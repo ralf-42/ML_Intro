@@ -1,1 +1,225 @@
-404: Not Found
+<?xml version="1.0" encoding="UTF-8"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_4" version="4.4.1">
+    <Header copyright="Copyright (c) 2021 Software AG" description="Default description">
+        <Application name="Nyoka" version="5.5.0"/>
+        <Timestamp>2025-05-28 16:20:42.435115</Timestamp>
+    </Header>
+    <DataDictionary numberOfFields="10">
+        <DataField name="carat" optype="continuous" dataType="double"/>
+        <DataField name="cut" optype="continuous" dataType="double"/>
+        <DataField name="color" optype="continuous" dataType="double"/>
+        <DataField name="clarity" optype="continuous" dataType="double"/>
+        <DataField name="depth" optype="continuous" dataType="double"/>
+        <DataField name="table" optype="continuous" dataType="double"/>
+        <DataField name="x" optype="continuous" dataType="double"/>
+        <DataField name="y" optype="continuous" dataType="double"/>
+        <DataField name="z" optype="continuous" dataType="double"/>
+        <DataField name="target" optype="continuous" dataType="double"/>
+    </DataDictionary>
+    <TreeModel modelName="DecisionTreeRegressor" functionName="regression" missingValuePenalty="1.0">
+        <MiningSchema>
+            <MiningField name="carat" usageType="active" optype="continuous"/>
+            <MiningField name="cut" usageType="active" optype="continuous"/>
+            <MiningField name="color" usageType="active" optype="continuous"/>
+            <MiningField name="clarity" usageType="active" optype="continuous"/>
+            <MiningField name="depth" usageType="active" optype="continuous"/>
+            <MiningField name="table" usageType="active" optype="continuous"/>
+            <MiningField name="x" usageType="active" optype="continuous"/>
+            <MiningField name="y" usageType="active" optype="continuous"/>
+            <MiningField name="z" usageType="active" optype="continuous"/>
+            <MiningField name="target" usageType="target" optype="continuous"/>
+        </MiningSchema>
+        <Output>
+            <OutputField name="predicted_target" optype="continuous" dataType="double" feature="predictedValue"/>
+        </Output>
+        <Node id="0" recordCount="37758.0">
+            <True/>
+            <Node id="1" recordCount="24406.0">
+                <SimplePredicate field="carat" operator="lessOrEqual" value="0.995"/>
+                <Node id="2" recordCount="17411.0">
+                    <SimplePredicate field="y" operator="lessOrEqual" value="5.525"/>
+                    <Node id="3" recordCount="12230.0">
+                        <SimplePredicate field="y" operator="lessOrEqual" value="4.995"/>
+                        <Node id="4" recordCount="8263.0">
+                            <SimplePredicate field="x" operator="lessOrEqual" value="4.625"/>
+                            <Node id="5" score="659.0088674548849212" recordCount="6428.0">
+                                <SimplePredicate field="clarity" operator="lessOrEqual" value="5.5"/>
+                            </Node>
+                            <Node id="6" score="847.9825613079019604" recordCount="1835.0">
+                                <SimplePredicate field="clarity" operator="greaterThan" value="5.5"/>
+                            </Node>
+                        </Node>
+                        <Node id="7" recordCount="3967.0">
+                            <SimplePredicate field="x" operator="greaterThan" value="4.625"/>
+                            <Node id="8" score="891.7307132459970944" recordCount="2748.0">
+                                <SimplePredicate field="clarity" operator="lessOrEqual" value="4.5"/>
+                            </Node>
+                            <Node id="9" score="1153.6349466776046029" recordCount="1219.0">
+                                <SimplePredicate field="clarity" operator="greaterThan" value="4.5"/>
+                            </Node>
+                        </Node>
+                    </Node>
+                    <Node id="10" recordCount="5181.0">
+                        <SimplePredicate field="y" operator="greaterThan" value="4.995"/>
+                        <Node id="11" recordCount="4138.0">
+                            <SimplePredicate field="clarity" operator="lessOrEqual" value="4.5"/>
+                            <Node id="12" score="1361.2335928809789038" recordCount="1798.0">
+                                <SimplePredicate field="clarity" operator="lessOrEqual" value="2.5"/>
+                            </Node>
+                            <Node id="13" score="1718.8034188034187082" recordCount="2340.0">
+                                <SimplePredicate field="clarity" operator="greaterThan" value="2.5"/>
+                            </Node>
+                        </Node>
+                        <Node id="14" recordCount="1043.0">
+                            <SimplePredicate field="clarity" operator="greaterThan" value="4.5"/>
+                            <Node id="15" score="1937.7486910994764457" recordCount="573.0">
+                                <SimplePredicate field="color" operator="lessOrEqual" value="3.5"/>
+                            </Node>
+                            <Node id="16" score="2532.0234042553192921" recordCount="470.0">
+                                <SimplePredicate field="color" operator="greaterThan" value="3.5"/>
+                            </Node>
+                        </Node>
+                    </Node>
+                </Node>
+                <Node id="17" recordCount="6995.0">
+                    <SimplePredicate field="y" operator="greaterThan" value="5.525"/>
+                    <Node id="18" recordCount="4990.0">
+                        <SimplePredicate field="carat" operator="lessOrEqual" value="0.865"/>
+                        <Node id="19" recordCount="2405.0">
+                            <SimplePredicate field="clarity" operator="lessOrEqual" value="2.5"/>
+                            <Node id="20" score="2305.2710576314120772" recordCount="1579.0">
+                                <SimplePredicate field="y" operator="lessOrEqual" value="5.835"/>
+                            </Node>
+                            <Node id="21" score="2732.2251815980630454" recordCount="826.0">
+                                <SimplePredicate field="y" operator="greaterThan" value="5.835"/>
+                            </Node>
+                        </Node>
+                        <Node id="22" recordCount="2585.0">
+                            <SimplePredicate field="clarity" operator="greaterThan" value="2.5"/>
+                            <Node id="23" score="2513.7456647398844325" recordCount="865.0">
+                                <SimplePredicate field="color" operator="lessOrEqual" value="2.5"/>
+                            </Node>
+                            <Node id="24" score="3206.8796511627906511" recordCount="1720.0">
+                                <SimplePredicate field="color" operator="greaterThan" value="2.5"/>
+                            </Node>
+                        </Node>
+                    </Node>
+                    <Node id="25" recordCount="2005.0">
+                        <SimplePredicate field="carat" operator="greaterThan" value="0.865"/>
+                        <Node id="26" recordCount="641.0">
+                            <SimplePredicate field="clarity" operator="lessOrEqual" value="1.5"/>
+                            <Node id="27" score="2193.2181818181816197" recordCount="55.0">
+                                <SimplePredicate field="clarity" operator="lessOrEqual" value="0.5"/>
+                            </Node>
+                            <Node id="28" score="3553.7730375426622231" recordCount="586.0">
+                                <SimplePredicate field="clarity" operator="greaterThan" value="0.5"/>
+                            </Node>
+                        </Node>
+                        <Node id="29" recordCount="1364.0">
+                            <SimplePredicate field="clarity" operator="greaterThan" value="1.5"/>
+                            <Node id="30" score="3403.7171314741035530" recordCount="251.0">
+                                <SimplePredicate field="color" operator="lessOrEqual" value="1.5"/>
+                            </Node>
+                            <Node id="31" score="4375.1653189577718877" recordCount="1113.0">
+                                <SimplePredicate field="color" operator="greaterThan" value="1.5"/>
+                            </Node>
+                        </Node>
+                    </Node>
+                </Node>
+            </Node>
+            <Node id="32" recordCount="13352.0">
+                <SimplePredicate field="carat" operator="greaterThan" value="0.995"/>
+                <Node id="33" recordCount="9001.0">
+                    <SimplePredicate field="y" operator="lessOrEqual" value="7.1949997"/>
+                    <Node id="34" recordCount="6818.0">
+                        <SimplePredicate field="clarity" operator="lessOrEqual" value="3.5"/>
+                        <Node id="35" recordCount="4926.0">
+                            <SimplePredicate field="clarity" operator="lessOrEqual" value="2.5"/>
+                            <Node id="36" score="4632.8195468195472131" recordCount="3663.0">
+                                <SimplePredicate field="carat" operator="lessOrEqual" value="1.195"/>
+                            </Node>
+                            <Node id="37" score="5980.6484560570070244" recordCount="1263.0">
+                                <SimplePredicate field="carat" operator="greaterThan" value="1.195"/>
+                            </Node>
+                        </Node>
+                        <Node id="38" recordCount="1892.0">
+                            <SimplePredicate field="clarity" operator="greaterThan" value="2.5"/>
+                            <Node id="39" score="5674.2197962154295965" recordCount="687.0">
+                                <SimplePredicate field="color" operator="lessOrEqual" value="2.5"/>
+                            </Node>
+                            <Node id="40" score="7120.4672199170126987" recordCount="1205.0">
+                                <SimplePredicate field="color" operator="greaterThan" value="2.5"/>
+                            </Node>
+                        </Node>
+                    </Node>
+                    <Node id="41" recordCount="2183.0">
+                        <SimplePredicate field="clarity" operator="greaterThan" value="3.5"/>
+                        <Node id="42" recordCount="538.0">
+                            <SimplePredicate field="color" operator="lessOrEqual" value="2.5"/>
+                            <Node id="43" score="5375.2074688796683404" recordCount="241.0">
+                                <SimplePredicate field="carat" operator="lessOrEqual" value="1.165"/>
+                            </Node>
+                            <Node id="44" score="7028.6228956228960669" recordCount="297.0">
+                                <SimplePredicate field="carat" operator="greaterThan" value="1.165"/>
+                            </Node>
+                        </Node>
+                        <Node id="45" recordCount="1645.0">
+                            <SimplePredicate field="color" operator="greaterThan" value="2.5"/>
+                            <Node id="46" score="8325.3119747899163485" recordCount="952.0">
+                                <SimplePredicate field="y" operator="lessOrEqual" value="6.665"/>
+                            </Node>
+                            <Node id="47" score="10545.3174603174611548" recordCount="693.0">
+                                <SimplePredicate field="y" operator="greaterThan" value="6.665"/>
+                            </Node>
+                        </Node>
+                    </Node>
+                </Node>
+                <Node id="48" recordCount="4351.0">
+                    <SimplePredicate field="y" operator="greaterThan" value="7.1949997"/>
+                    <Node id="49" recordCount="2780.0">
+                        <SimplePredicate field="y" operator="lessOrEqual" value="7.815"/>
+                        <Node id="50" recordCount="662.0">
+                            <SimplePredicate field="clarity" operator="lessOrEqual" value="1.5"/>
+                            <Node id="51" score="5840.0259740259743921" recordCount="77.0">
+                                <SimplePredicate field="clarity" operator="lessOrEqual" value="0.5"/>
+                            </Node>
+                            <Node id="52" score="8713.2290598290601338" recordCount="585.0">
+                                <SimplePredicate field="clarity" operator="greaterThan" value="0.5"/>
+                            </Node>
+                        </Node>
+                        <Node id="53" recordCount="2118.0">
+                            <SimplePredicate field="clarity" operator="greaterThan" value="1.5"/>
+                            <Node id="54" score="10000.1275045537331607" recordCount="1098.0">
+                                <SimplePredicate field="color" operator="lessOrEqual" value="2.5"/>
+                            </Node>
+                            <Node id="55" score="13484.0490196078426379" recordCount="1020.0">
+                                <SimplePredicate field="color" operator="greaterThan" value="2.5"/>
+                            </Node>
+                        </Node>
+                    </Node>
+                    <Node id="56" recordCount="1571.0">
+                        <SimplePredicate field="y" operator="greaterThan" value="7.815"/>
+                        <Node id="57" recordCount="71.0">
+                            <SimplePredicate field="clarity" operator="lessOrEqual" value="0.5"/>
+                            <Node id="58" score="8140.6721311475412222" recordCount="61.0">
+                                <SimplePredicate field="x" operator="lessOrEqual" value="9.4"/>
+                            </Node>
+                            <Node id="59" score="14651.2000000000007276" recordCount="10.0">
+                                <SimplePredicate field="x" operator="greaterThan" value="9.4"/>
+                            </Node>
+                        </Node>
+                        <Node id="60" recordCount="1500.0">
+                            <SimplePredicate field="clarity" operator="greaterThan" value="0.5"/>
+                            <Node id="61" score="13681.5773195876281534" recordCount="291.0">
+                                <SimplePredicate field="color" operator="lessOrEqual" value="0.5"/>
+                            </Node>
+                            <Node id="62" score="15503.7162944582305499" recordCount="1209.0">
+                                <SimplePredicate field="color" operator="greaterThan" value="0.5"/>
+                            </Node>
+                        </Node>
+                    </Node>
+                </Node>
+            </Node>
+        </Node>
+    </TreeModel>
+</PMML>
