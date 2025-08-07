@@ -78,11 +78,8 @@ Der Kursinhalt ist in 10 Hauptmodule unter `01 ipynb/` organisiert:
 
 Jedes Modul folgt einer konsistenten 5-Phasen Machine Learning-Workflow-Vorlage:
 
-## 3.1 📦 Installation & Import
-- Paketinstallation und Bibliotheksimporte
-- Warnungsunterdrückung-Setup
 
-## 3.2 🔍 Verstehen
+## 3.1 🔍 Verstehen
 **Checkliste**:
 - ✅ Aufgabenverständnis
 - ✅ Datensammlung
@@ -90,7 +87,7 @@ Jedes Modul folgt einer konsistenten 5-Phasen Machine Learning-Workflow-Vorlage:
 - ✅ Datenvisualisierung (Streudiagramme, Box-Plots)
 - ✅ Definition der Vorverarbeitungsstrategie
 
-## 3.3 🛠️ Vorbereiten
+## 3.2 🛠️ Vorbereiten
 **Checkliste**:
 - ✅ Entfernung unnötiger Features
 - ✅ Datentypkonvertierung
@@ -105,7 +102,7 @@ Jedes Modul folgt einer konsistenten 5-Phasen Machine Learning-Workflow-Vorlage:
 - ✅ Pipeline-Erstellung
 - ✅ Train-Test-Split
 
-## 3.4 🤖 Modellierung
+## 3.3 🤖 Modellierung
 **Checkliste**:
 - ✅ Modellauswahl
 - ✅ Pipeline-Konfiguration
@@ -115,7 +112,7 @@ Jedes Modul folgt einer konsistenten 5-Phasen Machine Learning-Workflow-Vorlage:
 - ✅ Bootstrapping
 - ✅ Regularisierung
 
-## 3.5 📊 Bewerten
+## 3.4 📊 Bewerten
 **Checkliste**:
 - ✅ Vorhersagegenerierung (Training, Test)
 - ✅ Modellleistungsbewertung
@@ -126,7 +123,7 @@ Jedes Modul folgt einer konsistenten 5-Phasen Machine Learning-Workflow-Vorlage:
 - ✅ Sensitivitätsanalyse
 - ✅ Kommunikation (Wichtigste Erkenntnisse)
 
-## 3.6 🚀 Bereitstellen
+## 3.5 🚀 Bereitstellen
 **Checkliste**:
 - ✅ Modellexport und -speicherung
 - ✅ Abhängigkeiten und Umgebungssetup
