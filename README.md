@@ -1,8 +1,11 @@
 # Machine Learning Kurs
 
-Dieses Repository enthält umfassende Lehrmaterialien für einen Machine Learning-Kurs. Dieser Kurs bietet einen strukturierten Lernpfad von grundlegenden Machine Learning-Konzepten bis hin zu fortgeschrittenen Deep Learning-Anwendungen und umfasst sowohl überwachte als auch unüberwachte Lerntechniken, neuronale Netze, Ensemble-Methoden und moderne generative KI-Anwendungen.
+Dieses Repository enthält umfassende Lehrmaterialien für einen Machine Learning-Kurs. 
 
-# 1 🎓 Lernziele
+# 1 📚 Kursübersicht
+Dieser Kurs bietet einen strukturierten Lernpfad von grundlegenden Machine Learning-Konzepten bis hin zu fortgeschrittenen Deep Learning-Anwendungen und umfasst sowohl überwachte als auch unüberwachte Lerntechniken, neuronale Netze, Ensemble-Methoden und moderne generative KI-Anwendungen.
+
+# 2🎓 Lernziele
 
 Nach Abschluss dieses Kurses können Studierende:
 
@@ -15,41 +18,41 @@ Nach Abschluss dieses Kurses können Studierende:
 - ✅ Einsetzbare ML-Anwendungen mit modernen Tools erstellen
 - ✅ Machine Learning-Modelle interpretieren und erklären
 
-# 2 📚 Repository-Struktur
+# 3 📚 Repository-Struktur
 
 Der Kursinhalt ist in 10 Hauptmodule unter `01 ipynb/` organisiert:
 
-## 2.1 🟢 Modul 00: Allgemeine Konzepte
+## 3.1 🟢 Modul 00: Allgemeine Konzepte
 **Pfad**: `00 general/`
 - Grundlegende ML-Konzepte und pandas-Grundlagen
 - Datensatzbehandlung und -exploration
 - Google Colab-Integration mit Gemini
 
-## 2.2 🔵 Modul 01: Überwachtes Lernen
+## 3.2 🔵 Modul 01: Überwachtes Lernen
 **Pfad**: `01 supervised/`
 - Entscheidungsbäume (Titanic-Datensatz)
 - Lineare Regression (MPG-Vorhersage)
 - Random Forests (Diamantpreisvorhersage)
 
-## 2.3 🟣 Modul 02: Unüberwachtes Lernen
+## 3.3 🟣 Modul 02: Unüberwachtes Lernen
 **Pfad**: `02 unsupervised/`
 - K-means und DBSCAN-Clustering
 - Isolation Forest für Anomalieerkennung
 - PCA für Dimensionsreduktion
 - Assoziationsregeln (Apriori-Algorithmus)
 
-## 2.4 🟡 Modul 03: Neuronale Netze
+## 3.4 🟡 Modul 03: Neuronale Netze
 **Pfad**: `03 network/`
 - Multi-Layer Perceptron (MLP) Implementierungen
 - Keras/TensorFlow neuronale Netze
 - Anwendungen auf Krebs- und Diamant-Datensätzen
 
-## 2.5 🟠 Modul 04: Ensemble-Methoden
+## 3.5 🟠 Modul 04: Ensemble-Methoden
 **Pfad**: `04 ensemble/`
 - XGBoost-Implementierung
 - Stacking-Ensemble-Techniken
 
-## 2.6 ⚪ Modul 05: Modell-Tuning & Validierung
+## 3.6 ⚪ Modul 05: Modell-Tuning & Validierung
 **Pfad**: `05 tuning/`
 - Kreuzvalidierungstechniken
 - Hyperparameter-Optimierung (Grid Search, Random Search)
@@ -57,25 +60,25 @@ Der Kursinhalt ist in 10 Hauptmodule unter `01 ipynb/` organisiert:
 - AutoML mit PyCaret
 - Lernkurven und Validierungsstrategien
 
-## 2.7 🔴 Modul 06: ML-Workflows
+## 3.7 🔴 Modul 06: ML-Workflows
 **Pfad**: `06 workflow/`
 - Scikit-learn Pipelines
 - End-to-End ML-Workflow-Automatisierung
 
-## 2.8 🟤 Modul 07: Spezialisierte Anwendungen
+## 3.8 🟤 Modul 07: Spezialisierte Anwendungen
 **Pfad**: `07 special/`
 - Computer Vision (MNIST, YOLO)
 - Natural Language Processing (Spam-Erkennung)
 - Zeitreihenanalyse (Wettervorhersage)
 - Autoencoder für Dimensionsreduktion
 
-## 2.9 ⚫ Modul 08: Generative KI
+## 3.9 ⚫ Modul 08: Generative KI
 **Pfad**: `08 genai/`
 - LangChain-Integration mit OpenAI
 - PDF-Zusammenfassung mit LLMs
 - Interaktive Chat-Anwendungen mit Gradio
 
-## 2.10 🔵 Modul 09: Vielfältige Anwendungen
+## 3.10 🔵 Modul 09: Vielfältige Anwendungen
 **Pfad**: `09 diverse/`
 - Erklärbare KI (XAI) Techniken
 - Gradio-Webanwendungen
@@ -83,9 +86,9 @@ Der Kursinhalt ist in 10 Hauptmodule unter `01 ipynb/` organisiert:
 - Business Intelligence mit Gemini AI
 
 
-# 3 🛠️ Technologie-Stack
+# 4 🛠️ Technologie-Stack
 
-## 3.1 Kernbibliotheken
+## 4.1 Kernbibliotheken
 - **Machine Learning**: scikit-learn, pandas, numpy
 - **Deep Learning**: Keras, TensorFlow
 - **Datenvisualisierung**: matplotlib, plotly
@@ -94,13 +97,13 @@ Der Kursinhalt ist in 10 Hauptmodule unter `01 ipynb/` organisiert:
 - **Webanwendungen**: Gradio
 - **Datenverarbeitung**: pandas, numpy
 
-## 3.2 Entwicklungsumgebung
+## 4.2 Entwicklungsumgebung
 - **Laufzeit**: Python 3.11+
 - **IDE**: Google Colab, Jupyter Notebook
 
 
 
-# 4 🗂️ Datensatz-Sammlung
+# 5 🗂️ Datensatz-Sammlung
 
 Der Kurs verwendet verschiedene reale Datensätze für praktisches Lernen:
 - **Titanic**: Überlebensvorhersage (Klassifikation)
@@ -112,7 +115,7 @@ Der Kurs verwendet verschiedene reale Datensätze für praktisches Lernen:
 - Und viele weitere spezialisierte Datensätze
 
 
-# 5 ⚖️ Lizenz
+# 6 ⚖️ Lizenz
 
 
 Dieses Projekt steht unter der **MIT-Lizenz** (siehe `LICENSE`-Datei).
