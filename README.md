@@ -120,6 +120,6 @@ Der Kurs verwendet verschiedene reale Datensätze für praktisches Lernen:
 
 Dieses Projekt steht unter der **MIT-Lizenz** (siehe `LICENSE`-Datei).
 
-**MIT License - Copyright (c) 2024 Ralf**
+**MIT License - Copyright (c) 2025 Ralf**
 
 Die Kursmaterialien können frei verwendet, modifiziert und weiterverbreitet werden.
