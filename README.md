@@ -151,20 +151,8 @@ Der Kurs verwendet verschiedene reale Datensätze für praktisches Lernen (unter
 - **`pexels_pixabay_people.mp4`** - Videoanalyse
 
 
-# 6 📋 Versionskontrolle
 
-Das Repository verwendet Git zur Versionskontrolle:
-- **`.gitignore`** - Definiert versionierte Verzeichnisse (01_notebook, 02_daten, 03_skript, 04_model)
-- **`.claudeignore`** - Entspricht der .gitignore-Konfiguration
-- Große Binärdateien und temporäre Dateien werden automatisch ignoriert
-
-## 6.1 Ignorierte Inhalte
-- PowerPoint-Dateien (*.pptx)
-- PNG/JPEG-Bilder (außer in `02_daten/02_bild/`)
-- Notebooks mit Präfix X_ oder _
-- Verzeichnisse: _misc/, _db/, .ipynb_checkpoints/
-
-# 7 ⚖️ Lizenz
+# 6 ⚖️ Lizenz
 
 Dieses Projekt steht unter der **MIT-Lizenz** (siehe `license`-Datei).
 
