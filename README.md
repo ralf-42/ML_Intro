@@ -20,70 +20,95 @@ Nach Abschluss dieses Kurses können Studierende:
 
 # 3 📚 Repository-Struktur
 
-Der Kursinhalt ist in 10 Hauptmodule unter `01 ipynb/` organisiert:
+Das Repository ist wie folgt organisiert (gemäß `.gitignore`):
 
-## 3.1 🟢 Modul 00: Allgemeine Konzepte
-**Pfad**: `00 general/`
+## 3.1 Hauptverzeichnisse
+
+- **`01_notebook/`** - Jupyter Notebooks mit Kursinhalten (10 Module)
+- **`02_daten/`** - Datensätze für praktische Übungen
+- **`03_skript/`** - Präsentationsmaterialien und Skripte
+- **`04_model/`** - Trainierte Modelle
+
+## 3.2 Kursmodule in `01_notebook/`
+
+### 3.2.1 🟢 Modul 00: Allgemeine Konzepte
+**Pfad**: `01_notebook/00_general/`
 - Grundlegende ML-Konzepte und pandas-Grundlagen
 - Datensatzbehandlung und -exploration
-- Google Colab-Integration mit Gemini
+- Beispiele: `b000_launch.ipynb`, `b020_pandas_basics.ipynb`, `b040_datasets.ipynb`
 
-## 3.2 🔵 Modul 01: Überwachtes Lernen
-**Pfad**: `01 supervised/`
+### 3.2.2 🔵 Modul 01: Überwachtes Lernen
+**Pfad**: `01_notebook/01_supervised/`
 - Entscheidungsbäume (Titanic-Datensatz)
 - Lineare Regression (MPG-Vorhersage)
 - Random Forests (Diamantpreisvorhersage)
+- Beispiele: `b110_sl_dt_titanic.ipynb`, `b120_sl_lr_mpg.ipynb`, `b130_sl_rf_diamonds_inverse.ipynb`
 
-## 3.3 🟣 Modul 02: Unüberwachtes Lernen
-**Pfad**: `02 unsupervised/`
+### 3.2.3 🟣 Modul 02: Unüberwachtes Lernen
+**Pfad**: `01_notebook/02_unsupervised/`
 - K-means und DBSCAN-Clustering
 - Isolation Forest für Anomalieerkennung
 - PCA für Dimensionsreduktion
 - Assoziationsregeln (Apriori-Algorithmus)
+- Beispiele: `b200_ul_kmeans_dbscan_location.ipynb`, `b240_ul_pca_special.ipynb`
 
-## 3.4 🟡 Modul 03: Neuronale Netze
-**Pfad**: `03 network/`
+### 3.2.4 🟡 Modul 03: Neuronale Netze
+**Pfad**: `01_notebook/03_network/`
 - Multi-Layer Perceptron (MLP) Implementierungen
 - Keras/TensorFlow neuronale Netze
 - Anwendungen auf Krebs- und Diamant-Datensätzen
+- Beispiele: `b310_nn_mlp_cancer.ipynb`, `b320_nn_keras_cancer.ipynb`
 
-## 3.5 🟠 Modul 04: Ensemble-Methoden
-**Pfad**: `04 ensemble/`
+### 3.2.5 🟠 Modul 04: Ensemble-Methoden
+**Pfad**: `01_notebook/04_ensemble/`
 - XGBoost-Implementierung
 - Stacking-Ensemble-Techniken
+- Beispiele: `b410_xg_cancer.ipynb`, `b430_stacking_titanic.ipynb`
 
-## 3.6 ⚪ Modul 05: Modell-Tuning & Validierung
-**Pfad**: `05 tuning/`
+### 3.2.6 ⚪ Modul 05: Modell-Tuning & Validierung
+**Pfad**: `01_notebook/05_tuning/`
 - Kreuzvalidierungstechniken
 - Hyperparameter-Optimierung (Grid Search, Random Search)
 - ROC-AUC-Analyse und Schwellenwertoptimierung
 - AutoML mit PyCaret
 - Lernkurven und Validierungsstrategien
+- Beispiele: `b510_cv_dt_titanic.ipynb`, `b530_gridsearch_nn_mlp_cancer.ipynb`
 
-## 3.7 🔴 Modul 06: ML-Workflows
-**Pfad**: `06 workflow/`
+### 3.2.7 🔴 Modul 06: ML-Workflows
+**Pfad**: `01_notebook/06_workflow/`
 - Scikit-learn Pipelines
 - End-to-End ML-Workflow-Automatisierung
+- Beispiel: `b610_pipeline_dt_diamonds.ipynb`
 
-## 3.8 🟤 Modul 07: Spezialisierte Anwendungen
-**Pfad**: `07 special/`
+### 3.2.8 🟤 Modul 07: Spezialisierte Anwendungen
+**Pfad**: `01_notebook/07_special/`
 - Computer Vision (MNIST, YOLO)
 - Natural Language Processing (Spam-Erkennung)
 - Zeitreihenanalyse (Wettervorhersage)
 - Autoencoder für Dimensionsreduktion
+- Beispiele: `b710_vision_keras_mnist.ipynb`, `b720_nlp_keras_spam.ipynb`
 
-## 3.9 ⚫ Modul 08: Generative KI
-**Pfad**: `08 genai/`
+### 3.2.9 ⚫ Modul 08: Generative KI
+**Pfad**: `01_notebook/08_genai/`
 - LangChain-Integration mit OpenAI
 - PDF-Zusammenfassung mit LLMs
 - Interaktive Chat-Anwendungen mit Gradio
+- Beispiele: `b800_simple_chat_langchain_openai_gradio.ipynb`, `b810_pdf_llm_summary.ipynb`
 
-## 3.10 🔵 Modul 09: Vielfältige Anwendungen
-**Pfad**: `09 diverse/`
+### 3.2.10 🔵 Modul 09: Vielfältige Anwendungen
+**Pfad**: `01_notebook/09_diverse/`
 - Erklärbare KI (XAI) Techniken
 - Gradio-Webanwendungen
 - Modellpersistierung (Speichern/Laden)
 - Business Intelligence mit Gemini AI
+- Beispiele: `b900_xai_titanic.ipynb`, `b910_data_app_gradio_diamonds.ipynb`
+
+## 3.3 Namenskonvention
+
+Alle Dateien und Verzeichnisse folgen einer einheitlichen Namenskonvention:
+- Nur Kleinbuchstaben
+- Unterstriche statt Bindestriche
+- Beispiel: `b110_sl_dt_titanic.ipynb`
 
 
 # 4 🛠️ Technologie-Stack
@@ -105,20 +130,43 @@ Der Kursinhalt ist in 10 Hauptmodule unter `01 ipynb/` organisiert:
 
 # 5 🗂️ Datensatz-Sammlung
 
-Der Kurs verwendet verschiedene reale Datensätze für praktisches Lernen:
-- **Titanic**: Überlebensvorhersage (Klassifikation)
-- **Diamonds**: Preisvorhersage (Regression)
-- **Cancer**: Medizinische Diagnose (Klassifikation)
-- **MPG**: Kraftstoffeffizienzvorhersage (Regression)
-- **MNIST**: Handschriftenerkennung (Computer Vision)
-- **Weather**: Zeitreihenvorhersage
+Der Kurs verwendet verschiedene reale Datensätze für praktisches Lernen (unter `02_daten/`):
+
+## 5.1 Tabellarische Daten (`02_daten/05_tabellen/`)
+- **`titanic.csv`** - Überlebensvorhersage (Klassifikation)
+- **`diamonds.csv`** - Preisvorhersage (Regression)
+- **`breast_cancer_wisconsin.csv`** - Medizinische Diagnose (Klassifikation)
+- **`auto_mpg.csv`** - Kraftstoffeffizienzvorhersage (Regression)
+- **`ccpp.csv`** - Combined Cycle Power Plant (Regression)
+- **`wa_fn_usec__telco_customer_churn.csv`** - Kundenabwanderung
 - Und viele weitere spezialisierte Datensätze
 
+## 5.2 Text-Daten (`02_daten/01_text/`)
+- **`smsspamcollection`** - SMS Spam-Erkennung (NLP)
 
-# 6 ⚖️ Lizenz
+## 5.3 Bild-Daten (`02_daten/02_bild/`)
+- Bilddateien für Computer Vision-Aufgaben
+
+## 5.4 Video-Daten (`02_daten/04_video/`)
+- **`pexels_pixabay_people.mp4`** - Videoanalyse
 
 
-Dieses Projekt steht unter der **MIT-Lizenz** (siehe `LICENSE`-Datei).
+# 6 📋 Versionskontrolle
+
+Das Repository verwendet Git zur Versionskontrolle:
+- **`.gitignore`** - Definiert versionierte Verzeichnisse (01_notebook, 02_daten, 03_skript, 04_model)
+- **`.claudeignore`** - Entspricht der .gitignore-Konfiguration
+- Große Binärdateien und temporäre Dateien werden automatisch ignoriert
+
+## 6.1 Ignorierte Inhalte
+- PowerPoint-Dateien (*.pptx)
+- PNG/JPEG-Bilder (außer in `02_daten/02_bild/`)
+- Notebooks mit Präfix X_ oder _
+- Verzeichnisse: _misc/, _db/, .ipynb_checkpoints/
+
+# 7 ⚖️ Lizenz
+
+Dieses Projekt steht unter der **MIT-Lizenz** (siehe `license`-Datei).
 
 **MIT License - Copyright (c) 2025 Ralf**
 
