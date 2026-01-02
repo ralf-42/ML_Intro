@@ -5,7 +5,7 @@
 [![Status](https://img.shields.io/badge/Status-Active-success)](./README.md)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](./LICENSE)
 
-Dieses Repository enthält umfassende Lehrmaterialien für einen Machine Learning-Kurs. 
+Dieses Repository enthält Lehrmaterialien für den Machine Learning-Kurs. 
 
 # 1 📚 Kursübersicht
 Dieser Kurs bietet einen strukturierten Lernpfad von grundlegenden Machine Learning-Konzepten bis hin zu fortgeschrittenen Deep Learning-Anwendungen und umfasst sowohl überwachte als auch unüberwachte Lerntechniken, neuronale Netze, Ensemble-Methoden und moderne generative KI-Anwendungen.
@@ -25,7 +25,7 @@ Nach Abschluss dieses Kurses können Studierende:
 
 # 3 📚 Repository-Struktur
 
-Das Repository ist wie folgt organisiert (gemäß `.gitignore`):
+ 
 
 ## 3.1 Hauptverzeichnisse
 
@@ -108,12 +108,6 @@ Das Repository ist wie folgt organisiert (gemäß `.gitignore`):
 - Business Intelligence mit Gemini AI
 - Beispiele: `b900_xai_titanic.ipynb`, `b910_data_app_gradio_diamonds.ipynb`
 
-## 3.3 Namenskonvention
-
-Alle Dateien und Verzeichnisse folgen einer einheitlichen Namenskonvention:
-- Nur Kleinbuchstaben
-- Unterstriche statt Bindestriche
-- Beispiel: `b110_sl_dt_titanic.ipynb`
 
 
 # 4 🛠️ Technologie-Stack
@@ -159,13 +153,13 @@ Der Kurs verwendet verschiedene reale Datensätze für praktisches Lernen (unter
 
 # 6 ⚖️ Lizenz
 
-Dieses Projekt steht unter der **MIT-Lizenz** (siehe `license`-Datei).
+Dieses Projekt steht unter der **MIT-Lizenz** (siehe `license`-Datei).      
 
-**MIT License - Copyright (c) 2025 Ralf**
+**MIT License - Copyright (c) 2025 Ralf**      
 
-Die Kursmaterialien können frei verwendet, modifiziert und weiterverbreitet werden.
+Die Kursmaterialien können frei verwendet, modifiziert und weiterverbreitet werden.     
 
 ---
 
-**Letzte Aktualisierung:** 2. Januar 2026
-**Version:** 1.0
+**Letzte Aktualisierung:** 2. Januar 2026      
+**Version:** 1.0      
