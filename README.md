@@ -1,5 +1,10 @@
 # Machine Learning Kurs
 
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-2026--01--02-blue)](./README.md)
+[![Python Version](https://img.shields.io/badge/Python-3.11%2B-brightgreen)](https://www.python.org/)
+[![Status](https://img.shields.io/badge/Status-Active-success)](./README.md)
+[![License](https://img.shields.io/badge/License-MIT-yellow)](./LICENSE)
+
 Dieses Repository enthält umfassende Lehrmaterialien für einen Machine Learning-Kurs. 
 
 # 1 📚 Kursübersicht
@@ -159,3 +164,8 @@ Dieses Projekt steht unter der **MIT-Lizenz** (siehe `license`-Datei).
 **MIT License - Copyright (c) 2025 Ralf**
 
 Die Kursmaterialien können frei verwendet, modifiziert und weiterverbreitet werden.
+
+---
+
+**Letzte Aktualisierung:** 2. Januar 2026
+**Version:** 1.0
