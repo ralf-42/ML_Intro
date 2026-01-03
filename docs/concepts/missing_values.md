@@ -23,6 +23,7 @@ Fehlende Werte (Missing Values) sind ein häufiges Problem in realen Datensätze
 ## Arten fehlender Werte
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
     subgraph arten["Arten fehlender Werte"]
         direction TB
@@ -47,6 +48,7 @@ flowchart TB
 ## Entscheidungsbaum zur Behandlung
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TD
     start([Start: Fehlende Werte erkannt]) --> analyse["Analyse des Anteils<br/>fehlender Werte"]
     
@@ -87,6 +89,7 @@ flowchart TD
 ### 1. Löschen (Deletion)
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart LR
     subgraph deletion["Löschstrategien"]
         direction TB
@@ -112,6 +115,7 @@ flowchart LR
 ### 2. Imputation (Auffüllen)
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
     subgraph simple["Einfache Imputation"]
         mean["<b>Mittelwert</b><br/>Durchschnitt der Spalte"]
@@ -142,6 +146,7 @@ flowchart TB
 ## Workflow in Python
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart LR
     subgraph workflow["Typischer Workflow"]
         direction TB
@@ -166,6 +171,7 @@ flowchart LR
 ## Konsequenzen falscher Behandlung
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TD
     wrong["Falsche Behandlung<br/>fehlender Werte"]
     
