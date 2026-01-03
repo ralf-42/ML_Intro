@@ -11,7 +11,7 @@ has_toc: true
 # Outlier – Ausreißer erkennen und behandeln
 {: .no_toc }
 
-> **Identifikation und Behandlung von Ausreißern in Datensätzen**    
+> **Identifikation und Behandlung von Ausreißern in Datensätzen**
 > Z-Score, IQR, Isolation Forest - Capping, Winsorizing und robuste Methoden
 
 ---
@@ -22,9 +22,8 @@ Ein Ausreißer (Outlier) ist ein Datenpunkt, dessen Ausprägung stark von der No
 
 ## Kategorien von Ausreißern
 
-<div style="transform: scale(0.6); transform-origin: top left; width: 166.67%; margin-bottom: -40%;">
-
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
     subgraph kategorien["Kategorien von Ausreißern"]
         direction LR
@@ -57,11 +56,7 @@ flowchart TB
     style influence fill:#FF9800,color:#fff
 ```
 
-</div>
-
 ## Typen von Anomalien
-
-<div style="transform: scale(0.6); transform-origin: top left; width: 166.67%; margin-bottom: -40%;">
 
 ```mermaid
 flowchart TD
@@ -84,11 +79,7 @@ flowchart TD
     style kollektiv fill:#fce4ec
 ```
 
-</div>
-
 ## Methoden zur Identifikation
-
-<div style="transform: scale(0.6); transform-origin: top left; width: 166.67%; margin-bottom: -40%;">
 
 ```mermaid
 flowchart TB
@@ -118,11 +109,7 @@ flowchart TB
     style ml fill:#fff3e0
 ```
 
-</div>
-
 ## Entscheidungsbaum zur Behandlung
-
-<div style="transform: scale(0.6); transform-origin: top left; width: 166.67%; margin-bottom: -40%;">
 
 ```mermaid
 flowchart TD
@@ -159,13 +146,9 @@ flowchart TD
     style behalten fill:#4CAF50,color:#fff
 ```
 
-</div>
-
 ## Statistische Methoden
 
 ### Z-Score Methode
-
-<div style="transform: scale(0.6); transform-origin: top left; width: 166.67%; margin-bottom: -40%;">
 
 ```mermaid
 flowchart LR
@@ -182,11 +165,7 @@ flowchart LR
     style zscore fill:#e3f2fd
 ```
 
-</div>
-
 ### IQR-Methode (Tukey's Fences)
-
-<div style="transform: scale(0.6); transform-origin: top left; width: 166.67%; margin-bottom: -40%;">
 
 ```mermaid
 flowchart TB
@@ -211,11 +190,7 @@ flowchart TB
     style normal fill:#c8e6c9
 ```
 
-</div>
-
 ## Behandlungsstrategien
-
-<div style="transform: scale(0.6); transform-origin: top left; width: 166.67%; margin-bottom: -40%;">
 
 ```mermaid
 flowchart TB
@@ -250,11 +225,7 @@ flowchart TB
     style behalten fill:#c8e6c9
 ```
 
-</div>
-
 ## Visualisierung zur Erkennung
-
-<div style="transform: scale(0.6); transform-origin: top left; width: 166.67%; margin-bottom: -40%;">
 
 ```mermaid
 flowchart LR
@@ -274,11 +245,7 @@ flowchart LR
     style viz fill:#f3e5f5
 ```
 
-</div>
-
 ## Algorithmus: Isolation Forest
-
-<div style="transform: scale(0.6); transform-origin: top left; width: 166.67%; margin-bottom: -40%;">
 
 ```mermaid
 flowchart TD
@@ -303,8 +270,6 @@ flowchart TD
     style normal fill:#c8e6c9
 ```
 
-</div>
-
 ## Best Practices
 
 | Empfehlung | Beschreibung |
@@ -318,8 +283,6 @@ flowchart TD
 | **Reihenfolge beachten** | Ausreißer vor Missing Values behandeln (oder umgekehrt konsistent) |
 
 ## Auswirkungen auf ML-Modelle
-
-<div style="transform: scale(0.6); transform-origin: top left; width: 166.67%; margin-bottom: -40%;">
 
 ```mermaid
 flowchart TB
@@ -341,8 +304,6 @@ flowchart TB
     style svm fill:#fff3e0
 ```
 
-</div>
-
 ## Scikit-learn Klassen
 
 | Klasse | Verwendung |
@@ -355,6 +316,6 @@ flowchart TB
 
 ---
 
-**Version:** 1.0    
-**Stand:** Januar 2026    
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    
+**Version:** 1.0
+**Stand:** Januar 2026
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
