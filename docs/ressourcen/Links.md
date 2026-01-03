@@ -28,6 +28,7 @@ has_toc: true
 - **StatQuest Kanal**: https://www.youtube.com/c/joshstarmer
 
 ### Confusion Matrix & Klassifikation
+
 | Thema | Link |
 |-------|------|
 | Confusion Matrix | https://youtu.be/Kdsp6soqA7o |
@@ -35,6 +36,7 @@ has_toc: true
 | ROC & AUC | https://www.youtube.com/watch?v=4jRBRDbJemM |
 
 ### Regression & Modellbewertung
+
 | Thema | Link |
 |-------|------|
 | R-squared | https://www.youtube.com/watch?v=2AQKmw14mHM |
@@ -42,6 +44,7 @@ has_toc: true
 | Logistic Regression | https://www.youtube.com/watch?v=yIYKR4sgzI8 |
 
 ### Gradient Descent & Optimierung
+
 | Thema | Link |
 |-------|------|
 | The Chain Rule | https://youtu.be/wl1myxrtQHQ |
@@ -49,6 +52,7 @@ has_toc: true
 | Stochastic Gradient Descent | https://www.youtube.com/watch?v=vMh0zPT0tLI |
 
 ### Regularisierung
+
 | Thema | Link |
 |-------|------|
 | Ridge Regression (L2) | https://www.youtube.com/watch?v=Q81RR3yKn30 |
@@ -56,6 +60,7 @@ has_toc: true
 | Elastic Net | https://www.youtube.com/watch?v=1dKRdX9bfIo |
 
 ### Ensemble-Methoden
+
 | Thema | Link |
 |-------|------|
 | Random Forest (Part 1) | https://www.youtube.com/watch?v=J4Wdy0Wc_xQ |
@@ -66,6 +71,7 @@ has_toc: true
 | XGBoost (Optimizations) | https://www.youtube.com/watch?v=oRrKeUCEbq8 |
 
 ### Clustering & Dimensionsreduktion
+
 | Thema | Link |
 |-------|------|
 | K-Means Clustering | https://youtu.be/4b5d3muPQmA |
@@ -74,12 +80,14 @@ has_toc: true
 | PCA | (im Skript referenziert, kein direkter Link) |
 
 ### Cross Validation & Overfitting
+
 | Thema | Link |
 |-------|------|
 | Cross Validation | https://www.youtube.com/watch?v=fSytzGwwBVw |
 | Overfitting | https://www.youtube.com/watch?v=pQPUL6PUy_4 |
 
 ### Neural Networks & Deep Learning
+
 | Thema | Link |
 |-------|------|
 | Neural Networks Playlist | https://www.youtube.com/watch?v=CqOfi41LfDw&list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1 |
@@ -90,6 +98,7 @@ has_toc: true
 ---
 
 ## 🔧 KNIME Kurse & Tutorials
+
 | Ressource | Link |
 |-----------|------|
 | KNIME Homepage | https://www.knime.com/ |
@@ -117,6 +126,7 @@ has_toc: true
 ---
 
 ## 🎯 Machine Learning Mastery
+
 | Ressource | Link |
 |-----------|------|
 | Homepage | https://machinelearningmastery.com/ |
@@ -126,6 +136,7 @@ has_toc: true
 ---
 
 ## 🎓 Google ML Crash Course
+
 | Thema | Link |
 |-------|------|
 | Embeddings | https://developers.google.com/machine-learning/crash-course/embeddings/translating-to-a-lower-dimensional-space |
@@ -135,6 +146,7 @@ has_toc: true
 ---
 
 ## 📄 Wissenschaftliche Paper
+
 | Paper | Link |
 |-------|------|
 | Random Search for Hyperparameter Optimization (Bergstra & Bengio, 2012) | https://www.jmlr.org/papers/volume13/bergstra12a/bergstra12a.pdf |
@@ -202,6 +214,7 @@ has_toc: true
 ## 🔗 Sonstige nützliche Ressourcen
 
 ### Tutorials & Artikel
+
 | Thema | Link |
 |-------|------|
 | One-Hot Encoding (datagy) | https://datagy.io/sklearn-one-hot-encode/ |
@@ -217,6 +230,7 @@ has_toc: true
 | Shapley Value (Wallstreetmojo) | https://www.wallstreetmojo.com/shapley-value/ |
 
 ### Tools & Frameworks
+
 | Tool | Link |
 |------|------|
 | Gradio (ML Demos) | https://www.gradio.app/ |
@@ -225,6 +239,7 @@ has_toc: true
 | Plotly Chart Studio | https://chart-studio.plotly.com/create/ |
 
 ### GitHub Repositories
+
 | Repository | Link |
 |------------|------|
 | ML From Scratch | https://github.com/eriklindernoren/ML-From-Scratch |
@@ -234,6 +249,7 @@ has_toc: true
 | Hands-On ML Notebooks | https://github.com/ageron/handson-ml2 |
 
 ### Weitere
+
 | Ressource | Link |
 |-----------|------|
 | KI-Campus | https://ki-campus.org/ |
@@ -245,6 +261,7 @@ has_toc: true
 ---
 
 ## 📺 Weitere YouTube-Kanäle
+
 | Kanal | Link |
 |-------|------|
 | The Morpheus Tutorials (deutsch) | https://www.youtube.com/@TheMorpheusTutorials |
