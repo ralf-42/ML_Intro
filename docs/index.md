@@ -6,7 +6,7 @@ description: "Machine Learning - Von den Grundlagen zu fortgeschrittenen Methode
 permalink: /
 ---
 
-# Machine Learning Intro
+# Machine Learning
 
 > **Machine Learning - Von den Grundlagen zu fortgeschrittenen Methoden**
 > Praktische Anwendung von Supervised und Unsupervised Learning, Neural Networks und modernen ML-Frameworks
