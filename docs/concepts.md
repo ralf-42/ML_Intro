@@ -12,7 +12,7 @@ Theoretische Grundlagen, technische Konzepte und fundamentale Prinzipien des Mac
 
 ## Grundlagen
 
-_Inhalte folgen_
+- [ML Workflow](./concepts/ml_workflow_erklaerung.html) - Der systematische Prozess von Understand bis Deploy
 
 ## Supervised Learning
 
