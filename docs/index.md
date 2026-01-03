@@ -8,7 +8,7 @@ permalink: /
 
 # Machine Learning
 
-> **Machine Learning - Von den Grundlagen zu fortgeschrittenen Methoden**
+> **Machine Learning - Von den Grundlagen zu fortgeschrittenen Methoden**     
 > Praktische Anwendung von Supervised und Unsupervised Learning, Neural Networks und modernen ML-Frameworks
 
 
@@ -40,6 +40,6 @@ Machine Learning markiert damit einen technologischen Wendepunkt. Es verändert 
 
 ---
 
-**Version:** 1.0
-**Stand:** Januar 2026
-**Kurs:** Machine Learning - Von den Grundlagen zu fortgeschrittenen Methoden
+**Version:** 1.0     
+**Stand:** Januar 2026     
+**Kurs:** Machine Learning - Von den Grundlagen zu fortgeschrittenen Methoden     
