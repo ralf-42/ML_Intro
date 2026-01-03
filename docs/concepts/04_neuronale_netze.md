@@ -39,3 +39,10 @@ Grundlagen neuronaler Netzwerke und Deep Learning Architekturen.
 - Transfer Learning
 
 _Detaillierte Inhalte folgen_
+
+
+---
+
+**Version:** 1.0
+**Stand:** Januar 2026
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
