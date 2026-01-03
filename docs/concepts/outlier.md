@@ -59,6 +59,7 @@ flowchart TB
 ## Typen von Anomalien
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TD
     subgraph typen["Anomalie-Typen"]
         direction TB
@@ -82,6 +83,7 @@ flowchart TD
 ## Methoden zur Identifikation
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
     subgraph methoden["Identifikationsmethoden"]
         direction LR
@@ -112,6 +114,7 @@ flowchart TB
 ## Entscheidungsbaum zur Behandlung
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TD
     start([Ausreißer erkannt]) --> analyse["Ursache analysieren"]
 
@@ -151,6 +154,7 @@ flowchart TD
 ### Z-Score Methode
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart LR
     subgraph zscore["Z-Score Methode"]
         direction TB
@@ -168,6 +172,7 @@ flowchart LR
 ### IQR-Methode (Tukey's Fences)
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
     subgraph iqr["IQR-Methode"]
         direction TB
@@ -193,6 +198,7 @@ flowchart TB
 ## Behandlungsstrategien
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
     subgraph strategien["Behandlungsstrategien"]
         direction LR
@@ -228,6 +234,7 @@ flowchart TB
 ## Visualisierung zur Erkennung
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart LR
     subgraph viz["Visualisierungsmethoden"]
         direction TB
@@ -248,6 +255,7 @@ flowchart LR
 ## Algorithmus: Isolation Forest
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TD
     subgraph iforest["Isolation Forest Prinzip"]
         direction TB
@@ -285,6 +293,7 @@ flowchart TD
 ## Auswirkungen auf ML-Modelle
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
     outlier["Unbehandelte<br/>Ausreißer"]
 
