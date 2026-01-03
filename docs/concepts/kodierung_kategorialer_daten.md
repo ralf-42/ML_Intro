@@ -1,17 +1,17 @@
 ---
 layout: default
-title: Kodierung kategorialer Daten
+title: Kodierung
 parent: Prozess
 grand_parent: Konzepte
 nav_order: 2
-description: "Kodierung kategorialer Daten - OrdinalEncoder, OneHotEncoder und TargetEncoder für Machine Learning"
+description: Kodierung kategorialer Daten - OrdinalEncoder, OneHotEncoder und TargetEncoder für Machine Learning
 has_toc: true
 ---
 
 # Kodierung kategorialer Daten
 {: .no_toc }
 
-> **Transformation kategorialer Merkmale in numerische Formate**
+> **Transformation kategorialer Merkmale in numerische Formate**      
 > Nominale vs. ordinale Daten, OrdinalEncoder, OneHotEncoder und TargetEncoder
 
 ---
@@ -414,3 +414,10 @@ mindmap
 ```
 
 Die Wahl der richtigen Kodierung ist entscheidend für die Modellperformance. Grundregel: **Ordinale Daten** mit OrdinalEncoder, **nominale Daten** mit OneHotEncoder (wenige Kategorien) oder TargetEncoder (viele Kategorien).
+
+
+---
+
+**Version:** 1.0     
+**Stand:** Januar 2026     
+**Kurs:** Machine Leanrning. Verstehen. Anwenden. Gestalten.     
