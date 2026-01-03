@@ -98,7 +98,7 @@ Ein Modell mit unbefriedigender Performance kann auf Probleme in der Datenaufber
 
 ## Beispiel
 
-[Teachable Machines]([Teachable Machine](https://teachablemachine.withgoogle.com/))
+[Teachable Machines](https://teachablemachine.withgoogle.com/))
 
 
 ---
