@@ -10,7 +10,7 @@ has_toc: true
 # Der Machine Learning Workflow
 {: .no_toc }
 
-> **Der systematische Prozess von der Problemstellung bis zur produktiven Anwendung**
+> **Der systematische Prozess von der Problemstellung bis zur produktiven Anwendung**      
 > Fünf Phasen: Understand, Prepare, Modeling, Evaluate und Deploy
 
 ---
@@ -91,3 +91,10 @@ Ein deployed Modell ist kein Endpunkt, sondern der Beginn eines kontinuierlichen
 Die gestrichelten Pfeile im Diagramm sind kein Zeichen von Fehlern, sondern ein wesentliches Merkmal erfolgreicher ML-Projekte. Machine Learning ist ein iterativer Prozess: Erkenntnisse aus späteren Phasen führen regelmäßig zu Verbesserungen in früheren Schritten.
 
 Ein Modell mit unbefriedigender Performance kann auf Probleme in der Datenaufbereitung hinweisen. Feedback aus dem Produktivbetrieb kann neue Feature-Ideen liefern. Veränderte Geschäftsanforderungen erfordern eine Neubewertung des ursprünglichen Problems. Diese Flexibilität und Bereitschaft zur Iteration unterscheidet erfolgreiche ML-Projekte von gescheiterten.
+
+
+---
+
+**Version:** 1.0       
+**Stand:** Januar 2026     
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.     
