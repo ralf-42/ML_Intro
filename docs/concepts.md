@@ -10,18 +10,11 @@ description: "Theoretische Grundlagen und technische Konzepte"
 
 Theoretische Grundlagen, technische Konzepte und fundamentale Prinzipien des Machine Learning.
 
-## Grundlagen
+Diese Sektion ist in folgende Themenbereiche untergliedert:
 
-- [ML Workflow](./concepts/ml_workflow_erklaerung.html) - Der systematische Prozess von Understand bis Deploy
-
-## Supervised Learning
-
-_Inhalte folgen_
-
-## Unsupervised Learning
-
-_Inhalte folgen_
-
-## Neural Networks
-
-_Inhalte folgen_
+- **Grundlagen** - Fundamentale ML-Konzepte wie Supervised/Unsupervised Learning, Bias-Variance Tradeoff
+- **Prozess** - Der systematische ML-Entwicklungsprozess (CRISP-DM, Workflows)
+- **Modelle** - Überblick über klassische ML-Algorithmen und Ensemble Methods
+- **Neuronale Netze** - Deep Learning Architekturen (CNN, RNN, Transformers)
+- **Workflow Design** - Praktische Patterns mit Scikit-learn Pipelines und AutoML
+- **XAI** - Explainable AI Methoden (SHAP, LIME, Interpretierbarkeit)

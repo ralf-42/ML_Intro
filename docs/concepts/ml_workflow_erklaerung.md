@@ -1,7 +1,8 @@
 ---
 layout: default
 title: ML Workflow
-parent: Konzepte
+parent: Prozess
+grand_parent: Konzepte
 nav_order: 1
 description: "Der Machine Learning Workflow - Von Understand über Prepare, Modeling und Evaluate bis Deploy"
 has_toc: true
@@ -52,13 +53,15 @@ Die erste Phase bildet das Fundament für den gesamten ML-Workflow. Hier geht es
 
 Zentrale Fragen dieser Phase sind: Welches Problem soll gelöst werden? Welche Daten stehen zur Verfügung? Wie sieht Erfolg aus und wie wird er gemessen? Ohne ein klares Verständnis des Problems riskiert man, ein technisch perfektes Modell zu bauen, das am eigentlichen Bedarf vorbeigeht.
 
+Diese Phase umfasst mehrere Teilschritte: Datensammlung und -integration aus verschiedenen Quellen, explorative Datenanalyse (EDA) zur Erkennung von Mustern und Anomalien, etc.
+
 In dieser Phase werden auch die Erfolgskriterien definiert – sowohl aus geschäftlicher Sicht (z.B. Kosteneinsparung, Zeitgewinn) als auch aus technischer Perspektive (z.B. Mindest-Accuracy, maximale Latenz).
 
 ## 2. Prepare – Daten aufbereiten
 
 Die Datenaufbereitung ist häufig die zeitaufwändigste Phase eines ML-Projekts. Rohdaten sind selten direkt für das Training geeignet – sie enthalten fehlende Werte, Ausreißer, inkonsistente Formate oder irrelevante Informationen.
 
-Diese Phase umfasst mehrere Teilschritte: Datensammlung und -integration aus verschiedenen Quellen, explorative Datenanalyse (EDA) zur Erkennung von Mustern und Anomalien, Datenbereinigung (Handling von Missing Values, Duplikaten, Ausreißern), Feature Engineering zur Erstellung aussagekräftiger Merkmale sowie die Aufteilung in Trainings-, Validierungs- und Testdaten.
+Diese Phase umfasst mehrere Teilschritte: Datenbereinigung (Handling von Missing Values, Duplikaten, Ausreißern), Skalierung von Daten mit unterschiedlichen Wertebereichen, Feature Engineering zur Erstellung aussagekräftiger Merkmale sowie die Aufteilung in Trainings-, Validierungs- und Testdaten.
 
 Die Qualität der Datenaufbereitung bestimmt maßgeblich die Qualität des späteren Modells – nach dem Prinzip „Garbage in, garbage out".
 
