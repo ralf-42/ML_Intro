@@ -361,11 +361,9 @@ Die digitale Souveränität Europas wird sich nicht daran entscheiden, ob ein eu
 60. Selbstbestimmt handeln im digitalen Raum – warum Digitale Souveränität für KMU immer wichtiger wird \- Mittelstand Digital, Zugriff am Dezember 31, 2025, [https://www.mittelstand-digital.de/MD/Redaktion/DE/Artikel/Blog/blog-beitrag-51-kipker.html](https://www.mittelstand-digital.de/MD/Redaktion/DE/Artikel/Blog/blog-beitrag-51-kipker.html)
 61. Mittelstand-Digital Zentrum Zukunftskultur, Zugriff am Dezember 31, 2025, [https://www.digitalzentrum-zukunftskultur.de/](https://www.digitalzentrum-zukunftskultur.de/)
 
----
-
 
 ---
 
-**Version:** 1.0
-**Stand:** Januar 2026
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
+**Version:** 1.0    
+**Stand:** Januar 2026    
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    
