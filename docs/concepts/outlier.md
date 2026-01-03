@@ -22,30 +22,32 @@ Ein Ausreißer (Outlier) ist ein Datenpunkt, dessen Ausprägung stark von der No
 
 ## Kategorien von Ausreißern
 
+<div style="transform: scale(0.6); transform-origin: top left; width: 166.67%; margin-bottom: -40%;">
+
 ```mermaid
 flowchart TB
     subgraph kategorien["Kategorien von Ausreißern"]
         direction LR
-        
+
         subgraph echt["Echte Ausreißer"]
             direction TB
             real["<b>Reale Anomalien</b><br/>Tatsächlich<br/>ungewöhnliche Werte"]
             real_ex["Beispiel:<br/>Betrugsfall,<br/>seltene Krankheit"]
         end
-        
+
         subgraph fehler["Fehlerhafte Ausreißer"]
             direction TB
             error["<b>Datenfehler</b><br/>Falsche Eingaben<br/>oder Messungen"]
             error_ex["Beispiel:<br/>Tippfehler,<br/>Sensordefekt"]
         end
-        
+
         subgraph einfluss["Einflussreiche Punkte"]
             direction TB
             influence["<b>Leverage Points</b><br/>Starker Einfluss auf<br/>Modellparameter"]
             influence_ex["Beispiel:<br/>Extremwert am<br/>Rand der Verteilung"]
         end
     end
-    
+
     real --> real_ex
     error --> error_ex
     influence --> influence_ex
@@ -55,22 +57,26 @@ flowchart TB
     style influence fill:#FF9800,color:#fff
 ```
 
+</div>
+
 ## Typen von Anomalien
+
+<div style="transform: scale(0.6); transform-origin: top left; width: 166.67%; margin-bottom: -40%;">
 
 ```mermaid
 flowchart TD
     subgraph typen["Anomalie-Typen"]
         direction TB
-        
+
         punkt["<b>Punkt-/Globale Anomalie</b><br/>Einzelner Datenpunkt weicht<br/>von gesamter Datenbasis ab"]
         kontext["<b>Kontextuelle Anomalie</b><br/>Wert ist nur im bestimmten<br/>Kontext anomal"]
         kollektiv["<b>Kollektive Anomalie</b><br/>Gruppe von Datenpunkten<br/>ist gemeinsam anomal"]
     end
-    
+
     punkt --> punkt_ex["Beispiel:<br/>Gehalt von 1 Million €<br/>bei Durchschnitt 50.000 €"]
-    
+
     kontext --> kontext_ex["Beispiel:<br/>30°C Außentemperatur<br/>im Januar (Mitteleuropa)"]
-    
+
     kollektiv --> kollektiv_ex["Beispiel:<br/>Kreditkartenkäufe in USA<br/>und Frankreich zur gleichen Zeit"]
 
     style punkt fill:#e3f2fd
@@ -78,24 +84,28 @@ flowchart TD
     style kollektiv fill:#fce4ec
 ```
 
+</div>
+
 ## Methoden zur Identifikation
+
+<div style="transform: scale(0.6); transform-origin: top left; width: 166.67%; margin-bottom: -40%;">
 
 ```mermaid
 flowchart TB
     subgraph methoden["Identifikationsmethoden"]
         direction LR
-        
+
         subgraph wissen["Wissensbasiert"]
             domain["<b>Domänenwissen</b><br/>Fachexperten definieren<br/>plausible Bereiche"]
             rules["<b>Geschäftsregeln</b><br/>Vordefinierte Grenzen<br/>und Constraints"]
         end
-        
+
         subgraph statistik["Statistikbasiert"]
             zscore["<b>Z-Score</b><br/>Standardabweichungen<br/>vom Mittelwert"]
             iqr["<b>IQR-Methode</b><br/>Interquartilsabstand"]
             percentile["<b>Perzentile</b><br/>Extreme Quantile"]
         end
-        
+
         subgraph ml["ML-basiert"]
             iforest["<b>Isolation Forest</b><br/>Anomalie-Isolation<br/>durch Entscheidungsbäume"]
             lof["<b>Local Outlier Factor</b><br/>Lokale Dichte-<br/>abweichungen"]
@@ -108,30 +118,34 @@ flowchart TB
     style ml fill:#fff3e0
 ```
 
+</div>
+
 ## Entscheidungsbaum zur Behandlung
+
+<div style="transform: scale(0.6); transform-origin: top left; width: 166.67%; margin-bottom: -40%;">
 
 ```mermaid
 flowchart TD
     start([Ausreißer erkannt]) --> analyse["Ursache analysieren"]
-    
+
     analyse --> ursache{Ursache?}
-    
+
     ursache -->|"Datenfehler"| korrigieren{"Korrektur<br/>möglich?"}
     ursache -->|"Echter Wert"| wichtig{"Fachlich<br/>wichtig?"}
     ursache -->|"Unklar"| vorsicht["Vorsichtiger<br/>Umgang"]
-    
+
     korrigieren -->|"Ja"| fix["Wert korrigieren"]
     korrigieren -->|"Nein"| remove["Datenpunkt<br/>entfernen ❌"]
-    
+
     wichtig -->|"Ja"| behalten["Behalten ✓<br/>Evtl. robust Modell"]
     wichtig -->|"Nein"| transform{"Transformation<br/>sinnvoll?"}
-    
+
     transform -->|"Ja"| trans_methods["Capping / Winsorizing<br/>Log-Transformation"]
     transform -->|"Nein"| remove
-    
+
     vorsicht --> robust["Robuste Methoden<br/>verwenden"]
     vorsicht --> sensitivity["Sensitivitätsanalyse<br/>mit/ohne Ausreißer"]
-    
+
     fix --> ende([Ende])
     remove --> ende
     behalten --> ende
@@ -145,9 +159,13 @@ flowchart TD
     style behalten fill:#4CAF50,color:#fff
 ```
 
+</div>
+
 ## Statistische Methoden
 
 ### Z-Score Methode
+
+<div style="transform: scale(0.6); transform-origin: top left; width: 166.67%; margin-bottom: -40%;">
 
 ```mermaid
 flowchart LR
@@ -156,7 +174,7 @@ flowchart LR
         formel["Z = (x - μ) / σ"]
         regel["Typische Regel:<br/>|Z| > 3 → Ausreißer"]
     end
-    
+
     formel --> annahme["⚠️ Annahme:<br/>Normalverteilung"]
     regel --> vorteil["✅ Einfach<br/>✅ Interpretierbar"]
     regel --> nachteil["❌ Sensitiv bei<br/>nicht-normalverteilten Daten"]
@@ -164,7 +182,11 @@ flowchart LR
     style zscore fill:#e3f2fd
 ```
 
+</div>
+
 ### IQR-Methode (Tukey's Fences)
+
+<div style="transform: scale(0.6); transform-origin: top left; width: 166.67%; margin-bottom: -40%;">
 
 ```mermaid
 flowchart TB
@@ -174,13 +196,13 @@ flowchart TB
         lower["Untere Grenze:<br/>Q1 - 1.5 × IQR"]
         upper["Obere Grenze:<br/>Q3 + 1.5 × IQR"]
     end
-    
+
     calc --> lower
     calc --> upper
-    
+
     lower --> outlier_check{"Wert außerhalb<br/>der Grenzen?"}
     upper --> outlier_check
-    
+
     outlier_check -->|"Ja"| is_outlier["→ Ausreißer"]
     outlier_check -->|"Nein"| normal["→ Normaler Wert"]
 
@@ -189,29 +211,33 @@ flowchart TB
     style normal fill:#c8e6c9
 ```
 
+</div>
+
 ## Behandlungsstrategien
+
+<div style="transform: scale(0.6); transform-origin: top left; width: 166.67%; margin-bottom: -40%;">
 
 ```mermaid
 flowchart TB
     subgraph strategien["Behandlungsstrategien"]
         direction LR
-        
+
         subgraph entfernen["Entfernen"]
             delete["<b>Löschen</b><br/>Zeilen mit Ausreißern<br/>aus Datensatz entfernen"]
         end
-        
+
         subgraph anpassen["Anpassen"]
             cap["<b>Capping</b><br/>Auf Grenzwert<br/>begrenzen"]
             winsor["<b>Winsorizing</b><br/>Auf Perzentil-<br/>werte setzen"]
             transform["<b>Transformation</b><br/>Log, Wurzel,<br/>Box-Cox"]
         end
-        
+
         subgraph robust["Robuste Methoden"]
             median_model["<b>Median statt Mean</b><br/>Robuste Statistiken"]
             robust_algo["<b>Robuste Algorithmen</b><br/>RANSAC, Huber"]
             ensemble["<b>Ensemble</b><br/>Ausreißer-resistente<br/>Modelle"]
         end
-        
+
         subgraph behalten["Behalten"]
             keep["<b>Unverändert lassen</b><br/>Wenn fachlich<br/>relevant"]
             flag["<b>Markieren</b><br/>Als Feature für<br/>das Modell"]
@@ -224,7 +250,11 @@ flowchart TB
     style behalten fill:#c8e6c9
 ```
 
+</div>
+
 ## Visualisierung zur Erkennung
+
+<div style="transform: scale(0.6); transform-origin: top left; width: 166.67%; margin-bottom: -40%;">
 
 ```mermaid
 flowchart LR
@@ -235,7 +265,7 @@ flowchart LR
         histogram["<b>Histogramm</b><br/>Verteilung und<br/>extreme Werte"]
         violin["<b>Violinplot</b><br/>Verteilung mit<br/>Dichtedarstellung"]
     end
-    
+
     boxplot --> bp_use["Schnelle univariate<br/>Analyse"]
     scatter --> sc_use["Beziehungen zwischen<br/>Variablen"]
     histogram --> hist_use["Verteilungsform<br/>verstehen"]
@@ -244,21 +274,25 @@ flowchart LR
     style viz fill:#f3e5f5
 ```
 
+</div>
+
 ## Algorithmus: Isolation Forest
+
+<div style="transform: scale(0.6); transform-origin: top left; width: 166.67%; margin-bottom: -40%;">
 
 ```mermaid
 flowchart TD
     subgraph iforest["Isolation Forest Prinzip"]
         direction TB
         idea["<b>Grundidee:</b><br/>Anomalien sind leichter<br/>zu isolieren als normale Punkte"]
-        
+
         step1["1. Zufällige Auswahl<br/>eines Features"]
         step2["2. Zufälliger Split-Wert<br/>zwischen Min und Max"]
         step3["3. Rekursive Partitionierung<br/>bis Isolation"]
         step4["4. Pfadlänge messen"]
-        
+
         idea --> step1 --> step2 --> step3 --> step4
-        
+
         step4 --> result{"Pfadlänge?"}
         result -->|"Kurz"| anomaly["🔴 Anomalie<br/>(schnell isoliert)"]
         result -->|"Lang"| normal["🟢 Normal<br/>(schwer zu isolieren)"]
@@ -268,6 +302,8 @@ flowchart TD
     style anomaly fill:#ffcdd2
     style normal fill:#c8e6c9
 ```
+
+</div>
 
 ## Best Practices
 
@@ -283,10 +319,12 @@ flowchart TD
 
 ## Auswirkungen auf ML-Modelle
 
+<div style="transform: scale(0.6); transform-origin: top left; width: 166.67%; margin-bottom: -40%;">
+
 ```mermaid
 flowchart TB
     outlier["Unbehandelte<br/>Ausreißer"]
-    
+
     outlier --> linreg["<b>Lineare Regression</b><br/>Stark beeinflusst<br/>❌ Sehr sensitiv"]
     outlier --> tree["<b>Entscheidungsbäume</b><br/>Weniger beeinflusst<br/>✓ Relativ robust"]
     outlier --> knn["<b>KNN</b><br/>Distanz-sensitiv<br/>❌ Sensitiv"]
@@ -302,6 +340,8 @@ flowchart TB
     style rf fill:#c8e6c9
     style svm fill:#fff3e0
 ```
+
+</div>
 
 ## Scikit-learn Klassen
 
