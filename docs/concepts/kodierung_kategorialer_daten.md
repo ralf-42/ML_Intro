@@ -420,4 +420,4 @@ Die Wahl der richtigen Kodierung ist entscheidend für die Modellperformance. Gr
 
 **Version:** 1.0     
 **Stand:** Januar 2026     
-**Kurs:** Machine Leanrning. Verstehen. Anwenden. Gestalten.     
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.     
