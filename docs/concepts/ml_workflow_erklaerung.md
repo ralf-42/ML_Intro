@@ -53,7 +53,7 @@ Die erste Phase bildet das Fundament für den gesamten ML-Workflow. Hier geht es
 
 Zentrale Fragen dieser Phase sind: Welches Problem soll gelöst werden? Welche Daten stehen zur Verfügung? Wie sieht Erfolg aus und wie wird er gemessen? Ohne ein klares Verständnis des Problems riskiert man, ein technisch perfektes Modell zu bauen, das am eigentlichen Bedarf vorbeigeht.
 
-Diese Phase umfasst mehrere Teilschritte: Problem verstehen, Datensammlung und -integration aus verschiedenen Quellen, explorative Datenanalyse (EDA) zur Erkennung von Mustern und Besonderheiten.
+Diese Phase umfasst mehrere Teilschritte: **Problem** verstehen, **Datensammlung** und -integration aus verschiedenen Quellen, explorative **Datenanalyse** (EDA) zur Erkennung von Mustern und Besonderheiten.
 
 In dieser Phase werden auch die Erfolgskriterien definiert – sowohl aus geschäftlicher Sicht (z.B. Kosteneinsparung, Zeitgewinn) als auch aus technischer Perspektive (z.B. Mindest-Accuracy, maximale Latenz).
 
