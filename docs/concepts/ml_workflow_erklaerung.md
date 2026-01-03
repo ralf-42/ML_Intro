@@ -93,6 +93,11 @@ Die gestrichelten Pfeile im Diagramm sind kein Zeichen von Fehlern, sondern ein 
 Ein Modell mit unbefriedigender Performance kann auf Probleme in der Datenaufbereitung hinweisen. Feedback aus dem Produktivbetrieb kann neue Feature-Ideen liefern. Veränderte Geschäftsanforderungen erfordern eine Neubewertung des ursprünglichen Problems. Diese Flexibilität und Bereitschaft zur Iteration unterscheidet erfolgreiche ML-Projekte von gescheiterten.
 
 
+## Beispiel
+
+[Teachable Machines]([Teachable Machine](https://teachablemachine.withgoogle.com/))
+
+
 ---
 
 **Version:** 1.0       
