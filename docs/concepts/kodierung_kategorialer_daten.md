@@ -25,6 +25,7 @@ Die Wahl der richtigen Kodierungsmethode hängt dabei maßgeblich vom **Skalenni
 ## Skalenniveaus kategorialer Daten
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
     subgraph Kategoriale["Kategoriale Skalen"]
         direction TB
@@ -55,6 +56,7 @@ flowchart TB
 ## Entscheidungsbaum: Welche Kodierung verwenden?
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TD
     Start["Kategoriale<br/>Daten"] --> Q1{"Haben die Kategorien<br/>eine natürliche<br/>Rangfolge?"}
     
@@ -84,6 +86,7 @@ Der **OrdinalEncoder** konvertiert kategoriale Merkmale in ganzzahlige Werte (0 
 #### Funktionsweise
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart LR
     subgraph Vorher["Originaldaten"]
         V1["schlecht"]
@@ -152,6 +155,7 @@ Der **OneHotEncoder** erstellt für jede Kategorie eine eigene binäre Spalte. D
 #### Funktionsweise
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart LR
     subgraph Vorher["Originaldaten"]
         direction TB
@@ -234,6 +238,7 @@ Der **TargetEncoder** ersetzt kategoriale Werte durch einen Wert, der aus dem Zi
 #### Funktionsweise
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
     subgraph Input["Eingabedaten"]
         direction LR
@@ -299,6 +304,7 @@ df['stadt_encoded'] = encoder.fit_transform(
 ## Vergleich der Kodierungsmethoden
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
     subgraph Vergleich["Übersicht Kodierungsmethoden"]
         direction TB
@@ -394,6 +400,7 @@ encoder = OrdinalEncoder(
 ## Zusammenfassung
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 mindmap
   root((Kodierung))
     Ordinal
