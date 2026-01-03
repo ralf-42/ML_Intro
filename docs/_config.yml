@@ -1,0 +1,104 @@
+# GitHub Pages Konfiguration für ML_Intro Projekt
+# Jekyll Theme: Just the Docs
+
+# Site settings
+title: "Machine Learning Intro"
+description: "Machine Learning - Von den Grundlagen zu fortgeschrittenen Methoden. Praktische Implementierungen mit scikit-learn, Keras und modernen ML-Frameworks"
+author: Ralf
+email: your-email@example.com
+baseurl: "/ML_Intro" # Repository name
+url: "https://ralf-42.github.io" # GitHub Pages URL
+
+# Theme
+# HINWEIS: just-the-docs muss remote geladen werden
+remote_theme: just-the-docs/just-the-docs
+
+# Alternative themes (GitHub Pages Standard):
+# theme: jekyll-theme-architect
+# theme: jekyll-theme-minimal
+# theme: jekyll-theme-cayman
+# theme: jekyll-theme-slate
+
+# Just the Docs Navigation Configuration
+# Sidebar wird automatisch aus Seiten mit nav_order generiert
+nav_external_links:
+  - title: GitHub Repository
+    url: https://github.com/ralf-42/ML_Intro
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-relative-links
+
+# Mermaid support
+mermaid:
+  src: 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js'
+
+# Jekyll Relative Links Configuration
+relative_links:
+  enabled: true
+  collections: false
+
+# Exclude from processing
+# Hinweis: Da GitHub Pages aus /docs liest, müssen wir nichts excluden
+exclude: []
+
+# Google Analytics (optional)
+# google_analytics: UA-XXXXXXXX-X
+
+# Social Links (optional)
+github_username: ralf-42
+# twitter_username: your-twitter
+# linkedin_username: your-linkedin
+
+# SEO settings
+lang: de
+timezone: Europe/Berlin
+
+# Show downloads button
+show_downloads: true
+
+# Just the Docs Theme Settings
+# Search
+search_enabled: true
+search:
+  heading_level: 2
+  previews: 3
+  preview_words_before: 5
+  preview_words_after: 10
+
+# Table of Contents (TOC) Settings
+heading_anchors: true  # Anker-Links für Überschriften aktivieren
+
+# Defaults für alle Seiten - TOC aktivieren
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+      has_toc: true  # TOC standardmäßig aktiviert
+
+# Aux links (rechts oben)
+aux_links:
+  "GitHub Repository":
+    - "https://github.com/ralf-42/ML_Intro"
+
+# Footer
+footer_content: "Copyright &copy; 2025 Ralf. MIT License | <a href='/ML_Intro/legal/impressum.html'>Impressum</a> | <a href='/ML_Intro/legal/datenschutz.html'>Datenschutz</a> | <a href='/ML_Intro/legal/haftungsausschluss.html'>Haftungsausschluss</a>"
+
+# Color scheme (optional)
+# color_scheme: dark
+
+# Logo (optional - kann später hinzugefügt werden)
+# logo: /assets/images/logo.png

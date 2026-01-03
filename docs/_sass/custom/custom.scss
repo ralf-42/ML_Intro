@@ -1,0 +1,323 @@
+// Custom styles for KI-Agenten GitHub Pages
+// Override just-the-docs default styles to increase content width
+// Target: ~130 characters per line (instead of ~100)
+
+// WICHTIG: Just-the-docs lädt diese Datei automatisch als letztes CSS
+// Daher brauchen wir !important für starke Overrides
+
+// Hauptinhalt-Container breiter machen
+.main-content,
+.main-content-wrap,
+main.main-content {
+  max-width: 1200px !important;
+}
+
+// Für alle Bildschirmgrößen anpassen
+@media (min-width: 31.25rem) {
+  .side-bar {
+    width: 16rem !important;
+  }
+
+  .main {
+    margin-left: 16rem !important;
+  }
+}
+
+@media (min-width: 50rem) {
+  .side-bar {
+    width: 17rem !important;
+  }
+
+  .main {
+    margin-left: 17rem !important;
+    max-width: calc(100% - 17rem) !important;
+  }
+
+  .main-content {
+    max-width: 1200px !important;
+  }
+}
+
+@media (min-width: 66.5rem) {
+  .side-bar {
+    width: 17rem !important;
+  }
+
+  .main {
+    margin-left: 17rem !important;
+    max-width: calc(100% - 17rem) !important;
+  }
+
+  .main-content,
+  .main-content-wrap {
+    max-width: 1200px !important;
+  }
+}
+
+// Für sehr große Bildschirme (Desktop)
+@media (min-width: 87.5rem) {
+  .main-content,
+  .main-content-wrap,
+  main.main-content {
+    max-width: 1200px !important;
+  }
+}
+
+// Body und Container-Anpassungen
+// Schriftgröße: Standard ist 16px
+// Wählen Sie zwischen: 14px (klein), 15px (mittel), 16px (normal), 17px (groß), 18px (sehr groß)
+body {
+  font-size: 16px !important; // Normale Schriftgröße
+}
+
+// Alternativ: Nur Content-Bereich anpassen
+.main-content {
+  font-size: 16px !important;
+  line-height: 1.6 !important; // Zeilenabstand (1.5 = eng, 1.6 = normal, 1.8 = weit)
+}
+
+// Überschriften separat anpassen (optional)
+h1 { font-size: 2em !important; }
+h2 { font-size: 1.5em !important; }
+h3 { font-size: 1.25em !important; }
+h4 { font-size: 1.1em !important; }
+
+// Code-Blöcke (optional)
+code, pre {
+  font-size: 0.9em !important; // Etwas kleiner als normaler Text
+}
+
+// Zusätzlich: Code-Blöcke auch breiter
+pre.highlight,
+figure.highlight {
+  max-width: 1200px !important;
+}
+
+// ============================================================
+// Callout Styles (Obsidian-kompatibel)
+// ============================================================
+
+.callout {
+  margin: 1.5em 0;
+  padding: 0;
+  border-radius: 6px;
+  border-left: 4px solid;
+  background-color: rgba(68, 138, 255, 0.1);
+  border-color: #448aff;
+  overflow: hidden;
+}
+
+.callout-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.75em 1em;
+  font-weight: 600;
+  background-color: rgba(68, 138, 255, 0.15);
+  border-bottom: 1px solid rgba(68, 138, 255, 0.2);
+}
+
+.callout-icon {
+  font-size: 1.2em;
+  line-height: 1;
+}
+
+.callout-title-inner {
+  flex: 1;
+}
+
+.callout-content {
+  padding: 1em;
+  line-height: 1.6;
+}
+
+.callout-content p:first-child {
+  margin-top: 0;
+}
+
+.callout-content p:last-child {
+  margin-bottom: 0;
+}
+
+// Callout-Typen mit spezifischen Farben
+
+.callout[data-callout="note"],
+.callout[data-callout="info"] {
+  background-color: rgba(68, 138, 255, 0.1);
+  border-color: #448aff;
+
+  .callout-title {
+    background-color: rgba(68, 138, 255, 0.15);
+    border-bottom-color: rgba(68, 138, 255, 0.2);
+  }
+}
+
+.callout[data-callout="tip"],
+.callout[data-callout="tipp"] {
+  background-color: rgba(0, 191, 165, 0.1);
+  border-color: #00bfa5;
+
+  .callout-title {
+    background-color: rgba(0, 191, 165, 0.15);
+    border-bottom-color: rgba(0, 191, 165, 0.2);
+  }
+}
+
+.callout[data-callout="warning"],
+.callout[data-callout="caution"] {
+  background-color: rgba(255, 152, 0, 0.1);
+  border-color: #ff9800;
+
+  .callout-title {
+    background-color: rgba(255, 152, 0, 0.15);
+    border-bottom-color: rgba(255, 152, 0, 0.2);
+  }
+}
+
+.callout[data-callout="danger"] {
+  background-color: rgba(244, 67, 54, 0.1);
+  border-color: #f44336;
+
+  .callout-title {
+    background-color: rgba(244, 67, 54, 0.15);
+    border-bottom-color: rgba(244, 67, 54, 0.2);
+  }
+}
+
+.callout[data-callout="success"] {
+  background-color: rgba(76, 175, 80, 0.1);
+  border-color: #4caf50;
+
+  .callout-title {
+    background-color: rgba(76, 175, 80, 0.15);
+    border-bottom-color: rgba(76, 175, 80, 0.2);
+  }
+}
+
+.callout[data-callout="example"] {
+  background-color: rgba(156, 39, 176, 0.1);
+  border-color: #9c27b0;
+
+  .callout-title {
+    background-color: rgba(156, 39, 176, 0.15);
+    border-bottom-color: rgba(156, 39, 176, 0.2);
+  }
+}
+
+.callout[data-callout="quote"] {
+  background-color: rgba(158, 158, 158, 0.1);
+  border-color: #9e9e9e;
+
+  .callout-title {
+    background-color: rgba(158, 158, 158, 0.15);
+    border-bottom-color: rgba(158, 158, 158, 0.2);
+  }
+}
+
+.callout[data-callout="question"] {
+  background-color: rgba(100, 181, 246, 0.1);
+  border-color: #64b5f6;
+
+  .callout-title {
+    background-color: rgba(100, 181, 246, 0.15);
+    border-bottom-color: rgba(100, 181, 246, 0.2);
+  }
+}
+
+.callout[data-callout="failure"],
+.callout[data-callout="bug"] {
+  background-color: rgba(239, 83, 80, 0.1);
+  border-color: #ef5350;
+
+  .callout-title {
+    background-color: rgba(239, 83, 80, 0.15);
+    border-bottom-color: rgba(239, 83, 80, 0.2);
+  }
+}
+
+// Dark Mode Support (wenn aktiviert)
+@media (prefers-color-scheme: dark) {
+  .callout {
+    background-color: rgba(68, 138, 255, 0.15);
+  }
+
+  .callout-title {
+    background-color: rgba(68, 138, 255, 0.2);
+  }
+
+  .callout[data-callout="note"],
+  .callout[data-callout="info"] {
+    background-color: rgba(68, 138, 255, 0.15);
+
+    .callout-title {
+      background-color: rgba(68, 138, 255, 0.2);
+    }
+  }
+
+  .callout[data-callout="tip"],
+  .callout[data-callout="tipp"] {
+    background-color: rgba(0, 191, 165, 0.15);
+
+    .callout-title {
+      background-color: rgba(0, 191, 165, 0.2);
+    }
+  }
+
+  .callout[data-callout="warning"],
+  .callout[data-callout="caution"] {
+    background-color: rgba(255, 152, 0, 0.15);
+
+    .callout-title {
+      background-color: rgba(255, 152, 0, 0.2);
+    }
+  }
+
+  .callout[data-callout="danger"] {
+    background-color: rgba(244, 67, 54, 0.15);
+
+    .callout-title {
+      background-color: rgba(244, 67, 54, 0.2);
+    }
+  }
+
+  .callout[data-callout="success"] {
+    background-color: rgba(76, 175, 80, 0.15);
+
+    .callout-title {
+      background-color: rgba(76, 175, 80, 0.2);
+    }
+  }
+
+  .callout[data-callout="example"] {
+    background-color: rgba(156, 39, 176, 0.15);
+
+    .callout-title {
+      background-color: rgba(156, 39, 176, 0.2);
+    }
+  }
+
+  .callout[data-callout="quote"] {
+    background-color: rgba(158, 158, 158, 0.15);
+
+    .callout-title {
+      background-color: rgba(158, 158, 158, 0.2);
+    }
+  }
+
+  .callout[data-callout="question"] {
+    background-color: rgba(100, 181, 246, 0.15);
+
+    .callout-title {
+      background-color: rgba(100, 181, 246, 0.2);
+    }
+  }
+
+  .callout[data-callout="failure"],
+  .callout[data-callout="bug"] {
+    background-color: rgba(239, 83, 80, 0.15);
+
+    .callout-title {
+      background-color: rgba(239, 83, 80, 0.2);
+    }
+  }
+}
