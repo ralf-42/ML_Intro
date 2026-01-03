@@ -11,7 +11,7 @@ has_toc: true
 # Outlier – Ausreißer erkennen und behandeln
 {: .no_toc }
 
-> **Identifikation und Behandlung von Ausreißern in Datensätzen**
+> **Identifikation und Behandlung von Ausreißern in Datensätzen**     
 > Z-Score, IQR, Isolation Forest - Capping, Winsorizing und robuste Methoden
 
 ---
@@ -324,7 +324,7 @@ flowchart TB
 
 
 ---
-
-**Version:** 1.0
-**Stand:** Januar 2026
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
+    
+**Version:** 1.0    
+**Stand:** Januar 2026    
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    

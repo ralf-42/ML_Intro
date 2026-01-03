@@ -20,7 +20,7 @@ Der Machine-Learning-Workflow beschreibt den systematischen Prozess von der erst
 
 ```mermaid
 graph LR
-    subgraph "App/Workflow Development"
+    subgraph "<b>App/Workflow Development</b>"
     1(1. Understand) --- 2(2. Prepare)
     2 --- 3(3. Modeling)
     3 --- 4(4. Evaluate)
@@ -53,7 +53,7 @@ Die erste Phase bildet das Fundament für den gesamten ML-Workflow. Hier geht es
 
 Zentrale Fragen dieser Phase sind: Welches Problem soll gelöst werden? Welche Daten stehen zur Verfügung? Wie sieht Erfolg aus und wie wird er gemessen? Ohne ein klares Verständnis des Problems riskiert man, ein technisch perfektes Modell zu bauen, das am eigentlichen Bedarf vorbeigeht.
 
-Diese Phase umfasst mehrere Teilschritte: Datensammlung und -integration aus verschiedenen Quellen, explorative Datenanalyse (EDA) zur Erkennung von Mustern und Anomalien, etc.
+Diese Phase umfasst mehrere Teilschritte: Problem verstehen, Datensammlung und -integration aus verschiedenen Quellen, explorative Datenanalyse (EDA) zur Erkennung von Mustern und Besonderheiten.
 
 In dieser Phase werden auch die Erfolgskriterien definiert – sowohl aus geschäftlicher Sicht (z.B. Kosteneinsparung, Zeitgewinn) als auch aus technischer Perspektive (z.B. Mindest-Accuracy, maximale Latenz).
 
@@ -63,13 +63,13 @@ Die Datenaufbereitung ist häufig die zeitaufwändigste Phase eines ML-Projekts.
 
 Diese Phase umfasst mehrere Teilschritte: Datenbereinigung (Handling von Missing Values, Duplikaten, Ausreißern), Skalierung von Daten mit unterschiedlichen Wertebereichen, Feature Engineering zur Erstellung aussagekräftiger Merkmale sowie die Aufteilung in Trainings-, Validierungs- und Testdaten.
 
-Die Qualität der Datenaufbereitung bestimmt maßgeblich die Qualität des späteren Modells – nach dem Prinzip „Garbage in, garbage out".
+Die Qualität der Datenaufbereitung bestimmt maßgeblich die Qualität des späteren Modells – nach dem Prinzip **Garbage in, garbage out**.
 
 ## 3. Modeling – Modell entwickeln
 
 In der Modeling-Phase wird der passende Algorithmus ausgewählt und das Modell trainiert. Die Wahl des Algorithmus hängt von mehreren Faktoren ab: Art des Problems (Regression, Klassifikation, Clustering), Datenmenge und -struktur, Anforderungen an Interpretierbarkeit sowie verfügbare Rechenressourcen.
 
-Typische Schritte sind: Auswahl geeigneter Algorithmen basierend auf dem Problemtyp, Training verschiedener Modelle mit den vorbereiteten Daten, Hyperparameter-Tuning zur Optimierung der Modellleistung und Vergleich verschiedener Ansätze.
+Typische Schritte sind: **Auswahl** geeigneter Algorithmen basierend auf dem Problemtyp, **Training** verschiedener Modelle mit den vorbereiteten Daten, **Hyperparameter-Tuning** zur Optimierung der Modellleistung und Vergleich verschiedener Ansätze.
 
 Es empfiehlt sich, mit einfachen Baseline-Modellen zu beginnen und die Komplexität schrittweise zu erhöhen. Ein einfaches, interpretierbares Modell ist oft wertvoller als ein komplexes Black-Box-Modell mit marginal besserer Performance.
 
@@ -83,7 +83,7 @@ Wichtig ist die Bewertung auf ungesehenen Testdaten, um Overfitting zu erkennen.
 
 ## 5. Deploy – Modell bereitstellen
 
-Die Deployment-Phase überführt das validierte Modell in eine produktive Umgebung, wo es echte Vorhersagen für Endanwender liefert. Dieser Schritt erfordert oft zusätzliche Arbeit jenseits des reinen ML-Codes.
+Die Deployment-Phase überführt das validierte Modell in eine produktive Umgebung, wo es echte Vorhersagen für Endanwender liefert. Dieser Schritt erfordert oft **zusätzliche** Arbeit jenseits des reinen ML-Codes.
 
 Aspekte dieser Phase umfassen: Integration in bestehende Systeme und Workflows, Skalierung für den Produktionsbetrieb, Monitoring der Modellleistung über Zeit, Versionierung und Reproduzierbarkeit sowie Strategien für Modell-Updates.
 
