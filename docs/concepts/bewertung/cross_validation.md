@@ -11,7 +11,7 @@ has_toc: true
 # Cross-Validation
 {: .no_toc }
 
-> **Robuste Modellbewertung durch Kreuzvalidierung**
+> **Robuste Modellbewertung durch Kreuzvalidierung**      
 > K-Fold, Stratified K-Fold, Leave-One-Out und Time Series Split
 
 ---
@@ -757,6 +757,6 @@ Cross-Validation ist ein unverzichtbares Werkzeug für die robuste Bewertung von
 
 ---
 
-**Version:** 1.0
-**Stand:** Januar 2026
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
+**Version:** 1.0    
+**Stand:** Januar 2026    
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    

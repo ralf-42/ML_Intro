@@ -11,7 +11,7 @@ has_toc: true
 # Bootstrapping
 {: .no_toc }
 
-> **Resampling zur Schätzung von Unsicherheit**
+> **Resampling zur Schätzung von Unsicherheit**      
 > Sampling mit Zurücklegen, Konfidenzintervalle und Bootstrap-Aggregating
 
 ---
@@ -707,6 +707,6 @@ Bootstrapping ergänzt Cross-Validation optimal: Während Cross-Validation die G
 
 ---
 
-**Version:** 1.0
-**Stand:** Januar 2026
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
+**Version:** 1.0    
+**Stand:** Januar 2026    
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    

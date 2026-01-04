@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Evaluation
+title: Bewertung - allgemein
 parent: Bewertung
 grand_parent: Konzepte
 nav_order: 6
-description: "Modellbewertung – Qualität von Vorhersagen messen und interpretieren"
+description: Modellbewertung – Qualität von Vorhersagen messen und interpretieren
 has_toc: true
 ---
 
@@ -241,12 +241,12 @@ Die Evaluation ist kein einmaliger Schritt, sondern ein iterativer Prozess. Die 
 
 ---
 
-*Referenzen:*
-- Machine Learning Skript, Kapitel Evaluate (S. 60-62)
-- scikit-learn Dokumentation: [Model Evaluation](https://scikit-learn.org/stable/modules/model_evaluation.html)
+*Referenzen:*    
+- Machine Learning Skript, Kapitel Evaluate (S. 60-62)   
+- scikit-learn Dokumentation: [Model Evaluation](https://scikit-learn.org/stable/modules/model_evaluation.html)   
 
 ---
 
-**Version:** 1.0
-**Stand:** Januar 2026
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
+**Version:** 1.0    
+**Stand:** Januar 2026    
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    
