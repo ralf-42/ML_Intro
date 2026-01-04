@@ -11,7 +11,7 @@ has_toc: true
 # Regularisierung
 {: .no_toc }
 
-> **Kontrolle der Modellkomplexität**
+> **Kontrolle der Modellkomplexität**     
 > L1, L2, Elastic Net, Ridge und Lasso Regression
 
 ---
@@ -745,6 +745,6 @@ Regularisierung ist ein unverzichtbares Werkzeug im Machine Learning. Die richti
 
 ---
 
-**Version:** 1.0
-**Stand:** Januar 2026
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
+**Version:** 1.0    
+**Stand:** Januar 2026    
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.     

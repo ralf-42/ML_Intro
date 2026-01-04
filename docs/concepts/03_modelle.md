@@ -3,6 +3,7 @@ layout: default
 title: Modelle
 parent: Konzepte
 nav_order: 3
+has_children: true
 description: "Machine Learning Modelle und Algorithmen"
 ---
 
@@ -14,7 +15,7 @@ description: "Machine Learning Modelle und Algorithmen"
 
 ### Klassifikation
 
-- Decision Trees
+- **[Entscheidungsbaum](modelle/decision_tree.md)** - Hierarchische Regelstruktur
 - Random Forests
 - Support Vector Machines
 - Naive Bayes

@@ -11,7 +11,7 @@ has_toc: true
 # Overfitting
 {: .no_toc }
 
-> **Das Problem des Auswendiglernens**
+> **Das Problem des Auswendiglernens**    
 > Overfitting-Erkennung, Learning Curves und Gegenmaßnahmen
 
 ---
@@ -672,6 +672,6 @@ flowchart TB
 
 ---
 
-**Version:** 1.0
-**Stand:** Januar 2026
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
+**Version:** 1.0    
+**Stand:** Januar 2026   
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.   

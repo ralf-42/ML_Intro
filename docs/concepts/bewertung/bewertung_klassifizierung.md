@@ -11,7 +11,8 @@ has_toc: true
 # Bewertung Klassifizierung
 {: .no_toc }
 
-> **Klassifikationsmodelle erfordern spezifische Metriken zur Leistungsbewertung. Dieses Kapitel behandelt die wichtigsten Werkzeuge: Confusion Matrix, Precision, Recall, F1-Score, Cohen's Kappa, ROC-Kurve und AUC. Besondere Aufmerksamkeit gilt dem Umgang mit unausgewogenen Datensätzen.**
+> **Klassifikationsmodelle erfordern spezifische Metriken zur Leistungsbewertung.**        
+>  Dieses Kapitel behandelt die wichtigsten Werkzeuge: Confusion Matrix, Precision, Recall, F1-Score, Cohen's Kappa, ROC-Kurve und AUC. Besondere Aufmerksamkeit gilt dem Umgang mit unausgewogenen Datensätzen.
 
 ---
 
@@ -717,13 +718,13 @@ evaluate_classifier(y_test, y_pred, y_proba, class_names=['Negativ', 'Positiv'])
 
 ---
 
-*Referenzen:*
-- scikit-learn Dokumentation: [Classification Metrics](https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics)
-- StatQuest: [Confusion Matrix](https://www.youtube.com/watch?v=Kdsp6soqA7o), [ROC and AUC](https://www.youtube.com/watch?v=4jRBRDbJemM)
-- KNIME: [Confusion Matrix](https://www.knime.com/blog/confusion-matrix), [ROC Curve](https://www.knime.com/blog/roc-curve)
+*Referenzen:*    
+- scikit-learn Dokumentation: [Classification Metrics](https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics)      
+- StatQuest: [Confusion Matrix](https://www.youtube.com/watch?v=Kdsp6soqA7o), [ROC and AUC](https://www.youtube.com/watch?v=4jRBRDbJemM)      
+- KNIME: [Confusion Matrix](https://www.knime.com/blog/confusion-matrix), [ROC Curve](https://www.knime.com/blog/roc-curve)     
 
 ---
 
-**Version:** 1.0
-**Stand:** Januar 2026
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
+**Version:** 1.0     
+**Stand:** Januar 2026    
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    
