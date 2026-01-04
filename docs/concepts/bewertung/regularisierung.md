@@ -742,3 +742,9 @@ Regularisierung ist ein unverzichtbares Werkzeug im Machine Learning. Die richti
 - scikit-learn Dokumentation: [Linear Models](https://scikit-learn.org/stable/modules/linear_model.html)
 - StatQuest: [Ridge Regression](https://www.youtube.com/watch?v=Q81RR3yKn30), [Lasso Regression](https://www.youtube.com/watch?v=NGf0voTMlcs)
 - Keras Dokumentation: [Regularizers](https://keras.io/api/layers/regularizers/)
+
+---
+
+**Version:** 1.0
+**Stand:** Januar 2026
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

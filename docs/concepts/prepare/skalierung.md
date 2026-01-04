@@ -502,3 +502,9 @@ mindmap
 - [scikit-learn: Preprocessing Data](https://scikit-learn.org/stable/modules/preprocessing.html)
 - [Feature Scaling - Machine Learning Mastery](https://machinelearningmastery.com/standardscaler-and-minmaxscaler-transforms-in-python/)
 - [StatQuest: Feature Scaling](https://www.youtube.com/watch?v=mnKm3YP56PY)
+
+---
+
+**Version:** 1.0
+**Stand:** Januar 2026
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

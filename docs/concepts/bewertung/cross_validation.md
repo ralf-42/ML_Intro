@@ -754,3 +754,9 @@ Cross-Validation ist ein unverzichtbares Werkzeug für die robuste Bewertung von
 - scikit-learn Dokumentation: [Cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html)
 - StatQuest: [Cross Validation](https://www.youtube.com/watch?v=fSytzGwwBVw)
 - KNIME: Overfitting and Cross-Validation
+
+---
+
+**Version:** 1.0
+**Stand:** Januar 2026
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

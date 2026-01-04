@@ -896,3 +896,9 @@ Hyperparameter-Tuning ist ein essenzieller Schritt, um das volle Potenzial von M
 - scikit-learn Dokumentation: [GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html), [RandomizedSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html)
 - Bergstra & Bengio (2012): Random Search for Hyper-Parameter Optimization
 - Optuna: [Dokumentation](https://optuna.readthedocs.io/)
+
+---
+
+**Version:** 1.0
+**Stand:** Januar 2026
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
