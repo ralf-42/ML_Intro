@@ -2,7 +2,7 @@
 layout: default
 title: Neuronale Netze
 parent: Konzepte
-nav_order: 4
+nav_order: 5
 description: "Deep Learning und Neuronale Netzwerke"
 ---
 

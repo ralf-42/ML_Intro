@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Kodierung
-parent: Prozess
+parent: Prepare
 grand_parent: Konzepte
 nav_order: 2
 description: Kodierung kategorialer Daten - OrdinalEncoder, OneHotEncoder und TargetEncoder für Machine Learning

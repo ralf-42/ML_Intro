@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Outlier
-parent: Prozess
+parent: Prepare
 grand_parent: Konzepte
 nav_order: 4
 description: "Outlier - Ausreißer erkennen und behandeln mit Z-Score, IQR und Isolation Forest"
