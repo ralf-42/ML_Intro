@@ -22,7 +22,7 @@ description: "Machine Learning Modelle und Algorithmen"
 
 ### Regression
 
-- Linear Regression
+- **[Regression](modeling/regression.md)** - Lineare und logistische Regression
 - Ridge & Lasso
 - Polynomial Regression
 
