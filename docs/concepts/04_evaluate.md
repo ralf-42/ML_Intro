@@ -1,13 +1,13 @@
 ---
 layout: default
-title: Bewertung
+title: Evaluate
 parent: Konzepte
 nav_order: 4
 has_children: true
 description: "Bewertung und Evaluation von ML-Modellen"
 ---
 
-# Bewertung
+# Evaluate
 
 Methoden und Metriken zur Bewertung und Evaluation von Machine Learning Modellen.
 

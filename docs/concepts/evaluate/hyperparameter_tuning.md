@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Hyperparameter-Tuning
-parent: Bewertung
+parent: Evaluate
 grand_parent: Konzepte
 nav_order: 5
 description: "Systematische Optimierung von Hyperparametern zur Verbesserung der Modellleistung"

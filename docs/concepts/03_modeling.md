@@ -1,13 +1,13 @@
 ---
 layout: default
-title: Modelle
+title: Modeling
 parent: Konzepte
 nav_order: 3
 has_children: true
 description: "Machine Learning Modelle und Algorithmen"
 ---
 
-# Modelle
+# Modeling
 
 Überblick über klassische Machine Learning Modelle und ihre Anwendungsfälle.
 
@@ -15,7 +15,7 @@ description: "Machine Learning Modelle und Algorithmen"
 
 ### Klassifikation
 
-- **[Entscheidungsbaum](modelle/decision_tree.md)** - Hierarchische Regelstruktur
+- **[Entscheidungsbaum](modeling/decision_tree.md)** - Hierarchische Regelstruktur
 - Random Forests
 - Support Vector Machines
 - Naive Bayes

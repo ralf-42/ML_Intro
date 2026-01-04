@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Bewertung - allgemein
-parent: Bewertung
+parent: Evaluate
 grand_parent: Konzepte
 nav_order: 6
 description: Modellbewertung – Qualität von Vorhersagen messen und interpretieren
