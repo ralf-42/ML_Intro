@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Overfitting
-parent: Bewertung
+parent: Evaluate
 grand_parent: Konzepte
 nav_order: 3
 description: "Overfitting - Wenn Modelle Trainingsdaten auswendig lernen"

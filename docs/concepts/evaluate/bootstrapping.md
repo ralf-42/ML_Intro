@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Bootstrapping
-parent: Bewertung
+parent: Evaluate
 grand_parent: Konzepte
 nav_order: 2
 description: "Bootstrapping - Resampling-Methode zur Quantifizierung von Unsicherheit"
