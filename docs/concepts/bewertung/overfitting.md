@@ -669,3 +669,9 @@ flowchart TB
 - scikit-learn Dokumentation: [Learning Curve](https://scikit-learn.org/stable/modules/learning_curve.html)
 - StatQuest: [Bias and Variance](https://www.youtube.com/watch?v=EuBBz3bI-aA)
 - KNIME: Overfitting Tutorial
+
+---
+
+**Version:** 1.0
+**Stand:** Januar 2026
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

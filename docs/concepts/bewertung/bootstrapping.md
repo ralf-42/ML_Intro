@@ -704,3 +704,9 @@ Bootstrapping ergänzt Cross-Validation optimal: Während Cross-Validation die G
 - Efron, B., & Tibshirani, R. J. (1993). An Introduction to the Bootstrap
 - scikit-learn Dokumentation: [resample](https://scikit-learn.org/stable/modules/generated/sklearn.utils.resample.html)
 - StatQuest: [Bootstrapping](https://www.youtube.com/watch?v=Xz0x-8-cgaQ)
+
+---
+
+**Version:** 1.0
+**Stand:** Januar 2026
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

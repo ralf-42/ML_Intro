@@ -440,3 +440,9 @@ Der Train-Test-Split ist die Grundlage für zuverlässige Modellbewertung. Die k
 *Referenzen:*
 - scikit-learn Dokumentation: [train_test_split](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)
 - KNIME: Data Preprocessing for Machine Learning Part 1 & Part 2
+
+---
+
+**Version:** 1.0
+**Stand:** Januar 2026
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
