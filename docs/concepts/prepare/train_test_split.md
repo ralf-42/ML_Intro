@@ -3,7 +3,7 @@ layout: default
 title: Train-Test-Split
 parent: Prepare
 grand_parent: Konzepte
-nav_order: 1
+nav_order: 5
 description: "Train-Test-Split - Aufteilung von Daten in Trainings- und Testsets für Machine Learning"
 has_toc: true
 ---

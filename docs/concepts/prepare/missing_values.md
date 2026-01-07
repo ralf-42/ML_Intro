@@ -3,7 +3,7 @@ layout: default
 title: Missing Values
 parent: Prepare
 grand_parent: Konzepte
-nav_order: 3
+nav_order: 1
 description: "Missing Values - Fehlende Werte erkennen und behandeln mit SimpleImputer, KNNImputer und IterativeImputer"
 has_toc: true
 ---

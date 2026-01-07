@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Bewertung Klassifizierung
+title: Klassifizierung
 parent: Evaluate
 grand_parent: Konzepte
-nav_order: 7
-description: "Metriken und Methoden zur Bewertung von Klassifikationsmodellen – von der Confusion Matrix bis zur ROC-Kurve"
+nav_order: 2
+description: Metriken und Methoden zur Bewertung von Klassifikationsmodellen – von der Confusion Matrix bis zur ROC-Kurve
 has_toc: true
 ---
 
