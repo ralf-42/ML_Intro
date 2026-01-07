@@ -1,6 +1,6 @@
 ---
 layout: default
-title: ABCD
+title: Intro
 parent: Grundlagen
 grand_parent: Konzepte
 nav_order: 1
@@ -345,7 +345,7 @@ Beim **Unsupervised Learning** arbeiten wir mit **ungelabelten Daten** – die "
 
 ```mermaid
 flowchart TB
-    subgraph UL["Unsupervised Learning - Aufgabentypen"]
+    subgraph UL["Unsupervised Learning"]
         direction LR
         
         subgraph CL["Clustering"]

@@ -23,8 +23,8 @@ Der Entscheidungsbaum ist ein fundamentaler Lernalgorithmus im überwachten masc
 Das Grundprinzip: Aus dem Trainingsdatensatz wird eine hierarchische Struktur von Regeln abgeleitet. Ausgehend von der Wurzel werden regelbasierte Verzweigungen durchgeführt, bis eine Entscheidung (Vorhersage) getroffen werden kann.
 
 ```mermaid
-flowchart TB
-    subgraph struktur["Struktur eines Entscheidungsbaums"]
+flowchart LR
+    subgraph struktur["Entscheidungsbaum"]
         R["🌳 Root Node<br/>(Wurzelknoten)"]
         R --> D1["🔀 Decision Node<br/>(Entscheidungsknoten)"]
         R --> D2["🔀 Decision Node<br/>(Entscheidungsknoten)"]
@@ -49,12 +49,12 @@ flowchart TB
 
 ## Komponenten des Entscheidungsbaums
 
-| Komponente | Beschreibung | Funktion |
-|------------|--------------|----------|
-| **Root Node** (Wurzelknoten) | Oberster Knoten des Baums | Erste Aufteilung des gesamten Datensatzes |
-| **Decision Node** (Entscheidungsknoten) | Innere Knoten mit Verzweigungen | Weitere Aufteilung basierend auf Merkmalen |
-| **Leaf Node** (Blattknoten) | Endknoten ohne Verzweigungen | Enthält die finale Vorhersage |
-| **Subtree** (Teilbaum) | Unterbaum ab einem Knoten | Kann als eigenständiger Baum betrachtet werden |
+| Komponente                              | Beschreibung                                           | Funktion                                       |
+| --------------------------------------- | ------------------------------------------------------ | ---------------------------------------------- |
+| **Root Node** (Wurzelknoten)            | Oberster Knoten des Baums                              | Erste Aufteilung des gesamten Datensatzes      |
+| **Decision Node** (Entscheidungsknoten) | Innere Knoten mit Verzweigungen/<br>Entscheidungsregel | Weitere Aufteilung basierend auf Merkmalen     |
+| **Leaf Node** (Blattknoten)             | Endknoten ohne Verzweigungen                           | Enthält die finale Vorhersage                  |
+| **Subtree** (Teilbaum)                  | Unterbaum ab einem Knoten                              | Kann als eigenständiger Baum betrachtet werden |
 
 ## Das Splitting-Prinzip
 
@@ -439,18 +439,10 @@ flowchart TB
 
 Der Entscheidungsbaum ist ein grundlegender Algorithmus, der das Fundament für fortgeschrittene Ensemble-Methoden wie Random Forest und Gradient Boosting bildet. Seine Stärke liegt in der Interpretierbarkeit – die Entscheidungslogik kann als Regelsystem visualisiert und kommuniziert werden.
 
-## Weiterführende Themen
-
-- **Random Forest**: Ensemble aus vielen Entscheidungsbäumen (Bagging)
-- **Gradient Boosting / XGBoost**: Sequentielle Verbesserung von Bäumen
-- **Pruning**: Nachträgliches Beschneiden zur Vermeidung von Overfitting
-- **CART-Algorithmus**: Classification and Regression Trees (Basis für sklearn)
-
 ---
 
 *Referenzen:*
 - scikit-learn Dokumentation: [DecisionTreeClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html)
-- KNIME: Decision Tree Learning
 - StatQuest: Decision Trees
 
 ---

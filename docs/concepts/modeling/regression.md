@@ -37,10 +37,10 @@ Der lineare Zusammenhang lässt sich als Gerade darstellen:
 
 $$y = b + ax$$
 
-| Parameter | Bezeichnung | Bedeutung |
-|-----------|-------------|-----------|
-| **b** | Intercept (Y-Achsenabschnitt) | Wert von y, wenn x = 0 |
-| **a** | Slope (Steigung) | Änderung von y pro Einheit x |
+| Parameter | Bezeichnung                   | Bedeutung                    |
+| --------- | ----------------------------- | ---------------------------- |
+| **b**     | Intercept (Y-Achsenabschnitt) | Wert von y, wenn x = 0       |
+| **a**     | Slope (Steigung)              | Änderung von y pro Einheit x |
 
 
 ### Implementierung mit scikit-learn
