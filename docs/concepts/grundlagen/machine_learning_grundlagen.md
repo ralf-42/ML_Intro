@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Grundlagen
+title: ML-Grundlagen
 parent: Grundlagen
 grand_parent: Konzepte
 nav_order: 1
