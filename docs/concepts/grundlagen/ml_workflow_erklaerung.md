@@ -3,7 +3,7 @@ layout: default
 title: ML Workflow
 parent: Grundlagen
 grand_parent: Konzepte
-nav_order: 1
+nav_order: 2
 description: "Der Machine Learning Workflow - Von Understand über Prepare, Modeling und Evaluate bis Deploy"
 has_toc: true
 ---
