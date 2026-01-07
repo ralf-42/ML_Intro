@@ -321,3 +321,54 @@ figure.highlight {
     }
   }
 }
+
+// ============================================================
+// Zentrierte Bilder
+// ============================================================
+
+// Zentrierte Bilder mit Klasse "centered"
+img.centered,
+img.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+// Logo-Klasse (bereits verwendet) - auch zentrieren
+img.logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+// Figure-Element für Bilder mit Beschriftung
+figure.centered,
+figure.center {
+  text-align: center;
+  margin: 1.5em auto;
+
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  figcaption {
+    font-style: italic;
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 0.5em;
+  }
+}
+
+// Dark Mode Support für Figcaption
+@media (prefers-color-scheme: dark) {
+  figure.centered figcaption,
+  figure.center figcaption {
+    color: #aaa;
+  }
+}
