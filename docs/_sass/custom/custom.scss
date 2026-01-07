@@ -326,18 +326,9 @@ figure.highlight {
 // Zentrierte Bilder
 // ============================================================
 
-// Zentrierte Bilder mit Klasse "centered"
+// Zentrierte Bilder mit Klasse "centered" oder "center"
 img.centered,
 img.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-
-// Logo-Klasse (bereits verwendet) - auch zentrieren
-img.logo {
   display: block;
   margin-left: auto;
   margin-right: auto;
