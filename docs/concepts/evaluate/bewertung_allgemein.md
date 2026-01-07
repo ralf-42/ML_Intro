@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Bewertung - allgemein
+title: Allgemein
 parent: Evaluate
 grand_parent: Konzepte
-nav_order: 6
+nav_order: 1
 description: Modellbewertung – Qualität von Vorhersagen messen und interpretieren
 has_toc: true
 ---
