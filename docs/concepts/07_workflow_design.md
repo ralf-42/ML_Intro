@@ -2,7 +2,7 @@
 layout: default
 title: Workflow Design
 parent: Konzepte
-nav_order: 6
+nav_order: 7
 description: "ML Workflow Design und Best Practices"
 ---
 
