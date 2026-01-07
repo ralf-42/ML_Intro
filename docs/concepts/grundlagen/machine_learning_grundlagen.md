@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Machine Learning Grundlagen
+title: Grundlagen
 parent: Grundlagen
 grand_parent: Konzepte
 nav_order: 1
@@ -11,7 +11,8 @@ has_toc: true
 # Machine Learning Grundlagen
 {: .no_toc }
 
-> **Dieses Kapitel vermittelt die fundamentalen Konzepte des maschinellen Lernens. Sie lernen, was Machine Learning ist, welche Lernparadigmen existieren und wie sich verschiedene ML-Aufgaben unterscheiden.**
+> **Dieses Kapitel vermittelt die fundamentalen Konzepte des maschinellen Lernens.**        
+> Sie lernen, was Machine Learning ist, welche Lernparadigmen existieren und wie sich verschiedene ML-Aufgaben unterscheiden.
 
 ---
 
@@ -536,18 +537,10 @@ flowchart TB
     style A5 fill:#bbdefb
 ```
 
----
 
-## Weiterführende Themen
-
-Mit diesem Grundwissen können Sie nun tiefer in die einzelnen Bereiche einsteigen:
-
-- **Train-Test-Split**: Wie Daten für Training und Evaluation aufgeteilt werden
-- **Datenvorverarbeitung**: Skalierung, Kodierung und Behandlung fehlender Werte
-- **Modelltraining**: Konkrete Algorithmen und deren Implementierung
-- **Evaluation**: Metriken zur Bewertung der Modellqualität
-- **Cross-Validation**: Robustere Modellbewertung
 
 ---
 
-*Basierend auf: ML_Skript_V6.pdf, Seiten 12-18*
+**Version:** 1.0       
+**Stand:** Januar 2026     
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.     

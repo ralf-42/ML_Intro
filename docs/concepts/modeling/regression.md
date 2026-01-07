@@ -28,30 +28,8 @@ has_toc: true
 
 Die lineare Regression ist ein statistisches Verfahren, mit dem eine beobachtete **abhängige Variable (y)** durch eine oder mehrere **unabhängige Variablen (x)** erklärt wird. Dabei wird ein linearer Zusammenhang zwischen den Variablen angenommen.
 
-```mermaid
-flowchart LR
-    subgraph input["Eingabe"]
-        X1["Feature x₁"]
-        X2["Feature x₂"]
-        Xn["Feature xₙ"]
-    end
-    
-    subgraph model["Lineares Modell"]
-        F["y = b + a₁x₁ + a₂x₂ + ... + aₙxₙ"]
-    end
-    
-    subgraph output["Ausgabe"]
-        Y["Vorhersage ŷ<br/>(numerisch, stetig)"]
-    end
-    
-    X1 --> F
-    X2 --> F
-    Xn --> F
-    F --> Y
-    
-    style F fill:#e3f2fd
-    style Y fill:#c8e6c9
-```
+
+<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/regression.png" class="logo" width="650"/>
 
 ### Die Regressionsgleichung
 
@@ -64,22 +42,6 @@ $$y = b + ax$$
 | **b** | Intercept (Y-Achsenabschnitt) | Wert von y, wenn x = 0 |
 | **a** | Slope (Steigung) | Änderung von y pro Einheit x |
 
-### Beispiel: Klausurvorbereitung
-
-Ein klassisches Beispiel: Die Beziehung zwischen **Vorbereitungszeit** und **Klausurpunkten**.
-
-```mermaid
-graph LR
-    subgraph example["Beispiel"]
-        direction TB
-        V["Vorbereitungszeit<br/>(Stunden)"] --> M["Lineares<br/>Modell"]
-        M --> P["Klausurpunkte"]
-    end
-    
-    style V fill:#fff9c4
-    style M fill:#e3f2fd
-    style P fill:#c8e6c9
-```
 
 ### Implementierung mit scikit-learn
 
@@ -119,29 +81,9 @@ print(f"Vorhersage für 5 Stunden: {prediction[0]:.1f} Punkte")
 
 Als **Loss** (Verlust) wird die Abweichung zwischen dem tatsächlichen Wert (y) und der Vorhersage (ŷ) bezeichnet. Der Loss quantifiziert, wie gut oder schlecht ein Modell vorhersagt.
 
-```mermaid
-flowchart TB
-    subgraph concept["Loss-Konzept"]
-        direction TB
-        R["Realer Wert<br/>y = 75"]
-        P["Vorhersage<br/>ŷ = 70"]
-        L["Loss = |y - ŷ| = 5"]
-        
-        R --> L
-        P --> L
-    end
-    
-    subgraph goal["Trainingsziel"]
-        G["Loss minimieren<br/>→ bessere Vorhersagen"]
-    end
-    
-    L --> goal
-    
-    style R fill:#c8e6c9
-    style P fill:#fff9c4
-    style L fill:#ffcdd2
-    style G fill:#e3f2fd
-```
+
+
+<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/regression_residuals.png" class="logo" width="650"/>
 
 ### Wichtige Loss-Funktionen für Regression
 
@@ -151,33 +93,6 @@ flowchart TB
 | **MAE** (Mean Absolute Error) | $\frac{1}{n}\sum\|y_i - \hat{y}_i\|$ | Robust gegenüber Ausreißern |
 | **RMSE** (Root MSE) | $\sqrt{MSE}$ | Gleiche Einheit wie Zielvariable |
 
-### Visualisierung der Residuen
-
-```mermaid
-flowchart LR
-    subgraph data["Datenpunkte"]
-        D1((●))
-        D2((●))
-        D3((●))
-        D4((●))
-    end
-    
-    subgraph line["Regressionsgerade"]
-        L["y = b + ax"]
-    end
-    
-    subgraph residuals["Residuen"]
-        R["Abstände zur Geraden<br/>(= einzelne Fehler)"]
-    end
-    
-    data --> L
-    L --> R
-    R --> |"Summe minimieren"| OPT["Optimales Modell"]
-    
-    style L fill:#e3f2fd
-    style R fill:#ffcdd2
-    style OPT fill:#c8e6c9
-```
 
 ### Loss berechnen mit scikit-learn
 
