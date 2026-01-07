@@ -358,10 +358,7 @@ flowchart TB
             AN_EX["Betrugserkennung,<br/>Defekte Produkte"]
         end
         
-        subgraph AS["Assoziationsanalyse"]
-            AS_DESC["Zusammenhänge<br/>entdecken"]
-            AS_EX["Warenkorbanalyse,<br/>Empfehlungen"]
-        end
+
     end
     
     style CL fill:#bbdefb
