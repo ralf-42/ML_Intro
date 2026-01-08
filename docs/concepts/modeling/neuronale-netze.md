@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Spezielle Neuronale Netze
+title: Neuronale Netze
 parent: Modeling
 grand_parent: Konzepte
 nav_order: 6
@@ -8,7 +8,7 @@ description: "Grundlagen künstlicher neuronaler Netze: Architektur, Aktivierung
 has_toc: true
 ---
 
-# Spezielle Neuronale Netze
+# Neuronale Netze
 {: .no_toc }
 
 > **Künstliche neuronale Netze (KNN) sind dem biologischen Nervensystem nachempfundene Modelle, die komplexe nichtlineare Zusammenhänge zwischen Ein- und Ausgaben lernen können. Sie bilden das Fundament moderner Deep-Learning-Systeme.**
