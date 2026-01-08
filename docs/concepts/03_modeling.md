@@ -58,6 +58,10 @@ description: "Machine Learning Modelle und Algorithmen"
 - Boosting - XGBoost, AdaBoost, Gradient Boosting
 - Stacking - Meta-Learning durch Modell-Kombinationen
 
+## Deep Learning
+
+- **[Spezielle Neuronale Netze](modeling/neuronale-netze)** - Grundlagen künstlicher neuronaler Netze mit CNNs, RNNs und Transformers
+
 ---
 
 _Weitere Algorithmen und detaillierte Inhalte folgen in den Unterseiten._
