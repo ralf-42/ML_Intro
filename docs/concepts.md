@@ -17,6 +17,6 @@ Diese Sektion ist in folgende Themenbereiche untergliedert:
 - **Modelle** - Überblick über klassische ML-Algorithmen und Ensemble Methods
 - **Bewertung** - Metriken und Methoden zur Evaluation von ML-Modellen (Accuracy, Precision, ROC-AUC, Cross-Validation)
 - **Deployment** - ML-Modelle in Produktion bringen (Model Persistence, Web Applications, MLOps)
-- **Neuronale Netze** - Deep Learning Architekturen (CNN, RNN, Transformers)
+- **Spezielle Neuronale Netze** - Deep Learning Architekturen (CNN, RNN, Transformers)
 - **Workflow Design** - Praktische Patterns mit Scikit-learn Pipelines und AutoML
 - **XAI** - Explainable AI Methoden (SHAP, LIME, Interpretierbarkeit)
