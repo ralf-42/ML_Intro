@@ -3,6 +3,7 @@ layout: default
 title: Workflow Design
 parent: Konzepte
 nav_order: 7
+has_children: true
 description: "ML Workflow Design und Best Practices"
 ---
 
@@ -10,47 +11,45 @@ description: "ML Workflow Design und Best Practices"
 
 Praktische Patterns und Best Practices für ML-Workflows.
 
-## Scikit-learn Pipelines
+## Scikit-learn Pipelines & Best Practices
 
-Automatisierung von Preprocessing und Modeling:
+**[Pipelines & Best Practices](workflow-design_text)** - Umfassender Guide zu scikit-learn Pipelines, ColumnTransformer und Best Practices für reproduzierbare ML-Workflows:
 
-```python
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.ensemble import RandomForestClassifier
+- Anwendung von Transformern und Modellen
+- Pipeline-Architektur und Verwendung
+- ColumnTransformer für gemischte Datentypen
+- Data Leakage vermeiden
+- Keras Preprocessing-Layer
+- Zugriff auf Pipeline-Schritte und Zwischenergebnisse
 
-pipeline = Pipeline([
-    ('scaler', StandardScaler()),
-    ('classifier', RandomForestClassifier())
-])
-```
+## Weitere Workflow-Themen
 
-## Cross-Validation
+### Cross-Validation
 
 - K-Fold Cross-Validation
 - Stratified K-Fold
 - Time Series Split
 
-## Hyperparameter Tuning
+### Hyperparameter Tuning
 
 - Grid Search
 - Random Search
 - Bayesian Optimization
 
-## Model Evaluation
+### Model Evaluation
 
 - Confusion Matrix
 - ROC-AUC
 - Precision-Recall Curves
 - Feature Importance
 
-## AutoML
+### AutoML
 
 - PyCaret
 - Auto-sklearn
 - H2O AutoML
 
-_Detaillierte Inhalte folgen_
+_Weitere detaillierte Inhalte folgen_
 
 
 ---
