@@ -3,7 +3,7 @@ layout: default
 title: Bootstrapping
 parent: Evaluate
 grand_parent: Konzepte
-nav_order: 4
+nav_order: 7
 description: "Bootstrapping - Resampling-Methode zur Quantifizierung von Unsicherheit"
 has_toc: true
 ---

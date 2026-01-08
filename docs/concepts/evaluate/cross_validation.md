@@ -3,7 +3,7 @@ layout: default
 title: Cross-Validation
 parent: Evaluate
 grand_parent: Konzepte
-nav_order: 3
+nav_order: 6
 description: "Cross-Validation - Kreuzvalidierung zur robusten Bewertung von ML-Modellen"
 has_toc: true
 ---

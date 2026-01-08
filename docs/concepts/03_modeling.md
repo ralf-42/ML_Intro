@@ -15,38 +15,52 @@ description: "Machine Learning Modelle und Algorithmen"
 
 ### Klassifikation
 
-- **[Entscheidungsbaum](modeling/decision_tree.md)** - Hierarchische Regelstruktur
-- Random Forests
-- Support Vector Machines
-- Naive Bayes
+- **[Entscheidungsbaum](modeling/decision_tree)** - Hierarchische Regelstruktur für Klassifikation und Regression
+- Random Forests - Ensemble von Entscheidungsbäumen
+- Support Vector Machines - Maximal-Margin-Klassifikatoren
+- Naive Bayes - Probabilistische Klassifikation
 
 ### Regression
 
-- **[Regression](modeling/regression.md)** - Lineare und logistische Regression
-- Ridge & Lasso
-- Polynomial Regression
+- **[Regression](modeling/regression)** - Lineare und logistische Regression für stetige Vorhersagen
+- Ridge & Lasso - Regularisierte Regression
+- Polynomial Regression - Nicht-lineare Beziehungen
 
 ## Unsupervised Learning
 
 ### Clustering
 
-- K-Means
-- DBSCAN
-- Hierarchisches Clustering
+- **[K-Means & DBSCAN](modeling/kmeans-dbscan)** - Partitions- und dichtebasiertes Clustering
+- Hierarchisches Clustering - Agglomerative und divisive Methoden
+- Mean Shift - Dichtebasiertes nicht-parametrisches Clustering
+
+### Anomalie-Erkennung
+
+- **[Isolation Forest](modeling/isolation_forest)** - Ensemble-basierte Anomalie-Erkennung
+- One-Class SVM - Support Vector Maschinen für Ausreißer
+- Local Outlier Factor (LOF) - Lokale Dichteanomalien
+
+### Assoziationsanalyse
+
+- **[Apriori](modeling/apriori)** - Entdeckung von Zusammenhängen in Transaktionsdaten
+- FP-Growth - Effiziente Alternative zum Apriori-Algorithmus
+- Eclat - Vertikales Mining von häufigen Itemsets
 
 ### Dimensionsreduktion
 
-- PCA (Principal Component Analysis)
-- t-SNE
-- UMAP
+- PCA (Principal Component Analysis) - Lineare Dimensionsreduktion
+- t-SNE - Visualisierung hochdimensionaler Daten
+- UMAP - Manifold-basierte Dimensionsreduktion
 
 ## Ensemble Methods
 
-- Bagging
-- Boosting (XGBoost, AdaBoost)
-- Stacking
+- Bagging - Bootstrap Aggregating (Random Forests)
+- Boosting - XGBoost, AdaBoost, Gradient Boosting
+- Stacking - Meta-Learning durch Modell-Kombinationen
 
-_Detaillierte Inhalte folgen_
+---
+
+_Weitere Algorithmen und detaillierte Inhalte folgen in den Unterseiten._
 
 
 ---

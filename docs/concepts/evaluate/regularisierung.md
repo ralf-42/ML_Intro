@@ -3,7 +3,7 @@ layout: default
 title: Regularisierung
 parent: Evaluate
 grand_parent: Konzepte
-nav_order: 6
+nav_order: 9
 description: "Regularisierung - Kontrolle der Modellkomplexität durch Strafterme"
 has_toc: true
 ---
