@@ -290,7 +290,7 @@ flowchart LR
 3. **Backward Pass**: Gradienten werden rückwärts durch das Netz berechnet
 4. **Update**: Gewichte werden angepasst, um den Loss zu minimieren
 
-
+<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/forward_backward.png" class="logo" width="950"/>
 
 ### Rechenbeispiel: Forward Pass
 
