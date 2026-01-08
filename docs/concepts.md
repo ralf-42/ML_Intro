@@ -14,9 +14,8 @@ Diese Sektion ist in folgende Themenbereiche untergliedert:
 
 - **Grundlagen** - Fundamentale ML-Konzepte inkl. ML Workflow (5-Phasen-Prozess), Supervised/Unsupervised Learning, Bias-Variance Tradeoff
 - **Prepare** - Datenaufbereitung und Preprocessing (Data Cleaning, Feature Engineering, Transformation, Train-Test Split)
-- **Modelle** - Überblick über klassische ML-Algorithmen und Ensemble Methods
+- **Modelle** - Überblick über klassische ML-Algorithmen, Ensemble Methods und Deep Learning (CNNs, RNNs, Transformers)
 - **Bewertung** - Metriken und Methoden zur Evaluation von ML-Modellen (Accuracy, Precision, ROC-AUC, Cross-Validation)
 - **Deployment** - ML-Modelle in Produktion bringen (Model Persistence, Web Applications, MLOps)
-- **Spezielle Neuronale Netze** - Deep Learning Architekturen (CNN, RNN, Transformers)
 - **Workflow Design** - Praktische Patterns mit Scikit-learn Pipelines und AutoML
 - **XAI** - Explainable AI Methoden (SHAP, LIME, Interpretierbarkeit)
