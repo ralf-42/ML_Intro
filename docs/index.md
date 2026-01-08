@@ -37,9 +37,3 @@ Mit zunehmender Verfügbarkeit von Open-Source-Modellen, Frameworks und Werkzeug
 
 Machine Learning markiert damit einen technologischen Wendepunkt. Es verändert nicht nur die Art, wie Entscheidungen getroffen werden, sondern auch das Verhältnis von Mensch und Maschine im analytischen, vorhersagenden und problemlösenden Denken.
 
-
----
-
-**Version:** 1.0     
-**Stand:** Januar 2026     
-**Kurs:** Machine Learning - Von den Grundlagen zu fortgeschrittenen Methoden     
