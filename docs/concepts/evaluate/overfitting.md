@@ -611,22 +611,24 @@ plt.show()
 
 ## Entscheidungshilfe
 
+{% raw %}
 ```mermaid
 flowchart TB
     Q1{{"Training Score<br/>niedrig?"}}
     Q1 --> |"Ja"| UF["Underfitting"]
     Q1 --> |"Nein"| Q2{{"Test Score<br/>deutlich niedriger?"}}
-    
+
     Q2 --> |"Ja"| OF["Overfitting"]
     Q2 --> |"Nein"| GF["Goodfit ✅"]
-    
+
     UF --> S1["Komplexeres Modell<br/>Mehr Features<br/>Weniger Regularisierung"]
     OF --> S2["Mehr Daten<br/>Regularisierung<br/>Feature Selection<br/>Cross-Validation"]
-    
+
     style UF fill:#e3f2fd
     style OF fill:#ffcdd2
     style GF fill:#c8e6c9
 ```
+{% endraw %}
 
 ## Best Practices
 
