@@ -3,6 +3,7 @@ layout: default
 title: XAI
 parent: Konzepte
 nav_order: 8
+has_children: true
 description: "Explainable AI - Interpretierbarkeit von ML-Modellen"
 ---
 
@@ -10,44 +11,46 @@ description: "Explainable AI - Interpretierbarkeit von ML-Modellen"
 
 Methoden zur Erklärbarkeit und Interpretierbarkeit von Machine Learning Modellen.
 
-## Model-agnostic Methods
+## XAI Methoden & Frameworks
 
-### SHAP (SHapley Additive exPlanations)
+**[Methoden & Frameworks](xai_erklaerbare_ki)** - Umfassender Guide zu XAI-Techniken und -Tools:
 
-- Feature Importance
-- Dependence Plots
-- Force Plots
+- **SHAP (SHapley Additive exPlanations)** - Theoretisch fundierte Feature-Attribution
+- **LIME (Local Interpretable Model-agnostic Explanations)** - Lokale Erklärungen durch Surrogate-Modelle
+- **ELI5** - Einfache Permutation Importance
+- **InterpretML** - Microsoft Framework mit interaktiven Dashboards
+- **Feature Importance** - Tree-basierte Modelle
+- **Ceteris Paribus Analysen** - "What-if"-Szenarien
+- **Framework-Vergleich** und Best Practices
 
-### LIME (Local Interpretable Model-agnostic Explanations)
+## Weitere XAI-Themen
 
-Lokale Erklärungen für einzelne Predictions.
+### Model-agnostic Methods
 
-## Model-specific Methods
-
-### Decision Trees
-
-- Tree Visualization mit dtreeviz
-- Feature Importance
-- Decision Paths
-
-### Linear Models
-
-- Koeffizienten-Interpretation
+- SHAP für verschiedene Modelltypen
+- LIME für Tabular, Text und Image Data
 - Partial Dependence Plots
+- Accumulated Local Effects
 
-## Fairness & Bias
+### Model-specific Methods
+
+- Decision Tree Visualization (dtreeviz)
+- Linear Model Koeffizienten
+- Neural Network Activation Maps
+
+### Fairness & Bias
 
 - Bias Detection
 - Fairness Metrics
 - Debiasing Techniques
 
-## Debugging ML Models
+### Debugging ML Models
 
 - Error Analysis
 - Feature Attribution
 - Adversarial Examples
 
-_Detaillierte Inhalte folgen_
+_Weitere detaillierte Inhalte folgen_
 
 
 ---
