@@ -60,7 +60,7 @@ description: "Machine Learning Modelle und Algorithmen"
 
 ## Deep Learning
 
-- **[Spezielle Neuronale Netze](modeling/neuronale-netze)** - Grundlagen künstlicher neuronaler Netze mit CNNs, RNNs und Transformers
+- **[Neuronale Netze](modeling/neuronale-netze)** - Grundlagen künstlicher neuronaler Netze mit CNNs, RNNs und Transformers
 
 ---
 
