@@ -667,23 +667,25 @@ if grid_search.best_params_['classifier__penalty'] == 'l1':
 
 ## Entscheidungshilfe
 
+{% raw %}
 ```mermaid
 flowchart TB
     Q1{{"Viele irrelevante<br/>Features vermutet?"}}
     Q1 --> |"Ja"| Q2{{"Korrelierte<br/>Feature-Gruppen?"}}
     Q1 --> |"Nein"| Q3{{"Multikollinearität<br/>vorhanden?"}}
-    
+
     Q2 --> |"Ja"| A1["Elastic Net<br/>(l1_ratio=0.5-0.7)"]
     Q2 --> |"Nein"| A2["Lasso (L1)"]
-    
+
     Q3 --> |"Ja"| A3["Ridge (L2)"]
     Q3 --> |"Nein / Unsicher"| A4["Ridge (L2)<br/>als Standard"]
-    
+
     style A1 fill:#c8e6c9
     style A2 fill:#c8e6c9
     style A3 fill:#c8e6c9
     style A4 fill:#c8e6c9
 ```
+{% endraw %}
 
 ## Faustregeln
 

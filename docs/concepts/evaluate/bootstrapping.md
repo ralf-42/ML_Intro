@@ -149,20 +149,22 @@ Bei n Datenpunkten und n Ziehungen mit Zurücklegen:
 
 ### Der Bootstrap-Algorithmus
 
+{% raw %}
 ```mermaid
 flowchart TB
     subgraph algo["Bootstrap-Algorithmus"]
-        A["1. Originaldaten<br/>(n Samples)"] --> B["2. Ziehe n Samples<br/>mit Zurücklegen"]
-        B --> C["3. Berechne Statistik θ̂*<br/>(z.B. Accuracy)"]
+        A["#1 Originaldaten<br/>(n Samples)"] --> B["#2 Ziehe n Samples<br/>mit Zurücklegen"]
+        B --> C["#3 Berechne Statistik θ̂*<br/>(z.B. Accuracy)"]
         C --> D{{"Wiederhole<br/>B mal"}}
         D --> |"Ja"| B
-        D --> |"Nein"| E["4. Sammle alle θ̂*<br/>Werte"]
-        E --> F["5. Berechne Konfidenz-<br/>intervall aus Verteilung"]
+        D --> |"Nein"| E["#4 Sammle alle θ̂*<br/>Werte"]
+        E --> F["#5 Berechne Konfidenz-<br/>intervall aus Verteilung"]
     end
-    
+
     style A fill:#e1f5fe
     style F fill:#f3e5f5
 ```
+{% endraw %}
 
 **Typische Anzahl Bootstrap-Iterationen (B):**
 - Standardfehler: B = 50-200 oft ausreichend
@@ -380,6 +382,7 @@ def bca_ci(bootstrap_scores, original_score, confidence_level=0.95):
 
 ## Bootstrapping vs. Cross-Validation
 
+{% raw %}
 ```mermaid
 flowchart TB
     subgraph cv["Cross-Validation"]
@@ -389,7 +392,7 @@ flowchart TB
         CV3["Bewertet Generalisierung"]
         CV1 --> CV2 --> CV3
     end
-    
+
     subgraph boot["Bootstrapping"]
         direction TB
         B1["Ziehen mit Zurücklegen"]
@@ -397,20 +400,21 @@ flowchart TB
         B3["Quantifiziert Unsicherheit"]
         B1 --> B2 --> B3
     end
-    
+
     subgraph compare["Wann was verwenden?"]
         Q1{{"Ziel?"}}
         Q1 --> |"Modellleistung<br/>schätzen"| A1["Cross-Validation"]
         Q1 --> |"Konfidenzintervall<br/>berechnen"| A2["Bootstrapping"]
         Q1 --> |"Beides"| A3["Kombination<br/>möglich"]
     end
-    
+
     style cv fill:#e3f2fd
     style boot fill:#fff3e0
     style A1 fill:#c8e6c9
     style A2 fill:#c8e6c9
     style A3 fill:#c8e6c9
 ```
+{% endraw %}
 
 ### Direkter Vergleich
 
@@ -657,11 +661,12 @@ plt.show()
 
 ## Wann Bootstrapping verwenden?
 
+{% raw %}
 ```mermaid
 flowchart TB
     subgraph decision["Entscheidungsbaum"]
         Q1{{"Was ist das Ziel?"}}
-        
+
         Q1 --> |"Konfidenzintervall<br/>für eine Metrik"| A1["✅ Bootstrapping"]
         Q1 --> |"Modell vergleichen<br/>und auswählen"| A2["➡️ Cross-Validation"]
         Q1 --> |"Robustheit der<br/>Feature Importance"| A3["✅ Bootstrapping"]
@@ -669,7 +674,7 @@ flowchart TB
         Q1 --> |"Ensemble-Modell<br/>trainieren"| A5["✅ Bagging<br/>(nutzt Bootstrapping)"]
         Q1 --> |"Standardfehler<br/>schätzen"| A6["✅ Bootstrapping"]
     end
-    
+
     style A1 fill:#c8e6c9
     style A3 fill:#c8e6c9
     style A5 fill:#c8e6c9
@@ -677,6 +682,7 @@ flowchart TB
     style A2 fill:#e3f2fd
     style A4 fill:#e3f2fd
 ```
+{% endraw %}
 
 ## Zusammenfassung
 

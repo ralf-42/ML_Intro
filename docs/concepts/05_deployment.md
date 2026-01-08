@@ -16,7 +16,7 @@ Die Bereitstellung (Deployment) eines ML-Modells ist der entscheidende Schritt, 
 ## Deployment-Ansätze
 
 ### Web Applications
-- **Gradio** - Schnelle Erstellung interaktiver ML-Demos (siehe [Gradio Deployment]({% link docs/concepts/deploy.md %}))
+- **Gradio** - Schnelle Erstellung interaktiver ML-Demos (siehe [Gradio Deployment](deploy))
 - **Streamlit** - Datenbasierte Web-Apps
 - **Flask/FastAPI** - REST APIs für ML-Modelle
 
