@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Spezielle Neuronale Netze
+title: Spezielle NN
 parent: Modeling
 grand_parent: Konzepte
 nav_order: 7
-description: "Computer Vision mit CNNs, Sequenzmodellierung mit RNNs und LSTMs sowie AutoEncoder für Dimensionsreduktion und Anomalieerkennung"
+description: Computer Vision mit CNNs, Sequenzmodellierung mit RNNs und LSTMs sowie AutoEncoder für Dimensionsreduktion und Anomalieerkennung
 has_toc: true
 ---
 

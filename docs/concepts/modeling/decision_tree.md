@@ -365,10 +365,10 @@ plt.show()
 ```mermaid
 flowchart TB
     subgraph single["Einzelner Entscheidungsbaum"]
-        S1["➕ Interpretierbar"]
-        S2["➕ Schnell"]
-        S3["➖ Overfitting"]
-        S4["➖ Instabil"]
+        S1["+ Interpretierbar"]
+        S2["+ Schnell"]
+        S3["- Overfitting"]
+        S4["- Instabil"]
     end
     
     subgraph ensemble["Ensemble: Random Forest"]
