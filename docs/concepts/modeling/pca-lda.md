@@ -365,3 +365,11 @@ mindmap
 | **Kernfrage** | "Welche Richtung erklärt die meiste Variation?" | "Welche Richtung trennt die Klassen am besten?" |
 | **Stärke** | Universell einsetzbar | Optimal für Klassifikation |
 | **Schwäche** | Ignoriert Klassenzugehörigkeit | Braucht Labels, max. k-1 Komponenten |
+
+
+
+---
+
+**Version:** 1.0    
+**Stand:** Januar 2026    
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    

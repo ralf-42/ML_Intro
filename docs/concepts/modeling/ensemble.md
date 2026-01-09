@@ -251,3 +251,10 @@ mindmap
 - **Boosting** (z.B. XGBoost) reduziert Bias durch sequentielles Lernen aus Fehlern
 - **Stacking** kombiniert verschiedenartige Modelle durch Voting oder Meta-Learning
 - Die Wahl der Methode hängt vom Problem und den verfügbaren Ressourcen ab
+
+
+---
+
+**Version:** 1.0    
+**Stand:** Januar 2026    
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    

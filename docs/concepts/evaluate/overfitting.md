@@ -103,20 +103,20 @@ Das Konzept hinter Underfit und Overfit lässt sich durch den Bias-Variance Trad
 
 ```mermaid
 flowchart TB
-    subgraph error["Gesamtfehler = Bias² + Varianz + Rauschen"]
+    subgraph error["<b>Gesamtfehler=Bias²+Varianz+Rauschen"]
         direction LR
         
-        subgraph bias["Bias (Verzerrung)"]
+        subgraph bias["<b>Bias (Verzerrung)"]
             B1["Fehler durch zu<br/>einfache Annahmen"]
             B2["→ Underfit"]
         end
         
-        subgraph variance["Varianz"]
+        subgraph variance["<b>Varianz"]
             V1["Empfindlichkeit auf<br/>Trainingsdaten"]
             V2["→ Overfit"]
         end
         
-        subgraph noise["Rauschen"]
+        subgraph noise["<b>Rauschen"]
             N1["Unvermeidbarer Fehler<br/>in den Daten"]
         end
     end
@@ -130,7 +130,7 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-    subgraph tradeoff["Modellkomplexität"]
+    subgraph tradeoff["<b>Modellkomplexität"]
         LOW["Niedrig"] --> MED["Mittel"] --> HIGH["Hoch"]
     end
     
@@ -246,20 +246,20 @@ plt.show()
 
 ```mermaid
 flowchart TB
-    subgraph patterns["Learning Curve Muster"]
-        subgraph overfit["🔴 Overfitting"]
+    subgraph patterns["<b>Learning Curve Muster"]
+        subgraph overfit["<b>🔴 Overfitting"]
             O1["Training: hoch & konstant"]
             O2["Validation: deutlich niedriger"]
             O3["Große Lücke bleibt"]
         end
         
-        subgraph underfit["🔵 Underfitting"]
+        subgraph underfit["<b>🔵 Underfitting"]
             U1["Training: niedrig"]
             U2["Validation: ähnlich niedrig"]
             U3["Beide konvergieren auf niedrigem Niveau"]
         end
         
-        subgraph good["🟢 Goodfit"]
+        subgraph good["<b>🟢 Goodfit"]
             G1["Training: gut"]
             G2["Validation: nähert sich an"]
             G3["Kleine Lücke, beide hoch"]
@@ -341,28 +341,28 @@ plt.show()
 
 ```mermaid
 flowchart TB
-    subgraph strategies["Strategien gegen Overfitting"]
+    subgraph strategies["<b>Strategien gegen Overfitting"]
         direction TB
         
-        subgraph data["📊 Daten-basiert"]
+        subgraph data["<b>📊 Daten-basiert"]
             D1["Mehr Trainingsdaten"]
             D2["Data Augmentation"]
             D3["Feature Selection"]
         end
         
-        subgraph model["🔧 Modell-basiert"]
+        subgraph model["<b>🔧 Modell-basiert"]
             M1["Einfacheres Modell"]
             M2["Regularisierung"]
             M3["Dropout (NN)"]
             M4["Early Stopping"]
         end
         
-        subgraph eval["📈 Evaluations-basiert"]
+        subgraph eval["<b>📈 Evaluations-basiert"]
             E1["Cross-Validation"]
             E2["Train-Validate-Test Split"]
         end
         
-        subgraph ensemble["🎯 Ensemble-Methoden"]
+        subgraph ensemble["<b>🎯 Ensemble-Methoden"]
             EN1["Bagging / Random Forest"]
             EN2["Boosting mit Regularisierung"]
         end
