@@ -549,4 +549,7 @@ Mit diesem Grundwissen können Sie nun tiefer in die einzelnen Bereiche einsteig
 
 ---
 
-*Basierend auf: ML_Skript_V6.pdf, Seiten 12-18*
+
+**Version:** 1.0   
+**Stand:** Januar 2026   
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.   

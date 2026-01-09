@@ -344,3 +344,10 @@ mindmap
 - **Diversität** der Base Learner ist entscheidend für den Ensemble-Erfolg
 - **Cross-Validation** bei Meta-Learning verhindert Data Leakage
 - Stacking kann höhere Performance erreichen, erfordert aber mehr Aufwand
+
+
+---
+
+**Version:** 1.0    
+**Stand:** Januar 2026    
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    

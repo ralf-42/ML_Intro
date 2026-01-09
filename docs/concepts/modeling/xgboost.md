@@ -255,3 +255,11 @@ mindmap
 - **Regularisierung** ist integriert und reduziert Overfitting
 - Besonders erfolgreich bei **tabellarischen Daten** und in **ML-Wettbewerben**
 - Erfordert mehr **Hyperparameter-Tuning** als Random Forest
+
+
+
+---
+
+**Version:** 1.0    
+**Stand:** Januar 2026    
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    

@@ -267,7 +267,7 @@ Der Parameter λ (in scikit-learn als `alpha` bezeichnet) steuert die Stärke de
 
 ```mermaid
 flowchart LR
-    subgraph scale["Regularisierungsstärke"]
+    subgraph scale["<b>Regularisierungsstärke"]
         A0["α → 0"] --> A1["α klein"] --> A2["α optimal"] --> A3["α groß"]
     end
     
@@ -572,11 +572,11 @@ from sklearn.linear_model import LogisticRegression, Lasso, Ridge, ElasticNet
 from sklearn.metrics import accuracy_score, classification_report
 
 # 1. Daten laden
-data = load_breast_cancer()
-X, y = data.data, data.target
+df = load_breast_cancer()
+data, target = df.data, df.target
 feature_names = data.feature_names
 
-print(f"Dataset: {X.shape[0]} Samples, {X.shape[1]} Features")
+print(f"Dataset: {data.shape[0]} Samples, {data.shape[1]} Features")
 
 # 2. Train-Test-Split
 data_train, data_test, target_train, target_test = train_test_split(
