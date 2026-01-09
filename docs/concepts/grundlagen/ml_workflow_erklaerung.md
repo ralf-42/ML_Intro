@@ -77,7 +77,7 @@ Es empfiehlt sich, mit einfachen Baseline-Modellen zu beginnen und die Komplexit
 
 Die Evaluationsphase prüft, ob das trainierte Modell die definierten Anforderungen erfüllt. Dabei werden verschiedene Metriken herangezogen, die zum Problemtyp passen müssen.
 
-Für Regressionsaufgaben sind MSE, RMSE und R² relevant. Klassifikationsaufgaben nutzen Accuracy, Precision, Recall, F1-Score und die Confusion Matrix. Bei unbalancierten Datensätzen sind ROC-AUC und PR-AUC besonders aussagekräftig.
+Klassifikationsaufgaben nutzen Accuracy, Precision, Recall, F1-Score und die Confusion Matrix. Für Regressionsaufgaben sind MSE, RMSE und R² relevant. Bei unbalancierten Datensätzen sind ROC-AUC und PR-AUC besonders aussagekräftig.
 
 Wichtig ist die Bewertung auf ungesehenen Testdaten, um Overfitting zu erkennen. Cross-Validation hilft dabei, robuste Schätzungen der Modellleistung zu erhalten. Erfüllt das Modell die Anforderungen nicht, führen die gestrichelten Pfeile zurück zu früheren Phasen – sei es zur Datenaufbereitung, zum Modeling oder sogar zur Problemdefinition.
 

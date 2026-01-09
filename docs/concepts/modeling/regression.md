@@ -51,25 +51,25 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 
 # Beispieldaten
-X = np.array([[1], [2], [3], [4], [5], [6], [7], [8]])  # Stunden Vorbereitung
-y = np.array([20, 35, 45, 55, 60, 70, 75, 85])          # Klausurpunkte
+data = np.array([[1], [2], [3], [4], [5], [6], [7], [8]])  # Stunden Vorbereitung
+target = np.array([20, 35, 45, 55, 60, 70, 75, 85])          # Klausurpunkte
 
 # Train-Test-Split
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+data_train, data_test, target_train, target_test = train_test_split(
+    data, target, test_size=0.2, random_state=42
 )
 
 # Modell erstellen und trainieren
 model = LinearRegression()
-model.fit(X_train, y_train)
+model.fit(data_train, target_train)
 
 # Parameter ausgeben
 print(f"Intercept (b): {model.intercept_:.2f}")
 print(f"Steigung (a):  {model.coef_[0]:.2f}")
 
 # Vorhersage
-X_new = np.array([[5]])  # 5 Stunden Vorbereitung
-prediction = model.predict(X_new)
+data_new = np.array([[5]])  # 5 Stunden Vorbereitung
+prediction = model.predict(data_new)
 print(f"Vorhersage für 5 Stunden: {prediction[0]:.1f} Punkte")
 ```
 
@@ -101,11 +101,11 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error
 import numpy as np
 
 # Vorhersagen erstellen
-y_pred = model.predict(X_test)
+target_pred = model.predict(data_test)
 
 # Loss-Metriken berechnen
-mse = mean_squared_error(y_test, y_pred)
-mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(target_test, target_pred)
+mae = mean_absolute_error(target_test, target_pred)
 rmse = np.sqrt(mse)
 
 print(f"MSE:  {mse:.2f}")
@@ -378,22 +378,22 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 
 # Features: [Fahrstunden, Theorie-Teilnahme (0/1)]
-X = np.array([
+data = np.array([
     [10, 0], [15, 0], [20, 1], [25, 1], [30, 1],
     [12, 1], [18, 0], [22, 1], [28, 1], [35, 1]
 ])
 
 # Ergebnis: 0 = nicht bestanden, 1 = bestanden
-y = np.array([0, 0, 0, 1, 1, 0, 0, 1, 1, 1])
+target = np.array([0, 0, 0, 1, 1, 0, 0, 1, 1, 1])
 
 # Train-Test-Split
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+data_train, data_test, target_train, target_test = train_test_split(
+    data, target, test_size=0.2, random_state=42
 )
 
 # Modell trainieren
 model = LogisticRegression()
-model.fit(X_train, y_train)
+model.fit(data_train, target_train)
 
 # Vorhersage für neuen Schüler: 20 Fahrstunden, Theorie besucht
 new_student = np.array([[20, 1]])
@@ -434,13 +434,13 @@ flowchart TB
 from sklearn.metrics import accuracy_score, classification_report
 
 # Vorhersagen
-y_pred = model.predict(X_test)
-y_prob = model.predict_proba(X_test)[:, 1]
+target_pred = model.predict(data_test)
+target_prob = model.predict_proba(data_test)[:, 1]
 
 # Metriken
-print(f"Accuracy: {accuracy_score(y_test, y_pred):.2%}")
+print(f"Accuracy: {accuracy_score(target_test, target_pred):.2%}")
 print("\nKlassifikationsbericht:")
-print(classification_report(y_test, y_pred, 
+print(classification_report(target_test, target_pred,
                           target_names=['Nicht bestanden', 'Bestanden']))
 ```
 
@@ -504,28 +504,28 @@ n_samples = 100
 class_0 = np.random.randn(n_samples // 2, 2) + np.array([0, 0])
 class_1 = np.random.randn(n_samples // 2, 2) + np.array([3, 3])
 
-X = np.vstack([class_0, class_1])
-y = np.array([0] * (n_samples // 2) + [1] * (n_samples // 2))
+data = np.vstack([class_0, class_1])
+target = np.array([0] * (n_samples // 2) + [1] * (n_samples // 2))
 
 # Train-Test-Split
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=y
+data_train, data_test, target_train, target_test = train_test_split(
+    data, target, test_size=0.2, random_state=42, stratify=target
 )
 
 # Modell trainieren
 model = LogisticRegression()
-model.fit(X_train, y_train)
+model.fit(data_train, target_train)
 
 # Entscheidungsgrenze visualisieren
 fig, ax = plt.subplots(figsize=(10, 8))
 
 # Scatter Plot
-scatter = ax.scatter(X[:, 0], X[:, 1], c=y, cmap='RdYlGn', 
+scatter = ax.scatter(data[:, 0], data[:, 1], c=target, cmap='RdYlGn',
                      edgecolors='black', s=100)
 
 # Entscheidungsgrenze
-x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
-y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+x_min, x_max = data[:, 0].min() - 1, data[:, 0].max() + 1
+y_min, y_max = data[:, 1].min() - 1, data[:, 1].max() + 1
 xx, yy = np.meshgrid(np.linspace(x_min, x_max, 200),
                      np.linspace(y_min, y_max, 200))
 Z = model.predict_proba(np.c_[xx.ravel(), yy.ravel()])[:, 1]
@@ -543,8 +543,8 @@ plt.legend(*scatter.legend_elements(), title="Klassen")
 plt.show()
 
 # Modellgüte
-print(f"Trainings-Accuracy: {model.score(X_train, y_train):.2%}")
-print(f"Test-Accuracy:      {model.score(X_test, y_test):.2%}")
+print(f"Trainings-Accuracy: {model.score(data_train, target_train):.2%}")
+print(f"Test-Accuracy:      {model.score(data_test, target_test):.2%}")
 ```
 
 ---

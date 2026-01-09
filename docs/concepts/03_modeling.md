@@ -16,7 +16,6 @@ description: "Machine Learning Modelle und Algorithmen"
 ### Klassifikation
 
 - **[Entscheidungsbaum](modeling/decision_tree)** - Hierarchische Regelstruktur für Klassifikation und Regression
-- Random Forests - Ensemble von Entscheidungsbäumen
 - Support Vector Machines - Maximal-Margin-Klassifikatoren
 - Naive Bayes - Probabilistische Klassifikation
 
@@ -48,13 +47,14 @@ description: "Machine Learning Modelle und Algorithmen"
 
 ### Dimensionsreduktion
 
-- PCA (Principal Component Analysis) - Lineare Dimensionsreduktion
+- **[PCA und LDA](modeling/pca-lda)** - Principal Component Analysis und Linear Discriminant Analysis für Dimensionsreduktion
 - t-SNE - Visualisierung hochdimensionaler Daten
 - UMAP - Manifold-basierte Dimensionsreduktion
 
 ## Ensemble Methods
 
-- **[Ensemble-Methoden](modeling/ensemble)** - Übersicht: Bagging (Random Forest), Boosting und Stacking
+- **[Ensemble-Methoden](modeling/ensemble)** - Übersicht: Bagging, Boosting und Stacking-Konzepte
+- **[Random Forest](modeling/random-forest)** - Bagging-basiertes Ensemble: Kombination multipler Entscheidungsbäume für robuste Vorhersagen
 - **[XGBoost](modeling/xgboost)** - Extreme Gradient Boosting: Optimierte Boosting-Implementierung für höchste Performance
 - **[Stacking](modeling/stacking)** - Kombination heterogener Modelle durch Voting oder Meta-Learning
 

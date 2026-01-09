@@ -20,10 +20,12 @@ has_toc: true
 
 Cross-Validation (Kreuzvalidierung) ist ein statistisches Verfahren zur Bewertung der **Generalisierungsfähigkeit** eines Machine-Learning-Modells. Im Gegensatz zum einfachen Train-Test-Split wird der Datensatz mehrfach unterschiedlich aufgeteilt, wodurch eine robustere und zuverlässigere Leistungsbewertung entsteht.
 
+
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '13px'}}}%%
 flowchart LR
     subgraph input[" "]
-        D[("Dataset")]
+        D[("Train-Dataset")]
     end
     
     subgraph cv["Cross-Validation (K=5)"]
@@ -100,12 +102,13 @@ flowchart TB
     S4 --> AVG
     S5 --> AVG
     
-    style T1 fill:#ffecb3
-    style T2 fill:#ffecb3
-    style T3 fill:#ffecb3
-    style T4 fill:#ffecb3
-    style T5 fill:#ffecb3
-    style AVG fill:#c8e6c9
+%% Blaues Farbschema für Test-Folds%% 
+style T1 fill:#2196f3,color:#fff,stroke:#0d47a1 
+style T2 fill:#2196f3,color:#fff,stroke:#0d47a1 
+style T3 fill:#2196f3,color:#fff,stroke:#0d47a1 
+style T4 fill:#2196f3,color:#fff,stroke:#0d47a1 
+style T5 fill:#2196f3,color:#fff,stroke:#0d47a1 
+style AVG fill:#c8e6c9
 ```
 
 ### Ablauf im Detail
@@ -127,13 +130,13 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.datasets import load_iris
 
 # Daten laden
-X, y = load_iris(return_X_y=True)
+data, target = load_iris(return_X_y=True)
 
 # Modell definieren
 model = RandomForestClassifier(random_state=42)
 
 # 5-Fold Cross-Validation durchführen
-scores = cross_val_score(model, X, y, cv=5, scoring='accuracy')
+scores = cross_val_score(model, data, target, cv=5, scoring='accuracy')
 
 print(f"Einzelne Scores: {scores}")
 print(f"Accuracy: {scores.mean():.3f} (+/- {scores.std() * 2:.3f})")
@@ -159,7 +162,7 @@ model = LogisticRegression(max_iter=1000)
 scoring = ['accuracy', 'precision_macro', 'recall_macro', 'f1_macro']
 
 results = cross_validate(
-    model, X, y,
+    model, data, target,
     cv=5,
     scoring=scoring,
     return_train_score=True  # Auch Training-Scores zurückgeben
@@ -189,16 +192,16 @@ model = RandomForestClassifier(random_state=42)
 scores = []
 fold = 1
 
-for train_index, test_index in kf.split(X):
+for train_index, test_index in kf.split(data):
     # Daten aufteilen
-    X_train, X_test = X[train_index], X[test_index]
-    y_train, y_test = y[train_index], y[test_index]
-    
+    data_train, data_test = data[train_index], data[test_index]
+    target_train, target_test = target[train_index], target[test_index]
+
     # Modell trainieren und evaluieren
-    model.fit(X_train, y_train)
-    y_pred = model.predict(X_test)
-    score = accuracy_score(y_test, y_pred)
-    
+    model.fit(data_train, target_train)
+    target_pred = model.predict(data_test)
+    score = accuracy_score(target_test, target_pred)
+
     scores.append(score)
     print(f"Fold {fold}: Accuracy = {score:.3f}")
     fold += 1
@@ -240,23 +243,30 @@ flowchart LR
 Bei **Klassifikationsproblemen** mit unausgewogenen Klassen sollte die Klassenverteilung in jedem Fold der Gesamtverteilung entsprechen:
 
 ```mermaid
-flowchart TB
-    subgraph problem["Problem: Unausgewogene Klassen"]
-        D1[("Dataset<br/>90% Klasse A<br/>10% Klasse B")]
+flowchart LR
+    subgraph problem["Unausgewogene Klassen"]
+        D1[("Train-Dataset<br/>90% Klasse A<br/>10% Klasse B")]
         D1 --> F1["Fold 1<br/>95% A, 5% B"]
         D1 --> F2["Fold 2<br/>85% A, 15% B"]
         D1 --> F3["Fold 3<br/>100% A, 0% B ❌"]
     end
-    
+
     subgraph solution["Lösung: Stratifizierung"]
-        D2[("Dataset<br/>90% Klasse A<br/>10% Klasse B")]
+        D2[("Train-Dataset<br/>90% Klasse A<br/>10% Klasse B")]
         D2 --> SF1["Fold 1<br/>90% A, 10% B ✓"]
         D2 --> SF2["Fold 2<br/>90% A, 10% B ✓"]
         D2 --> SF3["Fold 3<br/>90% A, 10% B ✓"]
     end
-    
+
+    %% Erzwingt Links → Rechts
+    problem --> solution
+
+    %% Kante unsichtbar machen
+    linkStyle 0 stroke-width:0,fill:none
+
     style problem fill:#ffcdd2
     style solution fill:#c8e6c9
+
 ```
 
 ### Implementierung
@@ -268,10 +278,10 @@ from sklearn.model_selection import StratifiedKFold, cross_val_score
 skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 
 # Mit cross_val_score (automatisch stratifiziert bei Klassifikation)
-scores = cross_val_score(model, X, y, cv=skf, scoring='accuracy')
+scores = cross_val_score(model, data, target, cv=skf, scoring='accuracy')
 
 # Oder einfacher - cv=5 verwendet automatisch StratifiedKFold für Klassifikation
-scores = cross_val_score(model, X, y, cv=5, scoring='accuracy')
+scores = cross_val_score(model, data, target, cv=5, scoring='accuracy')
 ```
 
 ### Überprüfung der Verteilung
@@ -280,13 +290,13 @@ scores = cross_val_score(model, X, y, cv=5, scoring='accuracy')
 from sklearn.model_selection import StratifiedKFold
 import numpy as np
 
-y = np.array([0]*90 + [1]*10)  # Unausgewogen: 90% vs 10%
+target = np.array([0]*90 + [1]*10)  # Unausgewogen: 90% vs 10%
 skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 
 print("Klassenverteilung pro Fold:")
-for fold, (train_idx, test_idx) in enumerate(skf.split(np.zeros(len(y)), y), 1):
-    train_dist = np.bincount(y[train_idx]) / len(train_idx) * 100
-    test_dist = np.bincount(y[test_idx]) / len(test_idx) * 100
+for fold, (train_idx, test_idx) in enumerate(skf.split(np.zeros(len(target)), target), 1):
+    train_dist = np.bincount(target[train_idx]) / len(train_idx) * 100
+    test_dist = np.bincount(target[test_idx]) / len(test_idx) * 100
     print(f"Fold {fold}: Train [{train_dist[0]:.1f}%, {train_dist[1]:.1f}%] | "
           f"Test [{test_dist[0]:.1f}%, {test_dist[1]:.1f}%]")
 ```
@@ -313,7 +323,7 @@ from sklearn.model_selection import LeaveOneOut, cross_val_score
 loo = LeaveOneOut()
 
 # Achtung: Bei großen Datensätzen sehr langsam!
-scores = cross_val_score(model, X, y, cv=loo, scoring='accuracy')
+scores = cross_val_score(model, data, target, cv=loo, scoring='accuracy')
 
 print(f"Anzahl Durchläufe: {len(scores)}")
 print(f"Accuracy: {scores.mean():.3f}")
@@ -337,7 +347,7 @@ rkf = RepeatedKFold(n_splits=5, n_repeats=10, random_state=42)
 # Stratifizierte Version
 rskf = RepeatedStratifiedKFold(n_splits=5, n_repeats=10, random_state=42)
 
-scores = cross_val_score(model, X, y, cv=rskf, scoring='accuracy')
+scores = cross_val_score(model, data, target, cv=rskf, scoring='accuracy')
 print(f"Accuracy: {scores.mean():.3f} (+/- {scores.std() * 2:.3f})")
 ```
 
@@ -354,7 +364,7 @@ groups = np.array([1, 1, 1, 2, 2, 2, 3, 3, 3, 3])
 
 gkf = GroupKFold(n_splits=3)
 
-for fold, (train_idx, test_idx) in enumerate(gkf.split(X, y, groups), 1):
+for fold, (train_idx, test_idx) in enumerate(gkf.split(data, target, groups), 1):
     print(f"Fold {fold}:")
     print(f"  Training-Gruppen: {np.unique(groups[train_idx])}")
     print(f"  Test-Gruppen: {np.unique(groups[test_idx])}")
@@ -370,15 +380,16 @@ from sklearn.model_selection import TimeSeriesSplit
 tscv = TimeSeriesSplit(n_splits=5)
 
 # Visualisierung der Splits
-for fold, (train_idx, test_idx) in enumerate(tscv.split(X), 1):
+for fold, (train_idx, test_idx) in enumerate(tscv.split(data), 1):
     print(f"Fold {fold}:")
     print(f"  Training: Index {train_idx[0]} bis {train_idx[-1]}")
     print(f"  Test:     Index {test_idx[0]} bis {test_idx[-1]}")
 ```
 
 ```mermaid
-flowchart TB
-    subgraph ts["TimeSeriesSplit (5 Folds)"]
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
+flowchart LR
+    subgraph ts["<b>TimeSeriesSplit (5 Folds)</b>"]
         subgraph f1["Fold 1"]
             T1["■■"] --> TE1["□"]
         end
@@ -396,7 +407,18 @@ flowchart TB
         end
     end
     
+        
+    %% Erzwingt Links → Rechts
+    f1 --> f2 --> f3 --> f4 --> f5
+    
     note["■ = Training, □ = Test<br/>Test ist immer NACH Training (zeitlich)"]
+    
+    
+    style f1 fill:#c8e6c9
+    style f2 fill:#c8e6c9
+	style f3 fill:#c8e6c9
+	style f4 fill:#c8e6c9
+	style f5 fill:#c8e6c9
     
     style note fill:#fff9c4
 ```
@@ -407,8 +429,8 @@ Bei der Kombination von **Hyperparameter-Tuning** und **Modellbewertung** besteh
 
 ```mermaid
 flowchart TB
-    subgraph nested["Nested Cross-Validation"]
-        subgraph outer["Äußere Schleife (Modellbewertung)"]
+    subgraph nested["<b>Nested Cross-Validation</b>"]
+        subgraph outer["Aussen: Modellbewertung"]
             D[("Dataset")] --> O1["Fold 1: Test"]
             D --> O2["Fold 2: Test"]
             D --> O3["Fold 3: Test"]
@@ -416,7 +438,7 @@ flowchart TB
             D --> O5["Fold 5: Test"]
         end
         
-        subgraph inner["Innere Schleife (Hyperparameter-Tuning)"]
+        subgraph inner["Innen: Parameter-Tuning"]
             O1 --> I1["Training → CV für<br/>beste Parameter"]
             O2 --> I2["Training → CV für<br/>beste Parameter"]
             O3 --> I3["Training → CV für<br/>beste Parameter"]
@@ -527,7 +549,7 @@ pipeline = Pipeline([
 
 # Cross-Validation auf der Pipeline
 # Preprocessing wird in JEDEM Fold neu gefittet!
-scores = cross_val_score(pipeline, X, y, cv=5, scoring='accuracy')
+scores = cross_val_score(pipeline, data, target, cv=5, scoring='accuracy')
 
 print(f"Accuracy: {scores.mean():.3f} (+/- {scores.std() * 2:.3f})")
 ```
@@ -600,7 +622,7 @@ model_pipeline = Pipeline([
 ])
 
 # Cross-Validation
-scores = cross_val_score(model_pipeline, X, y, cv=5, scoring='accuracy')
+scores = cross_val_score(model_pipeline, data, target, cv=5, scoring='accuracy')
 print(f"Accuracy: {scores.mean():.3f} (+/- {scores.std() * 2:.3f})")
 ```
 
@@ -616,11 +638,11 @@ mean_score = scores.mean()  # 0.90
 std_score = scores.std()    # 0.024
 ```
 
-| Maß | Bedeutung | Interpretation |
-|-----|-----------|----------------|
-| **Mittelwert** | Erwartete Leistung | "Im Durchschnitt erreicht das Modell 90% Accuracy" |
-| **Standardabweichung** | Stabilität | "Die Leistung schwankt um ±2.4%" |
-| **95% Konfidenzintervall** | Zuverlässigkeit | mean ± 2*std = [85.2%, 94.8%] |
+| Maß                        | Bedeutung          | Interpretation                                     |
+| -------------------------- | ------------------ | -------------------------------------------------- |
+| **Mittelwert**             | Erwartete Leistung | "Im Durchschnitt erreicht das Modell 90% Accuracy" |
+| **Standardabweichung**     | Stabilität         | "Die Leistung schwankt um ±2.4%"                   |
+| **95% Konfidenzintervall** | Zuverlässigkeit    | mean ± 2*std = [85.2%, 94.8%]                      |
 
 ### Anzeichen für Probleme
 
@@ -647,7 +669,7 @@ import pandas as pd
 
 # Mehrere Metriken und Train-Scores
 results = cross_validate(
-    model, X, y,
+    model, data, target,
     cv=5,
     scoring=['accuracy', 'f1', 'roc_auc'],
     return_train_score=True
@@ -660,7 +682,7 @@ summary = []
 for metric in metrics:
     train_scores = results[f'train_{metric}']
     test_scores = results[f'test_{metric}']
-    
+
     summary.append({
         'Metrik': metric,
         'Train (mean)': f"{train_scores.mean():.3f}",
@@ -695,6 +717,9 @@ print(pd.DataFrame(summary).to_string(index=False))
 ## Entscheidungsbaum: Welche CV-Strategie?
 
 ```mermaid
+
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '13px'}}}%%
+
 flowchart TB
     Q1{Zeitreihen-<br/>Daten?}
     Q1 -->|Ja| A1["TimeSeriesSplit"]
@@ -742,18 +767,11 @@ Cross-Validation ist ein unverzichtbares Werkzeug für die robuste Bewertung von
 4. **Nested CV** ist notwendig für unvoreingenommene Bewertung nach Hyperparameter-Tuning
 5. **Spezielle Strategien** für Zeitreihen, gruppierte Daten etc.
 
-## Weiterführende Themen
-
-- **Bootstrapping**: Alternative Resampling-Methode für Konfidenzintervalle
-- **Learning Curves**: Visualisierung der Modellleistung bei verschiedenen Trainingsgrößen
-- **Validation Curves**: Analyse der Hyperparameter-Sensitivität
-
 ---
 
 *Referenzen:*
 - scikit-learn Dokumentation: [Cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html)
 - StatQuest: [Cross Validation](https://www.youtube.com/watch?v=fSytzGwwBVw)
-- KNIME: Overfitting and Cross-Validation
 
 ---
 

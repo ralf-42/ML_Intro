@@ -119,18 +119,18 @@ Der grundlegende ML-Prozess folgt einem klaren Muster:
 
 ```mermaid
 flowchart TB
-    subgraph phase1["1. Datensammlung"]
+    subgraph phase1["<b>#1 Datensammlung</b>"]
         D1[("Rohdaten")]
         D2["Aufbereitete<br/>Daten"]
         D1 --> D2
     end
     
-    subgraph phase2["2. Training"]
+    subgraph phase2["<b>#2 Training"]
         D2 --> ALG["ML-Algorithmus"]
         ALG --> |"Lernt Muster"| MOD["Trainiertes<br/>Modell"]
     end
     
-    subgraph phase3["3. Anwendung"]
+    subgraph phase3["<b>#3 Anwendung"]
         NEW[("Neue Daten")]
         NEW --> MOD
         MOD --> PRED["Vorhersage"]
@@ -192,30 +192,25 @@ flowchart TB
 Jedes Lernparadigma umfasst verschiedene Aufgabentypen:
 
 ```mermaid
-flowchart TB
-    subgraph SL["Supervised Learning"]
-        direction TB
-        SL1["Klassifizierung"]
-        SL2["Regression"]
-    end
-    
-    subgraph UL["Unsupervised Learning"]
-        direction TB
-        UL1["Clustering"]
-        UL2["Anomalieerkennung"]
-        UL3["Dimensionsreduktion"]
-        UL4["Assoziationsanalyse"]
-    end
-    
-    subgraph RL["Reinforcement Learning"]
-        direction TB
-        RL1["Sequenzmodellierung"]
-        RL2["Strategieoptimierung"]
-    end
-    
-    style SL fill:#c8e6c9
-    style UL fill:#bbdefb
-    style RL fill:#fff9c4
+mindmap
+  root((Machine 
+  Learning))
+    Supervised Learning
+      Klassifizierung
+      Regression
+      Dimensionsreduktion
+      Sequenzmodellierung
+      Generative Modellierung
+    Unsupervised Learning
+      Clustering
+      Anomalieerkennung
+      Dimensionsreduktion
+      Assoziationsanalyse
+      Generative Modellierung
+    Reinforcement Learning
+      Agenten
+      Belohnungssysteme
+      Policy Optimization
 ```
 
 ---
@@ -345,21 +340,26 @@ Beim **Unsupervised Learning** arbeiten wir mit **ungelabelten Daten** – die "
 
 ```mermaid
 flowchart TB
-    subgraph UL["Unsupervised Learning"]
+    subgraph UL["<b>Unsupervised Learning</b>"]
         direction LR
         
-        subgraph CL["Clustering"]
+        subgraph CL["<b>Clustering"]
             CL_DESC["Ähnliche Objekte<br/>gruppieren"]
             CL_EX["Kundensegmente,<br/>Dokumentgruppen"]
         end
         
-        subgraph AN["Anomalieerkennung"]
+        subgraph AN["<b>Anomalieerkennung"]
             AN_DESC["Untypische<br/>Datenpunkte finden"]
             AN_EX["Betrugserkennung,<br/>Defekte Produkte"]
         end
         
-
-    end
+		subgraph AS["<b>Assoziationsanalyse"]
+		    AS_DESC["Zusammenhänge<br/>zwischen Merkmalen finden"]
+		    AS_EX["Warenkorbanalyse,<br/>Produktempfehlungen"]
+		end
+	end
+	
+	CL ~~~ AN ~~~ AS
     
     style CL fill:#bbdefb
     style AN fill:#fff9c4

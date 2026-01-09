@@ -27,22 +27,9 @@ has_toc: true
 
 Anomalie-Erkennung ist ein Verfahren des unüberwachten Lernens, das Datensätze identifiziert, die für die gesamte Datenbasis untypisch sind. Anomalien – auch als Ausreißer oder Outliers bezeichnet – weichen signifikant vom normalen Verhalten ab.
 
-```mermaid
-flowchart LR
-    subgraph Datensatz
-        N1[Normal] 
-        N2[Normal]
-        N3[Normal]
-        N4[Normal]
-        A1[🔴 Anomalie]
-    end
-    
-    N1 & N2 & N3 & N4 --> C[Cluster normaler Daten]
-    A1 -.-> |"stark abweichend"| C
-    
-    style A1 fill:#ff6b6b,stroke:#c92a2a,color:#fff
-    style C fill:#51cf66,stroke:#2f9e44,color:#fff
-```
+<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/isolation_forest.png" class="logo" width="750"/>
+
+
 
 ---
 
@@ -273,7 +260,8 @@ flowchart TD
 - **Anomalie-Score:** Quantifiziert die Abweichung (-1 = anomal, +1 = normal)
 - **Isolation Forest:** Standard-Algorithmus basierend auf der leichten Isolierbarkeit von Anomalien
 - **Wichtig:** Domänenwissen für Contamination-Parameter und Ergebnisvalidierung nutzen
-- 
+
+
 ---
 
 **Version:** 1.0    

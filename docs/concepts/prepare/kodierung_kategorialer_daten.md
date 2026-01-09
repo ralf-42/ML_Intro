@@ -25,7 +25,7 @@ Die Wahl der richtigen Kodierungsmethode hängt dabei maßgeblich vom **Skalenni
 ## Skalenniveaus kategorialer Daten
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}}}%%
 flowchart TB
     subgraph Kategoriale["Kategoriale Skalen"]
         direction TB
@@ -56,7 +56,7 @@ flowchart TB
 ## Entscheidungsbaum: Welche Kodierung verwenden?
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}}}%%
 flowchart TD
     Start["Kategoriale<br/>Daten"] --> Q1{"Haben die Kategorien<br/>eine natürliche<br/>Rangfolge?"}
     
@@ -86,7 +86,7 @@ Der **OrdinalEncoder** konvertiert kategoriale Merkmale in ganzzahlige Werte (0 
 #### Funktionsweise
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}}}%%
 flowchart LR
     subgraph Vorher["Originaldaten"]
         V1["schlecht"]
@@ -155,7 +155,7 @@ Der **OneHotEncoder** erstellt für jede Kategorie eine eigene binäre Spalte. D
 #### Funktionsweise
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}}}%%
 flowchart LR
     subgraph Vorher["Originaldaten"]
         direction TB
@@ -238,7 +238,7 @@ Der **TargetEncoder** ersetzt kategoriale Werte durch einen Wert, der aus dem Zi
 #### Funktionsweise
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}}}%%
 flowchart TB
     subgraph Input["Eingabedaten"]
         direction LR
@@ -304,7 +304,7 @@ df['stadt_encoded'] = encoder.fit_transform(
 ## Vergleich der Kodierungsmethoden
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}}}%%
 flowchart TB
     subgraph Vergleich["Übersicht Kodierungsmethoden"]
         direction TB
@@ -349,15 +349,15 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
 
 # Daten aufteilen
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+data_train, data_test, target_train, target_test = train_test_split(data, target, test_size=0.2)
 
 # Encoder nur auf Trainingsdaten fitten
 encoder = OneHotEncoder(handle_unknown='ignore')
-encoder.fit(X_train[['kategorie']])
+encoder.fit(data_train[['kategorie']])
 
 # Transformation auf beide Datensätze anwenden
-X_train_encoded = encoder.transform(X_train[['kategorie']])
-X_test_encoded = encoder.transform(X_test[['kategorie']])
+data_train_encoded = encoder.transform(data_train[['kategorie']])
+data_test_encoded = encoder.transform(data_test[['kategorie']])
 ```
 
 ### 2. Pipeline verwenden
@@ -378,9 +378,9 @@ preprocessor = ColumnTransformer([
 ])
 
 # In Pipeline einbinden
-pipeline = Pipeline([
+model = Pipeline([
     ('preprocessing', preprocessor),
-    ('model', SomeMLModel())
+    ('classifier', SomeMLModel())
 ])
 ```
 
@@ -400,7 +400,7 @@ encoder = OrdinalEncoder(
 ## Zusammenfassung
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}}}%%
 mindmap
   root((Kodierung))
     Ordinal

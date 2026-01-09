@@ -234,7 +234,7 @@ def bootstrap_confidence_interval(model, X, y, n_iterations=1000,
         
         # Modell trainieren und evaluieren
         model_clone = model.__class__(**model.get_params())
-        model_clone.fit(X_boot, y_boot)
+        model_clone.fit(data_boot, target_boot)
         
         # Out-of-Bag Samples für Evaluation finden
         oob_mask = ~np.isin(range(len(X)), 
@@ -280,7 +280,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
-def bootstrap_evaluate(X_train, y_train, X_test, y_test, model, n_bootstrap=1000):
+def bootstrap_evaluate(data_train, target_train, data_test, target_test, model, n_bootstrap=1000):
     """
     Bootstrap-Evaluation mit fester Testmenge.
     """
@@ -288,23 +288,23 @@ def bootstrap_evaluate(X_train, y_train, X_test, y_test, model, n_bootstrap=1000
     
     for i in range(n_bootstrap):
         # Bootstrap nur auf Trainingsdaten
-        X_boot, y_boot = resample(X_train, y_train, replace=True)
+        data_boot, target_boot = resample(data_train, target_train, replace=True)
         
         # Trainieren auf Bootstrap-Stichprobe
         model_clone = model.__class__(**model.get_params())
-        model_clone.fit(X_boot, y_boot)
+        model_clone.fit(data_boot, target_boot)
         
         # Evaluieren auf unveränderter Testmenge
-        score = accuracy_score(y_test, model_clone.predict(X_test))
+        score = accuracy_score(target_test, model_clone.predict(data_test))
         scores.append(score)
     
     return np.array(scores)
 
 # Anwendung
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+data_train, data_test, target_train, target_test = train_test_split(data, target, test_size=0.2, random_state=42)
 model = RandomForestClassifier(n_estimators=50, random_state=42)
 
-scores = bootstrap_evaluate(X_train, y_train, X_test, y_test, model, n_bootstrap=500)
+scores = bootstrap_evaluate(data_train, target_train, data_test, target_test, model, n_bootstrap=500)
 
 print(f"Accuracy: {scores.mean():.3f} ± {scores.std():.3f}")
 print(f"95% CI: [{np.percentile(scores, 2.5):.3f}, {np.percentile(scores, 97.5):.3f}]")
@@ -438,7 +438,7 @@ cv_scores = cross_val_score(model, X, y, cv=5, scoring='accuracy')
 print(f"CV Accuracy: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
 
 # Bootstrapping: Für Konfidenzintervalle der finalen Schätzung
-bootstrap_scores = bootstrap_evaluate(X_train, y_train, X_test, y_test, model)
+bootstrap_scores = bootstrap_evaluate(data_train, target_train, data_test, target_test, model)
 print(f"95% CI: [{np.percentile(bootstrap_scores, 2.5):.3f}, "
       f"{np.percentile(bootstrap_scores, 97.5):.3f}]")
 ```
@@ -490,10 +490,10 @@ rf = RandomForestClassifier(
     oob_score=True,      # OOB-Evaluation aktivieren
     random_state=42
 )
-rf.fit(X_train, y_train)
+rf.fit(data_train, target_train)
 
 print(f"OOB-Score: {rf.oob_score_:.3f}")
-print(f"Test-Score: {rf.score(X_test, y_test):.3f}")
+print(f"Test-Score: {rf.score(data_test, target_test):.3f}")
 ```
 
 ## Bootstrapping in Ensemble-Methoden
@@ -542,9 +542,9 @@ bagging = BaggingClassifier(
     random_state=42
 )
 
-bagging.fit(X_train, y_train)
+bagging.fit(data_train, target_train)
 print(f"OOB-Score: {bagging.oob_score_:.3f}")
-print(f"Test-Score: {bagging.score(X_test, y_test):.3f}")
+print(f"Test-Score: {bagging.score(data_test, target_test):.3f}")
 ```
 
 ## Vollständiges Beispiel: Bootstrap-Analyse
@@ -563,12 +563,12 @@ data = load_breast_cancer()
 X, y = data.data, data.target
 
 # 2. Train-Test-Split
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=y
+data_train, data_test, target_train, target_test = train_test_split(
+    data, target, test_size=0.2, random_state=42, stratify=target
 )
 
 # 3. Bootstrap-Funktion für mehrere Metriken
-def bootstrap_metrics(X_train, y_train, X_test, y_test, model, 
+def bootstrap_metrics(data_train, target_train, data_test, target_test, model, 
                       n_bootstrap=1000, random_state=42):
     """
     Berechnet Bootstrap-Verteilungen für Accuracy und F1-Score.
@@ -579,23 +579,23 @@ def bootstrap_metrics(X_train, y_train, X_test, y_test, model,
     
     for i in range(n_bootstrap):
         # Bootstrap-Stichprobe
-        X_boot, y_boot = resample(X_train, y_train, random_state=random_state+i)
+        data_boot, target_boot = resample(data_train, target_train, random_state=random_state+i)
         
         # Modell trainieren
         model_clone = model.__class__(**model.get_params())
-        model_clone.fit(X_boot, y_boot)
+        model_clone.fit(data_boot, target_boot)
         
         # Metriken berechnen
-        y_pred = model_clone.predict(X_test)
-        accuracies.append(accuracy_score(y_test, y_pred))
-        f1_scores.append(f1_score(y_test, y_pred))
+        target_pred = model_clone.predict(data_test)
+        accuracies.append(accuracy_score(target_test, target_pred))
+        f1_scores.append(f1_score(target_test, target_pred))
     
     return np.array(accuracies), np.array(f1_scores)
 
 # 4. Bootstrap durchführen
 model = RandomForestClassifier(n_estimators=100, random_state=42)
 accuracies, f1_scores = bootstrap_metrics(
-    X_train, y_train, X_test, y_test, model, n_bootstrap=1000
+    data_train, target_train, data_test, target_test, model, n_bootstrap=1000
 )
 
 # 5. Ergebnisse zusammenfassen

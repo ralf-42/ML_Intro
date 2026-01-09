@@ -223,7 +223,7 @@ grid_search = GridSearchCV(
 )
 
 # Suche durchführen
-grid_search.fit(X_train, y_train)
+grid_search.fit(data_train, target_train)
 
 # Beste Parameter und Score
 print(f"Beste Parameter: {grid_search.best_params_}")
@@ -231,7 +231,7 @@ print(f"Bester CV-Score: {grid_search.best_score_:.4f}")
 
 # Bestes Modell verwenden
 best_model = grid_search.best_estimator_
-y_pred = best_model.predict(X_test)
+target_pred = best_model.predict(data_test)
 ```
 
 #### Vor- und Nachteile
@@ -307,7 +307,7 @@ random_search = RandomizedSearchCV(
 )
 
 # Suche durchführen
-random_search.fit(X_train, y_train)
+random_search.fit(data_train, target_train)
 
 # Ergebnisse
 print(f"Beste Parameter: {random_search.best_params_}")
@@ -396,7 +396,7 @@ def objective(trial):
     model = RandomForestClassifier(**params, random_state=42)
     
     # Cross-Validation Score
-    score = cross_val_score(model, X_train, y_train, cv=5, scoring='accuracy')
+    score = cross_val_score(model, data_train, target_train, cv=5, scoring='accuracy')
     return score.mean()
 
 # Studie erstellen und optimieren
@@ -471,7 +471,7 @@ halving_search = HalvingRandomSearchCV(
     n_jobs=-1
 )
 
-halving_search.fit(X_train, y_train)
+halving_search.fit(data_train, target_train)
 print(f"Beste Parameter: {halving_search.best_params_}")
 ```
 
@@ -597,14 +597,14 @@ from scipy.stats import randint, uniform
 # y = df['target']
 
 # Train-Test-Split
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=y
+data_train, data_test, target_train, target_test = train_test_split(
+    data, target, test_size=0.2, random_state=42, stratify=target
 )
 
 # 1. Basis-Modell ohne Tuning
 baseline = RandomForestClassifier(random_state=42)
-baseline.fit(X_train, y_train)
-print(f"Baseline Accuracy: {baseline.score(X_test, y_test):.4f}")
+baseline.fit(data_train, target_train)
+print(f"Baseline Accuracy: {baseline.score(data_test, target_test):.4f}")
 
 # 2. Random Search Tuning
 param_dist = {
@@ -626,17 +626,17 @@ random_search = RandomizedSearchCV(
     random_state=42
 )
 
-random_search.fit(X_train, y_train)
+random_search.fit(data_train, target_train)
 
 # 3. Ergebnisse vergleichen
 print(f"\nBeste Parameter: {random_search.best_params_}")
 print(f"Bester CV-Score: {random_search.best_score_:.4f}")
-print(f"Test Accuracy: {random_search.score(X_test, y_test):.4f}")
+print(f"Test Accuracy: {random_search.score(data_test, target_test):.4f}")
 
 # 4. Detaillierter Bericht
-y_pred = random_search.predict(X_test)
+y_pred = random_search.predict(data_test)
 print("\nClassification Report:")
-print(classification_report(y_test, y_pred))
+print(classification_report(target_test, target_pred))
 ```
 
 ### Beispiel 2: XGBoost Regression
@@ -669,16 +669,16 @@ grid_search = GridSearchCV(
     verbose=1
 )
 
-grid_search.fit(X_train, y_train)
+grid_search.fit(data_train, target_train)
 
 # Ergebnisse
 print(f"Beste Parameter: {grid_search.best_params_}")
 print(f"Bester CV-RMSE: {np.sqrt(-grid_search.best_score_):.4f}")
 
 # Test-Evaluation
-y_pred = grid_search.predict(X_test)
-print(f"Test R²: {r2_score(y_test, y_pred):.4f}")
-print(f"Test RMSE: {np.sqrt(mean_squared_error(y_test, y_pred)):.4f}")
+y_pred = grid_search.predict(data_test)
+print(f"Test R²: {r2_score(target_test, target_pred):.4f}")
+print(f"Test RMSE: {np.sqrt(mean_squared_error(target_test, target_pred)):.4f}")
 ```
 
 ### Beispiel 3: Tuning mit Pipeline
@@ -738,9 +738,9 @@ random_search = RandomizedSearchCV(
     random_state=42
 )
 
-random_search.fit(X_train, y_train)
+random_search.fit(data_train, target_train)
 print(f"Beste Parameter: {random_search.best_params_}")
-print(f"Test Accuracy: {random_search.score(X_test, y_test):.4f}")
+print(f"Test Accuracy: {random_search.score(data_test, target_test):.4f}")
 ```
 
 ---

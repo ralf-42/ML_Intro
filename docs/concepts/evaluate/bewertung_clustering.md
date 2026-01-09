@@ -178,19 +178,19 @@ from sklearn.datasets import make_blobs
 import numpy as np
 
 # Beispieldaten erzeugen
-X, y_true = make_blobs(n_samples=300, centers=4, 
+data, target_true = make_blobs(n_samples=300, centers=4,
                        cluster_std=0.60, random_state=42)
 
 # K-Means Clustering
 kmeans = KMeans(n_clusters=4, random_state=42, n_init=10)
-cluster_labels = kmeans.fit_predict(X)
+cluster_labels = kmeans.fit_predict(data)
 
 # Silhouette-Koeffizient berechnen (Durchschnitt über alle Punkte)
-silhouette_avg = silhouette_score(X, cluster_labels)
+silhouette_avg = silhouette_score(data, cluster_labels)
 print(f"Durchschnittlicher Silhouette-Koeffizient: {silhouette_avg:.3f}")
 
 # Silhouette-Werte für jeden einzelnen Punkt
-sample_silhouette_values = silhouette_samples(X, cluster_labels)
+sample_silhouette_values = silhouette_samples(data, cluster_labels)
 print(f"Min: {sample_silhouette_values.min():.3f}")
 print(f"Max: {sample_silhouette_values.max():.3f}")
 ```
@@ -202,48 +202,48 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 import matplotlib.pyplot as plt
 
-def find_optimal_clusters(X, k_range=range(2, 11)):
+def find_optimal_clusters(data, k_range=range(2, 11)):
     """
     Findet die optimale Cluster-Anzahl basierend auf dem Silhouette-Koeffizienten.
-    
+
     Parameters:
     -----------
-    X : array-like
+    data : array-like
         Die Daten zum Clustern
     k_range : range
         Bereich der zu testenden Cluster-Anzahlen
-    
+
     Returns:
     --------
     int : Optimale Cluster-Anzahl
     """
     silhouette_scores = []
-    
+
     for k in k_range:
         kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
-        labels = kmeans.fit_predict(X)
-        score = silhouette_score(X, labels)
+        labels = kmeans.fit_predict(data)
+        score = silhouette_score(data, labels)
         silhouette_scores.append(score)
         print(f"k={k}: Silhouette-Score = {score:.3f}")
-    
+
     # Visualisierung
     plt.figure(figsize=(10, 5))
     plt.plot(list(k_range), silhouette_scores, 'bo-', linewidth=2, markersize=8)
     plt.xlabel('Anzahl Cluster (k)')
     plt.ylabel('Silhouette-Koeffizient')
     plt.title('Silhouette-Analyse zur Bestimmung der optimalen Cluster-Anzahl')
-    plt.axhline(y=max(silhouette_scores), color='r', linestyle='--', 
+    plt.axhline(y=max(silhouette_scores), color='r', linestyle='--',
                 label=f'Maximum: {max(silhouette_scores):.3f}')
     plt.legend()
     plt.grid(True, alpha=0.3)
     plt.show()
-    
+
     # Optimale Anzahl zurückgeben
     optimal_k = list(k_range)[silhouette_scores.index(max(silhouette_scores))]
     return optimal_k
 
 # Anwendung
-optimal_clusters = find_optimal_clusters(X)
+optimal_clusters = find_optimal_clusters(data)
 print(f"\nOptimale Cluster-Anzahl: {optimal_clusters}")
 ```
 
@@ -256,24 +256,24 @@ import numpy as np
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_samples, silhouette_score
 
-def plot_silhouette(X, n_clusters):
+def plot_silhouette(data, n_clusters):
     """
     Erstellt einen Silhouette-Plot für die gegebenen Daten.
-    
+
     Parameters:
     -----------
-    X : array-like
+    data : array-like
         Die Daten
     n_clusters : int
         Anzahl der Cluster
     """
     # Clustering durchführen
     clusterer = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
-    cluster_labels = clusterer.fit_predict(X)
-    
+    cluster_labels = clusterer.fit_predict(data)
+
     # Silhouette-Werte berechnen
-    silhouette_avg = silhouette_score(X, cluster_labels)
-    sample_silhouette_values = silhouette_samples(X, cluster_labels)
+    silhouette_avg = silhouette_score(data, cluster_labels)
+    sample_silhouette_values = silhouette_samples(data, cluster_labels)
     
     # Plot erstellen
     fig, ax = plt.subplots(figsize=(10, 7))
@@ -313,7 +313,7 @@ def plot_silhouette(X, n_clusters):
     return silhouette_avg
 
 # Anwendung
-avg_score = plot_silhouette(X, n_clusters=4)
+avg_score = plot_silhouette(data, n_clusters=4)
 ```
 
 ---
@@ -327,35 +327,35 @@ from sklearn.cluster import KMeans, AgglomerativeClustering, DBSCAN
 from sklearn.metrics import silhouette_score
 from sklearn.preprocessing import StandardScaler
 
-def compare_clustering_algorithms(X, n_clusters=4):
+def compare_clustering_algorithms(data, n_clusters=4):
     """
     Vergleicht verschiedene Clustering-Algorithmen anhand des Silhouette-Koeffizienten.
     """
     # Daten skalieren
     scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(X)
-    
+    data_scaled = scaler.fit_transform(data)
+
     results = {}
-    
+
     # K-Means
-    kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
-    labels_kmeans = kmeans.fit_predict(X_scaled)
-    results['K-Means'] = silhouette_score(X_scaled, labels_kmeans)
-    
+    model_kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
+    labels_kmeans = model_kmeans.fit_predict(data_scaled)
+    results['K-Means'] = silhouette_score(data_scaled, labels_kmeans)
+
     # Hierarchisches Clustering
-    hierarchical = AgglomerativeClustering(n_clusters=n_clusters)
-    labels_hier = hierarchical.fit_predict(X_scaled)
-    results['Hierarchisch'] = silhouette_score(X_scaled, labels_hier)
-    
+    model_hier = AgglomerativeClustering(n_clusters=n_clusters)
+    labels_hier = model_hier.fit_predict(data_scaled)
+    results['Hierarchisch'] = silhouette_score(data_scaled, labels_hier)
+
     # DBSCAN (benötigt keine Cluster-Anzahl)
-    dbscan = DBSCAN(eps=0.5, min_samples=5)
-    labels_dbscan = dbscan.fit_predict(X_scaled)
+    model_dbscan = DBSCAN(eps=0.5, min_samples=5)
+    labels_dbscan = model_dbscan.fit_predict(data_scaled)
     # Nur berechnen wenn mehr als 1 Cluster gefunden
     if len(set(labels_dbscan)) > 1 and -1 not in labels_dbscan:
-        results['DBSCAN'] = silhouette_score(X_scaled, labels_dbscan)
+        results['DBSCAN'] = silhouette_score(data_scaled, labels_dbscan)
     else:
         results['DBSCAN'] = 'N/A (zu wenig Cluster oder Rauschen)'
-    
+
     # Ergebnisse ausgeben
     print("Vergleich der Clustering-Algorithmen:")
     print("-" * 40)
@@ -364,11 +364,11 @@ def compare_clustering_algorithms(X, n_clusters=4):
             print(f"{algo:15} | Silhouette: {score:.3f}")
         else:
             print(f"{algo:15} | {score}")
-    
+
     return results
 
 # Anwendung
-comparison = compare_clustering_algorithms(X)
+comparison = compare_clustering_algorithms(data)
 ```
 
 ---

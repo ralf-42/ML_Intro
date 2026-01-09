@@ -188,15 +188,15 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 
 # Vorhersagen auf Test-Daten
-y_pred = model.predict(X_test)
+target_pred = model.predict(data_test)
 
 # Grundlegende Metriken
-print("Accuracy:", accuracy_score(y_test, y_pred))
+print("Accuracy:", accuracy_score(target_test, target_pred))
 print("\nKlassifikationsbericht:")
-print(classification_report(y_test, y_pred))
+print(classification_report(target_test, target_pred))
 
 # Confusion Matrix visualisieren
-cm = confusion_matrix(y_test, y_pred)
+cm = confusion_matrix(target_test, target_pred)
 disp = ConfusionMatrixDisplay(confusion_matrix=cm)
 disp.plot()
 plt.title("Confusion Matrix")

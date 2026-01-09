@@ -65,12 +65,12 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 
 # Confusion Matrix berechnen
-cm = confusion_matrix(y_test, y_pred)
+cm = confusion_matrix(target_test, target_pred)
 print("Confusion Matrix:")
 print(cm)
 
 # Visualisierung
-disp = ConfusionMatrixDisplay(confusion_matrix=cm, 
+disp = ConfusionMatrixDisplay(confusion_matrix=cm,
                                display_labels=['Negativ', 'Positiv'])
 disp.plot(cmap='Blues')
 plt.title('Confusion Matrix')
@@ -116,7 +116,7 @@ $$\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}$$
 ```python
 from sklearn.metrics import accuracy_score
 
-accuracy = accuracy_score(y_test, y_pred)
+accuracy = accuracy_score(target_test, target_pred)
 print(f"Accuracy: {accuracy:.4f}")
 ```
 
@@ -131,7 +131,7 @@ $$\text{Precision} = \frac{TP}{TP + FP}$$
 ```python
 from sklearn.metrics import precision_score
 
-precision = precision_score(y_test, y_pred)
+precision = precision_score(target_test, target_pred)
 print(f"Precision: {precision:.4f}")
 ```
 
@@ -149,7 +149,7 @@ $$\text{Recall} = \frac{TP}{TP + FN}$$
 ```python
 from sklearn.metrics import recall_score
 
-recall = recall_score(y_test, y_pred)
+recall = recall_score(target_test, target_pred)
 print(f"Recall: {recall:.4f}")
 ```
 
@@ -167,7 +167,7 @@ $$\text{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{
 ```python
 from sklearn.metrics import f1_score
 
-f1 = f1_score(y_test, y_pred)
+f1 = f1_score(target_test, target_pred)
 print(f"F1-Score: {f1:.4f}")
 ```
 
@@ -194,7 +194,7 @@ Gegeben sei folgende Confusion Matrix:
 ```python
 from sklearn.metrics import classification_report
 
-print(classification_report(y_test, y_pred, target_names=['Negativ', 'Positiv']))
+print(classification_report(target_test, target_pred, target_names=['Negativ', 'Positiv']))
 ```
 
 **Beispielausgabe:**
@@ -266,13 +266,13 @@ Bei Multi-Class-Problemen werden TP, TN, FP und FN für jede Klasse einzeln bere
 from sklearn.metrics import confusion_matrix, classification_report
 
 # Multi-Class Confusion Matrix
-cm = confusion_matrix(y_test, y_pred)
+cm = confusion_matrix(target_test, target_pred)
 print("Confusion Matrix:")
 print(cm)
 
 # Classification Report für alle Klassen
 print("\nClassification Report:")
-print(classification_report(y_test, y_pred, target_names=['Apple', 'Orange', 'Banana']))
+print(classification_report(target_test, target_pred, target_names=['Apple', 'Orange', 'Banana']))
 ```
 
 ### Aggregationsstrategien
@@ -289,9 +289,9 @@ Bei Multi-Class-Problemen gibt es verschiedene Möglichkeiten, die Metriken zu a
 from sklearn.metrics import precision_score, recall_score, f1_score
 
 # Verschiedene Averaging-Strategien
-print(f"Macro F1:    {f1_score(y_test, y_pred, average='macro'):.4f}")
-print(f"Weighted F1: {f1_score(y_test, y_pred, average='weighted'):.4f}")
-print(f"Micro F1:    {f1_score(y_test, y_pred, average='micro'):.4f}")
+print(f"Macro F1:    {f1_score(target_test, target_pred, average='macro'):.4f}")
+print(f"Weighted F1: {f1_score(target_test, target_pred, average='weighted'):.4f}")
+print(f"Micro F1:    {f1_score(target_test, target_pred, average='micro'):.4f}")
 ```
 
 ---
@@ -348,7 +348,7 @@ Wobei:
 ```python
 from sklearn.metrics import cohen_kappa_score
 
-kappa = cohen_kappa_score(y_test, y_pred)
+kappa = cohen_kappa_score(target_test, target_pred)
 print(f"Cohen's Kappa: {kappa:.4f}")
 ```
 
@@ -359,11 +359,11 @@ import numpy as np
 from sklearn.metrics import accuracy_score, cohen_kappa_score
 
 # Beispiel: Unausgewogener Datensatz (90% Klasse 0)
-y_true = np.array([0]*90 + [1]*10)
-y_pred_naive = np.array([0]*100)  # Sagt immer 0 voraus
+target_true = np.array([0]*90 + [1]*10)
+target_pred_naive = np.array([0]*100)  # Sagt immer 0 voraus
 
-print(f"Accuracy:      {accuracy_score(y_true, y_pred_naive):.2f}")  # 0.90
-print(f"Cohen's Kappa: {cohen_kappa_score(y_true, y_pred_naive):.2f}")  # 0.00
+print(f"Accuracy:      {accuracy_score(target_true, target_pred_naive):.2f}")  # 0.90
+print(f"Cohen's Kappa: {cohen_kappa_score(target_true, target_pred_naive):.2f}")  # 0.00
 
 # Kappa zeigt, dass das Modell nicht besser als Zufall ist!
 ```
@@ -407,13 +407,13 @@ from sklearn.metrics import roc_curve, RocCurveDisplay
 import matplotlib.pyplot as plt
 
 # Wahrscheinlichkeiten berechnen (nicht Labels!)
-y_proba = model.predict_proba(X_test)[:, 1]
+target_proba = model.predict_proba(data_test)[:, 1]
 
 # ROC-Kurve
-fpr, tpr, thresholds = roc_curve(y_test, y_proba)
+fpr, tpr, thresholds = roc_curve(target_test, target_proba)
 
 # Visualisierung
-RocCurveDisplay.from_predictions(y_test, y_proba)
+RocCurveDisplay.from_predictions(target_test, target_proba)
 plt.plot([0, 1], [0, 1], 'k--', label='Zufall')
 plt.title('ROC-Kurve')
 plt.legend()
@@ -454,7 +454,7 @@ from sklearn.metrics import roc_curve
 import numpy as np
 
 # ROC-Kurve berechnen
-fpr, tpr, thresholds = roc_curve(y_test, y_proba)
+fpr, tpr, thresholds = roc_curve(target_test, target_proba)
 
 # Youden's J-Statistik: Maximiert TPR - FPR
 j_scores = tpr - fpr
@@ -516,11 +516,11 @@ flowchart LR
 from sklearn.metrics import roc_auc_score
 
 # AUC berechnen
-auc = roc_auc_score(y_test, y_proba)
+auc = roc_auc_score(target_test, target_proba)
 print(f"AUC: {auc:.4f}")
 
 # Für Multi-Class
-auc_ovr = roc_auc_score(y_test, y_proba_multi, multi_class='ovr')
+auc_ovr = roc_auc_score(target_test, target_proba_multi, multi_class='ovr')
 print(f"AUC (One-vs-Rest): {auc_ovr:.4f}")
 ```
 
@@ -532,15 +532,15 @@ import matplotlib.pyplot as plt
 
 # Mehrere Modelle vergleichen
 models = [
-    ('Logistische Regression', lr_proba),
-    ('Random Forest', rf_proba),
-    ('XGBoost', xgb_proba)
+    ('Logistische Regression', model_lr_proba),
+    ('Random Forest', model_rf_proba),
+    ('XGBoost', model_xgb_proba)
 ]
 
 plt.figure(figsize=(10, 8))
 
-for name, y_proba in models:
-    fpr, tpr, _ = roc_curve(y_test, y_proba)
+for name, target_proba in models:
+    fpr, tpr, _ = roc_curve(target_test, target_proba)
     roc_auc = auc(fpr, tpr)
     plt.plot(fpr, tpr, label=f'{name} (AUC = {roc_auc:.3f})')
 
@@ -600,8 +600,8 @@ from sklearn.metrics import precision_recall_curve, average_precision_score
 import matplotlib.pyplot as plt
 
 # Precision-Recall-Kurve
-precision, recall, thresholds = precision_recall_curve(y_test, y_proba)
-ap = average_precision_score(y_test, y_proba)
+precision, recall, thresholds = precision_recall_curve(target_test, target_proba)
+ap = average_precision_score(target_test, target_proba)
 
 plt.figure(figsize=(8, 6))
 plt.plot(recall, precision, label=f'AP = {ap:.3f}')
@@ -664,37 +664,37 @@ from sklearn.metrics import (
 )
 import matplotlib.pyplot as plt
 
-def evaluate_classifier(y_true, y_pred, y_proba=None, class_names=None):
+def evaluate_classifier(target_true, target_pred, target_proba=None, class_names=None):
     """
     Umfassende Evaluation eines Klassifikationsmodells.
     """
     print("=" * 50)
     print("KLASSIFIKATIONS-EVALUATION")
     print("=" * 50)
-    
+
     # Basis-Metriken
-    print(f"\nAccuracy:      {accuracy_score(y_true, y_pred):.4f}")
-    print(f"Precision:     {precision_score(y_true, y_pred, average='weighted'):.4f}")
-    print(f"Recall:        {recall_score(y_true, y_pred, average='weighted'):.4f}")
-    print(f"F1-Score:      {f1_score(y_true, y_pred, average='weighted'):.4f}")
-    print(f"Cohen's Kappa: {cohen_kappa_score(y_true, y_pred):.4f}")
-    
+    print(f"\nAccuracy:      {accuracy_score(target_true, target_pred):.4f}")
+    print(f"Precision:     {precision_score(target_true, target_pred, average='weighted'):.4f}")
+    print(f"Recall:        {recall_score(target_true, target_pred, average='weighted'):.4f}")
+    print(f"F1-Score:      {f1_score(target_true, target_pred, average='weighted'):.4f}")
+    print(f"Cohen's Kappa: {cohen_kappa_score(target_true, target_pred):.4f}")
+
     # AUC (falls Wahrscheinlichkeiten verfügbar)
-    if y_proba is not None:
-        if len(y_proba.shape) == 1 or y_proba.shape[1] == 2:
-            proba = y_proba[:, 1] if len(y_proba.shape) > 1 else y_proba
-            print(f"AUC-ROC:       {roc_auc_score(y_true, proba):.4f}")
-    
+    if target_proba is not None:
+        if len(target_proba.shape) == 1 or target_proba.shape[1] == 2:
+            proba = target_proba[:, 1] if len(target_proba.shape) > 1 else target_proba
+            print(f"AUC-ROC:       {roc_auc_score(target_true, proba):.4f}")
+
     # Classification Report
     print("\n" + "-" * 50)
     print("Classification Report:")
     print("-" * 50)
-    print(classification_report(y_true, y_pred, target_names=class_names))
-    
+    print(classification_report(target_true, target_pred, target_names=class_names))
+
     # Confusion Matrix visualisieren
     fig, ax = plt.subplots(figsize=(8, 6))
     ConfusionMatrixDisplay.from_predictions(
-        y_true, y_pred, 
+        target_true, target_pred,
         display_labels=class_names,
         cmap='Blues',
         ax=ax
@@ -704,7 +704,7 @@ def evaluate_classifier(y_true, y_pred, y_proba=None, class_names=None):
     plt.show()
 
 # Verwendung
-evaluate_classifier(y_test, y_pred, y_proba, class_names=['Negativ', 'Positiv'])
+evaluate_classifier(target_test, target_pred, target_proba, class_names=['Negativ', 'Positiv'])
 ```
 
 ---

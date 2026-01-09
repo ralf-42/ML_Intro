@@ -159,17 +159,17 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
 # Daten aufteilen
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+data_train, data_test, target_train, target_test = train_test_split(
+    data, target, test_size=0.2, random_state=42
 )
 
 # Modell trainieren
 model = RandomForestClassifier(n_estimators=100, max_depth=None, random_state=42)
-model.fit(X_train, y_train)
+model.fit(data_train, target_train)
 
 # Performance vergleichen
-train_score = accuracy_score(y_train, model.predict(X_train))
-test_score = accuracy_score(y_test, model.predict(X_test))
+train_score = accuracy_score(target_train, model.predict(data_train))
+test_score = accuracy_score(target_test, model.predict(data_test))
 
 print(f"Training Accuracy: {train_score:.3f}")
 print(f"Test Accuracy:     {test_score:.3f}")
@@ -481,7 +481,7 @@ early_stopping = EarlyStopping(
 )
 
 history = model.fit(
-    X_train, y_train,
+    data_train, target_train,
     epochs=200,
     validation_split=0.2,
     callbacks=[early_stopping]
@@ -546,8 +546,8 @@ X, y = make_classification(
     random_state=42
 )
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+data_train, data_test, target_train, target_test = train_test_split(
+    data, target, test_size=0.2, random_state=42
 )
 
 # 2. Overfitting demonstrieren
@@ -557,10 +557,10 @@ print("=" * 50)
 
 for max_depth in [2, 5, 10, None]:
     model = DecisionTreeClassifier(max_depth=max_depth, random_state=42)
-    model.fit(X_train, y_train)
+    model.fit(data_train, target_train)
     
-    train_acc = accuracy_score(y_train, model.predict(X_train))
-    test_acc = accuracy_score(y_test, model.predict(X_test))
+    train_acc = accuracy_score(target_train, model.predict(data_train))
+    test_acc = accuracy_score(target_test, model.predict(data_test))
     
     depth_str = str(max_depth) if max_depth else "None"
     status = "⚠️" if train_acc - test_acc > 0.1 else "✅"
