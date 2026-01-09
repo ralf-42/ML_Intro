@@ -74,6 +74,6 @@ _Weitere Algorithmen und detaillierte Inhalte folgen in den Unterseiten._
 
 ---
 
-**Version:** 1.0
-**Stand:** Januar 2026
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
+**Version:** 1.0    
+**Stand:** Januar 2026    
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.     

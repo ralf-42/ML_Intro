@@ -55,6 +55,6 @@ _Weitere detaillierte Inhalte folgen_
 
 ---
 
-**Version:** 1.0
-**Stand:** Januar 2026
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
+**Version:** 1.0    
+**Stand:** Januar 2026    
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    
