@@ -77,30 +77,30 @@ Das zentrale Ziel eines Machine-Learning-Modells ist die **Generalisierungsfähi
 from sklearn.model_selection import train_test_split
 
 # Beispieldaten
-X = df.drop('target', axis=1)  # Features
-y = df['target']                # Zielvariable
+data = df.drop('target', axis=1)  # Features
+target = df['target']              # Zielvariable
 
 # Split durchführen
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y,
+data_train, data_test, target_train, target_test = train_test_split(
+    data, target,
     test_size=0.2,      # 20% für Test
     random_state=42     # Reproduzierbarkeit
 )
 
-print(f"Training: {len(X_train)} Samples")
-print(f"Test:     {len(X_test)} Samples")
+print(f"Training: {len(data_train)} Samples")
+print(f"Test:     {len(data_test)} Samples")
 ```
 
 ### Wichtige Parameter
 
 ```python
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y,
+data_train, data_test, target_train, target_test = train_test_split(
+    data, target,
     test_size=0.2,       # Anteil oder absolute Anzahl für Test
     train_size=None,     # Optional: Anteil für Training
     random_state=42,     # Seed für Reproduzierbarkeit
     shuffle=True,        # Daten vor Split mischen
-    stratify=y           # Klassenverteilung beibehalten
+    stratify=target      # Klassenverteilung beibehalten
 )
 ```
 
@@ -110,20 +110,20 @@ Bei unausgewogenen Klassen sollte der Split die Klassenverteilung in beiden Meng
 
 ```python
 # Ohne Stratifizierung (problematisch bei unausgewogenen Klassen)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+data_train, data_test, target_train, target_test = train_test_split(data, target, test_size=0.2)
 
 # Mit Stratifizierung (empfohlen für Klassifikation)
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y,
+data_train, data_test, target_train, target_test = train_test_split(
+    data, target,
     test_size=0.2,
-    stratify=y,          # Klassenverteilung beibehalten
+    stratify=target,     # Klassenverteilung beibehalten
     random_state=42
 )
 
 # Überprüfung der Verteilung
-print("Original:", y.value_counts(normalize=True))
-print("Training:", y_train.value_counts(normalize=True))
-print("Test:    ", y_test.value_counts(normalize=True))
+print("Original:", target.value_counts(normalize=True))
+print("Training:", target_train.value_counts(normalize=True))
+print("Test:    ", target_test.value_counts(normalize=True))
 ```
 
 ## Train-Validate-Test-Split
@@ -170,24 +170,24 @@ flowchart TB
 from sklearn.model_selection import train_test_split
 
 # Erster Split: Trainings-/Validierungs-Set vs. Test-Set
-X_temp, X_test, y_temp, y_test = train_test_split(
-    X, y,
+data_temp, data_test, target_temp, target_test = train_test_split(
+    data, target,
     test_size=0.2,
     random_state=42,
-    stratify=y
+    stratify=target
 )
 
 # Zweiter Split: Training-Set vs. Validation-Set
-X_train, X_val, y_train, y_val = train_test_split(
-    X_temp, y_temp,
+data_train, data_val, target_train, target_val = train_test_split(
+    data_temp, target_temp,
     test_size=0.2,       # 20% von 80% = 16% des Originals
     random_state=42,
-    stratify=y_temp
+    stratify=target_temp
 )
 
-print(f"Training:   {len(X_train)} Samples ({len(X_train)/len(X)*100:.1f}%)")
-print(f"Validation: {len(X_val)} Samples ({len(X_val)/len(X)*100:.1f}%)")
-print(f"Test:       {len(X_test)} Samples ({len(X_test)/len(X)*100:.1f}%)")
+print(f"Training:   {len(data_train)} Samples ({len(data_train)/len(data)*100:.1f}%)")
+print(f"Validation: {len(data_val)} Samples ({len(data_val)/len(data)*100:.1f}%)")
+print(f"Test:       {len(data_test)} Samples ({len(data_test)/len(data)*100:.1f}%)")
 ```
 
 ## Data Leakage vermeiden
@@ -224,25 +224,25 @@ flowchart TB
    ```python
    # ❌ FALSCH: Skalierung auf gesamtem Dataset
    scaler = StandardScaler()
-   X_scaled = scaler.fit_transform(X)  # Lernt von allen Daten!
-   X_train, X_test, y_train, y_test = train_test_split(X_scaled, y)
-   
+   data_scaled = scaler.fit_transform(data)  # Lernt von allen Daten!
+   data_train, data_test, target_train, target_test = train_test_split(data_scaled, target)
+
    # ✅ RICHTIG: Skalierung nur auf Training-Daten
-   X_train, X_test, y_train, y_test = train_test_split(X, y)
+   data_train, data_test, target_train, target_test = train_test_split(data, target)
    scaler = StandardScaler()
-   X_train_scaled = scaler.fit_transform(X_train)  # Nur Training
-   X_test_scaled = scaler.transform(X_test)        # Nur Transform!
+   data_train_scaled = scaler.fit_transform(data_train)  # Nur Training
+   data_test_scaled = scaler.transform(data_test)        # Nur Transform!
    ```
 
 2. **Imputation vor dem Split**
    ```python
    # ❌ FALSCH: Mittelwert aus allen Daten
-   X['feature'].fillna(X['feature'].mean(), inplace=True)
-   
+   data['feature'].fillna(data['feature'].mean(), inplace=True)
+
    # ✅ RICHTIG: Mittelwert nur aus Training-Daten
-   train_mean = X_train['feature'].mean()
-   X_train['feature'].fillna(train_mean, inplace=True)
-   X_test['feature'].fillna(train_mean, inplace=True)
+   train_mean = data_train['feature'].mean()
+   data_train['feature'].fillna(train_mean, inplace=True)
+   data_test['feature'].fillna(train_mean, inplace=True)
    ```
 
 3. **Feature Engineering vor dem Split**
@@ -265,20 +265,20 @@ from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
 
 # Pipeline definieren
-pipeline = Pipeline([
+model = Pipeline([
     ('imputer', SimpleImputer(strategy='mean')),
     ('scaler', StandardScaler()),
     ('classifier', LogisticRegression())
 ])
 
 # Split durchführen
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+data_train, data_test, target_train, target_test = train_test_split(data, target, test_size=0.2)
 
 # Pipeline auf Training-Daten fitten
-pipeline.fit(X_train, y_train)  # Alle Schritte lernen nur von X_train
+model.fit(data_train, target_train)  # Alle Schritte lernen nur von data_train
 
 # Vorhersage auf Test-Daten
-y_pred = pipeline.predict(X_test)  # Transformation mit Training-Parametern
+target_pred = model.predict(data_test)  # Transformation mit Training-Parametern
 ```
 
 ## Workflow: Vollständiges Beispiel
@@ -295,12 +295,12 @@ from sklearn.metrics import classification_report
 
 # 1. Daten laden
 df = pd.read_csv('daten.csv')
-X = df.drop('target', axis=1)
-y = df['target']
+data = df.drop('target', axis=1)
+target = df['target']
 
 # 2. Feature-Typen identifizieren
-numeric_features = X.select_dtypes(include=['int64', 'float64']).columns
-categorical_features = X.select_dtypes(include=['object', 'category']).columns
+numeric_features = data.select_dtypes(include=['int64', 'float64']).columns
+categorical_features = data.select_dtypes(include=['object', 'category']).columns
 
 # 3. Preprocessing-Pipeline definieren
 numeric_transformer = Pipeline([
@@ -319,25 +319,25 @@ preprocessor = ColumnTransformer([
 ])
 
 # 4. Vollständige Pipeline mit Modell
-model_pipeline = Pipeline([
+model = Pipeline([
     ('preprocessor', preprocessor),
     ('classifier', RandomForestClassifier(random_state=42))
 ])
 
 # 5. Train-Test-Split
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y,
+data_train, data_test, target_train, target_test = train_test_split(
+    data, target,
     test_size=0.2,
     random_state=42,
-    stratify=y
+    stratify=target
 )
 
 # 6. Training
-model_pipeline.fit(X_train, y_train)
+model.fit(data_train, target_train)
 
 # 7. Evaluation
-y_pred = model_pipeline.predict(X_test)
-print(classification_report(y_test, y_pred))
+target_pred = model.predict(data_test)
+print(classification_report(target_test, target_pred))
 ```
 
 ## Best Practices
@@ -365,12 +365,12 @@ Bei Zeitreihen darf nicht zufällig gesplittet werden:
 
 ```python
 # ❌ FALSCH für Zeitreihen
-X_train, X_test = train_test_split(X, shuffle=True)
+data_train, data_test = train_test_split(data, shuffle=True)
 
 # ✅ RICHTIG für Zeitreihen: Chronologischer Split
-split_index = int(len(X) * 0.8)
-X_train, X_test = X[:split_index], X[split_index:]
-y_train, y_test = y[:split_index], y[split_index:]
+split_index = int(len(data) * 0.8)
+data_train, data_test = data[:split_index], data[split_index:]
+target_train, target_test = target[:split_index], target[split_index:]
 
 # Oder mit TimeSeriesSplit für Cross-Validation
 from sklearn.model_selection import TimeSeriesSplit
@@ -385,7 +385,7 @@ Bei kleinen Datensätzen (<1000 Samples) ist Cross-Validation oft besser:
 from sklearn.model_selection import cross_val_score
 
 # Statt einem einzelnen Split
-scores = cross_val_score(model, X, y, cv=5, scoring='accuracy')
+scores = cross_val_score(model, data, target, cv=5, scoring='accuracy')
 print(f"Accuracy: {scores.mean():.3f} (+/- {scores.std()*2:.3f})")
 ```
 
@@ -398,10 +398,10 @@ from sklearn.model_selection import GroupShuffleSplit
 
 # Sicherstellen, dass alle Samples einer Gruppe im selben Set landen
 gss = GroupShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
-train_idx, test_idx = next(gss.split(X, y, groups=patient_ids))
+train_idx, test_idx = next(gss.split(data, target, groups=patient_ids))
 
-X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
-y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
+data_train, data_test = data.iloc[train_idx], data.iloc[test_idx]
+target_train, target_test = target.iloc[train_idx], target.iloc[test_idx]
 ```
 
 ## Zusammenfassung

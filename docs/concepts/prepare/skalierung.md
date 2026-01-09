@@ -368,19 +368,19 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 
 # Pipeline erstellt – Skalierung automatisch korrekt angewendet
-pipeline = Pipeline([
+model = Pipeline([
     ('scaler', StandardScaler()),
     ('classifier', LogisticRegression())
 ])
 
 # Train-Test-Split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+data_train, data_test, target_train, target_test = train_test_split(data, target, test_size=0.2)
 
 # Pipeline trainieren – fit_transform auf Trainingsdaten
-pipeline.fit(X_train, y_train)
+model.fit(data_train, target_train)
 
 # Vorhersage – transform (nicht fit!) auf Testdaten
-predictions = pipeline.predict(X_test)
+target_pred = model.predict(data_test)
 ```
 
 ### ColumnTransformer für gemischte Datentypen
@@ -400,7 +400,7 @@ preprocessor = ColumnTransformer(
 )
 
 # In Pipeline integrieren
-full_pipeline = Pipeline([
+model = Pipeline([
     ('preprocessor', preprocessor),
     ('classifier', LogisticRegression())
 ])

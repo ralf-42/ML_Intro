@@ -41,32 +41,8 @@ flowchart LR
 
 ## Die drei Regularisierungsmethoden
 
-```mermaid
-flowchart TB
-    subgraph reg["Regularisierungsmethoden"]
-        subgraph l1["L1 (Lasso)"]
-            L1F["Strafe = λ · Σ|wᵢ|"]
-            L1E["Summe der Absolutwerte"]
-            L1R["→ Setzt Gewichte auf 0"]
-        end
-        
-        subgraph l2["L2 (Ridge)"]
-            L2F["Strafe = λ · Σwᵢ²"]
-            L2E["Summe der Quadrate"]
-            L2R["→ Gewichte werden klein"]
-        end
-        
-        subgraph en["Elastic Net"]
-            ENF["Strafe = α·L1 + (1-α)·L2"]
-            ENE["Kombination beider"]
-            ENR["→ Beste aus beiden Welten"]
-        end
-    end
-    
-    style l1 fill:#e3f2fd
-    style l2 fill:#fff3e0
-    style en fill:#e8f5e9
-```
+
+<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/regularization.png" class="center" width="950"/>
 
 ## L1-Regularisierung (Lasso)
 
@@ -94,19 +70,19 @@ from sklearn.model_selection import train_test_split
 
 # Wichtig: Skalierung vor Regularisierung!
 scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
+data_train_scaled = scaler.fit_transform(data_train)
+data_test_scaled = scaler.transform(data_test)
 
 # Lasso mit festem Alpha
 lasso = Lasso(alpha=0.1, random_state=42)
-lasso.fit(X_train_scaled, y_train)
+lasso.fit(data_train_scaled, target_train)
 
 # Ergebnisse analysieren
-n_features_total = X_train.shape[1]
+n_features_total = data_train.shape[1]
 n_features_used = (lasso.coef_ != 0).sum()
 
 print(f"Features verwendet: {n_features_used} von {n_features_total}")
-print(f"R² Score (Test): {lasso.score(X_test_scaled, y_test):.3f}")
+print(f"R² Score (Test): {lasso.score(data_test_scaled, target_test):.3f}")
 
 # Feature Selection Ergebnis
 import pandas as pd
@@ -129,10 +105,10 @@ lasso_cv = LassoCV(
     cv=5,               # 5-Fold Cross-Validation
     random_state=42
 )
-lasso_cv.fit(X_train_scaled, y_train)
+lasso_cv.fit(data_train_scaled, target_train)
 
 print(f"Optimales Alpha: {lasso_cv.alpha_:.4f}")
-print(f"R² Score (Test): {lasso_cv.score(X_test_scaled, y_test):.3f}")
+print(f"R² Score (Test): {lasso_cv.score(data_test_scaled, target_test):.3f}")
 print(f"Nicht-Null Koeffizienten: {(lasso_cv.coef_ != 0).sum()}")
 ```
 
@@ -160,9 +136,9 @@ from sklearn.linear_model import Ridge, RidgeCV
 
 # Ridge mit festem Alpha
 ridge = Ridge(alpha=1.0)
-ridge.fit(X_train_scaled, y_train)
+ridge.fit(data_train_scaled, target_train)
 
-print(f"R² Score (Test): {ridge.score(X_test_scaled, y_test):.3f}")
+print(f"R² Score (Test): {ridge.score(data_test_scaled, target_test):.3f}")
 print(f"Min. Koeffizient (absolut): {abs(ridge.coef_).min():.6f}")
 print(f"Max. Koeffizient (absolut): {abs(ridge.coef_).max():.6f}")
 
@@ -171,10 +147,10 @@ ridge_cv = RidgeCV(
     alphas=[0.001, 0.01, 0.1, 1.0, 10.0, 100.0],
     cv=5
 )
-ridge_cv.fit(X_train_scaled, y_train)
+ridge_cv.fit(data_train_scaled, target_train)
 
 print(f"\nOptimales Alpha: {ridge_cv.alpha_:.4f}")
-print(f"R² Score (Test): {ridge_cv.score(X_test_scaled, y_test):.3f}")
+print(f"R² Score (Test): {ridge_cv.score(data_test_scaled, target_test):.3f}")
 ```
 
 ## Elastic Net
@@ -211,9 +187,9 @@ elastic = ElasticNet(
     l1_ratio=0.5,       # Balance: 0=Ridge, 1=Lasso
     random_state=42
 )
-elastic.fit(X_train_scaled, y_train)
+elastic.fit(data_train_scaled, target_train)
 
-print(f"R² Score (Test): {elastic.score(X_test_scaled, y_test):.3f}")
+print(f"R² Score (Test): {elastic.score(data_test_scaled, target_test):.3f}")
 print(f"Nicht-Null Koeffizienten: {(elastic.coef_ != 0).sum()}")
 
 # Optimale Parameter mit Cross-Validation
@@ -223,11 +199,11 @@ elastic_cv = ElasticNetCV(
     cv=5,
     random_state=42
 )
-elastic_cv.fit(X_train_scaled, y_train)
+elastic_cv.fit(data_train_scaled, target_train)
 
 print(f"\nOptimales Alpha: {elastic_cv.alpha_:.4f}")
 print(f"Optimales l1_ratio: {elastic_cv.l1_ratio_:.2f}")
-print(f"R² Score (Test): {elastic_cv.score(X_test_scaled, y_test):.3f}")
+print(f"R² Score (Test): {elastic_cv.score(data_test_scaled, target_test):.3f}")
 ```
 
 ## Vergleich der Methoden
@@ -268,7 +244,7 @@ for alpha in alphas:
         else:
             model = model_class(alpha=alpha)
         
-        scores = cross_val_score(model, X_train_scaled, y_train, cv=5, scoring='r2')
+        scores = cross_val_score(model, data_train_scaled, target_train, cv=5, scoring='r2')
         results[name].append(scores.mean())
 
 # Visualisierung
@@ -338,7 +314,7 @@ scores = []
 
 for alpha in alphas:
     model = Ridge(alpha=alpha)
-    cv_scores = cross_val_score(model, X_train_scaled, y_train, cv=5, scoring='r2')
+    cv_scores = cross_val_score(model, data_train_scaled, target_train, cv=5, scoring='r2')
     scores.append(cv_scores.mean())
 
 # Bestes Alpha finden
@@ -366,7 +342,7 @@ In neuronalen Netzen stehen zusätzliche Regularisierungstechniken zur Verfügun
 
 ```mermaid
 flowchart TB
-    subgraph nn_reg["Regularisierung in Neuronalen Netzen"]
+    subgraph nn_reg["<b>Regularisierung in NN</b>"]
         subgraph weight["Gewichts-Regularisierung"]
             W1["L1/L2 auf Gewichte"]
         end
@@ -495,7 +471,7 @@ early_stopping = EarlyStopping(
 )
 
 history = model.fit(
-    X_train, y_train,
+    data_train, target_train,
     epochs=200,                   # Maximale Epochen
     validation_split=0.2,
     callbacks=[early_stopping],
@@ -544,7 +520,7 @@ callbacks = [
 ]
 
 history = model.fit(
-    X_train, y_train,
+    data_train, target_train,
     epochs=200,
     validation_split=0.2,
     callbacks=callbacks,
@@ -563,22 +539,22 @@ from sklearn.linear_model import Ridge
 
 # ❌ FALSCH: Ohne Skalierung
 ridge_wrong = Ridge(alpha=1.0)
-ridge_wrong.fit(X_train, y_train)  # Features haben unterschiedliche Skalen!
+ridge_wrong.fit(data_train, target_train)  # Features haben unterschiedliche Skalen!
 
 # ✅ RICHTIG: Mit Skalierung
 pipeline = Pipeline([
     ('scaler', StandardScaler()),
     ('ridge', Ridge(alpha=1.0))
 ])
-pipeline.fit(X_train, y_train)
+pipeline.fit(data_train, target_train)
 
 # Oder manuell
 scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)  # Wichtig: Nur transform!
+data_train_scaled = scaler.fit_transform(data_train)
+data_test_scaled = scaler.transform(data_test)  # Wichtig: Nur transform!
 
 ridge_correct = Ridge(alpha=1.0)
-ridge_correct.fit(X_train_scaled, y_train)
+ridge_correct.fit(data_train_scaled, target_train)
 ```
 
 **Warum?** Features mit größeren Wertebereichen haben automatisch kleinere Koeffizienten. Regularisierung bestraft dann die falschen Features.
@@ -603,8 +579,8 @@ feature_names = data.feature_names
 print(f"Dataset: {X.shape[0]} Samples, {X.shape[1]} Features")
 
 # 2. Train-Test-Split
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=y
+data_train, data_test, target_train, target_test = train_test_split(
+    data, target, test_size=0.2, random_state=42, stratify=target
 )
 
 # 3. Pipeline mit Skalierung
@@ -627,7 +603,7 @@ grid_search = GridSearchCV(
     scoring='accuracy',
     n_jobs=-1
 )
-grid_search.fit(X_train, y_train)
+grid_search.fit(data_train, target_train)
 
 # 5. Ergebnisse
 print("\n" + "=" * 50)
@@ -639,14 +615,14 @@ print(f"CV Accuracy: {grid_search.best_score_:.4f}")
 
 # 6. Test-Evaluation
 best_model = grid_search.best_estimator_
-y_pred = best_model.predict(X_test)
+y_pred = best_model.predict(data_test)
 
 print("\n" + "=" * 50)
 print("Test-Ergebnisse")
 print("=" * 50)
-print(f"Test Accuracy: {accuracy_score(y_test, y_pred):.4f}")
+print(f"Test Accuracy: {accuracy_score(target_test, target_pred):.4f}")
 print("\nKlassifikationsbericht:")
-print(classification_report(y_test, y_pred, target_names=data.target_names))
+print(classification_report(target_test, target_pred, target_names=data.target_names))
 
 # 7. Feature Importance
 classifier = best_model.named_steps['classifier']
@@ -732,11 +708,6 @@ flowchart TB
 
 Regularisierung ist ein unverzichtbares Werkzeug im Machine Learning. Die richtige Wahl und Stärke der Regularisierung kann den Unterschied zwischen einem überangepassten und einem robusten Modell ausmachen.
 
-## Weiterführende Themen
-
-- **[Overfitting](overfitting.md)**: Diagnose und weitere Strategien
-- **Cross-Validation**: K-Fold zur robusten Modellbewertung
-- **Hyperparameter-Tuning**: GridSearchCV, RandomizedSearchCV
 
 ---
 

@@ -183,16 +183,16 @@ from sklearn.metrics import accuracy_score, classification_report
 import pandas as pd
 
 # Daten vorbereiten
-X = df.drop('target', axis=1)
-y = df['target']
+data = df.drop('target', axis=1)
+target = df['target']
 
 # Train-Test-Split
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+data_train, data_test, target_train, target_test = train_test_split(
+    data, target, test_size=0.2, random_state=42
 )
 
 # Modell erstellen und trainieren
-tree_clf = DecisionTreeClassifier(
+model = DecisionTreeClassifier(
     criterion='gini',      # oder 'entropy'
     max_depth=5,           # Maximale Tiefe begrenzen
     min_samples_split=10,  # Mindestanzahl für Split
@@ -200,12 +200,12 @@ tree_clf = DecisionTreeClassifier(
     random_state=42
 )
 
-tree_clf.fit(X_train, y_train)
+model.fit(data_train, target_train)
 
 # Vorhersage und Evaluation
-y_pred = tree_clf.predict(X_test)
-print(f"Accuracy: {accuracy_score(y_test, y_pred):.3f}")
-print(classification_report(y_test, y_pred))
+target_pred = model.predict(data_test)
+print(f"Accuracy: {accuracy_score(target_test, target_pred):.3f}")
+print(classification_report(target_test, target_pred))
 ```
 
 ### Regression
@@ -215,20 +215,20 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 
 # Modell erstellen und trainieren
-tree_reg = DecisionTreeRegressor(
+model = DecisionTreeRegressor(
     criterion='squared_error',  # MSE als Kriterium
     max_depth=5,
     min_samples_split=10,
     random_state=42
 )
 
-tree_reg.fit(X_train, y_train)
+model.fit(data_train, target_train)
 
 # Vorhersage und Evaluation
-y_pred = tree_reg.predict(X_test)
-print(f"MSE:  {mean_squared_error(y_test, y_pred):.3f}")
-print(f"RMSE: {mean_squared_error(y_test, y_pred, squared=False):.3f}")
-print(f"R²:   {r2_score(y_test, y_pred):.3f}")
+target_pred = model.predict(data_test)
+print(f"MSE:  {mean_squared_error(target_test, target_pred):.3f}")
+print(f"RMSE: {mean_squared_error(target_test, target_pred, squared=False):.3f}")
+print(f"R²:   {r2_score(target_test, target_pred):.3f}")
 ```
 
 ## Wichtige Hyperparameter
@@ -276,8 +276,8 @@ import matplotlib.pyplot as plt
 
 plt.figure(figsize=(20, 10))
 plot_tree(
-    tree_clf,
-    feature_names=X.columns,
+    model,
+    feature_names=data.columns,
     class_names=['Klasse 0', 'Klasse 1'],
     filled=True,
     rounded=True,
@@ -295,8 +295,8 @@ from sklearn.tree import export_text
 
 # Regeln als Text ausgeben
 tree_rules = export_text(
-    tree_clf,
-    feature_names=list(X.columns)
+    model,
+    feature_names=list(data.columns)
 )
 print(tree_rules)
 ```
@@ -328,8 +328,8 @@ import matplotlib.pyplot as plt
 
 # Feature Importance extrahieren
 importance = pd.DataFrame({
-    'Feature': X.columns,
-    'Importance': tree_clf.feature_importances_
+    'Feature': data.columns,
+    'Importance': model.feature_importances_
 }).sort_values('Importance', ascending=False)
 
 # Visualisierung
@@ -447,6 +447,6 @@ Der Entscheidungsbaum ist ein grundlegender Algorithmus, der das Fundament für 
 
 ---
 
-**Version:** 1.0
-**Stand:** Januar 2026
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
+**Version:** 1.0    
+**Stand:** Januar 2026    
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    

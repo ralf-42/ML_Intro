@@ -211,7 +211,7 @@ Code-Snippets sind vorgefertigte Codefragmente, die in der Programmierung wieder
 
 ```mermaid
 flowchart TD
-    subgraph Vorteile["Einsatzmöglichkeiten"]
+    subgraph Vorteile["<b>Einsatzmöglichkeiten</b>"]
         A[♻️ Wiederverwendung] --> A1[Häufig verwendete<br/>Codeblöcke]
         B[⚡ Schnelle<br/>Implementierung] --> B1[Standardfunktionen<br/>& Algorithmen]
         C[✅ Fehlervermeidung] --> C1[Getesteter &<br/>bewährter Code]
@@ -249,14 +249,14 @@ print(f"\nStatistik:\n{df.describe()}")
 # Snippet: Standard Train-Test-Split
 from sklearn.model_selection import train_test_split
 
-X = df.drop('target', axis=1)
-y = df['target']
+data = df.drop('target', axis=1)
+target = df['target']
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, 
-    test_size=0.2, 
+data_train, data_test, target_train, target_test = train_test_split(
+    data, target,
+    test_size=0.2,
     random_state=42,
-    stratify=y  # Bei Klassifikation
+    stratify=target  # Bei Klassifikation
 )
 ```
 
@@ -374,12 +374,6 @@ Die Kombination dieser Methoden führt zu höherer Codequalität, besserer Repro
 - [Google Colab](https://colab.research.google.com/) - Cloud-basierte Entwicklungsumgebung
 - [scikit-learn User Guide](https://scikit-learn.org/stable/user_guide.html) - Offizielle Dokumentation
 - [Pandas Cheat Sheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf) - Schnellreferenz
-
-### Verwandte Themen
-
-- [ML Process Übersicht](ml-process.md) - Der vollständige ML-Workflow
-- [Datenaufbereitung](prepare.md) - Detaillierte Prepare-Phase
-- [Modellierung](modeling.md) - Algorithmenauswahl und Training
 
 
 

@@ -121,26 +121,26 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 
 # Beispieldaten
-X = np.array([[1], [2], [3], [4], [5], [6], [7], [8], [9], [10]])
-y = np.array([2.1, 4.2, 5.8, 8.1, 10.2, 11.9, 14.1, 16.0, 18.2, 20.1])
+data = np.array([[1], [2], [3], [4], [5], [6], [7], [8], [9], [10]])
+target = np.array([2.1, 4.2, 5.8, 8.1, 10.2, 11.9, 14.1, 16.0, 18.2, 20.1])
 
 # Train-Test-Split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+data_train, data_test, target_train, target_test = train_test_split(data, target, test_size=0.2, random_state=42)
 
 # Modell trainieren
 model = LinearRegression()
-model.fit(X_train, y_train)
+model.fit(data_train, target_train)
 
 # Vorhersagen
-y_pred = model.predict(X_test)
+target_pred = model.predict(data_test)
 
 # R² berechnen
-r2 = r2_score(y_test, y_pred)
+r2 = r2_score(target_test, target_pred)
 print(f"R² Score: {r2:.4f}")
 
 # R² für Trainings- und Testdaten vergleichen
-r2_train = r2_score(y_train, model.predict(X_train))
-r2_test = r2_score(y_test, y_pred)
+r2_train = r2_score(target_train, model.predict(data_train))
+r2_test = r2_score(target_test, target_pred)
 
 print(f"R² Training: {r2_train:.4f}")
 print(f"R² Test:     {r2_test:.4f}")
@@ -218,12 +218,12 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error
 import numpy as np
 
 # Beispiel: Tatsächliche und vorhergesagte Werte
-y_true = np.array([3.0, -0.5, 2.0, 7.0, 4.5])
-y_pred = np.array([2.5, 0.0, 2.1, 7.8, 4.2])
+target_true = np.array([3.0, -0.5, 2.0, 7.0, 4.5])
+target_pred = np.array([2.5, 0.0, 2.1, 7.8, 4.2])
 
 # Metriken berechnen
-mae = mean_absolute_error(y_true, y_pred)
-mse = mean_squared_error(y_true, y_pred)
+mae = mean_absolute_error(target_true, target_pred)
+mse = mean_squared_error(target_true, target_pred)
 rmse = np.sqrt(mse)
 
 print(f"MAE:  {mae:.4f}")
@@ -313,29 +313,29 @@ from sklearn.model_selection import train_test_split
 
 # Beispieldaten generieren
 np.random.seed(42)
-X = np.random.rand(100, 1) * 10
-y = 2.5 * X.flatten() + np.random.randn(100) * 2
+data = np.random.rand(100, 1) * 10
+target = 2.5 * data.flatten() + np.random.randn(100) * 2
 
 # Train-Test-Split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+data_train, data_test, target_train, target_test = train_test_split(data, target, test_size=0.2, random_state=42)
 
 # Modell trainieren
 model = LinearRegression()
-model.fit(X_train, y_train)
+model.fit(data_train, target_train)
 
 # Vorhersagen
-y_pred_train = model.predict(X_train)
-y_pred_test = model.predict(X_test)
+target_pred_train = model.predict(data_train)
+target_pred_test = model.predict(data_test)
 
 # Residuen berechnen
-residuals_train = y_train - y_pred_train
-residuals_test = y_test - y_pred_test
+residuals_train = target_train - target_pred_train
+residuals_test = target_test - target_pred_test
 
 # Residual Plot erstellen
 fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
 # Plot 1: Residuen vs. Vorhergesagte Werte
-axes[0].scatter(y_pred_test, residuals_test, alpha=0.7, edgecolors='black')
+axes[0].scatter(target_pred_test, residuals_test, alpha=0.7, edgecolors='black')
 axes[0].axhline(y=0, color='red', linestyle='--', linewidth=2)
 axes[0].set_xlabel('Vorhergesagte Werte')
 axes[0].set_ylabel('Residuen')
@@ -360,41 +360,41 @@ plt.show()
 from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 import numpy as np
 
-def evaluate_regression(y_true, y_pred, dataset_name=""):
+def evaluate_regression(target_true, target_pred, dataset_name=""):
     """
     Vollständige Evaluation eines Regressionsmodells.
-    
+
     Parameters:
     -----------
-    y_true : array-like
+    target_true : array-like
         Tatsächliche Werte
-    y_pred : array-like
+    target_pred : array-like
         Vorhergesagte Werte
     dataset_name : str
         Name des Datensatzes (z.B. 'Training' oder 'Test')
-    
+
     Returns:
     --------
     dict : Dictionary mit allen Metriken
     """
     metrics = {
-        'R²': r2_score(y_true, y_pred),
-        'MAE': mean_absolute_error(y_true, y_pred),
-        'MSE': mean_squared_error(y_true, y_pred),
-        'RMSE': np.sqrt(mean_squared_error(y_true, y_pred))
+        'R²': r2_score(target_true, target_pred),
+        'MAE': mean_absolute_error(target_true, target_pred),
+        'MSE': mean_squared_error(target_true, target_pred),
+        'RMSE': np.sqrt(mean_squared_error(target_true, target_pred))
     }
-    
+
     print(f"\n{'='*40}")
     print(f"Evaluation: {dataset_name}")
     print(f"{'='*40}")
     for metric, value in metrics.items():
         print(f"{metric:6s}: {value:.4f}")
-    
+
     return metrics
 
 # Anwendung
-metrics_train = evaluate_regression(y_train, y_pred_train, "Training")
-metrics_test = evaluate_regression(y_test, y_pred_test, "Test")
+metrics_train = evaluate_regression(target_train, target_pred_train, "Training")
+metrics_test = evaluate_regression(target_test, target_pred_test, "Test")
 ```
 
 ---

@@ -3,7 +3,7 @@ layout: default
 title: AutoML
 parent: Modeling
 grand_parent: Konzepte
-nav_order: 12
+nav_order: 14
 description: "Automatisiertes Machine Learning (AutoML) - Workflow-Automatisierung von Datenvorbereitung bis Modellauswahl"
 has_toc: true
 ---
@@ -195,7 +195,7 @@ print(tuned_model)
 final_model = finalize_model(tuned_model)
 
 # Vorhersagen auf neuen Daten
-predictions = predict_model(final_model, data=new_data)
+predictions = predict_model(final_model, data=data)
 
 # Modell speichern
 save_model(final_model, 'titanic_classifier')

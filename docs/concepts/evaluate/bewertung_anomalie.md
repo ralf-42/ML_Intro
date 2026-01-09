@@ -130,23 +130,23 @@ import matplotlib.pyplot as plt
 # Beispieldaten generieren
 np.random.seed(42)
 # Normale Daten: Cluster um (0, 0)
-X_normal = np.random.randn(200, 2)
+data_normal = np.random.randn(200, 2)
 # Anomalien: verstreute Punkte
-X_anomalies = np.random.uniform(low=-4, high=4, size=(20, 2))
-X = np.vstack([X_normal, X_anomalies])
+data_anomalies = np.random.uniform(low=-4, high=4, size=(20, 2))
+data = np.vstack([data_normal, data_anomalies])
 
 # Isolation Forest erstellen und trainieren
-iso_forest = IsolationForest(
+model = IsolationForest(
     n_estimators=100,      # Anzahl der Bäume
     contamination=0.1,     # Erwarteter Anteil Anomalien
     random_state=42
 )
 
 # Vorhersage: 1 = normal, -1 = Anomalie
-predictions = iso_forest.fit_predict(X)
+predictions = model.fit_predict(data)
 
 # Anomalie-Scores abrufen (negativ = anomaler)
-scores = iso_forest.decision_function(X)
+scores = model.decision_function(data)
 
 print(f"Erkannte Anomalien: {(predictions == -1).sum()}")
 print(f"Score-Bereich: {scores.min():.3f} bis {scores.max():.3f}")
@@ -171,7 +171,7 @@ fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
 # Links: Klassifikation
 colors = ['#51cf66' if p == 1 else '#ff6b6b' for p in predictions]
-axes[0].scatter(X[:, 0], X[:, 1], c=colors, alpha=0.7, edgecolors='white')
+axes[0].scatter(data[:, 0], data[:, 1], c=colors, alpha=0.7, edgecolors='white')
 axes[0].set_title('Anomalie-Erkennung')
 axes[0].set_xlabel('Feature 1')
 axes[0].set_ylabel('Feature 2')
@@ -185,7 +185,7 @@ legend_elements = [
 axes[0].legend(handles=legend_elements)
 
 # Rechts: Anomalie-Scores
-scatter = axes[1].scatter(X[:, 0], X[:, 1], c=scores, cmap='RdYlGn', alpha=0.7)
+scatter = axes[1].scatter(data[:, 0], data[:, 1], c=scores, cmap='RdYlGn', alpha=0.7)
 axes[1].set_title('Anomalie-Scores')
 axes[1].set_xlabel('Feature 1')
 axes[1].set_ylabel('Feature 2')
@@ -205,12 +205,12 @@ Da Anomalie-Erkennung oft unüberwacht erfolgt, ist die Evaluation herausfordern
 from sklearn.metrics import classification_report, confusion_matrix
 import seaborn as sns
 
-# Bei bekannten Labels (y_true: 1=normal, -1=anomalie)
-print(classification_report(y_true, predictions, 
+# Bei bekannten Labels (target_true: 1=normal, -1=anomalie)
+print(classification_report(target_true, predictions,
                            target_names=['Anomalie', 'Normal']))
 
 # Confusion Matrix
-cm = confusion_matrix(y_true, predictions)
+cm = confusion_matrix(target_true, predictions)
 sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
             xticklabels=['Anomalie', 'Normal'],
             yticklabels=['Anomalie', 'Normal'])
@@ -226,10 +226,10 @@ plt.show()
 from sklearn.metrics import roc_curve, roc_auc_score
 
 # Scores für ROC (invertieren, da niedrigere Scores = anomaler)
-scores_for_roc = -iso_forest.decision_function(X_test)
+scores_for_roc = -model.decision_function(data_test)
 
-fpr, tpr, thresholds = roc_curve(y_true_binary, scores_for_roc)
-auc_score = roc_auc_score(y_true_binary, scores_for_roc)
+fpr, tpr, thresholds = roc_curve(target_true_binary, scores_for_roc)
+auc_score = roc_auc_score(target_true_binary, scores_for_roc)
 
 plt.figure(figsize=(8, 6))
 plt.plot(fpr, tpr, label=f'Isolation Forest (AUC = {auc_score:.3f})')
