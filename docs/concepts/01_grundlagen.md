@@ -11,33 +11,13 @@ description: "Fundamentale Machine Learning Grundlagen"
 
 Fundamentale Konzepte und theoretische Grundlagen des Machine Learning.
 
-## ML Workflow
+## Inhalte
 
-Der 5-Phasen-Prozess von Understand bis Deploy:
+Diese Sektion umfasst folgende Themen:
 
-1. **Understand** - Problemdefinition und Datenexploration
-2. **Prepare** - Datenaufbereitung und Feature Engineering
-3. **Modeling** - Modellauswahl und Training
-4. **Evaluate** - Bewertung und Optimierung
-5. **Deploy** - Produktivsetzung und Monitoring
-
-_Detaillierte Inhalte folgen_
-
-## Supervised vs. Unsupervised Learning
-
-_Inhalte folgen_
-
-## Bias-Variance Tradeoff
-
-_Inhalte folgen_
-
-## Overfitting & Underfitting
-
-_Inhalte folgen_
-
-## Feature Engineering
-
-_Inhalte folgen_
+1. **[Intro](grundlagen/machine_learning_grundlagen.html)** - Was ist Machine Learning? Lernparadigmen, Aufgabentypen und Anwendungsbeispiele
+2. **[ML Workflow](grundlagen/ml_workflow_erklaerung.html)** - Der 5-Phasen-Prozess von Understand bis Deploy
+3. **[Coding-Arbeitsweisen](grundlagen/coding-arbeitsweisen.html)** - Effiziente Arbeitsweisen: KI-Assistenz, Checklisten und Code-Snippets
 
 
 ---

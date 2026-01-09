@@ -54,14 +54,18 @@ description: "Machine Learning Modelle und Algorithmen"
 
 ## Ensemble Methods
 
-- Bagging - Bootstrap Aggregating (Random Forests)
-- Boosting - XGBoost, AdaBoost, Gradient Boosting
-- Stacking - Meta-Learning durch Modell-Kombinationen
+- **[Ensemble-Methoden](modeling/ensemble)** - Übersicht: Bagging (Random Forest), Boosting und Stacking
+- **[XGBoost](modeling/xgboost)** - Extreme Gradient Boosting: Optimierte Boosting-Implementierung für höchste Performance
+- **[Stacking](modeling/stacking)** - Kombination heterogener Modelle durch Voting oder Meta-Learning
 
 ## Deep Learning
 
 - **[Neuronale Netze](modeling/neuronale-netze)** - Grundlagen künstlicher neuronaler Netze: Architektur, Aktivierungsfunktionen und Training
 - **[Spezielle Neuronale Netze](modeling/spezielle-neuronale-netze)** - Computer Vision mit CNNs, Sequenzmodellierung mit RNNs/LSTMs und AutoEncoder
+
+## Automatisierung
+
+- **[AutoML](modeling/automl)** - Automatisiertes Machine Learning: Workflow-Automatisierung von Datenvorbereitung bis Modellauswahl mit PyCaret
 
 ---
 
