@@ -25,22 +25,22 @@ Ein Ausreißer (Outlier) ist ein Datenpunkt, dessen Ausprägung stark von der No
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
-    subgraph kategorien["Kategorien von Ausreißern"]
+    subgraph kategorien["<b>Kategorien von Ausreißern"]
         direction LR
 
-        subgraph echt["Echte Ausreißer"]
+        subgraph echt["<b>Echte Ausreißer"]
             direction TB
             real["<b>Reale Anomalien</b><br/>Tatsächlich<br/>ungewöhnliche Werte"]
             real_ex["Beispiel:<br/>Betrugsfall,<br/>seltene Krankheit"]
         end
 
-        subgraph fehler["Fehlerhafte Ausreißer"]
+        subgraph fehler["<b>Fehlerhafte Ausreißer"]
             direction TB
             error["<b>Datenfehler</b><br/>Falsche Eingaben<br/>oder Messungen"]
             error_ex["Beispiel:<br/>Tippfehler,<br/>Sensordefekt"]
         end
 
-        subgraph einfluss["Einflussreiche Punkte"]
+        subgraph einfluss["<b>Einflussreiche Punkte"]
             direction TB
             influence["<b>Leverage Points</b><br/>Starker Einfluss auf<br/>Modellparameter"]
             influence_ex["Beispiel:<br/>Extremwert am<br/>Rand der Verteilung"]
@@ -61,7 +61,7 @@ flowchart TB
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TD
-    subgraph typen["Anomalie-Typen"]
+    subgraph typen["<b>Anomalie-Typen"]
         direction TB
 
         punkt["<b>Punkt-/Globale Anomalie</b><br/>Einzelner Datenpunkt weicht<br/>von gesamter Datenbasis ab"]
@@ -85,21 +85,21 @@ flowchart TD
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
-    subgraph methoden["Identifikationsmethoden"]
+    subgraph methoden["<b>Identifikationsmethoden"]
         direction LR
 
-        subgraph wissen["Wissensbasiert"]
+        subgraph wissen["<b>Wissensbasiert"]
             domain["<b>Domänenwissen</b><br/>Fachexperten definieren<br/>plausible Bereiche"]
             rules["<b>Geschäftsregeln</b><br/>Vordefinierte Grenzen<br/>und Constraints"]
         end
 
-        subgraph statistik["Statistikbasiert"]
+        subgraph statistik["<b>Statistikbasiert"]
             zscore["<b>Z-Score</b><br/>Standardabweichungen<br/>vom Mittelwert"]
             iqr["<b>IQR-Methode</b><br/>Interquartilsabstand"]
             percentile["<b>Perzentile</b><br/>Extreme Quantile"]
         end
 
-        subgraph ml["ML-basiert"]
+        subgraph ml["<b>ML-basiert"]
             iforest["<b>Isolation Forest</b><br/>Anomalie-Isolation<br/>durch Entscheidungsbäume"]
             lof["<b>Local Outlier Factor</b><br/>Lokale Dichte-<br/>abweichungen"]
             dbscan["<b>DBSCAN</b><br/>Dichtebasiertes<br/>Clustering"]
@@ -156,7 +156,7 @@ flowchart TD
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart LR
-    subgraph zscore["Z-Score Methode"]
+    subgraph zscore["<b>Z-Score Methode"]
         direction TB
         formel["Z = (x - μ) / σ"]
         regel["Typische Regel:<br/>|Z| > 3 → Ausreißer"]
@@ -174,11 +174,11 @@ flowchart LR
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
-    subgraph iqr["IQR-Methode"]
+    subgraph iqr["<b>IQR-Methode"]
         direction TB
         calc["IQR = Q3 - Q1"]
-        lower["Untere Grenze:<br/>Q1 - 1.5 × IQR"]
-        upper["Obere Grenze:<br/>Q3 + 1.5 × IQR"]
+        lower["<b>Untere Grenze:<br/>Q1 - 1.5 × IQR"]
+        upper["<b>Obere Grenze:<br/>Q3 + 1.5 × IQR"]
     end
 
     calc --> lower
@@ -200,26 +200,26 @@ flowchart TB
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
-    subgraph strategien["Behandlungsstrategien"]
+    subgraph strategien["<b>Behandlungsstrategien"]
         direction LR
 
         subgraph entfernen["Entfernen"]
             delete["<b>Löschen</b><br/>Zeilen mit Ausreißern<br/>aus Datensatz entfernen"]
         end
 
-        subgraph anpassen["Anpassen"]
+        subgraph anpassen["<b>Anpassen"]
             cap["<b>Capping</b><br/>Auf Grenzwert<br/>begrenzen"]
             winsor["<b>Winsorizing</b><br/>Auf Perzentil-<br/>werte setzen"]
             transform["<b>Transformation</b><br/>Log, Wurzel,<br/>Box-Cox"]
         end
 
-        subgraph robust["Robuste Methoden"]
+        subgraph robust["<b>Robuste Methoden"]
             median_model["<b>Median statt Mean</b><br/>Robuste Statistiken"]
             robust_algo["<b>Robuste Algorithmen</b><br/>RANSAC, Huber"]
             ensemble["<b>Ensemble</b><br/>Ausreißer-resistente<br/>Modelle"]
         end
 
-        subgraph behalten["Behalten"]
+        subgraph behalten["<b>Behalten"]
             keep["<b>Unverändert lassen</b><br/>Wenn fachlich<br/>relevant"]
             flag["<b>Markieren</b><br/>Als Feature für<br/>das Modell"]
         end
@@ -236,7 +236,7 @@ flowchart TB
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart LR
-    subgraph viz["Visualisierungsmethoden"]
+    subgraph viz["<b>Visualisierungsmethoden"]
         direction TB
         boxplot["<b>Boxplot</b><br/>Quartile und Ausreißer<br/>auf einen Blick"]
         scatter["<b>Scatterplot</b><br/>Multivariate<br/>Ausreißer erkennen"]
@@ -257,7 +257,7 @@ flowchart LR
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TD
-    subgraph iforest["Isolation Forest Prinzip"]
+    subgraph iforest["<b>Isolation Forest Prinzip"]
         direction TB
         idea["<b>Grundidee:</b><br/>Anomalien sind leichter<br/>zu isolieren als normale Punkte"]
 
@@ -280,15 +280,15 @@ flowchart TD
 
 ## Best Practices
 
-| Empfehlung | Beschreibung |
-|------------|--------------|
-| **Immer visualisieren** | Boxplots und Scatterplots vor statistischen Tests |
-| **Kontext verstehen** | Fachexperten einbeziehen bei der Interpretation |
-| **Dokumentieren** | Welche Ausreißer wurden wie behandelt |
-| **Mehrere Methoden** | Verschiedene Erkennungsmethoden kombinieren |
-| **Sensitivitätsanalyse** | Modell mit und ohne Ausreißer vergleichen |
-| **Vorsicht beim Löschen** | Nur echte Fehler entfernen, nicht unbequeme Werte |
-| **Reihenfolge beachten** | Ausreißer vor Missing Values behandeln (oder umgekehrt konsistent) |
+| Empfehlung                | Beschreibung                                                       |
+| ------------------------- | ------------------------------------------------------------------ |
+| **Immer visualisieren**   | Boxplots und Scatterplots vor statistischen Tests                  |
+| **Kontext verstehen**     | Fachexperten einbeziehen bei der Interpretation                    |
+| **Dokumentieren**         | Welche Ausreißer wurden wie behandelt                              |
+| **Mehrere Methoden**      | Verschiedene Erkennungsmethoden kombinieren                        |
+| **Sensitivitätsanalyse**  | Modell mit und ohne Ausreißer vergleichen                          |
+| **Vorsicht beim Löschen** | Nur echte Fehler entfernen, nicht unbequeme Werte                  |
+| **Reihenfolge beachten**  | Ausreißer vor Missing Values behandeln (oder umgekehrt konsistent) |
 
 ## Auswirkungen auf ML-Modelle
 
@@ -324,7 +324,7 @@ flowchart TB
 
 
 ---
-    
+
 **Version:** 1.0    
 **Stand:** Januar 2026    
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    

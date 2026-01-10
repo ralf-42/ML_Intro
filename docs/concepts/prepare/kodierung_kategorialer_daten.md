@@ -18,7 +18,7 @@ has_toc: true
 
 ## Einführung
 
-Die meisten Machine-Learning-Algorithmen können nur mit numerischen Daten arbeiten. Kategoriale Daten – also Merkmale mit diskreten Ausprägungen wie Farben, Kategorien oder Bewertungen – müssen daher in numerische Formate umgewandelt werden. Dieser Prozess wird als **Kodierung** (Encoding) bezeichnet.
+Die **meisten** Machine-Learning-Algorithmen können **nur** mit **numerischen Daten** arbeiten. Kategoriale Daten – also Merkmale mit diskreten Ausprägungen wie Farben, Kategorien oder Bewertungen – müssen daher in numerische Formate umgewandelt werden. Dieser Prozess wird als **Kodierung** (Encoding) bezeichnet.
 
 Die Wahl der richtigen Kodierungsmethode hängt dabei maßgeblich vom **Skalenniveau** der Daten ab.
 
@@ -240,20 +240,20 @@ Der **TargetEncoder** ersetzt kategoriale Werte durch einen Wert, der aus dem Zi
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}}}%%
 flowchart TB
-    subgraph Input["Eingabedaten"]
+    subgraph Input["<b>Eingabedaten"]
         direction LR
         Stadt["Stadt"]
         Preis["Preis (Target)"]
     end
     
-    subgraph Berechnung["Berechnung Mittelwert je Kategorie"]
+    subgraph Berechnung["<b>Berechnung Mittelwert je Kategorie"]
         direction TB
         B["Berlin: (300k + 350k + 280k) / 3 = 310k"]
         M["München: (450k + 500k + 480k) / 3 = 477k"]
         H["Hamburg: (320k + 340k) / 2 = 330k"]
     end
     
-    subgraph Output["Kodierte Daten"]
+    subgraph Output["<b>Kodierte Daten"]
         direction LR
         E["Stadt_encoded"]
         E1["310000"]
@@ -306,22 +306,22 @@ df['stadt_encoded'] = encoder.fit_transform(
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}}}%%
 flowchart TB
-    subgraph Vergleich["Übersicht Kodierungsmethoden"]
+    subgraph Vergleich["<b>Übersicht Kodierungsmethoden"]
         direction TB
         
-        subgraph OE["OrdinalEncoder"]
+        subgraph OE["<b>OrdinalEncoder"]
             OE_T["Typ: Ordinal"]
             OE_D["Dimensionen: 1"]
             OE_R["Rangfolge: ✓ Erhalten"]
         end
         
-        subgraph OH["OneHotEncoder"]
+        subgraph OH["<b>OneHotEncoder"]
             OH_T["Typ: Nominal"]
             OH_D["Dimensionen: n Kategorien"]
             OH_R["Rangfolge: ✗ Keine"]
         end
         
-        subgraph TE["TargetEncoder"]
+        subgraph TE["<b>TargetEncoder"]
             TE_T["Typ: Nominal (viele)"]
             TE_D["Dimensionen: 1"]
             TE_R["Nutzt: Zielwert"]
@@ -329,14 +329,14 @@ flowchart TB
     end
 ```
 
-| Kriterium | OrdinalEncoder | OneHotEncoder | TargetEncoder |
-|-----------|----------------|---------------|---------------|
-| **Datentyp** | Ordinal | Nominal | Nominal |
-| **Kategorien** | Beliebig | Wenige (< 15) | Viele (> 15) |
-| **Dimensionen** | 1 | n Kategorien | 1 |
-| **Rangfolge** | Erhalten | Keine impliziert | Keine |
-| **Supervised** | Nein | Nein | Ja (benötigt Target) |
-| **Overfitting-Risiko** | Gering | Gering | Höher |
+| Kriterium              | OrdinalEncoder | OneHotEncoder    | TargetEncoder        |
+| ---------------------- | -------------- | ---------------- | -------------------- |
+| **Datentyp**           | Ordinal        | Nominal          | Nominal              |
+| **Kategorien**         | Beliebig       | Wenige (< 15)    | Viele (> 15)         |
+| **Dimensionen**        | 1              | n Kategorien     | 1                    |
+| **Rangfolge**          | Erhalten       | Keine impliziert | Keine                |
+| **Supervised**         | Nein           | Nein             | Ja (benötigt Target) |
+| **Overfitting-Risiko** | Gering         | Gering           | Höher                |
 
 ## Best Practices
 
