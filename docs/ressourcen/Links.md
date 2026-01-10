@@ -2,7 +2,7 @@
 layout: default
 title: Links
 parent: Ressourcen
-nav_order: 1
+nav_order: 2
 description: "Umfassende Sammlung nützlicher ML-Ressourcen: Videos, Tutorials, Bücher, Tools"
 has_toc: true
 ---
