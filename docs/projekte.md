@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Projekte
+nav_exclude: true
 description: "Praktische ML-Projekte und Anwendungen"
 ---
 
