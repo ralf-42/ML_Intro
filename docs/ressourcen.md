@@ -13,14 +13,14 @@ Nützliche Ressourcen, Tools und Best Practices für Machine Learning.
 ## Übersicht
 
 ### Interaktive Tools
-- **[Interaktive Visualisierung](./ressourcen/Interaktive%20Visualisierung.html)** - Web-Demos für ML-Konzepte
+- **[Interaktive Visualisierung](ressourcen/interaktive-visualisierung)** - Web-Demos für ML-Konzepte
   - Understand: Statistik, Verteilungen, Korrelation
   - Prepare: Missing Values, Kodierung, Skalierung, Outlier
   - Modeling: Decision Trees, Regression, Clustering, Neural Networks, CNN
   - Evaluate: Metriken, Threshold, Cross Validation, Bootstrapping
 
 ### Links & Tutorials
-- **[Links](./ressourcen/Links.html)** - Umfassende Link-Sammlung zu ML-Ressourcen
+- **[Links](ressourcen/links)** - Umfassende Link-Sammlung zu ML-Ressourcen
   - StatQuest Videos (YouTube) - Visualisierte ML-Konzepte
   - KNIME Kurse & Tutorials
   - Towards Data Science / Medium Artikel
