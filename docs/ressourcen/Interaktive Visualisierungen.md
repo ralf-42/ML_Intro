@@ -26,12 +26,12 @@ has_toc: true
 
 Explorative Datenanalyse und statistische Grundlagen
 
-| Thema | Beschreibung | Link |
-|-------|--------------|------|
-| **Statistik 01** | Mittelwert, Varianz, Standardabweichung | [Statistik_01](https://editor.p5js.org/ralf.bendig.rb/full/DOG7THxlr) |
-| **Verteilungsmaße** | Quantile, Boxplots, Verteilungen | [Verteilungsmasse](https://editor.p5js.org/ralf.bendig.rb/full/ls2j4c7FL) |
-| **Korrelation & Kovarianz** | Beziehungen zwischen Variablen | [Korrelation_Kovarianz](https://editor.p5js.org/ralf.bendig.rb/full/Zmdhn7YRd) |
-| **Häufigkeit & Entropie** | Häufigkeiten und Kategorien | [Haeufigkeit_Entropie](https://editor.p5js.org/ralf.bendig.rb/full/c0y9T6Na8) |
+| Thema                       | Beschreibung                            | Link                                                                           |
+| --------------------------- | --------------------------------------- | ------------------------------------------------------------------------------ |
+| **Lage- und Streuungsmaße** | Mittelwert, Varianz, Standardabweichung | [Statistik_01](https://editor.p5js.org/ralf.bendig.rb/full/DOG7THxlr)          |
+| **Verteilungsmaße**         | Quantile, Boxplots, Verteilungen        | [Verteilungsmasse](https://editor.p5js.org/ralf.bendig.rb/full/ls2j4c7FL)      |
+| **Korrelation & Kovarianz** | Beziehungen zwischen Variablen          | [Korrelation_Kovarianz](https://editor.p5js.org/ralf.bendig.rb/full/Zmdhn7YRd) |
+| **Häufigkeit & Entropie**   | Häufigkeiten und Kategorien             | [Haeufigkeit_Entropie](https://editor.p5js.org/ralf.bendig.rb/full/c0y9T6Na8)  |
 
 ---
 

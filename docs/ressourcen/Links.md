@@ -231,12 +231,20 @@ has_toc: true
 
 ### Tools & Frameworks
 
-| Tool | Link |
-|------|------|
-| Gradio (ML Demos) | [Link](https://www.gradio.app/) |
-| PyCaret (AutoML) | [Link](https://pycaret.org/) |
-| MediaPipe Studio | [Link](https://mediapipe-studio.webapps.google.com/home) |
-| Plotly Chart Studio | [Link](https://chart-studio.plotly.com/create/) |
+| Tool | Beschreibung | Link |
+|------|--------------|------|
+| **Pandas** | Datenmanipulation & -analyse | [Dokumentation](https://pandas.pydata.org/docs/) |
+| **NumPy** | Numerische Berechnungen | [Dokumentation](https://numpy.org/doc/stable/) |
+| **mlxtend** | ML Extensions (Pattern Mining, Plotting) | [Dokumentation](http://rasbt.github.io/mlxtend/) |
+| **dtreeviz** | Decision Tree Visualisierung | [GitHub](https://github.com/parrt/dtreeviz) |
+| **SHAP** | SHapley Additive exPlanations (XAI) | [Dokumentation](https://shap.readthedocs.io/) |
+| **LIME** | Local Interpretable Model-agnostic Explanations | [GitHub](https://github.com/marcotcr/lime) |
+| **ELI5** | Explain Like I'm 5 (Model Interpretation) | [Dokumentation](https://eli5.readthedocs.io/) |
+| **InterpretML** | Interpretable ML (Microsoft) | [Dokumentation](https://interpret.ml/) |
+| Gradio | ML Demos & Interfaces | [Link](https://www.gradio.app/) |
+| PyCaret | AutoML Framework | [Link](https://pycaret.org/) |
+| MediaPipe Studio | ML-Pipeline für Multimedia | [Link](https://mediapipe-studio.webapps.google.com/home) |
+| Plotly Chart Studio | Interaktive Visualisierungen | [Link](https://chart-studio.plotly.com/create/) |
 
 ### GitHub Repositories
 
