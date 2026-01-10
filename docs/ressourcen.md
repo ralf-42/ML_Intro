@@ -13,7 +13,7 @@ Nützliche Ressourcen, Tools und Best Practices für Machine Learning.
 ## Übersicht
 
 ### Interaktive Tools
-- **[Interaktive Visualisierungen](./ressourcen/Interaktive%20Visualisierungen.html)** - Web-Demos für ML-Konzepte
+- **[Interaktive Visualisierung](./ressourcen/Interaktive%20Visualisierung.html)** - Web-Demos für ML-Konzepte
   - Understand: Statistik, Verteilungen, Korrelation
   - Prepare: Missing Values, Kodierung, Skalierung, Outlier
   - Modeling: Decision Trees, Regression, Clustering, Neural Networks, CNN
