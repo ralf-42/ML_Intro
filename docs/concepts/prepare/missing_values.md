@@ -25,7 +25,7 @@ Fehlende Werte (Missing Values) sind ein häufiges Problem in realen Datensätze
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
-    subgraph arten["Arten fehlender Werte"]
+    subgraph arten["<b>Arten fehlender Werte"]
         direction TB
         mcar["<b>MCAR</b><br/>Missing Completely<br/>At Random"]
         mar["<b>MAR</b><br/>Missing<br/>At Random"]
@@ -91,7 +91,7 @@ flowchart TD
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart LR
-    subgraph deletion["Löschstrategien"]
+    subgraph deletion["<b>Löschstrategien"]
         direction TB
         listwise["<b>Listwise Deletion</b><br/>Komplette Zeile löschen"]
         pairwise["<b>Pairwise Deletion</b><br/>Nur für betroffene<br/>Berechnungen ausschließen"]
@@ -117,14 +117,14 @@ flowchart LR
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
-    subgraph simple["Einfache Imputation"]
+    subgraph simple["<b>Einfache Imputation"]
         mean["<b>Mittelwert</b><br/>Durchschnitt der Spalte"]
         median["<b>Median</b><br/>Zentralwert der Spalte"]
         mode["<b>Modus</b><br/>Häufigster Wert"]
         constant["<b>Konstante</b><br/>Fester Platzhalterwert"]
     end
     
-    subgraph advanced["Erweiterte Imputation"]
+    subgraph advanced["<b>Erweiterte Imputation"]
         knn["<b>KNN Imputer</b><br/>k nächste Nachbarn<br/>zur Schätzung"]
         iterative["<b>Iterative Imputer</b><br/>Mehrfache Schätzung<br/>mit ML-Modellen"]
         mice["<b>MICE</b><br/>Multiple Imputation by<br/>Chained Equations"]
@@ -148,7 +148,7 @@ flowchart TB
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart LR
-    subgraph workflow["Typischer Workflow"]
+    subgraph workflow["<b>Typischer Workflow"]
         direction TB
         A["1. Erkennen<br/><code>df.isnull().sum()</code>"]
         B["2. Visualisieren<br/><code>missingno.matrix()</code>"]
@@ -213,7 +213,7 @@ flowchart TD
 
 
 ---
-    
+
 **Version:** 1.0    
 **Stand:** Januar 2026    
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    

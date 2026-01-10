@@ -10,7 +10,8 @@ has_toc: true
 # Skalierung
 {: .no_toc }
 
-> **Feature-Skalierung ist ein kritischer Vorverarbeitungsschritt, der numerische Merkmale auf einen einheitlichen Wertebereich bringt. Sie verbessert die Konvergenz von Algorithmen und stellt sicher, dass alle Features gleichwertig in die Modellbildung einfließen.**
+> **Feature-Skalierung ist ein kritischer Vorverarbeitungsschritt, der numerische Merkmale auf einen einheitlichen Wertebereich bringt.**      
+> Sie verbessert die Konvergenz von Algorithmen und stellt sicher, dass alle Features gleichwertig in die Modellbildung einfließen.
 
 ---
 
@@ -67,7 +68,7 @@ Die Skalierung von Features hat mehrere positive Auswirkungen auf den Machine-Le
 
 ### 1. Faire Gewichtung der Features
 
-Ohne Skalierung werden die Regressionskoeffizienten direkt von der Größenordnung der Features beeinflusst. Ein Feature mit Werten im Millionenbereich erhält automatisch einen kleinen Koeffizienten, während ein Feature mit Werten zwischen 0 und 1 einen großen Koeffizienten erhält – unabhängig von ihrer tatsächlichen Wichtigkeit.
+Ohne Skalierung werden die Regressionskoeffizienten **direkt** von der Größenordnung der Features beeinflusst. Ein Feature mit Werten im Millionenbereich erhält automatisch einen kleinen Koeffizienten, während ein Feature mit Werten zwischen 0 und 1 einen großen Koeffizienten erhält – unabhängig von ihrer tatsächlichen Wichtigkeit.
 
 ### 2. Schnellere Konvergenz
 
@@ -90,8 +91,8 @@ flowchart LR
     end
     
     subgraph methods[Methoden]
-        B[Normalisierung<br/>Min-Max]
-        C[Standardisierung<br/>Z-Score]
+        B[<b>Normalisierung</b><br/>Min-Max]
+        C[<b>Standardisierung</b><br/>Z-Score]
     end
     
     subgraph output[Ausgabe]
@@ -411,7 +412,7 @@ model = Pipeline([
 ## Welche Algorithmen benötigen Skalierung?
 
 ```mermaid
-flowchart TD
+flowchart LR
     subgraph need[Skalierung erforderlich]
         A1[k-NN]
         A2[k-Means]
@@ -445,18 +446,19 @@ flowchart TD
 - **Baumbasierte Algorithmen**: Splitpunkte werden pro Feature unabhängig berechnet
 - **Naive Bayes**: Basiert auf Wahrscheinlichkeiten, nicht auf Abständen
 
----
 
 ## Best Practices
 
 ### Checkliste für die Skalierung
 
-- [ ] **Datenanalyse durchführen** – Verteilung und Ausreißer prüfen
-- [ ] **Methode wählen** – Standardisierung als Default, Normalisierung bei spezifischen Anforderungen
-- [ ] **Nur Trainingsdaten für fit verwenden** – Data Leakage vermeiden
-- [ ] **Pipeline nutzen** – Automatisch korrekte Anwendung auf Train/Test
-- [ ] **Scaler speichern** – Für die Anwendung auf neue Daten im Deployment
-- [ ] **Rücktransformation ermöglichen** – Ergebnisse interpretierbar halten
+- [ ] **Datenanalyse durchführen** – Verteilung und Ausreißer prüfen
+- [ ] **Methode wählen** – Standardisierung als Default, Normalisierung bei spezifischen Anforderungen
+- [ ] Neben den numerischen auch **ordinal-kodierte Spalten** skalieren 
+- [ ] **Nur Trainingsdaten für fit verwenden** – Data Leakage vermeiden
+- [ ] **Pipeline nutzen** – Automatisch korrekte Anwendung auf Train/Test
+- [ ] **Scaler speichern** – Für die Anwendung auf neue Daten im Deployment
+- [ ] **Rücktransformation ermöglichen** – Ergebnisse interpretierbar halten
+
 
 ### Häufige Fehler vermeiden
 
@@ -497,7 +499,7 @@ mindmap
 
 ---
 
-## Weiterführende Ressourcen
+## Ressourcen
 
 - [scikit-learn: Preprocessing Data](https://scikit-learn.org/stable/modules/preprocessing.html)
 - [Feature Scaling - Machine Learning Mastery](https://machinelearningmastery.com/standardscaler-and-minmaxscaler-transforms-in-python/)
@@ -505,6 +507,6 @@ mindmap
 
 ---
 
-**Version:** 1.0
-**Stand:** Januar 2026
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
+**Version:** 1.0     
+**Stand:** Januar 2026     
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.     

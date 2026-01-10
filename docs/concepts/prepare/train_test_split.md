@@ -442,7 +442,7 @@ Der Train-Test-Split ist die Grundlage für zuverlässige Modellbewertung. Die k
 - KNIME: Data Preprocessing for Machine Learning Part 1 & Part 2
 
 ---
-
-**Version:** 1.0
-**Stand:** Januar 2026
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
+   
+**Version:** 1.0    
+**Stand:** Januar 2026    
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    
