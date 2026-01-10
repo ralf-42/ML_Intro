@@ -11,7 +11,7 @@ has_toc: true
 # Stacking
 {: .no_toc }
 
-> **Stacking (Stacked Generalization) kombiniert verschiedenartige Modelle zu einem Ensemble. Im Gegensatz zu Bagging und Boosting verwendet Stacking heterogene Modelle – etwa einen Entscheidungsbaum, eine logistische Regression und ein neuronales Netz gemeinsam. Die Kombination erfolgt durch Voting oder Meta-Learning.**
+> **Stacking (Stacked Generalization) kombiniert verschiedenartige Modelle zu einem Ensemble.** Im Gegensatz zu Bagging und Boosting verwendet Stacking heterogene Modelle – etwa einen Entscheidungsbaum, eine logistische Regression und ein neuronales Netz gemeinsam. Die Kombination erfolgt durch Voting oder Meta-Learning.
 
 ---
 

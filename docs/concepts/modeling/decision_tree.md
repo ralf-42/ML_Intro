@@ -16,6 +16,14 @@ has_toc: true
 
 ---
 
+# Inhaltsverzeichnis
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
 ## Überblick
 
 Der Entscheidungsbaum ist ein fundamentaler Lernalgorithmus im überwachten maschinellen Lernen. Er eignet sich sowohl für **Klassifizierungs-** als auch für **Regressionsaufgaben** und zeichnet sich durch seine intuitive Interpretierbarkeit aus.

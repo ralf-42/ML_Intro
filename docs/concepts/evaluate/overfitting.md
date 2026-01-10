@@ -16,6 +16,14 @@ has_toc: true
 
 ---
 
+# Inhaltsverzeichnis
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
 ## Überblick
 
 Overfitting ist eines der zentralen Probleme im Machine Learning: Ein Modell lernt die Trainingsdaten "auswendig", anstatt allgemeine Muster zu erkennen. Das Ergebnis ist ein Modell, das auf Trainingsdaten hervorragend funktioniert, aber bei neuen, unbekannten Daten versagt.

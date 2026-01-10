@@ -16,6 +16,13 @@ has_toc: true
 
 ---
 
+# Inhaltsverzeichnis
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
 ## Überblick
 
 Bootstrapping ist eine statistische Resampling-Methode zur Quantifizierung der Unsicherheit von Schätzern. Das Grundprinzip: Aus dem vorhandenen Datensatz werden wiederholt Stichproben **mit Zurücklegen** gezogen, um die Variabilität von Statistiken oder Modellvorhersagen zu schätzen.

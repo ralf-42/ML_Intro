@@ -16,6 +16,14 @@ has_toc: true
 
 ---
 
+# Inhaltsverzeichnis
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
 ## Überblick
 
 Regularisierung ist eine Technik zur Vermeidung von Overfitting, indem die Modellkomplexität kontrolliert wird. Das Grundprinzip: Ein Strafterm wird zur Loss-Funktion hinzugefügt, der große Modellgewichte "bestraft" und das Modell zu einfacheren Lösungen zwingt.
