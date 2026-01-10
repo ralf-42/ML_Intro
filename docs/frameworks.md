@@ -13,6 +13,7 @@ Links zu den offiziellen Dokumentationen der wichtigsten ML-Frameworks und Tools
 
 - **[Pandas](https://pandas.pydata.org/docs/)** - Datenmanipulation und -analyse in Python
 - **[NumPy](https://numpy.org/doc/stable/)** - Numerische Berechnungen und Array-Operationen
+- **[ydata-profiling](https://github.com/ydataai/ydata-profiling)** - Automatisierte explorative Datenanalyse für Pandas DataFrames
 
 ## Core ML Frameworks
 
