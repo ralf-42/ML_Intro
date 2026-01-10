@@ -11,7 +11,6 @@ description: "Fundamentale Machine Learning Grundlagen"
 
 Fundamentale Konzepte und theoretische Grundlagen des Machine Learning.
 
-## Inhalte
 
 Diese Sektion umfasst folgende Themen:
 

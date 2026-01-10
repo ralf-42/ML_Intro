@@ -16,6 +16,14 @@ has_toc: true
 
 ---
 
+# Inhaltsverzeichnis
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
 ## Überblick
 
 Cross-Validation (Kreuzvalidierung) ist ein statistisches Verfahren zur Bewertung der **Generalisierungsfähigkeit** eines Machine-Learning-Modells. Im Gegensatz zum einfachen Train-Test-Split wird der Datensatz mehrfach unterschiedlich aufgeteilt, wodurch eine robustere und zuverlässigere Leistungsbewertung entsteht.

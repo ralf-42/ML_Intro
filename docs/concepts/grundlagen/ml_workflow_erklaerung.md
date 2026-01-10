@@ -15,6 +15,14 @@ has_toc: true
 > Fünf Phasen: Understand, Prepare, Modeling, Evaluate und Deploy
 
 ---
+# Inhaltsverzeichnis
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+
+---
 
 Der Machine-Learning-Workflow beschreibt den systematischen Prozess von der ersten Problemstellung bis zur produktiven Anwendung eines ML-Modells. Die folgenden fünf Phasen bilden das Fundament jedes erfolgreichen ML-Projekts.
 

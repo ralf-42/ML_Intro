@@ -11,7 +11,8 @@ has_toc: true
 # Ensemble-Methoden
 {: .no_toc }
 
-> **Ensemble-Learning kombiniert mehrere Machine-Learning-Modelle, um bessere Vorhersagen zu erzielen als einzelne Modelle. Die wichtigsten Strategien sind Bagging (parallele, homogene Modelle), Boosting (sequentielle, homogene Modelle) und Stacking (parallele, heterogene Modelle).**
+> **Ensemble-Learning kombiniert mehrere Machine-Learning-Modelle, um bessere Vorhersagen zu erzielen als einzelne Modelle.**
+> Die wichtigsten Strategien sind Bagging (parallele, homogene Modelle), Boosting (sequentielle, homogene Modelle) und Stacking (parallele, heterogene Modelle).
 
 ---
 
