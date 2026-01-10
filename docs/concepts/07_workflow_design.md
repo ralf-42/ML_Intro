@@ -49,9 +49,6 @@ Praktische Patterns und Best Practices für ML-Workflows.
 - Auto-sklearn
 - H2O AutoML
 
-_Weitere detaillierte Inhalte folgen_
-
-
 ---
 
 **Version:** 1.0    

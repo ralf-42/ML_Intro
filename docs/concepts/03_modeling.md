@@ -69,10 +69,6 @@ description: "Machine Learning Modelle und Algorithmen"
 
 ---
 
-_Weitere Algorithmen und detaillierte Inhalte folgen in den Unterseiten._
-
-
----
 
 **Version:** 1.0    
 **Stand:** Januar 2026    

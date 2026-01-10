@@ -64,8 +64,6 @@ Visualisierung der Klassifikationsergebnisse:
 - **Learning Curves** - Visualisierung des Lernverhaltens
 - **Bias-Variance Tradeoff** - Balance zwischen Modellkomplexität und Generalisierung
 
-_Detaillierte Inhalte folgen_
-
 
 ---
 

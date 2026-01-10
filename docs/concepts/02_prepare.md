@@ -52,8 +52,6 @@ _Detaillierte Inhalte folgen_
 - Time-based Split
 - Cross-Validation Strategies
 
-_Detaillierte Inhalte folgen_
-
 
 ---
 
