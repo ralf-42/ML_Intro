@@ -16,6 +16,14 @@ has_toc: true
 
 ---
 
+# Inhaltsverzeichnis
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
 ## Überblick
 
 Ein Ausreißer (Outlier) ist ein Datenpunkt, dessen Ausprägung stark von der Norm abweicht. Ausreißer können die Ergebnisse von Analysen und Machine-Learning-Modellen erheblich verzerren. Die korrekte Identifikation und Behandlung von Ausreißern ist daher ein wichtiger Schritt in der Datenvorverarbeitung.

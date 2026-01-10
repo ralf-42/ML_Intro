@@ -16,6 +16,15 @@ has_toc: true
 
 ---
 
+# Inhaltsverzeichnis
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
+
 ## Überblick
 
 Der Train-Test-Split ist ein fundamentales Verfahren im Machine Learning, um die Leistungsfähigkeit von Modellen zu überprüfen. Das Prinzip ist einfach: Die verfügbaren Daten werden in zwei separate Mengen aufgeteilt – eine zum Trainieren des Modells und eine zum Testen seiner Vorhersagefähigkeit.

@@ -16,6 +16,15 @@ has_toc: true
 
 ---
 
+# Inhaltsverzeichnis
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
+
 ## Einführung
 
 Die **meisten** Machine-Learning-Algorithmen können **nur** mit **numerischen Daten** arbeiten. Kategoriale Daten – also Merkmale mit diskreten Ausprägungen wie Farben, Kategorien oder Bewertungen – müssen daher in numerische Formate umgewandelt werden. Dieser Prozess wird als **Kodierung** (Encoding) bezeichnet.

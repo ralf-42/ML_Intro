@@ -16,6 +16,14 @@ has_toc: true
 
 ---
 
+# Inhaltsverzeichnis
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
 ## Überblick
 
 Fehlende Werte (Missing Values) sind ein häufiges Problem in realen Datensätzen. Sie entstehen durch unvollständige Datenerfassung, Übertragungsfehler, Systemausfälle oder bewusst nicht beantwortete Fragen. Die korrekte Behandlung fehlender Werte ist entscheidend für die Qualität eines Machine-Learning-Modells.
