@@ -57,10 +57,6 @@ Machine Learning Operations (MLOps) umfasst Best Practices für den gesamten ML-
 
 ---
 
-_Detaillierte Inhalte zu einzelnen Themen folgen in den Unterseiten._
-
----
-
 **Version:** 1.0    
 **Stand:** Januar 2026    
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.     

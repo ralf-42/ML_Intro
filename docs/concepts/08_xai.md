@@ -50,9 +50,6 @@ Methoden zur Erklärbarkeit und Interpretierbarkeit von Machine Learning Modelle
 - Feature Attribution
 - Adversarial Examples
 
-_Weitere detaillierte Inhalte folgen_
-
-
 ---
 
 **Version:** 1.0    

@@ -153,6 +153,12 @@ flowchart TB
 5. **Modell evaluieren**: Leistung auf ungesehenen Testdaten prüfen
 6. **Modell anwenden**: Vorhersagen für neue Daten erstellen
 
+
+## Beispiel
+
+[Teachable Machines](https://teachablemachine.withgoogle.com/)
+
+
 ---
 
 ## Lernparadigmen
@@ -166,7 +172,7 @@ flowchart TB
     Q1 --> |"Ja"| Q2{"Gibt es bekannte<br/>Lösungen zu<br/>den Daten?"}
     
     Q2 --> |"Ja"| SL["🎯 Supervised<br/>Learning"]
-    Q2 --> |"Nein"| Q3{"Können Daten<br/>durch Simulation<br/>oder Experimente<br/>gewonnen werden?"}
+    Q2 --> |"Nein"| Q3{"Müssen Daten<br/>durch Simulation<br/>oder Experimente<br/>gewonnen werden?"}
     
     Q3 --> |"Ja"| RL["🎮 Reinforcement<br/>Learning"]
     Q3 --> |"Nein"| UL["🔍 Unsupervised<br/>Learning"]
