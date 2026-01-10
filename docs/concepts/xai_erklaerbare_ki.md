@@ -4,7 +4,7 @@ title: Methoden & Frameworks
 parent: XAI
 grand_parent: Konzepte
 nav_order: 1
-description: "Einführung in Explainable AI (XAI): Methoden und Frameworks zur Erklärbarkeit von ML-Modellen mit LIME, SHAP, ELI5 und InterpretML"
+description: "Einführung in Explainable AI (XAI): Grundkonzepte (Black-Box, Perturbation, Surrogate-Modelle) und Methoden (LIME, SHAP, ELI5, Counterfactuals, Anchors, InterpretML)"
 has_toc: true
 ---
 
@@ -64,6 +64,100 @@ Die Umsetzung von XAI-Methoden trägt dazu bei, das Vertrauen in KI-Systeme zu e
 | **Finanzwesen** | Kreditentscheidungen müssen gegenüber Kunden begründbar sein |
 | **Rechtswesen** | Algorithmen müssen den Anforderungen an Fairness und Nachvollziehbarkeit genügen |
 | **Compliance** | DSGVO und andere Regularien fordern Erklärbarkeit automatisierter Entscheidungen |
+
+---
+
+## Grundlegende Konzepte
+
+Bevor wir die einzelnen XAI-Methoden betrachten, sollten einige zentrale Begriffe verstanden werden.
+
+**Wichtige Fachbegriffe für dieses Kapitel:**
+
+| **Begriff**           | **Bedeutung**                                                                                                               |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| **Approximation**     | Annäherung – ein vereinfachtes Modell, das das Verhalten eines komplexen Modells _ungefähr_ nachbildet                      |
+| **Modell-agnostisch** | Unabhängig vom Modelltyp – die Methode funktioniert bei jedem ML-Modell, egal ob neuronales Netz, Random Forest oder andere |
+| **Feature**           | Ein Eingabemerkmal des Modells (z.B. Alter, Einkommen, Geschlecht)                                                          |
+| **Scope**             | Geltungsbereich – ob eine Erklärung für eine einzelne Vorhersage (lokal) oder das gesamte Modell (global) gilt              |
+### Black-Box-Modelle
+
+Ein **Black-Box-Modell** ist ein ML-Modell, dessen interne Entscheidungslogik nicht direkt einsehbar oder interpretierbar ist. Man sieht nur Input und Output, aber nicht *wie* die Entscheidung zustande kommt.
+
+| Modelltyp | Transparenz | Beispiele |
+|-----------|-------------|-----------|
+| **White-Box** | Vollständig interpretierbar | Lineare Regression, Decision Trees, Regelbasierte Systeme |
+| **Grey-Box** | Teilweise interpretierbar | Ensemble-Methoden mit Feature Importance |
+| **Black-Box** | Nicht direkt interpretierbar | Tiefe neuronale Netze, komplexe Ensemble-Modelle |
+
+XAI-Methoden machen Black-Box-Modelle nachvollziehbar, ohne deren Architektur zu verändern.
+
+### Perturbierte Samples
+
+**Perturbierte Samples** sind Datenpunkte, die absichtlich leicht verändert (gestört) wurden. Der Begriff kommt vom lateinischen *perturbare* (durcheinanderbringen, stören).
+
+```mermaid
+flowchart LR
+    subgraph Original["📊 Original-Datenpunkt"]
+        O["Alter: 25<br/>Klasse: 1<br/>Geschlecht: m"]
+    end
+    
+    subgraph Perturbiert["🔀 Perturbierte Samples"]
+        P1["Alter: 30<br/>Klasse: 1<br/>Geschlecht: m"]
+        P2["Alter: 25<br/>Klasse: 2<br/>Geschlecht: m"]
+        P3["Alter: 25<br/>Klasse: 1<br/>Geschlecht: w"]
+        P4["Alter: 22<br/>Klasse: 3<br/>Geschlecht: m"]
+    end
+    
+    Original -->|"Systematische<br/>Variation"| Perturbiert
+    
+    style Original fill:#e3f2fd,stroke:#1565c0
+    style Perturbiert fill:#fff3e0,stroke:#e65100
+```
+
+**Grundprinzip in XAI:** Man verändert systematisch einzelne Features eines Inputs und beobachtet, wie sich die Modellvorhersage ändert. Große Änderungen im Output deuten auf wichtige Features hin.
+
+**XAI-Methoden, die Perturbation nutzen:**
+
+| Methode | Art der Perturbation | Zweck |
+|---------|---------------------|-------|
+| **LIME** | Zufällige Variation um einen Datenpunkt | Lokales Surrogate-Modell trainieren |
+| **KernelSHAP** | Systematisches Maskieren von Feature-Kombinationen | Shapley-Werte approximieren |
+| **Permutation Importance** | Zufälliges Durchmischen einzelner Features | Globale Feature-Wichtigkeit messen |
+| **Occlusion Sensitivity** | Verdecken von Bildbereichen | Wichtige Regionen in Bildern identifizieren |
+
+**Vorteil der Perturbation:** Modell-Agnostik – man braucht keinen Zugriff auf interne Gewichte, nur auf die Input-Output-Beziehung.
+
+### Surrogate-Modelle
+
+Ein **Surrogate-Modell** (auch Ersatzmodell) ist ein einfaches, interpretierbares Modell, das trainiert wird, um die Vorhersagen eines komplexen Black-Box-Modells nachzuahmen.
+
+**Alltagsanalogie:** Stellen Sie sich einen erfahrenen Arzt vor, der Diagnosen stellt, aber nicht erklären kann, *warum* er zu diesem Schluss kommt – er "spürt" es einfach nach 30 Jahren Erfahrung. Ein Surrogate-Modell wäre wie ein Praktikant, der den Arzt bei vielen Diagnosen beobachtet und dann einfache Regeln ableitet: "Wenn Symptom A und B vorliegen, diagnostiziert der Arzt meist Krankheit X." Die Regeln des Praktikanten sind nicht perfekt, aber sie machen das Verhalten des Arztes nachvollziehbar.
+
+```mermaid
+flowchart TD
+    subgraph BlackBox["🔲 Black-Box-Modell"]
+        BB["Neuronales Netz<br/>XGBoost<br/>Random Forest"]
+    end
+    
+    subgraph Surrogate["📐 Surrogate-Modell"]
+        SU["Lineare Regression<br/>Decision Tree<br/>Regelbasiertes System"]
+    end
+    
+    DATA["Eingabedaten"] --> BlackBox
+    BlackBox -->|"Vorhersagen als<br/>Trainingsdaten"| Surrogate
+    Surrogate -->|"Interpretation der<br/>Koeffizienten/Regeln"| EXPLAIN["📊 Erklärung"]
+    
+    style BlackBox fill:#ffcccc,stroke:#cc0000
+    style Surrogate fill:#ccffcc,stroke:#00cc00
+    style EXPLAIN fill:#ffffcc,stroke:#cccc00
+```
+
+| Surrogate-Typ | Scope | Methode |
+|---------------|-------|---------|
+| **Global** | Gesamtes Modell | Ein Surrogate erklärt alle Vorhersagen |
+| **Lokal** | Einzelne Vorhersage | LIME trainiert ein Surrogate nur für einen Datenpunkt |
+
+**Wichtig:** Das Surrogate-Modell erklärt nicht das Original-Modell selbst, sondern dessen *Verhalten* – die Erklärung ist eine Approximation.
 
 ---
 
@@ -435,6 +529,117 @@ flowchart TD
 
 ---
 
+## Counterfactual Explanations
+
+### Konzept
+
+**Counterfactual Explanations** (kontrafaktische Erklärungen) beantworten die Frage: *"Was müsste anders sein, damit das Modell eine andere Entscheidung trifft?"*
+
+```mermaid
+flowchart LR
+    subgraph Faktisch["📊 Faktische Situation"]
+        F["Kreditantrag: Abgelehnt<br/>Einkommen: 35.000€<br/>Schulden: 15.000€<br/>Beschäftigung: 2 Jahre"]
+    end
+    
+    subgraph Kontrafaktisch["✅ Counterfactual"]
+        CF["Kreditantrag: Genehmigt<br/>Einkommen: 35.000€<br/>Schulden: 8.000€<br/>Beschäftigung: 2 Jahre"]
+    end
+    
+    F -->|"Minimale<br/>Änderung"| CF
+    
+    style F fill:#ffcccc,stroke:#cc0000
+    style CF fill:#ccffcc,stroke:#00cc00
+```
+
+### Eigenschaften guter Counterfactuals
+
+| Eigenschaft | Beschreibung |
+|-------------|--------------|
+| **Minimal** | So wenig Änderungen wie möglich |
+| **Plausibel** | Die Änderungen sind realistisch umsetzbar |
+| **Actionable** | Der Betroffene kann die Änderungen beeinflussen |
+| **Divers** | Mehrere alternative Wege zum Ziel aufzeigen |
+
+### Anwendungsbeispiel
+
+Das folgende Beispiel zeigt die grundlegende Verwendung. In der Praxis erfordert die Bibliothek weitere Konfiguration.
+
+```python
+from alibi.explainers import CounterFactual
+
+# Counterfactual Explainer erstellen
+cf = CounterFactual(model.predict_proba, shape=(1, n_features))
+
+# Counterfactual für abgelehnten Kreditantrag finden
+explanation = cf.explain(abgelehnter_antrag)
+
+# Ergebnis zeigt minimale Änderungen für andere Entscheidung
+# z.B.: "Reduzieren Sie Ihre Schulden um 7.000€ für eine Genehmigung"
+```
+
+**Vorteil:** Counterfactuals sind intuitiv verständlich und geben konkrete Handlungsempfehlungen.
+
+---
+
+## Anchors
+
+### Konzept
+
+**Anchors** sind Regeln, die eine Vorhersage "verankern" – sie beschreiben die *hinreichenden Bedingungen*, unter denen das Modell mit hoher Wahrscheinlichkeit dieselbe Entscheidung trifft.
+
+```mermaid
+flowchart TD
+    subgraph Anchor["⚓ Anchor-Regel"]
+        RULE["WENN Geschlecht = weiblich<br/>UND Klasse ≤ 2<br/>DANN Überlebt = Ja<br/>(Precision: 97%)"]
+    end
+    
+    subgraph Anwendung["📊 Anwendung"]
+        P1["Rose: weiblich, 1. Klasse → ✅"]
+        P2["Mary: weiblich, 2. Klasse → ✅"]
+        P3["Jack: männlich, 3. Klasse → ❓"]
+    end
+    
+    Anchor --> Anwendung
+    
+    style Anchor fill:#e3f2fd,stroke:#1565c0
+    style P1 fill:#c8e6c9,stroke:#388e3c
+    style P2 fill:#c8e6c9,stroke:#388e3c
+    style P3 fill:#ffcccc,stroke:#cc0000
+```
+
+### Vergleich der Erklärungsarten
+
+Anchors liefern einen anderen Erklärungstyp als andere XAI-Methoden. Während LIME (siehe Abschnitt oben) numerische Gewichte liefert, die zeigen *wie stark* ein Feature wirkt, geben Anchors klare Regeln an, *wann* eine Vorhersage gilt.
+
+| Aspekt | Gewicht-basiert (z.B. LIME) | Regel-basiert (Anchors) |
+|--------|----------------------------|-------------------------|
+| **Output** | "Alter hat Gewicht +0.3" | "WENN Alter < 30 DANN ..." |
+| **Interpretation** | Erfordert Verständnis von Gewichten | Lesbar wie Geschäftsregel |
+| **Antwort auf** | "Wie stark wirkt jedes Feature?" | "Unter welchen Bedingungen gilt diese Vorhersage?" |
+| **Besonders geeignet für** | Technische Analyse | Kommunikation an Laien |
+
+### Code-Beispiel
+
+```python
+from alibi.explainers import AnchorTabular
+
+# Anchor Explainer erstellen
+anchor_exp = AnchorTabular(
+    predictor=model.predict,
+    feature_names=feature_names
+)
+anchor_exp.fit(X_train)
+
+# Anchor für einzelne Instanz
+explanation = anchor_exp.explain(rose.values)
+
+# Ausgabe: "IF sex = female AND pclass <= 2 THEN survived = 1"
+print(f"Anchor: {explanation.anchor}")
+print(f"Precision: {explanation.precision:.2%}")
+```
+
+---
+
 ## Ceteris Paribus Analysen
 
 ### Konzept
@@ -518,6 +723,6 @@ for pclass in [1, 2, 3]:
 
 ---
 
-**Version:** 1.0     
+**Version:** 1.2     
 **Stand:** Januar 2026     
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.     
