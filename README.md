@@ -1,11 +1,20 @@
 # Machine Learning Kurs
 
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-2026--01--02-blue)](./README.md)
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-2026--01--10-blue)](./README.md)
 [![Python Version](https://img.shields.io/badge/Python-3.11%2B-brightgreen)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Active-success)](./README.md)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](./LICENSE)
 
-Dieses Repository enthält Lehrmaterialien für den Machine Learning-Kurs. 
+Dieses Repository enthält Lehrmaterialien für den Machine Learning-Kurs.
+
+## 📖 Dokumentation
+
+Die vollständige Kursdokumentation ist verfügbar unter:  **[https://ralf-42.github.io/ML_Intro](https://ralf-42.github.io/ML_Intro)**
+
+Die Web-Dokumentation bietet:
+- Interaktive Navigation durch alle Konzepte und Frameworks
+- Mermaid-Diagramme zur Visualisierung von ML-Workflows
+- Strukturierte Übersicht über Deployment, Regulatorisches und Ressourcen
 
 # 1 📚 Kursübersicht
 Dieser Kurs bietet einen strukturierten Lernpfad von grundlegenden Machine Learning-Konzepten bis hin zu fortgeschrittenen Deep Learning-Anwendungen und umfasst sowohl überwachte als auch unüberwachte Lerntechniken, neuronale Netze, Ensemble-Methoden und moderne generative KI-Anwendungen.
@@ -117,7 +126,7 @@ Nach Abschluss dieses Kurses können Studierende:
 - **Deep Learning**: Keras, TensorFlow
 - **Datenvisualisierung**: matplotlib, plotly
 - **Spezialisierte ML**: XGBoost, PyCaret
-- **Generative KI**: LangChain, OpenAI API
+- **Generative KI**: google.colab ai
 - **Webanwendungen**: Gradio
 - **Datenverarbeitung**: pandas, numpy
 
@@ -161,5 +170,5 @@ Die Kursmaterialien können frei verwendet, modifiziert und weiterverbreitet wer
 
 ---
 
-**Letzte Aktualisierung:** 2. Januar 2026      
-**Version:** 1.0      
+**Letzte Aktualisierung:** 10. Januar 2026     
+**Version:** 1.0         
