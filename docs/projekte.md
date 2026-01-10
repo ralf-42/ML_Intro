@@ -1,8 +1,6 @@
 ---
 layout: default
 title: Projekte
-nav_order: 5
-has_children: true
 description: "Praktische ML-Projekte und Anwendungen"
 ---
 
