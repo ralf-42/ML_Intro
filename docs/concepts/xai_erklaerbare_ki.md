@@ -73,12 +73,13 @@ Bevor wir die einzelnen XAI-Methoden betrachten, sollten einige zentrale Begriff
 
 **Wichtige Fachbegriffe für dieses Kapitel:**
 
-| **Begriff**           | **Bedeutung**                                                                                                               |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| **Approximation**     | Annäherung – ein vereinfachtes Modell, das das Verhalten eines komplexen Modells _ungefähr_ nachbildet                      |
+| Begriff | Bedeutung |
+|---------|-----------|
+| **Approximation** | Annäherung – ein vereinfachtes Modell, das das Verhalten eines komplexen Modells _ungefähr_ nachbildet |
 | **Modell-agnostisch** | Unabhängig vom Modelltyp – die Methode funktioniert bei jedem ML-Modell, egal ob neuronales Netz, Random Forest oder andere |
-| **Feature**           | Ein Eingabemerkmal des Modells (z.B. Alter, Einkommen, Geschlecht)                                                          |
-| **Scope**             | Geltungsbereich – ob eine Erklärung für eine einzelne Vorhersage (lokal) oder das gesamte Modell (global) gilt              |
+| **Feature** | Ein Eingabemerkmal des Modells (z.B. Alter, Einkommen, Geschlecht) |
+| **Scope** | Geltungsbereich – ob eine Erklärung für eine einzelne Vorhersage (lokal) oder das gesamte Modell (global) gilt |
+
 ### Black-Box-Modelle
 
 Ein **Black-Box-Modell** ist ein ML-Modell, dessen interne Entscheidungslogik nicht direkt einsehbar oder interpretierbar ist. Man sieht nur Input und Output, aber nicht *wie* die Entscheidung zustande kommt.
