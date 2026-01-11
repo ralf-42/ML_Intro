@@ -3,7 +3,7 @@ layout: default
 title: Coding-Arbeitsweisen
 parent: Grundlagen
 grand_parent: Konzepte
-nav_order: 3
+nav_order: 4
 description: "Effiziente Arbeitsweisen für die ML-Entwicklung: KI-Assistenz, Checklisten und Code-Snippets"
 has_toc: true
 ---

@@ -8,7 +8,7 @@ description: Pipelines, ColumnTransformer und Best Practices für reproduzierbar
 has_toc: true
 ---
 
-# Workflow Design
+# Workflow-Design
 {: .no_toc }
 
 > **Pipelines, ColumnTransformer und Best Practices für reproduzierbare ML-Workflows in scikit-learn**
