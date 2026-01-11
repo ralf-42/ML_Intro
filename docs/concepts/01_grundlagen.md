@@ -16,7 +16,8 @@ Diese Sektion umfasst folgende Themen:
 
 1. **[Intro](grundlagen/machine_learning_grundlagen.html)** - Was ist Machine Learning? Lernparadigmen, Aufgabentypen und Anwendungsbeispiele
 2. **[ML Workflow](grundlagen/ml_workflow_erklaerung.html)** - Der 5-Phasen-Prozess von Understand bis Deploy
-3. **[Coding-Arbeitsweisen](grundlagen/coding-arbeitsweisen.html)** - Effiziente Arbeitsweisen: KI-Assistenz, Checklisten und Code-Snippets
+3. **[Pipelines & Best Practices](grundlagen/workflow-design_text.html)** - Scikit-learn Pipelines, ColumnTransformer und reproduzierbare ML-Workflows
+4. **[Coding-Arbeitsweisen](grundlagen/coding-arbeitsweisen.html)** - Effiziente Arbeitsweisen: KI-Assistenz, Checklisten und Code-Snippets
 
 
 ---
