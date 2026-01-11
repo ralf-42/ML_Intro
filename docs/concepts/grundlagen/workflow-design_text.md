@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Pipelines & Best Practices
-parent: Workflow Design
+parent: Grundlagen
 grand_parent: Konzepte
-nav_order: 1
+nav_order: 3
 description: "Pipelines, ColumnTransformer und Best Practices für reproduzierbare ML-Workflows in scikit-learn"
 has_toc: true
 ---
@@ -25,7 +25,7 @@ has_toc: true
 
 ## Anwendung von Modellen in scikit-learn
 
-Scikit-learn ermöglicht unterschiedliche Ansätze zur Definition und Verwendung von Skalierungs- und Codierungsmodellen. Die zentrale Frage ist, ob man eine Instanz eines Skalierers oder Codierers explizit erstellt und speichert – oder die Transformation direkt auf den Daten anwendet.
+Scikit-learn ermöglicht unterschiedliche Ansätze zur Definition und Verwendung von Skalierungs- und Codierungsmodellen. Die zentrale Frage ist, ob man eine **Instanz** eines Skalierers oder Codierers explizit erstellt und speichert – oder die Transformation **direkt** auf den Daten anwendet.
 
 ### Vergleich der Ansätze
 
@@ -48,11 +48,11 @@ from sklearn.preprocessing import MinMaxScaler
 
 # Explizite Definition (empfohlen)
 scaler = MinMaxScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)  # Nur transform, nicht fit!
+data_train_scaled = scaler.fit_transform(data_train)
+data_test_scaled = scaler.transform(data_test)  # Nur transform, nicht fit!
 
 # Inverse Transformation möglich
-X_original = scaler.inverse_transform(X_train_scaled)
+data_original = scaler.inverse_transform(data_train_scaled)
 ```
 
 ---
@@ -67,10 +67,10 @@ Wenn die originalen Daten für spätere Analysen oder Vergleiche benötigt werde
 
 ```python
 # Originaldaten erhalten
-X_scaled = scaler.fit_transform(X)
+data_scaled = scaler.fit_transform(data)
 
 # vs. Originaldaten überschreiben (nicht empfohlen)
-X = scaler.fit_transform(X)  # Original verloren!
+data = scaler.fit_transform(data)  # Original verloren!
 ```
 
 ### Speicherplatz
@@ -83,9 +83,9 @@ Die Verwendung separater Variablen macht den Code klarer und leichter wartbar, d
 
 ```python
 # Klar und wartbar
-X_train_imputed = imputer.fit_transform(X_train)
-X_train_scaled = scaler.fit_transform(X_train_imputed)
-X_train_encoded = encoder.fit_transform(X_train_scaled)
+data_train_imputed = imputer.fit_transform(data_train)
+data_train_scaled = scaler.fit_transform(data_train_imputed)
+data_train_encoded = encoder.fit_transform(data_train_scaled)
 ```
 
 ### Wiederverwendung und Reproduzierbarkeit
@@ -98,6 +98,101 @@ Wenn dieselbe Transformation auf mehrere Datensätze (z.B. Trainings- und Testda
 
 ---
 
+## Data Leakage
+
+Data Leakage tritt auf, wenn Informationen von außerhalb des Trainingsdatensatzes verwendet werden, um das Modell zu erstellen. Diese zusätzlichen Informationen können zu **übermäßig optimistischen** oder sogar **völlig ungültigen** Vorhersagemodellen führen.
+
+### Häufige Ursachen
+
+```mermaid
+flowchart TD
+    subgraph Ursachen["<b>Ursachen für Data Leakage"]
+        A[Skalierung vor<br/>Train-Test-Split]
+        B[Feature Engineering<br/>auf Gesamtdaten]
+        C[Imputation mit<br/>Gesamtstatistiken]
+        D[Target-Information<br/>in Features]
+    end
+    
+    A --> L[Data Leakage]
+    B --> L
+    C --> L
+    D --> L
+    
+    L --> R[Überschätzte<br/>Modellperformance]
+    R --> F[Schlechte Performance<br/>auf neuen Daten]
+    
+    style L fill:#e74c3c,stroke:#c0392b,color:#fff
+    style R fill:#f39c12,stroke:#e67e22
+    style F fill:#e74c3c,stroke:#c0392b,color:#fff
+```
+
+### Auswirkungen von Data Leakage
+
+Data Leakage kann zu einer massiven, aber unbegründeten Leistungssteigerung in verschiedenen Fachbereichen führen:
+
+- **Sprachmodelle (LLMs):** Bei Aufgaben zum Textverständnis (CBT) verfälscht Leakage die Ergebnisse extrem. Während die reale Leistung bei **19,41 %** liegt, täuscht der Kontakt mit Testdaten im Training einen Wert von **52,06 %** vor. Auch bei der SQuAD-Beantwortung steigt die Genauigkeit künstlich von ca. 42 % auf über 53 %.
+    
+- **Medizinische Diagnostik:** Bei der KI-basierten Altersschätzung aus MRT-Daten sinkt der Vorhersagefehler durch unzulässige Datenmischung fälschlicherweise von **6,2 auf 3,8 Jahre**. Ähnliche Verzerrungen zeigen sich bei der Vorhersage von Sepsis oder Demenz, wo die Trefferquoten (AUC) signifikant steigen.
+    
+- **Zufallsdaten & Statistik:** Besonders eindrucksvoll ist das Beispiel mit reinen Zufallszahlen. Erwartbar wäre eine Genauigkeit von 0,5 (Raten). Durch falsche Merkmalsauswahl auf dem gesamten Datensatz erreicht das Modell jedoch scheinbar **0,76**, ohne echten Vorhersagewert zu besitzen.
+    
+- **Politikwissenschaft:** Bei der Vorhersage von Bürgerkriegen schrumpfte der vermeintliche Vorsprung komplexer Modelle gegenüber simplen Methoden nach der Leakage-Korrektur von **0,14 auf fast unbedeutende 0,01** AUC-Punkte.
+    
+
+
+### Vermeidung von Data Leakage
+
+**1. Erst splitten, dann transformieren**
+
+```python
+# FALSCH - Data Leakage!
+data_scaled = scaler.fit_transform(data)  # Gesamtdaten
+data_train, data_test = train_test_split(data_scaled)
+
+# RICHTIG
+data_train, data_test = train_test_split(data)
+scaler.fit(data_train)
+data_train_scaled = scaler.transform(data_train)
+data_test_scaled = scaler.transform(data_test)
+```
+
+**2. Pipelines verwenden (siehe unten)**
+
+Pipelines stellen automatisch sicher, dass `fit` nur auf Trainingsdaten angewendet wird:
+
+```python
+pipeline.fit(data_train, target_train)  # fit nur auf Training
+pipeline.predict(data_test)             # nur transform auf Test
+```
+
+**3. Cross-Validation korrekt anwenden**
+
+```python
+from sklearn.model_selection import cross_val_score
+
+# Pipeline innerhalb der Cross-Validation
+scores = cross_val_score(pipeline, data_train, target_train, cv=5)
+# Jeder Fold: fit auf Training, transform auf Validation
+```
+
+> **Wichtig**
+>
+> Neben der Trennung von Trainings- und Testdaten sollte auch die **Codierung und Skalierung getrennt** erfolgen. Statistiken (Mittelwert, Standardabweichung, Kategorien) dürfen nur aus den Trainingsdaten berechnet werden!
+
+---
+
+### Zusammenfassung
+
+| Konzept                  | Kernaussage                                                                        |
+| ------------------------ | ---------------------------------------------------------------------------------- |
+| **Explizite Definition** | Transformer immer als Objekt speichern für Wiederverwendung und Reproduzierbarkeit |
+| **Pipelines**            | Automatisieren den Workflow und verhindern Data Leakage                            |
+| **ColumnTransformer**    | Ermöglicht unterschiedliche Transformationen für verschiedene Spaltentypen         |
+| **Keras-Integration**    | Vorverarbeitung kann direkt ins Modell integriert werden                           |
+| **Data Leakage**         | Vermeiden durch korrektes Splitten und Verwendung von Pipelines                    |
+
+
+---
 ## Pipelines
 
 Eine Pipeline ist eine Reihe von Aufgaben, die nacheinander ausgeführt werden. Die Ausgabe einer Aufgabe ist die Eingabe der nächsten Aufgabe, bis am Ende das Endprodukt (z.B. eine Vorhersage) ausgegeben wird.
@@ -158,10 +253,10 @@ pipeline = Pipeline([
 ])
 
 # Training - fit wird auf alle Schritte angewendet
-pipeline.fit(X_train, y_train)
+pipeline.fit(data_train, target_train)
 
 # Vorhersage - transform wird automatisch verkettet
-y_pred = pipeline.predict(X_test)
+target_pred = pipeline.predict(data_test)
 ```
 
 ---
@@ -172,9 +267,9 @@ In der Praxis werden oft beide Komponenten kombiniert, wobei der ColumnTransform
 
 ### Funktionsvergleich
 
-| Komponente | Funktionsweise | Einsatzbereich |
-|------------|----------------|----------------|
-| **Pipeline** | Verkettung von Transformatoren in **sequentieller** Reihenfolge, gefolgt von einem finalen Schätzer | Erstellen einer ML-Pipeline, die Daten erst transformiert und dann prognostiziert |
+| Komponente            | Funktionsweise                                                                                                      | Einsatzbereich                                                                            |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| **Pipeline**          | Verkettung von Transformatoren in **sequentieller** Reihenfolge, gefolgt von einem finalen Schätzer                 | Erstellen einer ML-Pipeline, die Daten erst transformiert und dann prognostiziert         |
 | **ColumnTransformer** | Anwendung verschiedener Transformatoren auf verschiedene Spalten **parallel**, anschließend Verkettung der Ausgaben | Unterschiedliche Transformationen für verschiedene Datentypen (numerisch vs. kategorisch) |
 
 ### Kombinierte Anwendung
@@ -215,8 +310,8 @@ full_pipeline = Pipeline([
 ])
 
 # Training und Vorhersage
-full_pipeline.fit(X_train, y_train)
-y_pred = full_pipeline.predict(X_test)
+full_pipeline.fit(data_train, target_train)
+target_pred = full_pipeline.predict(data_test)
 ```
 
 ---
@@ -250,7 +345,7 @@ num_pipeline = preprocessor.named_transformers_['num']
 
 ```python
 # Nur transformieren (ohne Modell)
-X_transformed = full_pipeline[:-1].transform(X_test)
+data_transformed = full_pipeline[:-1].transform(data_test)
 
 # Feature-Namen nach Transformation abrufen (sklearn >= 1.0)
 feature_names = full_pipeline[:-1].get_feature_names_out()
@@ -268,13 +363,13 @@ In Keras lassen sich **keine Pipelines** im Sinne von scikit-learn definieren. E
 
 ### Integrierbare Vorverarbeitungsschichten
 
-| Schicht | Funktion |
-|---------|----------|
-| **Normalization** | Anpassung der Skalierung der Eingabedaten |
-| **CategoryEncoding** | Umwandlung von kategorialen Daten in numerische Formate |
-| **TextVectorization** | Umwandlung von Textdaten in eine geeignete Form |
-| **Rescaling** | Reskalieren von Bilddaten |
-| **RandomFlip, RandomRotation** | Daten-Augmentierung für Bilder |
+| Schicht                        | Funktion                                                |
+| ------------------------------ | ------------------------------------------------------- |
+| **Normalization**              | Anpassung der Skalierung der Eingabedaten               |
+| **CategoryEncoding**           | Umwandlung von kategorialen Daten in numerische Formate |
+| **TextVectorization**          | Umwandlung von Textdaten in eine geeignete Form         |
+| **Rescaling**                  | Reskalieren von Bilddaten                               |
+| **RandomFlip, RandomRotation** | Daten-Augmentierung für Bilder                          |
 
 ### Beispiel: Preprocessing-Layer in Keras
 
@@ -285,7 +380,7 @@ from tensorflow.keras import layers
 
 # Normalization-Layer
 normalizer = layers.Normalization()
-normalizer.adapt(X_train)  # Statistiken lernen
+normalizer.adapt(data_train)  # Statistiken lernen
 
 # Modell mit integrierter Vorverarbeitung
 model = keras.Sequential([
@@ -295,8 +390,8 @@ model = keras.Sequential([
     layers.Dense(1, activation='sigmoid')
 ])
 
-model.compile(optimizer='adam', loss='binary_crossentropy')
-model.fit(X_train, y_train, epochs=10)
+model.compile(optimizer='adam', loss='binartaget_crossentropy')
+model.fit(data_train, target_train, epochs=10)
 ```
 
 ### Vorteile der Integration
@@ -305,86 +400,6 @@ model.fit(X_train, y_train, epochs=10)
 - Verbesserte Portabilität – das gespeicherte Modell enthält die Vorverarbeitung
 - Konsistente Transformation bei Inferenz
 
----
-
-## Data Leakage
-
-Data Leakage tritt auf, wenn Informationen von außerhalb des Trainingsdatensatzes verwendet werden, um das Modell zu erstellen. Diese zusätzlichen Informationen können zu **übermäßig optimistischen** oder sogar **völlig ungültigen** Vorhersagemodellen führen.
-
-### Häufige Ursachen
-
-```mermaid
-flowchart TD
-    subgraph Ursachen["Häufige Ursachen für Data Leakage"]
-        A[Skalierung vor<br/>Train-Test-Split]
-        B[Feature Engineering<br/>auf Gesamtdaten]
-        C[Imputation mit<br/>Gesamtstatistiken]
-        D[Target-Information<br/>in Features]
-    end
-    
-    A --> L[Data Leakage]
-    B --> L
-    C --> L
-    D --> L
-    
-    L --> R[Überschätzte<br/>Modellperformance]
-    R --> F[Schlechte Performance<br/>auf neuen Daten]
-    
-    style L fill:#e74c3c,stroke:#c0392b,color:#fff
-    style R fill:#f39c12,stroke:#e67e22
-    style F fill:#e74c3c,stroke:#c0392b,color:#fff
-```
-
-### Vermeidung von Data Leakage
-
-**1. Erst splitten, dann transformieren**
-
-```python
-# FALSCH - Data Leakage!
-X_scaled = scaler.fit_transform(X)  # Gesamtdaten
-X_train, X_test = train_test_split(X_scaled)
-
-# RICHTIG
-X_train, X_test = train_test_split(X)
-scaler.fit(X_train)
-X_train_scaled = scaler.transform(X_train)
-X_test_scaled = scaler.transform(X_test)
-```
-
-**2. Pipelines verwenden**
-
-Pipelines stellen automatisch sicher, dass `fit` nur auf Trainingsdaten angewendet wird:
-
-```python
-pipeline.fit(X_train, y_train)  # fit nur auf Training
-pipeline.predict(X_test)         # nur transform auf Test
-```
-
-**3. Cross-Validation korrekt anwenden**
-
-```python
-from sklearn.model_selection import cross_val_score
-
-# Pipeline innerhalb der Cross-Validation
-scores = cross_val_score(pipeline, X, y, cv=5)
-# Jeder Fold: fit auf Training, transform auf Validation
-```
-
-> **Wichtig**
->
-> Neben der Trennung von Trainings- und Testdaten sollte auch die **Codierung und Skalierung getrennt** erfolgen. Statistiken (Mittelwert, Standardabweichung, Kategorien) dürfen nur aus den Trainingsdaten berechnet werden!
-
----
-
-## Zusammenfassung
-
-| Konzept | Kernaussage |
-|---------|-------------|
-| **Explizite Definition** | Transformer immer als Objekt speichern für Wiederverwendung und Reproduzierbarkeit |
-| **Pipelines** | Automatisieren den Workflow und verhindern Data Leakage |
-| **ColumnTransformer** | Ermöglicht unterschiedliche Transformationen für verschiedene Spaltentypen |
-| **Keras-Integration** | Vorverarbeitung kann direkt ins Modell integriert werden |
-| **Data Leakage** | Vermeiden durch korrektes Splitten und Verwendung von Pipelines |
 
 ---
 

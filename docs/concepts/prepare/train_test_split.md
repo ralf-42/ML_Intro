@@ -438,11 +438,6 @@ flowchart TB
 
 Der Train-Test-Split ist die Grundlage für zuverlässige Modellbewertung. Die korrekte Anwendung – insbesondere die Vermeidung von Data Leakage – ist entscheidend für aussagekräftige Ergebnisse und erfolgreiche ML-Projekte.
 
-## Weiterführende Themen
-
-- **Cross-Validation**: Robustere Bewertung durch mehrfache Splits
-- **Nested Cross-Validation**: Kombination von Modellauswahl und Evaluation
-- **Bootstrapping**: Resampling-Technik für Konfidenzintervalle
 
 ---
 

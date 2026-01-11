@@ -336,78 +336,6 @@ print(data_robust.flatten().round(2))
 
 ---
 
-## Skalierung in der Pipeline
-
-### Wichtig: Data Leakage vermeiden
-
-Die Skalierung muss auf den **Trainingsdaten** angepasst (fit) und dann auf **Trainings- und Testdaten** angewendet (transform) werden:
-
-```mermaid
-flowchart LR
-    subgraph correct[✅ Korrekt]
-        A1[Trainingsdaten] --> B1[fit_transform]
-        B1 --> C1[Skalierte<br/>Trainingsdaten]
-        D1[Testdaten] --> E1[transform<br/>nur!]
-        E1 --> F1[Skalierte<br/>Testdaten]
-    end
-    
-    subgraph wrong[❌ Falsch - Data Leakage]
-        A2[Alle Daten] --> B2[fit_transform]
-        B2 --> C2[Dann Split]
-    end
-    
-    style correct fill:#e6ffe6
-    style wrong fill:#ffe6e6
-```
-
-### Implementierung mit Pipeline
-
-```python
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
-
-# Pipeline erstellt – Skalierung automatisch korrekt angewendet
-model = Pipeline([
-    ('scaler', StandardScaler()),
-    ('classifier', LogisticRegression())
-])
-
-# Train-Test-Split
-data_train, data_test, target_train, target_test = train_test_split(data, target, test_size=0.2)
-
-# Pipeline trainieren – fit_transform auf Trainingsdaten
-model.fit(data_train, target_train)
-
-# Vorhersage – transform (nicht fit!) auf Testdaten
-target_pred = model.predict(data_test)
-```
-
-### ColumnTransformer für gemischte Datentypen
-
-Wenn numerische und kategorische Features gemeinsam verarbeitet werden:
-
-```python
-from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
-
-# Verschiedene Transformationen für verschiedene Spaltentypen
-preprocessor = ColumnTransformer(
-    transformers=[
-        ('num', StandardScaler(), ['alter', 'einkommen', 'erfahrung']),
-        ('cat', OneHotEncoder(), ['abteilung', 'stadt'])
-    ]
-)
-
-# In Pipeline integrieren
-model = Pipeline([
-    ('preprocessor', preprocessor),
-    ('classifier', LogisticRegression())
-])
-```
-
----
 
 ## Welche Algorithmen benötigen Skalierung?
 
@@ -469,31 +397,7 @@ flowchart LR
 | Baumbasierte Modelle skalieren | Unnötiger Aufwand | Algorithmus-Anforderungen prüfen |
 | Kategorische Daten skalieren | Sinnlose Transformation | Nur numerische Features skalieren |
 
----
 
-## Zusammenfassung
-
-```mermaid
-mindmap
-  root((Skalierung))
-    Normalisierung
-      Min-Max Formel
-      Wertebereich 0-1
-      Ausreißer-empfindlich
-      Für Pixel, Neuronale Netze
-    Standardisierung
-      Z-Score Formel
-      Mittelwert 0, Std 1
-      Robuster bei Ausreißern
-      Standard-Empfehlung
-    Anwendung
-      Pipeline nutzen
-      Data Leakage vermeiden
-      Scaler speichern
-    Algorithmen
-      Erforderlich: k-NN, SVM, NN
-      Nicht nötig: Bäume, Boosting
-```
 
 > **Kernbotschaft:** Skalierung ist ein unverzichtbarer Vorverarbeitungsschritt für viele Machine-Learning-Algorithmen. Standardisierung ist die sichere Wahl für die meisten Anwendungsfälle, während Normalisierung bei spezifischen Anforderungen (fester Wertebereich, ausreißerfreie Daten) bevorzugt werden kann. Entscheidend ist die korrekte Anwendung: fit nur auf Trainingsdaten, transform auf alle Daten.
 
