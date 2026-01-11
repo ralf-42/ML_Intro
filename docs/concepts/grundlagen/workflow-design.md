@@ -1,14 +1,14 @@
 ---
 layout: default
-title: Pipelines & Best Practices
+title: Workflow-Design
 parent: Grundlagen
 grand_parent: Konzepte
 nav_order: 3
-description: "Pipelines, ColumnTransformer und Best Practices für reproduzierbare ML-Workflows in scikit-learn"
+description: Pipelines, ColumnTransformer und Best Practices für reproduzierbare ML-Workflows in scikit-learn
 has_toc: true
 ---
 
-# Pipelines & Best Practices
+# Workflow Design
 {: .no_toc }
 
 > **Pipelines, ColumnTransformer und Best Practices für reproduzierbare ML-Workflows in scikit-learn**
