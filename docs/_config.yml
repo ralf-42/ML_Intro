@@ -1,5 +1,11 @@
 # GitHub Pages Konfiguration für ML_Intro Projekt
 # Jekyll Theme: Just the Docs
+#
+# PERFORMANCE-OPTIMIERUNGEN (Build-Zeit: Ziel < 3 Min):
+# - exclude: Unnötige Dateien ausgeschlossen (Zeile 58)
+# - math_engine: null (MathJax wird in head_custom.html geladen)
+# - search previews: Reduziert auf 2 statt 3
+# - jekyll-relative-links: Kann entfernt werden bei Problemen (Zeile 46)
 
 # Site settings
 title: "Machine Learning"
@@ -32,17 +38,18 @@ kramdown:
   syntax_highlighter: rouge
   syntax_highlighter_opts:
     css_class: 'highlight'
-  math_engine: mathjax
-  math_engine_opts:
-    preview: true
-    preview_as_code: false
+  # MathJax engine deaktiviert für schnelleren Build
+  # (MathJax wird bereits in head_custom.html geladen)
+  math_engine: null
 
 # Plugins
+# HINWEIS: jekyll-relative-links kann Builds verlangsamen (bis zu +60 Sek)
+# Falls Build > 5 Min dauert, dieses Plugin entfernen und absolute Pfade verwenden
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
-  - jekyll-relative-links
+  - jekyll-relative-links  # Kann bei Performance-Problemen entfernt werden
 
 # Mermaid support
 mermaid:
@@ -54,8 +61,18 @@ relative_links:
   collections: false
 
 # Exclude from processing
-# Hinweis: Da GitHub Pages aus /docs liest, müssen wir nichts excluden
-exclude: []
+# WICHTIG: Diese Verzeichnisse/Dateien von Jekyll-Processing ausschließen für schnelleren Build
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/
+  - .sass-cache/
+  - .jekyll-cache/
+  - .jekyll-metadata
+  - "*.tmp"
+  - "*.bak"
 
 # Google Analytics (optional)
 # google_analytics: UA-XXXXXXXX-X
@@ -74,12 +91,14 @@ show_downloads: true
 
 # Just the Docs Theme Settings
 # Search
+# HINWEIS: Search indexing kann Build um +30 Sek verlangsamen
+# Bei Performance-Problemen auf false setzen
 search_enabled: true
 search:
   heading_level: 2
-  previews: 3
-  preview_words_before: 5
-  preview_words_after: 10
+  previews: 2  # Reduziert von 3 auf 2 für schnelleren Build
+  preview_words_before: 3  # Reduziert von 5 auf 3
+  preview_words_after: 5   # Reduziert von 10 auf 5
 
 # Table of Contents (TOC) Settings
 heading_anchors: true  # Anker-Links für Überschriften aktivieren
