@@ -1,9 +1,7 @@
 // External Links - Open in new tab
+// Automatisch alle externen Links mit target="_blank" versehen
 (function() {
-  console.log('[EXT] Script file loaded');
-
-  function process() {
-    console.log('[EXT] Processing...');
+  function processExternalLinks() {
     var links = document.querySelectorAll('a');
     var count = 0;
 
@@ -18,12 +16,15 @@
       }
     }
 
-    console.log('[EXT] Processed: ' + count);
+    // Optional: Log nur in Development
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      console.log('[External Links] Processed: ' + count);
+    }
   }
 
   if (document.readyState === 'complete') {
-    process();
+    processExternalLinks();
   } else {
-    window.addEventListener('load', process);
+    window.addEventListener('load', processExternalLinks);
   }
 })();
