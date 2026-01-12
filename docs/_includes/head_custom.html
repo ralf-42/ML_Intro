@@ -34,73 +34,121 @@
 
 <!-- Externe Links in neuem Tab öffnen -->
 <script>
-  // METHODE 1: Event Delegation auf document-Level
-  // Fängt alle Klicks auf Links ab, bevor sie verarbeitet werden
-  document.addEventListener('click', function(event) {
-    // Prüfen ob ein Link geklickt wurde
-    const link = event.target.closest('a[href]');
+  (function() {
+    'use strict';
 
-    if (link) {
-      const href = link.getAttribute('href');
+    // Debug-Modus (auf false setzen für Produktion)
+    const DEBUG = false;
 
-      // Externer Link wenn:
-      // 1. Beginnt mit http:// oder https://
-      // 2. Enthält nicht die eigene Domain
-      if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
-        const currentHost = window.location.host;
-
-        try {
-          const linkUrl = new URL(href);
-
-          // Wenn externe Domain
-          if (linkUrl.host !== currentHost) {
-            // Target auf _blank setzen wenn nicht bereits gesetzt
-            if (!link.hasAttribute('target')) {
-              link.setAttribute('target', '_blank');
-              link.setAttribute('rel', 'noopener noreferrer');
-            }
-          }
-        } catch (e) {
-          // Bei Parsing-Fehler: Externer Link
-          if (!href.includes(currentHost)) {
-            link.setAttribute('target', '_blank');
-            link.setAttribute('rel', 'noopener noreferrer');
-          }
-        }
+    function log(message, data) {
+      if (DEBUG) {
+        console.log('[External Links]', message, data || '');
       }
     }
-  }, true); // useCapture = true, um Event vor anderen Handlern zu fangen
 
-  // METHODE 2: Zusätzlich DOM-Processing beim Laden
-  function processExternalLinks() {
-    const links = document.querySelectorAll('a[href^="http://"], a[href^="https://"]');
-    const currentHost = window.location.host;
+    // Prüft ob Link extern ist
+    function isExternalLink(link) {
+      // Prüfung 1: Hat überhaupt einen href?
+      if (!link.href) return false;
 
-    links.forEach(function(link) {
-      const href = link.getAttribute('href');
+      // Prüfung 2: Ist es ein http/https Link?
+      if (!link.href.startsWith('http://') && !link.href.startsWith('https://')) {
+        return false;
+      }
 
-      try {
-        const linkUrl = new URL(href);
+      // Prüfung 3: Zeigt er auf eine andere Domain?
+      // Wichtig: link.href (Property) nutzen, nicht getAttribute('href')
+      // link.href gibt die vollständig aufgelöste URL zurück
+      const isExternal = !link.href.includes(window.location.hostname);
 
-        if (linkUrl.host !== currentHost) {
-          link.setAttribute('target', '_blank');
-          link.setAttribute('rel', 'noopener noreferrer');
-        }
-      } catch (e) {
-        if (!href.includes(currentHost)) {
-          link.setAttribute('target', '_blank');
-          link.setAttribute('rel', 'noopener noreferrer');
+      return isExternal;
+    }
+
+    // Setzt target="_blank" auf einem Link
+    function makeExternalLink(link) {
+      // Nur setzen wenn noch nicht gesetzt
+      if (link.getAttribute('target') !== '_blank') {
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener noreferrer');
+        log('Link marked as external:', link.href);
+        return true;
+      }
+      return false;
+    }
+
+    // METHODE 1: DOM Processing beim Laden (Ihr Code + meine Verbesserungen)
+    function processAllLinks() {
+      const links = document.querySelectorAll('a[href^="http"]');
+      let processed = 0;
+
+      for (const link of links) {
+        if (isExternalLink(link)) {
+          if (makeExternalLink(link)) {
+            processed++;
+          }
         }
       }
+
+      log('Processed links at DOM load:', processed);
+    }
+
+    // METHODE 2: Click Event Handler (Fallback)
+    // Fängt Klicks ab und setzt target="_blank" dynamisch
+    document.addEventListener('click', function(event) {
+      const link = event.target.closest('a');
+
+      if (link && isExternalLink(link)) {
+        makeExternalLink(link);
+        log('Link clicked:', link.href);
+      }
+    }, true);
+
+    // METHODE 3: MutationObserver für dynamisch geladene Inhalte
+    function observeDynamicContent() {
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          mutation.addedNodes.forEach(function(node) {
+            if (node.nodeType === 1) { // Element node
+              // Prüfe das Element selbst
+              if (node.tagName === 'A' && isExternalLink(node)) {
+                makeExternalLink(node);
+              }
+              // Prüfe alle Links innerhalb des Elements
+              const links = node.querySelectorAll ? node.querySelectorAll('a[href^="http"]') : [];
+              for (const link of links) {
+                if (isExternalLink(link)) {
+                  makeExternalLink(link);
+                }
+              }
+            }
+          });
+        });
+      });
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+
+      log('MutationObserver started');
+    }
+
+    // Initialisierung
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        processAllLinks();
+        observeDynamicContent();
+      });
+    } else {
+      // DOM bereits geladen
+      processAllLinks();
+      observeDynamicContent();
+    }
+
+    // Nochmal beim vollständigen Laden
+    window.addEventListener('load', function() {
+      processAllLinks();
     });
-  }
 
-  // Bei verschiedenen Events ausführen
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', processExternalLinks);
-  } else {
-    processExternalLinks();
-  }
-
-  window.addEventListener('load', processExternalLinks);
+  })();
 </script>
