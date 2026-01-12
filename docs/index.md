@@ -8,8 +8,8 @@ permalink: /
 
 # Machine Learning
 
-> **Machine Learning - Von den Grundlagen zu fortgeschrittenen Methoden**     
-> Praktische Anwendung von Supervised und Unsupervised Learning, Neural Networks und modernen ML-Frameworks
+> **Machine Learning - Von den Grundlagen zu fortgeschrittenen Methoden**        
+> Praktische Anwendung von Supervised und Unsupervised Learning, Neural Networks und modernen ML-Frameworks   
 
 
 ---
