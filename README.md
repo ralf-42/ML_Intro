@@ -5,7 +5,7 @@
 [![Status](https://img.shields.io/badge/Status-Active-success)](./README.md)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](./LICENSE)
 
-Dieses Repository enthält Lehrmaterialien für den Machine Learning-Kurs.    
+Dieses Repository enthält Lehrmaterialien für den Machine Learning-Kurs. 
 
 ## 📖 Dokumentation
 
