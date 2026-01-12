@@ -410,15 +410,15 @@ Die logistische Regression teilt den Merkmalsraum durch eine **lineare Entscheid
 
 ```mermaid
 flowchart TB
-    subgraph decision["Entscheidungsgrenze"]
+    subgraph decision["<b>Entscheidungsgrenze"]
         direction TB
         
-        subgraph threshold["Schwellenwert (Standard: 0.5)"]
+        subgraph threshold["<b>Schwellenwert (Standard: 0.5)"]
             T1["P(y=1) ≥ 0.5 → Klasse 1"]
             T2["P(y=1) < 0.5 → Klasse 0"]
         end
         
-        subgraph adjust["Anpassbar je nach Use Case"]
+        subgraph adjust["<b>Anpassbar je Use Case"]
             A1["Höherer Schwellenwert:<br/>Weniger False Positives"]
             A2["Niedrigerer Schwellenwert:<br/>Weniger False Negatives"]
         end
@@ -452,20 +452,20 @@ print(classification_report(target_test, target_pred,
 
 ```mermaid
 flowchart TB
-    subgraph transformation["Transformationsprozess"]
+    subgraph transformation["<b>Transformationsprozess"]
         direction TB
         
-        subgraph step1["Schritt 1: Lineare Kombination"]
+        subgraph step1["<b>1: Lineare Kombination"]
             L["z = b + a₁x₁ + a₂x₂ + ..."]
             L_note["Kann jeden Wert annehmen:<br/>z ∈ (-∞, +∞)"]
         end
         
-        subgraph step2["Schritt 2: Sigmoid-Transformation"]
+        subgraph step2["<b>2: Sigmoid-Transformation"]
             S["σ(z) = 1 / (1 + e⁻ᶻ)"]
             S_note["Komprimiert auf:<br/>σ(z) ∈ (0, 1)"]
         end
         
-        subgraph step3["Schritt 3: Klassifikation"]
+        subgraph step3["<b>3: Klassifikation"]
             C["Schwellenwert anwenden"]
             C_note["σ(z) ≥ 0.5 → Klasse 1<br/>σ(z) < 0.5 → Klasse 0"]
         end
@@ -552,26 +552,27 @@ print(f"Test-Accuracy:      {model.score(data_test, target_test):.2%}")
 ## Zusammenfassung
 
 ```mermaid
-flowchart TB
-    subgraph summary["Regression im Überblick"]
-        direction TB
+flowchart LR
+    subgraph summary["<b>Regression im Überblick"]
+        direction LR
         
-        subgraph linear["Lineare Regression"]
-            L1["Vorhersage numerischer Werte"]
-            L2["y = b + ax"]
-            L3["MSE als Loss"]
+        subgraph linear["<b>Lineare Regression"]
+            direction TB
+            L1["Vorhersage numerischer Werte"] ~~~ L2["y = b + ax"] ~~~ L3["MSE als Loss"]
         end
         
-        subgraph logistic["Logistische Regression"]
-            LO1["Klassifikation"]
-            LO2["Sigmoid-Transformation"]
-            LO3["Wahrscheinlichkeiten [0,1]"]
+        linear ~~~ logistic
+        
+        subgraph logistic["<b>Logistische Regression"]
+            direction TB
+            LO1["Klassifikation"] ~~~ LO2["Sigmoid-Transformation"] ~~~ LO3["Wahrscheinlichkeiten [0,1]"]
         end
         
-        subgraph training["Training"]
-            T1["Analytisch: Kleinste Quadrate"]
-            T2["Iterativ: Gradient Descent"]
-            T3["Ziel: Loss minimieren"]
+        logistic ~~~ training
+        
+        subgraph training["<b>Training"]
+            direction TB
+            T1["Analytisch: Kleinste Quadrate"] ~~~ T2["Iterativ: Gradient Descent"] ~~~ T3["Ziel: Loss minimieren"]
         end
     end
     
@@ -587,11 +588,6 @@ flowchart TB
 3. **Gradient Descent** findet iterativ optimale Modellparameter
 4. **Logistische Regression** transformiert lineare Ausgaben in Wahrscheinlichkeiten
 
-### Weiterführende Themen
-
-- **Regularisierung**: Ridge (L2) und Lasso (L1) zur Vermeidung von Overfitting
-- **Polynomiale Regression**: Nichtlineare Zusammenhänge modellieren
-- **Multiple Logistische Regression**: Mehr als zwei Klassen (Softmax)
 
 ---
 

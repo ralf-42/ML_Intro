@@ -1,13 +1,13 @@
 ---
 layout: default
-title: Ethik und GenAI
+title: Ethik und KI
 parent: Regulatorisches
 nav_order: 3
 description: "Ethische Aspekte: Bias, Fairness und verantwortungsvoller KI-Einsatz"
 has_toc: true
 ---
 
-# Ethik und GenAI
+# Ethik und KI
 {: .no_toc }
 
 > **Ethische Aspekte: Bias, Fairness und verantwortungsvoller KI-Einsatz**

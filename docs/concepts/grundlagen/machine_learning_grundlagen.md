@@ -111,7 +111,10 @@ Machine Learning ist heute in vielen Bereichen verbreitet:
 - **Prognose**: Wettervorhersage, Aktienkurse, Nachfrageplanung
 - **Automatisierte Entscheidungsfindung**: Kreditvergabe, Empfehlungssysteme
 
----
+
+
+--- 
+
 
 ## Wie funktioniert Machine Learning?
 
@@ -153,6 +156,8 @@ flowchart TB
 5. **Modell evaluieren**: Leistung auf ungesehenen Testdaten prüfen
 6. **Modell anwenden**: Vorhersagen für neue Daten erstellen
 
+
+---
 
 ## Beispiel
 

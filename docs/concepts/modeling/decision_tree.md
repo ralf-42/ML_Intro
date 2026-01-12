@@ -94,10 +94,10 @@ flowchart LR
 
 Die **Entropie** ist ein Maß für die Unsicherheit, Zufälligkeit oder Unordnung in den Daten:
 
-- **Entropie = 0**: Alle Datenpunkte gehören zur selben Klasse (perfekte Ordnung)
-- **Entropie = 1** (bei 2 Klassen): Gleichverteilung der Klassen (maximale Unordnung)
+- **Entropie = 0**: Alle Datenpunkte gehören zur selben Klasse (**perfekte** Ordnung)
+- **Entropie = 1** (bei 2 Klassen): Gleichverteilung der Klassen (**maximale** Unordnung)
 
-Der **Information Gain** misst, wie viel Entropie durch einen Split reduziert wird. Je höher der Information Gain, desto besser der Split.
+Der **Information Gain** misst, wie viel Entropie durch einen Split reduziert wird. Je **höher** der Information Gain, desto besser der Split.
 
 ### Gini-Impurity
 
