@@ -11,6 +11,10 @@ description: "Machine Learning Modelle und Algorithmen"
 
 Überblick über klassische Machine Learning Modelle und ihre Anwendungsfälle.
 
+## Modellauswahl
+
+- **[Modellauswahl](modeling/modellauswahl)** - Systematische Kriterien und Strategien zur Auswahl des optimalen Machine-Learning-Modells für verschiedene Problemstellungen
+
 ## Supervised Learning
 
 ### Klassifikation

@@ -26,34 +26,9 @@ has_toc: true
 
 Der Machine-Learning-Workflow beschreibt den systematischen Prozess von der ersten Problemstellung bis zur produktiven Anwendung eines ML-Modells. Die folgenden fünf Phasen bilden das Fundament jedes erfolgreichen ML-Projekts.
 
-```mermaid
-graph LR
-    subgraph "<b>App/Workflow Development</b>"
-    1(1. Understand) --- 2(2. Prepare)
-    2 --- 3(3. Modeling)
-    3 --- 4(4. Evaluate)
-    
-    %% Stil-Definitionen für die Farben
-    style 1 fill:#f39233,stroke:#333,stroke-width:1px,color:white
-    style 2 fill:#ffcc00,stroke:#333,stroke-width:1px,color:white
-    style 3 fill:#bad34d,stroke:#333,stroke-width:1px,color:white
-    style 4 fill:#45a86d,stroke:#333,stroke-width:1px,color:white
-    end
-    4 --- 5(5. Deploy)
-    style 5 fill:#0071bc,stroke:#333,stroke-width:1px,color:white
-    %% Haupt-Pfeile
-    1 --> 2
-    2 --> 3
-    3 --> 4
-    4 --> 5
-    %% Feedback-Schleifen (gestrichelt)
-    5 -.-> 1
-    5 -.-> 2
-    5 -.-> 3
-    5 -.-> 4
-    4 -.-> 3
-    3 -.-> 2
-```
+<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/ml_prozess.png" class="logo" width="950"/>
+
+
 
 ## 1. Understand – Das Problem verstehen
 
