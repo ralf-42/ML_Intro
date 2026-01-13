@@ -350,23 +350,25 @@ In neuronalen Netzen stehen zusätzliche Regularisierungstechniken zur Verfügun
 
 ```mermaid
 flowchart TB
-    subgraph nn_reg["<b>Regularisierung in NN</b>"]
-        subgraph weight["Gewichts-Regularisierung"]
+    subgraph nn_reg["<b><b>Regularisierung in NN</b>"]
+        subgraph weight["<b>Gewichts-Regularisierung"]
             W1["L1/L2 auf Gewichte"]
         end
         
-        subgraph dropout["Dropout"]
+        subgraph dropout["<b>Dropout"]
             D1["Zufälliges Deaktivieren<br/>von Neuronen"]
         end
         
-        subgraph early["Early Stopping"]
+        subgraph early["<b>Early Stopping"]
             E1["Training bei Val-Loss<br/>Verschlechterung stoppen"]
         end
         
-        subgraph bn["Batch Normalization"]
+        subgraph bn["<b>Batch Normalization"]
             B1["Normalisierung der<br/>Aktivierungen"]
         end
     end
+    
+    weight ~~~ dropout ~~~ early ~~~ bn
     
     style weight fill:#e3f2fd
     style dropout fill:#fff3e0
@@ -409,11 +411,11 @@ model_elastic = keras.Sequential([
 
 ### Dropout
 
-Dropout deaktiviert während des Trainings zufällig einen Anteil der Neuronen.
+Dropout deaktiviert während des **Trainings** zufällig einen Anteil der Neuronen.
 
 ```mermaid
-flowchart LR
-    subgraph training["Training (mit Dropout)"]
+flowchart TD
+    subgraph training["<b>Training (mit Dropout)"]
         I1["Input"] --> H1["⬤"]
         I1 --> H2["✕"]
         I1 --> H3["⬤"]
@@ -424,7 +426,7 @@ flowchart LR
         H5 --> O1
     end
     
-    subgraph inference["Inferenz (ohne Dropout)"]
+    subgraph inference["<b>Inferenz (ohne Dropout)"]
         I2["Input"] --> H6["⬤"]
         I2 --> H7["⬤"]
         I2 --> H8["⬤"]
@@ -436,6 +438,8 @@ flowchart LR
         H9 --> O2
         H10 --> O2
     end
+    
+    training ~~~ inference
     
     style training fill:#fff3e0
     style inference fill:#e8f5e9
