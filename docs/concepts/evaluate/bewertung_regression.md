@@ -288,6 +288,8 @@ $$Residuum = y_i - \hat{y}_i$$
 | **Kurve/Bogen**   | Nicht-linearer Zusammenhang     | Polynomiale Features hinzufügen            |
 | **Cluster**       | Subgruppen in Daten             | Separate Modelle oder zusätzliche Features |
 
+<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/residuenanalyse_linear_nichtlinear.png" class="logo" width="650"/>
+
 ### Visuelle Muster erkennen
 
 ```mermaid
