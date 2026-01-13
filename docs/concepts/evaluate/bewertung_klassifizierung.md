@@ -32,16 +32,21 @@ Die Konfusionsmatrix (Confusion Matrix) ist das fundamentale Werkzeug zur Bewert
 
 ```mermaid
 flowchart TB
-    subgraph matrix["Confusion Matrix"]
-        subgraph row1["Predicted: Positive"]
-            TP["✓ True Positive<br/>(TP)<br/>Richtig als positiv erkannt"]
-            FP["✗ False Positive<br/>(FP)<br/>Fälschlich als positiv erkannt<br/><i>Typ-I-Fehler</i>"]
-        end
-        subgraph row2["Predicted: Negative"]
+    subgraph matrix["<b>Confusion Matrix"]
+    
+		subgraph row2["Predicted: <b>Negative"]
             FN["✗ False Negative<br/>(FN)<br/>Fälschlich als negativ erkannt<br/><i>Typ-II-Fehler</i>"]
             TN["✓ True Negative<br/>(TN)<br/>Richtig als negativ erkannt"]
         end
+        subgraph row1["Predicted: <b>Positive"]
+            TP["✓ True Positive<br/>(TP)<br/>Richtig als positiv erkannt"]
+            FP["✗ False Positive<br/>(FP)<br/>Fälschlich als positiv erkannt<br/><i>Typ-I-Fehler</i>"]
+        end
+
     end
+    
+ 
+    
     
     style TP fill:#c8e6c9,stroke:#2e7d32
     style TN fill:#c8e6c9,stroke:#2e7d32
@@ -109,7 +114,7 @@ flowchart LR
 
 ### Accuracy (Genauigkeit)
 
-Die Accuracy misst den Anteil aller korrekten Vorhersagen an der Gesamtzahl der Fälle.
+Die Accuracy misst den Anteil aller **korrekten Vorhersagen** an der Gesamtzahl der Fälle.
 
 $$\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}$$
 
@@ -124,7 +129,7 @@ print(f"Accuracy: {accuracy:.4f}")
 
 ### Precision (Relevanz/Präzision)
 
-Die Precision gibt an, wie viele der als positiv vorhergesagten Fälle tatsächlich positiv sind.
+Die Precision gibt an, wie viele der als **positiv vorhergesagten Fälle tatsächlich positiv** sind.
 
 $$\text{Precision} = \frac{TP}{TP + FP}$$
 
@@ -142,7 +147,7 @@ print(f"Precision: {precision:.4f}")
 
 ### Recall (Sensitivität/Trefferquote)
 
-Der Recall gibt an, wie viele der tatsächlich positiven Fälle korrekt erkannt wurden.
+Der Recall gibt an, wie viele der **tatsächlich positiven Fälle korrekt** erkannt wurden.
 
 $$\text{Recall} = \frac{TP}{TP + FN}$$
 
@@ -160,7 +165,7 @@ print(f"Recall: {recall:.4f}")
 
 ### F1-Score
 
-Der F1-Score ist das harmonische Mittel aus Precision und Recall und bietet eine ausgewogene Bewertung.
+Der F1-Score ist das **harmonische Mittel aus Precision und Recall** und bietet eine ausgewogene Bewertung.
 
 $$\text{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$$
 
@@ -216,36 +221,7 @@ weighted avg       0.82      0.81      0.81        43
 
 Bei Klassifikationsproblemen mit mehr als zwei Klassen wird die Confusion Matrix entsprechend erweitert. Die Berechnung der Metriken erfolgt dann klassenweise.
 
-```mermaid
-flowchart TB
-    subgraph multiclass["Multi-Class Confusion Matrix (Beispiel: 3 Klassen)"]
-        subgraph header[" "]
-            H1[" "]
-            H2["Pred: A"]
-            H3["Pred: B"]
-            H4["Pred: C"]
-        end
-        subgraph row_a["Actual: A"]
-            A1["7<br/>(TP für A)"]
-            A2["1"]
-            A3["3"]
-        end
-        subgraph row_b["Actual: B"]
-            B1["8"]
-            B2["2<br/>(TP für B)"]
-            B3["3"]
-        end
-        subgraph row_c["Actual: C"]
-            C1["9"]
-            C2["2"]
-            C3["1<br/>(TP für C)"]
-        end
-    end
-    
-    style A1 fill:#c8e6c9
-    style B2 fill:#c8e6c9
-    style C3 fill:#c8e6c9
-```
+
 
 ### Berechnung für einzelne Klassen
 
@@ -253,12 +229,12 @@ Bei Multi-Class-Problemen werden TP, TN, FP und FN für jede Klasse einzeln bere
 
 **Beispiel für Klasse "Apple" aus der obigen Matrix:**
 
-| Metrik | Berechnung | Ergebnis |
-|--------|------------|----------|
-| **TP** | Korrekt als Apple klassifiziert | 7 |
-| **FN** | Apple, aber als andere Klasse klassifiziert | 1 + 3 = 4 |
-| **FP** | Andere Klasse, aber als Apple klassifiziert | 8 + 9 = 17 |
-| **TN** | Andere Klasse, korrekt nicht als Apple | 2 + 3 + 2 + 1 = 8 |
+| Metrik | Berechnung                                  | Ergebnis          |
+| ------ | ------------------------------------------- | ----------------- |
+| **TP** | Korrekt als Apple klassifiziert             | 7                 |
+| **FN** | Apple, aber als andere Klasse klassifiziert | 1 + 3 = 4         |
+| **FP** | Andere Klasse, aber als Apple klassifiziert | 8 + 9 = 17        |
+| **TN** | Andere Klasse, korrekt nicht als Apple      | 2 + 3 + 2 + 1 = 8 |
 
 ### Implementierung
 

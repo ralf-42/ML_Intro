@@ -304,8 +304,13 @@ flowchart LR
     style CURVE fill:#f44336,color:#fff
 ```
 
+<br> 
+
 
 <img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/residuenanalyse_linear_nichtlinear.png" class="logo" width="750"/>
+
+<br> 
+
 
 <img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/residuals_plot_heteroskedastizitaet.png" class="logo" width="750"/>
 ### Implementation in Python

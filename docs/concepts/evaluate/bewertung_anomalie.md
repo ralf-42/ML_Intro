@@ -24,68 +24,6 @@ has_toc: true
 
 ---
 
-## Was ist Anomalie-Erkennung?
-
-Anomalie-Erkennung ist ein Verfahren des unüberwachten Lernens, das Datensätze identifiziert, die für die gesamte Datenbasis untypisch sind. Anomalien – auch als Ausreißer oder Outliers bezeichnet – weichen signifikant vom normalen Verhalten ab.
-
-```mermaid
-flowchart LR
-    subgraph Datensatz
-        N1[Normal] 
-        N2[Normal]
-        N3[Normal]
-        N4[Normal]
-        A1[🔴 Anomalie]
-    end
-    
-    N1 & N2 & N3 & N4 --> C[Cluster normaler Daten]
-    A1 -.-> |"stark abweichend"| C
-    
-    style A1 fill:#ff6b6b,stroke:#c92a2a,color:#fff
-    style C fill:#51cf66,stroke:#2f9e44,color:#fff
-```
-
----
-
-## Anomalie-Typen
-
-Anomalien lassen sich in drei grundlegende Kategorien einteilen:
-
-### Punkt-/Globale Anomalien
-
-Ein einzelner Datenpunkt, der in Bezug auf den gesamten Datensatz als anomal zu klassifizieren ist.
-
-**Beispiel:** Eine einzelne Transaktion von 50.000 € bei einem Kunden mit durchschnittlichen Transaktionen von 100 €.
-
-### Kontextuelle Anomalien
-
-Ein Datenpunkt, der nur in einem bestimmten Kontext anomal erscheint.
-
-**Beispiel:** Eine Außentemperatur von +30°C im Dezember in Deutschland ist anomal, im Juli jedoch normal.
-
-### Kollektive Anomalien
-
-Eine Menge verwandter Datenpunkte ist gemeinsam anomal, obwohl einzelne Punkte normal erscheinen können.
-
-**Beispiel:** Kreditkartendaten zeigen Käufe in den USA und Frankreich zur gleichen Zeit – einzeln normal, zusammen verdächtig.
-
-```mermaid
-flowchart TD
-    A[Anomalie-Typen] --> P[Punkt-Anomalie]
-    A --> K[Kontextuelle Anomalie]
-    A --> C[Kollektive Anomalie]
-    
-    P --> PE["Einzelner extremer Wert<br>z.B. ungewöhnlich hohe Transaktion"]
-    K --> KE["Kontext-abhängig anomal<br>z.B. 30°C im Winter"]
-    C --> CE["Gruppe gemeinsam anomal<br>z.B. gleichzeitige Käufe in verschiedenen Ländern"]
-    
-    style P fill:#e7f5ff,stroke:#1971c2
-    style K fill:#fff3bf,stroke:#f59f00
-    style C fill:#ffe3e3,stroke:#fa5252
-```
-
----
-
 ## Der Anomalie-Score
 
 Der Anomalie-Score bewertet quantitativ, wie anomal oder atypisch ein bestimmter Datenpunkt im Vergleich zum Rest des Datensatzes ist.
@@ -161,39 +99,6 @@ print(f"Score-Bereich: {scores.min():.3f} bis {scores.max():.3f}")
 | `max_samples` | Stichprobengröße pro Baum | 'auto' oder Anzahl |
 | `max_features` | Features pro Baum | 1.0 (alle) |
 
-### Visualisierung der Ergebnisse
-
-```python
-import matplotlib.pyplot as plt
-
-# Visualisierung
-fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-
-# Links: Klassifikation
-colors = ['#51cf66' if p == 1 else '#ff6b6b' for p in predictions]
-axes[0].scatter(data[:, 0], data[:, 1], c=colors, alpha=0.7, edgecolors='white')
-axes[0].set_title('Anomalie-Erkennung')
-axes[0].set_xlabel('Feature 1')
-axes[0].set_ylabel('Feature 2')
-
-# Legende hinzufügen
-from matplotlib.patches import Patch
-legend_elements = [
-    Patch(facecolor='#51cf66', label='Normal'),
-    Patch(facecolor='#ff6b6b', label='Anomalie')
-]
-axes[0].legend(handles=legend_elements)
-
-# Rechts: Anomalie-Scores
-scatter = axes[1].scatter(data[:, 0], data[:, 1], c=scores, cmap='RdYlGn', alpha=0.7)
-axes[1].set_title('Anomalie-Scores')
-axes[1].set_xlabel('Feature 1')
-axes[1].set_ylabel('Feature 2')
-plt.colorbar(scatter, ax=axes[1], label='Score (niedriger = anomaler)')
-
-plt.tight_layout()
-plt.show()
-```
 
 ## Evaluation
 
