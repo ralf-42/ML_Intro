@@ -280,7 +280,7 @@ Cohen's Kappa ist eine robustere Metrik als die Accuracy, da sie die zufällige 
 
 ```mermaid
 flowchart LR
-    subgraph scale["Cohen's Kappa Skala"]
+    subgraph scale["<b>Cohen's Kappa Skala"]
         direction LR
         S1["-1<br/>Schlechte<br/>Übereinstimmung"]
         S2["0<br/>Zufällige<br/>Übereinstimmung"]
@@ -354,13 +354,13 @@ Die ROC-Kurve ist ein leistungsstarkes Werkzeug zur Visualisierung der Klassifik
 
 ```mermaid
 flowchart TB
-    subgraph roc["ROC-Kurve Interpretation"]
-        subgraph axes["Achsen"]
+    subgraph roc["<b>ROC-Kurve Interpretation"]
+        subgraph axes["<b>Achsen"]
             X["X-Achse: False Positive Rate (FPR)<br/>= FP / (FP + TN)<br/>= 1 - Specificity"]
             Y["Y-Achse: True Positive Rate (TPR)<br/>= TP / (TP + FN)<br/>= Sensitivity/Recall"]
         end
         
-        subgraph interpretation["Interpretation"]
+        subgraph interpretation["<b>Interpretation"]
             I1["Kurve oben links → Gutes Modell"]
             I2["Diagonale → Zufälliges Raten"]
             I3["Kurve unter Diagonale → Schlechter als Zufall"]
@@ -594,23 +594,23 @@ plt.show()
 
 ```mermaid
 flowchart TB
-    subgraph overview["Klassifikationsmetriken im Überblick"]
-        subgraph basic["Basis-Metriken"]
-            CM["Confusion Matrix<br/>(TP, TN, FP, FN)"]
-            ACC["Accuracy<br/>Gesamtgenauigkeit"]
-            PRE["Precision<br/>Relevanz der Positiven"]
-            REC["Recall<br/>Vollständigkeit der Erkennung"]
+    subgraph overview["<b>Klassifikationsmetriken"]
+        subgraph basic["<b>Basis-Metriken"]
+            CM["<b>Confusion Matrix<br/>(TP, TN, FP, FN)"]
+            ACC["<b>Accuracy<br/>Gesamtgenauigkeit"]
+            PRE["<b>Precision<br/>Relevanz der Positiven"]
+            REC["<b>Recall<br/>Vollständigkeit der Erkennung"]
         end
         
-        subgraph combined["Kombinierte Metriken"]
-            F1["F1-Score<br/>Harmonisches Mittel P & R"]
-            KAP["Cohen's Kappa<br/>Zufallskorrigierte Accuracy"]
+        subgraph combined["<b>Kombinierte Metriken"]
+            F1["<b>F1-Score<br/>Harmonisches Mittel P & R"]
+            KAP["<b>Cohen's Kappa<br/>Zufallskorrigierte Accuracy"]
         end
         
-        subgraph threshold["Schwellenwert-basiert"]
-            ROC["ROC-Kurve<br/>TPR vs. FPR"]
-            AUC["AUC<br/>Fläche unter ROC"]
-            PRC["PR-Kurve<br/>Precision vs. Recall"]
+        subgraph threshold["<b>Schwellenwert-basiert"]
+            ROC["<b>ROC-Kurve<br/>TPR vs. FPR"]
+            AUC["<b>AUC<br/>Fläche unter ROC"]
+            PRC["<b>PR-Kurve<br/>Precision vs. Recall"]
         end
         
         CM --> basic
