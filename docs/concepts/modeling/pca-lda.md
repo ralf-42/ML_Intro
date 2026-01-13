@@ -3,7 +3,7 @@ layout: default
 title: PCA und LDA
 parent: Modeling
 grand_parent: Konzepte
-nav_order: 6
+nav_order: 7
 description: "Dimensionsreduktion durch Principal Component Analysis (PCA) und Linear Discriminant Analysis (LDA) - Konzepte, Unterschiede und praktische Implementierung"
 has_toc: true
 ---

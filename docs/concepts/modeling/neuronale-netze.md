@@ -3,7 +3,7 @@ layout: default
 title: Neuronale Netze
 parent: Modeling
 grand_parent: Konzepte
-nav_order: 7
+nav_order: 8
 description: "Grundlagen künstlicher neuronaler Netze: Architektur, Aktivierungsfunktionen, Training und Loss Functions"
 has_toc: true
 ---

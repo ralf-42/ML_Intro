@@ -3,7 +3,7 @@ layout: default
 title: XGBoost
 parent: Modeling
 grand_parent: Konzepte
-nav_order: 11
+nav_order: 12
 description: "XGBoost (Extreme Gradient Boosting) ist eine optimierte Boosting-Implementierung für hohe Geschwindigkeit und Vorhersagequalität"
 has_toc: true
 ---

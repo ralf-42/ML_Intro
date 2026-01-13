@@ -3,7 +3,7 @@ layout: default
 title: Ensemble-Methoden
 parent: Modeling
 grand_parent: Konzepte
-nav_order: 9
+nav_order: 10
 description: "Ensemble-Learning kombiniert mehrere Modelle zu leistungsfähigeren Vorhersagesystemen durch Bagging, Boosting und Stacking"
 has_toc: true
 ---
