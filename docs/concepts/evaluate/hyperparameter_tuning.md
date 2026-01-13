@@ -135,15 +135,15 @@ Es gibt verschiedene Strategien zur Suche nach optimalen Hyperparametern. Jede h
 
 ```mermaid
 flowchart TB
-    subgraph methods["Tuning-Methoden"]
-        M["Hyperparameter-<br/>Tuning"]
-        M --> GS["Grid Search<br/>(Rastersuche)"]
-        M --> RS["Random Search<br/>(Zufallssuche)"]
+    subgraph methods["<b>Tuning-Methoden"]
+        M["<b>Hyperparameter-<br/>Tuning"]
+        M --> GS["<b>Grid Search<br/>(Rastersuche)"]
+        M --> RS["<b>Random Search<br/>(Zufallssuche)"]
         M --> BO["Bayesian<br/>Optimization"]
         M --> HA["Halving Search<br/>(Sukzessive Halbierung)"]
     end
     
-    subgraph char["Charakteristiken"]
+    subgraph char["<b>Charakteristiken"]
         GS --> GS1["Erschöpfend<br/>Systematisch<br/>Rechenintensiv"]
         RS --> RS1["Effizient<br/>Flexibel<br/>Stochastisch"]
         BO --> BO1["Intelligent<br/>Adaptiv<br/>Komplex"]
@@ -809,7 +809,7 @@ for col in param_cols:
 ### Empfehlungen
 
 ```mermaid
-flowchart TB
+flowchart TD
     subgraph workflow["Empfohlener Workflow"]
         S1["1. Baseline-Modell<br/>mit Standardparametern"]
         S2["2. Grober Suchraum<br/>definieren"]
@@ -859,7 +859,7 @@ flowchart TB
 
 ```mermaid
 flowchart TB
-    subgraph summary["Hyperparameter-Tuning: Zusammenfassung"]
+    subgraph summary["<b>Zusammenfassung"]
         D["Definition"]
         D --> D1["Hyperparameter werden<br/>VOR dem Training festgelegt"]
         
