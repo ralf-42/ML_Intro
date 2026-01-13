@@ -221,7 +221,7 @@ weighted avg       0.82      0.81      0.81        43
 
 Bei Klassifikationsproblemen mit mehr als zwei Klassen wird die Confusion Matrix entsprechend erweitert. Die Berechnung der Metriken erfolgt dann klassenweise.
 
-
+<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/multi_confusion_matrix.png" class="logo" width="650"/>
 
 ### Berechnung für einzelne Klassen
 
