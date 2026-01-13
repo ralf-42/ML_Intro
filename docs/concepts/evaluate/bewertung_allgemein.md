@@ -73,25 +73,27 @@ Die Modellbewertung beantwortet drei fundamentale Fragen:
 Eine gründliche Modellbewertung umfasst mehrere Perspektiven. Jede beleuchtet einen anderen Aspekt der Modellqualität:
 
 ```mermaid
-flowchart TB
-    subgraph core["Kern-Evaluation"]
+flowchart LR
+    subgraph core["<b>Kern-Evaluation"]
         G["Modellgüte<br/><small>Accuracy, F1, R², MAE</small>"]
         R["Residuenanalyse<br/><small>Fehlerverteilung prüfen</small>"]
     end
     
-    subgraph features["Feature-Analyse"]
+    subgraph features["<b>Feature-Analyse"]
         F["Feature Importance<br/><small>Welche Merkmale sind wichtig?</small>"]
     end
     
-    subgraph robustness["Robustheit & Stabilität"]
+    subgraph robustness["<b>Robustheit & Stabilität"]
         RO["Robustheitstest<br/><small>Cross-Validation, Bootstrapping</small>"]
         S["Sensitivitätsanalyse<br/><small>Wie reagiert das Modell auf Änderungen?</small>"]
     end
     
-    subgraph interpretation["Interpretation & Kommunikation"]
+    subgraph interpretation["<b>Interpretation&Kommunikation"]
         I["Modellinterpretation<br/><small>Warum trifft das Modell diese Entscheidung?</small>"]
         K["Kommunikation<br/><small>Key Takeaways vermitteln</small>"]
     end
+    
+    core ~~~ features ~~~ robustness ~~~ interpretation
     
     style G fill:#c8e6c9
     style R fill:#c8e6c9
@@ -178,38 +180,12 @@ Die folgende Tabelle zeigt, welche Techniken für lokale (einzelne Vorhersagen) 
 
 ---
 
-## Praktische Umsetzung
-
-Ein typischer Evaluations-Workflow in Python:
-
-```python
-from sklearn.metrics import accuracy_score, classification_report
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
-
-# Vorhersagen auf Test-Daten
-target_pred = model.predict(data_test)
-
-# Grundlegende Metriken
-print("Accuracy:", accuracy_score(target_test, target_pred))
-print("\nKlassifikationsbericht:")
-print(classification_report(target_test, target_pred))
-
-# Confusion Matrix visualisieren
-cm = confusion_matrix(target_test, target_pred)
-disp = ConfusionMatrixDisplay(confusion_matrix=cm)
-disp.plot()
-plt.title("Confusion Matrix")
-plt.show()
-```
-
----
 
 ## Zusammenfassung
 
 ```mermaid
 flowchart TB
-    subgraph eval["Evaluation = Mehrdimensionale Betrachtung"]
+    subgraph eval["<b>Evaluation"]
         direction TB
         G["📊 Metriken<br/><small>Wie genau?</small>"]
         R["📈 Residuen<br/><small>Welche Fehler?</small>"]
@@ -242,7 +218,6 @@ Die Evaluation ist kein einmaliger Schritt, sondern ein iterativer Prozess. Die 
 ---
 
 *Referenzen:*    
-- Machine Learning Skript, Kapitel Evaluate (S. 60-62)   
 - scikit-learn Dokumentation: [Model Evaluation](https://scikit-learn.org/stable/modules/model_evaluation.html)   
 
 ---
