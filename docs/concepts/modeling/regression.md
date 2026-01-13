@@ -114,7 +114,24 @@ print(f"RMSE: {rmse:.2f}")
 ```
 
 ---
+## Lineare Zusammenhang (Der schnelle Check)
 
+Vor der Modellbildung lässt sich prüfen, ob bzw.  wie stark der lineare Zusammenhang zwischen den Merkmalen und der Zielvariable ist.
+
+
+```Python
+import pandas as pd
+
+# Zeigt die Korrelation aller Spalten zur Zielvariable 'target'
+correlations = df.corr()['target'].sort_values(ascending=False)
+print(correlations)
+```
+
+- **Werte nah bei 1 oder -1:** Starker linearer Zusammenhang.
+    
+- **Werte nah bei 0:** Kein linearer Zusammenhang (die lineare Regression wird hier wahrscheinlich scheitern).
+
+---
 ## Ansätze zum Trainieren von Modellen
 
 Das Training eines Modells bedeutet, die optimalen Parameter (Gewichte) zu finden, die den Loss minimieren. Dafür gibt es zwei grundlegende Ansätze:
