@@ -14,6 +14,7 @@ description: "Machine Learning Modelle und Algorithmen"
 ## Modellauswahl
 
 - **[Modellauswahl](modeling/modellauswahl)** - Systematische Kriterien und Strategien zur Auswahl des optimalen Machine-Learning-Modells für verschiedene Problemstellungen
+- **[Modell-Steckbriefe](modeling/modell-steckbriefe)** - Kompakte Übersicht aller wichtigen ML-Algorithmen mit Einsatzbereichen, Eigenschaften und Bewertungsmetriken
 
 ## Supervised Learning
 

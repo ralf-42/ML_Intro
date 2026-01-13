@@ -3,7 +3,7 @@ layout: default
 title: Regression
 parent: Modeling
 grand_parent: Konzepte
-nav_order: 2
+nav_order: 3
 description: "Grundlagen der Regression im Machine Learning: Lineare und logistische Regression, Loss-Funktionen und Optimierungsverfahren"
 has_toc: true
 ---

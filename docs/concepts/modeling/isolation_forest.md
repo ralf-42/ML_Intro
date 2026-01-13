@@ -3,7 +3,7 @@ layout: default
 title: Isolation Forest
 parent: Modeling
 grand_parent: Konzepte
-nav_order: 4
+nav_order: 5
 description: "Identifikation untypischer Datenpunkte durch Anomalie-Scores und Isolation Forest"
 has_toc: true
 ---

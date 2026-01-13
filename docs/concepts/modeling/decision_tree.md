@@ -3,7 +3,7 @@ layout: default
 title: Entscheidungsbaum
 parent: Modeling
 grand_parent: Konzepte
-nav_order: 1
+nav_order: 2
 description: "Entscheidungsbaum - Hierarchische Regelstruktur für Klassifikation und Regression"
 has_toc: true
 ---
