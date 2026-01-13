@@ -25,7 +25,6 @@ Die wichtigsten Aspekte der Datenaufbereitung:
 - Data Quality Checks
 - Duplicate Removal
 
-_Detaillierte Inhalte folgen_
 
 ## Feature Engineering
 
@@ -34,7 +33,6 @@ _Detaillierte Inhalte folgen_
 - Feature Extraction
 - Domain Knowledge Integration
 
-_Detaillierte Inhalte folgen_
 
 ## Data Transformation
 
@@ -43,7 +41,6 @@ _Detaillierte Inhalte folgen_
 - Feature Binning
 - Log Transformations
 
-_Detaillierte Inhalte folgen_
 
 ## Train-Test Split
 
