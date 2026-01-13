@@ -25,7 +25,7 @@ has_toc: true
 
 ## Überblick
 
-Hyperparameter-Tuning ist ein entscheidender Schritt im Machine-Learning-Workflow. Während das Modell seine internen Parameter (Gewichte, Koeffizienten) während des Trainings selbst lernt, müssen Hyperparameter **vor** dem Training festgelegt werden. Die richtige Wahl dieser Einstellungen kann den Unterschied zwischen einem mittelmäßigen und einem exzellenten Modell ausmachen.
+Hyperparameter-Tuning ist ein entscheidender Schritt im Machine-Learning-Workflow. Während das Modell seine internen Parameter (Gewichte, Koeffizienten) während des Trainings selbst lernt, müssen Hyperparameter **vor** dem Training festgelegt werden. Die richtige Wahl dieser Einstellungen kann den Unterschied zwischen einem mittelmäßigen und einem exzellenten Modell ausmachen.    
 
 ```mermaid
 flowchart LR
