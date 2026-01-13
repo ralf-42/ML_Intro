@@ -135,19 +135,9 @@ flowchart TD
 
 Die folgende Checkliste deckt alle wesentlichen Phasen eines ML-Projekts ab:
 
-```mermaid
-flowchart LR
-    U[1️⃣ Understand] --> P[2️⃣ Prepare]
-    P --> M[3️⃣ Modeling]
-    M --> E[4️⃣ Evaluate]
-    E --> D[5️⃣ Deploy]
-    
-    style U fill:#bbdefb
-    style P fill:#c8e6c9
-    style M fill:#fff9c4
-    style E fill:#ffccbc
-    style D fill:#e1bee7
-```
+
+<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/checkliste.png" class="logo" width="950"/>
+
 
 #### Phase 1: Understand
 
