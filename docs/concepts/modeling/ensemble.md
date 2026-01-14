@@ -30,20 +30,20 @@ Ensemble-Methoden nutzen die "Weisheit der Vielen" – die Kombination mehrerer 
 
 ```mermaid
 flowchart TD
-    subgraph Ensemble["Ensemble-Methoden"]
+    subgraph Ensemble["<b>Ensemble-Methoden"]
         direction TB
         
-        subgraph Bagging["Bagging"]
+        subgraph Bagging["<b>Bagging"]
             B1["Homogene Modelle"]
             B2["Paralleles Training"]
         end
         
-        subgraph Boosting["Boosting"]
+        subgraph Boosting["<b>Boosting"]
             BO1["Homogene Modelle"]
             BO2["Sequentielles Training"]
         end
         
-        subgraph Stacking["Stacking"]
+        subgraph Stacking["<b>Stacking"]
             S1["Heterogene Modelle"]
             S2["Paralleles Training"]
             S3["Voting"]
@@ -215,14 +215,7 @@ flowchart LR
 
 ---
 
-## Weiterführende Ressourcen
 
-| Ressource | Beschreibung |
-|-----------|--------------|
-| [KNIME Bagging & Boosting](https://www.knime.com/) | Visuelle Erklärung der Ensemble-Methoden |
-| [StatQuest Random Forest](https://www.youtube.com/c/joshstarmer) | Video-Tutorial zu Random Forest |
-
----
 
 ## Zusammenfassung
 

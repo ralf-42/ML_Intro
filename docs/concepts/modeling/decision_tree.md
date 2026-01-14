@@ -180,64 +180,6 @@ flowchart TB
 - Bei Frauen spielt die Reiseklasse eine große Rolle
 - Jeder Pfad durch den Baum repräsentiert eine Regel
 
-## Implementierung mit scikit-learn
-
-### Klassifikation
-
-```python
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, classification_report
-import pandas as pd
-
-# Daten vorbereiten
-data = df.drop('target', axis=1)
-target = df['target']
-
-# Train-Test-Split
-data_train, data_test, target_train, target_test = train_test_split(
-    data, target, test_size=0.2, random_state=42
-)
-
-# Modell erstellen und trainieren
-model = DecisionTreeClassifier(
-    criterion='gini',      # oder 'entropy'
-    max_depth=5,           # Maximale Tiefe begrenzen
-    min_samples_split=10,  # Mindestanzahl für Split
-    min_samples_leaf=5,    # Mindestanzahl in Blättern
-    random_state=42
-)
-
-model.fit(data_train, target_train)
-
-# Vorhersage und Evaluation
-target_pred = model.predict(data_test)
-print(f"Accuracy: {accuracy_score(target_test, target_pred):.3f}")
-print(classification_report(target_test, target_pred))
-```
-
-### Regression
-
-```python
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.metrics import mean_squared_error, r2_score
-
-# Modell erstellen und trainieren
-model = DecisionTreeRegressor(
-    criterion='squared_error',  # MSE als Kriterium
-    max_depth=5,
-    min_samples_split=10,
-    random_state=42
-)
-
-model.fit(data_train, target_train)
-
-# Vorhersage und Evaluation
-target_pred = model.predict(data_test)
-print(f"MSE:  {mean_squared_error(target_test, target_pred):.3f}")
-print(f"RMSE: {mean_squared_error(target_test, target_pred, squared=False):.3f}")
-print(f"R²:   {r2_score(target_test, target_pred):.3f}")
-```
 
 ## Wichtige Hyperparameter
 
@@ -272,58 +214,6 @@ flowchart LR
     
     style problem fill:#ffcdd2
     style loesung fill:#c8e6c9
-```
-
-## Visualisierung des Baums
-
-### Mit matplotlib
-
-```python
-from sklearn.tree import plot_tree
-import matplotlib.pyplot as plt
-
-plt.figure(figsize=(20, 10))
-plot_tree(
-    model,
-    feature_names=data.columns,
-    class_names=['Klasse 0', 'Klasse 1'],
-    filled=True,
-    rounded=True,
-    fontsize=10
-)
-plt.title("Entscheidungsbaum Visualisierung")
-plt.tight_layout()
-plt.show()
-```
-
-### Textuelle Darstellung
-
-```python
-from sklearn.tree import export_text
-
-# Regeln als Text ausgeben
-tree_rules = export_text(
-    model,
-    feature_names=list(data.columns)
-)
-print(tree_rules)
-```
-
-**Beispielausgabe:**
-```
-|--- Geschlecht <= 0.50
-|   |--- Klasse <= 2.50
-|   |   |--- class: Überlebt
-|   |--- Klasse >  2.50
-|   |   |--- Ticketpreis <= 23.00
-|   |   |   |--- class: Nicht überlebt
-|   |   |--- Ticketpreis >  23.00
-|   |   |   |--- class: Überlebt
-|--- Geschlecht >  0.50
-|   |--- Alter <= 9.50
-|   |   |--- class: Überlebt
-|   |--- Alter >  9.50
-|   |   |--- class: Nicht überlebt
 ```
 
 ## Feature Importance
@@ -368,35 +258,6 @@ plt.show()
 - **Lineare Grenzen**: Kann keine diagonalen Entscheidungsgrenzen modellieren
 - **Einzelner Baum oft unzureichend**: → Ensemble-Methoden (Random Forest) bevorzugt
 
-## Entscheidungsbaum vs. Ensemble-Methoden
-
-```mermaid
-flowchart TB
-    subgraph single["Einzelner Entscheidungsbaum"]
-        S1["+ Interpretierbar"]
-        S2["+ Schnell"]
-        S3["- Overfitting"]
-        S4["- Instabil"]
-    end
-    
-    subgraph ensemble["Ensemble: Random Forest"]
-        E1["+ Robuster"]
-        E2["+ Bessere Generalisierung"]
-        E3["- Weniger interpretierbar"]
-        E4["- Rechenintensiver"]
-    end
-    
-    A{"Anwendungsfall?"}
-    A -->|"Interpretierbarkeit<br/>wichtig"| single
-    A -->|"Performance<br/>wichtig"| ensemble
-    
-    style single fill:#fff9c4
-    style ensemble fill:#e3f2fd
-```
-
-**Empfehlung:** 
-- Für explorative Analyse und Interpretierbarkeit: Einzelner Entscheidungsbaum
-- Für Produktivmodelle mit hoher Accuracy: Random Forest oder Gradient Boosting
 
 ## Best Practices
 
@@ -418,7 +279,7 @@ flowchart TB
 ## Zusammenfassung
 
 ```mermaid
-flowchart TB
+flowchart LR
     subgraph konzept["Kernkonzepte"]
         K1["Hierarchische<br/>Regelstruktur"]
         K2["Split nach<br/>bestem Merkmal"]
@@ -449,11 +310,6 @@ Der Entscheidungsbaum ist ein grundlegender Algorithmus, der das Fundament für 
 
 ---
 
-*Referenzen:*
-- scikit-learn Dokumentation: [DecisionTreeClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html)
-- StatQuest: Decision Trees
-
----
 
 **Version:** 1.0    
 **Stand:** Januar 2026    

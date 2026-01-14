@@ -26,7 +26,7 @@ has_toc: true
 
 Der Machine-Learning-Workflow beschreibt den systematischen Prozess von der ersten Problemstellung bis zur produktiven Anwendung eines ML-Modells. Die folgenden fünf Phasen bilden das Fundament jedes erfolgreichen ML-Projekts.
 
-<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/ml_prozess.png" class="logo" width="950"/>
+<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/ml_prozess.png" class="logo" width="1050"/>
 
 
 
@@ -77,11 +77,6 @@ Ein deployed Modell ist kein Endpunkt, sondern der Beginn eines kontinuierlichen
 Die gestrichelten Pfeile im Diagramm sind kein Zeichen von Fehlern, sondern ein wesentliches Merkmal erfolgreicher ML-Projekte. Machine Learning ist ein iterativer Prozess: Erkenntnisse aus späteren Phasen führen regelmäßig zu Verbesserungen in früheren Schritten.
 
 Ein Modell mit unbefriedigender Performance kann auf Probleme in der Datenaufbereitung hinweisen. Feedback aus dem Produktivbetrieb kann neue Feature-Ideen liefern. Veränderte Geschäftsanforderungen erfordern eine Neubewertung des ursprünglichen Problems. Diese Flexibilität und Bereitschaft zur Iteration unterscheidet erfolgreiche ML-Projekte von gescheiterten.
-
-
-## Beispiel
-
-[Teachable Machines](https://teachablemachine.withgoogle.com/))
 
 
 ---

@@ -29,10 +29,10 @@ Scikit-learn ermöglicht unterschiedliche Ansätze zur Definition und Verwendung
 
 ### Vergleich der Ansätze
 
-| Ansatz | Beispiel | Vorteile | Nachteile |
-|--------|----------|----------|-----------|
-| **Direkte Anwendung** | `MinMaxScaler().fit_transform(data)` | Kürzerer, direkter Code; geeignet für einmalige Anwendungen | Keine Wiederverwendung des Modells; erschwert Reproduzierbarkeit; keine inverse Transformation möglich |
-| **Explizite Definition** | `scaler = MinMaxScaler()`<br>`scaler.fit_transform(data)` | Ermöglicht Wiederverwendung und Konsistenz; gute Reproduzierbarkeit; ermöglicht inverse Transformation | Mehr Codezeilen; leicht erhöhte Komplexität |
+| Ansatz                   | Beispiel                                                  | Vorteile                                                                                               | Nachteile                                                                                              |
+| ------------------------ | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| **Direkte Anwendung**    | `MinMaxScaler().fit_transform(data)`                      | Kürzerer, direkter Code; geeignet für einmalige Anwendungen                                            | Keine Wiederverwendung des Modells; erschwert Reproduzierbarkeit; keine inverse Transformation möglich |
+| **Explizite Definition** | `scaler = MinMaxScaler()`<br>`scaler.fit_transform(data)` | Ermöglicht Wiederverwendung und Konsistenz; gute Reproduzierbarkeit; ermöglicht inverse Transformation | Mehr Codezeilen; leicht erhöhte Komplexität                                                            |
 
 ### Empfehlung
 

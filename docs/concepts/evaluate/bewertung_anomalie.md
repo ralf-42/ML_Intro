@@ -4,7 +4,7 @@ title: Anomalie
 parent: Evaluate
 grand_parent: Konzepte
 nav_order: 5
-description: Identifikation untypischer Datenpunkte durch Anomalie-Scores und Isolation Forest
+description: Identifikation untypischer Datenpunkte durch Anomalie-Scores mit DBSCAN
 has_toc: true
 ---
 
@@ -36,7 +36,7 @@ Der Anomalie-Score bewertet quantitativ, wie anomal oder atypisch ein bestimmter
 | **nahe 0** | Grenzfall | Datenpunkt liegt an der Entscheidungsgrenze |
 | **nahe +1** | Sehr wahrscheinlich normal | Datenpunkt passt gut zum Rest der Daten |
 
-> **Hinweis:** Die exakte Score-Interpretation hängt vom verwendeten Algorithmus ab. Bei scikit-learn's `IsolationForest` werden normale Punkte mit +1 und Anomalien mit -1 gekennzeichnet.
+> **Hinweis:** Die exakte Score-Interpretation hängt vom verwendeten Algorithmus ab. Bei verschiedenen Anomalie-Erkennungsverfahren werden unterschiedliche Bewertungsskalen verwendet.
 
 ### Visualisierung des Konzepts
 
@@ -54,16 +54,23 @@ flowchart LR
 
 ---
 
+## Algorithmen zur Anomalie-Erkennung
 
-## Praktische Implementierung
+Für die praktische Implementierung von Anomalie-Erkennung eignet sich besonders **DBSCAN** (Density-Based Spatial Clustering of Applications with Noise).
 
-### Grundlegende Anwendung
+> **DBSCAN** identifiziert automatisch Rauschpunkte (Noise), die als Anomalien interpretiert werden können. Der Algorithmus klassifiziert Datenpunkte als:
+> - **Core Points**: Punkte in dichten Bereichen
+> - **Border Points**: Punkte am Rand von Clustern
+> - **Noise Points**: Isolierte Punkte = **Anomalien**
+
+Für eine detaillierte Beschreibung und Implementierung siehe: [K-Means & DBSCAN Dokumentation](../modeling/kmeans-dbscan)
+
+### Beispiel: DBSCAN für Anomalie-Erkennung
 
 ```python
 import numpy as np
-import pandas as pd
-from sklearn.ensemble import IsolationForest
-import matplotlib.pyplot as plt
+from sklearn.cluster import DBSCAN
+from sklearn.preprocessing import StandardScaler
 
 # Beispieldaten generieren
 np.random.seed(42)
@@ -73,31 +80,29 @@ data_normal = np.random.randn(200, 2)
 data_anomalies = np.random.uniform(low=-4, high=4, size=(20, 2))
 data = np.vstack([data_normal, data_anomalies])
 
-# Isolation Forest erstellen und trainieren
-model = IsolationForest(
-    n_estimators=100,      # Anzahl der Bäume
-    contamination=0.1,     # Erwarteter Anteil Anomalien
-    random_state=42
-)
+# Daten skalieren
+scaler = StandardScaler()
+data_scaled = scaler.fit_transform(data)
 
-# Vorhersage: 1 = normal, -1 = Anomalie
-predictions = model.fit_predict(data)
+# DBSCAN anwenden
+model = DBSCAN(eps=0.3, min_samples=5)
+predictions = model.fit_predict(data_scaled)
 
-# Anomalie-Scores abrufen (negativ = anomaler)
-scores = model.decision_function(data)
+# -1 = Anomalie (Noise), andere Werte = Cluster
+n_anomalies = (predictions == -1).sum()
+n_clusters = len(set(predictions)) - (1 if -1 in predictions else 0)
 
-print(f"Erkannte Anomalien: {(predictions == -1).sum()}")
-print(f"Score-Bereich: {scores.min():.3f} bis {scores.max():.3f}")
+print(f"Erkannte Cluster: {n_clusters}")
+print(f"Erkannte Anomalien (Noise): {n_anomalies}")
 ```
 
-### Wichtige Hyperparameter
+### Wichtige Hyperparameter (DBSCAN)
 
 | Parameter | Beschreibung | Typische Werte |
 |:----------|:-------------|:---------------|
-| `n_estimators` | Anzahl der Bäume im Ensemble | 100-200 |
-| `contamination` | Erwarteter Anteil Anomalien | 0.01-0.1 (1%-10%) |
-| `max_samples` | Stichprobengröße pro Baum | 'auto' oder Anzahl |
-| `max_features` | Features pro Baum | 1.0 (alle) |
+| `eps` | Radius für Nachbarsuche | 0.3-1.0 (abhängig von Skalierung) |
+| `min_samples` | Minimale Punkte für Core Point | 5-10 |
+| `metric` | Distanzmetrik | 'euclidean', 'manhattan' |
 
 
 ## Evaluation
@@ -125,25 +130,16 @@ plt.title('Confusion Matrix - Anomalie-Erkennung')
 plt.show()
 ```
 
-### ROC-Kurve mit Anomalie-Scores
+### Silhouette-Score für Clustering-Qualität
 
 ```python
-from sklearn.metrics import roc_curve, roc_auc_score
+from sklearn.metrics import silhouette_score
 
-# Scores für ROC (invertieren, da niedrigere Scores = anomaler)
-scores_for_roc = -model.decision_function(data_test)
-
-fpr, tpr, thresholds = roc_curve(target_true_binary, scores_for_roc)
-auc_score = roc_auc_score(target_true_binary, scores_for_roc)
-
-plt.figure(figsize=(8, 6))
-plt.plot(fpr, tpr, label=f'Isolation Forest (AUC = {auc_score:.3f})')
-plt.plot([0, 1], [0, 1], 'k--', label='Zufall')
-plt.xlabel('False Positive Rate')
-plt.ylabel('True Positive Rate')
-plt.title('ROC-Kurve - Anomalie-Erkennung')
-plt.legend()
-plt.show()
+# Bei DBSCAN: Nur nicht-Noise-Punkte bewerten
+mask = predictions != -1
+if mask.sum() > 1 and len(set(predictions[mask])) > 1:
+    score = silhouette_score(data_scaled[mask], predictions[mask])
+    print(f"Silhouette Score (ohne Noise): {score:.3f}")
 ```
 
 ---
@@ -153,13 +149,13 @@ plt.show()
 
 ### Empfehlungen für die Praxis
 
-1. **Contamination schätzen:** Nutze Domänenwissen, um den erwarteten Anomalie-Anteil realistisch einzuschätzen
+1. **Parameter-Tuning:** Nutze den k-Distanz-Graph zur Bestimmung von `eps` bei DBSCAN
 
-2. **Feature-Skalierung:** Standardisiere Features vor der Anwendung, besonders bei unterschiedlichen Wertebereichen
+2. **Feature-Skalierung:** Standardisiere Features vor der Anwendung (essentiell bei distanzbasierten Methoden)
 
-3. **Mehrere Algorithmen testen:** Vergleiche Isolation Forest mit anderen Methoden wie One-Class SVM oder Autoencoder
+3. **Mehrere Algorithmen testen:** Vergleiche DBSCAN mit anderen Methoden wie One-Class SVM oder Local Outlier Factor
 
-4. **Schwellenwert anpassen:** Der Standard-Schwellenwert ist nicht immer optimal – experimentiere mit verschiedenen Werten
+4. **Visualisierung:** Plotte die Ergebnisse, um Anomalien visuell zu validieren
 
 5. **Ergebnisse validieren:** Lass Domänenexperten die erkannten Anomalien prüfen
 
@@ -187,9 +183,9 @@ flowchart TD
 
 - **Anomalie-Erkennung** identifiziert untypische Datenpunkte im Vergleich zum Normalverhalten
 - **Drei Anomalie-Typen:** Punkt-, kontextuelle und kollektive Anomalien
-- **Anomalie-Score:** Quantifiziert die Abweichung (-1 = anomal, +1 = normal)
-- **Isolation Forest:** Standard-Algorithmus basierend auf der leichten Isolierbarkeit von Anomalien
-- **Wichtig:** Domänenwissen für Contamination-Parameter und Ergebnisvalidierung nutzen
+- **Anomalie-Score:** Quantifiziert die Abweichung vom normalen Verhalten
+- **DBSCAN:** Dichtebasierter Algorithmus, der Anomalien als Rauschpunkte (Noise) automatisch identifiziert
+- **Wichtig:** Domänenwissen für Parameter-Wahl und Ergebnisvalidierung nutzen
 
 ---
 

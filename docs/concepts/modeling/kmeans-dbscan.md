@@ -67,11 +67,11 @@ flowchart LR
 
 ## Clustering-Ansätze im Überblick
 
-| Ansatz | Methode | Charakteristik |
-|--------|---------|----------------|
-| **Partitionierend** | K-Means | Teilt Daten in k vordefinierte Cluster; iterative Optimierung der Clusterzentren |
-| **Dichtebasiert** | DBSCAN | Erkennt Cluster anhand der Datendichte; identifiziert Ausreißer automatisch |
-| **Hierarchisch** | Agglomerativ/Divisiv | Baut Cluster-Hierarchie auf; keine Vorgabe der Clusterzahl nötig |
+| Ansatz              | Methode              | Charakteristik                                                                   |
+| ------------------- | -------------------- | -------------------------------------------------------------------------------- |
+| **Partitionierend** | K-Means              | Teilt Daten in k vordefinierte Cluster; iterative Optimierung der Clusterzentren |
+| **Dichtebasiert**   | DBSCAN               | Erkennt Cluster anhand der Datendichte; identifiziert Ausreißer automatisch      |
+
 
 ---
 
@@ -125,79 +125,17 @@ flowchart TD
 
 ### Eigenschaften von K-Means
 
-| Eigenschaft | Beschreibung |
-|-------------|--------------|
-| **Clusterform** | Bevorzugt kugelförmige, kompakte Cluster |
-| **Clustergröße** | Tendiert zu ähnlich großen Clustern |
-| **Varianz** | Minimiert die Varianz innerhalb der Cluster |
-| **Komplexität** | O(n × k × i × d) mit n=Datenpunkte, k=Cluster, i=Iterationen, d=Dimensionen |
+| Eigenschaft      | Beschreibung                                                                |
+| ---------------- | --------------------------------------------------------------------------- |
+| **Clusterform**  | Bevorzugt kugelförmige, kompakte Cluster                                    |
+| **Clustergröße** | Tendiert zu ähnlich großen Clustern                                         |
+| **Varianz**      | Minimiert die Varianz innerhalb der Cluster                                 |
 
-### Implementation mit scikit-learn
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
-from sklearn.datasets import make_blobs
-from sklearn.preprocessing import StandardScaler
-
-# Beispieldaten generieren
-X, y_true = make_blobs(
-    n_samples=300, 
-    centers=4,
-    cluster_std=0.60, 
-    random_state=42
-)
-
-# Daten skalieren (wichtig für K-Means!)
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
-
-# K-Means Modell erstellen und trainieren
-kmeans = KMeans(
-    n_clusters=4,           # Anzahl der Cluster
-    init='k-means++',       # Intelligente Initialisierung
-    n_init=10,              # Anzahl der Initialisierungen
-    max_iter=300,           # Maximale Iterationen
-    random_state=42
-)
-
-# Cluster-Labels vorhersagen
-cluster_labels = kmeans.fit_predict(X_scaled)
-
-# Ergebnisse ausgeben
-print(f"Clusterzentren:\n{kmeans.cluster_centers_}")
-print(f"Inertia (Within-Cluster-Summe): {kmeans.inertia_:.2f}")
-print(f"Anzahl Iterationen: {kmeans.n_iter_}")
-```
 
 ### Optimale Clusterzahl mit der Elbow-Methode
 
 Die Wahl der richtigen Anzahl K ist entscheidend. Die **Elbow-Methode** hilft dabei, indem sie die Inertia (Within-Cluster Sum of Squares) für verschiedene K-Werte visualisiert.
 
-```python
-from sklearn.cluster import KMeans
-import matplotlib.pyplot as plt
-
-# Inertia für verschiedene K-Werte berechnen
-inertias = []
-K_range = range(1, 11)
-
-for k in K_range:
-    kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
-    kmeans.fit(X_scaled)
-    inertias.append(kmeans.inertia_)
-
-# Elbow-Plot erstellen
-plt.figure(figsize=(10, 6))
-plt.plot(K_range, inertias, 'bo-', linewidth=2, markersize=8)
-plt.xlabel('Anzahl Cluster (K)', fontsize=12)
-plt.ylabel('Inertia (WCSS)', fontsize=12)
-plt.title('Elbow-Methode zur Bestimmung der optimalen Clusterzahl', fontsize=14)
-plt.grid(True, alpha=0.3)
-plt.xticks(K_range)
-plt.show()
-```
 
 ```mermaid
 xychart-beta
@@ -273,71 +211,6 @@ flowchart TD
 3. **Border Points zuweisen**: Jedem erreichbaren Core Point-Cluster zuordnen
 4. **Noise klassifizieren**: Übrige Punkte als Rauschen markieren
 
-### Implementation mit scikit-learn
-
-```python
-from sklearn.cluster import DBSCAN
-from sklearn.preprocessing import StandardScaler
-from sklearn.datasets import make_moons
-import numpy as np
-
-# Halbmond-Daten generieren (nicht-kugelförmige Cluster)
-X, y_true = make_moons(n_samples=300, noise=0.05, random_state=42)
-
-# Daten skalieren
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
-
-# DBSCAN Modell erstellen
-dbscan = DBSCAN(
-    eps=0.3,              # Epsilon: Radius für Nachbarsuche
-    min_samples=5,        # Mindestpunkte für Core Point
-    metric='euclidean'    # Distanzmetrik
-)
-
-# Cluster-Labels vorhersagen
-cluster_labels = dbscan.fit_predict(X_scaled)
-
-# Ergebnisse analysieren
-n_clusters = len(set(cluster_labels)) - (1 if -1 in cluster_labels else 0)
-n_noise = list(cluster_labels).count(-1)
-
-print(f"Gefundene Cluster: {n_clusters}")
-print(f"Noise-Punkte: {n_noise}")
-print(f"Core-Samples: {len(dbscan.core_sample_indices_)}")
-```
-
-### Parameter-Tuning mit k-Distanz-Graph
-
-Die Wahl von ε ist kritisch. Der **k-Distanz-Graph** hilft bei der Bestimmung:
-
-```python
-from sklearn.neighbors import NearestNeighbors
-import numpy as np
-import matplotlib.pyplot as plt
-
-# k nächste Nachbarn berechnen (k = min_samples - 1)
-k = 4
-neighbors = NearestNeighbors(n_neighbors=k)
-neighbors_fit = neighbors.fit(X_scaled)
-distances, indices = neighbors_fit.kneighbors(X_scaled)
-
-# Distanzen sortieren
-distances = np.sort(distances[:, k-1])
-
-# k-Distanz-Plot
-plt.figure(figsize=(10, 6))
-plt.plot(distances, linewidth=2)
-plt.xlabel('Datenpunkte (sortiert)', fontsize=12)
-plt.ylabel(f'{k}-Distanz', fontsize=12)
-plt.title('k-Distanz-Graph zur Bestimmung von ε', fontsize=14)
-plt.grid(True, alpha=0.3)
-plt.axhline(y=0.3, color='r', linestyle='--', label='Vorgeschlagenes ε')
-plt.legend()
-plt.show()
-```
-
-> **Tipp:** Der "Knick" im k-Distanz-Graphen zeigt einen guten ε-Wert an. Punkte oberhalb dieses Knicks werden wahrscheinlich als Noise klassifiziert.
 
 ---
 
@@ -378,25 +251,6 @@ flowchart LR
 | **Cosinus** | 1 - cos(θ) | Winkel zwischen Vektoren | Textähnlichkeit, Embeddings |
 | **Minkowski** | (Σ\|xᵢ-yᵢ\|ᵖ)^(1/p) | Generalisierung | Parameter p anpassbar |
 
-### Code-Beispiel: Verschiedene Metriken
-
-```python
-from sklearn.cluster import DBSCAN
-from sklearn.metrics import pairwise_distances
-import numpy as np
-
-# Beispieldaten
-X = np.array([[1, 2], [2, 2], [2, 3], [8, 7], [8, 8], [25, 80]])
-
-# DBSCAN mit verschiedenen Metriken
-metrics = ['euclidean', 'manhattan', 'cosine']
-
-for metric in metrics:
-    dbscan = DBSCAN(eps=0.5, min_samples=2, metric=metric)
-    labels = dbscan.fit_predict(X)
-    n_clusters = len(set(labels)) - (1 if -1 in labels else 0)
-    print(f"{metric.capitalize():12} → Cluster: {n_clusters}, Labels: {labels}")
-```
 
 ---
 
@@ -445,90 +299,11 @@ flowchart TD
 
 ---
 
-## Vollständiges Beispiel: Kundensegmentierung
-
-```python
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans, DBSCAN
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import silhouette_score
-
-# Simulierte Kundendaten erstellen
-np.random.seed(42)
-n_customers = 500
-
-data = {
-    'jahresumsatz': np.concatenate([
-        np.random.normal(5000, 1000, 200),    # Gelegenheitskäufer
-        np.random.normal(15000, 2000, 200),   # Stammkunden
-        np.random.normal(50000, 5000, 100)    # Premium-Kunden
-    ]),
-    'kaufhaeufigkeit': np.concatenate([
-        np.random.normal(3, 1, 200),          # Gelegenheitskäufer
-        np.random.normal(12, 2, 200),         # Stammkunden
-        np.random.normal(24, 3, 100)          # Premium-Kunden
-    ])
-}
-
-df = pd.DataFrame(data)
-
-# Daten skalieren
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(df)
-
-# --- K-Means Clustering ---
-kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
-df['kmeans_cluster'] = kmeans.fit_predict(X_scaled)
-silhouette_kmeans = silhouette_score(X_scaled, df['kmeans_cluster'])
-
-# --- DBSCAN Clustering ---
-dbscan = DBSCAN(eps=0.5, min_samples=10)
-df['dbscan_cluster'] = dbscan.fit_predict(X_scaled)
-
-# Noise-Punkte für Silhouette-Score ausschließen
-mask = df['dbscan_cluster'] != -1
-if mask.sum() > 1 and len(set(df.loc[mask, 'dbscan_cluster'])) > 1:
-    silhouette_dbscan = silhouette_score(
-        X_scaled[mask], 
-        df.loc[mask, 'dbscan_cluster']
-    )
-else:
-    silhouette_dbscan = None
-
-# Ergebnisse ausgeben
-print("=" * 50)
-print("CLUSTERING-ERGEBNISSE")
-print("=" * 50)
-print(f"\nK-Means:")
-print(f"  Silhouette Score: {silhouette_kmeans:.3f}")
-print(f"  Clustergrößen: {df['kmeans_cluster'].value_counts().sort_index().to_dict()}")
-
-print(f"\nDBSCAN:")
-n_clusters_dbscan = len(set(df['dbscan_cluster'])) - (1 if -1 in df['dbscan_cluster'].values else 0)
-n_noise = (df['dbscan_cluster'] == -1).sum()
-print(f"  Gefundene Cluster: {n_clusters_dbscan}")
-print(f"  Noise-Punkte: {n_noise}")
-if silhouette_dbscan:
-    print(f"  Silhouette Score (ohne Noise): {silhouette_dbscan:.3f}")
-```
 
 ---
 
 ## Best Practices
 
-### Datenvorbereitung
-
-> **Wichtig:** Beide Algorithmen sind distanzbasiert – Skalierung ist essentiell!
-
-```python
-from sklearn.preprocessing import StandardScaler
-
-# Immer vor dem Clustering skalieren
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
-```
 
 ### Checkliste für erfolgreiches Clustering
 
@@ -547,13 +322,6 @@ X_scaled = scaler.fit_transform(X)
 | Falsches K | Over-/Underfitting | Elbow-Methode + Silhouette |
 | ε zu klein/groß | Zu viele/wenige Cluster | k-Distanz-Graph analysieren |
 | Nur ein Algorithmus | Suboptimale Ergebnisse | Beide Methoden vergleichen |
-
----
-
-## Weiterführende Ressourcen
-
-- **StatQuest**: K-Means Clustering und DBSCAN Erklärungen
-- **scikit-learn Dokumentation**: Clustering-Modul mit weiteren Algorithmen
 
 ---
 

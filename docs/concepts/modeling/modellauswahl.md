@@ -122,30 +122,9 @@ Neben den Daten spielen die Anforderungen des konkreten Anwendungsfalls eine zen
 
 ### Performance: Was ist akzeptabel?
 
-Definieren Sie vorab, welche Metriken relevant sind und welche Schwellenwerte akzeptabel sind:
+Definieren Sie vorab, welche Metriken relevant sind und welche Schwellenwerte akzeptabel sind.
 
-```python
-from sklearn.model_selection import cross_val_score
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
 
-# Performance-Anforderung definieren
-min_accuracy = 0.85
-min_f1_score = 0.80
-
-# Modelle vergleichen
-models = {
-    'Logistic Regression': LogisticRegression(max_iter=1000),
-    'Random Forest': RandomForestClassifier(n_estimators=100, random_state=42)
-}
-
-for name, model in models.items():
-    accuracy = cross_val_score(model, data_train, target_train, cv=5, scoring='accuracy').mean()
-    f1 = cross_val_score(model, data_train, target_train, cv=5, scoring='f1').mean()
-    
-    status = "✓" if accuracy >= min_accuracy and f1 >= min_f1_score else "✗"
-    print(f"{name}: Accuracy={accuracy:.3f}, F1={f1:.3f} {status}")
-```
 
 ### Simplicity: Das richtige Maß an Komplexität
 
@@ -168,27 +147,6 @@ flowchart LR
 
 **Empfehlung:** Starten Sie immer mit einem einfachen Baseline-Modell und erhöhen Sie die Komplexität nur bei Bedarf:
 
-```python
-from sklearn.dummy import DummyClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
-
-# 1. Baseline: Einfachstes Modell
-baseline = DummyClassifier(strategy='most_frequent')
-
-# 2. Einfach: Lineares Modell
-simple_model = LogisticRegression(max_iter=1000)
-
-# 3. Komplex: Ensemble-Modell
-complex_model = RandomForestClassifier(n_estimators=100, random_state=42)
-
-# Schrittweise Komplexität erhöhen
-for name, model in [('Baseline', baseline), ('Einfach', simple_model), ('Komplex', complex_model)]:
-    model.fit(data_train, target_train)
-    score = model.score(data_test, target_test)
-    print(f"{name}: {score:.3f}")
-```
-
 ### Interpretability: Nachvollziehbarkeit der Entscheidungen
 
 Je nach Anwendungsbereich ist die Interpretierbarkeit unterschiedlich wichtig:
@@ -200,25 +158,6 @@ Je nach Anwendungsbereich ist die Interpretierbarkeit unterschiedlich wichtig:
 | **Marketing** | Mittel | Random Forest mit Feature Importance |
 | **Bilderkennung** | Niedrig akzeptabel | Neuronale Netze, Deep Learning |
 
-```python
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier
-import pandas as pd
-
-# Interpretierbares Modell: Decision Tree
-model = DecisionTreeClassifier(max_depth=4, random_state=42)
-model.fit(data_train, target_train)
-
-# Feature Importance anzeigen
-feature_names = data_train.columns if hasattr(data_train, 'columns') else [f'Feature_{i}' for i in range(data_train.shape[1])]
-importance = pd.DataFrame({
-    'Feature': feature_names,
-    'Importance': model.feature_importances_
-}).sort_values('Importance', ascending=False)
-
-print("Feature Importance (Top 5):")
-print(importance.head())
-```
 
 ### Computation Costs: Zeit- und Ressourcenbedarf
 
@@ -232,63 +171,10 @@ Das Modell muss in angemessener Zeit trainierbar und mit verfügbarer Hardware a
 | XGBoost | Mittel-Lang | Schnell | Mittel |
 | Neuronale Netze | Lang | Variabel | Hoch |
 
-```python
-import time
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
-
-models = {
-    'Logistic Regression': LogisticRegression(max_iter=1000),
-    'Random Forest (100 Trees)': RandomForestClassifier(n_estimators=100, random_state=42),
-    'Random Forest (500 Trees)': RandomForestClassifier(n_estimators=500, random_state=42)
-}
-
-print("Trainingszeiten vergleichen:")
-for name, model in models.items():
-    start = time.time()
-    model.fit(data_train, target_train)
-    train_time = time.time() - start
-    
-    start = time.time()
-    predictions = model.predict(data_test)
-    predict_time = time.time() - start
-    
-    print(f"{name}: Training={train_time:.3f}s, Inferenz={predict_time:.4f}s")
-```
-
 ### Competition: Systematischer Modellvergleich
 
 Wenn mehrere Modelle die Grundanforderungen erfüllen, hilft ein systematischer Vergleich:
 
-```python
-from sklearn.model_selection import cross_val_score
-from sklearn.linear_model import LogisticRegression
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.svm import SVC
-import pandas as pd
-
-# Kandidaten definieren
-candidates = {
-    'Logistische Regression': LogisticRegression(max_iter=1000),
-    'Decision Tree': DecisionTreeClassifier(max_depth=5, random_state=42),
-    'Random Forest': RandomForestClassifier(n_estimators=100, random_state=42),
-    'SVM': SVC(kernel='rbf', random_state=42)
-}
-
-# Systematischer Vergleich
-results = []
-for name, model in candidates.items():
-    accuracy = cross_val_score(model, data_train, target_train, cv=5, scoring='accuracy')
-    results.append({
-        'Modell': name,
-        'Accuracy (Mean)': accuracy.mean(),
-        'Accuracy (Std)': accuracy.std()
-    })
-
-comparison = pd.DataFrame(results).sort_values('Accuracy (Mean)', ascending=False)
-print(comparison.to_string(index=False))
-```
 
 ---
 
@@ -334,6 +220,11 @@ flowchart TD
 
 ---
 
+**Interaktive Mindmap mit einem breiten Methodenüberblick:**
+[Machine Learning Algorithms Mind Map](https://mindmapai.app/mind-map/machine-learning-algorithms-5f3b26fa)
+
+
+---
 ## Best Practices
 
 ### Do's ✓
@@ -351,28 +242,6 @@ flowchart TD
 - **Nicht blind kopieren:** Was bei anderen funktioniert, passt nicht automatisch zu Ihren Daten
 - **Nicht Trainingszeit ignorieren:** Produktionsanforderungen berücksichtigen
 - **Nicht Interpretierbarkeit vernachlässigen:** Stakeholder müssen Ergebnisse verstehen
-
----
-
-## Zusammenfassung
-
-Die Modellauswahl basiert auf zwei Perspektiven:
-
-**Perspektive Daten:**
-- Target-Typ (kategorial vs. numerisch)
-- Lernstrategie (supervised vs. unsupervised)
-- Umfang des Datenbestands
-- Datenqualität (Outlier, Missing Values)
-
-**Perspektive Use Case:**
-- Performance-Anforderungen
-- Einfachheit (Simplicity)
-- Interpretierbarkeit
-- Rechenkosten
-- Systematischer Modellvergleich
-
-> **Merke:** Das beste Modell ist nicht das komplexeste, sondern das, welches die Anforderungen mit der geringsten Komplexität erfüllt.
-
 
 ---
 

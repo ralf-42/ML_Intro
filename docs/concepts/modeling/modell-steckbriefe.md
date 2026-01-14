@@ -36,12 +36,17 @@ has_toc: true
 | **XGBoost** | Supervised | Klassifikation, Regression | Accuracy / R² |
 | **LDA** | Supervised | Dimensionsreduktion, Klassifikation | Erklärte Varianz |
 | **K-Means** | Unsupervised | Clustering | Silhouetten-Koeffizient |
-| **DBSCAN** | Unsupervised | Clustering | Silhouetten-Koeffizient |
-| **Isolation Forest** | Unsupervised | Anomalieerkennung | Anomalie-Score |
+| **DBSCAN** | Unsupervised | Clustering, Anomalieerkennung | Silhouetten-Koeffizient |
 | **Apriori** | Unsupervised | Assoziationsanalyse | Support, Confidence, Lift |
 | **PCA** | Unsupervised | Dimensionsreduktion | Erklärte Varianz |
 
 > **Tipp:** Starten Sie mit einfachen, interpretierbaren Modellen (Linear/Logistic Regression, Decision Tree) und steigern Sie die Komplexität nur bei Bedarf. Die beste Modellwahl hängt immer vom konkreten Use Case, den verfügbaren Daten und den Anforderungen an Interpretierbarkeit ab.
+
+---
+
+**Interaktive Mindmap mit einem breiten Methodenüberblick:**
+[Machine Learning Algorithms Mind Map](https://mindmapai.app/mind-map/machine-learning-algorithms-5f3b26fa)
+
 
 ---
 
@@ -81,9 +86,9 @@ flowchart TB
         
         UL_CLUST --> KM["K-Means"]
         UL_CLUST --> DBS["DBSCAN"]
-        
-        UL_ANOM --> IF["Isolation Forest"]
-        
+
+        UL_ANOM --> DBSCAN_ANOM["DBSCAN<br/>(siehe Clustering)"]
+
         UL_ASSOC --> APR["Apriori"]
         
         UL_DIM --> PCA["PCA"]
@@ -135,17 +140,6 @@ Ein Entscheidungsbaum teilt die Daten auf der Grundlage von Entscheidungsregeln 
 - `min_samples_leaf`: Minimale Samples pro Blatt
 - `criterion`: Splitting-Kriterium (gini, entropy, log_loss)
 
-```python
-from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
-
-# Klassifikation
-model = DecisionTreeClassifier(max_depth=5, random_state=42)
-model.fit(data_train, target_train)
-
-# Regression
-model = DecisionTreeRegressor(max_depth=5, random_state=42)
-model.fit(data_train, target_train)
-```
 
 ---
 
@@ -187,16 +181,6 @@ Random Forest ist eine Gruppe (Ensemble) von Entscheidungsbäumen. Mehrere Bäum
 - `max_features`: Anzahl Features pro Split ('sqrt', 'log2', int)
 - `bootstrap`: Bootstrap-Sampling aktivieren
 
-```python
-from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
-
-# Klassifikation
-model = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=42)
-model.fit(data_train, target_train)
-
-# Feature Importance analysieren
-importance = model.feature_importances_
-```
 
 ---
 
@@ -237,16 +221,6 @@ Die lineare Regression ist ein statistisches Verfahren, bei dem eine abhängige 
 - `fit_intercept`: Achsenabschnitt berechnen
 - `normalize`: Features normalisieren (deprecated, besser StandardScaler)
 
-```python
-from sklearn.linear_model import LinearRegression
-
-model = LinearRegression()
-model.fit(data_train, target_train)
-
-# Koeffizienten und Achsenabschnitt
-print(f"Koeffizienten: {model.coef_}")
-print(f"Achsenabschnitt: {model.intercept_}")
-```
 
 ---
 
@@ -289,15 +263,6 @@ Die logistische Regression ist eine Form der Regressionsanalyse, bei der ein kat
 - `solver`: Optimierungsalgorithmus
 - `max_iter`: Maximale Iterationen
 
-```python
-from sklearn.linear_model import LogisticRegression
-
-model = LogisticRegression(C=1.0, max_iter=1000, random_state=42)
-model.fit(data_train, target_train)
-
-# Wahrscheinlichkeiten abrufen
-probabilities = model.predict_proba(data_test)
-```
 
 ---
 
@@ -340,19 +305,6 @@ Künstliche neuronale Netze bestehen aus Schichten von Knoten (Neuronen) und kö
 - `learning_rate_init`: Initiale Lernrate
 - `alpha`: L2-Regularisierung
 
-```python
-from sklearn.neural_network import MLPClassifier, MLPRegressor
-
-# Klassifikation
-model = MLPClassifier(
-    hidden_layer_sizes=(100, 50),
-    activation='relu',
-    solver='adam',
-    max_iter=500,
-    random_state=42
-)
-model.fit(data_train, target_train)
-```
 
 ---
 
@@ -395,19 +347,6 @@ XGBoost (Extreme Gradient Boosting) ist eine optimierte Implementierung von Grad
 - `subsample`: Anteil der Trainingsdaten pro Runde
 - `colsample_bytree`: Anteil der Features pro Baum
 
-```python
-from xgboost import XGBClassifier, XGBRegressor
-
-# Klassifikation
-model = XGBClassifier(
-    n_estimators=100,
-    max_depth=6,
-    learning_rate=0.1,
-    random_state=42
-)
-model.fit(data_train, target_train)
-```
-
 ---
 
 ### Linear Discriminant Analysis (LDA)
@@ -445,18 +384,6 @@ Die Linear Discriminant Analysis ist eine Technik zur Dimensionsreduktion, die s
 - `n_components`: Anzahl der Komponenten
 - `solver`: Berechnungsmethode ('svd', 'lsqr', 'eigen')
 
-```python
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-
-# Als Dimensionsreduktion
-model = LinearDiscriminantAnalysis(n_components=2)
-data_reduced = model.fit_transform(data_train, target_train)
-
-# Als Klassifikator
-model = LinearDiscriminantAnalysis()
-model.fit(data_train, target_train)
-predictions = model.predict(data_test)
-```
 
 ---
 
@@ -500,17 +427,6 @@ K-Means-Clustering ist ein einfacher Ansatz zum Partitionieren eines Datensatzes
 - `n_init`: Anzahl der Initialisierungen
 - `max_iter`: Maximale Iterationen
 
-```python
-from sklearn.cluster import KMeans
-from sklearn.metrics import silhouette_score
-
-model = KMeans(n_clusters=3, init='k-means++', random_state=42)
-clusters = model.fit_predict(data)
-
-# Qualität bewerten
-score = silhouette_score(data, clusters)
-print(f"Silhouetten-Koeffizient: {score:.3f}")
-```
 
 ---
 
@@ -551,72 +467,8 @@ DBSCAN (Density-Based Spatial Clustering of Applications with Noise) ist ein dic
 - `min_samples`: Minimale Punkte für Kernpunkt
 - `metric`: Distanzmetrik ('euclidean', 'manhattan', etc.)
 
-```python
-from sklearn.cluster import DBSCAN
-from sklearn.metrics import silhouette_score
 
-model = DBSCAN(eps=0.5, min_samples=5)
-clusters = model.fit_predict(data)
-
-# Anzahl Cluster und Rauschpunkte
-n_clusters = len(set(clusters)) - (1 if -1 in clusters else 0)
-n_noise = list(clusters).count(-1)
-print(f"Cluster: {n_clusters}, Rauschen: {n_noise}")
-```
-
----
-
-### Isolation Forest
-
-| Eigenschaft | Beschreibung |
-|-------------|--------------|
-| **Lernstrategie** | Unsupervised Learning |
-| **Einsatzbereich** | Anomalieerkennung |
-| **Kernprinzip** | Isoliert Anomalien durch zufällige Partitionierung mit Entscheidungsbäumen |
-
-**Beschreibung**
-
-Isolation Forest ist ein unbeaufsichtigter Algorithmus zur Anomalieerkennung. Er basiert auf der Annahme, dass Anomalien seltener sind und sich von normalen Daten unterscheiden. Der Algorithmus baut mehrere Entscheidungsbäume mit zufälligen Splits und misst, wie schnell ein Datenpunkt isoliert wird. Anomalien benötigen tendenziell weniger Splits zur Isolation.
-
-**Vorteile**
-- Schnell und effizient
-- Gut skalierbar
-- Keine Annahmen über Datenverteilung
-- Funktioniert ohne gelabelte Daten
-
-**Nachteile**
-- Schwierigkeit bei hochdimensionalen Daten
-- Kontaminationsrate muss geschätzt werden
-- Kann bei gleichmäßig verteilten Daten versagen
-- Weniger interpretierbar
-
-**Bewertungsmetriken**
-
-| Metrik | Beschreibung |
-|--------|--------------|
-| Anomalie-Score | Grad der Anomalie (-1 bis 1) |
-| Precision/Recall | Bei bekannten Labels |
-| Kontaminationsrate | Anteil erwarteter Anomalien |
-
-**Wichtige Hyperparameter**
-- `n_estimators`: Anzahl der Bäume
-- `contamination`: Erwarteter Anteil Anomalien
-- `max_samples`: Samples pro Baum
-- `random_state`: Reproduzierbarkeit
-
-```python
-from sklearn.ensemble import IsolationForest
-
-model = IsolationForest(
-    n_estimators=100,
-    contamination=0.1,  # 10% erwartete Anomalien
-    random_state=42
-)
-
-# -1 = Anomalie, 1 = Normal
-predictions = model.fit_predict(data)
-anomalies = data[predictions == -1]
-```
+> **Hinweis zur Anomalieerkennung:** Für die Erkennung von Anomalien und Ausreißern eignet sich **DBSCAN** (siehe Abschnitt "DBSCAN" oben), da dieser Algorithmus Rauschpunkte automatisch identifiziert und beliebig geformte Cluster erkennen kann.
 
 ---
 
@@ -657,16 +509,6 @@ Der Apriori-Algorithmus dient dem Auffinden von Zusammenhängen in transaktionsb
 - `min_confidence`: Minimale Konfidenz für Regeln
 - `min_lift`: Minimaler Lift-Wert
 
-```python
-from mlxtend.frequent_patterns import apriori, association_rules
-
-# Häufige Itemsets finden (data muss One-Hot-kodiert sein)
-frequent_itemsets = apriori(data, min_support=0.1, use_colnames=True)
-
-# Assoziationsregeln ableiten
-rules = association_rules(frequent_itemsets, metric="lift", min_threshold=1.0)
-print(rules[['antecedents', 'consequents', 'support', 'confidence', 'lift']])
-```
 
 ---
 
@@ -706,27 +548,6 @@ Die Hauptkomponentenanalyse (PCA) ist eine Methode zur Dimensionsreduktion, die 
 - `n_components`: Anzahl zu behaltender Komponenten (int oder float für Varianzanteil)
 - `svd_solver`: Berechnungsmethode ('auto', 'full', 'randomized')
 
-```python
-from sklearn.decomposition import PCA
-import matplotlib.pyplot as plt
-
-# Auf 2 Komponenten reduzieren
-model = PCA(n_components=2)
-data_reduced = model.fit_transform(data)
-
-# Erklärte Varianz analysieren
-print(f"Erklärte Varianz: {model.explained_variance_ratio_}")
-print(f"Gesamt: {sum(model.explained_variance_ratio_):.2%}")
-
-# Scree-Plot
-pca_full = PCA().fit(data)
-plt.plot(range(1, len(pca_full.explained_variance_ratio_) + 1), 
-         pca_full.explained_variance_ratio_.cumsum())
-plt.xlabel('Anzahl Komponenten')
-plt.ylabel('Kumulative erklärte Varianz')
-plt.title('Scree-Plot')
-plt.show()
-```
 
 ---
 
@@ -746,9 +567,9 @@ flowchart TD
     Q2 -->|Kategorial| CLASS[/"🎯 KLASSIFIKATION<br/>Logistic Regression<br/>Decision Tree<br/>Random Forest<br/>XGBoost<br/>Neural Network"/]
     
     Q3 -->|Gruppen finden| CLUST[/"🔍 CLUSTERING<br/>K-Means<br/>DBSCAN"/]
-    
-    Q3 -->|Ausreißer finden| ANOM[/"🔍 ANOMALIE<br/>Isolation Forest"/]
-    
+
+    Q3 -->|Ausreißer finden| ANOM[/"🔍 ANOMALIE<br/>DBSCAN"/]
+
     Q3 -->|Dimensionen<br/>reduzieren| DIM[/"🔍 DIMENSIONSRED.<br/>PCA<br/>LDA (wenn Labels)"/]
     
     Q3 -->|Zusammenhänge<br/>finden| ASSOC[/"🔍 ASSOZIATION<br/>Apriori"/]
@@ -763,7 +584,6 @@ flowchart TD
 ```
 
 ---
-
 
 
 **Version:** 1.0    

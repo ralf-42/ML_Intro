@@ -123,42 +123,6 @@ flowchart LR
 | **Übertragungsfunktion** | Berechnet die gewichtete Summe aller Eingaben | z = Σ(wᵢ · xᵢ) + b |
 | **Aktivierungsfunktion** | Transformiert die Summe in die Ausgabe | y = f(z) |
 
-### Beispiel: Einfaches Neuron
-
-```python
-import numpy as np
-
-def neuron(inputs, weights, bias, activation_fn):
-    """
-    Berechnung eines einzelnen Neurons
-    
-    Args:
-        inputs: Eingabewerte [x1, x2, x3]
-        weights: Gewichte [w1, w2, w3]
-        bias: Bias-Wert
-        activation_fn: Aktivierungsfunktion
-    
-    Returns:
-        Ausgabe des Neurons
-    """
-    # Übertragungsfunktion: gewichtete Summe + Bias
-    z = np.dot(inputs, weights) + bias
-    
-    # Aktivierungsfunktion anwenden
-    output = activation_fn(z)
-    
-    return output
-
-# Beispiel
-inputs = np.array([0.5, 0.3, 0.2])
-weights = np.array([0.4, 0.6, 0.8])
-bias = 0.1
-
-# Mit ReLU-Aktivierung
-relu = lambda x: max(0, x)
-result = neuron(inputs, weights, bias, relu)
-print(f"Ausgabe: {result}")  # 0.54
-```
 
 ---
 
@@ -227,31 +191,6 @@ flowchart TD
     style MULTI fill:#fff9c4
 ```
 
-### Python-Implementierung
-
-```python
-import numpy as np
-
-# Aktivierungsfunktionen
-def sigmoid(x):
-    return 1 / (1 + np.exp(-x))
-
-def tanh(x):
-    return np.tanh(x)
-
-def relu(x):
-    return np.maximum(0, x)
-
-def softmax(x):
-    exp_x = np.exp(x - np.max(x))  # Numerische Stabilität
-    return exp_x / exp_x.sum()
-
-# Beispiel
-x = np.array([-2, -1, 0, 1, 2])
-print(f"Sigmoid: {sigmoid(x)}")
-print(f"Tanh:    {tanh(x)}")
-print(f"ReLU:    {relu(x)}")
-```
 
 ---
 
@@ -295,56 +234,6 @@ flowchart LR
 
 <img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/forward_backward.png" class="logo" width="950"/>
 
-### Rechenbeispiel: Forward Pass
-
-Betrachten wir ein einfaches Netz mit zwei Eingaben und einem Ausgabeneuron:
-
-```python
-import numpy as np
-
-# Netzwerk-Parameter
-inputs = np.array([9, 12])  # Besuchte Kurstermine, bearbeitete Fallstudien
-weights_hidden = np.array([[0.11, 0.21],    # Gewichte zu Hidden-Neuron 1
-                           [0.12, 0.08]])    # Gewichte zu Hidden-Neuron 2
-bias_hidden = np.array([0.0, 0.0])
-
-weights_output = np.array([0.14, 0.15])      # Gewichte zum Output
-bias_output = 0.0
-
-# Forward Pass
-hidden = np.dot(weights_hidden, inputs) + bias_hidden
-# hidden[0] = 0.11*9 + 0.21*12 = 0.99 + 2.52 = 3.51
-# hidden[1] = 0.12*9 + 0.08*12 = 1.08 + 0.96 = 2.04
-
-output = np.dot(weights_output, hidden) + bias_output
-# output = 0.14*3.51 + 0.15*2.04 = 0.49 + 0.31 = 0.80
-
-print(f"Hidden Layer: {hidden}")  # [3.51, 2.04]
-print(f"Output: {output}")         # 0.80
-```
-
-### Backward Pass: Gewichtsanpassung
-
-Der Backward Pass verwendet den **Gradientenabstieg** zur Optimierung:
-
-```python
-# Parameter
-learning_rate = 0.05
-target = 1.0  # Erwarteter Wert
-prediction = 0.80
-
-# Error
-error = target - prediction  # 0.2
-
-# Gewichte aktualisieren (vereinfacht, ohne vollständige Kettenregel)
-# w_neu = w_alt + learning_rate * hidden * error
-weights_output_new = weights_output + learning_rate * hidden * error
-
-print(f"Alte Gewichte: {weights_output}")
-print(f"Neue Gewichte: {weights_output_new}")
-# [0.14, 0.15] → [0.175, 0.170] (ungefähr)
-```
-
 ---
 
 ## Initialisierung der Gewichte
@@ -375,30 +264,6 @@ flowchart TD
     style HE fill:#bbdefb
 ```
 
-### Python-Implementierung mit Keras
-
-```python
-from tensorflow import keras
-from tensorflow.keras import layers
-
-# Xavier/Glorot-Initialisierung (Standard für Dense-Layer)
-model = keras.Sequential([
-    layers.Dense(64, activation='tanh', 
-                 kernel_initializer='glorot_uniform'),  # Xavier
-    layers.Dense(32, activation='tanh',
-                 kernel_initializer='glorot_uniform'),
-    layers.Dense(1, activation='linear')
-])
-
-# He-Initialisierung für ReLU-Netze
-model_relu = keras.Sequential([
-    layers.Dense(64, activation='relu',
-                 kernel_initializer='he_uniform'),  # He
-    layers.Dense(32, activation='relu',
-                 kernel_initializer='he_uniform'),
-    layers.Dense(1, activation='linear')
-])
-```
 
 ---
 
@@ -438,48 +303,6 @@ flowchart TD
 <img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/activation_loss_function.png" class="logo" width="750"/>
 
 
-### Keras-Implementierung
-
-```python
-from tensorflow import keras
-from tensorflow.keras import layers
-
-# Binäre Klassifikation
-model_binary = keras.Sequential([
-    layers.Dense(64, activation='relu'),
-    layers.Dense(32, activation='relu'),
-    layers.Dense(1, activation='sigmoid')  # Output: Wahrscheinlichkeit 0-1
-])
-model_binary.compile(
-    optimizer='adam',
-    loss='binary_crossentropy',  # Loss für binäre Klassifikation
-    metrics=['accuracy']
-)
-
-# Multi-Class Klassifikation (z.B. 10 Klassen)
-model_multi = keras.Sequential([
-    layers.Dense(64, activation='relu'),
-    layers.Dense(32, activation='relu'),
-    layers.Dense(10, activation='softmax')  # Output: Wahrscheinlichkeiten
-])
-model_multi.compile(
-    optimizer='adam',
-    loss='categorical_crossentropy',  # Loss für Multi-Class
-    metrics=['accuracy']
-)
-
-# Regression
-model_regression = keras.Sequential([
-    layers.Dense(64, activation='relu'),
-    layers.Dense(32, activation='relu'),
-    layers.Dense(1, activation='linear')  # Output: beliebiger Wert
-])
-model_regression.compile(
-    optimizer='adam',
-    loss='mse',  # Mean Squared Error
-    metrics=['mae']
-)
-```
 
 ---
 
@@ -516,13 +339,6 @@ Neuronale Netze werden auch im unüberwachten Lernen eingesetzt:
 | Linear-Aktivierung in Hidden Layers | Keine Nichtlinearität | ReLU, Tanh verwenden |
 | Falsche Loss-Funktion | Training konvergiert nicht | Loss an Aufgabe anpassen |
 | Zu große Lernrate | Training instabil | Lernrate reduzieren |
-
----
-## Weiterführende Ressourcen
-
-- **StatQuest**: [Neural Networks Playlist](https://www.youtube.com/playlist?list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1) – Intuitive Erklärungen zu allen Grundlagen
-- **3Blue1Brown**: [Neural Networks Series](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi) – Visuelle Mathematik
-- **Keras Dokumentation**: [Getting Started](https://keras.io/getting_started/) – Offizielle Anleitungen
 
 
 ---
