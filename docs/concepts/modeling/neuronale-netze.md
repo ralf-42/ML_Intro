@@ -69,39 +69,39 @@ flowchart LR
 
 Ein neuronales Netz besteht aus:
 
-| Komponente | Beschreibung | Funktion |
-|------------|--------------|----------|
-| **Neuronen/Knoten** | Grundbausteine des Netzwerks | Verarbeiten Eingaben und erzeugen Ausgaben |
-| **Verbindungen** | Gewichtete Kanten zwischen Neuronen | Übertragen Signale mit unterschiedlicher Stärke |
-| **Schichten (Layer)** | Gruppierte Neuronen | Input → Hidden → Output |
+| Komponente            | Beschreibung                        | Funktion                                        |
+| --------------------- | ----------------------------------- | ----------------------------------------------- |
+| **Neuronen/Knoten**   | Grundbausteine des Netzwerks        | Verarbeiten Eingaben und erzeugen Ausgaben      |
+| **Verbindungen**      | Gewichtete Kanten zwischen Neuronen | Übertragen Signale mit unterschiedlicher Stärke |
+| **Schichten (Layer)** | Gruppierte Neuronen                 | Input → Hidden → Output                         |
 
 ---
 
-## Aufbau eines Neurons
+## Aufbau eines Neuronalen Netzes
 
 Ein künstliches Neuron kann durch vier Basiselemente beschrieben werden:
 
 ```mermaid
 flowchart LR
-    subgraph Eingaben["Eingaben"]
+    subgraph Eingaben["<b>Eingaben"]
         X1["x₁"]
         X2["x₂"]
         X3["x₃"]
     end
     
-    subgraph Gewichte["Gewichte & Bias"]
+    subgraph Gewichte["<b>Gewichte & Bias"]
         W1["w₁"]
         W2["w₂"]
         W3["w₃"]
         B["Bias b"]
     end
     
-    subgraph Verarbeitung["Verarbeitung"]
+    subgraph Verarbeitung["<b>Neuron"]
         SUM["Σ<br/>Übertragungsfunktion"]
         ACT["f(x)<br/>Aktivierungsfunktion"]
     end
     
-    Y["y<br/>Ausgabe"]
+    Y["y<br/><b>Ausgabe"]
     
     X1 --> W1 --> SUM
     X2 --> W2 --> SUM
@@ -168,7 +168,7 @@ Die Aktivierungsfunktion bestimmt den möglichen Wertebereich der Ausgabe eines 
 
 ```mermaid
 flowchart TD
-    subgraph Aktivierungsfunktionen["Aktivierungsfunktionen"]
+    subgraph Aktivierungsfunktionen["<b>Aktivierungsfunktionen"]
         direction TB
         
         subgraph Linear["Linear (Identity)"]

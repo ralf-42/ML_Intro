@@ -74,13 +74,11 @@ Machine Learning Algorithmen und Modellierung
 
 ### Neural Networks
 
-| Thema | Beschreibung | Link |
-|-------|--------------|------|
-| **NN Training** | Visualisierung des Trainingsprozesses | [netflow.js](https://hmkcode.com/netflow/) |
-| **Forward/Backward Pass** | Neuronales Netz - Forward/Backward | [NN - Forward-Backward](https://editor.p5js.org/ralf.bendig.rb/full/mXyXxaFCT) |
-| **Training x-Iterationen** | Neuronales Netz - Training x-mal | [NN - Training x-mal](https://editor.p5js.org/ralf.bendig.rb/full/ugLsS4LjL) |
-| **Gewichte** | Einfache Netze visualisiert | [Einfache Netze](https://raw.githack.com/IMAGINARY/simple-networks/feature/pasch-workshop/index.html) |
-| **Architektur** | NN-Architektur Designer | [Neural Numbers](https://imaginary.github.io/neural-numbers/index.html#design-network) |
+| Thema           | Beschreibung                | Link                                                                                                  |
+| --------------- | --------------------------- | ----------------------------------------------------------------------------------------------------- |
+| **NN-Training** | Neuronales Netz - Training  | [NN - Training - neu](https://editor.p5js.org/ralf.bendig.rb/full/FsQx83Adk)                          |
+| **Gewichte**    | Einfache Netze visualisiert | [Einfache Netze](https://raw.githack.com/IMAGINARY/simple-networks/feature/pasch-workshop/index.html) |
+| **Architektur** | NN-Architektur Designer     | [Neural Numbers](https://imaginary.github.io/neural-numbers/index.html#design-network)                |
 
 ### Convolutional Neural Networks (CNN)
 
