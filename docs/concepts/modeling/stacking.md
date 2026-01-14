@@ -301,15 +301,6 @@ flowchart TD
 
 ---
 
-## Weiterführende Ressourcen
-
-| Ressource | Beschreibung |
-|-----------|--------------|
-| [Kaggle Ensembling Guide](https://www.kaggle.com/) | Praktische Stacking-Tutorials |
-| [scikit-learn StackingClassifier](https://scikit-learn.org/) | Offizielle Dokumentation |
-| [scikit-learn VotingClassifier](https://scikit-learn.org/) | Voting-Implementierung |
-
----
 
 ## Zusammenfassung
 

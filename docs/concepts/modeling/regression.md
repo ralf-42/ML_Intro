@@ -78,8 +78,7 @@ correlations = df.corr()['target'].sort_values(ascending=False)
 print(correlations)
 ```
 
-- **Werte nah bei 1 oder -1:** Starker linearer Zusammenhang.
-    
+- **Werte nah bei 1 oder -1:** Starker linearer Zusammenhang.    
 - **Werte nah bei 0:** Kein linearer Zusammenhang (die lineare Regression wird hier wahrscheinlich scheitern).
 
 ---

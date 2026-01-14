@@ -188,92 +188,6 @@ flowchart TD
 
 ---
 
-## Implementierung mit Scikit-learn
-
-### Klassifikation
-
-```python
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report, accuracy_score
-from sklearn.datasets import load_iris
-
-# Daten laden
-iris = load_iris()
-data, target = iris.data, iris.target
-
-# Train-Test-Split
-data_train, data_test, target_train, target_test = train_test_split(
-    data, target, test_size=0.2, random_state=42
-)
-
-# Random Forest Klassifikator
-model = RandomForestClassifier(
-    n_estimators=100,      # Anzahl der Bäume
-    max_depth=None,        # Maximale Tiefe (None = unbegrenzt)
-    min_samples_split=2,   # Min. Samples für Split
-    min_samples_leaf=1,    # Min. Samples pro Blatt
-    max_features='sqrt',   # Features pro Split
-    bootstrap=True,        # Bootstrap Sampling
-    random_state=42,
-    n_jobs=-1              # Alle CPU-Kerne nutzen
-)
-
-# Training
-model.fit(data_train, target_train)
-
-# Vorhersage
-target_pred = model.predict(data_test)
-
-# Evaluation
-print(f"Accuracy: {accuracy_score(target_test, target_pred):.4f}")
-print(classification_report(target_test, target_pred, target_names=iris.target_names))
-```
-
-### Regression
-
-```python
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_squared_error, r2_score
-from sklearn.datasets import fetch_california_housing
-import numpy as np
-
-# Daten laden
-housing = fetch_california_housing()
-data, target = housing.data, housing.target
-
-# Train-Test-Split
-data_train, data_test, target_train, target_test = train_test_split(
-    data, target, test_size=0.2, random_state=42
-)
-
-# Random Forest Regressor
-model = RandomForestRegressor(
-    n_estimators=100,
-    max_depth=15,
-    min_samples_split=5,
-    min_samples_leaf=2,
-    max_features=0.33,     # 1/3 der Features
-    bootstrap=True,
-    random_state=42,
-    n_jobs=-1
-)
-
-# Training
-model.fit(data_train, target_train)
-
-# Vorhersage
-target_pred = model.predict(data_test)
-
-# Evaluation
-rmse = np.sqrt(mean_squared_error(target_test, target_pred))
-r2 = r2_score(target_test, target_pred)
-
-print(f"RMSE: {rmse:.4f}")
-print(f"R²: {r2:.4f}")
-```
-
----
 
 ## Wichtige Hyperparameter
 
@@ -316,26 +230,6 @@ mindmap
 
 Random Forest bietet eingebaute **Feature Importance** basierend auf der durchschnittlichen Reduktion der Unreinheit (Gini/Entropy):
 
-```python
-import pandas as pd
-import matplotlib.pyplot as plt
-
-# Feature Importance extrahieren
-feature_importance = pd.DataFrame({
-    'feature': iris.feature_names,
-    'importance': model.feature_importances_
-}).sort_values('importance', ascending=False)
-
-# Visualisierung
-fig, ax = plt.subplots(figsize=(10, 6))
-ax.barh(feature_importance['feature'], feature_importance['importance'])
-ax.set_xlabel('Importance')
-ax.set_title('Random Forest Feature Importance')
-ax.invert_yaxis()
-plt.tight_layout()
-plt.show()
-```
-
 ```mermaid
 xychart-beta
     title "Feature Importance (Beispiel Iris Dataset)"
@@ -368,44 +262,7 @@ print(f"Test Score: {model.score(data_test, target_test):.4f}")
 
 ---
 
-## Vergleich: Decision Tree vs. Random Forest
 
-```mermaid
-flowchart LR
-    subgraph DT["<b>Decision Tree"]
-        DT1["Ein Baum"]
-        DT2["Alle Features"]
-        DT3["Alle Daten"]
-        DT4["Hohe Varianz"]
-    end
-    
-    subgraph RF["<b>Random Forest"]
-        RF1["Viele Bäume"]
-        RF2["Feature-Subset"]
-        RF3["Bootstrap Samples"]
-        RF4["Niedrige Varianz"]
-    end
-    
-    DT1 -.->|"Ensemble"| RF1
-    DT2 -.->|"Randomisierung"| RF2
-    DT3 -.->|"Bagging"| RF3
-    DT4 -.->|"Aggregation"| RF4
-    
-    style DT fill:#ffcdd2
-    style RF fill:#c8e6c9
-```
-
-| Aspekt | Decision Tree | Random Forest |
-|--------|---------------|---------------|
-| **Modellkomplexität** | Einfach | Komplex (Ensemble) |
-| **Overfitting-Risiko** | Hoch | Niedrig |
-| **Interpretierbarkeit** | Sehr gut | Eingeschränkt |
-| **Trainingszeit** | Schnell | Langsamer |
-| **Robustheit** | Sensibel | Robust |
-| **Feature Importance** | Ja | Ja (aggregiert) |
-| **Parallelisierbar** | Nein | Ja |
-
----
 
 ## Vor- und Nachteile
 
@@ -429,68 +286,6 @@ flowchart LR
 | ❌ **Langsame Vorhersage** | Bei sehr vielen Bäumen |
 | ❌ **Overfitting bei Rauschen** | Kann Rauschen in Daten überanpassen |
 | ❌ **Extrapolation** | Kann nicht über Trainingsdatenbereich hinaus extrapolieren |
-
----
-
-## Hyperparameter-Tuning
-
-### Grid Search
-
-```python
-from sklearn.model_selection import GridSearchCV
-
-param_grid = {
-    'n_estimators': [50, 100, 200],
-    'max_depth': [None, 10, 20, 30],
-    'min_samples_split': [2, 5, 10],
-    'min_samples_leaf': [1, 2, 4],
-    'max_features': ['sqrt', 'log2', 0.5]
-}
-
-grid_search = GridSearchCV(
-    RandomForestClassifier(random_state=42),
-    param_grid,
-    cv=5,
-    scoring='accuracy',
-    n_jobs=-1,
-    verbose=1
-)
-
-grid_search.fit(data_train, target_train)
-
-print(f"Beste Parameter: {grid_search.best_params_}")
-print(f"Bester Score: {grid_search.best_score_:.4f}")
-```
-
-### Randomized Search (für große Parameterräume)
-
-```python
-from sklearn.model_selection import RandomizedSearchCV
-from scipy.stats import randint, uniform
-
-param_distributions = {
-    'n_estimators': randint(50, 500),
-    'max_depth': [None] + list(range(5, 50)),
-    'min_samples_split': randint(2, 20),
-    'min_samples_leaf': randint(1, 10),
-    'max_features': uniform(0.1, 0.9)
-}
-
-random_search = RandomizedSearchCV(
-    RandomForestClassifier(random_state=42),
-    param_distributions,
-    n_iter=50,
-    cv=5,
-    scoring='accuracy',
-    n_jobs=-1,
-    random_state=42
-)
-
-random_search.fit(data_train, target_train)
-
-print(f"Beste Parameter: {random_search.best_params_}")
-print(f"Bester Score: {random_search.best_score_:.4f}")
-```
 
 ---
 

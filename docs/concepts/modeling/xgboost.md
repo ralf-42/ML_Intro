@@ -211,17 +211,7 @@ flowchart TD
 
 ---
 
-## Weiterführende Ressourcen
 
-| Ressource | Beschreibung |
-|-----------|--------------|
-| [StatQuest XGBoost Part 1](https://www.youtube.com/c/joshstarmer) | Regression mit XGBoost |
-| [StatQuest XGBoost Part 2](https://www.youtube.com/c/joshstarmer) | Klassifikation mit XGBoost |
-| [StatQuest XGBoost Part 3](https://www.youtube.com/c/joshstarmer) | Mathematische Details |
-| [StatQuest XGBoost Part 4](https://www.youtube.com/c/joshstarmer) | Optimierungen |
-| [XGBoost Documentation](https://xgboost.readthedocs.io/) | Offizielle Dokumentation |
-
----
 
 ## Zusammenfassung
 
