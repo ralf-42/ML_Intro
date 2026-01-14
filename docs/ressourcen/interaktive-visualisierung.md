@@ -65,12 +65,13 @@ Machine Learning Algorithmen und Modellierung
 
 ### Unsupervised Learning
 
-| Thema | Beschreibung | Link |
-|-------|--------------|------|
-| **K-Means** | Clustering-Algorithmus | [KMeans](https://editor.p5js.org/ralf.bendig.rb/full/ok7eHY9lx) |
-| **DBSCAN** | Density-based Clustering | [DBScan](https://editor.p5js.org/ralf.bendig.rb/full/gTDjzcFhn) |
-| **Apriori** | Assoziationsanalyse | [Associationanalysis](https://editor.p5js.org/ralf.bendig.rb/full/d8mzrnYv1) |
-| **PCA** | Hauptkomponentenanalyse | [PCA](https://editor.p5js.org/ralf.bendig.rb/full/t8LIyuiaq) |
+| Thema       | Beschreibung             | Link                                                                                   |
+| ----------- | ------------------------ | -------------------------------------------------------------------------------------- |
+| **K-Means** | Clustering-Algorithmus   | [KMeans](https://editor.p5js.org/ralf.bendig.rb/full/ok7eHY9lx)                        |
+| **DBSCAN**  | Density-based Clustering | [DBScan](https://editor.p5js.org/ralf.bendig.rb/full/gTDjzcFhn)                        |
+| **Apriori** | Assoziationsanalyse      | [Associationanalysis](https://editor.p5js.org/ralf.bendig.rb/full/d8mzrnYv1)           |
+| **PCA**     | Hauptkomponentenanalyse  | [PCA](https://editor.p5js.org/ralf.bendig.rb/full/t8LIyuiaq)                           |
+| **PCA**     | Hauptkomponentenanalyse  | [PCA - Lamarr-Institut](https://lamarr-institute.org/de/blog/dimensionsreduktion-pca/) |
 
 ### Neural Networks
 
