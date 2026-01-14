@@ -258,75 +258,6 @@ dense1 = Dense(128, activation='relu')
 output = Dense(10, activation='softmax')
 ```
 
-### Vollständiges CNN-Beispiel
-
-```python
-from tensorflow import keras
-from tensorflow.keras import layers
-
-def create_cnn_model(input_shape=(28, 28, 1), num_classes=10):
-    """
-    Erstellt ein CNN für Bildklassifizierung.
-    
-    Parameters:
-    -----------
-    input_shape : tuple
-        Form der Eingabebilder (Höhe, Breite, Kanäle)
-    num_classes : int
-        Anzahl der Klassen
-        
-    Returns:
-    --------
-    keras.Model
-        Kompiliertes CNN-Modell
-    """
-    model = keras.Sequential([
-        # Input Layer
-        layers.Input(shape=input_shape),
-        
-        # Erster Convolutional Block
-        layers.Conv2D(32, (3, 3), activation='relu', padding='same'),
-        layers.MaxPooling2D((2, 2)),
-        
-        # Zweiter Convolutional Block
-        layers.Conv2D(64, (3, 3), activation='relu', padding='same'),
-        layers.MaxPooling2D((2, 2)),
-        
-        # Dritter Convolutional Block
-        layers.Conv2D(64, (3, 3), activation='relu', padding='same'),
-        
-        # Classification Head
-        layers.Flatten(),
-        layers.Dense(64, activation='relu'),
-        layers.Dropout(0.5),  # Regularisierung
-        layers.Dense(num_classes, activation='softmax')
-    ])
-    
-    model.compile(
-        optimizer='adam',
-        loss='sparse_categorical_crossentropy',
-        metrics=['accuracy']
-    )
-    
-    return model
-
-# Modell erstellen und trainieren
-model = create_cnn_model()
-model.summary()
-
-# Training
-history = model.fit(
-    X_train, y_train,
-    epochs=10,
-    batch_size=32,
-    validation_split=0.2,
-    verbose=1
-)
-
-# Evaluation
-test_loss, test_acc = model.evaluate(X_test, y_test, verbose=0)
-print(f"Test Accuracy: {test_acc:.4f}")
-```
 
 ### CNN-Parameter verstehen
 
@@ -513,39 +444,6 @@ flowchart LR
     X0 ~~~ X1 ~~~ X2
 ```
 
-### Einfaches RNN in Keras
-
-```python
-from tensorflow.keras.layers import SimpleRNN, Embedding
-
-def create_simple_rnn(vocab_size, embedding_dim, rnn_units, output_dim):
-    """
-    Erstellt ein einfaches RNN für Sequenzklassifizierung.
-    
-    Parameters:
-    -----------
-    vocab_size : int
-        Größe des Vokabulars
-    embedding_dim : int
-        Dimension der Wort-Embeddings
-    rnn_units : int
-        Anzahl der RNN-Einheiten
-    output_dim : int
-        Ausgabedimension (Anzahl Klassen)
-    """
-    model = keras.Sequential([
-        # Embedding Layer: Wörter → Vektoren
-        Embedding(vocab_size, embedding_dim, input_length=100),
-        
-        # RNN Layer
-        SimpleRNN(rnn_units, return_sequences=False),
-        
-        # Output
-        layers.Dense(output_dim, activation='softmax')
-    ])
-    
-    return model
-```
 
 ### Problem: Vanishing Gradients
 
@@ -613,97 +511,7 @@ flowchart TD
 | **Input Gate** | Entscheidet, welche neuen Informationen gespeichert werden | "Was ist wichtig zu merken?" |
 | **Output Gate** | Entscheidet, welche Informationen als Output verwendet werden | "Was ist jetzt relevant?" |
 
-### LSTM in Keras
 
-```python
-from tensorflow.keras.layers import LSTM, Bidirectional
-
-def create_lstm_model(vocab_size=10000, embedding_dim=128, 
-                      lstm_units=64, num_classes=2, max_len=100):
-    """
-    Erstellt ein LSTM-Modell für Textklassifizierung.
-    
-    Parameters:
-    -----------
-    vocab_size : int
-        Größe des Vokabulars
-    embedding_dim : int
-        Dimension der Wort-Embeddings
-    lstm_units : int
-        Anzahl der LSTM-Einheiten
-    num_classes : int
-        Anzahl der Klassen
-    max_len : int
-        Maximale Sequenzlänge
-    """
-    model = keras.Sequential([
-        # Embedding Layer
-        layers.Embedding(vocab_size, embedding_dim, input_length=max_len),
-        
-        # LSTM Layer
-        layers.LSTM(lstm_units, return_sequences=True),
-        layers.Dropout(0.2),
-        
-        # Zweiter LSTM Layer
-        layers.LSTM(lstm_units // 2),
-        layers.Dropout(0.2),
-        
-        # Dense Layers
-        layers.Dense(32, activation='relu'),
-        layers.Dense(num_classes, activation='softmax')
-    ])
-    
-    model.compile(
-        optimizer='adam',
-        loss='sparse_categorical_crossentropy',
-        metrics=['accuracy']
-    )
-    
-    return model
-
-# Modell erstellen
-model = create_lstm_model()
-model.summary()
-```
-
-### Bidirektionale LSTMs
-
-Bidirektionale LSTMs verarbeiten die Sequenz in beide Richtungen (vorwärts und rückwärts), was oft zu besseren Ergebnissen führt.
-
-```mermaid
-flowchart LR
-    subgraph BiLSTM["Bidirectional LSTM"]
-        subgraph Forward["Forward LSTM"]
-            F1["→"] --> F2["→"] --> F3["→"]
-        end
-        
-        subgraph Backward["Backward LSTM"]
-            B3["←"] --> B2["←"] --> B1["←"]
-        end
-    end
-    
-    X1["x₁"] --> F1
-    X1 --> B1
-    X2["x₂"] --> F2
-    X2 --> B2
-    X3["x₃"] --> F3
-    X3 --> B3
-    
-    F3 --> Concat["Concat"]
-    B1 --> Concat
-    Concat --> Out["Output"]
-```
-
-```python
-# Bidirektionales LSTM
-model = keras.Sequential([
-    layers.Embedding(vocab_size, embedding_dim, input_length=max_len),
-    layers.Bidirectional(layers.LSTM(64, return_sequences=True)),
-    layers.Bidirectional(layers.LSTM(32)),
-    layers.Dense(64, activation='relu'),
-    layers.Dense(num_classes, activation='softmax')
-])
-```
 
 ### LSTM vs. SimpleRNN
 
@@ -763,146 +571,14 @@ flowchart LR
 3. **Rauschunterdrückung**: Denoising AutoEncoder
 4. **Generative Modelle**: Variational AutoEncoder (VAE)
 
-### Implementierung
-
-```python
-from tensorflow import keras
-from tensorflow.keras import layers
-
-def create_autoencoder(input_dim, encoding_dim=32):
-    """
-    Erstellt einen AutoEncoder für Dimensionsreduktion.
-    
-    Parameters:
-    -----------
-    input_dim : int
-        Dimension der Eingabedaten
-    encoding_dim : int
-        Dimension des Latent Space
-        
-    Returns:
-    --------
-    tuple
-        (autoencoder, encoder, decoder) Modelle
-    """
-    # Encoder
-    input_layer = layers.Input(shape=(input_dim,))
-    encoded = layers.Dense(256, activation='relu')(input_layer)
-    encoded = layers.Dense(128, activation='relu')(encoded)
-    encoded = layers.Dense(encoding_dim, activation='relu')(encoded)
-    
-    # Decoder
-    decoded = layers.Dense(128, activation='relu')(encoded)
-    decoded = layers.Dense(256, activation='relu')(decoded)
-    decoded = layers.Dense(input_dim, activation='sigmoid')(decoded)
-    
-    # Modelle erstellen
-    autoencoder = keras.Model(input_layer, decoded, name='autoencoder')
-    encoder = keras.Model(input_layer, encoded, name='encoder')
-    
-    # Decoder-Modell (für spätere Nutzung)
-    encoded_input = layers.Input(shape=(encoding_dim,))
-    decoder_layer = autoencoder.layers[-3](encoded_input)
-    decoder_layer = autoencoder.layers[-2](decoder_layer)
-    decoder_layer = autoencoder.layers[-1](decoder_layer)
-    decoder = keras.Model(encoded_input, decoder_layer, name='decoder')
-    
-    autoencoder.compile(
-        optimizer='adam',
-        loss='mse'  # Mean Squared Error für Rekonstruktion
-    )
-    
-    return autoencoder, encoder, decoder
-
-# Beispiel mit MNIST
-(X_train, _), (X_test, _) = keras.datasets.mnist.load_data()
-
-# Normalisierung und Flattening
-X_train = X_train.astype('float32') / 255.0
-X_test = X_test.astype('float32') / 255.0
-X_train = X_train.reshape(-1, 784)
-X_test = X_test.reshape(-1, 784)
-
-# AutoEncoder erstellen und trainieren
-autoencoder, encoder, decoder = create_autoencoder(input_dim=784, encoding_dim=32)
-
-autoencoder.fit(
-    X_train, X_train,  # Input = Target (Rekonstruktion)
-    epochs=50,
-    batch_size=256,
-    shuffle=True,
-    validation_data=(X_test, X_test)
-)
-```
-
 ### Anomalieerkennung mit AutoEncoder
 
 AutoEncoder eignen sich hervorragend zur Anomalieerkennung: Anomalien werden schlechter rekonstruiert als normale Daten.
-
-```python
-import numpy as np
-
-def detect_anomalies(autoencoder, data, threshold=None):
-    """
-    Erkennt Anomalien basierend auf Rekonstruktionsfehler.
-    
-    Parameters:
-    -----------
-    autoencoder : keras.Model
-        Trainierter AutoEncoder
-    data : np.ndarray
-        Zu prüfende Daten
-    threshold : float, optional
-        Schwellwert für Anomalien (Standard: Mean + 2*Std)
-        
-    Returns:
-    --------
-    tuple
-        (anomaly_mask, reconstruction_errors)
-    """
-    # Rekonstruktion
-    reconstructed = autoencoder.predict(data, verbose=0)
-    
-    # Rekonstruktionsfehler (MSE pro Sample)
-    mse = np.mean(np.power(data - reconstructed, 2), axis=1)
-    
-    # Threshold bestimmen
-    if threshold is None:
-        threshold = np.mean(mse) + 2 * np.std(mse)
-    
-    # Anomalien identifizieren
-    anomalies = mse > threshold
-    
-    return anomalies, mse
-
-# Anwendung
-anomaly_mask, errors = detect_anomalies(autoencoder, X_test)
-print(f"Gefundene Anomalien: {np.sum(anomaly_mask)}")
-print(f"Threshold: {np.mean(errors) + 2 * np.std(errors):.4f}")
-```
 
 ### Denoising AutoEncoder
 
 Ein Denoising AutoEncoder lernt, verrauschte Eingaben zu bereinigen:
 
-```python
-def add_noise(data, noise_factor=0.5):
-    """Fügt Gaußsches Rauschen hinzu."""
-    noisy_data = data + noise_factor * np.random.normal(size=data.shape)
-    return np.clip(noisy_data, 0., 1.)
-
-# Verrauschte Trainingsdaten erstellen
-X_train_noisy = add_noise(X_train)
-X_test_noisy = add_noise(X_test)
-
-# Training: Noisy Input → Clean Output
-autoencoder.fit(
-    X_train_noisy, X_train,  # Rausch → Original
-    epochs=50,
-    batch_size=256,
-    validation_data=(X_test_noisy, X_test)
-)
-```
 
 ---
 
@@ -946,13 +622,6 @@ flowchart TD
 
 ---
 
-## Weiterführende Ressourcen
-
-- **StatQuest**: [Neural Networks Playlist](https://www.youtube.com/playlist?list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1) - Verständliche Erklärungen
-- **Keras Documentation**: [Official Guides](https://keras.io/guides/) - Detaillierte Anleitungen
-- **TensorFlow Tutorials**: [Computer Vision](https://www.tensorflow.org/tutorials/images) - Hands-on Beispiele
-
----
 
 **Version:** 1.0     
 **Stand:** Januar 2026     
