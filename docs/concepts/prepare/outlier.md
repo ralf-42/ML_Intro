@@ -108,9 +108,8 @@ flowchart TB
         end
 
         subgraph ml["<b>ML-basiert"]
-            iforest["<b>Isolation Forest</b><br/>Anomalie-Isolation<br/>durch Entscheidungsbäume"]
+            dbscan["<b>DBSCAN</b><br/>Dichtebasiertes Clustering<br/>mit Ausreißer-Erkennung"]
             lof["<b>Local Outlier Factor</b><br/>Lokale Dichte-<br/>abweichungen"]
-            dbscan["<b>DBSCAN</b><br/>Dichtebasiertes<br/>Clustering"]
         end
     end
 
@@ -260,25 +259,29 @@ flowchart LR
     style viz fill:#f3e5f5
 ```
 
-## Algorithmus: Isolation Forest
+## Algorithmus: DBSCAN für Ausreißer-Erkennung
+
+> **DBSCAN** (Density-Based Spatial Clustering of Applications with Noise) ist ein dichtebasierter Clustering-Algorithmus, der Ausreißer automatisch als Rauschpunkte (Noise) identifiziert.
+
+Für eine detaillierte Beschreibung siehe: [K-Means & DBSCAN Dokumentation](../modeling/kmeans-dbscan)
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TD
-    subgraph iforest["<b>Isolation Forest Prinzip"]
+    subgraph dbscan["<b>DBSCAN Prinzip"]
         direction TB
-        idea["<b>Grundidee:</b><br/>Anomalien sind leichter<br/>zu isolieren als normale Punkte"]
+        idea["<b>Grundidee:</b><br/>Cluster als Bereiche hoher Dichte,<br/>Ausreißer als isolierte Punkte"]
 
-        step1["1. Zufällige Auswahl<br/>eines Features"]
-        step2["2. Zufälliger Split-Wert<br/>zwischen Min und Max"]
-        step3["3. Rekursive Partitionierung<br/>bis Isolation"]
-        step4["4. Pfadlänge messen"]
+        step1["1. Core Points finden<br/>(≥ min_samples im ε-Radius)"]
+        step2["2. Core Points zu<br/>Clustern verbinden"]
+        step3["3. Border Points<br/>zuweisen"]
+        step4["4. Noise Points<br/>klassifizieren"]
 
         idea --> step1 --> step2 --> step3 --> step4
 
-        step4 --> result{"Pfadlänge?"}
-        result -->|"Kurz"| anomaly["🔴 Anomalie<br/>(schnell isoliert)"]
-        result -->|"Lang"| normal["🟢 Normal<br/>(schwer zu isolieren)"]
+        step4 --> result{"Punkttyp?"}
+        result -->|"Core/Border"| normal["🟢 Cluster-Punkt<br/>(normale Daten)"]
+        result -->|"Noise"| anomaly["🔴 Ausreißer<br/>(Anomalie)"]
     end
 
     style idea fill:#fff3e0
@@ -325,7 +328,7 @@ flowchart TB
 
 | Klasse | Verwendung |
 |--------|------------|
-| `IsolationForest` | Unsupervised Anomalie-Erkennung |
+| `DBSCAN` | Dichtebasiertes Clustering mit Ausreißer-Erkennung |
 | `LocalOutlierFactor` | Dichtebasierte lokale Ausreißer |
 | `EllipticEnvelope` | Gaussian-basierte Ausreißer-Erkennung |
 | `OneClassSVM` | SVM für Anomalie-Erkennung |

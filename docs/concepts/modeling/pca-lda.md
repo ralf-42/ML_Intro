@@ -55,6 +55,9 @@ flowchart LR
 >
 > Stellen Sie sich einen Würfel vor, der von einer Lichtquelle beleuchtet wird. Der Schatten auf der Wand ist eine 2D-Projektion der 3D-Struktur. Dabei geht Information verloren, aber die wesentlichen Merkmale bleiben erhalten.
 
+
+<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/wuerfel.png" class="logo" width="650"/>
+
 ---
 
 ## Principal Component Analysis (PCA)
@@ -90,64 +93,6 @@ flowchart TD
 | **Interpretierbarkeit** | Neue Achsen sind interpretierbar |
 | **Anwendung** | Datenkompression, Visualisierung, Rauschreduktion |
 
-### Implementierung mit scikit-learn
-
-```python
-from sklearn.preprocessing import StandardScaler
-from sklearn.decomposition import PCA
-import numpy as np
-
-# Beispieldaten (Wichtig: Vor PCA standardisieren!)
-scaler = StandardScaler()
-data_scaled = scaler.fit_transform(data)
-
-# PCA mit 2 Komponenten
-pca = PCA(n_components=2)
-data_pca = pca.fit_transform(data_scaled)
-
-# Erklärte Varianz pro Komponente
-print("Erklärte Varianz:", pca.explained_variance_ratio_)
-print("Kumulierte Varianz:", np.cumsum(pca.explained_variance_ratio_))
-```
-
-### Bestimmung der Komponentenanzahl
-
-Die optimale Anzahl der Hauptkomponenten wird oft über die **erklärte Varianz** bestimmt:
-
-```python
-from sklearn.decomposition import PCA
-import matplotlib.pyplot as plt
-
-# PCA mit allen Komponenten
-pca_full = PCA()
-pca_full.fit(data_scaled)
-
-# Scree Plot erstellen
-plt.figure(figsize=(10, 5))
-
-plt.subplot(1, 2, 1)
-plt.bar(range(1, len(pca_full.explained_variance_ratio_) + 1), 
-        pca_full.explained_variance_ratio_)
-plt.xlabel('Hauptkomponente')
-plt.ylabel('Erklärte Varianz')
-plt.title('Scree Plot')
-
-plt.subplot(1, 2, 2)
-plt.plot(range(1, len(pca_full.explained_variance_ratio_) + 1), 
-         np.cumsum(pca_full.explained_variance_ratio_), 'bo-')
-plt.axhline(y=0.95, color='r', linestyle='--', label='95% Varianz')
-plt.xlabel('Anzahl Komponenten')
-plt.ylabel('Kumulierte erklärte Varianz')
-plt.title('Kumulierte Varianz')
-plt.legend()
-
-plt.tight_layout()
-plt.show()
-```
-
-> **Faustregel**
->
-> Wählen Sie die Anzahl der Komponenten so, dass mindestens **95% der Gesamtvarianz** erklärt wird. Der "Ellenbogen" im Scree Plot zeigt oft einen guten Kompromiss.
 
 ---
 
@@ -183,23 +128,6 @@ flowchart TD
 | **Max. Komponenten** | Anzahl Klassen - 1 |
 | **Anwendung** | Klassifikation, Vorverarbeitung |
 
-### Implementierung mit scikit-learn
-
-```python
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-
-# LDA benötigt Klassenlabels!
-lda = LinearDiscriminantAnalysis(n_components=2)
-data_lda = lda.fit_transform(data_scaled, target)
-
-# LDA kann auch direkt zur Klassifikation verwendet werden
-model = LinearDiscriminantAnalysis()
-model.fit(data_train, target_train)
-target_pred = model.predict(data_test)
-
-# Erklärte Varianz (bei LDA: zwischen-Klassen-Varianz)
-print("Erklärte Varianz:", lda.explained_variance_ratio_)
-```
 
 ---
 
@@ -260,62 +188,6 @@ flowchart LR
 
 ---
 
-## Praktisches Beispiel: PCA vs. LDA
-
-```python
-from sklearn.datasets import load_iris
-from sklearn.preprocessing import StandardScaler
-from sklearn.decomposition import PCA
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-import matplotlib.pyplot as plt
-
-# Daten laden
-iris = load_iris()
-data = iris.data
-target = iris.target
-
-# Standardisierung
-scaler = StandardScaler()
-data_scaled = scaler.fit_transform(data)
-
-# PCA und LDA anwenden
-pca = PCA(n_components=2)
-lda = LinearDiscriminantAnalysis(n_components=2)
-
-data_pca = pca.fit_transform(data_scaled)
-data_lda = lda.fit_transform(data_scaled, target)
-
-# Visualisierung
-fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-
-# PCA Plot
-for i, label in enumerate(iris.target_names):
-    mask = target == i
-    axes[0].scatter(data_pca[mask, 0], data_pca[mask, 1], label=label, alpha=0.7)
-axes[0].set_xlabel('PC1')
-axes[0].set_ylabel('PC2')
-axes[0].set_title('PCA - Maximiert Varianz')
-axes[0].legend()
-
-# LDA Plot
-for i, label in enumerate(iris.target_names):
-    mask = target == i
-    axes[1].scatter(data_lda[mask, 0], data_lda[mask, 1], label=label, alpha=0.7)
-axes[1].set_xlabel('LD1')
-axes[1].set_ylabel('LD2')
-axes[1].set_title('LDA - Maximiert Klassentrennung')
-axes[1].legend()
-
-plt.tight_layout()
-plt.show()
-
-# Erklärte Varianz vergleichen
-print(f"PCA - Erklärte Varianz: {pca.explained_variance_ratio_.sum():.2%}")
-print(f"LDA - Erklärte Varianz: {lda.explained_variance_ratio_.sum():.2%}")
-```
-
----
-
 ## Wann welche Methode verwenden?
 
 ### PCA empfohlen bei:
@@ -366,7 +238,6 @@ mindmap
 | **Kernfrage** | "Welche Richtung erklärt die meiste Variation?" | "Welche Richtung trennt die Klassen am besten?" |
 | **Stärke** | Universell einsetzbar | Optimal für Klassifikation |
 | **Schwäche** | Ignoriert Klassenzugehörigkeit | Braucht Labels, max. k-1 Komponenten |
-
 
 
 ---

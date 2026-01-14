@@ -40,7 +40,8 @@ description: "Machine Learning Modelle und Algorithmen"
 
 ### Anomalie-Erkennung
 
-- **[Isolation Forest](modeling/isolation_forest)** - Ensemble-basierte Anomalie-Erkennung
+> **Hinweis:** Für Anomalie-Erkennung siehe **[DBSCAN](modeling/kmeans-dbscan)** unter Clustering. DBSCAN kann Ausreißer automatisch identifizieren und eignet sich gut zur Erkennung von Anomalien in Daten.
+
 - One-Class SVM - Support Vector Maschinen für Ausreißer
 - Local Outlier Factor (LOF) - Lokale Dichteanomalien
 

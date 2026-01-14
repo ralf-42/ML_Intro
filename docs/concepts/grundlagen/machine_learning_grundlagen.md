@@ -159,33 +159,32 @@ flowchart TB
 
 ---
 
-## Beispiel
-
-[Teachable Machines](https://teachablemachine.withgoogle.com/)
-
-
----
 
 ## Lernparadigmen
 
 Die Art der verfügbaren Daten bestimmt, welches Lernparadigma angewendet werden kann. Es gibt drei grundlegende Ansätze:
 
 ```mermaid
-flowchart TB
-    Q1{"Gibt es Daten<br/>zur Aufgabe?"}
-    Q1 --> |"Nein"| NO["Keine ML-Lösung<br/>möglich"]
-    Q1 --> |"Ja"| Q2{"Gibt es bekannte<br/>Lösungen zu<br/>den Daten?"}
+flowchart TD
+    %% Startpunkt
+    Q1{"Gibt es <br/>Daten?"}
+
+    %% Zweig: Keine Daten vorhanden
+    Q1 -- "Nein" --> Q_Env{"Können Daten<br/>gewonnen/simuliert werden?"}
+    Q_Env -- "Ja" --> RL["🎮 <b>Reinforcement Learning</b><br/>(Lernen durch Interaktion)"]
+    Q_Env -- "Nein" --> NO["❌ Keine ML-Lösung<br/>möglich"]
+
+    %% Zweig: Daten vorhanden
+    Q1 -- "Ja" --> Q2{"Gibt es zu den Daten<br/>bekannte Zielwerte<br/>(Labels)?"}
     
-    Q2 --> |"Ja"| SL["🎯 Supervised<br/>Learning"]
-    Q2 --> |"Nein"| Q3{"Müssen Daten<br/>durch Simulation<br/>oder Experimente<br/>gewonnen werden?"}
-    
-    Q3 --> |"Ja"| RL["🎮 Reinforcement<br/>Learning"]
-    Q3 --> |"Nein"| UL["🔍 Unsupervised<br/>Learning"]
-    
-    style SL fill:#c8e6c9
-    style UL fill:#bbdefb
-    style RL fill:#fff9c4
-    style NO fill:#ffcdd2
+    Q2 -- "Ja" --> SL["🎯 <b>Supervised Learning</b><br/>(Vorhersage & Klassifikation)"]
+    Q2 -- "Nein" --> UL["🔍 <b>Unsupervised Learning</b><br/>(Struktur- & Mustererkennung)"]
+
+    %% Styling
+    style SL fill:#c8e6c9,stroke:#2e7d32
+    style UL fill:#bbdefb,stroke:#1565c0
+    style RL fill:#fff9c4,stroke:#fbc02d
+    style NO fill:#ffcdd2,stroke:#c62828
 ```
 
 ### Übersicht der Lernparadigmen
