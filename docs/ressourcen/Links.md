@@ -72,12 +72,12 @@ has_toc: true
 
 ### Clustering & Dimensionsreduktion
 
-| Thema | Link |
-|-------|------|
-| K-Means Clustering | [Link](https://youtu.be/4b5d3muPQmA) |
-| DBSCAN | [Link](https://www.youtube.com/watch?v=RDZUdRSDOok) |
-| LDA | [Link](https://www.youtube.com/watch?v=azXCzI57Yfc) |
-| PCA | (im Skript referenziert, kein direkter Link) |
+| Thema    | Link                                                |
+| -------- | --------------------------------------------------- |
+| K-Means  | [Link](https://youtu.be/4b5d3muPQmA)                |
+| DBSCAN   | [Link](https://www.youtube.com/watch?v=RDZUdRSDOok) |
+| LDA      | [Link](https://www.youtube.com/watch?v=azXCzI57Yfc) |
+| PCA      | [Link](https://www.youtube.com/watch?v=FgakZw6K1QQ) |
 
 ### Cross Validation & Overfitting
 
@@ -95,14 +95,7 @@ has_toc: true
 | RNN | [Link](https://www.youtube.com/watch?v=AsNTP8Kwu80) |
 | LSTM | [Link](https://www.youtube.com/watch?v=YCzL96nL7j0) |
 
----
 
-## 🔧 KNIME Kurse & Tutorials
-
-| Ressource | Link |
-|-----------|------|
-| KNIME Homepage | [Link](https://www.knime.com/) |
-| KNIME Kurse (alle) | [Link](https://www.knime.com/knime-courses) |
 
 ---
 
@@ -187,18 +180,6 @@ has_toc: true
 
 ---
 
-## 📖 Dokumentation & Referenzen
-
-| Ressource | Link |
-|-----------|------|
-| scikit-learn: Cross Validation | [Link](https://scikit-learn.org/stable/modules/cross_validation.html) |
-| scikit-learn: Decomposition | [Link](https://scikit-learn.org/stable/modules/decomposition.html) |
-| Wikipedia: Hyperparameter Optimization | [Link](https://www.wikiwand.com/en/Hyperparameter_optimization#/overview) |
-| Wikipedia: Lineare Regression (deutsch) | [Link](https://www.wikiwand.com/de/Lineare_Regression#/Einfache_lineare_Regression) |
-| Wikipedia: Bootstrap Aggregating | [Link](https://de.wikipedia.org/wiki/Bootstrap_aggregating) |
-| Wikipedia: Künstliche Neuronale Netze | [Link](https://de.wikipedia.org/wiki/K%C3%BCnstliches_neuronales_Netz) |
-
----
 
 ## 🤖 KI-Tool-Sammlungen
 

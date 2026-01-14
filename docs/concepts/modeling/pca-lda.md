@@ -24,39 +24,41 @@ has_toc: true
 
 ---
 
-## Grundprinzip: Dimensionsreduktion durch Projektion
+## Grundidee
 
-Die Projektion ist eine mathematische Funktion, die Datenpunkte so transformiert, dass sie mit weniger Komponenten beschreibbar werden. Das Konzept lässt sich anschaulich mit einem Schattenwurf vergleichen.
+### Das Problem: Zu viele Informationen
 
-```mermaid
-flowchart LR
-    subgraph original["Originaldaten (3D)"]
-        A[("x, y, z")]
-    end
-    
-    subgraph projektion["Projektion"]
-        P["📽️ Schattenwurf"]
-    end
-    
-    subgraph reduziert["Reduzierte Daten (2D)"]
-        B[("x', y'")]
-    end
-    
-    original --> projektion --> reduziert
-    
-    style original fill:#e3f2fd,stroke:#1976d2
-    style reduziert fill:#e8f5e9,stroke:#388e3c
-    style projektion fill:#fff3e0,stroke:#f57c00
-```
+Heutzutage werden enorme Datenmengen gesammelt. Für das Training von KI-Systemen ist das einerseits gut, da mehr Daten oft zu besseren Ergebnissen führen. Andererseits benötigen diese riesigen Mengen extrem viel **Speicherplatz und Rechenzeit**, was besonders bei Echtzeitanwendungen zum Problem wird.
 
-**Kernidee:** Ein dreidimensionaler Punkt kann als zweidimensionaler Punkt in einer Ebene dargestellt werden – ähnlich wie der Schatten eines Würfels auf einer Wand.
+### Die Lösung: Dimensionsreduktion
 
-> **Beispiel**
->
-> Stellen Sie sich einen Würfel vor, der von einer Lichtquelle beleuchtet wird. Der Schatten auf der Wand ist eine 2D-Projektion der 3D-Struktur. Dabei geht Information verloren, aber die wesentlichen Merkmale bleiben erhalten.
+Anstatt einfach Datenpunkte (Beispiele) zu löschen, verringert man bei der **Dimensionsreduktion** die Anzahl der **Merkmale** (Dimensionen). Es gibt zwei Wege, dies zu tun:
 
+1. **Merkmalsauswahl**: Man pickt sich nur einen Teil der vorhandenen Merkmale heraus.
+2. **Merkmalsprojektion**: Man rechnet alle Merkmale so um, dass sie durch weniger, neue Merkmale beschrieben werden können. Die **PCA** oder LDA gehört zu dieser zweiten Kategorie.
+
+### Wie funktioniert die PCA? (Das Schatten-Beispiel)
+
+Das Prinzip der PCA lässt sich vereinfacht mit einem **Schattenwurf** erklären:
+
+- Stellen Sie sich einen dreidimensionalen Würfel vor. Wenn man ihn mit einer Taschenlampe anstrahlt, wirft er einen zweidimensionalen Schatten auf den Boden.
+- Der Schatten ist eine **Projektion** des Würfels: Er hat weniger Dimensionen (2D statt 3D), zeigt aber immer noch die wesentlichen Eigenschaften des Objekts.
+- Die PCA sucht nun genau den Winkel („die beste Lichtquelle“), bei dem der Schatten die meiste Information des Originals beibehält. Mathematisch bedeutet das, dass die **Varianz** (die Streuung der Daten) im Schattenwurf maximal sein soll.
 
 <img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/wuerfel.png" class="logo" width="650"/>
+
+### Hauptkomponenten und Nutzen
+
+- **Hauptkomponenten**: Dies sind die neuen Koordinatenachsen, auf die die Daten projiziert werden. Die erste Hauptkomponente zeigt immer in die Richtung der größten Streuung.
+- **Vorteile**: Neben der Ersparnis von Rechenzeit und Speicher kann die PCA auch dabei helfen, unerwünschtes **Rauschen** (Störsignale) in den Daten zu unterdrücken.
+- **Risiko**: Man muss vorsichtig sein. In manchen Fällen kann die Reduktion dazu führen, dass verschiedene Datenklassen (zum Beispiel unterschiedliche Pflanzentypen) so stark überlappen, dass man sie nach der PCA nicht mehr voneinander unterscheiden kann.
+
+Zusammenfassend ist die PCA also eine Methode, um die **Komplexität von Daten zu verringern**, indem man sie auf ihre wichtigsten Bestandteile reduziert, ähnlich wie ein aussagekräftiger Schatten ein komplexes Objekt vereinfacht darstellt.
+
+
+---
+
+[PCA - Eine Methode zur Dimensionsreduktion » Lamarr-Institut](https://lamarr-institute.org/de/blog/dimensionsreduktion-pca/)
 
 ---
 
@@ -86,13 +88,16 @@ flowchart TD
 
 ### Eigenschaften von PCA
 
-| Eigenschaft | Beschreibung |
-|-------------|--------------|
-| **Lerntyp** | Unüberwacht (keine Labels erforderlich) |
-| **Ziel** | Maximierung der Gesamtvarianz |
-| **Interpretierbarkeit** | Neue Achsen sind interpretierbar |
-| **Anwendung** | Datenkompression, Visualisierung, Rauschreduktion |
+| Eigenschaft             | Beschreibung                                      |
+| ----------------------- | ------------------------------------------------- |
+| **Lerntyp**             | Unüberwacht (keine Labels erforderlich)           |
+| **Ziel**                | Maximierung der Gesamtvarianz                     |
+| **Interpretierbarkeit** | Neue Achsen sind interpretierbar                  |
+| **Anwendung**           | Datenkompression, Visualisierung, Rauschreduktion |
 
+---
+
+ *Beispiel Use Case "Cancer": siehe b240_ul_pca_special.ipynb*
 
 ---
 
