@@ -28,31 +28,6 @@ has_toc: true
 
 Fehlende Werte (Missing Values) sind ein häufiges Problem in realen Datensätzen. Sie entstehen durch unvollständige Datenerfassung, Übertragungsfehler, Systemausfälle oder bewusst nicht beantwortete Fragen. Die korrekte Behandlung fehlender Werte ist entscheidend für die Qualität eines Machine-Learning-Modells.
 
-## Arten fehlender Werte
-
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
-flowchart TB
-    subgraph arten["<b>Arten fehlender Werte"]
-        direction TB
-        mcar["<b>MCAR</b><br/>Missing Completely<br/>At Random"]
-        mar["<b>MAR</b><br/>Missing<br/>At Random"]
-        mnar["<b>MNAR</b><br/>Missing Not<br/>At Random"]
-    end
-    
-    mcar --> mcar_desc["Fehlen ist völlig zufällig<br/>Keine Abhängigkeit von<br/>anderen Variablen"]
-    mar --> mar_desc["Fehlen hängt von anderen<br/>beobachteten Variablen ab"]
-    mnar --> mnar_desc["Fehlen hängt vom<br/>fehlenden Wert selbst ab"]
-    
-    mcar_desc --> mcar_ex["Beispiel: Sensor fällt<br/>zufällig aus"]
-    mar_desc --> mar_ex["Beispiel: Jüngere Personen<br/>geben Alter seltener an"]
-    mnar_desc --> mnar_ex["Beispiel: Hohe Einkommen<br/>werden verschwiegen"]
-
-    style mcar fill:#4CAF50,color:#fff
-    style mar fill:#FF9800,color:#fff
-    style mnar fill:#f44336,color:#fff
-```
-
 ## Entscheidungsbaum zur Behandlung
 
 ```mermaid
@@ -151,30 +126,6 @@ flowchart TB
     style advanced fill:#fff3e0
 ```
 
-## Workflow in Python
-
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
-flowchart LR
-    subgraph workflow["<b>Typischer Workflow"]
-        direction TB
-        A["1. Erkennen<br/><code>df.isnull().sum()</code>"]
-        B["2. Visualisieren<br/><code>missingno.matrix()</code>"]
-        C["3. Analysieren<br/>Muster erkennen"]
-        D["4. Strategie wählen"]
-        E["5. Imputation<br/>durchführen"]
-        F["6. Validieren<br/>Ergebnis prüfen"]
-    end
-    
-    A --> B --> C --> D --> E --> F
-
-    style A fill:#bbdefb
-    style B fill:#bbdefb
-    style C fill:#bbdefb
-    style D fill:#c8e6c9
-    style E fill:#c8e6c9
-    style F fill:#c8e6c9
-```
 
 ## Konsequenzen falscher Behandlung
 
