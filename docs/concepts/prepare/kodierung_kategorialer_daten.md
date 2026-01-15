@@ -3,8 +3,8 @@ layout: default
 title: Kodierung
 parent: Prepare
 grand_parent: Konzepte
-nav_order: 3
-description: Kodierung kategorialer Daten - OrdinalEncoder, OneHotEncoder und TargetEncoder für Machine Learning
+nav_order: 5
+description: "Kodierung kategorialer Daten - OrdinalEncoder, OneHotEncoder und TargetEncoder für Machine Learning"
 has_toc: true
 ---
 

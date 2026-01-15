@@ -18,36 +18,47 @@ Die wichtigsten Aspekte der Datenaufbereitung:
 - **Data Transformation** - Skalierung, Normalisierung, Encoding
 - **Train-Test Split** - Aufteilung in Trainings- und Testdaten
 
+---
+
 ## Data Cleaning
 
-- Missing Values Handling
-- Outlier Detection & Treatment
-- Data Quality Checks
-- Duplicate Removal
+Bereinigung und Qualitätssicherung der Rohdaten.
 
+| Thema | Beschreibung |
+|-------|--------------|
+| [Missing Values](prepare/missing_values.md) | Fehlende Werte erkennen und behandeln (SimpleImputer, KNNImputer) |
+| [Outlier](prepare/outlier.md) | Ausreißer erkennen und behandeln (Z-Score, IQR, Isolation Forest) |
+
+---
 
 ## Feature Engineering
 
-- Feature Creation
-- Feature Selection
-- Feature Extraction
-- Domain Knowledge Integration
+Merkmalserstellung und -transformation zur Verbesserung der Modellperformance.
 
+| Thema | Beschreibung |
+|-------|--------------|
+| [Feature Engineering](prepare/feature-engineering.md) | Feature Creation, Selection, Extraction und Domain Knowledge Integration |
+
+---
 
 ## Data Transformation
 
-- Scaling & Normalization (StandardScaler, MinMaxScaler)
-- Categorical Encoding (One-Hot, Label Encoding)
-- Feature Binning
-- Log Transformations
+Skalierung, Normalisierung und Encoding für ML-Algorithmen.
 
+| Thema | Beschreibung |
+|-------|--------------|
+| [Skalierung](prepare/skalierung.md) | Normalisierung und Standardisierung (StandardScaler, MinMaxScaler) |
+| [Kodierung](prepare/kodierung_kategorialer_daten.md) | Kategoriale Daten kodieren (OrdinalEncoder, OneHotEncoder, TargetEncoder) |
+
+---
 
 ## Train-Test Split
 
-- Random Split
-- Stratified Split
-- Time-based Split
-- Cross-Validation Strategies
+Aufteilung in Trainings- und Testdaten für zuverlässige Modellbewertung.
+
+| Thema | Beschreibung |
+|-------|--------------|
+| [Train-Test-Split](prepare/train_test_split.md) | Datenaufteilung, Stratifizierung, Data Leakage vermeiden |
 
 
 ---

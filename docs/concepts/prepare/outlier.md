@@ -28,65 +28,6 @@ has_toc: true
 
 Ein Ausreißer (Outlier) ist ein Datenpunkt, dessen Ausprägung stark von der Norm abweicht. Ausreißer können die Ergebnisse von Analysen und Machine-Learning-Modellen erheblich verzerren. Die korrekte Identifikation und Behandlung von Ausreißern ist daher ein wichtiger Schritt in der Datenvorverarbeitung.
 
-## Kategorien von Ausreißern
-
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
-flowchart TB
-    subgraph kategorien["<b>Kategorien von Ausreißern"]
-        direction LR
-
-        subgraph echt["<b>Echte Ausreißer"]
-            direction TB
-            real["<b>Reale Anomalien</b><br/>Tatsächlich<br/>ungewöhnliche Werte"]
-            real_ex["Beispiel:<br/>Betrugsfall,<br/>seltene Krankheit"]
-        end
-
-        subgraph fehler["<b>Fehlerhafte Ausreißer"]
-            direction TB
-            error["<b>Datenfehler</b><br/>Falsche Eingaben<br/>oder Messungen"]
-            error_ex["Beispiel:<br/>Tippfehler,<br/>Sensordefekt"]
-        end
-
-        subgraph einfluss["<b>Einflussreiche Punkte"]
-            direction TB
-            influence["<b>Leverage Points</b><br/>Starker Einfluss auf<br/>Modellparameter"]
-            influence_ex["Beispiel:<br/>Extremwert am<br/>Rand der Verteilung"]
-        end
-    end
-
-    real --> real_ex
-    error --> error_ex
-    influence --> influence_ex
-
-    style real fill:#4CAF50,color:#fff
-    style error fill:#f44336,color:#fff
-    style influence fill:#FF9800,color:#fff
-```
-
-## Typen von Anomalien
-
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
-flowchart TD
-    subgraph typen["<b>Anomalie-Typen"]
-        direction TB
-
-        punkt["<b>Punkt-/Globale Anomalie</b><br/>Einzelner Datenpunkt weicht<br/>von gesamter Datenbasis ab"]
-        kontext["<b>Kontextuelle Anomalie</b><br/>Wert ist nur im bestimmten<br/>Kontext anomal"]
-        kollektiv["<b>Kollektive Anomalie</b><br/>Gruppe von Datenpunkten<br/>ist gemeinsam anomal"]
-    end
-
-    punkt --> punkt_ex["Beispiel:<br/>Gehalt von 1 Million €<br/>bei Durchschnitt 50.000 €"]
-
-    kontext --> kontext_ex["Beispiel:<br/>30°C Außentemperatur<br/>im Januar (Mitteleuropa)"]
-
-    kollektiv --> kollektiv_ex["Beispiel:<br/>Kreditkartenkäufe in USA<br/>und Frankreich zur gleichen Zeit"]
-
-    style punkt fill:#e3f2fd
-    style kontext fill:#fff3e0
-    style kollektiv fill:#fce4ec
-```
 
 ## Methoden zur Identifikation
 
@@ -176,7 +117,7 @@ flowchart LR
     style zscore fill:#e3f2fd
 ```
 
-### IQR-Methode (Tukey's Fences)
+### IQR-Methode
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
@@ -259,35 +200,6 @@ flowchart LR
     style viz fill:#f3e5f5
 ```
 
-## Algorithmus: DBSCAN für Ausreißer-Erkennung
-
-> **DBSCAN** (Density-Based Spatial Clustering of Applications with Noise) ist ein dichtebasierter Clustering-Algorithmus, der Ausreißer automatisch als Rauschpunkte (Noise) identifiziert.
-
-Für eine detaillierte Beschreibung siehe: [K-Means & DBSCAN Dokumentation](../modeling/kmeans-dbscan)
-
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
-flowchart TD
-    subgraph dbscan["<b>DBSCAN Prinzip"]
-        direction TB
-        idea["<b>Grundidee:</b><br/>Cluster als Bereiche hoher Dichte,<br/>Ausreißer als isolierte Punkte"]
-
-        step1["1. Core Points finden<br/>(≥ min_samples im ε-Radius)"]
-        step2["2. Core Points zu<br/>Clustern verbinden"]
-        step3["3. Border Points<br/>zuweisen"]
-        step4["4. Noise Points<br/>klassifizieren"]
-
-        idea --> step1 --> step2 --> step3 --> step4
-
-        step4 --> result{"Punkttyp?"}
-        result -->|"Core/Border"| normal["🟢 Cluster-Punkt<br/>(normale Daten)"]
-        result -->|"Noise"| anomaly["🔴 Ausreißer<br/>(Anomalie)"]
-    end
-
-    style idea fill:#fff3e0
-    style anomaly fill:#ffcdd2
-    style normal fill:#c8e6c9
-```
 
 ## Best Practices
 

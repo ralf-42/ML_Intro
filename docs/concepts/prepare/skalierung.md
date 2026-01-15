@@ -2,6 +2,7 @@
 layout: default
 title: Skalierung
 parent: Prepare
+grand_parent: Konzepte
 nav_order: 4
 description: "Feature-Skalierung durch Normalisierung und Standardisierung für Machine Learning"
 has_toc: true
@@ -142,26 +143,6 @@ $$x_{norm} = \frac{60 - 20}{100 - 20} = \frac{40}{80} = 0.5$$
 
 Ergebnis: [0.0, 0.25, 0.5, 0.75, 1.0]
 
-### Implementierung mit scikit-learn
-
-```python
-from sklearn.preprocessing import MinMaxScaler
-import numpy as np
-
-# Beispieldaten
-data = np.array([[20], [40], [60], [80], [100]])
-
-# Scaler erstellen und anwenden
-scaler = MinMaxScaler()
-data_normalized = scaler.fit_transform(data)
-
-print("Normalisierte Daten:")
-print(data_normalized.flatten())
-# Ausgabe: [0.   0.25 0.5  0.75 1.  ]
-
-# Rücktransformation möglich
-data_original = scaler.inverse_transform(data_normalized)
-```
 
 ---
 
@@ -199,27 +180,6 @@ $$x_{std} = \frac{60 - 60}{28.28} = 0$$
 
 Ergebnis: [-1.41, -0.71, 0, 0.71, 1.41]
 
-### Implementierung mit scikit-learn
-
-```python
-from sklearn.preprocessing import StandardScaler
-import numpy as np
-
-# Beispieldaten
-data = np.array([[20], [40], [60], [80], [100]])
-
-# Scaler erstellen und anwenden
-scaler = StandardScaler()
-data_standardized = scaler.fit_transform(data)
-
-print("Standardisierte Daten:")
-print(data_standardized.flatten())
-# Ausgabe: [-1.41421356 -0.70710678  0.          0.70710678  1.41421356]
-
-# Mittelwert und Standardabweichung abrufen
-print(f"Mittelwert: {scaler.mean_[0]}")
-print(f"Standardabweichung: {scaler.scale_[0]}")
-```
 
 ---
 
@@ -283,38 +243,9 @@ flowchart TD
 
 ## Das Ausreißer-Problem
 
-Ausreißer beeinflussen Normalisierung und Standardisierung unterschiedlich stark:
+Ausreißer beeinflussen Normalisierung und Standardisierung unterschiedlich stark: 
 
-### Beispiel: Auswirkung eines Ausreißers
-
-```python
-import numpy as np
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
-
-# Normale Daten
-normal_data = np.array([[30], [35], [40], [45], [50]])
-
-# Daten mit Ausreißer
-data_with_outlier = np.array([[30], [35], [40], [45], [500]])  # 500 ist Ausreißer
-
-# Normalisierung
-minmax = MinMaxScaler()
-print("Min-Max ohne Ausreißer:", minmax.fit_transform(normal_data).flatten())
-# [0.   0.25 0.5  0.75 1.  ]
-
-print("Min-Max mit Ausreißer:", minmax.fit_transform(data_with_outlier).flatten())
-# [0.    0.01  0.02  0.03  1.  ]  ← Fast alle Werte nahe 0!
-
-# Standardisierung
-standard = StandardScaler()
-print("\nZ-Score ohne Ausreißer:", standard.fit_transform(normal_data).flatten().round(2))
-# [-1.41 -0.71  0.    0.71  1.41]
-
-print("Z-Score mit Ausreißer:", standard.fit_transform(data_with_outlier).flatten().round(2))
-# [-0.59 -0.56 -0.54 -0.51  2.2 ]  ← Weniger extreme Verzerrung
-```
-
-Bei der Normalisierung werden durch den Ausreißer (500) alle anderen Werte (30-45) auf einen winzigen Bereich (0.00-0.03) komprimiert. Die Standardisierung ist robuster, da sie auf Mittelwert und Standardabweichung basiert.
+Bei der Normalisierung werden durch den Ausreißer alle anderen Werte auf einen winzigen Bereich komprimiert. Die Standardisierung ist robuster, da sie auf Mittelwert und Standardabweichung basiert.
 
 ---
 
@@ -322,17 +253,6 @@ Bei der Normalisierung werden durch den Ausreißer (500) alle anderen Werte (30-
 
 Für Daten mit starken Ausreißern bietet scikit-learn den `RobustScaler`, der Median und Interquartilsabstand statt Mittelwert und Standardabweichung verwendet:
 
-```python
-from sklearn.preprocessing import RobustScaler
-
-# Verwendet Median und IQR (25%-75% Perzentile)
-robust_scaler = RobustScaler()
-data_robust = robust_scaler.fit_transform(data_with_outlier)
-
-print("Robust-Skalierung mit Ausreißer:")
-print(data_robust.flatten().round(2))
-# [-0.67 -0.33  0.    0.33 30.67]  ← Normale Werte gut verteilt
-```
 
 ---
 
@@ -403,13 +323,6 @@ flowchart LR
 
 ---
 
-## Ressourcen
-
-- [scikit-learn: Preprocessing Data](https://scikit-learn.org/stable/modules/preprocessing.html)
-- [Feature Scaling - Machine Learning Mastery](https://machinelearningmastery.com/standardscaler-and-minmaxscaler-transforms-in-python/)
-- [StatQuest: Feature Scaling](https://www.youtube.com/watch?v=mnKm3YP56PY)
-
----
 
 **Version:** 1.0     
 **Stand:** Januar 2026     
