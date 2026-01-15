@@ -3,7 +3,7 @@ layout: default
 title: K-Means & DBSCAN
 parent: Modeling
 grand_parent: Konzepte
-nav_order: 4
+nav_order: 6
 description: "Clustering-Algorithmen zur Entdeckung von Strukturen in Daten: K-Means für partitionsbasiertes und DBSCAN für dichtebasiertes Clustering"
 has_toc: true
 ---

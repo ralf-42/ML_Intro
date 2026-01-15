@@ -3,7 +3,7 @@ layout: default
 title: AutoML
 parent: Modeling
 grand_parent: Konzepte
-nav_order: 15
+nav_order: 13
 description: "Automatisiertes Machine Learning (AutoML) - Workflow-Automatisierung von Datenvorbereitung bis Modellauswahl"
 has_toc: true
 ---

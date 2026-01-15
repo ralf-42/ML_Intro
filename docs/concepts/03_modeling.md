@@ -9,70 +9,73 @@ description: "Machine Learning Modelle und Algorithmen"
 
 # Modeling
 
-Überblick über klassische Machine Learning Modelle und ihre Anwendungsfälle.
+Überblick über Machine Learning Modelle und ihre Anwendungsfälle.
+
+---
 
 ## Modellauswahl
 
-- **[Modellauswahl](modeling/modellauswahl)** - Systematische Kriterien und Strategien zur Auswahl des optimalen Machine-Learning-Modells für verschiedene Problemstellungen
-- **[Modell-Steckbriefe](modeling/modell-steckbriefe)** - Kompakte Übersicht aller wichtigen ML-Algorithmen mit Einsatzbereichen, Eigenschaften und Bewertungsmetriken
+Einstiegspunkt für die systematische Auswahl des passenden Algorithmus.
+
+| Thema | Beschreibung |
+|-------|--------------|
+| [Modellauswahl](modeling/modellauswahl) | Systematische Kriterien und Strategien zur Auswahl des optimalen Modells |
+| [Modell-Steckbriefe](modeling/modell-steckbriefe) | Kompakte Übersicht aller wichtigen ML-Algorithmen |
+
+---
 
 ## Supervised Learning
 
-### Klassifikation
+Modelle, die aus gelabelten Daten lernen, um Vorhersagen zu treffen.
 
-- **[Entscheidungsbaum](modeling/decision_tree)** - Hierarchische Regelstruktur für Klassifikation und Regression
-- Support Vector Machines - Maximal-Margin-Klassifikatoren
-- Naive Bayes - Probabilistische Klassifikation
+| Thema | Beschreibung |
+|-------|--------------|
+| [Entscheidungsbaum](modeling/decision_tree) | Hierarchische Regelstruktur für Klassifikation und Regression |
+| [Random Forest](modeling/random-forest) | Bagging-Ensemble aus multiplen Entscheidungsbäumen |
+| [Regression](modeling/regression) | Lineare und logistische Regression für stetige Vorhersagen |
+| [XGBoost](modeling/xgboost) | Extreme Gradient Boosting für höchste Performance |
 
-### Regression
-
-- **[Regression](modeling/regression)** - Lineare und logistische Regression für stetige Vorhersagen
-- Ridge & Lasso - Regularisierte Regression
-- Polynomial Regression - Nicht-lineare Beziehungen
+---
 
 ## Unsupervised Learning
 
-### Clustering
+Modelle, die Strukturen in ungelabelten Daten entdecken.
 
-- **[K-Means & DBSCAN](modeling/kmeans-dbscan)** - Partitions- und dichtebasiertes Clustering
-- Hierarchisches Clustering - Agglomerative und divisive Methoden
-- Mean Shift - Dichtebasiertes nicht-parametrisches Clustering
+| Thema | Beschreibung |
+|-------|--------------|
+| [Clustering (K-Means & DBSCAN)](modeling/kmeans-dbscan) | Partitions- und dichtebasiertes Clustering |
+| [PCA und LDA](modeling/pca-lda) | Dimensionsreduktion und Visualisierung |
+| [Apriori](modeling/apriori) | Association Rules für Warenkorbanalyse |
 
-### Anomalie-Erkennung
-
-- [DBSCAN](modeling/kmeans-dbscan)
-- Isolation Forest - Ensemble von Entscheidungsbäumen
-- One-Class SVM - Support Vector Maschinen für Ausreißer
-- Local Outlier Factor (LOF) - Lokale Dichteanomalien
-- AutoEncoder – Neuronale Netze zur Rekonstruktionsfehler-basierten Anomalieerkennung
-
-### Assoziationsanalyse
-
-- **[Apriori](modeling/apriori)** - Entdeckung von Zusammenhängen in Transaktionsdaten
-- FP-Growth - Effiziente Alternative zum Apriori-Algorithmus
-- Eclat - Vertikales Mining von häufigen Itemsets
-
-### Dimensionsreduktion
-
-- **[PCA und LDA](modeling/pca-lda)** - Principal Component Analysis und Linear Discriminant Analysis für Dimensionsreduktion
-- t-SNE - Visualisierung hochdimensionaler Daten
-- UMAP - Manifold-basierte Dimensionsreduktion
-
-## Ensemble Methods
-
-- **[Ensemble-Methoden](modeling/ensemble)** - Übersicht: Bagging, Boosting und Stacking-Konzepte
-- **[Random Forest](modeling/random-forest)** - Bagging-basiertes Ensemble: Kombination multipler Entscheidungsbäume für robuste Vorhersagen
-- **[XGBoost](modeling/xgboost)** - Extreme Gradient Boosting: Optimierte Boosting-Implementierung für höchste Performance
-- **[Stacking](modeling/stacking)** - Kombination heterogener Modelle durch Voting oder Meta-Learning
+---
 
 ## Deep Learning
 
-- **[Neuronale Netze](modeling/neuronale-netze)** - Grundlagen künstlicher neuronaler Netze: Architektur, Aktivierungsfunktionen und Training
-- **[Spezielle Neuronale Netze](modeling/spezielle-neuronale-netze)** - Computer Vision mit CNNs, Sequenzmodellierung mit RNNs/LSTMs und AutoEncoder
+Neuronale Netze für komplexe Muster in Bildern, Text und Sequenzen.
+
+| Thema | Beschreibung |
+|-------|--------------|
+| [Neuronale Netze](modeling/neuronale-netze) | Grundlagen: Architektur, Aktivierungsfunktionen, Training |
+| [Spezielle Neuronale Netze](modeling/spezielle-neuronale-netze) | CNN (Computer Vision), RNN/LSTM (Zeitreihen), AutoEncoder |
+
+---
+
+## Ensemble-Methoden
+
+Kombination mehrerer Modelle für bessere Vorhersagen.
+
+| Thema | Beschreibung |
+|-------|--------------|
+| [Ensemble-Methoden](modeling/ensemble) | Übersicht: Bagging, Boosting und Stacking-Konzepte |
+| [Stacking](modeling/stacking) | Kombination heterogener Modelle durch Meta-Learning |
+
+---
 
 ## Automatisierung
 
-- **[AutoML](modeling/automl)** - Automatisiertes Machine Learning: Workflow-Automatisierung von Datenvorbereitung bis Modellauswahl mit PyCaret
+| Thema | Beschreibung |
+|-------|--------------|
+| [AutoML](modeling/automl) | Workflow-Automatisierung mit PyCaret |
 
 ---
 

@@ -3,7 +3,7 @@ layout: default
 title: Apriori
 parent: Modeling
 grand_parent: Konzepte
-nav_order: 6
+nav_order: 8
 description: Der Apriori-Algorithmus für Assoziationsanalyse – Entdeckung von Zusammenhängen in Transaktionsdaten mit Support, Confidence und Lift
 has_toc: true
 ---

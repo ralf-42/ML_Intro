@@ -3,7 +3,7 @@ layout: default
 title: Stacking
 parent: Modeling
 grand_parent: Konzepte
-nav_order: 13
+nav_order: 12
 description: "Stacking kombiniert heterogene Modelle durch Voting oder Meta-Learning zu einem leistungsfähigeren Ensemble"
 has_toc: true
 ---
