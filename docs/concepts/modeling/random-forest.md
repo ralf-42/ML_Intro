@@ -3,7 +3,7 @@ layout: default
 title: Random Forest
 parent: Modeling
 grand_parent: Konzepte
-nav_order: 11
+nav_order: 3
 description: "Random Forest kombiniert multiple Entscheidungsbäume zu einem robusten Ensemble-Modell für Klassifikation und Regression"
 has_toc: true
 ---
