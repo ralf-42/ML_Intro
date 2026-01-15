@@ -11,49 +11,73 @@ description: "ML-Modelle in Produktion bringen"
 
 Vom Experiment zur Production - ML-Modelle produktiv einsetzen.
 
-Die Bereitstellung (Deployment) eines ML-Modells ist der entscheidende Schritt, um aus einem Experiment eine produktive Anwendung zu machen. Während in der Entwicklungsphase Jupyter Notebooks und lokale Tests ausreichen, erfordert der Produktivbetrieb robuste, skalierbare Lösungen.
+Die wichtigsten Aspekte des Deployments:
 
-## Deployment-Ansätze
+- **Model Persistence** - Modelle speichern und laden
+- **Pipelines** - Reproduzierbare ML-Workflows
+- **Web Apps** - Interaktive Interfaces mit Gradio
+- **XAI** - Erklärbarkeit und Interpretierbarkeit
 
-### Web Applications
-- **Gradio** - Schnelle Erstellung interaktiver ML-Demos (siehe [Gradio Deployment](deploy))
+---
+
+## Model Persistence
+
+Modelle speichern und in Produktionsumgebungen laden.
+
+| Thema | Beschreibung |
+|-------|--------------|
+| **joblib** | Serialisierung von scikit-learn Modellen (empfohlen) |
+| **pickle** | Python-Standard für Objektspeicherung |
+| **ONNX** | Framework-übergreifendes Modellformat |
+| **TensorFlow SavedModel** | TensorFlow/Keras Modellformat |
+
+---
+
+## Pipelines
+
+Reproduzierbare und wartbare ML-Workflows.
+
+| Konzept | Beschreibung |
+|---------|--------------|
+| **scikit-learn Pipeline** | Verkettung von Preprocessing und Modell |
+| **ColumnTransformer** | Unterschiedliche Transformationen für verschiedene Spaltentypen |
+| **MLflow** | Experiment Tracking und Model Registry |
+| **DVC** | Versionierung von Daten und Modellen |
+
+---
+
+## Web Apps (Gradio)
+
+Interaktive Web-Interfaces für ML-Modelle.
+
+| Thema | Beschreibung |
+|-------|--------------|
+| [Gradio Deployment](deploy) | Web-Interfaces, Hugging Face Spaces, Docker |
+
+**Weitere Web-Frameworks:**
 - **Streamlit** - Datenbasierte Web-Apps
 - **Flask/FastAPI** - REST APIs für ML-Modelle
 
-### Model Persistence
-- **joblib** - Serialisierung von scikit-learn Modellen
-- **pickle** - Python-Standard für Objektspeicherung
-- **ONNX** - Framework-übergreifendes Modellformat
-- **TensorFlow SavedModel** - TensorFlow/Keras Modellformat
+---
 
-### Cloud Deployment
-- **Hugging Face Spaces** - Kostenloses Hosting für ML-Demos
-- **AWS SageMaker** - Vollständige ML-Plattform
-- **Google Cloud AI Platform** - Managed ML Services
-- **Azure ML** - Microsoft Cloud ML-Lösung
+## XAI (Explainability)
 
-### Container & Orchestrierung
-- **Docker** - Containerisierung von ML-Anwendungen
-- **Kubernetes** - Orchestrierung und Skalierung
-- **Docker Compose** - Multi-Container Deployments
+Erklärbarkeit und Interpretierbarkeit von Modellentscheidungen.
 
-## Deployment-Herausforderungen
+| Thema | Beschreibung |
+|-------|--------------|
+| [XAI - Explainable AI](08_xai) | SHAP, LIME, Feature Importance, Counterfactuals |
 
-| Herausforderung | Beschreibung | Lösungsansatz |
-|-----------------|--------------|---------------|
-| **Performance** | Modell verhält sich in Produktion anders | Umfangreiche Tests, A/B Testing |
-| **Skalierbarkeit** | Umgang mit vielen Anfragen | Load Balancing, Auto-Scaling |
-| **Monitoring** | Überwachung der Performance | Logging, Alerting, Drift Detection |
-| **Versionierung** | Tracking von Modell-Versionen | MLflow, DVC, Git |
+---
 
-## MLOps
+## Cloud & MLOps
 
-Machine Learning Operations (MLOps) umfasst Best Practices für den gesamten ML-Lifecycle:
-
-- **Continuous Integration/Deployment (CI/CD)** - Automatisierte Tests und Deployments
-- **Model Registry** - Zentrale Verwaltung von Modellen und Versionen
-- **Monitoring & Alerting** - Überwachung von Performance und Data Drift
-- **Experiment Tracking** - Dokumentation von Experimenten (MLflow, Weights & Biases)
+| Plattform | Beschreibung |
+|-----------|--------------|
+| **Hugging Face Spaces** | Kostenloses Hosting für ML-Demos |
+| **AWS SageMaker** | Vollständige ML-Plattform |
+| **Google Cloud AI** | Managed ML Services |
+| **Azure ML** | Microsoft Cloud ML-Lösung |
 
 ---
 
