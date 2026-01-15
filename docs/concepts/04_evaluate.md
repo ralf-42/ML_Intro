@@ -13,56 +13,56 @@ Methoden und Metriken zur Bewertung und Evaluation von Machine Learning Modellen
 
 Die wichtigsten Aspekte der Modellbewertung:
 
-- **Klassifikationsmetriken** - Accuracy, Precision, Recall, F1-Score
-- **Regressionsmetriken** - MSE, RMSE, MAE, R²
-- **ROC & AUC** - Receiver Operating Characteristic und Area Under Curve
-- **Confusion Matrix** - Visualisierung von Klassifikationsergebnissen
-- **Cross-Validation** - K-Fold, Stratified K-Fold, Leave-One-Out
-- **Model Selection** - Vergleich und Auswahl von Modellen
+- **Metriken** - Bewertungsmaße für Klassifikation, Regression, Clustering
+- **Cross-Validation** - Robuste Modellbewertung durch Kreuzvalidierung
+- **Hyperparameter-Tuning** - Optimierung der Modellparameter
+- **Overfitting vermeiden** - Regularisierung und Generalisierung
 
-## Klassifikationsmetriken
+---
 
-- **Accuracy** - Anteil korrekter Vorhersagen
-- **Precision** - Anteil korrekt positiver unter allen als positiv klassifizierten
-- **Recall (Sensitivity)** - Anteil gefundener positiver Fälle
-- **F1-Score** - Harmonisches Mittel aus Precision und Recall
-- **Specificity** - Anteil korrekt negativer Fälle
+## Metriken (Klassifikation / Regression)
 
-## Regressionsmetriken
+Bewertungsmetriken für verschiedene ML-Aufgaben.
 
-- **Mean Squared Error (MSE)** - Mittlerer quadratischer Fehler
-- **Root Mean Squared Error (RMSE)** - Wurzel des MSE
-- **Mean Absolute Error (MAE)** - Mittlerer absoluter Fehler
-- **R² (Bestimmtheitsmaß)** - Anteil erklärter Varianz
+| Thema | Beschreibung |
+|-------|--------------|
+| [Allgemein](evaluate/bewertung_allgemein) | Grundlagen der Modellbewertung |
+| [Klassifizierung](evaluate/bewertung_klassifizierung) | Confusion Matrix, Precision, Recall, F1-Score, ROC-AUC |
+| [Regression](evaluate/bewertung_regression) | R², MSE, RMSE, MAE, Residuenanalyse |
+| [Clustering](evaluate/bewertung_clustering) | Silhouette-Koeffizient, Cluster-Validierung |
+| [Anomalie](evaluate/bewertung_anomalie) | Anomalie-Scores, Ausreißer-Erkennung |
 
-## Confusion Matrix
-
-Visualisierung der Klassifikationsergebnisse:
-
-- True Positives (TP)
-- True Negatives (TN)
-- False Positives (FP)
-- False Negatives (FN)
-
-## ROC & AUC
-
-- **ROC-Kurve** - True Positive Rate vs. False Positive Rate
-- **AUC** - Fläche unter der ROC-Kurve (0.5 - 1.0)
-- **Threshold-Optimierung** - Auswahl des optimalen Schwellenwerts
+---
 
 ## Cross-Validation
 
-- **K-Fold** - Aufteilung in k gleich große Teile
-- **Stratified K-Fold** - Erhalt der Klassenverteilung
-- **Leave-One-Out** - Spezialfall mit k = Anzahl Samples
-- **Time Series Split** - Für zeitabhängige Daten
+Robuste Modellbewertung durch wiederholte Aufteilung der Daten.
 
-## Overfitting & Underfitting
+| Thema | Beschreibung |
+|-------|--------------|
+| [Cross-Validation](evaluate/cross_validation) | K-Fold, Stratified K-Fold, Leave-One-Out, Time Series Split |
+| [Bootstrapping](evaluate/bootstrapping) | Resampling zur Schätzung von Unsicherheit |
 
-- **Overfitting Detection** - Training vs. Validation Error
-- **Regularisierung** - L1, L2, Elastic Net
-- **Learning Curves** - Visualisierung des Lernverhaltens
-- **Bias-Variance Tradeoff** - Balance zwischen Modellkomplexität und Generalisierung
+---
+
+## Hyperparameter-Tuning
+
+Systematische Optimierung der Modellparameter.
+
+| Thema | Beschreibung |
+|-------|--------------|
+| [Hyperparameter-Tuning](evaluate/hyperparameter_tuning) | Grid Search, Random Search, Bayesian Optimization |
+
+---
+
+## Overfitting vermeiden
+
+Strategien zur Verbesserung der Generalisierung.
+
+| Thema | Beschreibung |
+|-------|--------------|
+| [Overfitting](evaluate/overfitting) | Erkennung, Learning Curves, Bias-Variance Tradeoff |
+| [Regularisierung](evaluate/regularisierung) | L1 (Lasso), L2 (Ridge), Elastic Net |
 
 
 ---
