@@ -95,6 +95,10 @@ flowchart TB
 | **Varianz** | Niedrig | Niedrig | Hoch |
 | **Problem** | Modell zu einfach | — | Modell zu komplex |
 
+**Hinweis:** 
+- **Hoher Bias** = Modell macht systematische Fehler (zu einfach)
+- **Hohe Varianz** = Modell reagiert stark auf kleine Änderungen in Trainingsdaten (zu komplex)
+
 ### Visuelle Analogie
 
 Stell dir vor, ein Modell soll den Zusammenhang zwischen Lernzeit und Prüfungsergebnis lernen:
@@ -151,7 +155,7 @@ flowchart LR
     style GF fill:#c8e6c9
 ```
 
-**Merksatz:** 
+**Hinweis:** 
 - **Hoher Bias** = Modell macht systematische Fehler (zu einfach)
 - **Hohe Varianz** = Modell reagiert stark auf kleine Änderungen in Trainingsdaten (zu komplex)
 
