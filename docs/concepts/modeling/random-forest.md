@@ -122,6 +122,13 @@ flowchart LR
     style Bootstrap2 fill:#f3e5f5
 ```
 
+
+**Beispiel**:
+
+Bei 3000 verfügbaren Datensätzen zieht jeder Baum im Random Forest ein Bootstrap-Sample der Größe 3000, wobei mit Zurücklegen gesampelt wird. Im Mittel gehen dabei etwa 2000 unterschiedliche Datensätze in das Training eines Baums ein, während rund 1000 Datensätze für diesen Baum _Out-of-the-Bag_ bleiben.
+
+Wird der Out-of-Bag-Score (siehe unten) aktiviert, werden diese nicht gezogenen Datensätze zur internen Validierung verwendet. Ist der Out-of-Bag-Score deaktiviert, werden zwar weiterhin dieselben Bootstrap-Samples erzeugt, die Out-of-Bag-Datensätze jedoch nicht zur Fehlerschätzung herangezogen.
+
 ### Feature-Randomisierung
 
 An jedem Splitpunkt wird nur eine **zufällige Teilmenge der Features** betrachtet:
@@ -242,7 +249,7 @@ xychart-beta
 
 ## Out-of-Bag (OOB) Score
 
-Durch Bootstrap-Sampling werden ca. **37% der Daten** pro Baum nicht verwendet. Diese können zur Validierung genutzt werden:
+Durch **Bootstrap-Sampling** werden ca. **37% der Daten**[^1] pro Baum nicht für ein Training verwendet. Diese können zur Validierung genutzt werden:
 
 ```python
 model = RandomForestClassifier(
@@ -262,6 +269,72 @@ print(f"Test Score: {model.score(data_test, target_test):.4f}")
 
 ---
 
+### Nutzung des OOB-Scores
+
+Der **OOB-Score** dient beim Random Forest als interne Validierungsmetrik. Da er auf den Daten berechnet wird, die während des Bootstrappings **nicht** für den Bau eines Baumes verwendet wurden, bietet er eine unverzerrte Schätzung der Modellgüte.
+
+Man nutzt ihn vor allem für:
+
+1. **Validierung ohne Testset:** Er spart Daten, da man kein separates Validierungset abspalten muss.
+    
+2. **Effizientes Tuning:** Man kann Hyperparameter (wie die Tiefe der Bäume) optimieren, ohne teure Cross-Validation-Schleifen durchzuführen.
+    
+3. **Konvergenz-Check:** Er zeigt an, ab wie vielen Bäumen das Modell gesättigt ist und keine weitere Verbesserung mehr erzielt.
+    
+
+---
+
+### Code-Beispiel: OOB-Fehler-Kurve
+
+Dieses Skript zeigt, wie sich die Fehlerrate stabilisiert, je mehr Bäume dem Wald hinzugefügt werden.
+
+Python
+
+```Python
+import pandas as pd
+import plotly.express as px
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.datasets import make_classification
+
+# 1. Daten vorbereiten (data, target)
+data, target = make_classification(n_samples=1000, n_features=20, random_state=42)
+
+# 2. Modell und Parameter
+rf = RandomForestClassifier(oob_score=True, random_state=42, warm_start=True)
+tree_range = range(10, 301, 10)
+results = []
+
+# 3. Iterative Berechnung
+for n in tree_range:
+    rf.set_params(n_estimators=n)
+    rf.fit(data, target)
+    oob_error = 1 - rf.oob_score_
+    results.append({"n_estimators": n, "oob_error": oob_error})
+
+# 4. DataFrame erstellen
+df_results = pd.DataFrame(results)
+
+# 5. Plotly Express Plot erstellen
+fig = px.line(
+    df_results, 
+    x="n_estimators", 
+    y="oob_error", 
+    title="OOB-Fehlerrate vs. Anzahl der Bäume",
+    labels={"n_estimators": "Anzahl der Bäume", "oob_error": "OOB-Fehler"},
+    markers=True
+)
+
+# Layout-Anpassungen
+fig.update_layout(
+    xaxis_title="Anzahl der Bäume (n_estimators)",
+    yaxis_title="OOB-Fehlerrate",
+    template="plotly_white"
+)
+```
+
+**Was man im Plot suchen sollte:**
+
+Sobald die Fehlerrate nur noch minimal schwankt (Plateau), hat man die optimale Anzahl an Bäumen erreicht. Mehr Bäume erhöhen dann nur noch die Rechenlast, aber nicht mehr die Vorhersagekraft.
 
 
 ## Vor- und Nachteile
@@ -366,6 +439,13 @@ mindmap
 ```
 
 > **Kernaussage**: Random Forest kombiniert die Einfachheit von Entscheidungsbäumen mit der Robustheit von Ensemble-Methoden. Durch Bagging und Feature-Randomisierung entstehen dekorrelierte Bäume, deren aggregierte Vorhersagen stabiler und genauer sind als die eines einzelnen Baums.
+
+---
+[^1] Mathematisch gesehen liegt die Wahrscheinlichkeit, dass ein spezifischer Datensatz bei einer Stichprobengröße von $n$ nicht ausgewählt wird, bei:
+
+$$\left(1 - \frac{1}{n}\right)^n$$
+
+Für große $n$ nähert sich dieser Wert $1/e \approx 0,368$ an.
 
 ---
 
