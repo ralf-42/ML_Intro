@@ -249,7 +249,7 @@ xychart-beta
 
 ## Out-of-Bag (OOB) Score
 
-Durch **Bootstrap-Sampling** werden ca. **37% der Daten**[^1] pro Baum nicht für ein Training verwendet. Diese können zur Validierung genutzt werden:
+Durch **Bootstrap-Sampling** werden ca. **37% der Daten**[1] pro Baum nicht für ein Training verwendet. Diese können zur Validierung genutzt werden:
 
 ```python
 model = RandomForestClassifier(
@@ -441,7 +441,7 @@ mindmap
 > **Kernaussage**: Random Forest kombiniert die Einfachheit von Entscheidungsbäumen mit der Robustheit von Ensemble-Methoden. Durch Bagging und Feature-Randomisierung entstehen dekorrelierte Bäume, deren aggregierte Vorhersagen stabiler und genauer sind als die eines einzelnen Baums.
 
 ---
-[^1] Mathematisch gesehen liegt die Wahrscheinlichkeit, dass ein spezifischer Datensatz bei einer Stichprobengröße von $n$ nicht ausgewählt wird, bei:
+[1] Mathematisch gesehen liegt die Wahrscheinlichkeit, dass ein spezifischer Datensatz bei einer Stichprobengröße von $n$ nicht ausgewählt wird, bei:
 
 $$\left(1 - \frac{1}{n}\right)^n$$
 
