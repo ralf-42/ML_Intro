@@ -28,12 +28,12 @@ Einstiegspunkt für die systematische Auswahl des passenden Algorithmus.
 
 Modelle, die aus gelabelten Daten lernen, um Vorhersagen zu treffen.
 
-| Thema | Beschreibung |
-|-------|--------------|
+| Thema                                       | Beschreibung                                                  |
+| ------------------------------------------- | ------------------------------------------------------------- |
 | [Entscheidungsbaum](modeling/decision_tree) | Hierarchische Regelstruktur für Klassifikation und Regression |
-| [Random Forest](modeling/random-forest) | Bagging-Ensemble aus multiplen Entscheidungsbäumen |
-| [Regression](modeling/regression) | Lineare und logistische Regression für stetige Vorhersagen |
-| [XGBoost](modeling/xgboost) | Extreme Gradient Boosting für höchste Performance |
+| [Random Forest](modeling/random-forest)     | Bagging-Ensemble aus multiplen Entscheidungsbäumen            |
+| [Regression](modeling/regression)           | Lineare und logistische Regression für stetige Vorhersagen    |
+| [XGBoost](modeling/xgboost)                 | Extreme Gradient Boosting für höchste Performance             |
 
 ---
 
@@ -64,10 +64,12 @@ Neuronale Netze für komplexe Muster in Bildern, Text und Sequenzen.
 
 Kombination mehrerer Modelle für bessere Vorhersagen.
 
-| Thema | Beschreibung |
-|-------|--------------|
-| [Ensemble-Methoden](modeling/ensemble) | Übersicht: Bagging, Boosting und Stacking-Konzepte |
-| [Stacking](modeling/stacking) | Kombination heterogener Modelle durch Meta-Learning |
+| Thema                                   | Beschreibung                                        |
+| --------------------------------------- | --------------------------------------------------- |
+| [Ensemble-Methoden](modeling/ensemble)  | Übersicht: Bagging, Boosting und Stacking-Konzepte  |
+| [Random Forest](modeling/random-forest) | Bagging-Ensemble aus multiplen Entscheidungsbäumen  |
+| [XGBoost](modeling/xgboost)             | Extreme Gradient Boosting für höchste Performance   |
+| [Stacking](modeling/stacking)           | Kombination heterogener Modelle durch Meta-Learning |
 
 ---
 
