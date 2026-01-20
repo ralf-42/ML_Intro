@@ -1,0 +1,355 @@
+name: Generate PDF with WeasyPrint
+
+on:
+  workflow_dispatch:  # Manueller Start über GitHub UI
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install WeasyPrint system dependencies
+        # Source: https://doc.courtbouillon.org/weasyprint/stable/first_steps.html
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libpango-1.0-0 \
+            libharfbuzz0b \
+            libpangoft2-1.0-0 \
+            libharfbuzz-subset0
+
+      - name: Install Python dependencies
+        run: pip install weasyprint PyPDF2 requests pyyaml reportlab beautifulsoup4
+
+      - name: Generate PDF from all pages (nav_order sorted)
+        run: |
+          python << 'EOF'
+          import os
+          import re
+          import yaml
+          import requests
+          from weasyprint import HTML, CSS
+          from PyPDF2 import PdfReader, PdfWriter
+          from reportlab.pdfgen import canvas
+          from reportlab.lib.pagesizes import A4
+          from io import BytesIO
+          from bs4 import BeautifulSoup
+
+          BASE_URL = "https://ralf-42.github.io/ML_Intro"
+          DOCS_DIR = "docs"
+          OUTPUT_DIR = "pdf_parts"
+          FINAL_PDF = "ML_Intro_Dokumentation.pdf"
+
+          # Seiten die ausgeschlossen werden sollen
+          EXCLUDE_PATTERNS = [
+              r'/legal/',
+              r'/test-',
+              r'FONT_SIZE_GUIDE',
+          ]
+
+          # Print-CSS für bessere PDF-Ausgabe
+          # Hinweis: Seitennummern werden nach dem Merge mit reportlab hinzugefügt
+          PRINT_CSS = CSS(string='''
+              @page {
+                  size: A4;
+                  margin: 2cm 1.5cm 2.5cm 1.5cm;
+              }
+
+              /* TOC der einzelnen Seiten ausblenden */
+              .toc, #toc, [id*="inhaltsverzeichnis"],
+              nav.toc, .table-of-contents,
+              #markdown-toc, .no_toc + ul,
+              h1:contains("Inhaltsverzeichnis"),
+              #inhaltsverzeichnis {
+                  display: none !important;
+              }
+
+              /* Sidebar und Navigation ausblenden */
+              .side-bar, .site-nav, nav,
+              .site-header, .site-footer,
+              .main-header, .aux-nav,
+              .breadcrumb-nav {
+                  display: none !important;
+              }
+
+              /* Hauptinhalt volle Breite */
+              .main-content, .main, main, article {
+                  max-width: 100% !important;
+                  margin: 0 !important;
+                  padding: 0 !important;
+              }
+
+              /* Tabellen-Handling */
+              table {
+                  width: 100% !important;
+                  font-size: 9pt !important;
+                  border-collapse: collapse;
+                  page-break-inside: auto;
+              }
+              tr {
+                  page-break-inside: avoid;
+                  page-break-after: auto;
+              }
+              th, td {
+                  padding: 4px 6px !important;
+                  word-wrap: break-word;
+                  overflow-wrap: break-word;
+              }
+
+              /* Codeblöcke */
+              pre, code {
+                  font-size: 8pt !important;
+                  white-space: pre-wrap !important;
+                  word-wrap: break-word !important;
+              }
+              pre {
+                  page-break-inside: avoid;
+              }
+
+              /* Seitenumbrüche */
+              h1, h2 {
+                  page-break-after: avoid;
+              }
+              h1 {
+                  page-break-before: always;
+              }
+              /* Erste Seite: kein Umbruch vor h1 */
+              body > *:first-child h1:first-of-type,
+              .main-content > h1:first-child {
+                  page-break-before: avoid;
+              }
+
+              /* Links für Print */
+              a[href^="http"]:after {
+                  content: none !important;
+              }
+          ''')
+
+          def parse_frontmatter(filepath):
+              """Extrahiert YAML Frontmatter aus Markdown-Datei."""
+              try:
+                  with open(filepath, 'r', encoding='utf-8') as f:
+                      content = f.read()
+                  if content.startswith('---'):
+                      end = content.find('---', 3)
+                      if end != -1:
+                          fm = yaml.safe_load(content[3:end])
+                          return fm if fm else {}
+              except Exception as e:
+                  print(f"  Fehler beim Parsen: {filepath} - {e}")
+              return {}
+
+          def get_url(filepath, frontmatter):
+              """Konvertiert Dateipfad zu URL, berücksichtigt permalink."""
+              # Permalink hat Priorität
+              if frontmatter.get('permalink'):
+                  permalink = frontmatter['permalink']
+                  # Entferne führenden Slash falls vorhanden
+                  if permalink.startswith('/'):
+                      permalink = permalink[1:]
+                  return f"{BASE_URL}/{permalink}"
+
+              rel_path = os.path.relpath(filepath, DOCS_DIR)
+              # index.md -> /
+              if rel_path == 'index.md':
+                  return BASE_URL + '/'
+              # datei.md -> /datei.html oder /ordner/datei.html
+              url_path = rel_path.replace('\\', '/').replace('.md', '.html')
+              return f"{BASE_URL}/{url_path}"
+
+          def should_exclude(url, filepath):
+              """Prüft ob URL/Pfad ausgeschlossen werden soll."""
+              for pattern in EXCLUDE_PATTERNS:
+                  if re.search(pattern, url) or re.search(pattern, filepath):
+                      return True
+              return False
+
+          def fetch_and_clean_html(url):
+              """Lädt HTML und ersetzt Mermaid-Blöcke durch Hinweis."""
+              response = requests.get(url)
+              response.raise_for_status()
+              soup = BeautifulSoup(response.text, 'html.parser')
+
+              # Mermaid-Blöcke finden (verschiedene Varianten)
+              mermaid_selectors = [
+                  'pre.mermaid',
+                  'div.mermaid',
+                  'code.language-mermaid',
+                  '[class*="mermaid"]'
+              ]
+
+              replaced = 0
+              for selector in mermaid_selectors:
+                  for element in soup.select(selector):
+                      # Hinweis-Element erstellen
+                      hinweis = soup.new_tag('p')
+                      hinweis['style'] = 'color: #666; font-style: italic; background: #f5f5f5; padding: 10px; border-left: 3px solid #ccc;'
+                      hinweis.string = '📊 Diagramm siehe Online-Version'
+                      element.replace_with(hinweis)
+                      replaced += 1
+
+              return str(soup), replaced
+
+          # Alle Markdown-Dateien sammeln
+          print("Sammle Markdown-Dateien...")
+          all_pages = []
+          for root, dirs, files in os.walk(DOCS_DIR):
+              # _sass, _includes etc. überspringen
+              dirs[:] = [d for d in dirs if not d.startswith('_')]
+              for file in files:
+                  if file.endswith('.md'):
+                      filepath = os.path.join(root, file)
+                      fm = parse_frontmatter(filepath)
+                      if fm.get('layout') != 'default':  # Nur echte Seiten
+                          continue
+                      if fm.get('nav_exclude'):  # nav_exclude: true überspringen
+                          continue
+                      url = get_url(filepath, fm)  # URL mit permalink-Support
+                      if should_exclude(url, filepath):
+                          continue
+                      all_pages.append({
+                          'filepath': filepath,
+                          'url': url,
+                          'title': fm.get('title', file),
+                          'nav_order': fm.get('nav_order', 999),
+                          'parent': fm.get('parent'),
+                          'has_children': fm.get('has_children', False),
+                      })
+
+          print(f"Gefunden: {len(all_pages)} Seiten")
+
+          # Hierarchische Sortierung: Top-Level nach nav_order, dann Children
+          # 1. Trenne Top-Level und Children
+          top_level = [p for p in all_pages if not p['parent']]
+          children = [p for p in all_pages if p['parent']]
+
+          # 2. Sortiere Top-Level nach nav_order
+          top_level.sort(key=lambda p: p['nav_order'])
+
+          # 3. Baue finale Liste: Top-Level, dann dessen Children
+          pages = []
+          for parent_page in top_level:
+              parent_page['_level'] = 0
+              parent_page['_parent_title'] = None
+              pages.append(parent_page)
+              # Finde und sortiere Children dieses Parents
+              parent_children = [c for c in children if c['parent'] == parent_page['title']]
+              parent_children.sort(key=lambda p: p['nav_order'])
+              for child in parent_children:
+                  child['_level'] = 1
+                  child['_parent_title'] = parent_page['title']
+                  pages.append(child)
+
+          print("\nReihenfolge:")
+          for i, p in enumerate(pages):
+              level = p.get('_level', 0)
+              indent = "  " * level
+              print(f"  {i+1}. {indent}{p['title']} (nav_order: {p['nav_order']})")
+
+          # Verzeichnis erstellen
+          os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+          # Einzelne PDFs erstellen
+          pdf_data = []  # (pdf_path, title, level, parent_title, page_count)
+          total_mermaid = 0
+          for i, page in enumerate(pages):
+              print(f"\n[{i+1}/{len(pages)}] Konvertiere: {page['title']}")
+              print(f"    URL: {page['url']}")
+              try:
+                  # HTML laden und Mermaid-Blöcke ersetzen
+                  html_content, mermaid_count = fetch_and_clean_html(page['url'])
+                  if mermaid_count > 0:
+                      print(f"    Mermaid-Diagramme ersetzt: {mermaid_count}")
+                      total_mermaid += mermaid_count
+                  pdf_path = f"{OUTPUT_DIR}/page_{i:03d}.pdf"
+                  HTML(string=html_content, base_url=page['url']).write_pdf(pdf_path, stylesheets=[PRINT_CSS])
+                  # Seitenzahl ermitteln
+                  reader = PdfReader(pdf_path)
+                  page_count = len(reader.pages)
+                  pdf_data.append({
+                      'path': pdf_path,
+                      'title': page['title'],
+                      'level': page.get('_level', 0),
+                      'parent_title': page.get('_parent_title'),
+                      'page_count': page_count
+                  })
+                  print(f"    OK: {pdf_path} ({page_count} Seiten)")
+              except Exception as e:
+                  print(f"    FEHLER: {e}")
+
+          # PDFs zusammenführen
+          print(f"\nFühre {len(pdf_data)} PDFs zusammen...")
+          writer = PdfWriter()
+
+          # Alle Seiten hinzufügen und Startseiten merken
+          doc_start_pages = []  # (start_page_index, title, level, parent_title)
+          current_page = 0
+          for doc in pdf_data:
+              reader = PdfReader(doc['path'])
+              doc_start_pages.append((current_page, doc['title'], doc['level'], doc['parent_title']))
+              for page in reader.pages:
+                  writer.add_page(page)
+              current_page += doc['page_count']
+
+          total_pages = current_page
+          print(f"Gesamt: {total_pages} Seiten")
+
+          # Durchlaufende Seitennummern hinzufügen
+          print("Füge durchlaufende Seitennummern hinzu...")
+          final_writer = PdfWriter()
+
+          for i, page in enumerate(writer.pages):
+              # Seitennummer-Overlay erstellen
+              packet = BytesIO()
+              c = canvas.Canvas(packet, pagesize=A4)
+              width, height = A4
+              # Seitennummer unten mittig
+              page_text = f"Seite {i + 1} von {total_pages}"
+              c.setFont("Helvetica", 10)
+              c.setFillColorRGB(0.4, 0.4, 0.4)  # Grau
+              c.drawCentredString(width / 2, 30, page_text)
+              c.save()
+
+              # Overlay auf Seite anwenden
+              packet.seek(0)
+              overlay = PdfReader(packet)
+              page.merge_page(overlay.pages[0])
+              final_writer.add_page(page)
+
+          # Hierarchische Bookmarks erstellen (nach Seitennummern)
+          print("Erstelle hierarchische Bookmarks...")
+          parent_bookmarks = {}  # title -> bookmark reference
+
+          for start_page, title, level, parent_title in doc_start_pages:
+              if level == 0:
+                  # Top-Level Bookmark
+                  bookmark = final_writer.add_outline_item(title, start_page)
+                  parent_bookmarks[title] = bookmark
+              else:
+                  # Child Bookmark - eingerückt unter Parent
+                  parent_bookmark = parent_bookmarks.get(parent_title)
+                  final_writer.add_outline_item(title, start_page, parent=parent_bookmark)
+
+          # Finale PDF speichern
+          with open(FINAL_PDF, "wb") as f:
+              final_writer.write(f)
+
+          print(f"\nFertig: {FINAL_PDF}")
+          print(f"Dokumente: {len(pdf_data)}, Seiten: {total_pages}")
+          if total_mermaid > 0:
+              print(f"Mermaid-Diagramme ersetzt: {total_mermaid}")
+          EOF
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ML-Intro-Dokumentation
+          path: ML_Intro_Dokumentation.pdf
