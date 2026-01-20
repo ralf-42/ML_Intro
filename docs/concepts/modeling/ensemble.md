@@ -124,22 +124,22 @@ flowchart TD
         D[("Datensatz")] --> B1["Bootstrap<br>Stichprobe 1"]
         D --> B2["Bootstrap<br>Stichprobe 2"]
         D --> BN["Bootstrap<br>Stichprobe N"]
-        
-        B1 --> T1["🌳 Baum 1<br>Zufällige Features"]
-        B2 --> T2["🌳 Baum 2<br>Zufällige Features"]
-        BN --> TN["🌳 Baum N<br>Zufällige Features"]
-        
+
+        B1 --> T1["Baum 1<br>Zufällige Features"]
+        B2 --> T2["Baum 2<br>Zufällige Features"]
+        BN --> TN["Baum N<br>Zufällige Features"]
+
         T1 --> V1["Vorhersage 1"]
         T2 --> V2["Vorhersage 2"]
         TN --> VN["Vorhersage N"]
-        
-        V1 --> AGG{{"Aggregation<br>(Voting/Mittelwert)"}}
+
+        V1 --> AGG{{"Aggregation"}}
         V2 --> AGG
         VN --> AGG
-        
+
         AGG --> FINAL["Finale Vorhersage"]
     end
-    
+
     style D fill:#e8f5e9,stroke:#4caf50
     style AGG fill:#fff9c4,stroke:#fbc02d
     style FINAL fill:#c8e6c9,stroke:#388e3c
