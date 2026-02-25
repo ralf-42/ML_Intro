@@ -28,6 +28,9 @@ has_toc: true
 
 Die Konfusionsmatrix (Confusion Matrix) ist das fundamentale Werkzeug zur Bewertung von Klassifikationsmodellen. Sie zeigt, wie die Vorhersagen des Modells mit den tatsächlichen Werten übereinstimmen.
 
+> [!NOTE] Ausgangspunkt      
+> Viele Klassifikationsmetriken sind direkte Ableitungen aus TP, FP, TN und FN der Confusion Matrix.
+
 ### Aufbau der binären Confusion Matrix
 
 ```mermaid
@@ -125,7 +128,8 @@ accuracy = accuracy_score(target_test, target_pred)
 print(f"Accuracy: {accuracy:.4f}")
 ```
 
-> **Achtung:** Die Accuracy kann bei unausgewogenen Datensätzen irreführend sein! Ein Modell, das bei 95% negativen Fällen immer "negativ" vorhersagt, erreicht 95% Accuracy – ohne einen einzigen positiven Fall zu erkennen.
+> [!WARNING] Accuracy-Falle bei Imbalance     
+> Ein Modell kann hohe Accuracy erreichen und trotzdem die relevante Minderheitsklasse kaum erkennen.
 
 ### Precision (Relevanz/Präzision)
 
@@ -532,6 +536,12 @@ plt.show()
 
 ## Umgang mit unausgewogenen Klassen
 
+> [!WARNING] Geschäftsrisiko     
+> Bei unausgewogenen Klassen führt die falsche Metrik oft zu teuren Fehlentscheidungen im Betrieb.
+
+> [!TIP] Metrik nach Kostenmodell wählen      
+> Wenn False Negatives kritisch sind, Recall priorisieren; wenn False Positives teuer sind, Precision priorisieren.
+
 Bei unausgewogenen Datensätzen (Imbalanced Classification) sind Standard-Metriken oft irreführend. Die richtige Metrikauswahl ist entscheidend.
 
 ### Entscheidungsbaum zur Metrikauswahl
@@ -591,6 +601,9 @@ plt.show()
 ---
 
 ## Zusammenfassung: Metrik-Übersicht
+
+> [!SUCCESS] Mindeststandard      
+> Neben Accuracy immer mindestens Precision, Recall, F1 und eine klassenbezogene Auswertung berichten.
 
 ```mermaid
 flowchart TB

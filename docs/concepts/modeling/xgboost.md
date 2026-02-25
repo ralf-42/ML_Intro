@@ -126,6 +126,9 @@ flowchart TD
 
 ## Einsatzbereiche
 
+> [!NOTE] Wann XGBoost?       
+> XGBoost ist besonders stark bei tabellarischen, heterogenen Daten mit nichtlinearen Zusammenhängen.
+
 XGBoost kann für beide Hauptaufgaben des überwachten Lernens verwendet werden:
 
 ```mermaid
@@ -173,6 +176,9 @@ flowchart LR
 
 ## Wichtige Hyperparameter
 
+> [!WARNING] Komplexität vs. Generalisierung      
+> Zu tiefe Bäume und hohe `n_estimators` ohne passende Regularisierung erhöhen das Overfitting-Risiko.
+
 ```mermaid
 flowchart TD
     subgraph HP["XGBoost Hyperparameter"]
@@ -205,9 +211,8 @@ flowchart TD
 | `reg_alpha` | L1-Regularisierung | 0-1 |
 | `reg_lambda` | L2-Regularisierung | 0-1 |
 
-> **Tipp: Learning Rate und n_estimators**
->
-> Eine **niedrigere Learning Rate** (z.B. 0.01) erfordert **mehr Boosting-Runden** (n_estimators), führt aber oft zu besseren Ergebnissen. Der Trade-off ist längere Trainingszeit.
+> [!TIP] Learning Rate und n_estimators       
+> Eine niedrigere Learning Rate (z. B. `0.01`) erfordert mehr Boosting-Runden, liefert aber häufig robustere Ergebnisse.
 
 ---
 

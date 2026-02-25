@@ -27,6 +27,9 @@ has_toc: true
 
 Stacking unterscheidet sich fundamental von Bagging und Boosting durch die **Heterogenität** der verwendeten Modelle:
 
+> [!NOTE] Kernunterschied      
+> Stacking lebt von komplementären Modellfamilien, nicht von vielen Varianten desselben Modells.
+
 ```mermaid
 flowchart TD
     subgraph Vergleich["Ensemble-Strategien im Vergleich"]
@@ -156,6 +159,9 @@ Die Stimmen können auch **gewichtet** werden, z.B. basierend auf der Modellperf
 
 Beim **Meta-Learning** (auch: Stacked Generalization) wird ein zusätzliches Modell trainiert, das lernt, wie die Vorhersagen der Basismodelle optimal kombiniert werden.
 
+> [!WARNING] Leakage-Gefahr     
+> Meta-Features müssen out-of-fold erzeugt werden. Direkte Train-Vorhersagen der Base-Modelle führen zu überoptimistischen Ergebnissen.
+
 ```mermaid
 flowchart TD
     D[("Daten")]
@@ -235,6 +241,9 @@ Der **Meta-Learner** lernt aus diesen Daten, wann welches Modell vertrauenswürd
 
 ## Best Practices für Stacking
 
+> [!SUCCESS] Mindestanforderung     
+> Nutzen Sie diverse Base-Modelle, konsistente CV und ein einfaches Meta-Modell als stabile Ausgangskonfiguration.
+
 ### Auswahl der Base Learner
 
 ```mermaid
@@ -290,6 +299,9 @@ flowchart TD
 ---
 
 ## Vergleich: Voting vs. Meta-Learning
+
+> [!TIP] Entscheidungsregel      
+> Starten Sie mit Voting für schnelle, robuste Baselines und wechseln Sie zu Meta-Learning, wenn zusätzlicher Genauigkeitsgewinn nachweisbar ist.
 
 | Kriterium | Voting | Meta-Learning |
 |-----------|--------|---------------|

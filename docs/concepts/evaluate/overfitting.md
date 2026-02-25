@@ -52,6 +52,9 @@ flowchart LR
 
 **Das Problem:** Ein Modell, das nur auf bereits gesehenen Daten gut funktioniert, hat keinen praktischen Nutzen. Das Ziel ist immer die **Generalisierungsfähigkeit** – die Fähigkeit, auf neuen Daten zuverlässige Vorhersagen zu treffen.
 
+> [!NOTE] Kernprinzip     
+> Ein hoher Trainings-Score ist kein Qualitätsnachweis. Entscheidend ist die stabile Leistung auf unbekannten Daten.
+
 ## Underfit, Goodfit und Overfit
 
 Die Qualität eines Machine-Learning-Modells lässt sich anhand seiner Fähigkeit beurteilen, sowohl Trainings- als auch Testdaten korrekt vorherzusagen.
@@ -160,6 +163,9 @@ flowchart LR
 - **Hohe Varianz** = Modell reagiert stark auf kleine Änderungen in Trainingsdaten (zu komplex)
 
 ## Erkennung von Overfitting
+
+> [!WARNING] Frühes Warnsignal      
+> Eine große Lücke zwischen Trainings- und Testleistung ist meist ein Hinweis auf Overfitting oder Data Leakage.
 
 ### Methode 1: Train-Test-Vergleich
 
@@ -350,6 +356,9 @@ plt.show()
 ```
 
 ## Strategien gegen Overfitting
+
+> [!SUCCESS] Praxisregel     
+> Kombinieren Sie mehrere Gegenmaßnahmen (z. B. Regularisierung + Cross-Validation + Early Stopping) statt nur an einem Parameter zu drehen.
 
 ```mermaid
 flowchart TB
@@ -643,6 +652,9 @@ flowchart TB
 {% endraw %}
 
 ## Best Practices
+
+> [!TIP] Robust statt maximal      
+> Optimieren Sie auf reproduzierbare Generalisierung, nicht auf den besten Einzel-Score in einem zufälligen Split.
 
 ### Dos ✅
 
