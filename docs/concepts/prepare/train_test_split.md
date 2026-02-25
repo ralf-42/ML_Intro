@@ -29,6 +29,9 @@ has_toc: true
 
 Der Train-Test-Split ist ein fundamentales Verfahren im Machine Learning, um die Leistungsfähigkeit von Modellen zu überprüfen. Das Prinzip ist einfach: Die verfügbaren Daten werden in zwei separate Mengen aufgeteilt – eine zum Trainieren des Modells und eine zum Testen seiner Vorhersagefähigkeit.
 
+> [!NOTE] Mindeststandard
+> Ein sauberer Split ist die Basis jeder belastbaren Modellbewertung.
+
 ```mermaid
 flowchart LR
     subgraph input[" "]
@@ -117,6 +120,9 @@ data_train, data_test, target_train, target_test = train_test_split(
 
 Bei unausgewogenen Klassen sollte der Split die Klassenverteilung in beiden Mengen beibehalten:
 
+> [!TIP] Bei Imbalance
+> Für Klassifikationsprobleme mit Klassenungleichgewicht `stratify=target` standardmäßig aktivieren.
+
 ```python
 # Ohne Stratifizierung (problematisch bei unausgewogenen Klassen)
 data_train, data_test, target_train, target_test = train_test_split(data, target, test_size=0.2)
@@ -202,6 +208,9 @@ print(f"Test:       {len(data_test)} Samples ({len(data_test)/len(data)*100:.1f}
 ## Data Leakage vermeiden
 
 **Data Leakage** bezeichnet die unbeabsichtigte Verwendung von Informationen aus dem Test-Set während des Trainings. Dies führt zu unrealistisch guten Ergebnissen, die sich nicht in der Praxis bestätigen.
+
+> [!WARNING] Häufiger Praxisfehler
+> Skalierung, Imputation und Feature-Auswahl immer nach dem Split fitten, nie auf dem Gesamtdatensatz.
 
 ```mermaid
 flowchart TB
@@ -350,6 +359,9 @@ print(classification_report(target_test, target_pred))
 ```
 
 ## Best Practices
+
+> [!SUCCESS] Robuste Routine
+> Fixer `random_state`, klare Split-Strategie und dokumentierte Datenversionen erhöhen Vergleichbarkeit und Auditierbarkeit.
 
 ### Dos ✅
 
