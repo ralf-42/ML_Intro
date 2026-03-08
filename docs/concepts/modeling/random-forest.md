@@ -11,7 +11,7 @@ has_toc: true
 # Random Forest
 {: .no_toc }
 
-> [!NOTE] Kerndefinition
+> [!NOTE] Kerndefinition    
 > Random Forest ist ein Ensemble-Algorithmus, der multiple Entscheidungsbaeume kombiniert, um robuste und genaue Vorhersagen zu treffen.
 > Durch Bagging und Feature-Randomisierung reduziert er Overfitting und liefert zuverlaessige Ergebnisse fuer Klassifikation und Regression.
 
