@@ -11,7 +11,8 @@ has_toc: true
 # Methoden & Frameworks
 {: .no_toc }
 
-> **Explainable AI (XAI) umfasst Methoden und Techniken, die ML-Modelle für Menschen verständlich und nachvollziehbar machen.** 
+> [!NOTE] Kerndefinition
+> Explainable AI (XAI) umfasst Methoden und Techniken, die ML-Modelle fuer Menschen verstaendlich und nachvollziehbar machen.
 
 ---
 
@@ -158,7 +159,9 @@ flowchart TD
 | **Global** | Gesamtes Modell | Ein Surrogate erklärt alle Vorhersagen |
 | **Lokal** | Einzelne Vorhersage | LIME trainiert ein Surrogate nur für einen Datenpunkt |
 
-**Wichtig:** Das Surrogate-Modell erklärt nicht das Original-Modell selbst, sondern dessen *Verhalten* – die Erklärung ist eine Approximation.
+> [!WARNING] Grenzen von Surrogate-Modellen
+> Das Surrogate-Modell erklaert nicht das Original-Modell selbst, sondern dessen *Verhalten*.
+> Die Erklaerung ist eine Approximation.
 
 ---
 
@@ -202,10 +205,11 @@ Verwendung von ML-Modellen, die von Grund auf so konzipiert sind, dass sie erkl�
 
 Erklärung individueller Vorhersagen durch Analyse der wichtigsten Features und ihrer Ausprägungen:
 
-> **Beispiel**: Warum wurde für Passagier X vorhergesagt, dass er überlebt?
-> - Geschlecht: weiblich → +45% Überlebenschance
-> - Klasse: 1. Klasse → +20% Überlebenschance
-> - Alter: 22 Jahre → +5% Überlebenschance
+> [!TIP] Beispiel fuer lokale Erklaerung
+> Warum wurde fuer Passagier X vorhergesagt, dass er ueberlebt?
+> - Geschlecht: weiblich -> +45% Ueberlebenschance
+> - Klasse: 1. Klasse -> +20% Ueberlebenschance
+> - Alter: 22 Jahre -> +5% Ueberlebenschance
 
 ### Global Explanation
 
@@ -714,13 +718,13 @@ for pclass in [1, 2, 3]:
 
 ## Zusammenfassung
 
-> **Kernpunkte:**
-> - XAI macht ML-Modelle verständlich und erhöht das Vertrauen
-> - **SHAP** ist die theoretisch fundierteste Methode für lokale und globale Erklärungen
-> - **LIME** eignet sich hervorragend für schnelle lokale Erklärungen
+> [!SUCCESS] Kernpunkte
+> - XAI macht ML-Modelle verstaendlich und erhoeht das Vertrauen
+> - **SHAP** ist die theoretisch fundierteste Methode fuer lokale und globale Erklaerungen
+> - **LIME** eignet sich hervorragend fuer schnelle lokale Erklaerungen
 > - **ELI5** bietet den einfachsten Einstieg
-> - Die Wahl des Frameworks hängt von Anwendungsfall und Zielgruppe ab
-> - Kombiniere verschiedene Methoden für ein vollständiges Bild
+> - Die Wahl des Frameworks haengt von Anwendungsfall und Zielgruppe ab
+> - Kombiniere verschiedene Methoden fuer ein vollstaendiges Bild
 
 ---
 

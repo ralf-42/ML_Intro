@@ -11,7 +11,8 @@ has_toc: true
 # Anomalie-Erkennung
 {: .no_toc }
 
-> **Anomalie-Erkennung identifiziert Datenpunkte, die signifikant vom erwarteten Muster abweichen.**    
+> [!NOTE] Kerndefinition
+> Anomalie-Erkennung identifiziert Datenpunkte, die signifikant vom erwarteten Muster abweichen.
 > Der Anomalie-Score quantifiziert dabei, wie untypisch ein Datenpunkt im Vergleich zum Rest des Datensatzes ist.
 
 ---
@@ -36,7 +37,9 @@ Der Anomalie-Score bewertet quantitativ, wie anomal oder atypisch ein bestimmter
 | **nahe 0** | Grenzfall | Datenpunkt liegt an der Entscheidungsgrenze |
 | **nahe +1** | Sehr wahrscheinlich normal | Datenpunkt passt gut zum Rest der Daten |
 
-> **Hinweis:** Die exakte Score-Interpretation hängt vom verwendeten Algorithmus ab. Bei verschiedenen Anomalie-Erkennungsverfahren werden unterschiedliche Bewertungsskalen verwendet.
+> [!NOTE] Score-Interpretation
+> Die exakte Score-Interpretation hängt vom verwendeten Algorithmus ab.
+> Bei verschiedenen Anomalie-Erkennungsverfahren werden unterschiedliche Bewertungsskalen verwendet.
 
 ### Visualisierung des Konzepts
 
@@ -58,7 +61,9 @@ flowchart LR
 
 Für die praktische Implementierung von Anomalie-Erkennung eignet sich besonders **DBSCAN** (Density-Based Spatial Clustering of Applications with Noise).
 
-> **DBSCAN** identifiziert automatisch Rauschpunkte (Noise), die als Anomalien interpretiert werden können. Der Algorithmus klassifiziert Datenpunkte als:
+> [!TIP] DBSCAN in der Anomalie-Erkennung
+> DBSCAN identifiziert automatisch Rauschpunkte (Noise), die als Anomalien interpretiert werden koennen.
+> Der Algorithmus klassifiziert Datenpunkte als:
 > - **Core Points**: Punkte in dichten Bereichen
 > - **Border Points**: Punkte am Rand von Clustern
 > - **Noise Points**: Isolierte Punkte = **Anomalien**
@@ -161,7 +166,9 @@ if mask.sum() > 1 and len(set(predictions[mask])) > 1:
 
 ### Häufige Fallstricke
 
-> **Vorsicht vor Überinterpretation:** Nicht jede erkannte Anomalie ist problematisch. Manche "Anomalien" sind einfach seltene, aber valide Datenpunkte.
+> [!WARNING] Vorsicht vor Ueberinterpretation
+> Nicht jede erkannte Anomalie ist problematisch.
+> Manche "Anomalien" sind einfach seltene, aber valide Datenpunkte.
 
 ```mermaid
 flowchart TD
