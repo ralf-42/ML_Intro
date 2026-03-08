@@ -11,7 +11,7 @@ has_toc: true
 # Methoden & Frameworks
 {: .no_toc }
 
-> [!NOTE] Kerndefinition
+> [!NOTE] Kerndefinition    
 > Explainable AI (XAI) umfasst Methoden und Techniken, die ML-Modelle fuer Menschen verstaendlich und nachvollziehbar machen.
 
 ---
@@ -159,7 +159,7 @@ flowchart TD
 | **Global** | Gesamtes Modell | Ein Surrogate erklärt alle Vorhersagen |
 | **Lokal** | Einzelne Vorhersage | LIME trainiert ein Surrogate nur für einen Datenpunkt |
 
-> [!WARNING] Grenzen von Surrogate-Modellen
+> [!WARNING] Grenzen von Surrogate-Modellen   
 > Das Surrogate-Modell erklaert nicht das Original-Modell selbst, sondern dessen *Verhalten*.
 > Die Erklaerung ist eine Approximation.
 
@@ -205,7 +205,7 @@ Verwendung von ML-Modellen, die von Grund auf so konzipiert sind, dass sie erkl�
 
 Erklärung individueller Vorhersagen durch Analyse der wichtigsten Features und ihrer Ausprägungen:
 
-> [!TIP] Beispiel fuer lokale Erklaerung
+> [!TIP] Beispiel fuer lokale Erklaerung     
 > Warum wurde fuer Passagier X vorhergesagt, dass er ueberlebt?
 > - Geschlecht: weiblich -> +45% Ueberlebenschance
 > - Klasse: 1. Klasse -> +20% Ueberlebenschance
@@ -709,16 +709,12 @@ for pclass in [1, 2, 3]:
 - **LIME**: "Why Should I Trust You?" (Ribeiro et al., 2016)
 - **SHAP**: "A Unified Approach to Interpreting Model Predictions" (Lundberg & Lee, 2017)
 
-### Video-Tutorials
-
-- [StatQuest: SHAP Values Explained](https://www.youtube.com/watch?v=VB9uV-x0fGE)
-- [KNIME: Explainable AI](https://www.youtube.com/watch?v=Xv5xQQe2a3w)
 
 ---
 
 ## Zusammenfassung
 
-> [!SUCCESS] Kernpunkte
+> [!SUCCESS] Kernpunkte     
 > - XAI macht ML-Modelle verstaendlich und erhoeht das Vertrauen
 > - **SHAP** ist die theoretisch fundierteste Methode fuer lokale und globale Erklaerungen
 > - **LIME** eignet sich hervorragend fuer schnelle lokale Erklaerungen
