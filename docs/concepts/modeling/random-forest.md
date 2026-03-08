@@ -11,7 +11,9 @@ has_toc: true
 # Random Forest
 {: .no_toc }
 
-> **Random Forest ist ein Ensemble-Algorithmus, der multiple Entscheidungsbäume kombiniert, um robuste und genaue Vorhersagen zu treffen. Durch Bagging und Feature-Randomisierung reduziert er Overfitting und liefert zuverlässige Ergebnisse für Klassifikation und Regression.**
+> [!NOTE] Kerndefinition
+> Random Forest ist ein Ensemble-Algorithmus, der multiple Entscheidungsbaeume kombiniert, um robuste und genaue Vorhersagen zu treffen.
+> Durch Bagging und Feature-Randomisierung reduziert er Overfitting und liefert zuverlaessige Ergebnisse fuer Klassifikation und Regression.
 
 ---
 
@@ -265,7 +267,8 @@ print(f"OOB Score: {model.oob_score_:.4f}")
 print(f"Test Score: {model.score(data_test, target_test):.4f}")
 ```
 
-> **Vorteil**: OOB Score liefert eine Schätzung der Generalisierungsfähigkeit ohne zusätzlichen Validierungsdatensatz.
+> [!TIP] OOB-Vorteil
+> OOB Score liefert eine Schaetzung der Generalisierungsfaehigkeit ohne zusaetzlichen Validierungsdatensatz.
 
 ---
 
@@ -438,7 +441,9 @@ mindmap
       Feature Selection
 ```
 
-> **Kernaussage**: Random Forest kombiniert die Einfachheit von Entscheidungsbäumen mit der Robustheit von Ensemble-Methoden. Durch Bagging und Feature-Randomisierung entstehen dekorrelierte Bäume, deren aggregierte Vorhersagen stabiler und genauer sind als die eines einzelnen Baums.
+> [!SUCCESS] Kernaussage
+> Random Forest kombiniert die Einfachheit von Entscheidungsbaeumen mit der Robustheit von Ensemble-Methoden.
+> Durch Bagging und Feature-Randomisierung entstehen dekorrelierte Baeume, deren aggregierte Vorhersagen stabiler und genauer sind als die eines einzelnen Baums.
 
 ---
 [1] Mathematisch gesehen liegt die Wahrscheinlichkeit, dass ein spezifischer Datensatz bei einer Stichprobengröße von $n$ nicht ausgewählt wird, bei:
