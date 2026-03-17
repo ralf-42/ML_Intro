@@ -8,7 +8,7 @@ description: "Nützliche Ressourcen und Tools"
 
 # Ressourcen
 
-Nützliche Ressourcen, Tools und Best Practices für Machine Learning.
+Nützliche Ressourcen, Tools und Best Practices für Machine Learning.    
 
 ## Übersicht
 
