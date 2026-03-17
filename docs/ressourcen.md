@@ -19,7 +19,7 @@ Nützliche Ressourcen, Tools und Best Practices für Machine Learning.
   - Modeling: Decision Trees, Regression, Clustering, Neural Networks, CNN
   - Evaluate: Metriken, Threshold, Cross Validation, Bootstrapping
 
-### Links & Tutorials
+### Links & Tutorials     
 - **[Links](./ressourcen/links.html)** - Umfassende Link-Sammlung zu ML-Ressourcen
   - StatQuest Videos (YouTube) - Visualisierte ML-Konzepte
   - KNIME Kurse & Tutorials
