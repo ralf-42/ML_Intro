@@ -16,5 +16,4 @@ Diese Sektion ist in folgende Themenbereiche untergliedert:
 - **Prepare** - Datenaufbereitung und Preprocessing (Data Cleaning, Feature Engineering, Transformation, Train-Test Split)
 - **Modelle** - Überblick über klassische ML-Algorithmen, Ensemble Methods, Deep Learning (CNNs, RNNs) und AutoML-Ansätze
 - **Bewertung** - Metriken und Methoden zur Evaluation von ML-Modellen (Accuracy, Precision, ROC-AUC, Cross-Validation)
-- **Deployment** - ML-Modelle in Produktion bringen (Model Persistence, Web Applications, MLOps)
 - **XAI** - Explainable AI Methoden (SHAP, LIME, Interpretierbarkeit)
