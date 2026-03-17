@@ -710,7 +710,6 @@ evaluate_classifier(target_test, target_pred, target_proba, class_names=['Negati
 *Referenzen:*    
 - scikit-learn Dokumentation: [Classification Metrics](https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics)      
 - StatQuest: [Confusion Matrix](https://www.youtube.com/watch?v=Kdsp6soqA7o), [ROC and AUC](https://www.youtube.com/watch?v=4jRBRDbJemM)      
-- KNIME: [Confusion Matrix](https://www.knime.com/blog/confusion-matrix), [ROC Curve](https://www.knime.com/blog/roc-curve)     
 
 ---
 

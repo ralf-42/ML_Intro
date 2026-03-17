@@ -416,7 +416,6 @@ model.fit(data_train, target_train, epochs=10)
 
 - [scikit-learn Pipeline Documentation](https://scikit-learn.org/stable/modules/compose.html)
 - [ColumnTransformer Guide](https://scikit-learn.org/stable/modules/generated/sklearn.compose.ColumnTransformer.html)
-- [Keras Preprocessing Layers](https://keras.io/guides/preprocessing_layers/)
 - [Data Leakage Explained](https://machinelearningmastery.com/data-leakage-machine-learning/)
 
 ---

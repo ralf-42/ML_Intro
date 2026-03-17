@@ -105,12 +105,10 @@ has_toc: true
 |-------|------|
 | Clean AutoML for Dirty Data | [Link](https://medium.com/towards-data-science/clean-automl-for-dirty-data-how-and-why-to-automate-preprocessing-of-tables-in-machine-learning-d79ac87780d3) |
 | Feature Scaling (MinMax/Standard) | [Link](https://medium.com/technofunnel/what-when-why-feature-scaling-for-machine-learning-standard-minmax-scaler-49e64c510422) |
-| Hyperparameter Optimization | [Link](https://towardsdatascience.com/hyperparameters-optimization-526348bb8e2d) |
 | Multi-Class Confusion Matrix | [Link](https://towardsdatascience.com/confusion-matrix-for-your-multi-class-machine-learning-model-ff9aa3bf7826) |
 | AUC-ROC Curve | [Link](https://medium.com/computer-architecture-club/what-is-the-auc-roc-curve-47fbdcbf7a4a) |
 | 9 Distance Measures | [Link](https://medium.com/towards-data-science/9-distance-measures-in-data-science-918109d069fa) |
 | XGBoost Deep Dive | [Link](https://medium.com/sfu-cspmp/xgboost-a-deep-dive-into-boosting-f06c9c41349) |
-| XGBoost in scikit-learn | [Link](https://towardsdatascience.com/getting-started-with-xgboost-in-scikit-learn-f69f5f470a97) |
 | AWS AutoPilot (AutoML) | [Link](https://medium.com/autopilot-the-amazon-web-services-aws-automl/autopilot-the-amazon-web-services-aws-automl-solution-641a23535835) |
 | CNN Guide (ELI5) | [Link](https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53) |
 | LSTM Networks | [Link](https://towardsdatascience.com/lstm-recurrent-neural-networks-how-to-teach-a-network-to-remember-the-past-55e54c2ff22e) |
