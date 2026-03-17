@@ -10,7 +10,7 @@ has_toc: true
 # Links
 {: .no_toc }
 
-> **Umfassende Sammlung nützlicher ML-Ressourcen: Videos, Tutorials, Bücher, Tools**      
+> **Umfassende Sammlung nützlicher ML-Ressourcen: Videos, Tutorials, Bücher, Tools**    
 
 ---
 
