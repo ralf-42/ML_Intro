@@ -30,4 +30,4 @@ Nützliche Ressourcen, Tools und Best Practices für Machine Learning.
   - Interaktive Lerntools
   - Bücher & E-Books (kostenlos)
   - Dokumentation & Referenzen
-  - KI-Tool-Sammlungen
+  - KI-Tool-Sammlungen  
