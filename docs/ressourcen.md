@@ -20,7 +20,7 @@ Nützliche Ressourcen, Tools und Best Practices für Machine Learning.
   - Evaluate: Metriken, Threshold, Cross Validation, Bootstrapping
 
 ### Links & Tutorials     
-- **[Links](./ressourcen/links.html)** - Umfassende Link-Sammlung zu ML-Ressourcen
+- **[Links](./ressourcen/link_sammlung.html)** - Umfassende Link-Sammlung zu ML-Ressourcen
   - StatQuest Videos (YouTube) - Visualisierte ML-Konzepte
   - KNIME Kurse & Tutorials
   - Towards Data Science / Medium Artikel
