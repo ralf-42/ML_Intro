@@ -8,19 +8,19 @@ description: "Nützliche Ressourcen und Tools"
 
 # Ressourcen
 
-Nützliche Ressourcen, Tools und Best Practices für Machine Learning.    
+Nützliche Ressourcen, Tools und Best Practices für Machine Learning.
 
 ## Übersicht
 
 ### Interaktive Tools
-- **[Interaktive Visualisierung](./ressourcen/interaktive-visualisierung.html)** - Web-Demos für ML-Konzepte
+- **[Interaktive Visualisierung](https://ralf-42.github.io/ML_Intro/ressourcen/interaktive-visualisierung.html)** - Web-Demos für ML-Konzepte
   - Understand: Statistik, Verteilungen, Korrelation
   - Prepare: Missing Values, Kodierung, Skalierung, Outlier
   - Modeling: Decision Trees, Regression, Clustering, Neural Networks, CNN
   - Evaluate: Metriken, Threshold, Cross Validation, Bootstrapping
 
-### Links & Tutorials     
-- **[Links](./ressourcen/link_sammlung.html)** - Umfassende Link-Sammlung zu ML-Ressourcen
+### Links & Tutorials
+- **[Links](https://ralf-42.github.io/ML_Intro/ressourcen/link_sammlung.html)** - Umfassende Link-Sammlung zu ML-Ressourcen
   - StatQuest Videos (YouTube) - Visualisierte ML-Konzepte
   - KNIME Kurse & Tutorials
   - Towards Data Science / Medium Artikel
@@ -30,4 +30,4 @@ Nützliche Ressourcen, Tools und Best Practices für Machine Learning.
   - Interaktive Lerntools
   - Bücher & E-Books (kostenlos)
   - Dokumentation & Referenzen
-  - KI-Tool-Sammlungen  
+  - KI-Tool-Sammlungen

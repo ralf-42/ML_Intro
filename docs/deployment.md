@@ -12,8 +12,8 @@ Vom Experiment zur Produktion — ML-Modelle produktiv einsetzen.
 
 ## Inhalte
 
-- **[Gradio Deployment](./deployment/Gradio_Deployment.html)** - Web-Interfaces, Hugging Face Spaces, Docker
-- **[Produktionsreife Anwendung](./deployment/aus-entwicklung-ins-deployment.html)** - Schritt-für-Schritt vom Notebook ins Deployment
+- **[Gradio Deployment](https://ralf-42.github.io/ML_Intro/deployment/Gradio_Deployment.html)** - Web-Interfaces, Hugging Face Spaces, Docker
+- **[Produktionsreife Anwendung](https://ralf-42.github.io/ML_Intro/deployment/aus-entwicklung-ins-deployment.html)** - Schritt-für-Schritt vom Notebook ins Deployment
 
 ---
 
@@ -49,7 +49,7 @@ Interaktive Web-Interfaces für ML-Modelle.
 
 | Thema | Beschreibung |
 |-------|--------------|
-| **[Gradio Deployment](./deployment/Gradio_Deployment.html)** | Web-Interfaces, Hugging Face Spaces, Docker |
+| **[Gradio Deployment](https://ralf-42.github.io/ML_Intro/deployment/Gradio_Deployment.html)** | Web-Interfaces, Hugging Face Spaces, Docker |
 
 **Weitere Web-Frameworks:**
 - **Streamlit** - Datenbasierte Web-Apps
@@ -65,4 +65,3 @@ Interaktive Web-Interfaces für ML-Modelle.
 | **AWS SageMaker** | Vollständige ML-Plattform |
 | **Google Cloud AI** | Managed ML Services |
 | **Azure ML** | Microsoft Cloud ML-Lösung |
-
