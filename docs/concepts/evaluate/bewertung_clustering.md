@@ -221,6 +221,15 @@ flowchart TD
 | k=1 testen | Silhouette für einzelnes Cluster undefiniert | Minimum k=2 verwenden |
 | Negative Werte ignorieren | Falsch zugeordnete Punkte übersehen | Punkte mit s < 0 untersuchen |
 
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|
+| [K-Means und DBSCAN](../modeling/kmeans-dbscan.html) | Wie funktionieren die wichtigsten Clustering-Verfahren selbst? |
+| [Bewertung allgemein](./bewertung_allgemein.html) | Welche Bewertungslogik gilt über einzelne Verfahren hinaus? |
+| [Bewertung Anomalie](./bewertung_anomalie.html) | Wie verändert sich die Bewertung, wenn nicht Cluster, sondern Ausreißer im Fokus stehen? |
+| [Skalierung](../prepare/skalierung.html) | Warum ist Vorverarbeitung für Distanzverfahren besonders wichtig? |
+
 ---
 
 **Version:** 1.0    

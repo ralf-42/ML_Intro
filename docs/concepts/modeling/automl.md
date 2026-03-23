@@ -139,6 +139,14 @@ flowchart TD
 3. **Ergebnisse verstehen:** Nicht blind dem besten Modell vertrauen
 4. **Reproduzierbarkeit:** Immer `session_id` setzen
 5. **Iteration:** AutoML als Startpunkt, dann manuell optimieren
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [Modellauswahl](./modellauswahl.html) | AutoML automatisiert Modellauswahl und Preprocessing; manuelle Modellauswahl erfordert Expertenwissen |
+| [Hyperparameter-Tuning](../evaluate/hyperparameter_tuning.html) | AutoML automatisiert den gesamten Workflow inkl. Tuning; manuelles Tuning optimiert ein einzelnes Modell gezielt |
+| [Feature Engineering](../prepare/feature-engineering.html) | AutoML automatisiert Feature Creation; manuelles Feature Engineering nutzt gezielt Domaenenwissen |
+
 
 
 ---

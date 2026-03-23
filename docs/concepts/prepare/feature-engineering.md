@@ -891,6 +891,14 @@ Feature Engineering ist eine Kunst, die Domänenwissen, statistische Methoden un
 - **Domänenwissen** ist oft der entscheidende Faktor für aussagekräftige Features
 
 Der iterative Prozess aus Hypothese, Implementierung und Validierung führt schrittweise zu einem optimalen Feature-Set für das jeweilige Problem.
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [Kodierung kategorialer Daten](./kodierung_kategorialer_daten.html) | Kodierung konvertiert Datentypen; Feature Engineering erschafft neue informative Merkmale aus bestehenden |
+| [Modellauswahl](../modeling/modellauswahl.html) | Feature Engineering optimiert die Eingabedaten; Modellauswahl waehlt die Algorithmusklasse |
+| [Feature Importance (Random Forest)](../modeling/random-forest.html) | Feature Engineering konstruiert Merkmale; Feature Importance bewertet nachtraeglich, welche Merkmale das Modell nutzt |
+
 
 ---
 

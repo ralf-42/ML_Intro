@@ -711,6 +711,15 @@ Bootstrapping ergänzt Cross-Validation optimal: Während Cross-Validation die G
 - **Jackknife**: Alternative Resampling-Methode (Ziehen ohne Zurücklegen)
 - **Bagging & Boosting**: Ensemble-Methoden mit Bootstrap-Grundlage
 
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|
+| [Cross Validation](./cross_validation.html) | Wann geht es um Generalisierungsbewertung statt Unsicherheitsabschätzung? |
+| [Hyperparameter Tuning](./hyperparameter_tuning.html) | Wie wird Modellauswahl systematisch mit Evaluation verbunden? |
+| [Bewertung allgemein](./bewertung_allgemein.html) | Wo ordnet sich Bootstrapping im gesamten Evaluationsprozess ein? |
+| [Random Forest](../modeling/random-forest.html) | Wie wird Bootstrapping in Ensemble-Verfahren praktisch genutzt? |
+
 ---
 
 *Referenzen:*

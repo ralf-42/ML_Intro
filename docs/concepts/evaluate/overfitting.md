@@ -104,7 +104,7 @@ flowchart TB
 
 ### Visuelle Analogie
 
-Stell dir vor, ein Modell soll den Zusammenhang zwischen Lernzeit und Prüfungsergebnis lernen:
+Ein Modell soll den Zusammenhang zwischen Lernzeit und Prüfungsergebnis lernen:
 
 | Typ | Beschreibung | Analogie |
 |-----|--------------|----------|
@@ -695,6 +695,14 @@ flowchart TB
 - scikit-learn Dokumentation: [Learning Curve](https://scikit-learn.org/stable/modules/learning_curve.html)
 - StatQuest: [Bias and Variance](https://www.youtube.com/watch?v=EuBBz3bI-aA)
 - KNIME: Overfitting Tutorial
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [Cross-Validation](./cross_validation.html) | Overfitting ist das Problem; Cross-Validation ist eine Methode, es zuverlaessig zu erkennen |
+| [Hyperparameter-Tuning](./hyperparameter_tuning.html) | Overfitting entsteht durch falsche Hyperparameter; Tuning optimiert Parameter zur Vermeidung |
+| [Modellauswahl](../modeling/modellauswahl.html) | Overfitting entsteht durch zu komplexe Modelle; Modellauswahl beruecksichtigt den Komplexitaets-Trade-off von Anfang an |
+
 
 ---
 

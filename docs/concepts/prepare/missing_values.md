@@ -169,6 +169,14 @@ flowchart TD
 | `SimpleImputer` | Einfache Strategien (mean, median, most_frequent, constant) |
 | `KNNImputer` | K-Nearest-Neighbors basierte Imputation |
 | `IterativeImputer` | Multivariate Imputation mit ML-Modellen |
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [Outlier-Behandlung](./outlier.html) | Beide behandeln Datenqualitaetsprobleme; Missing Values sind Abwesenheit von Daten, Outliers sind extreme Werte |
+| [Train-Test-Split](./train_test_split.html) | Missing Values werden *vor* dem Split behandelt; Split trennt Daten erst *nach* der Bereinigung |
+| [Feature Engineering](./feature-engineering.html) | Feature Engineering nutzt den bereinigten Datensatz; Missing Values sind ein vorgelagerter Bereinigungsschritt |
+
 
 
 ---

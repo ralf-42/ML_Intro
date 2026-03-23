@@ -77,6 +77,14 @@ Ein deployed Modell ist kein Endpunkt, sondern der Beginn eines kontinuierlichen
 Die gestrichelten Pfeile im Diagramm sind kein Zeichen von Fehlern, sondern ein wesentliches Merkmal erfolgreicher ML-Projekte. Machine Learning ist ein iterativer Prozess: Erkenntnisse aus späteren Phasen führen regelmäßig zu Verbesserungen in früheren Schritten.
 
 Ein Modell mit unbefriedigender Performance kann auf Probleme in der Datenaufbereitung hinweisen. Feedback aus dem Produktivbetrieb kann neue Feature-Ideen liefern. Veränderte Geschäftsanforderungen erfordern eine Neubewertung des ursprünglichen Problems. Diese Flexibilität und Bereitschaft zur Iteration unterscheidet erfolgreiche ML-Projekte von gescheiterten.
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [ML Grundlagen](./machine_learning_grundlagen.html) | Grundlagen erklaeren *was* ML ist; der Workflow zeigt *wie* Projekte phasenweise durchgefuehrt werden |
+| [Workflow-Design (Pipelines)](./workflow-design.html) | ML-Workflow beschreibt die 5 Phasen uebergeordnet; Workflow-Design konkretisiert technische Umsetzung mit scikit-learn Pipelines |
+| [Hyperparameter-Tuning](../evaluate/hyperparameter_tuning.html) | Der Workflow rahmt alle Phasen ein; Hyperparameter-Tuning ist eine spezialisierte Optimierungstechnik in Phase 3 |
+
 
 
 ---

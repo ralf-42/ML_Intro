@@ -4,10 +4,21 @@ title: Prepare
 parent: Konzepte
 nav_order: 2
 has_children: true
+has_toc: true
 description: "Datenaufbereitung für Machine Learning"
 ---
 
 # Prepare
+{: .no_toc }
+
+# Inhaltsverzeichnis
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
 
 Systematische Datenaufbereitung und Preprocessing für Machine Learning Modelle.
 
@@ -26,8 +37,8 @@ Bereinigung und Qualitätssicherung der Rohdaten.
 
 | Thema | Beschreibung |
 |-------|--------------|
-| [Missing Values](prepare/missing_values.md) | Fehlende Werte erkennen und behandeln (SimpleImputer, KNNImputer) |
-| [Outlier](prepare/outlier.md) | Ausreißer erkennen und behandeln (Z-Score, IQR, Isolation Forest) |
+| [Missing Values](prepare/missing_values.html) | Fehlende Werte erkennen und behandeln (SimpleImputer, KNNImputer) |
+| [Outlier](prepare/outlier.html) | Ausreißer erkennen und behandeln (Z-Score, IQR, Isolation Forest) |
 
 ---
 
@@ -37,7 +48,7 @@ Merkmalserstellung und -transformation zur Verbesserung der Modellperformance.
 
 | Thema | Beschreibung |
 |-------|--------------|
-| [Feature Engineering](prepare/feature-engineering.md) | Feature Creation, Selection, Extraction und Domain Knowledge Integration |
+| [Feature Engineering](prepare/feature-engineering.html) | Feature Creation, Selection, Extraction und Domain Knowledge Integration |
 
 ---
 
@@ -47,8 +58,8 @@ Skalierung, Normalisierung und Encoding für ML-Algorithmen.
 
 | Thema | Beschreibung |
 |-------|--------------|
-| [Skalierung](prepare/skalierung.md) | Normalisierung und Standardisierung (StandardScaler, MinMaxScaler) |
-| [Kodierung](prepare/kodierung_kategorialer_daten.md) | Kategoriale Daten kodieren (OrdinalEncoder, OneHotEncoder, TargetEncoder) |
+| [Skalierung](prepare/skalierung.html) | Normalisierung und Standardisierung (StandardScaler, MinMaxScaler) |
+| [Kodierung](prepare/kodierung_kategorialer_daten.html) | Kategoriale Daten kodieren (OrdinalEncoder, OneHotEncoder, TargetEncoder) |
 
 ---
 
@@ -58,11 +69,19 @@ Aufteilung in Trainings- und Testdaten für zuverlässige Modellbewertung.
 
 | Thema | Beschreibung |
 |-------|--------------|
-| [Train-Test-Split](prepare/train_test_split.md) | Datenaufteilung, Stratifizierung, Data Leakage vermeiden |
+| [Train-Test-Split](prepare/train_test_split.html) | Datenaufteilung, Stratifizierung, Data Leakage vermeiden |
 
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|
+| [Grundlagen](./01_grundlagen.html) | Welche ML-Logik und welchen Workflow setzt Datenvorbereitung voraus? |
+| [Modeling](./03_modeling.html) | Welche Modelle profitieren wovon in der Vorverarbeitung? |
+| [Evaluate](./04_evaluate.html) | Wie wird geprüft, ob die vorbereiteten Daten zu belastbaren Ergebnissen führen? |
+| [XAI](./08_xai.html) | Wie wirkt sich Vorverarbeitung auf spätere Interpretierbarkeit aus? |
 
 ---
 
-**Version:** 1.0    
-**Stand:** Januar 2026    
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    
+**Version:** 1.0
+**Stand:** März 2026
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

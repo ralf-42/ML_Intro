@@ -362,6 +362,14 @@ Die Kombination dieser Methoden führt zu höherer Codequalität, besserer Repro
 - [Google Colab](https://colab.research.google.com/) - Cloud-basierte Entwicklungsumgebung
 - [scikit-learn User Guide](https://scikit-learn.org/stable/user_guide.html) - Offizielle Dokumentation
 - [Pandas Cheat Sheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf) - Schnellreferenz
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [ML Workflow Erklaerung](./ml_workflow_erklaerung.html) | Coding-Arbeitsweisen sind Produktivitaetstechniken (KI-Assistenz, Checklisten); ML-Workflow beschreibt Projektphasen |
+| [Modellauswahl](../modeling/modellauswahl.html) | Coding-Arbeitsweisen unterstuetzen effizientes Arbeiten; Modellauswahl entscheidet, welcher Algorithmus eingesetzt wird |
+| [Hyperparameter-Tuning](../evaluate/hyperparameter_tuning.html) | Arbeitsweisen optimieren den Entwicklungsprozess; Tuning optimiert Algorithmus-Parameter |
+
 
 
 

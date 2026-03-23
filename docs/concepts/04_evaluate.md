@@ -4,10 +4,21 @@ title: Evaluate
 parent: Konzepte
 nav_order: 4
 has_children: true
+has_toc: true
 description: "Bewertung und Evaluation von ML-Modellen"
 ---
 
 # Evaluate
+{: .no_toc }
+
+# Inhaltsverzeichnis
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
 
 Methoden und Metriken zur Bewertung und Evaluation von Machine Learning Modellen.
 
@@ -64,9 +75,17 @@ Strategien zur Verbesserung der Generalisierung.
 | [Overfitting](evaluate/overfitting) | Erkennung, Learning Curves, Bias-Variance Tradeoff |
 | [Regularisierung](evaluate/regularisierung) | L1 (Lasso), L2 (Ridge), Elastic Net |
 
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|
+| [Grundlagen](./01_grundlagen.html) | Welche Grundlogik von Lernen, Daten und Workflow steckt hinter Evaluation? |
+| [Prepare](./02_prepare.html) | Wie beeinflusst Datenaufbereitung die spätere Modellbewertung? |
+| [Modeling](./03_modeling.html) | Welche Modelle werden hier überhaupt bewertet und verglichen? |
+| [XAI](./08_xai.html) | Wie ergänzt Erklärbarkeit klassische Metriken und Tests? |
 
 ---
 
-**Version:** 1.0    
-**Stand:** Januar 2026    
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    
+**Version:** 1.0
+**Stand:** März 2026
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

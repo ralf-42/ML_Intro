@@ -4,10 +4,21 @@ title: Modeling
 parent: Konzepte
 nav_order: 3
 has_children: true
+has_toc: true
 description: "Machine Learning Modelle und Algorithmen"
 ---
 
 # Modeling
+{: .no_toc }
+
+# Inhaltsverzeichnis
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
 
 Überblick über Machine Learning Modelle und ihre Anwendungsfälle.
 
@@ -79,9 +90,17 @@ Kombination mehrerer Modelle für bessere Vorhersagen.
 |-------|--------------|
 | [AutoML](modeling/automl) | Workflow-Automatisierung mit PyCaret |
 
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|
+| [Grundlagen](./01_grundlagen.html) | Welche Problemtypen und Lernparadigmen liegen der Modellwahl zugrunde? |
+| [Prepare](./02_prepare.html) | Welche Vorverarbeitung ist nötig, bevor ein Modell sinnvoll trainiert werden kann? |
+| [Evaluate](./04_evaluate.html) | Wie wird entschieden, ob ein gewähltes Modell tatsächlich überzeugt? |
+| [XAI](./08_xai.html) | Wie lassen sich komplexere Modelle später nachvollziehbar erläutern? |
+
 ---
 
-
-**Version:** 1.0    
-**Stand:** Januar 2026    
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.     
+**Version:** 1.0
+**Stand:** März 2026
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

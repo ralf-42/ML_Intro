@@ -244,6 +244,15 @@ mindmap
 | **Stärke** | Universell einsetzbar | Optimal für Klassifikation |
 | **Schwäche** | Ignoriert Klassenzugehörigkeit | Braucht Labels, max. k-1 Komponenten |
 
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|
+| [Modellauswahl](./modellauswahl.html) | Wann ist Dimensionsreduktion sinnvoller als ein direktes Modell? |
+| [K-Means und DBSCAN](./kmeans-dbscan.html) | Wie wird mit reduzierten Daten später gruppiert oder segmentiert? |
+| [Feature Engineering](../prepare/feature-engineering.html) | Wie unterscheiden sich erzeugte Features von reduzierten Komponenten? |
+| [Bewertung Clustering](../evaluate/bewertung_clustering.html) | Wie wird geprüft, ob eine reduzierte Darstellung die Gruppenbildung verbessert? |
+
 
 ---
 

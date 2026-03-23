@@ -4,10 +4,21 @@ title: XAI
 parent: Konzepte
 nav_order: 8
 has_children: true
+has_toc: true
 description: "Explainable AI - Interpretierbarkeit von ML-Modellen"
 ---
 
 # XAI - Explainable AI
+{: .no_toc }
+
+# Inhaltsverzeichnis
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
 
 Methoden zur Erklärbarkeit und Interpretierbarkeit von Machine Learning Modellen.
 
@@ -50,8 +61,17 @@ Methoden zur Erklärbarkeit und Interpretierbarkeit von Machine Learning Modelle
 - Feature Attribution
 - Adversarial Examples
 
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|
+| [Grundlagen](./01_grundlagen.html) | Welche ML-Grundbegriffe und Lernparadigmen sollte XAI voraussetzen? |
+| [Prepare](./02_prepare.html) | Wie beeinflusst Vorverarbeitung die spätere Interpretierbarkeit? |
+| [Modeling](./03_modeling.html) | Welche Modellarten stellen unterschiedliche Anforderungen an Erklärbarkeit? |
+| [Evaluate](./04_evaluate.html) | Wie ergänzt XAI klassische Bewertungsmetriken durch inhaltliche Nachvollziehbarkeit? |
+
 ---
 
-**Version:** 1.0    
-**Stand:** Januar 2026    
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    
+**Version:** 1.0
+**Stand:** März 2026
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

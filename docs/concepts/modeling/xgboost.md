@@ -250,6 +250,14 @@ mindmap
 - **Regularisierung** ist integriert und reduziert Overfitting
 - Besonders erfolgreich bei **tabellarischen Daten** und in **ML-Wettbewerben**
 - Erfordert mehr **Hyperparameter-Tuning** als Random Forest
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [Ensemble-Methoden](./ensemble.html) | XGBoost spezialisiert Gradient Boosting; Ensemble-Methoden decken Bagging, Boosting und Stacking uebergreifend ab |
+| [Random Forest](./random-forest.html) | Random Forest nutzt paralleles Bagging; XGBoost nutzt sequentielle Fehlerkorrektur durch Boosting |
+| [Hyperparameter-Tuning](../evaluate/hyperparameter_tuning.html) | XGBoost ist die Modellklasse; Hyperparameter-Tuning optimiert Parameter wie learning_rate und max_depth |
+
 
 
 

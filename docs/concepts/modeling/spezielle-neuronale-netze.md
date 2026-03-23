@@ -620,6 +620,15 @@ flowchart TD
 >
 > Moderne Architekturen wie **Transformer** (BERT, GPT) haben in vielen NLP-Aufgaben LSTMs abgelöst. Für Computer Vision sind **Vision Transformer (ViT)** und fortgeschrittene CNNs wie **ResNet** oder **EfficientNet** Stand der Technik.
 
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|
+| [Neuronale Netze](./neuronale-netze.html) | Welche Grundlagen gelten für neuronale Modelle allgemein? |
+| [XAI Erklärbare KI](../xai_erklaerbare_ki.html) | Wie lassen sich komplexe Netze trotz geringer Transparenz erläutern? |
+| [Regularisierung](../evaluate/regularisierung.html) | Wie werden neuronale Modelle gegen Overfitting stabilisiert? |
+| [Modell-Steckbriefe](./modell-steckbriefe.html) | Wo ordnen sich CNN, LSTM und AutoEncoder im Gesamtüberblick ein? |
+
 ---
 
 
