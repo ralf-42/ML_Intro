@@ -307,6 +307,14 @@ flowchart LR
 ```
 
 Der Entscheidungsbaum ist ein grundlegender Algorithmus, der das Fundament für fortgeschrittene Ensemble-Methoden wie Random Forest und Gradient Boosting bildet. Seine Stärke liegt in der Interpretierbarkeit – die Entscheidungslogik kann als Regelsystem visualisiert und kommuniziert werden.
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [Random Forest](./random-forest.html) | Decision Tree ist der Basis-Algorithmus; Random Forest kombiniert viele Baeume zu einem robusteren Ensemble |
+| [Ensemble-Methoden](./ensemble.html) | Ensemble-Methoden beschreiben Kombinationsstrategien; Decision Tree ist die grundlegende Komponente dieser Verfahren |
+| [Modellauswahl](./modellauswahl.html) | Modellauswahl entscheidet, wann ein Decision Tree sinnvoll ist — z.B. bei Interpretierbarkeitsanforderungen |
+
 
 ---
 

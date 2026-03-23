@@ -908,6 +908,14 @@ Hyperparameter-Tuning ist ein essenzieller Schritt, um das volle Potenzial von M
 - scikit-learn Dokumentation: [GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html), [RandomizedSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html)
 - Bergstra & Bengio (2012): Random Search for Hyper-Parameter Optimization
 - Optuna: [Dokumentation](https://optuna.readthedocs.io/)
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [Modellauswahl](../modeling/modellauswahl.html) | Hyperparameter-Tuning optimiert Parameter *eines* Modells; Modellauswahl waehlt die Modellklasse insgesamt |
+| [Cross-Validation](./cross_validation.html) | Cross-Validation ist die Evaluierungsmethodik; Hyperparameter-Tuning nutzt CV zum Finden optimaler Parameter |
+| [AutoML](../modeling/automl.html) | Hyperparameter-Tuning ist manueller Optimierungsprozess mit Expertenwissen; AutoML automatisiert ihn |
+
 
 ---
 

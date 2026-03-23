@@ -242,6 +242,14 @@ flowchart TD
 - **Nicht blind kopieren:** Was bei anderen funktioniert, passt nicht automatisch zu Ihren Daten
 - **Nicht Trainingszeit ignorieren:** Produktionsanforderungen berücksichtigen
 - **Nicht Interpretierbarkeit vernachlässigen:** Stakeholder müssen Ergebnisse verstehen
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [Regression](./regression.html) | Modellauswahl ist strategische Entscheidung ueber die Algorithmusklasse; Aufgabentyp (Regression/Klassifikation) bestimmt Richtung |
+| [Hyperparameter-Tuning](../evaluate/hyperparameter_tuning.html) | Modellauswahl waehlt den Algorithmus; Hyperparameter-Tuning optimiert dessen Einstellungen danach |
+| [Overfitting](../evaluate/overfitting.html) | Modellauswahl beruecksichtigt Komplexitaets-Trade-offs; Overfitting ist ein haeufiges Ergebnis zu komplexer Modelle |
+
 
 ---
 

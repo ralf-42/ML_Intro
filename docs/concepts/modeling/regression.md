@@ -400,6 +400,14 @@ flowchart LR
     style logistic fill:#c8e6c9
     style training fill:#fff9c4
 ```
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [Bewertung: Regression](../evaluate/bewertung_regression.html) | Regressionsmodell macht Vorhersagen; Metriken (R2, MAE, RMSE) quantifizieren die Vorhersageguete |
+| [Bewertung: Klassifizierung](../evaluate/bewertung_klassifizierung.html) | Lineare Regression vorhersagt kontinuierliche Werte; Logistische Regression gibt Klassenwahrscheinlichkeiten aus |
+| [Modellauswahl](./modellauswahl.html) | Modellauswahl entscheidet, wann Regression angemessen ist; Regression ist die konkrete Implementierung |
+
 
 
 ---

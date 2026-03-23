@@ -194,6 +194,15 @@ flowchart TD
 - **DBSCAN:** Dichtebasierter Algorithmus, der Anomalien als Rauschpunkte (Noise) automatisch identifiziert
 - **Wichtig:** Domänenwissen für Parameter-Wahl und Ergebnisvalidierung nutzen
 
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|
+| [Bewertung Clustering](./bewertung_clustering.html) | Wie werden Gruppenstrukturen statt Ausreißern bewertet? |
+| [Outlier](../prepare/outlier.html) | Wie werden Ausreißer bereits in der Datenvorbereitung erkannt und behandelt? |
+| [K-Means und DBSCAN](../modeling/kmeans-dbscan.html) | Wie funktionieren die zentralen Clustering- und dichtebasierten Verfahren selbst? |
+| [Bewertung allgemein](./bewertung_allgemein.html) | Welche Evaluationslogik gilt unabhängig vom Aufgabentyp? |
+
 ---
 
 **Version:** 1.0    

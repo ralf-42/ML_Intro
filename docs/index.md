@@ -4,9 +4,11 @@ title: Start
 nav_order: 1
 description: "Machine Learning - Von den Grundlagen zu fortgeschrittenen Methoden"
 permalink: /
+has_toc: true
 ---
 
 # Machine Learning
+{: .no_toc }
 
 > **Machine Learning - Von den Grundlagen zu fortgeschrittenen Methoden**        
 > Praktische Anwendung von Supervised und Unsupervised Learning, Neural Networks und modernen ML-Frameworks   
@@ -14,26 +16,34 @@ permalink: /
 
 ---
 
+# Inhaltsverzeichnis
+{: .no_toc .text-delta }
 
-Machine Learning bezeichnet eine Klasse von Algorithmen und Methoden, die es Computersystemen ermöglichen, aus Daten zu lernen und Vorhersagen zu treffen – ohne explizit programmiert zu werden. Im Gegensatz zu regelbasierten Systemen, die auf fest definierten Anweisungen beruhen, entdecken ML-Modelle selbstständig Muster in Trainingsdaten und verallgemeinern diese auf neue, ungesehene Fälle.
+1. TOC
+{:toc}
 
-Im Zentrum dieser Entwicklung stehen bewährte Frameworks wie **scikit-learn**, **Keras** und **TensorFlow**, die es ermöglichen, ML-Modelle effizient zu entwickeln, zu trainieren und zu evaluieren. Von klassischen Entscheidungsbäumen über Ensemble-Methoden bis hin zu Deep Neural Networks – moderne ML-Werkzeuge decken das gesamte Spektrum ab.
+---
 
-Machine Learning lässt sich aus drei **Perspektiven** betrachten:
+Machine Learning steht im Kurs nicht für einen abstrakten Sammelbegriff, sondern für einen konkreten Arbeitsablauf: Daten verstehen, vorbereiten, ein Modell auswählen, die Qualität prüfen und das Ergebnis so bereitstellen, dass es außerhalb des Notebooks noch nutzbar bleibt. Genau an dieser Kette scheitern viele erste Projekte. Nicht am Modell allein, sondern an fehlender Datenlogik, schlechter Evaluation oder einer Pipeline, die nur einmal lokal funktioniert.
+
+Der Kurs ist deshalb bewusst breiter angelegt als eine reine Modellsammlung. Klassische Verfahren wie Regression, Entscheidungsbäume oder Clustering gehören genauso dazu wie Ensemble-Methoden, neuronale Netze und Explainable AI. Der rote Faden bleibt jedoch derselbe: Welche Methode passt zu welchem Problem, woran erkennt sich ein brauchbares Ergebnis und wo wird der Aufwand größer als der Nutzen?
+
+Machine Learning lässt sich im Kurs aus drei **Perspektiven** betrachten:
 
 ## Verstehen
 
-Grundlegend ist das Verständnis der verschiedenen Lernparadigmen: **Supervised Learning** (mit gelabelten Daten), **Unsupervised Learning** (ohne Labels), und spezialisierte Ansätze wie Ensemble-Methoden oder Deep Learning. Dazu gehört auch das Verständnis für Bias-Variance Tradeoff, Overfitting-Vermeidung und die Wahl geeigneter Evaluationsmetriken.
+Im Verständnissteil geht es um die Grundlagen, die in der Praxis später über Erfolg oder Misserfolg entscheiden: Lernparadigmen, Overfitting, Datenleckage, Metriken und die Frage, warum ein Modell auf Trainingsdaten gut und auf echten Daten schlecht aussehen kann. Gerade Einsteiger unterschätzen oft, wie stark die Modellqualität von der Datenvorbereitung und der Evaluationslogik abhängt.
 
 ## Anwenden
 
-Die praktische Nutzung von ML erfordert die Fähigkeit, Daten vorzubereiten (Cleaning, Encoding, Feature Engineering), Modelle zu trainieren, Hyperparameter zu optimieren und Pipelines zu erstellen. Moderne Tools wie **scikit-learn Pipelines**, **XGBoost**, **PyCaret (AutoML)** und **Gradio** ermöglichen es, ML-Modelle in Anwendungen zu integrieren – von klassischen Vorhersagemodellen bis hin zu interaktiven Web-Apps.
+Im Anwendungsteil entstehen belastbare Arbeitsmuster: saubere Preprocessing-Schritte, nachvollziehbare Modellwahl, Hyperparameter-Tuning, Cross-Validation, Visualisierung und einfache Deployments. Das Ziel ist nicht, möglichst viele Algorithmen einmal gesehen zu haben, sondern typische Aufgaben selbstständig durchspielen zu können.
 
 ## Gestalten
 
-Mit zunehmender Verfügbarkeit von Open-Source-Modellen, Frameworks und Werkzeugen eröffnet sich ein neues Feld kreativer Gestaltung: Custom Workflows, Explainable AI (XAI), multimodale Anwendungen und produktionsreife Deployments werden möglich. Gleichzeitig entstehen neue Rollen in Entwicklung, Data Science und MLOps, die den bewussten und verantwortungsvollen Umgang mit ML erfordern.
+Gestaltung beginnt dort, wo aus einem Modell eine Anwendung wird. Dann zählen Reproduzierbarkeit, Dokumentation, Erklärbarkeit und ein realistischer Blick auf Risiken. Nicht jedes Problem braucht Deep Learning, nicht jedes gute Notebook verdient ein Deployment und nicht jede hohe Accuracy ist ein gutes Ergebnis. Diese Unterscheidungen sind Teil des Kurses, nicht nur Randbemerkung.
 
-**Von der Theorie zur Praxis:** Die Entwicklung von ML-Produkten erfordert mehr als technisches Verständnis – es braucht ein Bewusstsein für die realen Herausforderungen in Data Preparation, Model Training, Evaluation und Deployment. Der Weg vom Experiment zum Produkt ist geprägt von Engineering-Disziplin, iterativem Feedback und einem tiefen Verständnis für Nutzeranforderungen.
+---
 
-Machine Learning markiert damit einen technologischen Wendepunkt. Es verändert nicht nur die Art, wie Entscheidungen getroffen werden, sondern auch das Verhältnis von Mensch und Maschine im analytischen, vorhersagenden und problemlösenden Denken.
-
+**Version:** 1.0
+**Stand:** März 2026
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

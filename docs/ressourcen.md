@@ -4,30 +4,35 @@ title: Ressourcen
 nav_order: 7
 has_children: true
 description: "Nützliche Ressourcen und Tools"
+has_toc: true
 ---
 
 # Ressourcen
 
-Nützliche Ressourcen, Tools und Best Practices für Machine Learning.
+Die Ressourcenseiten ergänzen den Kurs dort, wo zusätzliche Werkzeuge, Visualisierungen oder Sammlungen wirklich helfen. Sie sind nicht als unendliches Linkarchiv gedacht, sondern als gezielte Unterstützung für typische Lern- und Projektfragen.
 
-## Übersicht
+# Inhaltsverzeichnis
+{: .no_toc .text-delta }
 
-### Interaktive Tools
-- **[Interaktive Visualisierung](https://ralf-42.github.io/ML_Intro/ressourcen/interaktive-visualisierung.html)** - Web-Demos für ML-Konzepte
-  - Understand: Statistik, Verteilungen, Korrelation
-  - Prepare: Missing Values, Kodierung, Skalierung, Outlier
-  - Modeling: Decision Trees, Regression, Clustering, Neural Networks, CNN
-  - Evaluate: Metriken, Threshold, Cross Validation, Bootstrapping
+1. TOC
+{:toc}
 
-### Links & Tutorials
-- **[Links](https://ralf-42.github.io/ML_Intro/ressourcen/link_sammlung.html)** - Umfassende Link-Sammlung zu ML-Ressourcen
-  - StatQuest Videos (YouTube) - Visualisierte ML-Konzepte
-  - KNIME Kurse & Tutorials
-  - Towards Data Science / Medium Artikel
-  - Machine Learning Mastery
-  - Google ML Crash Course
-  - Wissenschaftliche Paper
-  - Interaktive Lerntools
-  - Bücher & E-Books (kostenlos)
-  - Dokumentation & Referenzen
-  - KI-Tool-Sammlungen
+---
+
+## Interaktive Werkzeuge
+
+Gerade bei Statistik, Modellverhalten oder Datenvorbereitung helfen visuelle Werkzeuge oft mehr als eine weitere Definition. Die Visualisierungsseite bündelt genau solche Hilfen.
+
+- **[Interaktive Visualisierung](https://ralf-42.github.io/ML_Intro/ressourcen/interaktive-visualisierung.html)** – *Welche Konzepte lassen sich besser visuell als textlich verstehen?* Demos zu Statistik, Vorbereitung, Modellierung und Bewertung.
+
+## Externe Lern- und Arbeitsquellen
+
+Die Link-Sammlung ist dort nützlich, wo eine Kursseite nicht ausreicht oder ein Thema aus einer zweiten Perspektive betrachtet werden soll. Relevant sind vor allem gut gepflegte Dokumentationen, Visualisierungen und vertiefende Tutorials.
+
+- **[Links](https://ralf-42.github.io/ML_Intro/ressourcen/link_sammlung.html)** – *Wo finden sich gute externe Quellen für ML-Themen?* Dokumentation, Lernmaterialien, Visualisierungen und weiterführende Tutorials.
+
+---
+
+**Version:** 1.0
+**Stand:** März 2026
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

@@ -347,6 +347,14 @@ mindmap
 - **Diversität** der Base Learner ist entscheidend für den Ensemble-Erfolg
 - **Cross-Validation** bei Meta-Learning verhindert Data Leakage
 - Stacking kann höhere Performance erreichen, erfordert aber mehr Aufwand
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [Ensemble-Methoden](./ensemble.html) | Stacking ist heterogenes Ensemble; Bagging und Boosting verwenden homogene Modelltypen |
+| [Random Forest](./random-forest.html) | Random Forest kombiniert identische Decision Trees; Stacking kombiniert verschiedene Algorithmen (Tree, SVM, NN) |
+| [AutoML](./automl.html) | AutoML automatisiert Modellkombination und Hyperparameter; Stacking erfordert manuelle Architekturentscheidungen |
+
 
 
 ---

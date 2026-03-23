@@ -349,6 +349,14 @@ flowchart TB
 
 
 Die Wahl der richtigen Kodierung ist entscheidend für die Modellperformance. Grundregel: **Ordinale Daten** mit OrdinalEncoder, **nominale Daten** mit OneHotEncoder (wenige Kategorien) oder TargetEncoder (viele Kategorien).
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [Skalierung](./skalierung.html) | Kodierung transformiert kategoriale in numerische Merkmale; Skalierung normalisiert bereits numerische Werte |
+| [Feature Engineering](./feature-engineering.html) | Kodierung ist Datentyp-Konversion; Feature Engineering erstellt neue Merkmale aus bestehenden |
+| [Modellauswahl](../modeling/modellauswahl.html) | Kodierungsart beeinflusst Modellwahl: TargetEncoder erfordert Supervised-Kontext und kann Data Leakage verursachen |
+
 
 
 ---

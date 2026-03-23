@@ -792,6 +792,14 @@ Cross-Validation ist ein unverzichtbares Werkzeug für die robuste Bewertung von
 *Referenzen:*
 - scikit-learn Dokumentation: [Cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html)
 - StatQuest: [Cross Validation](https://www.youtube.com/watch?v=fSytzGwwBVw)
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [Train-Test-Split](../prepare/train_test_split.html) | Cross-Validation macht mehrfache, ueberlappende Splits; Train-Test-Split ist ein einzelner, einfacher Split |
+| [Hyperparameter-Tuning](./hyperparameter_tuning.html) | Cross-Validation ist die Evaluierungsmethodik; Hyperparameter-Tuning nutzt CV zur robusten Optimierung |
+| [Overfitting](./overfitting.html) | Cross-Validation liefert robuste Metriken; hohe Score-Varianz zwischen Folds ist ein Overfitting-Signal |
+
 
 ---
 

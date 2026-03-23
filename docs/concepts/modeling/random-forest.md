@@ -451,6 +451,14 @@ mindmap
 $$\left(1 - \frac{1}{n}\right)^n$$
 
 Für große $n$ nähert sich dieser Wert $1/e \approx 0,368$ an.
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [Entscheidungsbaum](./decision_tree.html) | Random Forest ist ein Ensemble aus Decision Trees; einzelner Baum ist die grundlegende Komponente |
+| [XGBoost](./xgboost.html) | Random Forest nutzt Bagging (parallele, unabhaengige Baeume); XGBoost nutzt Boosting (sequentielle Fehlerkorrektur) |
+| [Ensemble-Methoden](./ensemble.html) | Random Forest implementiert die Bagging-Strategie; Ensemble-Methoden umfassen zusaetzlich Boosting und Stacking |
+
 
 ---
 

@@ -322,6 +322,14 @@ flowchart TD
 | Falsches K | Over-/Underfitting | Elbow-Methode + Silhouette |
 | ε zu klein/groß | Zu viele/wenige Cluster | k-Distanz-Graph analysieren |
 | Nur ein Algorithmus | Suboptimale Ergebnisse | Beide Methoden vergleichen |
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [Modellauswahl](./modellauswahl.html) | Modellauswahl entscheidet zwischen Supervised und Unsupervised; K-Means und DBSCAN sind Unsupervised-Algorithmen |
+| [Bewertung: Clustering](../evaluate/bewertung_clustering.html) | Clustering-Algorithmen erzeugen Gruppen; Metriken (Silhouette, Davies-Bouldin) bewerten die Guete der Zuordnung |
+| [Anomalieerkennung](../evaluate/bewertung_anomalie.html) | Clustering findet Gruppen in Daten; Anomalieerkennung identifiziert Ausreisser als Abweichung vom normalen Muster |
+
 
 ---
 

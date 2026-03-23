@@ -313,6 +313,15 @@ flowchart TB
 - Sehr große Itemmengen (> 10.000)
 - Echtzeitanalysen (besser: FP-Growth)
 
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|
+| [K-Means und DBSCAN](./kmeans-dbscan.html) | Wann werden Gruppen in Daten gesucht statt Assoziationsregeln? |
+| [Modellauswahl](./modellauswahl.html) | Wie wird entschieden, ob Assoziationsanalyse überhaupt der richtige Ansatz ist? |
+| [Feature Engineering](../prepare/feature-engineering.html) | Wie werden Daten so vorbereitet, dass Zusammenhänge sinnvoll untersucht werden können? |
+| [Bewertung allgemein](../evaluate/bewertung_allgemein.html) | Wie werden Modell- oder Analyseergebnisse grundsätzlich eingeordnet? |
+
 ---
 
 **Version:** 1.0    

@@ -320,6 +320,14 @@ flowchart LR
 
 
 > **Kernbotschaft:** Skalierung ist ein unverzichtbarer Vorverarbeitungsschritt für viele Machine-Learning-Algorithmen. Standardisierung ist die sichere Wahl für die meisten Anwendungsfälle, während Normalisierung bei spezifischen Anforderungen (fester Wertebereich, ausreißerfreie Daten) bevorzugt werden kann. Entscheidend ist die korrekte Anwendung: fit nur auf Trainingsdaten, transform auf alle Daten.
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [Outlier-Behandlung](./outlier.html) | Outliers verfaelschen Skalierungsergebnisse; RobustScaler verringert diesen Einfluss — Behandlungsreihenfolge beachten |
+| [Kodierung kategorialer Daten](./kodierung_kategorialer_daten.html) | Skalierung normalisiert numerische Features; Kodierung konvertiert kategoriale in numerische Merkmale |
+| [Modellauswahl](../modeling/modellauswahl.html) | Skalierungsbedarf ist algorithmusabhaengig: k-NN und SVM benoetigen sie; Entscheidungsbaeume nicht |
+
 
 ---
 

@@ -98,8 +98,8 @@ flowchart LR
 | **0.0 - 0.4** | Schwache Erklärungskraft |
 | **< 0** | Modell schlechter als Mittelwert-Vorhersage |
 
-{: .warning }
-> **Wichtig:** Ein hoher R²-Wert allein garantiert kein gutes Modell. R² sollte immer in Verbindung mit anderen Metriken und einer Residuenanalyse betrachtet werden.
+> [!WARNING] R² allein reicht nicht
+> Ein hoher R²-Wert garantiert kein gutes Modell. R² sollte immer in Verbindung mit anderen Metriken und einer Residuenanalyse betrachtet werden.
 
 ### Mathematische Definition
 
@@ -462,6 +462,14 @@ flowchart TD
 | **MAE** | Robust gegen Ausreißer | Keine Bestrafung großer Fehler |
 | **RMSE** | Bestraft große Fehler, gleiche Einheit | Empfindlich gegen Ausreißer |
 | **Residual Plot** | Zeigt Modellprobleme visuell | Subjektive Interpretation |
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [Bewertung: Klassifizierung](./bewertung_klassifizierung.html) | Regressions-Metriken (R2, MAE, RMSE) fuer kontinuierliche Werte; Klassifikations-Metriken (Precision, Recall) fuer Klassen |
+| [Overfitting](./overfitting.html) | Regressions-Metriken messen Vorhersagefehler; Overfitting-Erkennung nutzt Train-Test-Vergleich dieser Metriken |
+| [Cross-Validation](./cross_validation.html) | Cross-Validation ist die Evaluierungsmethodik; Regressions-Metriken quantifizieren die Modellguete |
+
 
 
 ---

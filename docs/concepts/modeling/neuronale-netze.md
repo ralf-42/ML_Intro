@@ -339,6 +339,14 @@ Neuronale Netze werden auch im unüberwachten Lernen eingesetzt:
 | Linear-Aktivierung in Hidden Layers | Keine Nichtlinearität | ReLU, Tanh verwenden |
 | Falsche Loss-Funktion | Training konvergiert nicht | Loss an Aufgabe anpassen |
 | Zu große Lernrate | Training instabil | Lernrate reduzieren |
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [Lineare Regression](./regression.html) | Neuronale Netze lernen nichtlineare Funktionen durch mehrere Schichten; Regression modelliert nur lineare Beziehungen |
+| [Modellauswahl](./modellauswahl.html) | Neuronale Netze sind eine Modellklasse; Modellauswahl entscheidet, wann NN sinnvoll ist — z.B. bei grossen Datenmgen |
+| [Spezielle Neuronale Netze](./spezielle-neuronale-netze.html) | Dieses Dokument behandelt Grundlagen (MLP, Aktivierung, Training); spezialisierte Architekturen (CNN, RNN) folgen dort |
+
 
 
 ---

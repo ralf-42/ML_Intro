@@ -457,8 +457,16 @@ Der Train-Test-Split ist die Grundlage für zuverlässige Modellbewertung. Die k
 - scikit-learn Dokumentation: [train_test_split](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)
 - KNIME: Data Preprocessing for Machine Learning Part 1 & Part 2
 
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [Workflow-Design (Pipelines)](../grundlagen/workflow-design.html) | Train-Test-Split teilt Daten *vor* dem Preprocessing; Pipelines wenden fit/transform korrekt *nach* dem Split an |
+| [Cross-Validation](../evaluate/cross_validation.html) | Train-Test-Split ist ein einzelner, einfacher Split; Cross-Validation macht mehrfache Splits fuer robustere Bewertung |
+| [Missing Values](./missing_values.html) | Missing Values werden vor dem Split behandelt — falsche Reihenfolge fuehrt zu Data Leakage |
+
 ---
    
 **Version:** 1.0    
 **Stand:** Januar 2026    
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

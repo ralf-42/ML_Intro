@@ -12,7 +12,7 @@ has_toc: true
 {: .no_toc }
 
 > **Dieses Kapitel vermittelt die fundamentalen Konzepte des maschinellen Lernens.**        
-> Sie lernen, was Machine Learning ist, welche Lernparadigmen existieren und wie sich verschiedene ML-Aufgaben unterscheiden.
+> Der Abschnitt klärt, was unter Machine Learning zu verstehen ist, welche Lernparadigmen existieren und wie sich typische Aufgabentypen unterscheiden.
 
 ---
 
@@ -58,7 +58,7 @@ Diese menschlichen Lernprinzipien bilden die Grundlage für das maschinelle Lern
 **Machine Learning** (maschinelles Lernen) bezeichnet einen Bereich der künstlichen Intelligenz, der es Computern ermöglicht:
 
 1. **Automatisch aus Informationen und Erfahrung zu lernen**
-2. **Ihre Leistung bei bestimmten Aufgaben kontinuierlich zu verbessern**
+2. **Die Leistung bei bestimmten Aufgaben kontinuierlich zu verbessern**
 3. **Muster und Zusammenhänge zu erkennen** und diese in Vorhersagen, Entscheidungen oder Aktionen umzusetzen
 
 ```mermaid
@@ -111,6 +111,8 @@ Machine Learning ist heute in vielen Bereichen verbreitet:
 - **Prognose**: Wettervorhersage, Aktienkurse, Nachfrageplanung
 - **Automatisierte Entscheidungsfindung**: Kreditvergabe, Empfehlungssysteme
 
+In Einführungsveranstaltungen wirkt das schnell so, als beginne ML immer mit einem passenden Algorithmus. In der Praxis ist das selten der erste Engpass. Häufiger ist unklar, ob überhaupt genügend brauchbare Daten vorliegen, ob das Problem als Klassifikation oder Regression formuliert werden sollte oder ob eine einfache Regel bereits ausreichen würde.
+
 
 
 --- 
@@ -155,6 +157,8 @@ flowchart TB
 4. **Modell trainieren**: Algorithmus lernt Muster aus den Trainingsdaten
 5. **Modell evaluieren**: Leistung auf ungesehenen Testdaten prüfen
 6. **Modell anwenden**: Vorhersagen für neue Daten erstellen
+
+Gerade bei ersten Projekten wird dieser Ablauf oft zu linear gedacht. Tatsächlich führen schwache Evaluation, ungeeignete Features oder auffällige Fehlerbilder meist wieder zurück in frühere Schritte. Ein ML-Projekt ist deshalb fast immer iterativ, auch wenn der Ablauf auf Folien sauber nacheinander aussieht.
 
 
 ---
@@ -543,6 +547,14 @@ flowchart TB
     style A4 fill:#bbdefb
     style A5 fill:#bbdefb
 ```
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [ML Workflow](./ml_workflow_erklaerung.html) | Grundlagen erklaeren *was* ML ist; der Workflow beschreibt *wie* Projekte strukturiert durchgefuehrt werden |
+| [Entscheidungsbaum](../modeling/decision_tree.html) | Grundlagen behandeln Lernparadigmen uebergreifend; Entscheidungsbaum ist eine konkrete Implementierung von Supervised Learning |
+| [Clustering (K-Means & DBSCAN)](../modeling/kmeans-dbscan.html) | Grundlagen definieren Unsupervised Learning als Paradigma; Clustering implementiert es praktisch ohne Labels |
+
 
 
 

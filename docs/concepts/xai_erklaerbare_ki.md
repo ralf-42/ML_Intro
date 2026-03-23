@@ -721,6 +721,14 @@ for pclass in [1, 2, 3]:
 > - **ELI5** bietet den einfachsten Einstieg
 > - Die Wahl des Frameworks haengt von Anwendungsfall und Zielgruppe ab
 > - Kombiniere verschiedene Methoden fuer ein vollstaendiges Bild
+## Abgrenzung zu verwandten Themen
+
+| Thema | Abgrenzung |
+|-------|------------|
+| [Modellauswahl](./modeling/modellauswahl.html) | XAI erklaert Black-Box-Modelle nachtraeglich; Modellauswahl beruecksichtigt Interpretierbarkeit von Anfang an |
+| [Feature Importance (Random Forest)](./modeling/random-forest.html) | Feature Importance ist eingebaute, modellspezifische Erklaerung; XAI umfasst modell-agnostische Methoden (LIME, SHAP) |
+| [Hyperparameter-Tuning](./evaluate/hyperparameter_tuning.html) | XAI erklaert Modellentscheidungen qualitativ; Hyperparameter-Tuning optimiert Modellleistung quantitativ |
+
 
 ---
 
