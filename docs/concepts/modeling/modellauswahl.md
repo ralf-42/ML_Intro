@@ -122,13 +122,13 @@ Neben den Daten spielen die Anforderungen des konkreten Anwendungsfalls eine zen
 
 ### Performance: Was ist akzeptabel?
 
-Definieren Sie vorab, welche Metriken relevant sind und welche Schwellenwerte akzeptabel sind.
+Vorab festlegen, welche Metriken relevant sind und welche Schwellenwerte akzeptabel sind.
 
 
 
 ### Simplicity: Das richtige Maß an Komplexität
 
-> **Grundregel:** Verwenden Sie kein komplexes Modell für ein einfaches Problem.
+> **Grundregel:** Kein komplexes Modell für ein einfaches Problem.
 
 ```mermaid
 flowchart LR
@@ -145,7 +145,7 @@ flowchart LR
     style B fill:#ed8936,stroke:#c05621,color:#fff
 ```
 
-**Empfehlung:** Starten Sie immer mit einem einfachen Baseline-Modell und erhöhen Sie die Komplexität nur bei Bedarf:
+**Empfehlung:** Immer mit einem einfachen Baseline-Modell starten und Komplexität nur bei Bedarf erhöhen:
 
 ### Interpretability: Nachvollziehbarkeit der Entscheidungen
 
@@ -229,11 +229,11 @@ flowchart TD
 
 ### Do's ✓
 
-- **Baseline zuerst:** Starten Sie immer mit einem einfachen Modell als Referenz
-- **Cross-Validation nutzen:** Verwenden Sie CV für robuste Leistungsschätzungen
-- **Mehrere Metriken:** Bewerten Sie Modelle anhand mehrerer relevanter Metriken
-- **Dokumentieren:** Halten Sie fest, warum Sie sich für ein Modell entschieden haben
-- **Iterativ vorgehen:** Erhöhen Sie die Komplexität schrittweise
+- **Baseline zuerst:** Immer mit einem einfachen Modell als Referenz starten
+- **Cross-Validation nutzen:** CV für robuste Leistungsschätzungen einsetzen
+- **Mehrere Metriken:** Modelle anhand mehrerer relevanter Metriken bewerten
+- **Dokumentieren:** Festhalten, warum ein Modell gewählt wurde
+- **Iterativ vorgehen:** Komplexität schrittweise erhöhen
 
 ### Don'ts ✗
 

@@ -715,7 +715,7 @@ print(pd.DataFrame(summary).to_string(index=False))
 ## Best Practices
 
 > [!SUCCESS] Qualitätsmuster<br>
-> Berichten Sie immer Mittelwert und Streuung der CV-Scores statt nur eines einzelnen Werts.
+> Mittelwert und Streuung der CV-Scores stets gemeinsam angeben, nicht nur einen einzelnen Wert.
 
 ### Dos ✅
 

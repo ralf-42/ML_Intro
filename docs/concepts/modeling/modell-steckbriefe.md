@@ -40,7 +40,7 @@ has_toc: true
 | **Apriori** | Unsupervised | Assoziationsanalyse | Support, Confidence, Lift |
 | **PCA** | Unsupervised | Dimensionsreduktion | Erklärte Varianz |
 
-> **Tipp:** Starten Sie mit einfachen, interpretierbaren Modellen (Linear/Logistic Regression, Decision Tree) und steigern Sie die Komplexität nur bei Bedarf. Die beste Modellwahl hängt immer vom konkreten Use Case, den verfügbaren Daten und den Anforderungen an Interpretierbarkeit ab.
+> **Tipp:** Mit einfachen, interpretierbaren Modellen (Linear/Logistic Regression, Decision Tree) starten und die Komplexität nur bei Bedarf steigern. Die beste Modellwahl hängt immer vom konkreten Use Case, den verfügbaren Daten und den Anforderungen an Interpretierbarkeit ab.
 
 ---
 

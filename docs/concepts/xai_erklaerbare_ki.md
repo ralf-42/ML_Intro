@@ -133,7 +133,7 @@ flowchart LR
 
 Ein **Surrogate-Modell** (auch Ersatzmodell) ist ein einfaches, interpretierbares Modell, das trainiert wird, um die Vorhersagen eines komplexen Black-Box-Modells nachzuahmen.
 
-**Alltagsanalogie:** Stellen Sie sich einen erfahrenen Arzt vor, der Diagnosen stellt, aber nicht erklären kann, *warum* er zu diesem Schluss kommt – er "spürt" es einfach nach 30 Jahren Erfahrung. Ein Surrogate-Modell wäre wie ein Praktikant, der den Arzt bei vielen Diagnosen beobachtet und dann einfache Regeln ableitet: "Wenn Symptom A und B vorliegen, diagnostiziert der Arzt meist Krankheit X." Die Regeln des Praktikanten sind nicht perfekt, aber sie machen das Verhalten des Arztes nachvollziehbar.
+**Alltagsanalogie:** Ein erfahrener Arzt stellt Diagnosen, kann aber nicht erklären, *warum* er zu diesem Schluss kommt – er "spürt" es einfach nach 30 Jahren Erfahrung. Ein Surrogate-Modell entspricht einem Praktikanten, der den Arzt bei vielen Diagnosen beobachtet und dann einfache Regeln ableitet: "Wenn Symptom A und B vorliegen, diagnostiziert der Arzt meist Krankheit X." Die Regeln des Praktikanten sind nicht perfekt, aber sie machen das Verhalten des Arztes nachvollziehbar.
 
 ```mermaid
 flowchart TD

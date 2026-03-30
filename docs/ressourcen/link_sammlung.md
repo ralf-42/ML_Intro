@@ -187,6 +187,7 @@ has_toc: true
 | Futurepedia | [Link](https://www.futurepedia.io/) |
 | That AI Collection | [Link](https://www.thataicollection.com/en/) |
 | Great AI Prompts | [Link](https://greataiprompts.com/prompts/) |
+| Anthropic Economic Index: US Usage | [Link](https://www.anthropic.com/economic-index#us-usage) |
 
 ---
 
