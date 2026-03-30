@@ -891,7 +891,7 @@ Feature Engineering ist eine Kunst, die Domänenwissen, statistische Methoden un
 - **Domänenwissen** ist oft der entscheidende Faktor für aussagekräftige Features
 
 Der iterative Prozess aus Hypothese, Implementierung und Validierung führt schrittweise zu einem optimalen Feature-Set für das jeweilige Problem.
-## Abgrenzung zu verwandten Themen
+## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
 |-------|------------|

@@ -24,48 +24,27 @@ Die wichtigsten Aspekte der Datenaufbereitung:
 
 Bereinigung und Qualitätssicherung der Rohdaten.
 
-| Thema | Beschreibung |
-|-------|--------------|
-| [Missing Values](prepare/missing_values.html) | Fehlende Werte erkennen und behandeln (SimpleImputer, KNNImputer) |
-| [Outlier](prepare/outlier.html) | Ausreißer erkennen und behandeln (Z-Score, IQR, Isolation Forest) |
+**[Missing Values](https://ralf-42.github.io/ML_Intro/concepts/prepare/missing_values.html)** – *Wie werden fehlende Werte erkannt und sinnvoll behandelt?* SimpleImputer, KNNImputer und typische Strategien im Vergleich.
 
----
+**[Outlier](https://ralf-42.github.io/ML_Intro/concepts/prepare/outlier.html)** – *Wie werden Ausreißer identifiziert und bereinigt?* Z-Score, IQR und Isolation Forest als komplementäre Methoden.
 
 ## Feature Engineering
 
 Merkmalserstellung und -transformation zur Verbesserung der Modellperformance.
 
-| Thema | Beschreibung |
-|-------|--------------|
-| [Feature Engineering](prepare/feature-engineering.html) | Feature Creation, Selection, Extraction und Domain Knowledge Integration |
-
----
+**[Feature Engineering](https://ralf-42.github.io/ML_Intro/concepts/prepare/feature-engineering.html)** – *Wie werden aus Rohdaten informative Merkmale gewonnen?* Feature Creation, Selection, Extraction und Domain Knowledge Integration.
 
 ## Data Transformation
 
 Skalierung, Normalisierung und Encoding für ML-Algorithmen.
 
-| Thema | Beschreibung |
-|-------|--------------|
-| [Skalierung](prepare/skalierung.html) | Normalisierung und Standardisierung (StandardScaler, MinMaxScaler) |
-| [Kodierung](prepare/kodierung_kategorialer_daten.html) | Kategoriale Daten kodieren (OrdinalEncoder, OneHotEncoder, TargetEncoder) |
+**[Skalierung](https://ralf-42.github.io/ML_Intro/concepts/prepare/skalierung.html)** – *Wann und wie werden Merkmale skaliert oder normalisiert?* StandardScaler, MinMaxScaler und die Auswirkungen auf distanzbasierte Algorithmen.
 
----
+**[Kodierung](https://ralf-42.github.io/ML_Intro/concepts/prepare/kodierung_kategorialer_daten.html)** – *Wie werden kategoriale Daten modellierbar gemacht?* OrdinalEncoder, OneHotEncoder und TargetEncoder im Vergleich.
 
 ## Train-Test Split
 
 Aufteilung in Trainings- und Testdaten für zuverlässige Modellbewertung.
 
-| Thema | Beschreibung |
-|-------|--------------|
-| [Train-Test-Split](prepare/train_test_split.html) | Datenaufteilung, Stratifizierung, Data Leakage vermeiden |
-
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|
-| [Grundlagen](./01_grundlagen.html) | Welche ML-Logik und welchen Workflow setzt Datenvorbereitung voraus? |
-| [Modeling](./03_modeling.html) | Welche Modelle profitieren wovon in der Vorverarbeitung? |
-| [Evaluate](./04_evaluate.html) | Wie wird geprüft, ob die vorbereiteten Daten zu belastbaren Ergebnissen führen? |
-| [XAI](./08_xai.html) | Wie wirkt sich Vorverarbeitung auf spätere Interpretierbarkeit aus? |
+**[Train-Test-Split](https://ralf-42.github.io/ML_Intro/concepts/prepare/train_test_split.html)** – *Wie wird die Datentrennung zuverlässig und leckagefrei umgesetzt?* Stratifizierung, Datenaufteilung und Vermeidung von Data Leakage.
 

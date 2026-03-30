@@ -250,7 +250,7 @@ mindmap
 - **Regularisierung** ist integriert und reduziert Overfitting
 - Besonders erfolgreich bei **tabellarischen Daten** und in **ML-Wettbewerben**
 - Erfordert mehr **Hyperparameter-Tuning** als Random Forest
-## Abgrenzung zu verwandten Themen
+## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
 |-------|------------|

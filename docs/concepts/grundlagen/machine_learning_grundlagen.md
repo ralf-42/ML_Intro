@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Intro
+title: Was ist Machine Learning?
 parent: Grundlagen
 grand_parent: Konzepte
 nav_order: 1
@@ -547,7 +547,7 @@ flowchart TB
     style A4 fill:#bbdefb
     style A5 fill:#bbdefb
 ```
-## Abgrenzung zu verwandten Themen
+## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
 |-------|------------|

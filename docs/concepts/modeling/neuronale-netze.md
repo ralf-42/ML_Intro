@@ -339,7 +339,7 @@ Neuronale Netze werden auch im unüberwachten Lernen eingesetzt:
 | Linear-Aktivierung in Hidden Layers | Keine Nichtlinearität | ReLU, Tanh verwenden |
 | Falsche Loss-Funktion | Training konvergiert nicht | Loss an Aufgabe anpassen |
 | Zu große Lernrate | Training instabil | Lernrate reduzieren |
-## Abgrenzung zu verwandten Themen
+## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
 |-------|------------|

@@ -244,7 +244,7 @@ flowchart TB
 | `LocalOutlierFactor` | Dichtebasierte lokale Ausreißer |
 | `EllipticEnvelope` | Gaussian-basierte Ausreißer-Erkennung |
 | `OneClassSVM` | SVM für Anomalie-Erkennung |
-## Abgrenzung zu verwandten Themen
+## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
 |-------|------------|

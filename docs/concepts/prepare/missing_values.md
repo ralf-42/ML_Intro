@@ -169,7 +169,7 @@ flowchart TD
 | `SimpleImputer` | Einfache Strategien (mean, median, most_frequent, constant) |
 | `KNNImputer` | K-Nearest-Neighbors basierte Imputation |
 | `IterativeImputer` | Multivariate Imputation mit ML-Modellen |
-## Abgrenzung zu verwandten Themen
+## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
 |-------|------------|

@@ -462,7 +462,7 @@ flowchart TD
 | **MAE** | Robust gegen Ausreißer | Keine Bestrafung großer Fehler |
 | **RMSE** | Bestraft große Fehler, gleiche Einheit | Empfindlich gegen Ausreißer |
 | **Residual Plot** | Zeigt Modellprobleme visuell | Subjektive Interpretation |
-## Abgrenzung zu verwandten Themen
+## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
 |-------|------------|

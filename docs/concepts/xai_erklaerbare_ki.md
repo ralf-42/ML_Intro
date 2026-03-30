@@ -721,7 +721,7 @@ for pclass in [1, 2, 3]:
 > - **ELI5** bietet den einfachsten Einstieg
 > - Die Wahl des Frameworks haengt von Anwendungsfall und Zielgruppe ab
 > - Kombiniere verschiedene Methoden fuer ein vollstaendiges Bild
-## Abgrenzung zu verwandten Themen
+## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
 |-------|------------|
