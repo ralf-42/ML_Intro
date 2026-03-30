@@ -27,7 +27,7 @@ has_toc: true
 
 Feature Engineering ist der Prozess der Nutzung von Domänenwissen und statistischen Techniken, um aus Rohdaten informative Merkmale zu erstellen. Die Qualität der Features beeinflusst die Modellperformance oft stärker als die Wahl des Algorithmus.
 
-> [!NOTE] Hebelwirkung     
+> [!NOTE] Hebelwirkung<br>
 > In tabellarischen ML-Projekten verbessert gutes Feature Engineering die Leistung oft stärker als ein Modellwechsel.
 
 ```mermaid
@@ -222,7 +222,7 @@ print(data[['timestamp', 'wochentag_name', 'ist_wochenende', 'wochentag_sin', 'w
 
 Feature Selection identifiziert die relevantesten Merkmale und entfernt redundante oder irrelevante Features. Dies verbessert die Modellperformance und reduziert Overfitting.
 
-> [!TIP] Praktischer Start      
+> [!TIP] Praktischer Start<br>
 > Beginnen Sie mit einfachen Filtermethoden und ergänzen Sie Wrapper-/Embedded-Methoden nur bei nachweisbarem Zusatznutzen.
 
 ```mermaid
@@ -809,7 +809,7 @@ print(kredite[['antrag_id', 'dti_ratio', 'pti_ratio', 'kk_auslastung', 'risiko']
 
 ## Best Practices
 
-> [!WARNING] Zielnahe Merkmale prüfen     
+> [!WARNING] Zielnahe Merkmale prüfen<br>
 > Features mit indirektem Zugriff auf die Zielvariable verursachen Leakage und führen zu künstlich hohen Scores.
 
 ### Empfehlungen für effektives Feature Engineering
@@ -902,6 +902,6 @@ Der iterative Prozess aus Hypothese, Implementierung und Validierung führt schr
 
 ---
 
-**Version:** 1.0
-**Stand:** Januar 2026
+**Version:** 1.0<br>
+**Stand:** Januar 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

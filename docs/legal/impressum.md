@@ -2,7 +2,7 @@
 layout: default
 title: Impressum
 parent: Rechtliches
-nav_order: 1
+nav_exclude: true
 description: "Impressum und rechtliche Angaben gemäß § 5 TMG"
 ---
 
@@ -46,5 +46,4 @@ Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden 
 
 ---
 
-**Version:** 1.0       
 **Letzte Aktualisierung:** Dezember 2025

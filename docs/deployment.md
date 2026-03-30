@@ -4,20 +4,11 @@ title: Deployment
 nav_order: 4
 has_children: true
 description: "Von der Entwicklung zum produktiven Einsatz von ML-Anwendungen"
-has_toc: true
 ---
 
 # Deployment
 
 Deployment beginnt im ML-Kontext nicht erst bei Docker oder Cloud-Hosting. Relevant wird es in dem Moment, in dem ein Modell wiederholbar laufen, mit echten Eingaben umgehen und außerhalb des Trainingsnotebooks nutzbar bleiben soll. Genau an dieser Schwelle zeigt sich, ob ein Projekt nur eine Auswertung ist oder bereits eine Anwendung.
-
-# Inhaltsverzeichnis
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
-
----
 
 ## Einstieg
 
@@ -79,8 +70,3 @@ Mit wachsender Komplexität treten weitere Fragen hinzu: Modellversionierung, Ex
 | **Google Cloud AI** | Managed ML Services |
 | **Azure ML** | Microsoft Cloud ML-Lösung |
 
----
-
-**Version:** 1.0
-**Stand:** März 2026
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

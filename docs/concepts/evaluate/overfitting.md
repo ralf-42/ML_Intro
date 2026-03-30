@@ -52,7 +52,7 @@ flowchart LR
 
 **Das Problem:** Ein Modell, das nur auf bereits gesehenen Daten gut funktioniert, hat keinen praktischen Nutzen. Das Ziel ist immer die **Generalisierungsfähigkeit** – die Fähigkeit, auf neuen Daten zuverlässige Vorhersagen zu treffen.
 
-> [!NOTE] Kernprinzip     
+> [!NOTE] Kernprinzip<br>
 > Ein hoher Trainings-Score ist kein Qualitätsnachweis. Entscheidend ist die stabile Leistung auf unbekannten Daten.
 
 ## Underfit, Goodfit und Overfit
@@ -164,7 +164,7 @@ flowchart LR
 
 ## Erkennung von Overfitting
 
-> [!WARNING] Frühes Warnsignal      
+> [!WARNING] Frühes Warnsignal<br>
 > Eine große Lücke zwischen Trainings- und Testleistung ist meist ein Hinweis auf Overfitting oder Data Leakage.
 
 ### Methode 1: Train-Test-Vergleich
@@ -357,7 +357,7 @@ plt.show()
 
 ## Strategien gegen Overfitting
 
-> [!SUCCESS] Praxisregel     
+> [!SUCCESS] Praxisregel<br>
 > Kombinieren Sie mehrere Gegenmaßnahmen (z. B. Regularisierung + Cross-Validation + Early Stopping) statt nur an einem Parameter zu drehen.
 
 ```mermaid
@@ -457,7 +457,7 @@ linear_model = LogisticRegression()  # Oft weniger Overfitting
 
 ### Strategie 4: Regularisierung
 
-Regularisierung fügt einen Strafterm für komplexe Modelle hinzu. → Siehe [regularisierung.md](regularisierung.md)
+Regularisierung fügt einen Strafterm für komplexe Modelle hinzu. → Siehe [Regularisierung](regularisierung.html)
 
 ```python
 from sklearn.linear_model import Ridge, Lasso, LogisticRegression
@@ -653,7 +653,7 @@ flowchart TB
 
 ## Best Practices
 
-> [!TIP] Robust statt maximal      
+> [!TIP] Robust statt maximal<br>
 > Optimieren Sie auf reproduzierbare Generalisierung, nicht auf den besten Einzel-Score in einem zufälligen Split.
 
 ### Dos ✅
@@ -684,7 +684,7 @@ flowchart TB
 
 ## Weiterführende Themen
 
-- **[Regularisierung](regularisierung.md)**: L1, L2, Elastic Net im Detail
+- **[Regularisierung](regularisierung.html)**: L1, L2, Elastic Net im Detail
 - **Cross-Validation**: K-Fold zur robusten Modellbewertung
 - **Hyperparameter-Tuning**: GridSearchCV, RandomizedSearchCV
 - **Ensemble-Methoden**: Random Forest, Boosting
@@ -706,6 +706,6 @@ flowchart TB
 
 ---
 
-**Version:** 1.0    
-**Stand:** Januar 2026   
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.   
+**Version:** 1.0<br>
+**Stand:** Januar 2026<br>
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

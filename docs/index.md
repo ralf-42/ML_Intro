@@ -44,6 +44,6 @@ Gestaltung beginnt dort, wo aus einem Modell eine Anwendung wird. Dann zählen R
 
 ---
 
-**Version:** 1.0
-**Stand:** März 2026
+**Version:** 1.0<br>
+**Stand:** März 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

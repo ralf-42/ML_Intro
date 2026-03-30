@@ -27,7 +27,7 @@ has_toc: true
 
 Hyperparameter-Tuning ist ein entscheidender Schritt im Machine-Learning-Workflow. Während das Modell seine internen Parameter (Gewichte, Koeffizienten) während des Trainings selbst lernt, müssen Hyperparameter **vor** dem Training festgelegt werden. Die richtige Wahl dieser Einstellungen kann den Unterschied zwischen einem mittelmäßigen und einem exzellenten Modell ausmachen. 
 
-> [!NOTE] Zielsetzung
+> [!NOTE] Zielsetzung<br>
 > Tuning soll robuste Generalisierung verbessern, nicht nur den besten Score auf einem einzelnen Datensplit erzeugen.
 
 ```mermaid
@@ -134,7 +134,7 @@ flowchart TB
 
 ## Tuning-Methoden
 
-> [!TIP] Methodenwahl
+> [!TIP] Methodenwahl<br>
 > Bei großem Suchraum zuerst Random Search, danach fokussiertes Fine-Tuning auf einem kleineren Bereich.
 
 Es gibt verschiedene Strategien zur Suche nach optimalen Hyperparametern. Jede hat ihre Vor- und Nachteile.
@@ -485,7 +485,7 @@ print(f"Beste Parameter: {halving_search.best_params_}")
 
 ## Cross-Validation beim Tuning
 
-> [!WARNING] Overtuning vermeiden
+> [!WARNING] Overtuning vermeiden<br>
 > Häufiges Nachjustieren auf denselben Validierungsdaten kann zu indirektem Overfitting führen.
 
 Cross-Validation ist unverzichtbar beim Hyperparameter-Tuning, um Overfitting auf die Trainingsdaten zu vermeiden.
@@ -815,7 +815,7 @@ for col in param_cols:
 
 ## Best Practices
 
-> [!SUCCESS] Solider Ablauf
+> [!SUCCESS] Solider Ablauf<br>
 > Definieren Sie Suchraum, Budget und Metrik vorab und dokumentieren Sie jede Tuning-Runde reproduzierbar.
 
 ### Empfehlungen
@@ -919,6 +919,6 @@ Hyperparameter-Tuning ist ein essenzieller Schritt, um das volle Potenzial von M
 
 ---
 
-**Version:** 1.0    
-**Stand:** Januar 2026   
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.   
+**Version:** 1.0<br>
+**Stand:** Januar 2026<br>
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

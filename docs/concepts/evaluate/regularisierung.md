@@ -49,7 +49,7 @@ flowchart LR
 
 ## Die drei Regularisierungsmethoden
 
-> [!NOTE] Auswahlhilfe      
+> [!NOTE] Auswahlhilfe<br>
 > L1 fördert Sparse-Modelle, L2 stabilisiert Gewichte, Elastic Net kombiniert beide Effekte.
 
 
@@ -274,7 +274,7 @@ plt.show()
 
 ## Der Regularisierungsparameter λ (Alpha)
 
-> [!WARNING] Zu starke Regularisierung     
+> [!WARNING] Zu starke Regularisierung<br>
 > Ein zu hoher Alpha-Wert kann relevante Signale unterdrücken und in Underfitting münden.
 
 Der Parameter λ (in scikit-learn als `alpha` bezeichnet) steuert die Stärke der Regularisierung.
@@ -548,7 +548,7 @@ history = model.fit(
 
 ## Wichtig: Skalierung vor Regularisierung
 
-> [!TIP] Pipeline-Umsetzung     
+> [!TIP] Pipeline-Umsetzung<br>
 > Skalierung und Regularisierung in einer Pipeline kapseln, damit `fit`/`transform` in CV und Test konsistent bleiben.
 
 **Ohne Skalierung funktioniert Regularisierung nicht korrekt!**
@@ -699,7 +699,7 @@ flowchart TB
 
 ## Best Practices
 
-> [!SUCCESS] Robuste Praxis      
+> [!SUCCESS] Robuste Praxis<br>
 > Alpha und Modellvariante immer per Cross-Validation wählen und mit einer einfachen Baseline vergleichen.
 
 ### Dos ✅
@@ -751,6 +751,6 @@ Regularisierung ist ein unverzichtbares Werkzeug im Machine Learning. Die richti
 
 ---
 
-**Version:** 1.0    
-**Stand:** Januar 2026    
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.     
+**Version:** 1.0<br>
+**Stand:** Januar 2026<br>
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

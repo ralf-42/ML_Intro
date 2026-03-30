@@ -4,20 +4,11 @@ title: Konzepte
 nav_order: 2
 has_children: true
 description: "Theoretische Grundlagen und technische Konzepte"
-has_toc: true
 ---
 
 # Konzepte
 
 Die Konzeptseiten erklären nicht möglichst viel auf einmal, sondern genau die Stellen, an denen im Kurs die wichtigsten Unterschiede entstehen: Welche Art von Problem liegt vor, wie werden Daten sinnvoll vorbereitet, woran erkennt sich ein geeignetes Modell und wie wird Qualität belastbar bewertet? Die Sammlung ist deshalb entlang des typischen ML-Workflows aufgebaut.
-
-# Inhaltsverzeichnis
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
-
----
 
 ## Grundlagen
 
@@ -49,8 +40,3 @@ Erklärbarkeit wird relevant, sobald Modelle begründet, geprüft oder gegenübe
 
 - **[XAI](https://ralf-42.github.io/ML_Intro/concepts/08_xai.html)** – *Wie wird ein Modell nachvollziehbar gemacht?* Methoden der erklärbaren KI im ML-Kontext.
 
----
-
-**Version:** 1.0
-**Stand:** März 2026
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
