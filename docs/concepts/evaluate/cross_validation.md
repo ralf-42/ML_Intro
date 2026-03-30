@@ -28,7 +28,7 @@ has_toc: true
 
 Cross-Validation (Kreuzvalidierung) ist ein statistisches Verfahren zur Bewertung der **Generalisierungsfähigkeit** eines Machine-Learning-Modells. Im Gegensatz zum einfachen Train-Test-Split wird der Datensatz mehrfach unterschiedlich aufgeteilt, wodurch eine robustere und zuverlässigere Leistungsbewertung entsteht.
 
-> [!NOTE] Warum CV?     
+> [!NOTE] Warum CV?<br>
 > Cross-Validation reduziert Zufallseffekte einzelner Splits und liefert stabilere Leistungsschätzungen.
 
 
@@ -222,7 +222,7 @@ print(f"\nGesamt: {np.mean(scores):.3f} (+/- {np.std(scores) * 2:.3f})")
 
 ## Wahl von K
 
-> [!TIP] Startwerte     
+> [!TIP] Startwerte<br>
 > In der Praxis sind `K=5` oder `K=10` meist ein guter Kompromiss aus Rechenzeit und Stabilität.
 
 Die Anzahl der Folds beeinflusst die Qualität der Schätzung:
@@ -545,7 +545,7 @@ print(f"Nested CV Score: {nested_scores.mean():.3f}")
 
 ## Cross-Validation mit Pipelines
 
-> [!WARNING] Leakage-Risiko     
+> [!WARNING] Leakage-Risiko<br>
 > Vorverarbeitung muss innerhalb der Pipeline passieren. Externes `fit_transform` vor CV führt oft zu zu optimistischen Ergebnissen.
 
 Um **Data Leakage** zu vermeiden, muss die gesamte Vorverarbeitung innerhalb der CV-Schleife erfolgen:
@@ -714,7 +714,7 @@ print(pd.DataFrame(summary).to_string(index=False))
 
 ## Best Practices
 
-> [!SUCCESS] Qualitätsmuster       
+> [!SUCCESS] Qualitätsmuster<br>
 > Berichten Sie immer Mittelwert und Streuung der CV-Scores statt nur eines einzelnen Werts.
 
 ### Dos ✅
@@ -803,6 +803,6 @@ Cross-Validation ist ein unverzichtbares Werkzeug für die robuste Bewertung von
 
 ---
 
-**Version:** 1.0    
-**Stand:** Januar 2026    
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    
+**Version:** 1.0<br>
+**Stand:** Januar 2026<br>
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

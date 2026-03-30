@@ -4,20 +4,11 @@ title: Ressourcen
 nav_order: 7
 has_children: true
 description: "Nützliche Ressourcen und Tools"
-has_toc: true
 ---
 
 # Ressourcen
 
 Die Ressourcenseiten ergänzen den Kurs dort, wo zusätzliche Werkzeuge, Visualisierungen oder Sammlungen wirklich helfen. Sie sind nicht als unendliches Linkarchiv gedacht, sondern als gezielte Unterstützung für typische Lern- und Projektfragen.
-
-# Inhaltsverzeichnis
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
-
----
 
 ## Interaktive Werkzeuge
 
@@ -31,8 +22,3 @@ Die Link-Sammlung ist dort nützlich, wo eine Kursseite nicht ausreicht oder ein
 
 - **[Links](https://ralf-42.github.io/ML_Intro/ressourcen/link_sammlung.html)** – *Wo finden sich gute externe Quellen für ML-Themen?* Dokumentation, Lernmaterialien, Visualisierungen und weiterführende Tutorials.
 
----
-
-**Version:** 1.0
-**Stand:** März 2026
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

@@ -11,7 +11,7 @@ has_toc: true
 # Anomalie-Erkennung
 {: .no_toc }
 
-> [!NOTE] Kerndefinition   
+> [!NOTE] Kerndefinition<br>
 > Anomalie-Erkennung identifiziert Datenpunkte, die signifikant vom erwarteten Muster abweichen.
 > Der Anomalie-Score quantifiziert dabei, wie untypisch ein Datenpunkt im Vergleich zum Rest des Datensatzes ist.
 
@@ -37,7 +37,7 @@ Der Anomalie-Score bewertet quantitativ, wie anomal oder atypisch ein bestimmter
 | **nahe 0** | Grenzfall | Datenpunkt liegt an der Entscheidungsgrenze |
 | **nahe +1** | Sehr wahrscheinlich normal | Datenpunkt passt gut zum Rest der Daten |
 
-> [!NOTE] Score-Interpretation    
+> [!NOTE] Score-Interpretation<br>
 > Die exakte Score-Interpretation hängt vom verwendeten Algorithmus ab.
 > Bei verschiedenen Anomalie-Erkennungsverfahren werden unterschiedliche Bewertungsskalen verwendet.
 
@@ -61,7 +61,7 @@ flowchart LR
 
 Für die praktische Implementierung von Anomalie-Erkennung eignet sich besonders **DBSCAN** (Density-Based Spatial Clustering of Applications with Noise).
 
-> [!TIP] DBSCAN in der Anomalie-Erkennung    
+> [!TIP] DBSCAN in der Anomalie-Erkennung<br>
 > DBSCAN identifiziert automatisch Rauschpunkte (Noise), die als Anomalien interpretiert werden koennen.
 > Der Algorithmus klassifiziert Datenpunkte als:
 > - **Core Points**: Punkte in dichten Bereichen
@@ -166,7 +166,7 @@ if mask.sum() > 1 and len(set(predictions[mask])) > 1:
 
 ### Häufige Fallstricke
 
-> [!WARNING] Vorsicht vor Ueberinterpretation    
+> [!WARNING] Vorsicht vor Ueberinterpretation<br>
 > Nicht jede erkannte Anomalie ist problematisch.
 > Manche "Anomalien" sind einfach seltene, aber valide Datenpunkte.
 
@@ -205,6 +205,6 @@ flowchart TD
 
 ---
 
-**Version:** 1.0    
-**Stand:** Januar 2026    
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    
+**Version:** 1.0<br>
+**Stand:** Januar 2026<br>
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

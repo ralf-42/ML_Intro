@@ -5,21 +5,11 @@ parent: Konzepte
 nav_order: 1
 has_children: true
 description: "Fundamentale Machine Learning Grundlagen"
-has_toc: true
 ---
 
 # Grundlagen
-{: .no_toc }
 
 Die Grundlagenseite bündelt die Dokumente, ohne die spätere Modellwahl im Kurs kaum sinnvoll einzuordnen ist. Dazu gehören nicht nur Begriffe wie Supervised oder Unsupervised Learning, sondern auch der übergreifende Workflow und die Frage, wie mit Notebooks, Pipelines und wiederkehrenden Arbeitsschritten sauber umgegangen wird.
-
-# Inhaltsverzeichnis
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
-
----
 
 ## Einstieg in das Thema
 
@@ -39,8 +29,3 @@ Die Einzeldokumente in diesem Bereich bauen aufeinander auf. Wer Machine Learnin
 | [Evaluate](./04_evaluate.html) | Wie wird beurteilt, ob ein Modell wirklich brauchbar ist? |
 | [XAI](./08_xai.html) | Wie werden Modellentscheidungen später nachvollziehbar gemacht? |
 
----
-
-**Version:** 1.0
-**Stand:** März 2026
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

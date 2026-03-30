@@ -98,7 +98,7 @@ flowchart LR
 | **0.0 - 0.4** | Schwache Erklärungskraft |
 | **< 0** | Modell schlechter als Mittelwert-Vorhersage |
 
-> [!WARNING] R² allein reicht nicht
+> [!WARNING] R² allein reicht nicht<br>
 > Ein hoher R²-Wert garantiert kein gutes Modell. R² sollte immer in Verbindung mit anderen Metriken und einer Residuenanalyse betrachtet werden.
 
 ### Mathematische Definition
@@ -474,6 +474,6 @@ flowchart TD
 
 ---
 
-**Version:** 1.0     
-**Stand:** Januar 2026    
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    
+**Version:** 1.0<br>
+**Stand:** Januar 2026<br>
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

@@ -4,21 +4,10 @@ title: Evaluate
 parent: Konzepte
 nav_order: 4
 has_children: true
-has_toc: true
 description: "Bewertung und Evaluation von ML-Modellen"
 ---
 
 # Evaluate
-{: .no_toc }
-
-# Inhaltsverzeichnis
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
-
----
-
 
 Methoden und Metriken zur Bewertung und Evaluation von Machine Learning Modellen.
 
@@ -84,8 +73,3 @@ Strategien zur Verbesserung der Generalisierung.
 | [Modeling](./03_modeling.html) | Welche Modelle werden hier überhaupt bewertet und verglichen? |
 | [XAI](./08_xai.html) | Wie ergänzt Erklärbarkeit klassische Metriken und Tests? |
 
----
-
-**Version:** 1.0
-**Stand:** März 2026
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

@@ -2,7 +2,7 @@
 layout: default
 title: Haftungsausschluss
 parent: Rechtliches
-nav_order: 3
+nav_exclude: true
 description: "Haftungsausschluss (Disclaimer)"
 ---
 
@@ -182,6 +182,5 @@ E-Mail: ralf.bendig.rb@gmail.com
 
 ---
 
-**Version:** 1.0       
 **Letzte Aktualisierung:** Dezember 2025
 

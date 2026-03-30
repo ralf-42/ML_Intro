@@ -49,7 +49,7 @@ Verwendet wird das **Just the Docs** Theme mit folgenden Features:
 Markdown-Callouts (Obsidian-Syntax) werden automatisch transformiert:
 
 ```markdown
-> [!NOTE]
+> [!NOTE] GitHub Pages Callout-Beispiel<br>
 > Dies ist ein Hinweis
 ```
 

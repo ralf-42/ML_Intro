@@ -43,7 +43,7 @@ Für produktionsreife ML-Workflows sollte **immer die explizite Definition** ver
 - Inverse Transformation bei Bedarf
 - Bessere Nachvollziehbarkeit und Debugging
 
-> [!NOTE] Reproduzierbarkeit
+> [!NOTE] Reproduzierbarkeit<br>
 > Gespeicherte Transformer-Objekte sind Voraussetzung, um Training, Evaluation und Produktion konsistent zu halten.
 
 ```python
@@ -105,7 +105,7 @@ Wenn dieselbe Transformation auf mehrere Datensätze (z.B. Trainings- und Testda
 
 Data Leakage tritt auf, wenn Informationen von außerhalb des Trainingsdatensatzes verwendet werden, um das Modell zu erstellen. Diese zusätzlichen Informationen können zu **übermäßig optimistischen** oder sogar **völlig ungültigen** Vorhersagemodellen führen.
 
-> [!WARNING] Kritischer Fehler
+> [!WARNING] Kritischer Fehler<br>
 > Leakage verfälscht Evaluationsergebnisse systematisch und führt häufig zu Fehlentscheidungen im produktiven Einsatz.
 
 ### Häufige Ursachen
@@ -203,7 +203,7 @@ scores = cross_val_score(pipeline, data_train, target_train, cv=5)
 
 Eine Pipeline ist eine Reihe von Aufgaben, die nacheinander ausgeführt werden. Die Ausgabe einer Aufgabe ist die Eingabe der nächsten Aufgabe, bis am Ende das Endprodukt (z.B. eine Vorhersage) ausgegeben wird.
 
-> [!TIP] Standardisieren
+> [!TIP] Standardisieren<br>
 > Nutzen Sie Pipelines als Default-Struktur, um Preprocessing, Modelltraining und Inferenz sauber zu kapseln.
 
 ### Vorteile von Pipelines
@@ -427,6 +427,6 @@ model.fit(data_train, target_train, epochs=10)
 
 
 ---
-**Version:** 1.0    
-**Stand:** Januar 2026    
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.    
+**Version:** 1.0<br>
+**Stand:** Januar 2026<br>
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

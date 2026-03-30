@@ -2,7 +2,7 @@
 layout: default
 title: Datenschutzerklärung
 parent: Rechtliches
-nav_order: 2
+nav_exclude: true
 description: "Datenschutzerklärung gemäß DSGVO"
 ---
 
@@ -171,5 +171,4 @@ E-Mail: ralf.bendig.rb@gmail.com
 
 ---
 
-**Version:** 1.0         
-**Letzte Aktualisierung:** Dezember 2025   
+**Letzte Aktualisierung:** Dezember 2025

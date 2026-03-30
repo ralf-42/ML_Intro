@@ -4,21 +4,10 @@ title: Prepare
 parent: Konzepte
 nav_order: 2
 has_children: true
-has_toc: true
 description: "Datenaufbereitung für Machine Learning"
 ---
 
 # Prepare
-{: .no_toc }
-
-# Inhaltsverzeichnis
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
-
----
-
 
 Systematische Datenaufbereitung und Preprocessing für Machine Learning Modelle.
 
@@ -80,8 +69,3 @@ Aufteilung in Trainings- und Testdaten für zuverlässige Modellbewertung.
 | [Evaluate](./04_evaluate.html) | Wie wird geprüft, ob die vorbereiteten Daten zu belastbaren Ergebnissen führen? |
 | [XAI](./08_xai.html) | Wie wirkt sich Vorverarbeitung auf spätere Interpretierbarkeit aus? |
 
----
-
-**Version:** 1.0
-**Stand:** März 2026
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
