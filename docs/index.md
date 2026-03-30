@@ -30,6 +30,8 @@ Der Kurs ist deshalb bewusst breiter angelegt als eine reine Modellsammlung. Kla
 
 Machine Learning lässt sich im Kurs aus drei **Perspektiven** betrachten:
 
+Wer den Kurs nicht nur punktuell, sondern in einer sinnvollen Reihenfolge durcharbeiten will, findet im [Lernpfad](https://ralf-42.github.io/ML_Intro/ressourcen/lernpfad.html) eine kompakte Orientierung durch die produktiven Notebooks.
+
 ## Verstehen
 
 Im Verständnissteil geht es um die Grundlagen, die in der Praxis später über Erfolg oder Misserfolg entscheiden: Lernparadigmen, Overfitting, Datenleckage, Metriken und die Frage, warum ein Modell auf Trainingsdaten gut und auf echten Daten schlecht aussehen kann. Gerade Einsteiger unterschätzen oft, wie stark die Modellqualität von der Datenvorbereitung und der Evaluationslogik abhängt.
