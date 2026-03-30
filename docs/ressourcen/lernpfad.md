@@ -10,7 +10,7 @@ has_toc: true
 # Lernpfad
 {: .no_toc }
 
-> **Welche Reihenfolge ergibt für den Kurs den klarsten Lernfortschritt?**<br>
+> **Welche Reihenfolge ergibt für den Kurs den klarsten Lernfortschritt?** <br>
 > Der Lernpfad ordnet die produktiven Notebooks aus `ML_Intro/01_notebook` zu einem nachvollziehbaren Kursverlauf.
 
 ---
