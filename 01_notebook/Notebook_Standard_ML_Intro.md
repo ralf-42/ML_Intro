@@ -208,6 +208,21 @@ Besser:
 - `Zum Einsatz kommt ...`
 - `Als Analogie dient ...`
 
+Selbstbeschreibende Einleitungen werden gestrichen. Direkt mit dem Inhalt beginnen:
+
+| ❌ Selbstbeschreibend | ✅ Direkt |
+|---|---|
+| „In diesem Abschnitt wird Cross-Validation erklärt." | „Cross-Validation schätzt Modellqualität robuster als ein einzelner Split." |
+| „Im Folgenden werden die wichtigsten Metriken vorgestellt." | „Für Klassifikation sind Precision, Recall und F1 die zentralen Metriken." |
+
+Folgende Formulierungen werden **vermieden** (vage, KI-typisch):
+
+| Vermeiden | Stattdessen |
+|---|---|
+| „einfach", „leistungsstark", „praxisnah" | Konkreten Beleg liefern |
+| „fundiert", „ganzheitlich" | Spezifisches Konzept benennen |
+| „praxisorientiert" | Datensatz oder Anwendungsfall nennen |
+
 ### 6.2 Fließtext vor Stichpunkten
 
 Listen sind erlaubt, aber Erklärungen gehören bevorzugt in kurze Absätze. Aufzählungen dienen der Struktur, nicht als Ersatz für Formulierung.
@@ -216,21 +231,87 @@ Listen sind erlaubt, aber Erklärungen gehören bevorzugt in kurze Absätze. Auf
 
 Jedes zentrale Konzept soll mindestens einen Satz zu Grenzen, Fehlerquellen oder typischen Missverständnissen enthalten. Das ist für ML_Intro wichtiger als Werbesprache oder Vollständigkeitsanspruch.
 
+### 6.4 3-Satz-Muster für Konzepterklärungen
+
+Jede Konzepterklärung folgt — wo möglich — diesem Muster:
+
+- **Satz 1:** Einordnung des Konzepts (was es ist)
+- **Satz 2:** Praktischer Nutzen im ML-Workflow (wann es hilft)
+- **Satz 3:** Grenze, Fehlerquelle oder typische Fehlinterpretation (wo es scheitert)
+
+Beispiel: „Cross-Validation teilt den Datensatz in mehrere Folds auf und schätzt die Modellgüte als Mittelwert aller Fold-Ergebnisse. Im ML-Workflow ersetzt es den einzelnen Train-Test-Split, wenn Datenmenge oder Klassenverteilung eine robuste Schätzung erfordern. Häufiger Fehler: CV auf dem Gesamtdatensatz statt nur auf den Trainingsdaten — das erzeugt Data Leakage."
+
+### 6.5 Formulierungsmarker
+
+Wiederkehrende Marker erzeugen einen konsistenten Ton:
+
+- **Typischer Fehler:** [konkretes Fehlmuster]
+- **Grenze:** [wo das Verfahren versagt oder ungeeignet wird]
+- **In der Praxis relevant, wenn:** [Anwendungsbedingung]
+- **Nicht geeignet, wenn:** [Ausschlusskriterium]
+
+Pro Konzeptabschnitt mindestens einer dieser Marker einsetzen.
+
 ---
 
 ## 7. Visualisierung
 
-Mermaid ist in ML_Intro derzeit nicht gelebter Projektstandard und daher nicht verpflichtend. Visualisierung erfolgt primär über:
+### 7.1 Trennung von Prozesslogik und Datenvisualisierung
+
+Zwei Visualisierungsarten werden klar getrennt:
+
+- **Prozesslogik** (Abläufe, Architekturen, Entscheidungslogik) → Mermaid
+- **Modellverhalten, Metriken, Fehlerbilder** → Matplotlib / Seaborn / Plotly
+
+### 7.2 Mermaid-Diagramme
+
+Mermaid wird eingesetzt, wenn Prozesslogik visuell klarer ist als in Textform — nicht als Dekoration.
+
+**5 Standarddiagrammtypen für ML_Intro:**
+
+| Typ | Einsatz |
+|-----|---------|
+| Workflow-Flowchart | Ablauf des 5-Phasen-Workflows |
+| Split-/Fold-Schema | Cross-Validation, Bootstrapping |
+| Pipeline-Blockdiagramm | Transformationsketten, Scikit-learn Pipelines |
+| Modellarchitektur | Ensemble, Stacking (Base + Meta-Modell) |
+| Prozessgrafik | Zeitreihen-Forecasting, XAI global vs. lokal |
+
+**Platzierung:**
+- Prozessüberblick: direkt nach `# 1 | Understand`
+- Methodenlogik: direkt vor `# 3 | Modeling` oder `# 4 | Evaluate`
+- Pro Notebook maximal 2 Diagramme
+
+**Hochnutzen-Bereiche** (Mermaid besonders sinnvoll):
+- `06_workflow` — Pipeline-Transformationskette
+- `05_tuning` — CV-Fold-Schema, Hyperparameter-Suche
+- `04_ensemble` — Stacking-Architektur
+- `07_special` — Zeitreihen-Forecasting-Ablauf
+- `09_diverse` — XAI global vs. lokal
+
+**Geringer Nutzen:** einfache Pandas- oder Basisnotebooks (Daten laden, erste EDA).
+
+```python
+from genai_lib.utilities import mermaid
+
+diagram = '''
+flowchart LR
+    DATEN[Rohdaten] --> PREP[Vorbereitung]
+    PREP --> MODELL[Modelltraining]
+    MODELL --> EVAL[Evaluation]
+'''
+
+mermaid(diagram, width=800)
+```
+
+### 7.3 Datenvisualisierung
+
+Primäre Tools:
 
 - `matplotlib`
 - `seaborn`
 - `plotly`
 - modellnahe Diagramme und Metrikplots
-
-Empfehlung:
-
-- Prozess- oder Entscheidungslogik darf künftig mit Mermaid ergänzt werden.
-- Für bestehende Notebook-Serien ist das eine Qualitätsverbesserung, aber keine Mindestanforderung.
 
 ---
 
@@ -323,6 +404,6 @@ Vor der Ablage eines neuen oder überarbeiteten Notebooks:
 
 ---
 
-**Version:** 1.0  
-**Stand:** März 2026  
+**Version:** 1.1
+**Stand:** März 2026
 **Projekt:** ML_Intro

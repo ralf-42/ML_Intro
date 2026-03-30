@@ -223,7 +223,7 @@ print(data[['timestamp', 'wochentag_name', 'ist_wochenende', 'wochentag_sin', 'w
 Feature Selection identifiziert die relevantesten Merkmale und entfernt redundante oder irrelevante Features. Dies verbessert die Modellperformance und reduziert Overfitting.
 
 > [!TIP] Praktischer Start<br>
-> Beginnen Sie mit einfachen Filtermethoden und ergänzen Sie Wrapper-/Embedded-Methoden nur bei nachweisbarem Zusatznutzen.
+> Mit einfachen Filtermethoden beginnen und Wrapper-/Embedded-Methoden nur bei nachweisbarem Zusatznutzen ergänzen.
 
 ```mermaid
 flowchart LR

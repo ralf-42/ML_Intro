@@ -522,8 +522,7 @@ flowchart TD
 
 > **Tipp: Modell nicht im Interface trainieren**
 >
-> Trainieren Sie Modelle separat und laden Sie nur das fertige Modell 
-> in die Gradio-App. Dies verbessert Startzeit und Zuverlässigkeit.
+> Modelle separat trainieren und nur das fertige Modell in die Gradio-App laden. Das verbessert Startzeit und Zuverlässigkeit.
 
 ```python
 # ❌ Falsch: Training in der App
