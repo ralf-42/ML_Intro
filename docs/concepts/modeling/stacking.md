@@ -242,7 +242,7 @@ Der **Meta-Learner** lernt aus diesen Daten, wann welches Modell vertrauenswürd
 ## Best Practices für Stacking
 
 > [!SUCCESS] Mindestanforderung<br>
-> Nutzen Sie diverse Base-Modelle, konsistente CV und ein einfaches Meta-Modell als stabile Ausgangskonfiguration.
+> Diverse Base-Modelle, konsistente CV und ein einfaches Meta-Modell als stabile Ausgangskonfiguration wählen.
 
 ### Auswahl der Base Learner
 
@@ -301,7 +301,7 @@ flowchart TD
 ## Vergleich: Voting vs. Meta-Learning
 
 > [!TIP] Entscheidungsregel<br>
-> Starten Sie mit Voting für schnelle, robuste Baselines und wechseln Sie zu Meta-Learning, wenn zusätzlicher Genauigkeitsgewinn nachweisbar ist.
+> Mit Voting für schnelle, robuste Baselines beginnen und zu Meta-Learning wechseln, wenn zusätzlicher Genauigkeitsgewinn nachweisbar ist.
 
 | Kriterium | Voting | Meta-Learning |
 |-----------|--------|---------------|

@@ -41,7 +41,7 @@ Anstatt einfach Datenpunkte (Beispiele) zu löschen, verringert man bei der **Di
 
 Das Prinzip der PCA lässt sich vereinfacht mit einem **Schattenwurf** erklären:
 
-- Stellen Sie sich einen dreidimensionalen Würfel vor. Wenn man ihn mit einer Taschenlampe anstrahlt, wirft er einen zweidimensionalen Schatten auf den Boden.
+- Ein dreidimensionaler Würfel, mit einer Taschenlampe angestrahlt, wirft einen zweidimensionalen Schatten auf den Boden.
 - Der Schatten ist eine **Projektion** des Würfels: Er hat weniger Dimensionen (2D statt 3D), zeigt aber immer noch die wesentlichen Eigenschaften des Objekts.
 - Die PCA sucht nun genau den Winkel („die beste Lichtquelle“), bei dem der Schatten die meiste Information des Originals beibehält. Mathematisch bedeutet das, dass die **Varianz** (die Streuung der Daten) im Schattenwurf maximal sein soll.
 

@@ -204,7 +204,7 @@ scores = cross_val_score(pipeline, data_train, target_train, cv=5)
 Eine Pipeline ist eine Reihe von Aufgaben, die nacheinander ausgeführt werden. Die Ausgabe einer Aufgabe ist die Eingabe der nächsten Aufgabe, bis am Ende das Endprodukt (z.B. eine Vorhersage) ausgegeben wird.
 
 > [!TIP] Standardisieren<br>
-> Nutzen Sie Pipelines als Default-Struktur, um Preprocessing, Modelltraining und Inferenz sauber zu kapseln.
+> Pipelines als Default-Struktur nutzen, um Preprocessing, Modelltraining und Inferenz sauber zu kapseln.
 
 ### Vorteile von Pipelines
 

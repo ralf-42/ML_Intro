@@ -144,7 +144,7 @@ flowchart TD
 
 ### Intuition
 
-Stellen Sie sich vor, Sie stehen auf einem Berg im Nebel und möchten den tiefsten Punkt (das Tal) finden. Die Strategie: Schauen Sie, in welche Richtung es am steilsten bergab geht, und machen Sie einen Schritt in diese Richtung. Wiederholen Sie dies, bis Sie im Tal angekommen sind.
+Als Analogie dient ein Wanderer auf einem nebligen Berg, der den tiefsten Punkt (das Tal) sucht. Die Strategie: in die Richtung schreiten, in der es am steilsten bergab geht, Schritt für Schritt — bis das Tal erreicht ist.
 
 ```mermaid
 flowchart TB

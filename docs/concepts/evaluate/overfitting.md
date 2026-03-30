@@ -358,7 +358,7 @@ plt.show()
 ## Strategien gegen Overfitting
 
 > [!SUCCESS] Praxisregel<br>
-> Kombinieren Sie mehrere Gegenmaßnahmen (z. B. Regularisierung + Cross-Validation + Early Stopping) statt nur an einem Parameter zu drehen.
+> Mehrere Gegenmaßnahmen kombinieren (z. B. Regularisierung + Cross-Validation + Early Stopping), statt nur an einem Parameter zu drehen.
 
 ```mermaid
 flowchart TB
@@ -654,7 +654,7 @@ flowchart TB
 ## Best Practices
 
 > [!TIP] Robust statt maximal<br>
-> Optimieren Sie auf reproduzierbare Generalisierung, nicht auf den besten Einzel-Score in einem zufälligen Split.
+> Auf reproduzierbare Generalisierung optimieren, nicht auf den besten Einzel-Score in einem zufälligen Split.
 
 ### Dos ✅
 

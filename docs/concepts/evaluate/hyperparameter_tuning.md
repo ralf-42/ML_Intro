@@ -816,7 +816,7 @@ for col in param_cols:
 ## Best Practices
 
 > [!SUCCESS] Solider Ablauf<br>
-> Definieren Sie Suchraum, Budget und Metrik vorab und dokumentieren Sie jede Tuning-Runde reproduzierbar.
+> Suchraum, Budget und Metrik vorab definieren und jede Tuning-Runde reproduzierbar dokumentieren.
 
 ### Empfehlungen
 
