@@ -292,17 +292,21 @@ Mermaid wird eingesetzt, wenn Prozesslogik visuell klarer ist als in Textform �
 **Geringer Nutzen:** einfache Pandas- oder Basisnotebooks (Daten laden, erste EDA).
 
 ```python
-from genai_lib.utilities import mermaid
+import base64
+from IPython.display import Image, display
 
-diagram = '''
+diagram = """
 flowchart LR
     DATEN[Rohdaten] --> PREP[Vorbereitung]
     PREP --> MODELL[Modelltraining]
     MODELL --> EVAL[Evaluation]
-'''
+"""
 
-mermaid(diagram, width=800)
+encoded = base64.urlsafe_b64encode(diagram.strip().encode()).decode()
+display(Image(url=f"https://mermaid.ink/img/{encoded}", width=750))
 ```
+
+Kein externes Modul — nur `base64` + `IPython.display` (immer verfügbar). Rendering via `mermaid.ink` (serverseitig, kein JavaScript nötig).
 
 ### 7.3 Datenvisualisierung
 
