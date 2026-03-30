@@ -245,7 +245,7 @@ mindmap
 - **Boosting** (z.B. XGBoost) reduziert Bias durch sequentielles Lernen aus Fehlern
 - **Stacking** kombiniert verschiedenartige Modelle durch Voting oder Meta-Learning
 - Die Wahl der Methode hängt vom Problem und den verfügbaren Ressourcen ab
-## Abgrenzung zu verwandten Themen
+## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
 |-------|------------|

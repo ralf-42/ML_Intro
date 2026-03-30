@@ -139,7 +139,7 @@ flowchart TD
 3. **Ergebnisse verstehen:** Nicht blind dem besten Modell vertrauen
 4. **Reproduzierbarkeit:** Immer `session_id` setzen
 5. **Iteration:** AutoML als Startpunkt, dann manuell optimieren
-## Abgrenzung zu verwandten Themen
+## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
 |-------|------------|

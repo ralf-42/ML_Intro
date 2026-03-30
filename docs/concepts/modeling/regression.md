@@ -400,7 +400,7 @@ flowchart LR
     style logistic fill:#c8e6c9
     style training fill:#fff9c4
 ```
-## Abgrenzung zu verwandten Themen
+## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
 |-------|------------|

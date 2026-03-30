@@ -695,7 +695,7 @@ flowchart TB
 - scikit-learn Dokumentation: [Learning Curve](https://scikit-learn.org/stable/modules/learning_curve.html)
 - StatQuest: [Bias and Variance](https://www.youtube.com/watch?v=EuBBz3bI-aA)
 - KNIME: Overfitting Tutorial
-## Abgrenzung zu verwandten Themen
+## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
 |-------|------------|

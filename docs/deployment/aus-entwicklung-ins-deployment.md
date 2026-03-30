@@ -27,11 +27,10 @@ has_toc: true
 
 Die GenAI-Anwendung wurde in einem Jupyter Notebook entwickelt und getestet. Jetzt soll sie in den Produktivbetrieb. Diese Anleitung zeigt Schritt für Schritt, wie dieser Übergang gelingt.
 
-```
-┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│   Entwicklung   │ ──► │   Vorbereitung  │ ──► │   Deployment    │
-│    (.ipynb)     │     │    (.py + ...)  │     │   (Container)   │
-└─────────────────┘     └─────────────────┘     └─────────────────┘
+```mermaid
+flowchart LR
+    A["Entwicklung\n(.ipynb)"] --> B["Vorbereitung\n(.py + ...)"]
+    B --> C["Deployment\n(Container)"]
 ```
 
 ### Deployment-Strategie zuerst festlegen

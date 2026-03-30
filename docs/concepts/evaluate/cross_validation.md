@@ -792,7 +792,7 @@ Cross-Validation ist ein unverzichtbares Werkzeug für die robuste Bewertung von
 *Referenzen:*
 - scikit-learn Dokumentation: [Cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html)
 - StatQuest: [Cross Validation](https://www.youtube.com/watch?v=fSytzGwwBVw)
-## Abgrenzung zu verwandten Themen
+## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
 |-------|------------|

@@ -24,52 +24,35 @@ Die wichtigsten Aspekte der Modellbewertung:
 
 Bewertungsmetriken für verschiedene ML-Aufgaben.
 
-| Thema | Beschreibung |
-|-------|--------------|
-| [Allgemein](evaluate/bewertung_allgemein) | Grundlagen der Modellbewertung |
-| [Klassifizierung](evaluate/bewertung_klassifizierung) | Confusion Matrix, Precision, Recall, F1-Score, ROC-AUC |
-| [Regression](evaluate/bewertung_regression) | R², MSE, RMSE, MAE, Residuenanalyse |
-| [Clustering](evaluate/bewertung_clustering) | Silhouette-Koeffizient, Cluster-Validierung |
-| [Anomalie](evaluate/bewertung_anomalie) | Anomalie-Scores, Ausreißer-Erkennung |
+**[Allgemein](https://ralf-42.github.io/ML_Intro/concepts/evaluate/bewertung_allgemein.html)** – *Wie wird die Grundlogik der Modellbewertung verstanden?* Grundlagen der Modellbewertung: Trainings- vs. Testfehler, Bias-Variance-Tradeoff.
 
----
+**[Klassifizierung](https://ralf-42.github.io/ML_Intro/concepts/evaluate/bewertung_klassifizierung.html)** – *Welche Metriken zeigen, ob ein Klassifikationsmodell wirklich taugt?* Confusion Matrix, Precision, Recall, F1-Score und ROC-AUC.
+
+**[Regression](https://ralf-42.github.io/ML_Intro/concepts/evaluate/bewertung_regression.html)** – *Woran wird die Qualität eines Regressionsmodells gemessen?* R², MSE, RMSE, MAE und Residuenanalyse.
+
+**[Clustering](https://ralf-42.github.io/ML_Intro/concepts/evaluate/bewertung_clustering.html)** – *Wie wird bewertet, ob eine Clusterstruktur sinnvoll ist?* Silhouette-Koeffizient und weitere Cluster-Validierungsmetriken.
+
+**[Anomalie](https://ralf-42.github.io/ML_Intro/concepts/evaluate/bewertung_anomalie.html)** – *Wie wird die Güte eines Anomalie-Erkennungsmodells eingeschätzt?* Anomalie-Scores und Methoden zur Ausreißer-Erkennung.
 
 ## Cross-Validation
 
 Robuste Modellbewertung durch wiederholte Aufteilung der Daten.
 
-| Thema | Beschreibung |
-|-------|--------------|
-| [Cross-Validation](evaluate/cross_validation) | K-Fold, Stratified K-Fold, Leave-One-Out, Time Series Split |
-| [Bootstrapping](evaluate/bootstrapping) | Resampling zur Schätzung von Unsicherheit |
+**[Cross-Validation](https://ralf-42.github.io/ML_Intro/concepts/evaluate/cross_validation.html)** – *Wie liefert Kreuzvalidierung eine robuste Schätzung der Modellgüte?* K-Fold, Stratified K-Fold, Leave-One-Out und Time Series Split.
 
----
+**[Bootstrapping](https://ralf-42.github.io/ML_Intro/concepts/evaluate/bootstrapping.html)** – *Wie quantifiziert Resampling die Unsicherheit einer Schätzung?* Resampling-Verfahren zur Berechnung von Konfidenzintervallen und Modellunsicherheit.
 
 ## Hyperparameter-Tuning
 
 Systematische Optimierung der Modellparameter.
 
-| Thema | Beschreibung |
-|-------|--------------|
-| [Hyperparameter-Tuning](evaluate/hyperparameter_tuning) | Grid Search, Random Search, Bayesian Optimization |
-
----
+**[Hyperparameter-Tuning](https://ralf-42.github.io/ML_Intro/concepts/evaluate/hyperparameter_tuning.html)** – *Wie werden Modellparameter systematisch optimiert?* Grid Search, Random Search und Bayesian Optimization im Vergleich.
 
 ## Overfitting vermeiden
 
 Strategien zur Verbesserung der Generalisierung.
 
-| Thema | Beschreibung |
-|-------|--------------|
-| [Overfitting](evaluate/overfitting) | Erkennung, Learning Curves, Bias-Variance Tradeoff |
-| [Regularisierung](evaluate/regularisierung) | L1 (Lasso), L2 (Ridge), Elastic Net |
+**[Overfitting](https://ralf-42.github.io/ML_Intro/concepts/evaluate/overfitting.html)** – *Woran wird Overfitting erkannt und wie wird es verhindert?* Learning Curves, Bias-Variance Tradeoff und praktische Gegenmaßnahmen.
 
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|
-| [Grundlagen](./01_grundlagen.html) | Welche Grundlogik von Lernen, Daten und Workflow steckt hinter Evaluation? |
-| [Prepare](./02_prepare.html) | Wie beeinflusst Datenaufbereitung die spätere Modellbewertung? |
-| [Modeling](./03_modeling.html) | Welche Modelle werden hier überhaupt bewertet und verglichen? |
-| [XAI](./08_xai.html) | Wie ergänzt Erklärbarkeit klassische Metriken und Tests? |
+**[Regularisierung](https://ralf-42.github.io/ML_Intro/concepts/evaluate/regularisierung.html)** – *Wie reduziert Regularisierung Overfitting ohne die Modellkomplexität zu opfern?* L1 (Lasso), L2 (Ridge) und Elastic Net.
 

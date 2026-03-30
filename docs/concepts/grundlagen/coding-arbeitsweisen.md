@@ -362,7 +362,7 @@ Die Kombination dieser Methoden führt zu höherer Codequalität, besserer Repro
 - [Google Colab](https://colab.research.google.com/) - Cloud-basierte Entwicklungsumgebung
 - [scikit-learn User Guide](https://scikit-learn.org/stable/user_guide.html) - Offizielle Dokumentation
 - [Pandas Cheat Sheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf) - Schnellreferenz
-## Abgrenzung zu verwandten Themen
+## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
 |-------|------------|

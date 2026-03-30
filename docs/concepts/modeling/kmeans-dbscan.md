@@ -322,7 +322,7 @@ flowchart TD
 | Falsches K | Over-/Underfitting | Elbow-Methode + Silhouette |
 | ε zu klein/groß | Zu viele/wenige Cluster | k-Distanz-Graph analysieren |
 | Nur ein Algorithmus | Suboptimale Ergebnisse | Beide Methoden vergleichen |
-## Abgrenzung zu verwandten Themen
+## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
 |-------|------------|

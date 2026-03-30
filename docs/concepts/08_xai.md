@@ -50,12 +50,3 @@ Methoden zur Erklärbarkeit und Interpretierbarkeit von Machine Learning Modelle
 - Feature Attribution
 - Adversarial Examples
 
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|
-| [Grundlagen](./01_grundlagen.html) | Welche ML-Grundbegriffe und Lernparadigmen sollte XAI voraussetzen? |
-| [Prepare](./02_prepare.html) | Wie beeinflusst Vorverarbeitung die spätere Interpretierbarkeit? |
-| [Modeling](./03_modeling.html) | Welche Modellarten stellen unterschiedliche Anforderungen an Erklärbarkeit? |
-| [Evaluate](./04_evaluate.html) | Wie ergänzt XAI klassische Bewertungsmetriken durch inhaltliche Nachvollziehbarkeit? |
-

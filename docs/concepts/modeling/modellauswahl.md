@@ -242,7 +242,7 @@ flowchart TD
 - **Nicht blind kopieren:** Was bei anderen funktioniert, passt nicht automatisch zu Ihren Daten
 - **Nicht Trainingszeit ignorieren:** Produktionsanforderungen berücksichtigen
 - **Nicht Interpretierbarkeit vernachlässigen:** Stakeholder müssen Ergebnisse verstehen
-## Abgrenzung zu verwandten Themen
+## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
 |-------|------------|

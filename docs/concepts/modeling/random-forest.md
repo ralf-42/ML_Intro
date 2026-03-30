@@ -451,7 +451,7 @@ mindmap
 $$\left(1 - \frac{1}{n}\right)^n$$
 
 Für große $n$ nähert sich dieser Wert $1/e \approx 0,368$ an.
-## Abgrenzung zu verwandten Themen
+## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
 |-------|------------|
