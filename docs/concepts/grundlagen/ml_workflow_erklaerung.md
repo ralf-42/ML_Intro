@@ -60,7 +60,7 @@ Es empfiehlt sich, mit einfachen Baseline-Modellen zu beginnen und die Komplexit
 
 Die Evaluationsphase prüft, ob das trainierte Modell die definierten Anforderungen erfüllt. Dabei werden verschiedene Metriken herangezogen, die zum Problemtyp passen müssen.
 
-Klassifikationsaufgaben nutzen Accuracy, Precision, Recall, F1-Score und die Confusion Matrix. Für Regressionsaufgaben sind MSE, RMSE und R² relevant. Bei unbalancierten Datensätzen sind ROC-AUC und PR-AUC besonders aussagekräftig.
+Klassifikationsaufgaben nutzen Accuracy, Precision, Recall, F1-Score und die Confusion Matrix. Für Regressionsaufgaben sind MAE, MSE, RMSE und R² relevant. Bei unbalancierten Datensätzen sind ROC-AUC und PR-AUC besonders aussagekräftig.
 
 Wichtig ist die Bewertung auf ungesehenen Testdaten, um Overfitting zu erkennen. Cross-Validation hilft dabei, robuste Schätzungen der Modellleistung zu erhalten. Erfüllt das Modell die Anforderungen nicht, führen die gestrichelten Pfeile zurück zu früheren Phasen – sei es zur Datenaufbereitung, zum Modeling oder sogar zur Problemdefinition.
 
@@ -70,25 +70,25 @@ Die Deployment-Phase überführt das validierte Modell in eine produktive Umgebu
 
 Aspekte dieser Phase umfassen: Integration in bestehende Systeme und Workflows, Skalierung für den Produktionsbetrieb, Monitoring der Modellleistung über Zeit, Versionierung und Reproduzierbarkeit sowie Strategien für Modell-Updates.
 
-Ein deployed Modell ist kein Endpunkt, sondern der Beginn eines kontinuierlichen Zyklus. Die gestrichelten Rückpfeile im Diagramm verdeutlichen: Wenn sich Daten oder Anforderungen ändern (Data Drift, Concept Drift), muss der Prozess erneut durchlaufen werden – von der Problemanalyse bis zur erneuten Bereitstellung.
+Ein **deployed Model** ist kein Endpunkt, sondern der Beginn eines kontinuierlichen Zyklus. Die gestrichelten Rückpfeile im Diagramm verdeutlichen: Wenn sich Daten oder Anforderungen ändern (Data Drift, Concept Drift), muss der Prozess erneut durchlaufen werden – von der Problemanalyse bis zur erneuten Bereitstellung.
 
 ## Der iterative Charakter
 
-Die gestrichelten Pfeile im Diagramm sind kein Zeichen von Fehlern, sondern ein wesentliches Merkmal erfolgreicher ML-Projekte. Machine Learning ist ein iterativer Prozess: Erkenntnisse aus späteren Phasen führen regelmäßig zu Verbesserungen in früheren Schritten.
+Die gestrichelten Pfeile im Diagramm sind kein Zeichen von Fehlern, sondern ein wesentliches Merkmal erfolgreicher ML-Projekte. Machine Learning ist ein **iterativer Prozess**: Erkenntnisse aus späteren Phasen führen regelmäßig zu Verbesserungen in früheren Schritten.
 
 Ein Modell mit unbefriedigender Performance kann auf Probleme in der Datenaufbereitung hinweisen. Feedback aus dem Produktivbetrieb kann neue Feature-Ideen liefern. Veränderte Geschäftsanforderungen erfordern eine Neubewertung des ursprünglichen Problems. Diese Flexibilität und Bereitschaft zur Iteration unterscheidet erfolgreiche ML-Projekte von gescheiterten.
 ## Abgrenzung zu verwandten Dokumenten
 
-| Thema | Abgrenzung |
-|-------|------------|
-| [ML Grundlagen](./machine_learning_grundlagen.html) | Grundlagen erklaeren *was* ML ist; der Workflow zeigt *wie* Projekte phasenweise durchgefuehrt werden |
-| [Workflow-Design (Pipelines)](./workflow-design.html) | ML-Workflow beschreibt die 5 Phasen uebergeordnet; Workflow-Design konkretisiert technische Umsetzung mit scikit-learn Pipelines |
-| [Hyperparameter-Tuning](../evaluate/hyperparameter_tuning.html) | Der Workflow rahmt alle Phasen ein; Hyperparameter-Tuning ist eine spezialisierte Optimierungstechnik in Phase 3 |
+| Thema                                                           | Abgrenzung                                                                                                                        |
+| --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| [ML Grundlagen](./machine_learning_grundlagen.html)             | Grundlagen erklaeren *was* ML ist; der Workflow zeigt *wie* Projekte phasenweise durchgefuehrt werden                             |
+| [Workflow-Design (Pipelines)](./workflow-design.html)           | ML-Workflow beschreibt die 5 Phasen übergeordnet; Workflow-Design konkretisiert *technische Umsetzung* mit scikit-learn Pipelines |
+| [Hyperparameter-Tuning](../evaluate/hyperparameter_tuning.html) | Der Workflow rahmt alle Phasen ein; Hyperparameter-Tuning ist eine spezialisierte *Optimierungstechnik* in Phase 3                |
 
 
 
 ---
 
-**Version:** 1.0<br>
-**Stand:** Januar 2026<br>
+**Version:** 1.1<br>
+**Stand:** April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

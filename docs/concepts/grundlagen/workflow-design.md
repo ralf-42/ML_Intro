@@ -25,7 +25,7 @@ has_toc: true
 
 ## Anwendung von Modellen in scikit-learn
 
-Scikit-learn ermöglicht unterschiedliche Ansätze zur Definition und Verwendung von Skalierungs- und Codierungsmodellen. Die zentrale Frage ist, ob man eine **Instanz** eines Skalierers oder Codierers explizit erstellt und speichert – oder die Transformation **direkt** auf den Daten anwendet.
+Scikit-learn ermöglicht unterschiedliche Ansätze zur Definition und Verwendung von Skalierungs- und Codierungsmodellen. Die zentrale Frage ist, ob man eine **Instanz** (konkrete Ausprägung) eines Skalierers oder Codierers explizit erstellt und speichert – oder die Transformation **direkt** auf den Daten anwendet.
 
 ### Vergleich der Ansätze
 
@@ -91,19 +91,12 @@ data_train_scaled = scaler.fit_transform(data_train_imputed)
 data_train_encoded = encoder.fit_transform(data_train_scaled)
 ```
 
-### Wiederverwendung und Reproduzierbarkeit
-
-Wenn dieselbe Transformation auf mehrere Datensätze (z.B. Trainings- und Testdaten) angewandt werden soll, ist die separate Implementierung der Skalierung als eigenständiger Schritt unerlässlich.
-
-> **Best Practice**
->
-> Verwende immer separate Variablen für transformierte Daten und speichere die Transformer-Objekte. Dies gewährleistet Reproduzierbarkeit und ermöglicht die konsistente Anwendung auf neue Daten.
 
 ---
 
 ## Data Leakage
 
-Data Leakage tritt auf, wenn Informationen von außerhalb des Trainingsdatensatzes verwendet werden, um das Modell zu erstellen. Diese zusätzlichen Informationen können zu **übermäßig optimistischen** oder sogar **völlig ungültigen** Vorhersagemodellen führen.
+Data Leakage tritt auf, wenn Informationen von *außerhalb* des Trainingsdatensatzes verwendet werden, um das Modell zu erstellen. Diese zusätzlichen Informationen können zu **übermäßig optimistischen** oder sogar **völlig ungültigen** Vorhersagemodellen führen.
 
 > [!WARNING] Kritischer Fehler<br>
 > Leakage verfälscht Evaluationsergebnisse systematisch und führt häufig zu Fehlentscheidungen im produktiven Einsatz.
@@ -132,7 +125,7 @@ flowchart TD
     style F fill:#e74c3c,stroke:#c0392b,color:#fff
 ```
 
-### Auswirkungen von Data Leakage
+### Mögliche Auswirkungen von Data Leakage
 
 Data Leakage kann zu einer massiven, aber unbegründeten Leistungssteigerung in verschiedenen Fachbereichen führen:
 
@@ -185,17 +178,6 @@ scores = cross_val_score(pipeline, data_train, target_train, cv=5)
 >
 > Neben der Trennung von Trainings- und Testdaten sollte auch die **Codierung und Skalierung getrennt** erfolgen. Statistiken (Mittelwert, Standardabweichung, Kategorien) dürfen nur aus den Trainingsdaten berechnet werden!
 
----
-
-### Zusammenfassung
-
-| Konzept                  | Kernaussage                                                                        |
-| ------------------------ | ---------------------------------------------------------------------------------- |
-| **Explizite Definition** | Transformer immer als Objekt speichern für Wiederverwendung und Reproduzierbarkeit |
-| **Pipelines**            | Automatisieren den Workflow und verhindern Data Leakage                            |
-| **ColumnTransformer**    | Ermöglicht unterschiedliche Transformationen für verschiedene Spaltentypen         |
-| **Keras-Integration**    | Vorverarbeitung kann direkt ins Modell integriert werden                           |
-| **Data Leakage**         | Vermeiden durch korrektes Splitten und Verwendung von Pipelines                    |
 
 
 ---
@@ -417,16 +399,9 @@ model.fit(data_train, target_train, epochs=10)
 - [scikit-learn Pipeline Documentation](https://scikit-learn.org/stable/modules/compose.html)
 - [ColumnTransformer Guide](https://scikit-learn.org/stable/modules/generated/sklearn.compose.ColumnTransformer.html)
 - [Data Leakage Explained](https://machinelearningmastery.com/data-leakage-machine-learning/)
-## Abgrenzung zu verwandten Dokumenten
-
-| Thema | Abgrenzung |
-|-------|------------|
-| [ML Workflow Erklaerung](./ml_workflow_erklaerung.html) | ML-Workflow gibt konzeptionelle 5-Phasen-Struktur vor; Workflow-Design konkretisiert technische Implementierung mit Pipelines |
-| [Train-Test-Split](../prepare/train_test_split.html) | Workflow-Design zeigt, wie Pipelines korrekt aufgebaut werden; Train-Test-Split adressiert das spezifische Data-Leakage-Problem |
-| [Feature Engineering](../prepare/feature-engineering.html) | Pipelines automatisieren Transformationen; Feature Engineering ist die kreative Merkmalskonstruktion vor der Pipeline |
 
 
 ---
-**Version:** 1.0<br>
-**Stand:** Januar 2026<br>
+**Version:** 1.1<br>
+**Stand:** April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

@@ -197,7 +197,7 @@ Die folgende Checkliste deckt alle wesentlichen Phasen eines ML-Projekts ab:
 
 ### Was sind Code-Snippets?
 
-Code-Snippets sind vorgefertigte Codefragmente, die in der Programmierung wiederverwendet werden können. Sie werden in verschiedenen IDEs (Integrated Development Environments) eingesetzt, um Zeit zu sparen und die Effizienz zu steigern.
+Code-Snippets sind vorgefertigte Codefragmente, die in der Programmierung wiederverwendet werden können. Sie werden in verschiedenen IDEs (Integrated Development Environments) unterstützt, um Zeit zu sparen und die Effizienz zu steigern.
 
 ```mermaid
 flowchart TD
@@ -311,12 +311,12 @@ def evaluate_classifier(y_true, y_pred, model_name="Model"):
 
 ### Organisation von Snippets
 
-| Methode | Beschreibung | Empfehlung |
-|---------|--------------|------------|
-| **IDE-Snippets** | In VS Code, PyCharm etc. speichern | Für häufig genutzte Patterns |
-| **Utility-Module** | Python-Dateien mit Hilfsfunktionen | Für projektübergreifende Nutzung |
-| **Notebooks** | Template-Notebooks für verschiedene Aufgaben | Für explorative Analysen |
-| **Git Repository** | Versionierte Snippet-Sammlung | Für Team-Sharing |
+| Methode            | Beschreibung                                     | Empfehlung                       |
+| ------------------ | ------------------------------------------------ | -------------------------------- |
+| **IDE-Snippets**   | In Google Colab, VS Code, PyCharm etc. speichern | Für häufig genutzte Patterns     |
+| **Utility-Module** | Python-Dateien mit Hilfsfunktionen               | Für projektübergreifende Nutzung |
+| **Notebooks**      | Template-Notebooks für verschiedene Aufgaben     | Für explorative Analysen         |
+| **Git Repository** | Versionierte Snippet-Sammlung                    | Für Team-Sharing                 |
 
 > **Tipp**
 >
@@ -357,11 +357,6 @@ Die Kombination dieser Methoden führt zu höherer Codequalität, besserer Repro
 
 ---
 
-## Ressourcen
-
-- [Google Colab](https://colab.research.google.com/) - Cloud-basierte Entwicklungsumgebung
-- [scikit-learn User Guide](https://scikit-learn.org/stable/user_guide.html) - Offizielle Dokumentation
-- [Pandas Cheat Sheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf) - Schnellreferenz
 ## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
