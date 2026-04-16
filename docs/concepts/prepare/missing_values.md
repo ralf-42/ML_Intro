@@ -163,11 +163,15 @@ flowchart TD
 
 ## Scikit-learn Klassen
 
-| Klasse | Verwendung |
-|--------|------------|
-| `SimpleImputer` | Einfache Strategien (mean, median, most_frequent, constant) |
-| `KNNImputer` | K-Nearest-Neighbors basierte Imputation |
-| `IterativeImputer` | Multivariate Imputation mit ML-Modellen |
+
+
+| Klasse             | Verwendung                                                  |
+| ------------------ | ----------------------------------------------------------- |
+| `SimpleImputer`    | Einfache Strategien (mean, median, most_frequent, constant) |
+| `KNNImputer`       | K-Nearest-Neighbors basierte Imputation                     |
+| `IterativeImputer` | Multivariate Imputation mit ML-Modellen                     |
+
+
 ## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
@@ -180,6 +184,6 @@ flowchart TD
 
 ---
 
-**Version:** 1.0<br>
-**Stand:** Januar 2026<br>
+**Version:** 1.1<br>
+**Stand:** April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
