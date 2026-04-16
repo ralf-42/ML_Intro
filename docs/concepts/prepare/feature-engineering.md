@@ -3,7 +3,7 @@ layout: default
 title: Feature Engineering
 parent: Prepare
 grand_parent: Konzepte
-nav_order: 3
+nav_order: 5
 description: "Systematische Techniken zur Erstellung, Auswahl und Transformation von Features für optimale Modellperformance"
 has_toc: true
 ---
@@ -11,7 +11,8 @@ has_toc: true
 # Feature Engineering
 {: .no_toc }
 
-> **Feature Engineering umfasst alle Techniken zur systematischen Erstellung, Auswahl und Transformation von Merkmalen, um die Vorhersagekraft von Machine-Learning-Modellen zu maximieren. Es ist oft der entscheidende Faktor zwischen einem mittelmäßigen und einem exzellenten Modell.**
+> **Feature Engineering umfasst alle Techniken zur systematischen Erstellung, Auswahl und Transformation von Merkmalen, um die Vorhersagekraft von Machine-Learning-Modellen zu maximieren.** 
+> Es ist oft der entscheidende Faktor zwischen einem mittelmäßigen und einem exzellenten Modell.
 
 ---
 
@@ -27,8 +28,6 @@ has_toc: true
 
 Feature Engineering ist der Prozess der Nutzung von Domänenwissen und statistischen Techniken, um aus Rohdaten informative Merkmale zu erstellen. Die Qualität der Features beeinflusst die Modellperformance oft stärker als die Wahl des Algorithmus.
 
-> [!NOTE] Hebelwirkung<br>
-> In tabellarischen ML-Projekten verbessert gutes Feature Engineering die Leistung oft stärker als ein Modellwechsel.
 
 ```mermaid
 flowchart TB
@@ -566,43 +565,6 @@ data_2d = pca_2d.fit_transform(data_scaled)
 print(f"\nReduziert auf 2 Komponenten: {pca_2d.explained_variance_ratio_.sum()*100:.1f}% Varianz erklärt")
 ```
 
-### Text-Feature-Extraktion
-
-Aus Textdaten lassen sich numerische Features durch verschiedene Techniken extrahieren.
-
-```python
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
-import pandas as pd
-
-# Beispiel-Texte
-texte = [
-    "Machine Learning ist ein Teilgebiet der künstlichen Intelligenz",
-    "Deep Learning verwendet neuronale Netze mit vielen Schichten",
-    "Feature Engineering verbessert die Modellperformance",
-    "Neuronale Netze lernen komplexe Muster aus Daten"
-]
-
-# Bag of Words (CountVectorizer)
-count_vec = CountVectorizer()
-bow_matrix = count_vec.fit_transform(texte)
-
-print("Bag of Words - Vokabular:")
-print(count_vec.get_feature_names_out()[:10])  # Erste 10 Wörter
-print(f"\nMatrix-Form: {bow_matrix.shape}")
-
-# TF-IDF (Term Frequency - Inverse Document Frequency)
-tfidf_vec = TfidfVectorizer()
-tfidf_matrix = tfidf_vec.fit_transform(texte)
-
-# TF-IDF Werte für ersten Text
-tfidf_df = pd.DataFrame(
-    tfidf_matrix.toarray()[0:1],
-    columns=tfidf_vec.get_feature_names_out()
-).T.sort_values(0, ascending=False)
-
-print("\nTF-IDF Scores (Text 1, Top 5):")
-print(tfidf_df.head().round(3))
-```
 
 ### Aggregations-Features
 
@@ -692,135 +654,19 @@ Verschiedene Branchen haben charakteristische Feature-Typen, die aus Domänenwis
 | **Immobilien** | Preis pro m², Lage-Score, Infrastruktur-Index |
 | **Produktion** | OEE-Kennzahlen, Ausschussrate, Maschinenlaufzeit |
 
-### Beispiel: E-Commerce Feature Engineering
-
-```python
-import pandas as pd
-import numpy as np
-
-# Beispiel-Kundendaten im E-Commerce
-kunden = pd.DataFrame({
-    'kunde_id': [1, 2, 3, 4, 5],
-    'bestellungen_gesamt': [15, 3, 42, 8, 1],
-    'bestellwert_gesamt': [1250, 180, 5600, 720, 45],
-    'retouren_gesamt': [2, 1, 5, 0, 0],
-    'tage_seit_registrierung': [365, 30, 720, 180, 7],
-    'tage_seit_letzter_bestellung': [14, 25, 3, 90, 7],
-    'newsletter_abonniert': [1, 0, 1, 0, 0]
-})
-
-# Domain-basierte Features
-# Customer Lifetime Value Proxy
-kunden['avg_bestellwert'] = kunden['bestellwert_gesamt'] / kunden['bestellungen_gesamt']
-
-# Bestellfrequenz (Bestellungen pro Monat)
-kunden['bestellfrequenz'] = kunden['bestellungen_gesamt'] / (kunden['tage_seit_registrierung'] / 30)
-
-# Retourenquote (wichtig für Profitabilität)
-kunden['retourenquote'] = kunden['retouren_gesamt'] / kunden['bestellungen_gesamt']
-
-# Recency Score (niedrig = kürzlich aktiv)
-kunden['recency_score'] = np.where(
-    kunden['tage_seit_letzter_bestellung'] <= 30, 'Aktiv',
-    np.where(kunden['tage_seit_letzter_bestellung'] <= 90, 'Warm', 'Kalt')
-)
-
-# Customer Value Segment (basierend auf Domänenwissen)
-def customer_segment(row):
-    if row['bestellwert_gesamt'] > 1000 and row['bestellfrequenz'] > 1:
-        return 'Premium'
-    elif row['bestellwert_gesamt'] > 500 or row['bestellfrequenz'] > 0.5:
-        return 'Standard'
-    else:
-        return 'Gelegentlich'
-
-kunden['kundensegment'] = kunden.apply(customer_segment, axis=1)
-
-print("E-Commerce Features mit Domänenwissen:")
-print(kunden[['kunde_id', 'avg_bestellwert', 'bestellfrequenz', 'retourenquote', 
-              'recency_score', 'kundensegment']].round(2))
-```
-
-### Beispiel: Finanz-Feature Engineering
-
-```python
-import pandas as pd
-import numpy as np
-
-# Beispiel-Kreditdaten
-kredite = pd.DataFrame({
-    'antrag_id': [1, 2, 3, 4, 5],
-    'einkommen_monatlich': [3500, 5200, 2800, 8000, 4200],
-    'schulden_gesamt': [15000, 8000, 25000, 12000, 5000],
-    'kreditbetrag_beantragt': [20000, 15000, 10000, 50000, 8000],
-    'laufzeit_monate': [48, 36, 24, 60, 24],
-    'bestehende_kredite': [2, 1, 3, 0, 1],
-    'kreditkarten_limit': [5000, 8000, 3000, 15000, 4000],
-    'kreditkarten_nutzung': [3500, 2000, 2800, 3000, 1000]
-})
-
-# Domänenspezifische Finanzkennzahlen
-
-# Debt-to-Income Ratio (DTI) - Kernkennzahl für Kreditwürdigkeit
-kredite['dti_ratio'] = kredite['schulden_gesamt'] / (kredite['einkommen_monatlich'] * 12)
-
-# Monatliche Rate (vereinfacht ohne Zinsen)
-kredite['monatliche_rate'] = kredite['kreditbetrag_beantragt'] / kredite['laufzeit_monate']
-
-# Payment-to-Income Ratio
-kredite['pti_ratio'] = kredite['monatliche_rate'] / kredite['einkommen_monatlich']
-
-# Kreditkartenauslastung (wichtiger Score-Faktor)
-kredite['kk_auslastung'] = kredite['kreditkarten_nutzung'] / kredite['kreditkarten_limit']
-
-# Risikokategorie basierend auf Domänenwissen
-def risiko_kategorie(row):
-    score = 0
-    if row['dti_ratio'] > 0.4:
-        score += 2
-    elif row['dti_ratio'] > 0.3:
-        score += 1
-    
-    if row['pti_ratio'] > 0.3:
-        score += 2
-    elif row['pti_ratio'] > 0.2:
-        score += 1
-    
-    if row['kk_auslastung'] > 0.7:
-        score += 1
-    
-    if row['bestehende_kredite'] > 2:
-        score += 1
-    
-    if score >= 4:
-        return 'Hoch'
-    elif score >= 2:
-        return 'Mittel'
-    else:
-        return 'Niedrig'
-
-kredite['risiko'] = kredite.apply(risiko_kategorie, axis=1)
-
-print("Finanz-Features mit Domänenwissen:")
-print(kredite[['antrag_id', 'dti_ratio', 'pti_ratio', 'kk_auslastung', 'risiko']].round(3))
-```
 
 ---
 
-## Best Practices
-
-> [!WARNING] Zielnahe Merkmale prüfen<br>
-> Features mit indirektem Zugriff auf die Zielvariable verursachen Leakage und führen zu künstlich hohen Scores.
 
 ### Empfehlungen für effektives Feature Engineering
 
-| Empfehlung | Beschreibung |
-|------------|--------------|
-| **Iterativ vorgehen** | Feature Engineering ist ein iterativer Prozess – beginne einfach und verfeinere schrittweise |
-| **Domänenexperten einbeziehen** | Fachexperten können wertvolle Hinweise auf relevante Zusammenhänge geben |
-| **Features dokumentieren** | Halte fest, wie jedes Feature berechnet wird und welche Annahmen zugrunde liegen |
-| **Validierung nicht vergessen** | Prüfe neue Features auf Korrelation mit dem Target und auf Data Leakage |
-| **Skalierung beachten** | Viele Algorithmen erfordern skalierte Features – berücksichtige dies bei der Feature-Erstellung |
+| Empfehlung                      | Beschreibung                                                                                    |
+| ------------------------------- | ----------------------------------------------------------------------------------------------- |
+| **Iterativ vorgehen**           | Feature Engineering ist ein iterativer Prozess – beginne einfach und verfeinere schrittweise    |
+| **Domänenexperten einbeziehen** | Fachexperten können wertvolle Hinweise auf relevante Zusammenhänge geben                        |
+| **Features dokumentieren**      | Halte fest, wie jedes Feature berechnet wird und welche Annahmen zugrunde liegen                |
+| **Validierung nicht vergessen** | Prüfe neue Features auf Korrelation mit dem Target und auf Data Leakage                         |
+| **Skalierung beachten**         | Viele Algorithmen erfordern skalierte Features – berücksichtige dies bei der Feature-Erstellung |
 
 ### Häufige Fehler vermeiden
 
@@ -893,15 +739,16 @@ Feature Engineering ist eine Kunst, die Domänenwissen, statistische Methoden un
 Der iterative Prozess aus Hypothese, Implementierung und Validierung führt schrittweise zu einem optimalen Feature-Set für das jeweilige Problem.
 ## Abgrenzung zu verwandten Dokumenten
 
-| Thema | Abgrenzung |
-|-------|------------|
-| [Kodierung kategorialer Daten](./kodierung_kategorialer_daten.html) | Kodierung konvertiert Datentypen; Feature Engineering erschafft neue informative Merkmale aus bestehenden |
-| [Modellauswahl](../modeling/modellauswahl.html) | Feature Engineering optimiert die Eingabedaten; Modellauswahl waehlt die Algorithmusklasse |
+| Thema                                                                | Abgrenzung                                                                                                            |
+| -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| [Kodierung kategorialer Daten](./kodierung_kategorialer_daten.html)  | Kodierung konvertiert Datentypen; Feature Engineering erschafft neue informative Merkmale aus bestehenden             |
+| [Modellauswahl](../modeling/modellauswahl.html)                      | Feature Engineering optimiert die Eingabedaten; Modellauswahl waehlt die Algorithmusklasse                            |
 | [Feature Importance (Random Forest)](../modeling/random-forest.html) | Feature Engineering konstruiert Merkmale; Feature Importance bewertet nachtraeglich, welche Merkmale das Modell nutzt |
+
 
 
 ---
 
-**Version:** 1.0<br>
-**Stand:** Januar 2026<br>
+**Version:** 1.1<br>
+**Stand:** April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

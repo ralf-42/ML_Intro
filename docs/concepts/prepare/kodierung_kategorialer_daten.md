@@ -3,7 +3,7 @@ layout: default
 title: Kodierung
 parent: Prepare
 grand_parent: Konzepte
-nav_order: 5
+nav_order: 3
 description: "Kodierung kategorialer Daten - OrdinalEncoder, OneHotEncoder und TargetEncoder für Machine Learning"
 has_toc: true
 ---
@@ -217,12 +217,9 @@ encoded_df = pd.DataFrame(
 # 4         1.0         0.0        0.0
 ```
 
-#### Parameter-Optionen
+#### Parameter-Option
 
 ```python
-# Drop='first' vermeidet Multikollinearität (für lineare Modelle)
-encoder = OneHotEncoder(sparse_output=False, drop='first')
-
 # handle_unknown='ignore' für unbekannte Kategorien in neuen Daten
 encoder = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
 ```
@@ -234,11 +231,16 @@ encoder = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
 
 #### Vorteile und Nachteile
 
-| Vorteile | Nachteile |
-|----------|-----------|
-| Keine implizite Rangfolge | Dimensionserhöhung (Curse of Dimensionality) |
-| Funktioniert mit allen Algorithmen | Speicherintensiv bei vielen Kategorien |
-| Vermeidet ordinale Beziehungen | Sparse Matrizen können Probleme verursachen |
+| Vorteile                           | Nachteile                                    |
+| ---------------------------------- | -------------------------------------------- |
+| Keine implizite Rangfolge          | Dimensionserhöhung (Curse of Dimensionality) |
+| Funktioniert mit allen Algorithmen | Speicherintensiv bei vielen Kategorien       |
+| Vermeidet ordinale Beziehungen     | Sparse Matrizen können Probleme verursachen  |
+
+> [!NOTE]  0/1-Kodierung<br>
+> Bei einem nominalen Feature mit **nur 2 Ausprägungen** reicht eine **0/1-Kodierung** (OrdinalEncoder) völlig aus.  **One-Hot-Encoding bringt hier keinen echten Vorteil**, da es nur die gleiche Information auf zwei Spalten verteilt. Für binäre Kategorien: **kein Unterschied in der Praxis → 0/1 genügt**.
+
+
 
 ### 3. TargetEncoder (für nominale Daten mit vielen Kategorien)
 
@@ -265,9 +267,9 @@ flowchart TB
     subgraph Output["<b>Kodierte Daten"]
         direction LR
         E["Stadt_encoded"]
-        E1["310000"]
-        E2["477000"]
-        E3["330000"]
+        E1["310.000"]
+        E2["477.000"]
+        E3["330.000"]
     end
     
     Stadt --> Berechnung
@@ -361,6 +363,6 @@ Die Wahl der richtigen Kodierung ist entscheidend für die Modellperformance. Gr
 
 ---
 
-**Version:** 1.0<br>
-**Stand:** Januar 2026<br>
+**Version:** 1.1<br>
+**Stand:**  April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

@@ -11,7 +11,7 @@ has_toc: true
 # Train-Test-Split
 {: .no_toc }
 
-> **Aufteilung von Daten für Training und Evaluation**
+> **Aufteilung von Daten für Training und Evaluation**    
 > 80-20-Split, Stratified Split, Random State und Best Practices
 
 ---
@@ -451,11 +451,6 @@ flowchart TB
 Der Train-Test-Split ist die Grundlage für zuverlässige Modellbewertung. Die korrekte Anwendung – insbesondere die Vermeidung von Data Leakage – ist entscheidend für aussagekräftige Ergebnisse und erfolgreiche ML-Projekte.
 
 
----
-
-*Referenzen:*
-- scikit-learn Dokumentation: [train_test_split](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)
-- KNIME: Data Preprocessing for Machine Learning Part 1 & Part 2
 
 ## Abgrenzung zu verwandten Dokumenten
 
@@ -467,6 +462,6 @@ Der Train-Test-Split ist die Grundlage für zuverlässige Modellbewertung. Die k
 
 ---
    
-**Version:** 1.0<br>
-**Stand:** Januar 2026<br>
+**Version:** 1.1<br>
+**Stand:** April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
