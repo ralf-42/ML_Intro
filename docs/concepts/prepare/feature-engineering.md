@@ -3,7 +3,7 @@ layout: default
 title: Feature Engineering
 parent: Prepare
 grand_parent: Konzepte
-nav_order: 5
+nav_order: 6
 description: "Systematische Techniken zur Erstellung, Auswahl und Transformation von Features für optimale Modellperformance"
 has_toc: true
 ---
