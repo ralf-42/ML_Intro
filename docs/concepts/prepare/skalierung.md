@@ -3,7 +3,7 @@ layout: default
 title: Skalierung
 parent: Prepare
 grand_parent: Konzepte
-nav_order: 4
+nav_order: 5
 description: "Feature-Skalierung durch Normalisierung und Standardisierung für Machine Learning"
 has_toc: true
 ---

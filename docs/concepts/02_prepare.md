@@ -20,6 +20,12 @@ Die wichtigsten Aspekte der Datenaufbereitung:
 
 ---
 
+## Train-Test Split
+
+Aufteilung in Trainings- und Testdaten für zuverlässige Modellbewertung.
+
+**[Train-Test-Split](https://ralf-42.github.io/ML_Intro/concepts/prepare/train_test_split.html)** – *Wie wird die Datentrennung zuverlässig und leckagefrei umgesetzt?* Stratifizierung, Datenaufteilung und Vermeidung von Data Leakage.
+
 ## Data Cleaning
 
 Bereinigung und Qualitätssicherung der Rohdaten.
@@ -41,10 +47,4 @@ Skalierung, Normalisierung und Encoding für ML-Algorithmen.
 Merkmalserstellung und -transformation zur Verbesserung der Modellperformance.
 
 **[Feature Engineering](https://ralf-42.github.io/ML_Intro/concepts/prepare/feature-engineering.html)** – *Wie werden aus Rohdaten informative Merkmale gewonnen?* Feature Creation, Selection, Extraction und Domain Knowledge Integration.
-
-## Train-Test Split
-
-Aufteilung in Trainings- und Testdaten für zuverlässige Modellbewertung.
-
-**[Train-Test-Split](https://ralf-42.github.io/ML_Intro/concepts/prepare/train_test_split.html)** – *Wie wird die Datentrennung zuverlässig und leckagefrei umgesetzt?* Stratifizierung, Datenaufteilung und Vermeidung von Data Leakage.
 
