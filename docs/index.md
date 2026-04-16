@@ -2,9 +2,9 @@
 layout: default
 title: Start
 nav_order: 1
-description: "Machine Learning - Von den Grundlagen zu fortgeschrittenen Methoden"
+description: Machine Learning - Von den Grundlagen zu fortgeschrittenen Methoden
 permalink: /
-has_toc: true
+has_toc: false
 ---
 
 # Machine Learning
