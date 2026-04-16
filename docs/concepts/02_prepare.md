@@ -13,10 +13,10 @@ Systematische Datenaufbereitung und Preprocessing für Machine Learning Modelle.
 
 Die wichtigsten Aspekte der Datenaufbereitung:
 
+- **Train-Test Split** - Aufteilung in Trainings- und Testdaten
 - **Data Cleaning** - Bereinigung und Qualitätssicherung
 - **Feature Engineering** - Merkmalserstellung und -transformation
-- **Data Transformation** - Skalierung, Normalisierung, Encoding
-- **Train-Test Split** - Aufteilung in Trainings- und Testdaten
+- **Data Transformation** - Skalierung, Normalisierung, Encoding- 
 
 ---
 
