@@ -111,7 +111,10 @@ Machine Learning ist heute in vielen Bereichen verbreitet:
 - **Prognose**: Wettervorhersage, Aktienkurse, Nachfrageplanung
 - **Automatisierte Entscheidungsfindung**: Kreditvergabe, Empfehlungssysteme
 
-In Einführungsveranstaltungen wirkt das schnell so, als beginne ML immer mit einem passenden Algorithmus. In der Praxis ist das selten der erste Engpass. Häufiger ist unklar, ob überhaupt genügend brauchbare Daten vorliegen, ob das Problem als Klassifikation oder Regression formuliert werden sollte oder ob eine einfache Regel bereits ausreichen würde.
+
+
+> [!NOTE] Erfahrung<br>
+> In Kursen wirkt das schnell so, als beginne ML immer mit einem passenden Algorithmus. In der Praxis ist das selten der erste Engpass. Häufiger ist unklar, ob überhaupt genügend brauchbare Daten vorliegen, ob das Problem als Klassifikation oder Regression formuliert werden sollte oder ob eine einfache Regel bereits ausreichen würde.
 
 
 
@@ -158,7 +161,7 @@ flowchart TB
 5. **Modell evaluieren**: Leistung auf ungesehenen Testdaten prüfen
 6. **Modell anwenden**: Vorhersagen für neue Daten erstellen
 
-Gerade bei ersten Projekten wird dieser Ablauf oft zu linear gedacht. Tatsächlich führen schwache Evaluation, ungeeignete Features oder auffällige Fehlerbilder meist wieder zurück in frühere Schritte. Ein ML-Projekt ist deshalb fast immer iterativ, auch wenn der Ablauf auf Folien sauber nacheinander aussieht.
+Gerade bei ersten Projekten wird dieser Ablauf oft zu linear gedacht. Tatsächlich führen schwache Evaluation, ungeeignete Features oder auffällige Fehlerbilder meist wieder zurück in frühere Schritte. Ein ML-Projekt ist deshalb fast immer **iterativ**, auch wenn der Ablauf auf Folien sauber nacheinander aussieht.
 
 
 ---
@@ -172,17 +175,18 @@ Die Art der verfügbaren Daten bestimmt, welches Lernparadigma angewendet werden
 flowchart TD
     %% Startpunkt
     Q1{"Gibt es <br/>Daten?"}
+    
+    %% Zweig: Daten vorhanden
+    Q1 -- "Ja" --> Q2{"Gibt es zu den Daten<br/>bekannte Zielwerte<br/>(Labels)?"}
+    
+    Q2 -- "Ja" --> SL["🎯 <b>Supervised Learning</b><br/>(Vorhersage & Klassifikation)"]
+    Q2 -- "Nein" --> UL["🔍 <b>Unsupervised Learning</b><br/>(Struktur- & Mustererkennung)"]
 
     %% Zweig: Keine Daten vorhanden
     Q1 -- "Nein" --> Q_Env{"Können Daten<br/>gewonnen/simuliert werden?"}
     Q_Env -- "Ja" --> RL["🎮 <b>Reinforcement Learning</b><br/>(Lernen durch Interaktion)"]
     Q_Env -- "Nein" --> NO["❌ Keine ML-Lösung<br/>möglich"]
 
-    %% Zweig: Daten vorhanden
-    Q1 -- "Ja" --> Q2{"Gibt es zu den Daten<br/>bekannte Zielwerte<br/>(Labels)?"}
-    
-    Q2 -- "Ja" --> SL["🎯 <b>Supervised Learning</b><br/>(Vorhersage & Klassifikation)"]
-    Q2 -- "Nein" --> UL["🔍 <b>Unsupervised Learning</b><br/>(Struktur- & Mustererkennung)"]
 
     %% Styling
     style SL fill:#c8e6c9,stroke:#2e7d32
