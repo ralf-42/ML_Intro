@@ -26,77 +26,27 @@ has_toc: true
 
 ## Algorithmen auf einen Blick
 
-| Algorithmus | Lernstrategie | Einsatzbereich | Hauptmetrik |
-|-------------|---------------|----------------|-------------|
-| **Decision Tree** | Supervised | Klassifikation, Regression | Accuracy / R² |
-| **Random Forest** | Supervised | Klassifikation, Regression | Accuracy / R² |
-| **Linear Regression** | Supervised | Regression | R², MAE |
-| **Logistic Regression** | Supervised | Klassifikation | Accuracy, AUC |
-| **Neural Network** | Supervised | Klassifikation, Regression | Accuracy / R² |
-| **XGBoost** | Supervised | Klassifikation, Regression | Accuracy / R² |
-| **LDA** | Supervised | Dimensionsreduktion, Klassifikation | Erklärte Varianz |
-| **K-Means** | Unsupervised | Clustering | Silhouetten-Koeffizient |
-| **DBSCAN** | Unsupervised | Clustering, Anomalieerkennung | Silhouetten-Koeffizient |
-| **Apriori** | Unsupervised | Assoziationsanalyse | Support, Confidence, Lift |
-| **PCA** | Unsupervised | Dimensionsreduktion | Erklärte Varianz |
+| Algorithmus             | Lernstrategie            | Einsatzbereich                      | Hauptmetrik                             |
+| ----------------------- | ------------------------ | ----------------------------------- | --------------------------------------- |
+| **Decision Tree**       | Supervised               | Klassifikation, Regression          | Accuracy / R²                           |
+| **Random Forest**       | Supervised               | Klassifikation, Regression          | Accuracy / R²                           |
+| **Linear Regression**   | Supervised               | Regression                          | R², MAE                                 |
+| **Logistic Regression** | Supervised               | Klassifikation                      | Accuracy, AUC                           |
+| **Neural Network**      | Supervised, Unsupervised | Klassifikation, Regression          | Accuracy / R² / Silhouetten-Koeffizient |
+| **XGBoost**             | Supervised               | Klassifikation, Regression          | Accuracy / R²                           |
+| **LDA**                 | Supervised               | Dimensionsreduktion, Klassifikation | Erklärte Varianz                        |
+| **K-Means**             | Unsupervised             | Clustering                          | Silhouetten-Koeffizient                 |
+| **DBSCAN**              | Unsupervised             | Clustering, Anomalieerkennung       | Silhouetten-Koeffizient                 |
+| **Apriori**             | Unsupervised             | Assoziationsanalyse                 | Support, Confidence, Lift               |
+| **PCA**                 | Unsupervised             | Dimensionsreduktion                 | Erklärte Varianz                        |
 
 > **Tipp:** Mit einfachen, interpretierbaren Modellen (Linear/Logistic Regression, Decision Tree) starten und die Komplexität nur bei Bedarf steigern. Die beste Modellwahl hängt immer vom konkreten Use Case, den verfügbaren Daten und den Anforderungen an Interpretierbarkeit ab.
 
 ---
 
-**Interaktive Mindmap mit einem breiten Methodenüberblick:**
+**Interaktive Mindmap mit einem breiten Methodenüberblick:**     
 [Machine Learning Algorithms Mind Map](https://mindmapai.app/mind-map/machine-learning-algorithms-5f3b26fa)
 
-
----
-
-## Übersicht nach Lernstrategie
-
-Die folgende Tabelle bietet einen schnellen Überblick über alle behandelten Algorithmen, kategorisiert nach Lernstrategie und Einsatzbereich.
-
-```mermaid
-flowchart TB
-    subgraph SL["🎯 Supervised Learning"]
-        direction TB
-        SL_CLASS["Klassifikation"]
-        SL_REG["Regression"]
-        SL_DIM["Dimensionsreduktion"]
-        
-        SL_CLASS --> DT1["Decision Tree"]
-        SL_CLASS --> RF1["Random Forest"]
-        SL_CLASS --> LOG["Logistic Regression"]
-        SL_CLASS --> NN1["Neural Network"]
-        SL_CLASS --> XGB1["XGBoost"]
-        
-        SL_REG --> DT2["Decision Tree"]
-        SL_REG --> RF2["Random Forest"]
-        SL_REG --> LIN["Linear Regression"]
-        SL_REG --> NN2["Neural Network"]
-        SL_REG --> XGB2["XGBoost"]
-        
-        SL_DIM --> LDA["LDA"]
-    end
-    
-    subgraph UL["🔍 Unsupervised Learning"]
-        direction TB
-        UL_CLUST["Clustering"]
-        UL_ANOM["Anomalieerkennung"]
-        UL_ASSOC["Assoziationsanalyse"]
-        UL_DIM["Dimensionsreduktion"]
-        
-        UL_CLUST --> KM["K-Means"]
-        UL_CLUST --> DBS["DBSCAN"]
-
-        UL_ANOM --> DBSCAN_ANOM["DBSCAN<br/>(siehe Clustering)"]
-
-        UL_ASSOC --> APR["Apriori"]
-        
-        UL_DIM --> PCA["PCA"]
-    end
-    
-    style SL fill:#e8f5e9,stroke:#2e7d32
-    style UL fill:#e3f2fd,stroke:#1565c0
-```
 
 ---
 
@@ -118,6 +68,7 @@ Ein Entscheidungsbaum teilt die Daten auf der Grundlage von Entscheidungsregeln 
 - Hohe Interpretierbarkeit und Transparenz
 - Keine Datenskalierung erforderlich
 - Kann kategoriale und numerische Features verarbeiten
+- Liefert Feature Importance
 - Schnelles Training und Vorhersage
 
 **Nachteile**
@@ -194,7 +145,7 @@ Random Forest ist eine Gruppe (Ensemble) von Entscheidungsbäumen. Mehrere Bäum
 
 **Beschreibung**
 
-Die lineare Regression ist ein statistisches Verfahren, bei dem eine abhängige Variable (y) durch eine oder mehrere unabhängige Variablen (x) erklärt wird. Es wird ein linearer Zusammenhang angenommen, darstellbar als Gerade y = b + ax mit b = Achsenabschnitt und a = Steigung. Das Training minimiert den quadratischen Fehler zwischen Vorhersage und tatsächlichem Wert.
+Die lineare Regression ist ein statistisches Verfahren, bei dem eine abhängige Variable (y) durch eine oder mehrere unabhängige Variablen (x) erklärt wird. Es wird ein *linearer* Zusammenhang angenommen, darstellbar als Gerade y = b + ax mit b = Achsenabschnitt und a = Steigung. Das Training minimiert den quadratischen Fehler zwischen Vorhersage und tatsächlichem Wert.
 
 **Vorteile**
 - Sehr hohe Interpretierbarkeit
@@ -203,7 +154,7 @@ Die lineare Regression ist ein statistisches Verfahren, bei dem eine abhängige 
 - Koeffizienten zeigen Feature-Einfluss
 
 **Nachteile**
-- Nur für lineare Beziehungen geeignet
+- Nur für *lineare* Beziehungen geeignet
 - Empfindlich gegenüber Ausreißern
 - Kann Multikollinearität nicht gut handhaben
 - Begrenzte Ausdrucksstärke

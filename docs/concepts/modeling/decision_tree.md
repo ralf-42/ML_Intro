@@ -11,7 +11,7 @@ has_toc: true
 # Entscheidungsbaum (Decision Tree)
 {: .no_toc }
 
-> **Hierarchische Regelstruktur für ML-Modelle**
+> **Hierarchische Regelstruktur für ML-Modelle**     
 > Interpretierbare Entscheidungslogik für Klassifikation und Regression
 
 ---
@@ -246,7 +246,7 @@ plt.show()
 
 - **Interpretierbarkeit**: Entscheidungsregeln sind leicht verständlich
 - **Keine Skalierung nötig**: Funktioniert mit verschiedenen Wertebereichen
-- **Gemischte Datentypen**: Kann numerische und kategoriale Features verarbeiten
+- **Gemischte Datentypen**: Kann numerische und kategoriale Features verarbeiten (nicht bei sklearn)
 - **Feature Selection**: Automatische Auswahl relevanter Features
 - **Schnelles Training**: Effizient auch bei größeren Datensätzen
 
@@ -258,23 +258,6 @@ plt.show()
 - **Lineare Grenzen**: Kann keine diagonalen Entscheidungsgrenzen modellieren
 - **Einzelner Baum oft unzureichend**: → Ensemble-Methoden (Random Forest) bevorzugt
 
-
-## Best Practices
-
-### Dos ✅
-
-- **Hyperparameter begrenzen** um Overfitting zu vermeiden (`max_depth`, `min_samples_leaf`)
-- **Cross-Validation nutzen** für robuste Hyperparameter-Wahl
-- **Feature Importance analysieren** um das Modell zu verstehen
-- **Baum visualisieren** zur Kommunikation mit Stakeholdern
-- **Für Produktion Random Forest nutzen** statt einzelnem Baum
-
-### Don'ts ❌
-
-- **Unbegrenztes Wachstum** ohne `max_depth` erlauben
-- **Zu komplexe Bäume** erstellen (schwer interpretierbar)
-- **Nur auf Training-Accuracy** achten (Overfitting-Gefahr)
-- **Kategoriale Features mit vielen Kategorien** ohne Encoding verwenden
 
 ## Zusammenfassung
 

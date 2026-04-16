@@ -11,9 +11,8 @@ has_toc: true
 # Random Forest
 {: .no_toc }
 
-> [!NOTE] Kerndefinition<br>
-> Random Forest ist ein Ensemble-Algorithmus, der multiple Entscheidungsbaeume kombiniert, um robuste und genaue Vorhersagen zu treffen.
-> Durch Bagging und Feature-Randomisierung reduziert er Overfitting und liefert zuverlaessige Ergebnisse fuer Klassifikation und Regression.
+Random Forest ist ein Ensemble-Algorithmus, der multiple Entscheidungsbäume kombiniert, um robuste und genaue Vorhersagen zu treffen.
+Durch Bagging und Feature-Randomisierung reduziert er Overfitting und liefert zuverlässige Ergebnisse für Klassifikation und Regression.
 
 ---
 
@@ -127,7 +126,7 @@ flowchart LR
 
 **Beispiel**:
 
-Bei 3000 verfügbaren Datensätzen zieht jeder Baum im Random Forest ein Bootstrap-Sample der Größe 3000, wobei mit Zurücklegen gesampelt wird. Im Mittel gehen dabei etwa 2000 unterschiedliche Datensätze in das Training eines Baums ein, während rund 1000 Datensätze für diesen Baum _Out-of-the-Bag_ bleiben.
+Bei 3.000 verfügbaren Datensätzen zieht jeder Baum im Random Forest ein Bootstrap-Sample der Größe 3.000, wobei mit Zurücklegen gesampelt wird. Im Mittel gehen dabei etwa 2.000 unterschiedliche Datensätze in das Training eines Baums ein, während rund 1.000 Datensätze für diesen Baum _Out-of-the-Bag_ [1] bleiben.
 
 Wird der Out-of-Bag-Score (siehe unten) aktiviert, werden diese nicht gezogenen Datensätze zur internen Validierung verwendet. Ist der Out-of-Bag-Score deaktiviert, werden zwar weiterhin dieselben Bootstrap-Samples erzeugt, die Out-of-Bag-Datensätze jedoch nicht zur Fehlerschätzung herangezogen.
 
@@ -141,7 +140,7 @@ An jedem Splitpunkt wird nur eine **zufällige Teilmenge der Features** betracht
 | Regression | m/3 Features | Ein Drittel der Features |
 | max_features | 'sqrt', 'log2', int | Scikit-learn Parameter |
 
-Diese Randomisierung führt zu **dekorrellierten Bäumen**, was die Varianz des Ensembles reduziert.
+**Ergebnis**: Unabhängige Bäume = weniger gemeinsame Fehler = zuverlässigere Gesamtvorhersage
 
 ---
 
@@ -200,29 +199,6 @@ flowchart TD
 
 ## Wichtige Hyperparameter
 
-```mermaid
-mindmap
-  root((Random Forest<br/>Hyperparameter))
-    Baumstruktur
-      n_estimators
-      max_depth
-      min_samples_split
-      min_samples_leaf
-    Feature-Auswahl
-      max_features
-      bootstrap
-      max_samples
-    Performance
-      n_jobs
-      random_state
-      warm_start
-    Regularisierung
-      max_leaf_nodes
-      min_impurity_decrease
-      ccp_alpha
-```
-
-### Parameter-Übersicht
 
 | Parameter | Default | Empfohlener Bereich | Effekt |
 |-----------|---------|---------------------|--------|
@@ -251,7 +227,7 @@ xychart-beta
 
 ## Out-of-Bag (OOB) Score
 
-Durch **Bootstrap-Sampling** werden ca. **37% der Daten**[1] pro Baum nicht für ein Training verwendet. Diese können zur Validierung genutzt werden:
+Durch **Bootstrap-Sampling** werden ca. **37% der Daten** pro Baum nicht für ein Training verwendet. Diese können zur Validierung genutzt werden:
 
 ```python
 model = RandomForestClassifier(
@@ -268,7 +244,7 @@ print(f"Test Score: {model.score(data_test, target_test):.4f}")
 ```
 
 > [!TIP] OOB-Vorteil<br>
-> OOB Score liefert eine Schaetzung der Generalisierungsfaehigkeit ohne zusaetzlichen Validierungsdatensatz.
+> OOB Score liefert eine Schätzung der Generalisierungsfähigkeit ohne zusätzlichen Validierungsdatensatz.
 
 ---
 
@@ -406,44 +382,17 @@ flowchart TD
 
 ### Don'ts ❌
 
-| Vermeiden | Grund |
-|-----------|-------|
-| Zu viele Bäume ohne Verbesserung | Erhöht nur Rechenaufwand |
-| max_depth ignorieren | Kann zu sehr tiefen, überangepassten Bäumen führen |
-| Bei Zeitreihen ohne Vorsicht | Random Forest ignoriert zeitliche Ordnung |
-| Für Extrapolation verwenden | Kann nur innerhalb des Trainingsdatenbereichs vorhersagen |
+| Vermeiden                        | Grund                                                     |
+| -------------------------------- | --------------------------------------------------------- |
+| Zu viele Bäume ohne Verbesserung | Erhöht nur Rechenaufwand                                  |
+| max_depth ignorieren             | Kann zu sehr tiefen, überangepassten Bäumen führen        |
+| Bei Zeitreihen ohne Vorsicht     | Random Forest ignoriert zeitliche Ordnung                 |
+| Für Extrapolation verwenden      | Kann nur innerhalb des Trainingsdatenbereichs vorhersagen |
 
----
 
-## Zusammenfassung
-
-```mermaid
-mindmap
-  root((Random Forest))
-    Kernkonzepte
-      Ensemble aus Decision Trees
-      Bootstrap Aggregating
-      Feature Randomisierung
-      Majority Voting / Averaging
-    Stärken
-      Robust gegen Overfitting
-      Keine Feature-Skalierung
-      Eingebaute Feature Importance
-      Parallelisierbar
-    Parameter
-      n_estimators
-      max_depth
-      max_features
-      min_samples_split
-    Anwendung
-      Klassifikation
-      Regression
-      Feature Selection
-```
 
 > [!SUCCESS] Kernaussage<br>
-> Random Forest kombiniert die Einfachheit von Entscheidungsbaeumen mit der Robustheit von Ensemble-Methoden.
-> Durch Bagging und Feature-Randomisierung entstehen dekorrelierte Baeume, deren aggregierte Vorhersagen stabiler und genauer sind als die eines einzelnen Baums.
+> Random Forest kombiniert die Einfachheit von Entscheidungsbaeumen mit der Robustheit von Ensemble-Methoden. 
 
 ---
 [1] Mathematisch gesehen liegt die Wahrscheinlichkeit, dass ein spezifischer Datensatz bei einer Stichprobengröße von $n$ nicht ausgewählt wird, bei:
@@ -453,16 +402,16 @@ $$\left(1 - \frac{1}{n}\right)^n$$
 Für große $n$ nähert sich dieser Wert $1/e \approx 0,368$ an.
 ## Abgrenzung zu verwandten Dokumenten
 
-| Thema | Abgrenzung |
-|-------|------------|
-| [Entscheidungsbaum](./decision_tree.html) | Random Forest ist ein Ensemble aus Decision Trees; einzelner Baum ist die grundlegende Komponente |
-| [XGBoost](./xgboost.html) | Random Forest nutzt Bagging (parallele, unabhaengige Baeume); XGBoost nutzt Boosting (sequentielle Fehlerkorrektur) |
-| [Ensemble-Methoden](./ensemble.html) | Random Forest implementiert die Bagging-Strategie; Ensemble-Methoden umfassen zusaetzlich Boosting und Stacking |
+| Thema                                     | Abgrenzung                                                                                                          |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| [Entscheidungsbaum](./decision_tree.html) | Random Forest ist ein Ensemble aus Decision Trees; einzelner Baum ist die grundlegende Komponente                   |
+| [XGBoost](./xgboost.html)                 | Random Forest nutzt Bagging (parallele, unabhaengige Baeume); XGBoost nutzt Boosting (sequentielle Fehlerkorrektur) |
+| [Ensemble-Methoden](./ensemble.html)      | Random Forest implementiert die Bagging-Strategie; Ensemble-Methoden umfassen zusaetzlich Boosting und Stacking     |
 
 
 ---
 
 
-**Version:** 1.0<br>
-**Stand:** Januar 2026<br>
+**Version:** 1.1<br>
+**Stand:** April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

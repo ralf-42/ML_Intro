@@ -11,7 +11,8 @@ has_toc: true
 # XGBoost
 {: .no_toc }
 
-> **XGBoost (Extreme Gradient Boosting) ist eine hochoptimierte Implementierung des Gradient Boosting, die für Geschwindigkeit und Leistung entwickelt wurde. Der Algorithmus kombiniert schwache Modelle sequentiell, wobei jedes neue Modell die Fehler der vorherigen korrigiert.**
+> **XGBoost (Extreme Gradient Boosting) ist eine hochoptimierte Implementierung des Gradient Boosting, die für Geschwindigkeit und Leistung entwickelt wurde.**    #
+> Der Algorithmus kombiniert schwache Modelle sequentiell, wobei jedes neue Modell die Fehler der vorherigen korrigiert.
 
 ---
 
@@ -220,28 +221,6 @@ flowchart TD
 
 ## Zusammenfassung
 
-```mermaid
-mindmap
-  root((XGBoost))
-    Gradient Boosting
-      Sequentielles Lernen
-      Fehlerkorrektur
-      Residuen-Modellierung
-    eXtreme Optimierungen
-      Parallelisierung
-      Cache-Awareness
-      Regularisierung
-    Einsatz
-      Regression
-      Klassifikation
-      Ranking
-    Hyperparameter
-      learning_rate
-      n_estimators
-      max_depth
-      Regularisierung
-```
-
 **Die wichtigsten Erkenntnisse:**
 
 - **XGBoost** ist eine hochoptimierte Gradient-Boosting-Implementierung
@@ -252,17 +231,17 @@ mindmap
 - Erfordert mehr **Hyperparameter-Tuning** als Random Forest
 ## Abgrenzung zu verwandten Dokumenten
 
-| Thema | Abgrenzung |
-|-------|------------|
-| [Ensemble-Methoden](./ensemble.html) | XGBoost spezialisiert Gradient Boosting; Ensemble-Methoden decken Bagging, Boosting und Stacking uebergreifend ab |
-| [Random Forest](./random-forest.html) | Random Forest nutzt paralleles Bagging; XGBoost nutzt sequentielle Fehlerkorrektur durch Boosting |
-| [Hyperparameter-Tuning](../evaluate/hyperparameter_tuning.html) | XGBoost ist die Modellklasse; Hyperparameter-Tuning optimiert Parameter wie learning_rate und max_depth |
+| Thema                                                           | Abgrenzung                                                                                                        |
+| --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| [Ensemble-Methoden](./ensemble.html)                            | XGBoost spezialisiert Gradient Boosting; Ensemble-Methoden decken Bagging, Boosting und Stacking uebergreifend ab |
+| [Random Forest](./random-forest.html)                           | Random Forest nutzt paralleles Bagging; XGBoost nutzt sequentielle Fehlerkorrektur durch Boosting                 |
+| [Hyperparameter-Tuning](../evaluate/hyperparameter_tuning.html) | XGBoost ist die Modellklasse; Hyperparameter-Tuning optimiert Parameter wie learning_rate und max_depth           |
 
 
 
 
 ---
 
-**Version:** 1.0<br>
-**Stand:** Januar 2026<br>
+**Version:** 1.1<br>
+**Stand:** April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

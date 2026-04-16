@@ -28,7 +28,7 @@ has_toc: true
 
 Clustering bezeichnet Verfahren zur Entdeckung von Ähnlichkeitsstrukturen in Datenbeständen. Die gefundenen Gruppen ähnlicher Objekte werden als **Cluster** bezeichnet.
 
-Im Gegensatz zum überwachten Lernen sind beim Clustering keine Labels vorhanden – der Algorithmus muss die Struktur selbst entdecken. Dies macht Clustering zu einem zentralen Werkzeug des **unüberwachten Lernens**.
+Im Gegensatz zum überwachten Lernen sind beim Clustering **keine** Labels vorhanden – der Algorithmus muss die Struktur selbst entdecken. Dies macht Clustering zu einem zentralen Werkzeug des **unüberwachten Lernens**.
 
 ```mermaid
 flowchart LR
@@ -257,7 +257,7 @@ flowchart LR
 ## K-Means vs. DBSCAN: Vergleich
 
 ```mermaid
-flowchart TD
+flowchart TB
     subgraph KMeans["K-Means"]
         K1["✓ Schnell & effizient"]
         K2["✓ Einfach zu verstehen"]
@@ -300,8 +300,6 @@ flowchart TD
 ---
 
 
----
-
 ## Best Practices
 
 
@@ -314,6 +312,8 @@ flowchart TD
 - [ ] Ergebnis mit Silhouette-Score evaluieren
 - [ ] Cluster visualisieren und interpretieren
 
+
+
 ### Häufige Fehler vermeiden
 
 | Fehler | Problem | Lösung |
@@ -322,6 +322,7 @@ flowchart TD
 | Falsches K | Over-/Underfitting | Elbow-Methode + Silhouette |
 | ε zu klein/groß | Zu viele/wenige Cluster | k-Distanz-Graph analysieren |
 | Nur ein Algorithmus | Suboptimale Ergebnisse | Beide Methoden vergleichen |
+
 ## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
@@ -333,6 +334,6 @@ flowchart TD
 
 ---
 
-**Version:** 1.0<br>
-**Stand:** Januar 2026<br>
+**Version:** 1.1<br>
+**Stand:** April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

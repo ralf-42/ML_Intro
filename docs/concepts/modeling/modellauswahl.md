@@ -11,7 +11,8 @@ has_toc: true
 # Modellauswahl
 {: .no_toc }
 
-> **Die Wahl des richtigen Modells ist entscheidend für den Erfolg eines ML-Projekts.**     Diese Seite zeigt systematische Kriterien aus Daten- und Use-Case-Perspektive sowie praktische Entscheidungshilfen.
+> **Die Wahl des richtigen Modells ist entscheidend für den Erfolg eines ML-Projekts.**         
+> Diese Seite zeigt systematische Kriterien aus Daten- und Use-Case-Perspektive sowie praktische Entscheidungshilfen.
 
 ---
 
