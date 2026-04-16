@@ -11,7 +11,7 @@ has_toc: true
 # Regression
 {: .no_toc }
 
-> **Regressionsmodelle sagen stetige, numerische Werte voraus**
+> **Regressionsmodelle sagen stetige, numerische Werte voraus**     
 > Lineare und logistische Regression, Loss-Funktionen und Gradient Descent
 
 ---
@@ -140,7 +140,73 @@ flowchart TD
 
 ---
 
-## Gradient Descent
+## Methode der kleinsten Quadrate (analytisch)
+
+Man stellt die Fehlerfunktion auf und leitet sie nach den unbekannten Parametern ab. Danach setzt man die Ableitungen gleich **0**.
+
+### Beispiel: lineare Funktion
+
+Wir suchen die Gerade
+$$
+\hat{y} = a x + b
+$$
+mit
+
+- $a$: Steigung  
+- $b$: Achsenabschnitt  
+
+Die Fehlerfunktion ist:
+$$
+S(a,b) = \sum_{i=1}^{n}(y_i - (a x_i + b))^2
+$$
+Jetzt leitet man nach **$a$** und **$b$** ab.
+
+### 1. Ableitung nach $a$
+
+$$
+\frac{\partial S}{\partial a}
+= -2 \sum_{i=1}^{n} x_i \bigl(y_i - (a x_i + b)\bigr)
+$$
+
+### 2. Ableitung nach $b$
+
+$$
+\frac{\partial S}{\partial b}
+= -2 \sum_{i=1}^{n} \bigl(y_i - (a x_i + b)\bigr)
+$$
+
+Dann setzt man beide Ableitungen gleich 0:
+
+$$
+\frac{\partial S}{\partial a} = 0, \qquad \frac{\partial S}{\partial b} = 0
+$$
+
+So erhält man zwei Gleichungen, aus denen man $a$ und $b$ berechnen kann.
+
+### Ergebnis
+
+Für die lineare Regression ergeben sich:
+
+$$
+a = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}
+$$
+
+$$
+b = \bar{y} - a \bar{x}
+$$
+
+### Einfach gesagt
+
+- Fehlerfunktion aufstellen  
+- nach den Parametern ableiten  
+- Ableitungen = 0 setzen  
+- Gleichungssystem lösen  
+
+Das Verfahren heißt *analytisch*, weil man die Lösung **direkt mit Formeln** berechnet und nicht  schrittweise numerisch sucht.
+
+---
+
+## Gradient Descent (iterativ)
 
 ### Intuition
 
@@ -170,17 +236,6 @@ flowchart TB
     style E fill:#c8e6c9
 ```
 
-### Die Update-Regel
-
-Die Gewichte werden nach folgender Regel angepasst:
-
-$$w_{neu} = w_{alt} - \eta \cdot \nabla L$$
-
-| Symbol | Bedeutung |
-|--------|-----------|
-| $w$ | Gewicht (Parameter) |
-| $\eta$ | Lernrate (Schrittgröße) |
-| $\nabla L$ | Gradient der Loss-Funktion |
 
 ### Die Lernrate
 
@@ -356,7 +411,7 @@ flowchart TB
     style step3 fill:#c8e6c9
 ```
 
-### Vergleich: Lineare vs. Logistische Regression
+## Vergleich: Lineare vs. Logistische Regression
 
 | Aspekt | Lineare Regression | Logistische Regression |
 |--------|-------------------|----------------------|
@@ -369,50 +424,20 @@ flowchart TB
 
 ---
 
-## Zusammenfassung
 
-```mermaid
-flowchart LR
-    subgraph summary["<b>Regression im Überblick"]
-        direction LR
-        
-        subgraph linear["<b>Lineare Regression"]
-            direction TB
-            L1["Vorhersage numerischer Werte"] ~~~ L2["y = b + ax"] ~~~ L3["MSE als Loss"]
-        end
-        
-        linear ~~~ logistic
-        
-        subgraph logistic["<b>Logistische Regression"]
-            direction TB
-            LO1["Klassifikation"] ~~~ LO2["Sigmoid-Transformation"] ~~~ LO3["Wahrscheinlichkeiten [0,1]"]
-        end
-        
-        logistic ~~~ training
-        
-        subgraph training["<b>Training"]
-            direction TB
-            T1["Analytisch: Kleinste Quadrate"] ~~~ T2["Iterativ: Gradient Descent"] ~~~ T3["Ziel: Loss minimieren"]
-        end
-    end
-    
-    style linear fill:#e3f2fd
-    style logistic fill:#c8e6c9
-    style training fill:#fff9c4
-```
 ## Abgrenzung zu verwandten Dokumenten
 
-| Thema | Abgrenzung |
-|-------|------------|
-| [Bewertung: Regression](../evaluate/bewertung_regression.html) | Regressionsmodell macht Vorhersagen; Metriken (R2, MAE, RMSE) quantifizieren die Vorhersageguete |
+| Thema                                                                    | Abgrenzung                                                                                                       |
+| ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| [Bewertung: Regression](../evaluate/bewertung_regression.html)           | Regressionsmodell macht Vorhersagen; Metriken (R2, MAE, RMSE) quantifizieren die Vorhersageguete                 |
 | [Bewertung: Klassifizierung](../evaluate/bewertung_klassifizierung.html) | Lineare Regression vorhersagt kontinuierliche Werte; Logistische Regression gibt Klassenwahrscheinlichkeiten aus |
-| [Modellauswahl](./modellauswahl.html) | Modellauswahl entscheidet, wann Regression angemessen ist; Regression ist die konkrete Implementierung |
+| [Modellauswahl](./modellauswahl.html)                                    | Modellauswahl entscheidet, wann Regression angemessen ist; Regression ist die konkrete Implementierung           |
 
 
 
 ---
 
 
-**Version:** 1.0<br>
-**Stand:** Januar 2026<br>
+**Version:** 1.1<br>
+**Stand:** April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
