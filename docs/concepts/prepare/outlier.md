@@ -101,6 +101,20 @@ flowchart TD
 
 ### Z-Score Methode
 
+
+Der **Z-Score** (Standardwert) zeigt, **wie weit ein Wert vom Durchschnitt entfernt ist** – gemessen in **Standardabweichungen**.
+
+- **x**: betrachteter Wert
+- **μ (mu)**: Durchschnitt
+- **σ (sigma)**: Standardabweichung
+
+**Interpretation:**
+
+- **z = 0** → genau im Durchschnitt
+- **z = 1** → 1 Standardabweichung über dem Durchschnitt
+- **z = -2** → 2 Standardabweichungen darunter
+
+
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart LR
@@ -118,6 +132,25 @@ flowchart LR
 ```
 
 ### IQR-Methode
+
+Die **IQR-Methode** (Interquartilsabstand) wird genutzt, um **Ausreißer zu erkennen**.
+
+**Schritte:**
+
+1. Bestimme die Quartile:
+    - **Q1** = unteres Quartil (25 %)
+    - **Q3** = oberes Quartil (75 %)
+2. Berechne den Abstand:
+    - **IQR = Q3 − Q1**
+3. Definiere Grenzen:
+    - Untere Grenze: **Q1 − 1,5 · IQR**
+    - Obere Grenze: **Q3 + 1,5 · IQR**
+
+**Interpretation:**
+
+- Werte **außerhalb dieser Grenzen** gelten als **Ausreißer**.
+
+
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
@@ -238,12 +271,14 @@ flowchart TB
 
 ## Scikit-learn Klassen
 
-| Klasse | Verwendung |
-|--------|------------|
-| `DBSCAN` | Dichtebasiertes Clustering mit Ausreißer-Erkennung |
-| `LocalOutlierFactor` | Dichtebasierte lokale Ausreißer |
-| `EllipticEnvelope` | Gaussian-basierte Ausreißer-Erkennung |
-| `OneClassSVM` | SVM für Anomalie-Erkennung |
+| Klasse               | Verwendung                                         |
+| -------------------- | -------------------------------------------------- |
+| `DBSCAN`             | Dichtebasiertes Clustering mit Ausreißer-Erkennung |
+| `LocalOutlierFactor` | Dichtebasierte lokale Ausreißer                    |
+| `EllipticEnvelope`   | Gaussian-basierte Ausreißer-Erkennung              |
+| `OneClassSVM`        | SVM für Anomalie-Erkennung                         |
+
+
 ## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
@@ -256,6 +291,6 @@ flowchart TB
 
 ---
 
-**Version:** 1.0<br>
-**Stand:** Januar 2026<br>
+**Version:** 1.1<br>
+**Stand:** April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
