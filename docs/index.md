@@ -14,13 +14,6 @@ has_toc: false
 > Praktische Anwendung von Supervised und Unsupervised Learning, Neural Networks und modernen ML-Frameworks   
 
 
----
-
-# Inhaltsverzeichnis
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
 
 ---
 
@@ -30,7 +23,6 @@ Der Kurs ist deshalb bewusst breiter angelegt als eine reine Modellsammlung. Kla
 
 Machine Learning lässt sich im Kurs aus drei **Perspektiven** betrachten:
 
-Wer den Kurs nicht nur punktuell, sondern in einer sinnvollen Reihenfolge durcharbeiten will, findet im [Lernpfad](https://ralf-42.github.io/ML_Intro/ressourcen/lernpfad.html) eine kompakte Orientierung durch die produktiven Notebooks.
 
 ## Verstehen
 
@@ -46,6 +38,6 @@ Gestaltung beginnt dort, wo aus einem Modell eine Anwendung wird. Dann zählen R
 
 ---
 
-**Version:** 1.0<br>
-**Stand:** März 2026<br>
+**Version:** 1.1<br>
+**Stand:** April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
