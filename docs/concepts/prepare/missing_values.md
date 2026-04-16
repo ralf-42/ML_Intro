@@ -77,21 +77,17 @@ flowchart LR
     subgraph deletion["<b>Löschstrategien"]
         direction TB
         listwise["<b>Listwise Deletion</b><br/>Komplette Zeile löschen"]
-        pairwise["<b>Pairwise Deletion</b><br/>Nur für betroffene<br/>Berechnungen ausschließen"]
         column["<b>Column Deletion</b><br/>Gesamte Spalte löschen"]
     end
     
     listwise --> lw_pro["✅ Einfach umzusetzen<br/>✅ Konsistente Datensätze"]
     listwise --> lw_con["❌ Datenverlust<br/>❌ Bias bei nicht-MCAR"]
     
-    pairwise --> pw_pro["✅ Mehr Daten nutzbar"]
-    pairwise --> pw_con["❌ Inkonsistente n<br/>❌ Komplexer"]
-    
+   
     column --> col_pro["✅ Schnell bei vielen NaN"]
     column --> col_con["❌ Informationsverlust<br/>❌ Evtl. wichtige Features weg"]
 
     style listwise fill:#e3f2fd
-    style pairwise fill:#e3f2fd
     style column fill:#e3f2fd
 ```
 
@@ -100,6 +96,13 @@ flowchart LR
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
+
+    subgraph advanced["<b>Erweiterte Imputation"]
+        knn["<b>KNN Imputer</b><br/>k nächste Nachbarn<br/>zur Schätzung"]
+        iterative["<b>Iterative Imputer</b><br/>Mehrfache Schätzung<br/>mit ML-Modellen"]
+        mice["<b>MICE</b><br/>Multiple Imputation by<br/>Chained Equations"]
+    end
+    
     subgraph simple["<b>Einfache Imputation"]
         mean["<b>Mittelwert</b><br/>Durchschnitt der Spalte"]
         median["<b>Median</b><br/>Zentralwert der Spalte"]
@@ -107,11 +110,7 @@ flowchart TB
         constant["<b>Konstante</b><br/>Fester Platzhalterwert"]
     end
     
-    subgraph advanced["<b>Erweiterte Imputation"]
-        knn["<b>KNN Imputer</b><br/>k nächste Nachbarn<br/>zur Schätzung"]
-        iterative["<b>Iterative Imputer</b><br/>Mehrfache Schätzung<br/>mit ML-Modellen"]
-        mice["<b>MICE</b><br/>Multiple Imputation by<br/>Chained Equations"]
-    end
+
     
     mean --> mean_use["Normalverteilte<br/>numerische Daten"]
     median --> median_use["Schiefe Verteilungen<br/>mit Ausreißern"]
