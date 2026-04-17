@@ -78,7 +78,7 @@ flowchart TD
     P2 --> V
     P3 --> V
 
-    V --> FINAL["Finale Entscheidung: 'Class A'<br>(Konsens aus heterogenen Modellen)"]
+    V --> FINAL["Finale Entscheidung: 'Class A'<br>Konsens aus heterogenen Modellen"]
 
     style D fill:#e3f2fd,stroke:#1976d2
     style V fill:#fff9c4,stroke:#fbc02d
