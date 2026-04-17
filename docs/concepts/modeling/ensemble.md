@@ -82,7 +82,7 @@ flowchart LR
     S3 --> M3["Modell 3"]
     SN -.-> MN["Modell N"]
 
-    M1 --> A{{"Aggregation<br/>(Voting/Averaging)"}}
+    M1 --> A["Aggregation<br/>(Voting/Averaging)"]
     M2 --> A
     M3 --> A
     MN --> A
@@ -120,7 +120,7 @@ Random Forest erweitert das klassische Bagging um eine zusätzliche Zufallskompo
 
 ```mermaid
 flowchart TD
-    subgraph RF["<b>Random Forest Prinzip</b>"]
+    subgraph RF["Random Forest Prinzip"]
         D[("Datensatz")] --> B1["Bootstrap 1"]
         D --> B2["Bootstrap 2"]
         D --> BN["Bootstrap N"]
@@ -129,7 +129,7 @@ flowchart TD
         B2 --> T2["Baum 2<br/>(Sub-Features)"]
         BN --> TN["Baum N<br/>(Sub-Features)"]
 
-        T1 & T2 & TN --> AGG{{"Aggregation<br/>(Voting / Mean)"}}
+        T1 & T2 & TN --> AGG["Aggregation<br/>(Voting / Mean)"]
         
         AGG --> FINAL["Finale Vorhersage"]
     end
@@ -174,7 +174,7 @@ flowchart LR
         M3 -.-> MN["..."]
     end
 
-    M1 & M2 & M3 & MN --> K{{"Gewichtete<br/>Kombination"}}
+    M1 & M2 & M3 & MN --> K["Gewichtete<br/>Kombination"]
     K --> P["Finale Vorhersage"]
 
     style D fill:#e3f2fd,stroke:#1976d2
