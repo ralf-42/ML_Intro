@@ -11,8 +11,7 @@ has_toc: true
 # Methoden & Frameworks
 {: .no_toc }
 
-> [!NOTE] Kerndefinition<br>
-> Explainable AI (XAI) umfasst Methoden und Techniken, die ML-Modelle fuer Menschen verstaendlich und nachvollziehbar machen.
+Explainable AI (XAI) umfasst Methoden und Techniken, die ML-Modelle für Menschen verstaendlich und nachvollziehbar machen.
 
 ---
 
