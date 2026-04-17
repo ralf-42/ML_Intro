@@ -195,17 +195,17 @@ flowchart TD
 ```mermaid
 flowchart TD
 
-subgraph Phase1["<b>Phase 1: Base Learner Training</b>"]
+subgraph Phase1["Phase 1: Base Learner Training"]
     D1[("Trainingsdaten")] --> BL["Base Learner<br/>(Modell 1, 2, 3, ...)"]
     BL --> PRED["Vorhersagen auf<br/>Validierungsdaten"]
 end
 
-subgraph Phase2["<b>Phase 2: Meta-Daten Erstellung</b>"]
+subgraph Phase2["Phase 2: Meta-Daten Erstellung"]
     PRED --> MD["Meta-Daten:<br/>Vorhersagen als Features"]
     MD --> TARGET["+ Original-Zielvariable"]
 end
 
-subgraph Phase3["<b>Phase 3: Meta-Learner Training</b>"]
+subgraph Phase3["Phase 3: Meta-Learner Training"]
     TARGET --> ML["Meta-Learner<br/>trainieren"]
     ML --> FINAL["Finales Ensemble"]
 end

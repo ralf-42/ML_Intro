@@ -228,14 +228,14 @@ Bei **Klassifikationsproblemen** mit unausgewogenen Klassen sollte die Klassenve
 ```mermaid
 flowchart LR
 
-subgraph problem["<b>Problem: Unausgewogene Klassen (Zufall)</b>"]
+subgraph problem["Problem: Unausgewogene Klassen (Zufall)"]
     D1[("Train-Dataset<br/>90% A, 10% B")]
     D1 --> F1["Fold 1<br/>95% A, 5% B"]
     D1 --> F2["Fold 2<br/>85% A, 15% B"]
     D1 --> F3["Fold 3<br/>100% A, 0% B ❌"]
 end
 
-subgraph solution["<b>Lösung: Stratifizierung</b>"]
+subgraph solution["Lösung: Stratifizierung"]
     D2[("Train-Dataset<br/>90% A, 10% B")]
     D2 --> SF1["Fold 1<br/>90% A, 10% B ✓"]
     D2 --> SF2["Fold 2<br/>90% A, 10% B ✓"]
@@ -369,7 +369,7 @@ for fold, (train_idx, test_idx) in enumerate(tscv.split(data), 1):
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart LR
-    subgraph ts["<b>TimeSeriesSplit (5 Folds)</b>"]
+    subgraph ts["TimeSeriesSplit (5 Folds)"]
         subgraph f1["Fold 1"]
             T1["■■"] --> TE1["□"]
         end
@@ -409,7 +409,7 @@ Bei der Kombination von **Hyperparameter-Tuning** und **Modellbewertung** besteh
 
 ```mermaid
 flowchart TB
-    subgraph nested["<b>Nested Cross-Validation</b>"]
+    subgraph nested["Nested Cross-Validation"]
         subgraph outer["Aussen: Modellbewertung"]
             D[("Dataset")] --> O1["Fold 1: Test"]
             D --> O2["Fold 2: Test"]

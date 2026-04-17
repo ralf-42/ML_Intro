@@ -201,7 +201,7 @@ Code-Snippets sind vorgefertigte Codefragmente, die in der Programmierung wieder
 
 ```mermaid
 flowchart TD
-    subgraph Vorteile["<b>Einsatzmöglichkeiten</b>"]
+    subgraph Vorteile["Einsatzmöglichkeiten"]
         A[♻️ Wiederverwendung] --> A1[Häufig verwendete<br/>Codeblöcke]
         B[⚡ Schnelle<br/>Implementierung] --> B1[Standardfunktionen<br/>& Algorithmen]
         C[✅ Fehlervermeidung] --> C1[Getesteter &<br/>bewährter Code]
