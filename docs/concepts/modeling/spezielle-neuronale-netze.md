@@ -299,13 +299,13 @@ flowchart LR
 
 **Typische NLP-Aufgaben:**
 
-| Aufgabe | Beschreibung | Beispiel |
-|---------|--------------|----------|
-| **Spracherkennung** | Audio → Text | Diktiersoftware |
-| **POS-Tagging** | Wortarten bestimmen | "Der [DET] Hund [NOUN] läuft [VERB]" |
-| **NER** | Entitäten erkennen | "Berlin [LOC]", "Siemens [ORG]" |
-| **Sentiment Analysis** | Stimmung erkennen | Positiv, Negativ, Neutral |
-| **Textgenerierung** | Text erzeugen | ChatGPT, Claude |
+| Aufgabe                | Beschreibung        | Beispiel                                       |
+| ---------------------- | ------------------- | ---------------------------------------------- |
+| **Spracherkennung**    | Audio → Text        | Diktiersoftware                                |
+| **POS-Tagging**        | Wortarten bestimmen | "Der [Artikel] Hund [Substantiv] läuft [Verb]" |
+| **NER**                | Entitäten erkennen  | "Berlin [LOC]", "Siemens [ORG]"                |
+| **Sentiment Analysis** | Stimmung erkennen   | Positiv, Negativ, Neutral                      |
+| **Textgenerierung**    | Text erzeugen       | ChatGPT, Claude                                |
 
 ### Text-Preprocessing
 

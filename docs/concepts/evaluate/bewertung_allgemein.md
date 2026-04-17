@@ -73,7 +73,7 @@ Die Modellbewertung beantwortet drei fundamentale Fragen:
 Eine gründliche Modellbewertung umfasst mehrere Perspektiven. Jede beleuchtet einen anderen Aspekt der Modellqualität:
 
 ```mermaid
-flowchart LR
+flowchart TD
     subgraph core["<b>Kern-Evaluation"]
         G["Modellgüte<br/><small>Accuracy, F1, R², MAE</small>"]
         R["Residuenanalyse<br/><small>Fehlerverteilung prüfen</small>"]

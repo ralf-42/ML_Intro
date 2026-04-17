@@ -11,7 +11,8 @@ has_toc: true
 # Stacking
 {: .no_toc }
 
-> **Stacking (Stacked Generalization) kombiniert verschiedenartige Modelle zu einem Ensemble.** Im Gegensatz zu Bagging und Boosting verwendet Stacking heterogene Modelle – etwa einen Entscheidungsbaum, eine logistische Regression und ein neuronales Netz gemeinsam. Die Kombination erfolgt durch Voting oder Meta-Learning.
+> **Stacking (Stacked Generalization) kombiniert verschiedenartige Modelle zu einem Ensemble.**   
+> > Im Gegensatz zu Bagging und Boosting verwendet Stacking heterogene Modelle – etwa einen Entscheidungsbaum, eine logistische Regression und ein neuronales Netz gemeinsam. Die Kombination erfolgt durch Voting oder Meta-Learning.
 
 ---
 
@@ -62,25 +63,25 @@ Beim **Voting** werden die Vorhersagen mehrerer unterschiedlicher Modelle direkt
 
 ```mermaid
 flowchart TD
-    D[("Daten")]
-    
-    D --> M1["🌳 Decision Tree"]
-    D --> M2["📈 Logistische Regression"]
-    D --> M3["🧠 Neuronales Netz"]
-    
-    M1 --> P1["Class A"]
-    M2 --> P2["Class B"]
-    M3 --> P3["Class A"]
-    
-    P1 --> V{{"Voting"}}
-    P2 --> V
-    P3 --> V
-    
-    V --> FINAL["<b>Class A</b><br>(2 von 3 Stimmen)"]
-    
-    style D fill:#e3f2fd,stroke:#1976d2
-    style V fill:#fff9c4,stroke:#fbc02d
-    style FINAL fill:#c8e6c9,stroke:#388e3c
+
+D[("Daten")]
+D --> M1["🌳 Decision Tree"]
+D --> M2["📈 Logistische Regression"]
+D --> M3["🧠 Neuronales Netz"]
+
+M1 -- "Einzelvorhersage" --> P1["Class A"]
+M2 -- "Einzelvorhersage" --> P2["Class B"]
+M3 -- "Einzelvorhersage" --> P3["Class A"]
+
+P1 --> V{{"Voting / Mehrheitsentscheid"}}
+P2 --> V
+P3 --> V
+
+V --> FINAL["<b>Finale Entscheidung: Class A</b><br>(Konsens aus heterogenen Modellen)"]
+
+style D fill:#e3f2fd,stroke:#1976d2
+style V fill:#fff9c4,stroke:#fbc02d
+style FINAL fill:#c8e6c9,stroke:#388e3c
 ```
 
 ### Voting-Strategien
@@ -192,26 +193,28 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph Phase1["Phase 1: Base Learner Training"]
-        D1["Trainingsdaten"] --> BL["Base Learner<br>(Modell 1, 2, 3, ...)"]
-        BL --> PRED["Vorhersagen auf<br>Validierungsdaten"]
-    end
-    
-    subgraph Phase2["Phase 2: Meta-Daten Erstellung"]
-        PRED --> MD["Meta-Daten:<br>Vorhersagen als Features"]
-        MD --> TARGET["+ Original-Zielvariable"]
-    end
-    
-    subgraph Phase3["Phase 3: Meta-Learner Training"]
-        TARGET --> ML["Meta-Learner<br>trainieren"]
-        ML --> FINAL["Finales Ensemble"]
-    end
-    
-    Phase1 --> Phase2 --> Phase3
-    
-    style Phase1 fill:#e3f2fd,stroke:#1976d2
-    style Phase2 fill:#fff3e0,stroke:#ff9800
-    style Phase3 fill:#e8f5e9,stroke:#4caf50
+
+subgraph Phase1["<b>Phase 1: Base Learner Training</b>"]
+    D1[("Trainingsdaten")] --> BL["Base Learner<br/>(Modell 1, 2, 3, ...)"]
+    BL --> PRED["Vorhersagen auf<br/>Validierungsdaten"]
+end
+
+subgraph Phase2["<b>Phase 2: Meta-Daten Erstellung</b>"]
+    PRED --> MD["Meta-Daten:<br/>Vorhersagen als Features"]
+    MD --> TARGET["+ Original-Zielvariable"]
+end
+
+subgraph Phase3["<b>Phase 3: Meta-Learner Training</b>"]
+    TARGET --> ML["Meta-Learner<br/>trainieren"]
+    ML --> FINAL["Finales Ensemble"]
+end
+
+Phase1 --> Phase2
+Phase2 --> Phase3
+
+style Phase1 fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+style Phase2 fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+style Phase3 fill:#e8f5e9,stroke:#4caf50,stroke-width:2px
 ```
 
 ### Beispiel: Meta-Daten Struktur
