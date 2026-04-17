@@ -277,7 +277,8 @@ flowchart LR
     style E2 fill:#c8e6c9
 ```
 
-<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/opt_alpha.png" class="logo" width="950"/>
+
+
 
 ### Optimales Alpha finden
 
@@ -315,6 +316,8 @@ print(f"Optimales Alpha: {best_alpha:.4f}")
 print(f"Bester CV-Score: {scores[best_idx]:.4f}")
 ```
 
+
+<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/opt_alpha.png" class="logo" width="750"/>
 
 
 ## Regularisierung in Neuronalen Netzen
@@ -709,15 +712,9 @@ Regularisierung ist ein unverzichtbares Werkzeug im Machine Learning. Die richti
 | [Neuronale Netze](../modeling/neuronale-netze.html) | Welche Regularisierungsformen sind bei Deep-Learning-Modellen relevant? |
 
 
----
-
-*Referenzen:*
-- scikit-learn Dokumentation: [Linear Models](https://scikit-learn.org/stable/modules/linear_model.html)
-- StatQuest: [Ridge Regression](https://www.youtube.com/watch?v=Q81RR3yKn30), [Lasso Regression](https://www.youtube.com/watch?v=NGf0voTMlcs)
-- Keras Dokumentation: [Regularizers](https://keras.io/api/layers/regularizers/)
 
 ---
 
-**Version:** 1.0<br>
-**Stand:** Januar 2026<br>
+**Version:** 1.1<br>
+**Stand:** April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
