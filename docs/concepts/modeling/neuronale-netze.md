@@ -25,7 +25,7 @@ has_toc: true
 
 ## Überblick
 
-Künstliche neuronale Netze (englisch: Artificial Neural Networks, ANN) sind Netze aus künstlichen Neuronen, die nach dem biologischen Vorbild des Nervensystems modelliert sind. Sie können sowohl für **Klassifikation** als auch für **Regression** eingesetzt werden.
+Künstliche neuronale Netze (englisch: Artificial Neural Networks, ANN) sind Netze aus künstlichen Neuronen, die nach dem biologischen Vorbild des Nervensystems modelliert sind. Man kann neuronale Netze für unterschiedliche Lernstrategien eingesetzen.
 
 ```mermaid
 flowchart LR
@@ -232,8 +232,6 @@ flowchart LR
 
 <br>
 
-<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/forward_backward.png" class="logo" width="950"/>
-
 ---
 
 ## Initialisierung der Gewichte
@@ -280,20 +278,6 @@ Die Loss-Funktion (Verlustfunktion) quantifiziert, wie weit die Vorhersagen des 
 | **Binäre Klassifikation** | Binary Cross-Entropy | Logarithmischer Verlust für 2 Klassen |
 | **Multi-Class Klassifikation** | Categorical Cross-Entropy | Logarithmischer Verlust für n Klassen |
 
-### Kombinationen: Aktivierung + Loss
-
-```mermaid
-flowchart TD
-    TASK{"Aufgabe?"}
-    
-    TASK -->|Regression| REG["Output: Linear<br/>Loss: MSE oder MAE"]
-    TASK -->|Binäre Klassifikation| BIN["Output: Sigmoid<br/>Loss: Binary Cross-Entropy"]
-    TASK -->|Multi-Class| MULTI["Output: Softmax<br/>Loss: Categorical Cross-Entropy"]
-    
-    style REG fill:#e3f2fd
-    style BIN fill:#ffcdd2
-    style MULTI fill:#fff9c4
-```
 
 ### Empfohlene Kombinationen für Supervised Learning
 
@@ -306,6 +290,7 @@ flowchart TD
 
 ---
 
+
 ## Kombinationen für Unsupervised Learning
 
 Neuronale Netze werden auch im unüberwachten Lernen eingesetzt:
@@ -316,6 +301,7 @@ Neuronale Netze werden auch im unüberwachten Lernen eingesetzt:
 | **Anomalieerkennung** | ReLU, Tanh, Sigmoid | Sigmoid | MSE, Binary Cross-Entropy |
 | **Dimensionsreduktion** | ReLU, Leaky ReLU, Tanh | Linear, Sigmoid | MSE |
 | **Generative Modelle (GAN)** | Leaky ReLU, SELU | Tanh (Generator), Sigmoid (Discriminator) | Binary Cross-Entropy |
+
 
 ---
 
@@ -330,6 +316,8 @@ Neuronale Netze werden auch im unüberwachten Lernen eingesetzt:
 - [ ] **Passende Loss-Funktion**: Muss zur Aufgabe passen
 - [ ] **Gewichtsinitialisierung**: He für ReLU, Xavier für Sigmoid/Tanh
 
+
+
 ### Häufige Fehler vermeiden
 
 | Fehler | Problem | Lösung |
@@ -339,18 +327,19 @@ Neuronale Netze werden auch im unüberwachten Lernen eingesetzt:
 | Linear-Aktivierung in Hidden Layers | Keine Nichtlinearität | ReLU, Tanh verwenden |
 | Falsche Loss-Funktion | Training konvergiert nicht | Loss an Aufgabe anpassen |
 | Zu große Lernrate | Training instabil | Lernrate reduzieren |
+
 ## Abgrenzung zu verwandten Dokumenten
 
-| Thema | Abgrenzung |
-|-------|------------|
-| [Lineare Regression](./regression.html) | Neuronale Netze lernen nichtlineare Funktionen durch mehrere Schichten; Regression modelliert nur lineare Beziehungen |
-| [Modellauswahl](./modellauswahl.html) | Neuronale Netze sind eine Modellklasse; Modellauswahl entscheidet, wann NN sinnvoll ist — z.B. bei grossen Datenmgen |
+| Thema                                                         | Abgrenzung                                                                                                             |
+| ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| [Lineare Regression](./regression.html)                       | Neuronale Netze lernen nichtlineare Funktionen durch mehrere Schichten; Regression modelliert nur lineare Beziehungen  |
+| [Modellauswahl](./modellauswahl.html)                         | Neuronale Netze sind eine Modellklasse; Modellauswahl entscheidet, wann NN sinnvoll ist — z.B. bei großen Datenmengen  |
 | [Spezielle Neuronale Netze](./spezielle-neuronale-netze.html) | Dieses Dokument behandelt Grundlagen (MLP, Aktivierung, Training); spezialisierte Architekturen (CNN, RNN) folgen dort |
 
 
 
 ---
 
-**Version:** 1.0<br>
-**Stand:** Januar 2026<br>
+**Version:** 1.1<br>
+**Stand:** April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

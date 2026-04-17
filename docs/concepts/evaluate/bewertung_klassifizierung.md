@@ -91,29 +91,6 @@ plt.show()
 
 Aus den vier Grundwerten der Confusion Matrix lassen sich verschiedene Leistungsmetriken ableiten, die unterschiedliche Aspekte der Modellqualität bewerten.
 
-```mermaid
-flowchart LR
-    subgraph cm["Confusion Matrix"]
-        TP["TP"]
-        FP["FP"]
-        FN["FN"]
-        TN["TN"]
-    end
-    
-    subgraph metrics["Abgeleitete Metriken"]
-        ACC["Accuracy<br/>(TP+TN) / Alle"]
-        PRE["Precision<br/>TP / (TP+FP)"]
-        REC["Recall<br/>TP / (TP+FN)"]
-        F1["F1-Score<br/>2×(P×R)/(P+R)"]
-    end
-    
-    cm --> metrics
-    
-    style ACC fill:#e3f2fd
-    style PRE fill:#e8f5e9
-    style REC fill:#fff3e0
-    style F1 fill:#f3e5f5
-```
 
 ### Accuracy (Genauigkeit)
 
@@ -145,7 +122,7 @@ print(f"Precision: {precision:.4f}")
 ```
 
 **Wann ist Precision wichtig?**
-- Wenn False Positives teuer oder problematisch sind
+- Wenn **False Positives teuer oder problematisch** sind
 - Beispiel: Spam-Filter (normale E-Mails sollen nicht blockiert werden)
 - Beispiel: Qualitätskontrolle (gute Produkte sollen nicht aussortiert werden)
 
@@ -163,7 +140,7 @@ print(f"Recall: {recall:.4f}")
 ```
 
 **Wann ist Recall wichtig?**
-- Wenn False Negatives teuer oder gefährlich sind
+- Wenn **False Negatives teuer oder gefährlich** sind
 - Beispiel: Krankheitsdiagnose (Kranke sollen nicht übersehen werden)
 - Beispiel: Betrugserkennung (Betrug soll nicht unentdeckt bleiben)
 
@@ -352,7 +329,7 @@ print(f"Cohen's Kappa: {cohen_kappa_score(target_true, target_pred_naive):.2f}")
 
 ## ROC-Kurve (Receiver Operating Characteristic)
 
-Die ROC-Kurve ist ein leistungsstarkes Werkzeug zur Visualisierung der Klassifikationsleistung über verschiedene Schwellenwerte hinweg.
+Die ROC-Kurve ist ein leistungsstarkes Werkzeug zur Visualisierung der **Klassifikationsleistung über verschiedene Schwellenwerte** hinweg.
 
 ### Grundkonzept
 
@@ -450,7 +427,7 @@ print(f"FPR bei optimalem Schwellenwert: {fpr[optimal_idx]:.4f}")
 
 ## Area Under the Curve (AUC)
 
-Die AUC (Area Under the ROC Curve) fasst die Leistung eines Klassifikators in einer einzigen Zahl zusammen.
+Die AUC (Area Under the ROC Curve) fasst die **Leistung eines Klassifikators** in einer einzigen Zahl zusammen.
 
 ### Interpretation
 
@@ -476,13 +453,13 @@ flowchart LR
     style A6 fill:#81c784
 ```
 
-| AUC-Wert | Interpretation |
-|----------|----------------|
-| 0.5 | Keine Unterscheidungsfähigkeit (Zufall) |
-| 0.6 - 0.7 | Schwache Diskriminierung |
-| 0.7 - 0.8 | Akzeptable Diskriminierung |
-| 0.8 - 0.9 | Gute Diskriminierung |
-| > 0.9 | Exzellente Diskriminierung |
+| AUC-Wert  | Interpretation                          |
+| --------- | --------------------------------------- |
+| 0.5       | Keine Unterscheidungsfähigkeit (Zufall) |
+| 0.6 - 0.7 | Schwache Trennschärfe/Diskriminierung   |
+| 0.7 - 0.8 | Akzeptable Trennschärfe                 |
+| 0.8 - 0.9 | Gute Trennschärfe                       |
+| > 0.9     | Exzellente Trennschärfe                 |
 
 ### Vorteile der AUC
 

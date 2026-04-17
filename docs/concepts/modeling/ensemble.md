@@ -11,7 +11,7 @@ has_toc: true
 # Ensemble-Methoden
 {: .no_toc }
 
-> **Ensemble-Learning kombiniert mehrere Machine-Learning-Modelle, um bessere Vorhersagen zu erzielen als einzelne Modelle.**
+> **Ensemble-Learning kombiniert mehrere Machine-Learning-Modelle, um bessere Vorhersagen zu erzielen als einzelne Modelle.**     
 > Die wichtigsten Strategien sind Bagging (parallele, homogene Modelle), Boosting (sequentielle, homogene Modelle) und Stacking (parallele, heterogene Modelle).
 
 ---
@@ -72,26 +72,26 @@ Beim **Bagging** werden mehrere gleichartige Modelle parallel trainiert und dere
 
 ```mermaid
 flowchart LR
-    D[("Originaldaten")] --> S1["Stichprobe 1"]
+    D[("Originaldaten")] -- Resampling --> S1["Stichprobe 1"]
     D --> S2["Stichprobe 2"]
     D --> S3["Stichprobe 3"]
-    D --> SN["..."]
-    
+    D -.-> SN["..."]
+
     S1 --> M1["Modell 1"]
     S2 --> M2["Modell 2"]
     S3 --> M3["Modell 3"]
-    SN --> MN["Modell N"]
-    
-    M1 --> A{{"Aggregation"}}
+    SN -.-> MN["Modell N"]
+
+    M1 --> A{{"Aggregation<br/>(Voting/Averaging)"}}
     M2 --> A
     M3 --> A
     MN --> A
-    
+
     A --> P["Finale Vorhersage"]
-    
-    style D fill:#e3f2fd,stroke:#1976d2
-    style A fill:#fff9c4,stroke:#fbc02d
-    style P fill:#c8e6c9,stroke:#388e3c
+
+    style D fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    style A fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
+    style P fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
 ```
 
 **Die drei Schritte des Bagging:**
@@ -120,29 +120,23 @@ Random Forest erweitert das klassische Bagging um eine zusätzliche Zufallskompo
 
 ```mermaid
 flowchart TD
-    subgraph RF["Random Forest Prinzip"]
-        D[("Datensatz")] --> B1["Bootstrap<br>Stichprobe 1"]
-        D --> B2["Bootstrap<br>Stichprobe 2"]
-        D --> BN["Bootstrap<br>Stichprobe N"]
+    subgraph RF["<b>Random Forest Prinzip</b>"]
+        D[("Datensatz")] --> B1["Bootstrap 1"]
+        D --> B2["Bootstrap 2"]
+        D --> BN["Bootstrap N"]
 
-        B1 --> T1["Baum 1<br>Zufällige Features"]
-        B2 --> T2["Baum 2<br>Zufällige Features"]
-        BN --> TN["Baum N<br>Zufällige Features"]
+        B1 --> T1["Baum 1<br/>(Sub-Features)"]
+        B2 --> T2["Baum 2<br/>(Sub-Features)"]
+        BN --> TN["Baum N<br/>(Sub-Features)"]
 
-        T1 --> V1["Vorhersage 1"]
-        T2 --> V2["Vorhersage 2"]
-        TN --> VN["Vorhersage N"]
-
-        V1 --> AGG{{"Aggregation"}}
-        V2 --> AGG
-        VN --> AGG
-
+        T1 & T2 & TN --> AGG{{"Aggregation<br/>(Voting / Mean)"}}
+        
         AGG --> FINAL["Finale Vorhersage"]
     end
 
-    style D fill:#e8f5e9,stroke:#4caf50
-    style AGG fill:#fff9c4,stroke:#fbc02d
-    style FINAL fill:#c8e6c9,stroke:#388e3c
+    style D fill:#e8f5e9,stroke:#4caf50,stroke-width:2px
+    style AGG fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
+    style FINAL fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
 ```
 
 **Was Random Forest "zufällig" macht:**
@@ -171,21 +165,18 @@ Beim **Boosting** werden Modelle sequentiell trainiert, wobei jedes neue Modell 
 
 ```mermaid
 flowchart LR
-    subgraph Seq["Sequentielles Lernen"]
+    subgraph Seq["Sequentielles Lernen (Boosting)"]
         D[("Daten")] --> M1["Modell 1"]
-        M1 --> E1["Fehler<br>analysieren"]
-        E1 --> |"Gewichtung<br>anpassen"| M2["Modell 2"]
-        M2 --> E2["Fehler<br>analysieren"]
-        E2 --> |"Gewichtung<br>anpassen"| M3["Modell 3"]
-        M3 --> EN["..."]
+        M1 --> E1["Fehler-Analyse"]
+        E1 -->|"Fokus auf Fehler"| M2["Modell 2"]
+        M2 --> E2["Fehler-Analyse"]
+        E2 -->|"Fokus auf Fehler"| M3["Modell 3"]
+        M3 -.-> MN["..."]
     end
-    
-    M1 --> K{{"Kombination"}}
-    M2 --> K
-    M3 --> K
-    
-    K --> P["Finale<br>Vorhersage"]
-    
+
+    M1 & M2 & M3 & MN --> K{{"Gewichtete<br/>Kombination"}}
+    K --> P["Finale Vorhersage"]
+
     style D fill:#e3f2fd,stroke:#1976d2
     style K fill:#fff9c4,stroke:#fbc02d
     style P fill:#c8e6c9,stroke:#388e3c
