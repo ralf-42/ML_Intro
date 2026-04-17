@@ -66,9 +66,9 @@ flowchart TD
 
 D[("Daten")]
 
-D --> M1["🌳 Decision Tree"]
-D --> M2["📈 Logistische Regression"]
-D --> M3["🧠 Neuronales Netz"]
+D --> M1["Decision Tree"]
+D --> M2["Logistische Regression"]
+D --> M3["Neuronales Netz"]
 
 M1 -- "Einzelvorhersage" --> P1["Class A"]
 M2 -- "Einzelvorhersage" --> P2["Class B"]
