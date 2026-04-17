@@ -202,7 +202,7 @@ weighted avg       0.82      0.81      0.81        43
 
 Bei Klassifikationsproblemen mit mehr als zwei Klassen wird die Confusion Matrix entsprechend erweitert. Die Berechnung der Metriken erfolgt dann klassenweise.
 
-<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/multi_confusion_matrix.png" class="logo" width="750"/>
+<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/multi_confusion_matrix.png" class="logo" width="650"/>
 
 ### Berechnung für einzelne Klassen
 
@@ -349,12 +349,15 @@ flowchart TB
     end
 ```
 
+<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/roc_auc.png" class="logo" width="750"/>
+
+
 ### Sensitivität und Spezifität
 
-| Metrik | Formel | Beschreibung |
-|--------|--------|--------------|
-| **Sensitivität (TPR)** | TP / (TP + FN) | Anteil der korrekt erkannten positiven Fälle |
-| **Spezifität (TNR)** | TN / (TN + FP) | Anteil der korrekt erkannten negativen Fälle |
+| Metrik                  | Formel                          | Beschreibung                                                |
+| ----------------------- | ------------------------------- | ----------------------------------------------------------- |
+| **Sensitivität (TPR)**  | TP / (TP + FN)                  | Anteil der korrekt erkannten positiven Fälle                |
+| **Spezifität (TNR)**    | TN / (TN + FP)                  | Anteil der korrekt erkannten negativen Fälle                |
 | **False Positive Rate** | FP / (FP + TN) = 1 - Spezifität | Anteil der fälschlich als positiv erkannten negativen Fälle |
 
 ### Implementierung
@@ -452,6 +455,10 @@ flowchart LR
     style A5 fill:#a5d6a7
     style A6 fill:#81c784
 ```
+
+
+<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/roc_auc.png" class="logo" width="750"/>
+
 
 | AUC-Wert  | Interpretation                          |
 | --------- | --------------------------------------- |
@@ -684,20 +691,17 @@ evaluate_classifier(target_test, target_pred, target_proba, class_names=['Negati
 
 ---
 
-*Referenzen:*    
-- scikit-learn Dokumentation: [Classification Metrics](https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics)      
-- StatQuest: [Confusion Matrix](https://www.youtube.com/watch?v=Kdsp6soqA7o), [ROC and AUC](https://www.youtube.com/watch?v=4jRBRDbJemM)      
 ## Abgrenzung zu verwandten Dokumenten
 
-| Thema | Abgrenzung |
-|-------|------------|
-| [Bewertung: Regression](./bewertung_regression.html) | Klassifikations-Metriken fuer kategoriale Vorhersagen; Regressions-Metriken fuer kontinuierliche Werte |
-| [Overfitting](./overfitting.html) | Klassifikations-Metriken quantifizieren Vorhersageguete; Overfitting erkennt man an der Train-Test-Diskrepanz |
-| [Cross-Validation](./cross_validation.html) | Cross-Validation ist die Evaluierungsmethodik; Klassifikations-Metriken sind die Messgroessen dabei |
+| Thema                                                | Abgrenzung                                                                                                    |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| [Bewertung: Regression](./bewertung_regression.html) | Klassifikations-Metriken fuer kategoriale Vorhersagen; Regressions-Metriken fuer kontinuierliche Werte        |
+| [Overfitting](./overfitting.html)                    | Klassifikations-Metriken quantifizieren Vorhersageguete; Overfitting erkennt man an der Train-Test-Diskrepanz |
+| [Cross-Validation](./cross_validation.html)          | Cross-Validation ist die Evaluierungsmethodik; Klassifikations-Metriken sind die Messgroessen dabei           |
 
 
 ---
 
-**Version:** 1.0<br>
-**Stand:** Januar 2026<br>
+**Version:** 1.1<br>
+**Stand:** April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

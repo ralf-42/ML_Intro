@@ -60,7 +60,7 @@ flowchart LR
 Die Qualität eines Machine-Learning-Modells lässt sich anhand seiner Fähigkeit beurteilen, sowohl Trainings- als auch Testdaten korrekt vorherzusagen.
 
 ```mermaid
-flowchart TB
+flowchart TD
     subgraph underfit["Underfit"]
         U1["Zu einfaches Modell"]
         U2["Erfasst keine Muster"]
@@ -691,10 +691,6 @@ flowchart TB
 
 ---
 
-*Referenzen:*
-- scikit-learn Dokumentation: [Learning Curve](https://scikit-learn.org/stable/modules/learning_curve.html)
-- StatQuest: [Bias and Variance](https://www.youtube.com/watch?v=EuBBz3bI-aA)
-- KNIME: Overfitting Tutorial
 ## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |

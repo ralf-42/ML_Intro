@@ -11,7 +11,7 @@ has_toc: true
 # Evaluation Regression
 {: .no_toc }
 
-> **Regressionsmodelle bewerten die Qualität ihrer Vorhersagen durch verschiedene Metriken.**       Das Bestimmtheitsmaß R², der Mean Absolute Error und die Residuenanalyse bilden das Fundament einer soliden Modellbewertung.
+> **Regressionsmodelle bewerten die Qualität ihrer Vorhersagen durch verschiedene Metriken.**<br>Das Bestimmtheitsmaß R², der Mean Absolute Error und die Residuenanalyse bilden das Fundament einer soliden Modellbewertung.
 
 ---
 
@@ -40,7 +40,7 @@ flowchart TD
         R2_INT["Erklärte Varianz<br/>0 bis 1"]
         MAE_INT["Durchschnittlicher<br/>absoluter Fehler"]
         MSE_INT["Durchschnittlicher<br/>quadratischer Fehler"]
-        RMSE_INT["Fehler in<br/>Originaleinheit"]
+        RMSE_INT["Durchschnittlicher Fehler"]
     end
     
     R2 --> R2_INT
@@ -87,6 +87,7 @@ flowchart LR
     style RESULT fill:#4CAF50,color:#fff
 ```
 
+SS = Sum of Squares / Quadratsummen
 ### Interpretation
 
 | R²-Wert | Interpretation |
@@ -281,12 +282,12 @@ $$Residuum = y_i - \hat{y}_i$$
 
 ### Interpretation von Residual Plots
 
-| Muster            | Bedeutung                       | Aktion                                     |
-| ----------------- | ------------------------------- | ------------------------------------------ |
-| **Zufällig um 0** | Modell erfasst Zusammenhang gut | ✅ Modell ist geeignet                      |
-| **Trichterform**  | Heteroskedastizität             | Transformation der Zielvariable            |
-| **Kurve/Bogen**   | Nicht-linearer Zusammenhang     | Polynomiale Features hinzufügen            |
-| **Cluster**       | Subgruppen in Daten             | Separate Modelle oder zusätzliche Features |
+| Muster            | Bedeutung                                                           | Aktion                                     |
+| ----------------- | ------------------------------------------------------------------- | ------------------------------------------ |
+| **Zufällig um 0** | Modell erfasst Zusammenhang gut                                     | ✅ Modell ist geeignet                      |
+| **Trichterform**  | Heteroskedastizität (die Streuung der Fehler ist nicht gleichmäßig) | Transformation der Zielvariable            |
+| **Kurve/Bogen**   | Nicht-linearer Zusammenhang                                         | Polynomiale Features hinzufügen            |
+| **Cluster**       | Subgruppen in Daten                                                 | Separate Modelle oder zusätzliche Features |
 
 
 ### Visuelle Muster erkennen
@@ -435,13 +436,13 @@ metrics_test = evaluate_regression(target_test, target_pred_test, "Test")
 ```mermaid
 flowchart TD
     subgraph Evaluation["🎯 Regressions-Evaluation"]
-        R2["**R²**<br/>Erklärte Varianz<br/>0-1 (höher = besser)"]
-        MAE["**MAE**<br/>Mittlerer absoluter Fehler<br/>Robust gegen Ausreißer"]
-        RESIDUAL["**Residual Plot**<br/>Modelldiagnose<br/>Muster erkennen"]
+        R2["<b>R²</b><br/>Erklärte Varianz<br/>0-1 (höher = besser)"]
+        MAE["<b>MAE</b><br/>Mittlerer absoluter Fehler<br/>Robust gegen Ausreißer"]
+        RESIDUAL["<b>Residual Plot</b><br/>Modelldiagnose<br/>Muster erkennen"]
     end
     
     subgraph Anwendung["📋 Anwendung"]
-        VERGLEICH["Modellvergleich"]
+        VERGLEICH["Modellbewertung<br>-vergleich"]
         DIAGNOSE["Problemdiagnose"]
         OPTIMIERUNG["Modelloptimierung"]
     end
@@ -456,24 +457,26 @@ flowchart TD
     style RESIDUAL fill:#9C27B0,color:#fff
 ```
 
+
 | Metrik | Stärke | Schwäche |
 |--------|--------|----------|
 | **R²** | Leicht interpretierbar, standardisiert | Kann bei nicht-linearen Zusammenhängen irreführen |
 | **MAE** | Robust gegen Ausreißer | Keine Bestrafung großer Fehler |
 | **RMSE** | Bestraft große Fehler, gleiche Einheit | Empfindlich gegen Ausreißer |
 | **Residual Plot** | Zeigt Modellprobleme visuell | Subjektive Interpretation |
+
 ## Abgrenzung zu verwandten Dokumenten
 
-| Thema | Abgrenzung |
-|-------|------------|
+| Thema                                                          | Abgrenzung                                                                                                                 |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | [Bewertung: Klassifizierung](./bewertung_klassifizierung.html) | Regressions-Metriken (R2, MAE, RMSE) fuer kontinuierliche Werte; Klassifikations-Metriken (Precision, Recall) fuer Klassen |
-| [Overfitting](./overfitting.html) | Regressions-Metriken messen Vorhersagefehler; Overfitting-Erkennung nutzt Train-Test-Vergleich dieser Metriken |
-| [Cross-Validation](./cross_validation.html) | Cross-Validation ist die Evaluierungsmethodik; Regressions-Metriken quantifizieren die Modellguete |
+| [Overfitting](./overfitting.html)                              | Regressions-Metriken messen Vorhersagefehler; Overfitting-Erkennung nutzt Train-Test-Vergleich dieser Metriken             |
+| [Cross-Validation](./cross_validation.html)                    | Cross-Validation ist die Evaluierungsmethodik; Regressions-Metriken quantifizieren die Modellgüte                          |
 
 
 
 ---
 
-**Version:** 1.0<br>
-**Stand:** Januar 2026<br>
+**Version:** 1.1<br>
+**Stand:** April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

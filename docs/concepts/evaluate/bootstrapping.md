@@ -63,6 +63,8 @@ flowchart LR
     style CI fill:#f3e5f5
 ```
 
+θ̂ = bestmögliche Schätzung<br>
+
 **Kernidee:** Durch wiederholtes Ziehen mit Zurücklegen wird die ursprüngliche Stichprobe als "Population" behandelt, aus der viele neue Stichproben generiert werden. Die Variabilität dieser Bootstrap-Stichproben approximiert die wahre Unsicherheit der Schätzung.
 
 ## Warum Bootstrapping?
@@ -338,54 +340,6 @@ lower, upper = percentile_ci(scores, 0.95)
 print(f"95% Perzentil-CI: [{lower:.3f}, {upper:.3f}]")
 ```
 
-### Bias-korrigierte Methode (BCa)
-
-Korrigiert für Verzerrung und Schiefe der Bootstrap-Verteilung:
-
-```python
-from scipy import stats
-
-def bca_ci(bootstrap_scores, original_score, confidence_level=0.95):
-    """
-    Bias-korrigiertes und beschleunigtes Konfidenzintervall.
-    
-    Genauer als Perzentil-Methode, besonders bei schiefen Verteilungen.
-    """
-    alpha = 1 - confidence_level
-    
-    # Bias-Korrektur
-    z0 = stats.norm.ppf(np.mean(bootstrap_scores < original_score))
-    
-    # Beschleunigungsfaktor (Jackknife)
-    n = len(bootstrap_scores)
-    jackknife_scores = np.array([
-        np.mean(np.delete(bootstrap_scores, i)) 
-        for i in range(n)
-    ])
-    mean_jack = np.mean(jackknife_scores)
-    a = np.sum((mean_jack - jackknife_scores)**3) / \
-        (6 * np.sum((mean_jack - jackknife_scores)**2)**1.5)
-    
-    # Korrigierte Perzentile
-    z_alpha = stats.norm.ppf(alpha/2)
-    z_1_alpha = stats.norm.ppf(1 - alpha/2)
-    
-    p_lower = stats.norm.cdf(z0 + (z0 + z_alpha) / (1 - a * (z0 + z_alpha)))
-    p_upper = stats.norm.cdf(z0 + (z0 + z_1_alpha) / (1 - a * (z0 + z_1_alpha)))
-    
-    lower = np.percentile(bootstrap_scores, p_lower * 100)
-    upper = np.percentile(bootstrap_scores, p_upper * 100)
-    
-    return lower, upper
-```
-
-### Vergleich der Methoden
-
-| Methode | Vorteile | Nachteile |
-|---------|----------|-----------|
-| **Perzentil** | Einfach, intuitiv | Kann bei Verzerrung ungenau sein |
-| **BCa** | Korrigiert Verzerrung/Schiefe | Komplexer, mehr Rechenaufwand |
-| **t-Intervall** | Gut bei Normalverteilung | Erfordert Normalverteilungsannahme |
 
 ## Bootstrapping vs. Cross-Validation
 
@@ -720,15 +674,9 @@ Bootstrapping ergänzt Cross-Validation optimal: Während Cross-Validation die G
 | [Bewertung allgemein](./bewertung_allgemein.html) | Wo ordnet sich Bootstrapping im gesamten Evaluationsprozess ein? |
 | [Random Forest](../modeling/random-forest.html) | Wie wird Bootstrapping in Ensemble-Verfahren praktisch genutzt? |
 
----
-
-*Referenzen:*
-- Efron, B., & Tibshirani, R. J. (1993). An Introduction to the Bootstrap
-- scikit-learn Dokumentation: [resample](https://scikit-learn.org/stable/modules/generated/sklearn.utils.resample.html)
-- StatQuest: [Bootstrapping](https://www.youtube.com/watch?v=Xz0x-8-cgaQ)
 
 ---
 
-**Version:** 1.0<br>
-**Stand:** Januar 2026<br>
+**Version:** 1.1<br>
+**Stand:** April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

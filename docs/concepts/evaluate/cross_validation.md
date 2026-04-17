@@ -82,7 +82,7 @@ Ein einfacher Train-Test-Split hat Limitierungen:
 Die gebräuchlichste Variante ist **K-Fold Cross-Validation**. Der Datensatz wird in K gleich große Teile (Folds) aufgeteilt. In K Durchläufen wird jeweils ein anderer Fold als Testset verwendet.
 
 ```mermaid
-flowchart TB
+flowchart TD
     subgraph kfold["K-Fold Cross-Validation (K=5)"]
         subgraph run1["Durchlauf 1"]
             T1["Test"] --- TR1["Training"] --- TR2["Training"] --- TR3["Training"] --- TR4["Training"]
@@ -188,37 +188,6 @@ for metric in scoring:
     print(f"  Test:     {results[test_key].mean():.3f} (+/- {results[test_key].std():.3f})")
 ```
 
-#### Manuelle Kontrolle: `KFold`
-
-Für volle Kontrolle über den Prozess:
-
-```python
-from sklearn.model_selection import KFold
-from sklearn.metrics import accuracy_score
-import numpy as np
-
-kf = KFold(n_splits=5, shuffle=True, random_state=42)
-model = RandomForestClassifier(random_state=42)
-
-scores = []
-fold = 1
-
-for train_index, test_index in kf.split(data):
-    # Daten aufteilen
-    data_train, data_test = data[train_index], data[test_index]
-    target_train, target_test = target[train_index], target[test_index]
-
-    # Modell trainieren und evaluieren
-    model.fit(data_train, target_train)
-    target_pred = model.predict(data_test)
-    score = accuracy_score(target_test, target_pred)
-
-    scores.append(score)
-    print(f"Fold {fold}: Accuracy = {score:.3f}")
-    fold += 1
-
-print(f"\nGesamt: {np.mean(scores):.3f} (+/- {np.std(scores) * 2:.3f})")
-```
 
 ## Wahl von K
 
@@ -258,29 +227,26 @@ Bei **Klassifikationsproblemen** mit unausgewogenen Klassen sollte die Klassenve
 
 ```mermaid
 flowchart LR
-    subgraph problem["Unausgewogene Klassen"]
-        D1[("Train-Dataset<br/>90% Klasse A<br/>10% Klasse B")]
-        D1 --> F1["Fold 1<br/>95% A, 5% B"]
-        D1 --> F2["Fold 2<br/>85% A, 15% B"]
-        D1 --> F3["Fold 3<br/>100% A, 0% B ❌"]
-    end
 
-    subgraph solution["Lösung: Stratifizierung"]
-        D2[("Train-Dataset<br/>90% Klasse A<br/>10% Klasse B")]
-        D2 --> SF1["Fold 1<br/>90% A, 10% B ✓"]
-        D2 --> SF2["Fold 2<br/>90% A, 10% B ✓"]
-        D2 --> SF3["Fold 3<br/>90% A, 10% B ✓"]
-    end
+subgraph problem["<b>Problem: Unausgewogene Klassen (Zufall)</b>"]
+    D1[("Train-Dataset<br/>90% A, 10% B")]
+    D1 --> F1["Fold 1<br/>95% A, 5% B"]
+    D1 --> F2["Fold 2<br/>85% A, 15% B"]
+    D1 --> F3["Fold 3<br/>100% A, 0% B ❌"]
+end
 
-    %% Erzwingt Links → Rechts
-    problem --> solution
+subgraph solution["<b>Lösung: Stratifizierung</b>"]
+    D2[("Train-Dataset<br/>90% A, 10% B")]
+    D2 --> SF1["Fold 1<br/>90% A, 10% B ✓"]
+    D2 --> SF2["Fold 2<br/>90% A, 10% B ✓"]
+    D2 --> SF3["Fold 3<br/>90% A, 10% B ✓"]
+end
 
-    %% Kante unsichtbar machen
-    linkStyle 0 stroke-width:0,fill:none
+%% Unsichtbare Verbindung für das Layout (nebeneinander)
+problem ~~~ solution
 
-    style problem fill:#ffcdd2
-    style solution fill:#c8e6c9
-
+style problem fill:#ffcdd2,stroke:#e53935
+style solution fill:#c8e6c9,stroke:#43a047
 ```
 
 ### Implementierung
@@ -789,20 +755,17 @@ Cross-Validation ist ein unverzichtbares Werkzeug für die robuste Bewertung von
 
 ---
 
-*Referenzen:*
-- scikit-learn Dokumentation: [Cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html)
-- StatQuest: [Cross Validation](https://www.youtube.com/watch?v=fSytzGwwBVw)
 ## Abgrenzung zu verwandten Dokumenten
 
-| Thema | Abgrenzung |
-|-------|------------|
-| [Train-Test-Split](../prepare/train_test_split.html) | Cross-Validation macht mehrfache, ueberlappende Splits; Train-Test-Split ist ein einzelner, einfacher Split |
-| [Hyperparameter-Tuning](./hyperparameter_tuning.html) | Cross-Validation ist die Evaluierungsmethodik; Hyperparameter-Tuning nutzt CV zur robusten Optimierung |
-| [Overfitting](./overfitting.html) | Cross-Validation liefert robuste Metriken; hohe Score-Varianz zwischen Folds ist ein Overfitting-Signal |
+| Thema                                                 | Abgrenzung                                                                                                  |
+| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| [Train-Test-Split](../prepare/train_test_split.html)  | Cross-Validation macht mehrfache, ueberlappende Splits; Train-Test-Split ist ein einzelner, einfacher Split |
+| [Hyperparameter-Tuning](./hyperparameter_tuning.html) | Cross-Validation ist die Evaluierungsmethodik; Hyperparameter-Tuning nutzt CV zur robusten Optimierung      |
+| [Overfitting](./overfitting.html)                     | Cross-Validation liefert robuste Metriken; hohe Score-Varianz zwischen Folds ist ein Overfitting-Signal     |
 
 
 ---
 
-**Version:** 1.0<br>
-**Stand:** Januar 2026<br>
+**Version:** 1.1<br>
+**Stand:** April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
