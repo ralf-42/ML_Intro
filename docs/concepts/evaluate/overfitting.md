@@ -635,9 +635,9 @@ plt.show()
 {% raw %}
 ```mermaid
 flowchart TB
-    Q1{{"Training Score<br/>niedrig?"}}
+    Q1["Training Score<br/>niedrig?"]
     Q1 --> |"Ja"| UF["Underfitting"]
-    Q1 --> |"Nein"| Q2{{"Test Score<br/>deutlich niedriger?"}}
+    Q1 --> |"Nein"| Q2["Test Score<br/>deutlich niedriger?"]
 
     Q2 --> |"Ja"| OF["Overfitting"]
     Q2 --> |"Nein"| GF["Goodfit ✅"]

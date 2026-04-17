@@ -127,7 +127,7 @@ Der grundlegende ML-Prozess folgt einem klaren Muster:
 
 ```mermaid
 flowchart TB
-    subgraph phase1["<b>#1 Datensammlung</b>"]
+    subgraph phase1["#1 Datensammlung"]
         D1[("Rohdaten")]
         D2["Aufbereitete<br/>Daten"]
         D1 --> D2
@@ -358,7 +358,7 @@ Beim **Unsupervised Learning** arbeiten wir mit **ungelabelten Daten** – die "
 
 ```mermaid
 flowchart TB
-    subgraph UL["<b>Unsupervised Learning</b>"]
+    subgraph UL["Unsupervised Learning"]
         direction LR
         
         subgraph CL["<b>Clustering"]

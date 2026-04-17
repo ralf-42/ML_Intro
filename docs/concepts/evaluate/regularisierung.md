@@ -326,7 +326,7 @@ In neuronalen Netzen stehen zusätzliche Regularisierungstechniken zur Verfügun
 
 ```mermaid
 flowchart TB
-    subgraph nn_reg["<b><b>Regularisierung in NN</b>"]
+    subgraph nn_reg["Regularisierung in NN"]
         subgraph weight["<b>Gewichts-Regularisierung"]
             W1["L1/L2 auf Gewichte"]
         end
@@ -637,9 +637,9 @@ if grid_search.best_params_['classifier__penalty'] == 'l1':
 {% raw %}
 ```mermaid
 flowchart TB
-    Q1{{"Viele irrelevante<br/>Features vermutet?"}}
-    Q1 --> |"Ja"| Q2{{"Korrelierte<br/>Feature-Gruppen?"}}
-    Q1 --> |"Nein"| Q3{{"Multikollinearität<br/>vorhanden?"}}
+    Q1["Viele irrelevante<br/>Features vermutet?"]
+    Q1 --> |"Ja"| Q2["Korrelierte<br/>Feature-Gruppen?"]
+    Q1 --> |"Nein"| Q3["Multikollinearität<br/>vorhanden?"]
 
     Q2 --> |"Ja"| A1["Elastic Net<br/>(l1_ratio=0.5-0.7)"]
     Q2 --> |"Nein"| A2["Lasso (L1)"]

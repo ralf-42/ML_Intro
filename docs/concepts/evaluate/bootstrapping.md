@@ -164,7 +164,7 @@ flowchart TB
     subgraph algo["Bootstrap-Algorithmus"]
         A["#1 Originaldaten<br/>(n Samples)"] --> B["#2 Ziehe n Samples<br/>mit Zurücklegen"]
         B --> C["#3 Berechne Statistik θ̂*<br/>(z.B. Accuracy)"]
-        C --> D{{"Wiederhole<br/>B mal"}}
+        C --> D["Wiederhole<br/>B mal"]
         D --> |"Ja"| B
         D --> |"Nein"| E["#4 Sammle alle θ̂*<br/>Werte"]
         E --> F["#5 Berechne Konfidenz-<br/>intervall aus Verteilung"]
