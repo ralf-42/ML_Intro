@@ -32,8 +32,6 @@ Bewertungsmetriken für verschiedene ML-Aufgaben.
 
 **[Clustering](https://ralf-42.github.io/ML_Intro/concepts/evaluate/bewertung_clustering.html)** – *Wie wird bewertet, ob eine Clusterstruktur sinnvoll ist?* Silhouette-Koeffizient und weitere Cluster-Validierungsmetriken.
 
-**[Anomalie](https://ralf-42.github.io/ML_Intro/concepts/evaluate/bewertung_anomalie.html)** – *Wie wird die Güte eines Anomalie-Erkennungsmodells eingeschätzt?* Anomalie-Scores und Methoden zur Ausreißer-Erkennung.
-
 ## Cross-Validation
 
 Robuste Modellbewertung durch wiederholte Aufteilung der Daten.

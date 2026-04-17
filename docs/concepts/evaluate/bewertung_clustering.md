@@ -45,10 +45,10 @@ flowchart LR
 
 Der Koeffizient kombiniert zwei Perspektiven:
 
-| Aspekt | Beschreibung | Wünschenswert |
-|--------|--------------|---------------|
-| **Kompaktheit** | Wie nah ist der Punkt an den anderen Punkten seines Clusters? | Möglichst nah |
-| **Separation** | Wie weit ist der Punkt von Punkten anderer Cluster entfernt? | Möglichst weit |
+| Aspekt          | Beschreibung                                                      | Wünschenswert  |
+| --------------- | ----------------------------------------------------------------- | -------------- |
+| **Kompaktheit** | Wie nah ist der Punkt an den anderen Punkten **seines** Clusters? | Möglichst nah  |
+| **Separation**  | Wie weit ist der Punkt von Punkten **anderer** Cluster entfernt?  | Möglichst weit |
 
 Ein gutes Clustering zeichnet sich durch **hohe Kompaktheit innerhalb** der Cluster und **große Separation zwischen** den Clustern aus.
 
@@ -175,7 +175,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph Vorbereitung["+1 Vorbereitung"]
+    subgraph Vorbereitung["#1 Vorbereitung"]
         V1[Daten skalieren<br/>vor dem Clustering]
         V2[Ausreißer<br/>behandeln]
     end
@@ -227,7 +227,6 @@ flowchart TD
 |---|---|
 | [K-Means und DBSCAN](../modeling/kmeans-dbscan.html) | Wie funktionieren die wichtigsten Clustering-Verfahren selbst? |
 | [Bewertung allgemein](./bewertung_allgemein.html) | Welche Bewertungslogik gilt über einzelne Verfahren hinaus? |
-| [Bewertung Anomalie](./bewertung_anomalie.html) | Wie verändert sich die Bewertung, wenn nicht Cluster, sondern Ausreißer im Fokus stehen? |
 | [Skalierung](../prepare/skalierung.html) | Warum ist Vorverarbeitung für Distanzverfahren besonders wichtig? |
 
 ---

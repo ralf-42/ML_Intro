@@ -105,23 +105,6 @@ print("\nAusgewählte Features (Koeffizient ≠ 0):")
 print(coef_df[coef_df['Coefficient'] != 0].sort_values('Coefficient', key=abs, ascending=False))
 ```
 
-### Optimales Alpha mit Cross-Validation
-
-```python
-from sklearn.linear_model import LassoCV
-
-# LassoCV findet automatisch das beste Alpha
-lasso_cv = LassoCV(
-    alphas=None,        # Automatische Auswahl
-    cv=5,               # 5-Fold Cross-Validation
-    random_state=42
-)
-lasso_cv.fit(data_train_scaled, target_train)
-
-print(f"Optimales Alpha: {lasso_cv.alpha_:.4f}")
-print(f"R² Score (Test): {lasso_cv.score(data_test_scaled, target_test):.3f}")
-print(f"Nicht-Null Koeffizienten: {(lasso_cv.coef_ != 0).sum()}")
-```
 
 ## L2-Regularisierung (Ridge)
 
@@ -294,25 +277,7 @@ flowchart LR
     style E2 fill:#c8e6c9
 ```
 
-### Wichtig: C vs. Alpha
-
-In scikit-learn gibt es zwei Konventionen:
-
-| Modell | Parameter | Bedeutung |
-|--------|-----------|-----------|
-| `Ridge`, `Lasso`, `ElasticNet` | `alpha` | α = λ (direkt) |
-| `LogisticRegression`, `SVC` | `C` | C = 1/λ (invers!) |
-
-```python
-# Bei LogisticRegression: C = 1/λ
-# Kleine C → starke Regularisierung
-# Große C → schwache Regularisierung
-
-from sklearn.linear_model import LogisticRegression
-
-strong_reg = LogisticRegression(C=0.01)   # Starke Regularisierung
-weak_reg = LogisticRegression(C=100)      # Schwache Regularisierung
-```
+<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/opt_alpha.png" class="logo" width="950"/>
 
 ### Optimales Alpha finden
 
@@ -349,6 +314,8 @@ plt.show()
 print(f"Optimales Alpha: {best_alpha:.4f}")
 print(f"Bester CV-Score: {scores[best_idx]:.4f}")
 ```
+
+
 
 ## Regularisierung in Neuronalen Netzen
 
