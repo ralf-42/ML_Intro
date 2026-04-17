@@ -30,20 +30,20 @@ Ensemble-Methoden nutzen die "Weisheit der Vielen" – die Kombination mehrerer 
 
 ```mermaid
 flowchart TD
-    subgraph Ensemble["<b>Ensemble-Methoden</b>"]
+    subgraph Ensemble["Ensemble-Methoden"]
         direction TB
         
-        subgraph Bagging["<b>Bagging</b>"]
+        subgraph Bagging["Bagging"]
             B1["Homogene Modelle"]
             B2["Paralleles Training"]
         end
         
-        subgraph Boosting["<b>Boosting</b>"]
+        subgraph Boosting["Boosting"]
             BO1["Homogene Modelle"]
             BO2["Sequentielles Training"]
         end
         
-        subgraph Stacking["<b>Stacking</b>"]
+        subgraph Stacking["Stacking"]
             S1["Heterogene Modelle"]
             S2["Paralleles Training"]
             S3["Voting"]

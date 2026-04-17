@@ -63,24 +63,24 @@ Beim **Voting** werden die Vorhersagen mehrerer unterschiedlicher Modelle direkt
 
 ```mermaid
 flowchart TD
-	D[("Daten")]
-	D --> M1["🌳 Decision Tree"]
-	D --> M2["📈 Logistische Regression"]
-	D --> M3["🧠 Neuronales Netz"]
-	
-	M1 -- "Einzelvorhersage" --> P1["Class A"]
-	M2 -- "Einzelvorhersage" --> P2["Class B"]
-	M3 -- "Einzelvorhersage" --> P3["Class A"]
-	
-	P1 --> V{{"Voting / Mehrheitsentscheid"}}
-	P2 --> V
-	P3 --> V
-	
-	V --> FINAL["<b>Finale Entscheidung: Class A</b><br>(Konsens aus heterogenen Modellen)"]
-	
-	style D fill:#e3f2fd,stroke:#1976d2
-	style V fill:#fff9c4,stroke:#fbc02d
-	style FINAL fill:#c8e6c9,stroke:#388e3c
+      D[("Daten")]
+      D --> M1["🌳 Decision Tree"]
+      D --> M2["📈 Logistische Regression"]
+      D --> M3["🧠 Neuronales Netz"]
+
+      M1 -- "Einzelvorhersage" --> P1["Class A"]
+      M2 -- "Einzelvorhersage" --> P2["Class B"]
+      M3 -- "Einzelvorhersage" --> P3["Class A"]
+
+      P1 --> V{{"Voting / Mehrheitsentscheid"}}
+      P2 --> V
+      P3 --> V
+
+      V --> FINAL["<b>Finale Entscheidung: Class A</b><br>(Konsens aus heterogenen Modellen)"]
+
+      style D fill:#e3f2fd,stroke:#1976d2
+      style V fill:#fff9c4,stroke:#fbc02d
+      style FINAL fill:#c8e6c9,stroke:#388e3c
 ```
 
 ### Voting-Strategien
