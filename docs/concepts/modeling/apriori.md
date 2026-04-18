@@ -163,7 +163,7 @@ $$\text{Lift}(\{A, B\} \Rightarrow C) = \frac{\text{Support}(A, B, C)}{\text{Sup
 
 ### Beispieldaten
 
-Betrachten wir folgende Einkaufstransaktionen:
+Beispielhafte Einkaufstransaktionen:
 
 | Transaktion | Gekaufte Items |
 |-------------|----------------|

@@ -25,7 +25,7 @@ has_toc: true
 
 ## Überblick
 
-Hyperparameter-Tuning ist ein entscheidender Schritt im Machine-Learning-Workflow. Während das Modell seine internen Parameter (Gewichte, Koeffizienten) während des Trainings selbst lernt, müssen Hyperparameter **vor** dem Training festgelegt werden. Die richtige Wahl dieser Einstellungen kann den Unterschied zwischen einem mittelmäßigen und einem exzellenten Modell ausmachen. 
+Hyperparameter-Tuning optimiert Einstellungen, die ein Modell nicht selbst lernt. Gute Suchräume verbessern die Generalisierung; schlechte Suchräume verschwenden Rechenzeit oder treiben das Modell in Overtuning auf einen einzelnen Datensplit.
 
 > [!NOTE] Zielsetzung<br>
 > Tuning soll robuste Generalisierung verbessern, nicht nur den besten Score auf einem einzelnen Datensplit erzeugen.

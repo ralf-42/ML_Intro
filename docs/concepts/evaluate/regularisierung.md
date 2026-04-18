@@ -26,7 +26,7 @@ has_toc: true
 
 ## Überblick
 
-Regularisierung ist eine Technik zur Vermeidung von Overfitting, indem die Modellkomplexität kontrolliert wird. Das Grundprinzip: Ein Strafterm wird zur Loss-Funktion hinzugefügt, der große Modellgewichte "bestraft" und das Modell zu einfacheren Lösungen zwingt.
+Regularisierung begrenzt Modellkomplexität durch einen zusätzlichen Strafterm in der Loss-Funktion. Das verbessert oft die Generalisierung, kann bei zu starker Ausprägung aber zu Underfitting führen und sinnvolle Signalanteile wegdrücken.
 
 ```mermaid
 flowchart LR

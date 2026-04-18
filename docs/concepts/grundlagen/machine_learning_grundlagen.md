@@ -11,8 +11,7 @@ has_toc: true
 # Machine Learning Grundlagen
 {: .no_toc }
 
-> **Dieses Kapitel vermittelt die fundamentalen Konzepte des maschinellen Lernens.**        
-> Der Abschnitt klärt, was unter Machine Learning zu verstehen ist, welche Lernparadigmen existieren und wie sich typische Aufgabentypen unterscheiden.
+Machine Learning beschreibt Verfahren, die aus Daten Muster ableiten und diese für Vorhersagen, Entscheidungen oder Strukturierung nutzen.
 
 ---
 
@@ -26,7 +25,7 @@ has_toc: true
 
 ## Was ist Lernen?
 
-Bevor wir uns dem maschinellen Lernen widmen, lohnt sich ein Blick auf das Konzept des Lernens selbst:
+Lernen bezeichnet allgemein die Veränderung von Wissen, Verhalten oder Fähigkeiten durch Erfahrung, Rückmeldung oder Wiederholung:
 
 **Lernen** ist ein Prozess, bei dem:
 - **Wissen**, **Fähigkeiten**, **Verhaltensweisen** oder **Einstellungen** erworben, verändert oder verstärkt werden
@@ -49,7 +48,7 @@ mindmap
       Optimierung
 ```
 
-Diese menschlichen Lernprinzipien bilden die Grundlage für das maschinelle Lernen – übertragen auf Computer und Algorithmen.
+Maschinelles Lernen überträgt diese Grundidee auf Daten, Modelle und Optimierungsverfahren.
 
 ---
 
@@ -354,7 +353,7 @@ flowchart LR
 
 ## Unsupervised Learning (Unüberwachtes Lernen)
 
-Beim **Unsupervised Learning** arbeiten wir mit **ungelabelten Daten** – die "richtigen Antworten" sind nicht bekannt. Das Ziel ist es, **versteckte Strukturen und Muster** in den Daten zu entdecken.
+Beim **Unsupervised Learning** liegen **ungelabelte Daten** vor. Gesucht werden **Strukturen, Gruppen oder Abweichungen**, ohne dass korrekte Zielwerte vorgegeben sind.
 
 ```mermaid
 flowchart TB
