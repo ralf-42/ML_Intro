@@ -11,8 +11,7 @@ has_toc: true
 # Modell-Steckbriefe
 {: .no_toc }
 
-> **Kompakte Referenz zu den wichtigsten Machine Learning Algorithmen.**    
-> Jeder Steckbrief enthält Einsatzbereich, Kernprinzip, Vor- und Nachteile sowie passende Bewertungsmetriken.
+Kompakte Referenz zu wichtigen Machine-Learning-Algorithmen mit Einsatzbereich, Kernprinzip, Grenzen und typischen Metriken.
 
 ---
 
@@ -62,20 +61,7 @@ has_toc: true
 
 **Beschreibung**
 
-Ein Entscheidungsbaum teilt die Daten auf der Grundlage von Entscheidungsregeln auf. Er ist einfach zu verstehen und zu interpretieren. Aus dem Trainingsdatensatz wird eine hierarchische Struktur von möglichst wenigen Regeln abgeleitet. Die beste Aufteilung wird anhand von Kriterien wie der Entropie oder dem Gini-Index ermittelt.
-
-**Vorteile**
-- Hohe Interpretierbarkeit und Transparenz
-- Keine Datenskalierung erforderlich
-- Kann kategoriale und numerische Features verarbeiten
-- Liefert Feature Importance
-- Schnelles Training und Vorhersage
-
-**Nachteile**
-- Neigung zu Overfitting bei tiefen Bäumen
-- Instabil bei kleinen Datenänderungen
-- Kann komplexe Beziehungen schlecht erfassen
-- Bias bei unbalancierten Klassen
+Ein Entscheidungsbaum zerlegt den Datenraum in aufeinanderfolgende Regeln. Das Verfahren ist leicht zu interpretieren und benötigt in der Regel keine Skalierung. Tiefe Bäume overfitten jedoch schnell, reagieren empfindlich auf kleine Datenänderungen und bilden glatte Zusammenhänge oft schlecht ab.
 
 **Bewertungsmetriken**
 
@@ -104,19 +90,7 @@ Ein Entscheidungsbaum teilt die Daten auf der Grundlage von Entscheidungsregeln 
 
 **Beschreibung**
 
-Random Forest ist eine Gruppe (Ensemble) von Entscheidungsbäumen. Mehrere Bäume werden in „zufälliger" Weise aufgebaut und bilden einen Random Forest. Jeder Baum wird aus einer anderen Bootstrap-Stichprobe von Daten und Merkmalen erstellt. Die Vorhersagen aller Bäume werden dann aggregiert (Mehrheitsentscheidung oder Mittelwert).
-
-**Vorteile**
-- Robuster als einzelne Entscheidungsbäume
-- Weniger anfällig für Overfitting
-- Liefert Feature Importance
-- Parallelisierbar
-
-**Nachteile**
-- Weniger interpretierbar als einzelne Bäume
-- Höherer Speicher- und Rechenaufwand
-- Kann bei vielen Features langsam werden
-- Tendiert zu Bias bei unbalancierten Daten
+Random Forest kombiniert viele zufällig variierte Entscheidungsbäume zu einem Ensemble. Das erhöht Robustheit und senkt das Overfitting-Risiko gegenüber einzelnen Bäumen. Die Kehrseite sind höherer Rechenaufwand, geringere Interpretierbarkeit und mögliche Verzerrungen bei stark unbalancierten Daten.
 
 **Bewertungsmetriken**
 
@@ -145,19 +119,7 @@ Random Forest ist eine Gruppe (Ensemble) von Entscheidungsbäumen. Mehrere Bäum
 
 **Beschreibung**
 
-Die lineare Regression ist ein statistisches Verfahren, bei dem eine abhängige Variable (y) durch eine oder mehrere unabhängige Variablen (x) erklärt wird. Es wird ein *linearer* Zusammenhang angenommen, darstellbar als Gerade y = b + ax mit b = Achsenabschnitt und a = Steigung. Das Training minimiert den quadratischen Fehler zwischen Vorhersage und tatsächlichem Wert.
-
-**Vorteile**
-- Sehr hohe Interpretierbarkeit
-- Schnelles Training
-- Gut für lineare Zusammenhänge
-- Koeffizienten zeigen Feature-Einfluss
-
-**Nachteile**
-- Nur für *lineare* Beziehungen geeignet
-- Empfindlich gegenüber Ausreißern
-- Kann Multikollinearität nicht gut handhaben
-- Begrenzte Ausdrucksstärke
+Die lineare Regression modelliert den Zusammenhang zwischen Merkmalen und Zielwert als lineare Funktion. Sie ist schnell, transparent und eignet sich gut als Baseline oder für annähernd lineare Effekte. Bei Ausreißern, Multikollinearität oder klar nichtlinearen Mustern sinkt ihre Aussagekraft jedoch deutlich.
 
 **Bewertungsmetriken**
 

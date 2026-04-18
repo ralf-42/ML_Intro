@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Methoden & Frameworks
+title: Welche Methoden machen KI erklärbar?
 parent: XAI
 grand_parent: Konzepte
 nav_order: 1
@@ -8,10 +8,10 @@ description: "Einführung in Explainable AI (XAI): Grundkonzepte (Black-Box, Per
 has_toc: true
 ---
 
-# Methoden & Frameworks
+# Welche Methoden machen KI erklärbar?
 {: .no_toc }
 
-Explainable AI (XAI) umfasst Methoden und Techniken, die ML-Modelle für Menschen verstaendlich und nachvollziehbar machen.
+Explainable AI (XAI) macht Modellentscheidungen verständlich, nachvollziehbar und überprüfbar.
 
 ---
 
@@ -56,7 +56,7 @@ flowchart TD
 
 ### Warum ist XAI wichtig?
 
-Die Umsetzung von XAI-Methoden trägt dazu bei, das Vertrauen in KI-Systeme zu erhöhen, indem sie Transparenz und Nachvollziehbarkeit in den Entscheidungsprozess bringen.
+XAI schafft Transparenz in Entscheidungsprozessen und ist dort relevant, wo Vorhersagen begründet, geprüft oder angefochten werden müssen.
 
 | Bereich | Bedeutung von XAI |
 |---------|-------------------|
@@ -69,7 +69,7 @@ Die Umsetzung von XAI-Methoden trägt dazu bei, das Vertrauen in KI-Systeme zu e
 
 ## Grundlegende Konzepte
 
-Bevor wir die einzelnen XAI-Methoden betrachten, sollten einige zentrale Begriffe verstanden werden.
+Einige Begriffe tauchen in fast allen XAI-Verfahren auf.
 
 **Wichtige Fachbegriffe für dieses Kapitel:**
 
@@ -159,8 +159,8 @@ flowchart TD
 | **Lokal** | Einzelne Vorhersage | LIME trainiert ein Surrogate nur für einen Datenpunkt |
 
 > [!WARNING] Grenzen von Surrogate-Modellen<br>
-> Das Surrogate-Modell erklaert nicht das Original-Modell selbst, sondern dessen *Verhalten*.
-> Die Erklaerung ist eine Approximation.
+> Das Surrogate-Modell erklärt nicht das Original-Modell selbst, sondern dessen *Verhalten*.
+> Die Erklärung ist eine Approximation.
 
 ---
 
@@ -204,11 +204,11 @@ Verwendung von ML-Modellen, die von Grund auf so konzipiert sind, dass sie erkl�
 
 Erklärung individueller Vorhersagen durch Analyse der wichtigsten Features und ihrer Ausprägungen:
 
-> [!TIP] Beispiel fuer lokale Erklaerung<br>
-> Warum wurde fuer Passagier X vorhergesagt, dass er ueberlebt?
-> - Geschlecht: weiblich -> +45% Ueberlebenschance
-> - Klasse: 1. Klasse -> +20% Ueberlebenschance
-> - Alter: 22 Jahre -> +5% Ueberlebenschance
+> [!TIP] Beispiel für lokale Erklärung<br>
+> Warum wurde für Passagier X vorhergesagt, dass er überlebt?
+> - Geschlecht: weiblich -> +45% Überlebenschance
+> - Klasse: 1. Klasse -> +20% Überlebenschance
+> - Alter: 22 Jahre -> +5% Überlebenschance
 
 ### Global Explanation
 
@@ -395,7 +395,7 @@ eli5.show_weights(model, feature_names=data_train.columns.tolist())
 
 ### Konzept
 
-InterpretML ist Microsofts umfassendes Open-Source-Framework für Explainable AI, das sowohl interpretierbare Modelle als auch Black-Box-Erklärungen unterstützt.
+InterpretML ist ein Open-Source-Framework für Explainable AI, das sowohl interpretierbare Modelle als auch Black-Box-Erklärungen unterstützt.
 
 ### Kernfunktionen
 
@@ -484,7 +484,7 @@ fig.show()
 | Framework | Stärken | Schwächen | Einsteigerfreundlichkeit |
 |-----------|---------|-----------|--------------------------|
 | **LIME** | Sehr intuitiv, gute Visualisierung, schnell lokal | Nur lokale Erklärungen, kann instabil sein | ⭐⭐⭐⭐⭐ |
-| **SHAP** | Theoretisch fundiert, beste Visualisierungen, lokal & global | Kann langsam sein, komplexeres Konzept | ⭐⭐⭐⭐ |
+| **SHAP** | Klare lokale und globale Attributionen, starke Visualisierungen | Kann langsam sein, komplexeres Konzept | ⭐⭐⭐⭐ |
 | **ELI5** | Extrem einfach, minimaler Code, schnell | Weniger Visualisierungen, weniger Features | ⭐⭐⭐⭐⭐ |
 | **InterpretML** | Interaktive Dashboards, umfassend, professionell | Komplexer Setup, Overhead für einfache Aufgaben | ⭐⭐⭐ |
 | **RF Importance** | Extrem schnell, in sklearn integriert | Nur Feature Importance, keine Richtung | ⭐⭐⭐⭐⭐ |
@@ -688,7 +688,7 @@ for pclass in [1, 2, 3]:
 |-----------|-------------------|
 | Schnelle Feature-Übersicht | RF Importance |
 | Einzelne Kundenentscheidung erklären | LIME oder SHAP Waterfall |
-| Regulatorische Anforderungen | SHAP (theoretisch fundiert) |
+| Regulatorische Anforderungen | SHAP (gut dokumentierte Attributionen) |
 | Interaktive Exploration | InterpretML Dashboard |
 | Minimal Setup | ELI5 |
 
@@ -714,19 +714,19 @@ for pclass in [1, 2, 3]:
 ## Zusammenfassung
 
 > [!SUCCESS] Kernpunkte<br>
-> - XAI macht ML-Modelle verstaendlich und erhoeht das Vertrauen
-> - **SHAP** ist die theoretisch fundierteste Methode fuer lokale und globale Erklaerungen
-> - **LIME** eignet sich hervorragend fuer schnelle lokale Erklaerungen
+> - XAI macht ML-Modelle verständlich und überprüfbar
+> - **SHAP** eignet sich für lokale und globale Erklärungen
+> - **LIME** eignet sich für schnelle lokale Erklärungen
 > - **ELI5** bietet den einfachsten Einstieg
-> - Die Wahl des Frameworks haengt von Anwendungsfall und Zielgruppe ab
-> - Kombiniere verschiedene Methoden fuer ein vollstaendiges Bild
+> - Die Wahl des Frameworks hängt von Anwendungsfall und Zielgruppe ab
+> - Mehrere Verfahren liefern oft ein robusteres Bild als eine Einzelmethode
 ## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
 |-------|------------|
-| [Modellauswahl](./modeling/modellauswahl.html) | XAI erklaert Black-Box-Modelle nachtraeglich; Modellauswahl beruecksichtigt Interpretierbarkeit von Anfang an |
-| [Feature Importance (Random Forest)](./modeling/random-forest.html) | Feature Importance ist eingebaute, modellspezifische Erklaerung; XAI umfasst modell-agnostische Methoden (LIME, SHAP) |
-| [Hyperparameter-Tuning](./evaluate/hyperparameter_tuning.html) | XAI erklaert Modellentscheidungen qualitativ; Hyperparameter-Tuning optimiert Modellleistung quantitativ |
+| [Modellauswahl](./modeling/modellauswahl.html) | XAI erklärt Black-Box-Modelle nachträglich; Modellauswahl berücksichtigt Interpretierbarkeit von Anfang an |
+| [Feature Importance (Random Forest)](./modeling/random-forest.html) | Feature Importance ist eingebaute, modellspezifische Erklärung; XAI umfasst modell-agnostische Methoden (LIME, SHAP) |
+| [Hyperparameter-Tuning](./evaluate/hyperparameter_tuning.html) | XAI erklärt Modellentscheidungen qualitativ; Hyperparameter-Tuning optimiert Modellleistung quantitativ |
 
 
 ---

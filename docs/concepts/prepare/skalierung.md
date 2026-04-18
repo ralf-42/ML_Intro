@@ -30,7 +30,7 @@ Machine-Learning-Algorithmen arbeiten mit numerischen Daten, deren Wertebereiche
 
 ### Das Problem unterschiedlicher Wertebereiche
 
-Betrachten wir ein einfaches Beispiel mit zwei Features:
+Ein einfaches Beispiel mit zwei Features:
 
 | Feature | Wertebereich | Beispielwerte |
 |---------|--------------|---------------|

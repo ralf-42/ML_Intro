@@ -26,7 +26,7 @@ has_toc: true
 
 ## Lineare Regression
 
-Die lineare Regression ist ein statistisches Verfahren, mit dem eine beobachtete **abhängige Variable (y)** durch eine oder mehrere **unabhängige Variablen (x)** erklärt wird. Dabei wird ein linearer Zusammenhang zwischen den Variablen angenommen.
+Die lineare Regression modelliert eine beobachtete **abhängige Variable (y)** durch eine oder mehrere **unabhängige Variablen (x)**. Sie eignet sich für annähernd lineare Zusammenhänge, ist leicht interpretierbar und scheitert bei stark nichtlinearen Mustern oder dominanten Ausreißern schnell.
 
 
 <img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/regression.png" class="logo" width="650"/>
@@ -142,11 +142,11 @@ flowchart TD
 
 ## Methode der kleinsten Quadrate (analytisch)
 
-Man stellt die Fehlerfunktion auf und leitet sie nach den unbekannten Parametern ab. Danach setzt man die Ableitungen gleich **0**.
+Die Fehlerfunktion wird nach den unbekannten Parametern abgeleitet; anschließend werden die Ableitungen gleich **0** gesetzt.
 
 ### Beispiel: lineare Funktion
 
-Wir suchen die Gerade
+Gesucht ist die Gerade
 $$
 \hat{y} = a x + b
 $$

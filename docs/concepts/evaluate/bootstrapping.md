@@ -71,7 +71,7 @@ flowchart LR
 
 ### Das Problem: Unsicherheit quantifizieren
 
-Bei der Modellbewertung erhalten wir typischerweise eine einzelne Kennzahl (z.B. Accuracy = 0.85). Aber wie zuverlässig ist diese Schätzung? Würden wir mit anderen Daten ein ähnliches Ergebnis erhalten?
+Bei der Modellbewertung steht oft zunächst nur eine einzelne Kennzahl (z.B. Accuracy = 0.85). Entscheidend ist dann, wie zuverlässig diese Schätzung ist und ob sie mit anderen Stichproben ähnlich ausfallen würde.
 
 **Traditionelle Ansätze erfordern:**
 - Annahmen über die Datenverteilung (z.B. Normalverteilung)

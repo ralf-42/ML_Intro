@@ -25,7 +25,7 @@ has_toc: true
 
 ## Überblick
 
-Nach dem Training eines Modells stellt sich die entscheidende Frage: *Wie gut funktioniert es wirklich?* Die Evaluation liefert darauf fundierte Antworten. Sie misst die Leistung des trainierten Modells anhand der Qualität seiner Vorhersagen und hilft dabei, Stärken und Schwächen zu identifizieren.
+Evaluation misst die Qualität von Vorhersagen auf ungesehenen Daten. Sie zeigt, ob ein Modell brauchbar ist, wo Fehler systematisch auftreten und ob weitere Iterationen an Daten, Features oder Modellwahl nötig sind.
 
 ```mermaid
 flowchart LR
