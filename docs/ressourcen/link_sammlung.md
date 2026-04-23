@@ -157,6 +157,7 @@ has_toc: true
 | Reinforcement Learning Demo | RL interaktiv | [Link](https://imaginary.github.io/reinforcement-learning-2/exhibit.html?lang=de) |
 | Sumory (RL Game) | RL-Spiel | [Link](https://imaginary.github.io/sumory/) |
 | Polo Club (Georgia Tech) | ML-Visualisierungen | [Link](https://poloclub.github.io/#page-top) |
+| Generative AI (Financial Times) | Interaktiver visueller Erklärer | [Link](https://ig.ft.com/generative-ai/) |
 
 ---
 
