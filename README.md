@@ -4,7 +4,7 @@
 [![Python Version](https://img.shields.io/badge/Python-3.11%2B-brightgreen)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Active-success)](./README.md)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](./license)
-[![Notebooks](https://img.shields.io/badge/Notebooks-44-orange)](./01_notebook/)
+[![Notebooks](https://img.shields.io/badge/Notebooks-45-orange)](./01_notebook/)
 [![Modules](https://img.shields.io/badge/Modules-10-blueviolet)](./01_notebook/)
 
 Dieses Repository enthält Lehrmaterialien für den Machine Learning-Kurs.      
@@ -112,10 +112,10 @@ Nach Abschluss dieses Kurses können Studierende:
 
 ### 3.2.10 ⚫ Modul 09: XAI & KI-Integration
 **Pfad**: `01_notebook/09_xai_ai/`
-- Erklärbare KI (XAI) Techniken (Titanic)
-- Business Intelligence mit Google Gemini AI (Kreditdaten, Verkehr)
-- KI-Integration
-- Beispiele: `b900-xai_titanic.ipynb`, `b910_ai_integration.ipynb`, `b960_analyse_credit_data_with_gemini_chat.ipynb`, `b970_analyse_traffic_mit_gemini_chat.ipynb`
+- Erklärbare KI (XAI) mit Titanic-Beispielen und Framework-Vergleich
+- Vertiefung zu umfangreicheren XAI-Analysen
+- KI-Integration und Business Intelligence mit Google Gemini AI (Kreditdaten, Verkehr)
+- Beispiele: `b900_xai_titanic.ipynb`, `b910_xai_xxl_titanic.ipynb`, `b940_ai_integration.ipynb`, `b950_analyse_credit_data_with_gemini_chat.ipynb`, `b960_analyse_traffic_mit_gemini_chat.ipynb`
 
 
 
