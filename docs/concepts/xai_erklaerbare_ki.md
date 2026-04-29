@@ -1,17 +1,17 @@
 ---
 layout: default
-title: Welche Methoden machen KI erklärbar?
+title: Erklärbare KI (XAI)
 parent: XAI
 grand_parent: Konzepte
 nav_order: 1
-description: "Einführung in Explainable AI (XAI): Grundkonzepte (Black-Box, Perturbation, Surrogate-Modelle) und Methoden (LIME, SHAP, ELI5, Counterfactuals, Anchors, InterpretML)"
+description: "Explainable AI: lokale und globale Erklärungen, SHAP, LIME, ALE, Counterfactuals, Fairness, Stabilität und Grenzen"
 has_toc: true
 ---
 
-# Welche Methoden machen KI erklärbar?
+# Erklärbare KI (XAI)
 {: .no_toc }
 
-Explainable AI (XAI) macht Modellentscheidungen verständlich, nachvollziehbar und überprüfbar.
+Explainable AI macht Modellvorhersagen prüfbar. Es zeigt, welche Merkmale ein Modell nutzt, wie einzelne Vorhersagen zustande kommen und wo Erklärungen selbst unsicher oder missverständlich werden.
 
 ---
 
@@ -23,714 +23,356 @@ Explainable AI (XAI) macht Modellentscheidungen verständlich, nachvollziehbar u
 
 ---
 
-## Einführung in XAI
+## Einordnung
 
-### Was ist Explainable AI?
-
-Explainable AI (XAI) ist ein Ansatz der künstlichen Intelligenz, der darauf abzielt, dass die Funktionsweise und Entscheidungen von ML-Modellen für Menschen verständlich und nachvollziehbar sind.
-
-```mermaid
-flowchart TD
-    subgraph Problem["🔲 Das Black-Box-Problem"]
-        INPUT[/"Eingabedaten"/]
-        MODEL[("ML-Modell<br/>(Black Box)")]
-        OUTPUT[/"Vorhersage"/]
-        INPUT --> MODEL --> OUTPUT
-    end
-    
-    subgraph Lösung["✅ XAI-Lösung"]
-        INPUT2[/"Eingabedaten"/]
-        MODEL2[("ML-Modell")]
-        OUTPUT2[/"Vorhersage"/]
-        EXPLAIN["📊 Erklärung:<br/>Welche Features waren wichtig?<br/>Warum diese Entscheidung?"]
-        INPUT2 --> MODEL2 --> OUTPUT2
-        MODEL2 -.-> EXPLAIN
-    end
-    
-    Problem --> Lösung
-    
-    style Problem fill:#ffcccc,stroke:#cc0000
-    style Lösung fill:#ccffcc,stroke:#00cc00
-    style EXPLAIN fill:#ffffcc,stroke:#cccc00
-```
-
-### Warum ist XAI wichtig?
-
-XAI schafft Transparenz in Entscheidungsprozessen und ist dort relevant, wo Vorhersagen begründet, geprüft oder angefochten werden müssen.
-
-| Bereich | Bedeutung von XAI |
-|---------|-------------------|
-| **Medizin** | Ärzte müssen verstehen, warum ein Modell eine Diagnose vorschlägt |
-| **Finanzwesen** | Kreditentscheidungen müssen gegenüber Kunden begründbar sein |
-| **Rechtswesen** | Algorithmen müssen den Anforderungen an Fairness und Nachvollziehbarkeit genügen |
-| **Compliance** | DSGVO und andere Regularien fordern Erklärbarkeit automatisierter Entscheidungen |
-
----
-
-## Grundlegende Konzepte
-
-Einige Begriffe tauchen in fast allen XAI-Verfahren auf.
-
-**Wichtige Fachbegriffe für dieses Kapitel:**
-
-| Begriff | Bedeutung |
-|---------|-----------|
-| **Approximation** | Annäherung – ein vereinfachtes Modell, das das Verhalten eines komplexen Modells _ungefähr_ nachbildet |
-| **Modell-agnostisch** | Unabhängig vom Modelltyp – die Methode funktioniert bei jedem ML-Modell, egal ob neuronales Netz, Random Forest oder andere |
-| **Feature** | Ein Eingabemerkmal des Modells (z.B. Alter, Einkommen, Geschlecht) |
-| **Scope** | Geltungsbereich – ob eine Erklärung für eine einzelne Vorhersage (lokal) oder das gesamte Modell (global) gilt |
-
-### Black-Box-Modelle
-
-Ein **Black-Box-Modell** ist ein ML-Modell, dessen interne Entscheidungslogik nicht direkt einsehbar oder interpretierbar ist. Man sieht nur Input und Output, aber nicht *wie* die Entscheidung zustande kommt.
-
-| Modelltyp | Transparenz | Beispiele |
-|-----------|-------------|-----------|
-| **White-Box** | Vollständig interpretierbar | Lineare Regression, Decision Trees, Regelbasierte Systeme |
-| **Grey-Box** | Teilweise interpretierbar | Ensemble-Methoden mit Feature Importance |
-| **Black-Box** | Nicht direkt interpretierbar | Tiefe neuronale Netze, komplexe Ensemble-Modelle |
-
-XAI-Methoden machen Black-Box-Modelle nachvollziehbar, ohne deren Architektur zu verändern.
-
-### Perturbierte Samples
-
-**Perturbierte Samples** sind Datenpunkte, die absichtlich leicht verändert (gestört) wurden. Der Begriff kommt vom lateinischen *perturbare* (durcheinanderbringen, stören).
+Machine-Learning-Modelle liefern oft gute Vorhersagen, aber nicht automatisch gute Begründungen. Bei einem Entscheidungsbaum lässt sich ein Pfad durch die Regeln verfolgen. Bei einem Random Forest, einem neuronalen Netz oder einem komplexen Ensemble bleibt meist nur die Input-Output-Beziehung sichtbar. XAI-Verfahren setzen genau dort an: Sie untersuchen das Modellverhalten nach dem Training und erzeugen Erklärungen, die Menschen auswerten können.
 
 ```mermaid
 flowchart LR
-    subgraph Original["📊 Original-Datenpunkt"]
-        O["Alter: 25<br/>Klasse: 1<br/>Geschlecht: m"]
-    end
-    
-    subgraph Perturbiert["🔀 Perturbierte Samples"]
-        P1["Alter: 30<br/>Klasse: 1<br/>Geschlecht: m"]
-        P2["Alter: 25<br/>Klasse: 2<br/>Geschlecht: m"]
-        P3["Alter: 25<br/>Klasse: 1<br/>Geschlecht: w"]
-        P4["Alter: 22<br/>Klasse: 3<br/>Geschlecht: m"]
-    end
-    
-    Original -->|"Systematische<br/>Variation"| Perturbiert
-    
-    style Original fill:#e3f2fd,stroke:#1565c0
-    style Perturbiert fill:#fff3e0,stroke:#e65100
+    A["Eingabedaten"] --> B["ML-Modell"]
+    B --> C["Vorhersage"]
+    B -.-> D["XAI-Erklärung"]
+    D --> E["Prüfen<br>Begründen<br>Kommunizieren"]
 ```
 
-**Grundprinzip in XAI:** Man verändert systematisch einzelne Features eines Inputs und beobachtet, wie sich die Modellvorhersage ändert. Große Änderungen im Output deuten auf wichtige Features hin.
+XAI ersetzt keine Modellbewertung. Eine plausible Erklärung kann zu einem schlechten Modell gehören, und eine unplausible Erklärung kann ein Datenproblem sichtbar machen. Im ML-Workflow liegt XAI deshalb nach Training und Evaluation: Erst wird geprüft, ob das Modell tragfähig ist; danach wird untersucht, worauf es seine Vorhersagen stützt.
 
-**XAI-Methoden, die Perturbation nutzen:**
-
-| Methode | Art der Perturbation | Zweck |
-|---------|---------------------|-------|
-| **LIME** | Zufällige Variation um einen Datenpunkt | Lokales Surrogate-Modell trainieren |
-| **KernelSHAP** | Systematisches Maskieren von Feature-Kombinationen | Shapley-Werte approximieren |
-| **Permutation Importance** | Zufälliges Durchmischen einzelner Features | Globale Feature-Wichtigkeit messen |
-| **Occlusion Sensitivity** | Verdecken von Bildbereichen | Wichtige Regionen in Bildern identifizieren |
-
-**Vorteil der Perturbation:** Modell-Agnostik – man braucht keinen Zugriff auf interne Gewichte, nur auf die Input-Output-Beziehung.
-
-### Surrogate-Modelle
-
-Ein **Surrogate-Modell** (auch Ersatzmodell) ist ein einfaches, interpretierbares Modell, das trainiert wird, um die Vorhersagen eines komplexen Black-Box-Modells nachzuahmen.
-
-**Alltagsanalogie:** Ein erfahrener Arzt stellt Diagnosen, kann aber nicht erklären, *warum* er zu diesem Schluss kommt – er "spürt" es einfach nach 30 Jahren Erfahrung. Ein Surrogate-Modell entspricht einem Praktikanten, der den Arzt bei vielen Diagnosen beobachtet und dann einfache Regeln ableitet: "Wenn Symptom A und B vorliegen, diagnostiziert der Arzt meist Krankheit X." Die Regeln des Praktikanten sind nicht perfekt, aber sie machen das Verhalten des Arztes nachvollziehbar.
-
-```mermaid
-flowchart TD
-    subgraph BlackBox["🔲 Black-Box-Modell"]
-        BB["Neuronales Netz<br/>XGBoost<br/>Random Forest"]
-    end
-    
-    subgraph Surrogate["📐 Surrogate-Modell"]
-        SU["Lineare Regression<br/>Decision Tree<br/>Regelbasiertes System"]
-    end
-    
-    DATA["Eingabedaten"] --> BlackBox
-    BlackBox -->|"Vorhersagen als<br/>Trainingsdaten"| Surrogate
-    Surrogate -->|"Interpretation der<br/>Koeffizienten/Regeln"| EXPLAIN["📊 Erklärung"]
-    
-    style BlackBox fill:#ffcccc,stroke:#cc0000
-    style Surrogate fill:#ccffcc,stroke:#00cc00
-    style EXPLAIN fill:#ffffcc,stroke:#cccc00
-```
-
-| Surrogate-Typ | Scope | Methode |
-|---------------|-------|---------|
-| **Global** | Gesamtes Modell | Ein Surrogate erklärt alle Vorhersagen |
-| **Lokal** | Einzelne Vorhersage | LIME trainiert ein Surrogate nur für einen Datenpunkt |
-
-> [!WARNING] Grenzen von Surrogate-Modellen<br>
-> Das Surrogate-Modell erklärt nicht das Original-Modell selbst, sondern dessen *Verhalten*.
-> Die Erklärung ist eine Approximation.
+> [!WARNING] Typischer Fehler<br>
+> Eine XAI-Erklärung beschreibt die Logik des trainierten Modells, nicht automatisch die reale Ursache in der Welt. Wenn SHAP zeigt, dass `sex` im Titanic-Modell stark wirkt, ist damit eine Modellabhängigkeit erklärt, aber keine kausale Aussage bewiesen.
 
 ---
 
-## XAI-Ansätze im Überblick
+## Grundbegriffe
 
-```mermaid
-flowchart TD
-    XAI["🔍 XAI-Ansätze"]
-    
-    XAI --> IM["📐 Interpretable Models"]
-    XAI --> LE["🎯 Local Explanation"]
-    XAI --> GE["🌍 Global Explanation"]
-    
-    IM --> IM1["Decision Trees"]
-    IM --> IM2["Lineare Regression"]
-    IM --> IM3["Regelbasierte Systeme"]
-    
-    LE --> LE1["LIME"]
-    LE --> LE2["SHAP (lokal)"]
-    LE --> LE3["Break-Down Analyse"]
-    
-    GE --> GE1["Feature Importance"]
-    GE --> GE2["SHAP Summary"]
-    GE --> GE3["Partial Dependence"]
-    
-    style XAI fill:#e1f5fe,stroke:#01579b
-    style IM fill:#fff3e0,stroke:#e65100
-    style LE fill:#e8f5e9,stroke:#2e7d32
-    style GE fill:#fce4ec,stroke:#c2185b
-```
+Einige Begriffe bestimmen fast jede XAI-Diskussion. **Lokal** bedeutet, dass eine einzelne Vorhersage erklärt wird, etwa warum das Modell für eine bestimmte Person eine hohe Überlebenschance prognostiziert. **Global** bedeutet, dass das Gesamtverhalten des Modells betrachtet wird, etwa welche Merkmale über viele Datenpunkte hinweg wichtig sind. **Modell-agnostisch** sind Verfahren, die nur Eingaben und Ausgaben des Modells benötigen; **modellspezifisch** sind Verfahren, die die interne Struktur eines Modelltyps ausnutzen.
 
-### Interpretable Models
+| Begriff | Bedeutung im XAI-Kontext |
+|---|---|
+| **Black Box** | Modell mit schwer einsehbarer Entscheidungslogik, z. B. Random Forest, Gradient Boosting oder neuronales Netz |
+| **Feature Attribution** | Zuordnung eines Vorhersagebeitrags zu einzelnen Merkmalen |
+| **Perturbation** | Systematisches Verändern von Eingaben, um den Einfluss auf die Vorhersage zu messen |
+| **Surrogate-Modell** | Einfaches Ersatzmodell, das das Verhalten eines komplexeren Modells approximiert |
+| **Counterfactual** | Alternative Eingabe, bei der das Modell eine andere Entscheidung treffen würde |
 
-Verwendung von ML-Modellen, die von Grund auf so konzipiert sind, dass sie erklärbar sind:
-
-- **Decision Trees**: Klare Entscheidungsregeln, visuell darstellbar
-- **Lineare Regression**: Koeffizienten zeigen direkt den Einfluss jedes Features
-- **Regelbasierte Systeme**: Explizite IF-THEN-Regeln
-
-### Local Explanation
-
-Erklärung individueller Vorhersagen durch Analyse der wichtigsten Features und ihrer Ausprägungen:
-
-> [!TIP] Beispiel für lokale Erklärung<br>
-> Warum wurde für Passagier X vorhergesagt, dass er überlebt?
-> - Geschlecht: weiblich -> +45% Überlebenschance
-> - Klasse: 1. Klasse -> +20% Überlebenschance
-> - Alter: 22 Jahre -> +5% Überlebenschance
-
-### Global Explanation
-
-Ganzheitliche Erklärung der Prognosefähigkeit eines ML-Modells:
-
-- **Feature Importance**: Welche Merkmale sind insgesamt am wichtigsten?
-- **Partial Dependence**: Wie beeinflusst ein Feature die Vorhersage über alle Datenpunkte?
-- **Accumulated Local Dependence**: Robustere Alternative zu Partial Dependence
+Perturbation ist dabei ein zentrales Arbeitsprinzip. LIME erzeugt ähnliche Datenpunkte um einen konkreten Fall herum. Permutation Importance mischt ein Feature im Testdatensatz und misst, wie stark die Modellleistung fällt. SHAP-Varianten untersuchen gedanklich viele Feature-Kombinationen. Die gemeinsame Idee ist immer: Wenn eine gezielte Änderung die Vorhersage stark verändert, nutzt das Modell dieses Merkmal.
 
 ---
 
-## SHAP – SHapley Additive exPlanations
+## Methodische Landkarte
 
-### Konzept
-
-SHAP basiert auf der Spieltheorie und dem Shapley-Wert, der ursprünglich zur fairen Verteilung von Gewinnen in Koalitionen entwickelt wurde.
+Die Kursnotebooks trennen XAI bewusst in zwei Stufen. `b900_xai_titanic.ipynb` behandelt die Kernmethoden für den Einstieg: erst globale Verfahren, dann lokale Erklärungen. `b910_xai_titanic.ipynb` erweitert diese Sicht um fortgeschrittene Fragen wie Fairness, Stabilität, interpretierbare Ersatzmodelle, Interaktionen und kausale Grenzen.
 
 ```mermaid
-flowchart LR
-    subgraph Spieltheorie["🎲 Spieltheorie-Analogie"]
-        P1["Spieler A"]
-        P2["Spieler B"]
-        P3["Spieler C"]
-        GEWINN["💰 Gewinn"]
-        P1 & P2 & P3 --> GEWINN
-    end
-    
-    subgraph ML["🤖 ML-Kontext"]
-        F1["Feature 1<br/>(Alter)"]
-        F2["Feature 2<br/>(Geschlecht)"]
-        F3["Feature 3<br/>(Klasse)"]
-        PRED["📊 Vorhersage"]
-        F1 & F2 & F3 --> PRED
-    end
-    
-    Spieltheorie -.->|"Übertragung"| ML
-    
-    style Spieltheorie fill:#e3f2fd,stroke:#1565c0
-    style ML fill:#f3e5f5,stroke:#7b1fa2
+flowchart TD
+    XAI["XAI im Kurs"] --> G["Global:<br>Gesamtmodell verstehen"]
+    XAI --> L["Lokal:<br>Einzelvorhersage erklären"]
+    XAI --> F["Fortgeschritten:<br>Erklärungen prüfen"]
+
+    G --> G1["Feature Importance"]
+    G --> G2["Permutation Importance"]
+    G --> G3["SHAP Global"]
+    G --> G4["ALE"]
+    G --> G5["Sobol"]
+
+    L --> L1["LIME"]
+    L --> L2["ELI5 Prediction"]
+    L --> L3["SHAP Waterfall"]
+    L --> L4["Ceteris Paribus"]
+    L --> L5["Counterfactuals"]
+
+    F --> F1["Fairness & Bias"]
+    F --> F2["Stabilität"]
+    F --> F3["Surrogate & EBM"]
+    F --> F4["Interaktionen"]
+    F --> F5["Kausalitätsgrenzen"]
+    F --> F6["Anchors"]
+    F --> F7["Example-Based"]
 ```
 
-### Berechnung des Shapley-Werts
+Diese Reihenfolge ist didaktisch sinnvoll: Zuerst entsteht ein Überblick über das Modellverhalten. Danach werden einzelne Fälle untersucht. Erst dann lohnt sich die kritischere Frage, ob die Erklärung stabil, fair, kausal interpretierbar oder nur eine fragile Approximation ist.
 
-Der Shapley-Wert berücksichtigt alle möglichen Kombinationen von Features und berechnet den durchschnittlichen Beitrag jedes Features:
+---
 
-1. Betrachte alle möglichen Teilmengen von Features
-2. Berechne für jede Teilmenge die Vorhersage mit und ohne das Feature
-3. Bilde den gewichteten Durchschnitt über alle Kombinationen
+## Globale Erklärungen
 
-### SHAP-Visualisierungen
+Globale Erklärungen beantworten die Frage, welche Merkmale das Modell insgesamt nutzt. Sie eignen sich für den ersten Modellcheck, für Fachgespräche und für die Suche nach Datenproblemen. Sie sind aber keine Einzelfallbegründung: Ein global wichtiges Feature muss für eine konkrete Person nicht den Ausschlag geben.
 
-| Visualisierung      | Beschreibung                                  | Scope  |
-| ------------------- | --------------------------------------------- | ------ |
-| **Waterfall Plot**  | Zeigt schrittweise den Beitrag jedes Features | Lokal  |
-| **Force Plot**      | Kompakte Darstellung der Feature-Beiträge     | Lokal  |
-| **Summary Plot**    | Übersicht über alle Features und Datenpunkte  | Global |
-| **Dependence Plot** | Einfluss eines Features auf die Vorhersage    | Global |
+### Feature Importance
 
-### Code-Beispiel
+Feature Importance ist bei baumbasierten Modellen direkt verfügbar. Beim Random Forest misst sie, wie stark ein Merkmal über alle Bäume hinweg zur Aufteilung der Daten beiträgt. Im Titanic-Beispiel liefert das schnell eine Rangfolge, in der `sex` und `pclass` dominieren.
+
+Die Methode ist ein guter Einstieg, weil sie ohne zusätzliche Bibliothek funktioniert und sofort lesbar ist. Ihre Grenze liegt in der Interpretation: Sie zeigt Wichtigkeit, aber keine Richtung. Außerdem kann sie bei korrelierten Merkmalen verzerrt wirken, weil sich mehrere Features dieselbe Informationsquelle teilen.
 
 ```python
-import shap
-
-# SHAP Explainer erstellen
-explainer = shap.TreeExplainer(model)
-
-# SHAP-Werte berechnen
-shap_values = explainer(data_test)
-
-# Waterfall Plot für einzelne Vorhersage
-shap.plots.waterfall(shap_values[0])
-
-# Summary Plot für globale Übersicht
-shap.plots.summary(shap_values)
+feature_importance = DataFrame({
+    "Feature": data_train.columns,
+    "Importance": model.feature_importances_
+}).sort_values("Importance", ascending=False)
 ```
+
+### Permutation Importance mit ELI5
+
+Permutation Importance misst, wie stark die Modellleistung sinkt, wenn die Werte eines Features im Testdatensatz zufällig gemischt werden. Wenn das Modell danach deutlich schlechter wird, war das Feature wichtig. ELI5 macht diese Logik mit wenig Code sichtbar und eignet sich deshalb gut für den Einstieg.
+
+In der Praxis ist die Methode besonders nützlich, wenn eine modellunabhängige Wichtigkeitsmessung gebraucht wird. Sie bleibt aber global und erklärt nicht, warum eine einzelne Person genau diese Vorhersage erhalten hat. Bei stark korrelierten Features kann die Wichtigkeit unterschätzt werden, weil ein anderes Feature die gleiche Information teilweise ersetzt.
+
+```python
+perm = PermutationImportance(model, random_state=42).fit(data_test, target_test)
+df_weights = eli5.explain_weights_df(perm, feature_names=data_train.columns.tolist())
+```
+
+### SHAP Global
+
+SHAP ordnet Features Beiträge zu, die auf Shapley-Werten aus der Spieltheorie beruhen. Global entsteht daraus ein aggregierter Blick: Welche Features liefern im Durchschnitt große Beiträge zur Vorhersage? Anders als einfache Feature Importance kann SHAP zusätzlich zeigen, ob hohe oder niedrige Feature-Werte die Vorhersage eher erhöhen oder senken.
+
+Für den Kurs ist SHAP der zentrale Brückenschlag zwischen mathematisch fundierter Erklärung und verständlicher Visualisierung. Der Preis ist höhere Komplexität. Teilnehmende müssen verstehen, dass die Baseline ein Modellwert ist und nicht automatisch der reale Klassenanteil.
+
+```python
+shap_explainer = shap.TreeExplainer(model)
+shap_values_global = shap_explainer(data_train)
+shap.plots.bar(shap_values_global[:, :, 1])
+```
+
+### ALE - Accumulated Local Effects
+
+ALE zeigt, wie sich die Modellvorhersage verändert, wenn ein einzelnes Feature in lokalen Intervallen steigt oder fällt. Es ist eng verwandt mit Partial Dependence, vermeidet aber einen wichtigen Fehler: Es wertet nicht systematisch unrealistische Feature-Kombinationen aus, die bei korrelierten Merkmalen entstehen können.
+
+Im Titanic-Beispiel eignet sich ALE für Fragen wie: Wie verändert sich die Überlebenschance mit dem Alter? Wie wirken die diskreten Merkmale `sex` und `pclass`? Für Einsteiger reicht ein kurzer Hinweis, dass PDP und ICE verwandte Verfahren sind. Die Kursnotebooks bevorzugen ALE, weil es bei korrelierten Features robuster ist.
+
+```python
+result = ale(
+    X=data_train,
+    model=model,
+    feature=["age"],
+    feature_type="continuous",
+    grid_size=20,
+)
+```
+
+### Sobol-Indizes
+
+Sobol-Indizes stammen aus der globalen Sensitivitätsanalyse. Sie zerlegen die Varianz der Modellvorhersagen in Anteile, die einzelnen Features und deren Interaktionen zugeschrieben werden. Im Notebook ist Sobol als Vertiefung markiert, nicht als Einstiegsmethode.
+
+Die Methode ist relevant, wenn nicht nur die Stärke einzelner Features interessiert, sondern auch deren Wechselwirkungen. Sie erfordert viele Modellaufrufe und eine saubere Definition der Feature-Bereiche. Bei kategorischen Merkmalen wie `sex` oder `pclass` muss zusätzlich darauf geachtet werden, dass generierte Werte wieder realistisch auf Kategorien abgebildet werden.
 
 ---
 
-## LIME – Local Interpretable Model-agnostic Explanations
+## Lokale Erklärungen
 
-### Konzept
+Lokale Erklärungen beantworten, warum eine konkrete Vorhersage entstanden ist. Im Titanic-Notebook werden dafür Rose und Jack als bewusst einfache Testpersonen verwendet. Das ist didaktisch stark, weil die Erklärungen sofort mit Domänenwissen abgeglichen werden können: Geschlecht und Passagierklasse sollten im Modell eine sichtbare Rolle spielen.
 
-LIME erklärt einzelne Vorhersagen, indem es ein einfaches, interpretierbares Modell lokal um die zu erklärende Instanz herum trainiert.
+### LIME
 
-```mermaid
-flowchart TD
-    subgraph LIME["LIME-Prozess"]
-        INST["🎯 Zu erklärende Instanz"]
-        PERT["🔄 Perturbierte Samples<br/>generieren"]
-        WEIGHT["⚖️ Gewichtung nach<br/>Ähnlichkeit"]
-        LOCAL["📐 Lokales lineares<br/>Modell trainieren"]
-        EXPLAIN["📊 Erklärung<br/>extrahieren"]
-        
-        INST --> PERT --> WEIGHT --> LOCAL --> EXPLAIN
-    end
-    
-    style INST fill:#ffeb3b,stroke:#f57f17
-    style EXPLAIN fill:#4caf50,stroke:#2e7d32
-```
+LIME trainiert ein einfaches lokales Ersatzmodell um den zu erklärenden Datenpunkt. Dazu werden ähnliche Datenpunkte erzeugt, vom Black-Box-Modell bewertet und nach Nähe zum Original gewichtet. Die Koeffizienten des lokalen Ersatzmodells liefern dann die Erklärung.
 
-### Funktionsweise
-
-1. **Sample-Generierung**: Erzeuge ähnliche Datenpunkte durch Perturbation
-2. **Gewichtung**: Gewichte Samples nach Nähe zur Original-Instanz
-3. **Lokales Modell**: Trainiere ein interpretierbares Modell (z.B. lineare Regression)
-4. **Interpretation**: Die Koeffizienten des lokalen Modells erklären die Vorhersage
-
-### Code-Beispiel
+LIME ist für Einsteiger gut zugänglich, weil die Idee anschaulich ist: In der unmittelbaren Umgebung eines Falls wird ein einfaches Modell gebaut. Die Grenze liegt in der Stabilität. Kleine Änderungen am Sampling oder am Seed können die lokale Erklärung verändern, besonders wenn Features korreliert oder Datenpunkte am Rand der Datenverteilung liegen.
 
 ```python
-from lime.lime_tabular import LimeTabularExplainer
-
-# LIME Explainer erstellen
-explainer = LimeTabularExplainer(
-    training_data=data_train.values,
+lime_explainer = LimeTabularExplainer(
+    data_train.values,
     feature_names=data_train.columns.tolist(),
-    class_names=['Nicht überlebt', 'Überlebt'],
-    mode='classification'
+    class_names=["Not Survived", "Survived"],
+    mode="classification",
 )
 
-# Erklärung für einzelne Instanz
-explanation = explainer.explain_instance(
-    data_row=rose.values[0],
-    predict_fn=model.predict_proba,
-    num_features=5
+rose_lime_exp = lime_explainer.explain_instance(
+    rose.iloc[0].values,
+    model.predict_proba,
+    num_features=5,
 )
-
-# Visualisierung
-explanation.show_in_notebook()
 ```
 
----
+### ELI5 Prediction
 
-## ELI5 – Explain Like I'm 5
+ELI5 kann neben Permutation Importance auch einzelne Vorhersagen aufschlüsseln. Die Darstellung ist weniger mächtig als SHAP, aber für einen ersten lokalen Blick oft ausreichend. Der Nutzen liegt in der niedrigen Einstiegshürde: Feature-Beiträge werden tabellarisch sichtbar, ohne dass zunächst Shapley-Werte erklärt werden müssen.
 
-### Konzept
+Grenze: Je nach Modell arbeitet ELI5 auf internen Skalen wie Log-Odds. Das muss erklärt werden, sonst werden Gewichte schnell mit Prozentpunkten verwechselt.
 
-ELI5 ist ein Framework, das Erklärungen so einfach wie möglich darstellt – wie für ein 5-jähriges Kind. Es fokussiert auf Permutation Importance.
+### SHAP lokal
 
-### Permutation Importance
+Lokale SHAP-Erklärungen zeigen, wie sich die Vorhersage von einer Baseline zur konkreten Modellvorhersage aufbaut. Waterfall Plots sind dafür besonders geeignet: Positive Beiträge schieben die Vorhersage nach oben, negative nach unten.
 
-Die Methode misst die Wichtigkeit eines Features, indem sie dessen Werte zufällig permutiert und den Einfluss auf die Modellleistung beobachtet:
-
-```mermaid
-flowchart LR
-    subgraph Original["📊 Original"]
-        DATA1["Daten"]
-        SCORE1["Score: 0.85"]
-        DATA1 --> SCORE1
-    end
-    
-    subgraph Permutiert["🔀 Feature X permutiert"]
-        DATA2["Daten<br/>(X gemischt)"]
-        SCORE2["Score: 0.65"]
-        DATA2 --> SCORE2
-    end
-    
-    Original --> Permutiert
-    Permutiert --> IMP["📈 Importance(X) = 0.85 - 0.65 = 0.20"]
-    
-    style IMP fill:#c8e6c9,stroke:#388e3c
-```
-
-### Code-Beispiel
+Im Titanic-Beispiel wird sichtbar, dass Rose vor allem durch `sex=weiblich` und `pclass=1` eine höhere Überlebenschance erhält, während Jack durch `sex=männlich` und `pclass=3` nach unten gedrückt wird. Diese Lesart ist verständlich, solange klar bleibt: SHAP erklärt die Modellrechnung, nicht die historische Realität.
 
 ```python
-import eli5
-from eli5.sklearn import PermutationImportance
-
-# Permutation Importance berechnen
-perm = PermutationImportance(model, random_state=42)
-perm.fit(data_test, target_test)
-
-# HTML-Darstellung
-eli5.show_weights(perm, feature_names=data_test.columns.tolist())
-
-# Feature-Gewichte des Modells
-eli5.show_weights(model, feature_names=data_train.columns.tolist())
+rose_shap = shap_explainer(rose)
+shap.plots.waterfall(rose_shap[0, :, 1])
 ```
+
+### InterpretML
+
+InterpretML bündelt mehrere XAI-Verfahren unter einer einheitlichen API und bietet interaktive Darstellungen. Im Kurs wird es vor allem genutzt, um lokale SHAP-basierte Erklärungen für Rose und Jack vergleichbar darzustellen.
+
+Für den Einstieg ist InterpretML nicht zwingend nötig. Der Mehrwert entsteht, wenn Erklärungen explorativ untersucht oder in einem Dashboard präsentiert werden sollen. Für einfache Notebook-Demos ist der Setup-Aufwand höher als bei LIME oder direktem SHAP.
+
+### Ceteris Paribus
+
+Ceteris-Paribus-Analysen variieren ein Feature, während alle anderen gleich bleiben. Damit beantworten sie eine leicht verständliche Frage: Was passiert mit der Vorhersage, wenn Jack in einer anderen Klasse gereist wäre? Oder wenn Rose ein anderes Alter hätte?
+
+Die Methode ist didaktisch stark, weil sie direkt an Was-wäre-wenn-Fragen anschließt. Sie darf aber nicht mit echter Kausalität verwechselt werden. Wenn das Modell bei geänderter Passagierklasse anders vorhersagt, heißt das nicht, dass eine reale Person durch diese Änderung zwangsläufig dasselbe historische Ergebnis erfahren hätte.
+
+### Counterfactual Explanations
+
+Counterfactuals suchen minimale Änderungen, die die Modellentscheidung kippen. Im Titanic-Notebook wird für Jack gesucht, welche Kombinationen die prognostizierte Überlebenschance über 50 Prozent heben würden. Das macht die Modellgrenze verständlich: Welche Eigenschaften müssten anders sein, damit das Modell anders entscheidet?
+
+Fortgeschritten wird diese Methode erst, wenn realistische Nebenbedingungen einbezogen werden. Nicht jedes Feature ist veränderbar, und nicht jede rechnerisch minimale Änderung ist fachlich sinnvoll. Gerade sensitive Merkmale wie Geschlecht dürfen nicht als Handlungsempfehlung missverstanden werden.
+
+> [!IMPORTANT] Counterfactuals richtig lesen<br>
+> Ein Counterfactual zeigt, welche Eingabe das Modell anders bewerten würde. Es ist keine Empfehlung, eine reale Eigenschaft zu ändern, und kein Beweis für eine kausale Wirkung.
 
 ---
 
-## InterpretML – Microsoft Framework
+## Fortgeschrittene XAI-Themen
 
-### Konzept
+`b910_xai_titanic.ipynb` erweitert den Einstieg um Themen, die in realen Projekten häufig wichtiger sind als eine weitere Visualisierung. Die zentrale Frage verschiebt sich: Nicht nur "Was sagt die Erklärung?", sondern "Ist diese Erklärung belastbar, fair und korrekt interpretierbar?"
 
-InterpretML ist ein Open-Source-Framework für Explainable AI, das sowohl interpretierbare Modelle als auch Black-Box-Erklärungen unterstützt.
+### Fairness und Bias
 
-### Kernfunktionen
+Fairness-Analysen prüfen, ob Modellleistung und Modellentscheidungen zwischen Gruppen unterschiedlich ausfallen. Beim Titanic-Datensatz sind `sex` und `pclass` naheliegende Analyseachsen, weil sie im Modell stark wirken. Ein Vergleich von Selection Rate, Accuracy oder Fehlerraten zeigt, ob das Modell Gruppen systematisch verschieden behandelt.
 
-| Funktion | Beschreibung |
-|----------|--------------|
-| **Explainable Boosting Machine (EBM)** | Interpretierbares Modell mit Boosting-Performance |
-| **SHAP Kernel** | Black-Box-Erklärungen für beliebige Modelle |
-| **Interaktive Dashboards** | Web-basierte Visualisierungen |
-| **Unified API** | Einheitliche Schnittstelle für verschiedene Erklärungsmethoden |
+XAI macht solche Muster sichtbar, bewertet sie aber nicht automatisch moralisch oder rechtlich. In historischen Daten können reale Ungleichheiten enthalten sein; ein Modell kann diese reproduzieren. Für Unterricht und Projektarbeit ist genau diese Unterscheidung wichtig: Erklärbarkeit zeigt die Abhängigkeit, Fairness bewertet ihre Tragfähigkeit.
 
-### Code-Beispiel
+### Robustheit und Stabilität
 
-```python
-from interpret import show
-from interpret.blackbox import ShapKernel
+Eine Erklärung ist nur dann brauchbar, wenn sie nicht bei jedem Seed oder Split stark kippt. Das fortgeschrittene Notebook untersucht deshalb LIME-Gewichte über mehrere Läufe und SHAP-Ergebnisse über verschiedene Train-Test-Splits. Wenn `sex` und `pclass` stabil oben bleiben, ist diese Kernaussage robuster als die genaue Rangfolge schwacher Features wie `sibsp` oder `parch`.
 
-# SHAP Kernel Explainer
-shap_explainer = ShapKernel(
-    predict_fn=model.predict_proba,
-    data=data_train,
-    feature_names=data_train.columns.tolist()
-)
+In Trainings zeigt sich häufig, dass Teilnehmende die erste Erklärung als endgültige Wahrheit lesen. Stabilitätschecks brechen diese Gewohnheit. Sie machen sichtbar, welche Aussagen zuverlässig sind und welche eher Artefakte eines konkreten Laufs.
 
-# Lokale Erklärung
-local_explanation = shap_explainer.explain_local(
-    X=rose,
-    y=None,
-    name="Rose"
-)
+### Surrogate Models und EBM
 
-# Interaktives Dashboard
-show(local_explanation)
-```
+Ein globales Surrogate-Modell approximiert die Vorhersagen einer Black Box mit einem einfacheren Modell, etwa einem flachen Decision Tree. So entsteht eine lesbare Annäherung an das Modellverhalten. Die Qualität dieses Surrogates muss aber gegen die Black-Box-Vorhersagen gemessen werden; sonst erklärt der Baum nur sich selbst.
 
----
+Explainable Boosting Machines (EBM) gehen einen anderen Weg. Sie sind von Anfang an interpretierbare Modelle, die Feature-Effekte additiv lernen und trotzdem oft gute Leistung erreichen. Damit wird eine wichtige Projektfrage sichtbar: Nicht jedes Problem braucht eine Black Box plus XAI. Manchmal ist ein direkt interpretierbares Modell die bessere Entscheidung.
 
-## Feature Importance (Random Forest)
+### SHAP Interaction Values
 
-### Konzept
+Feature-Interaktionen beschreiben, dass zwei Merkmale gemeinsam anders wirken als isoliert. Im Titanic-Beispiel ist `sex x pclass` fachlich plausibel: Geschlecht und Klasse prägen zusammen das Muster der Überlebenswahrscheinlichkeit. SHAP Interaction Values machen solche gemeinsamen Beiträge sichtbar.
 
-Random Forest berechnet die Feature Importance basierend darauf, wie stark jedes Feature zur Reduktion der Unreinheit (Impurity) in den Entscheidungsbäumen beiträgt.
+Diese Analyse ist fortgeschritten, weil die Interpretation schnell komplex wird. Sie eignet sich, wenn einfache Feature-Ranglisten nicht mehr reichen oder wenn Fachwissen nahelegt, dass Merkmale zusammen wirken.
 
-### Vorteile
+### Kausalität und Korrelation
 
-- **Schnell**: Direkt im Training berechnet, kein zusätzlicher Aufwand
-- **Integriert**: In scikit-learn bereits enthalten
-- **Einfach interpretierbar**: Direkte Rangfolge der Features
+XAI-Erklärungen sind keine Kausalmodelle. SHAP, LIME, ALE und Feature Importance zeigen, wie ein trainiertes Modell seine Inputs nutzt. Sie beantworten nicht, was in der realen Welt passiert wäre, wenn ein Merkmal geändert worden wäre.
 
-### Einschränkungen
+Das Notebook demonstriert diese Grenze mit einer Proxy-Frage: Was passiert, wenn ein sensibles Feature entfernt wird? Häufig bleiben Stellvertretermerkmale im Datensatz, die ähnliche Information tragen. Ein Modell ohne `sex` kann also weiterhin geschlechtsnahe Muster über andere Variablen nutzen. Genau deshalb reicht "Feature entfernen" als Fairness-Maßnahme selten aus.
 
-- Zeigt keine **Richtung** des Einflusses (positiv/negativ)
-- Kann bei korrelierten Features irreführend sein
-- Nur für Tree-basierte Modelle verfügbar
+### Anchors
 
-### Code-Beispiel
+Anchors sind lokale Wenn-dann-Regeln. Sie suchen Bedingungen, unter denen eine Vorhersage mit hoher Wahrscheinlichkeit stabil bleibt, etwa: Wenn `sex=weiblich` und `pclass=1`, dann prognostiziert das Modell mit hoher Präzision "überlebt". Anders als LIME oder SHAP liefern Anchors keine Gewichte, sondern Regeln.
 
-```python
-import pandas as pd
-import plotly.express as px
+Regeln sind für Fachbereiche oft leichter lesbar als Balkendiagramme. Ihre Grenze liegt in der Abdeckung: Eine präzise Regel kann nur für einen kleinen Teil des Datenraums gelten. Deshalb werden Precision und Coverage zusammen betrachtet.
 
-# Feature Importance extrahieren
-feature_importance = pd.DataFrame({
-    'Feature': data_train.columns,
-    'Importance': model.feature_importances_
-}).sort_values('Importance', ascending=False)
+### Beispielbasierte Erklärungen
 
-# Visualisierung
-fig = px.bar(
-    feature_importance,
-    x='Importance',
-    y='Feature',
-    orientation='h',
-    title='Feature Importance',
-    color='Importance',
-    color_continuous_scale='viridis'
-)
-fig.show()
-```
+Example-Based Explanations erklären nicht über Gewichte, sondern über ähnliche Fälle. Ein k-nearest-neighbors-Vergleich kann zeigen, welchen Trainingsfällen Rose oder Jack ähneln. Prototypen zeigen repräsentative Fälle einer Klasse, Gegenbeispiele zeigen ähnliche Fälle mit anderer Vorhersage.
+
+Dieser Ansatz ist intuitiv, weil Menschen häufig über Vergleiche argumentieren: "Dieser Fall ähnelt jenen Fällen." Die Grenze ist die gewählte Distanzmetrik. Wenn Skalierung, Kodierung oder Feature-Auswahl schlecht gewählt sind, werden scheinbar ähnliche Fälle fachlich unpassend.
 
 ---
 
-## Framework-Vergleich
+## Framework- und Methodenvergleich
 
-### Übersichtstabelle
+Die folgende Tabelle ordnet die im Kurs eingesetzten Methoden nach Einsatzbereich. Die Sterne beschreiben nicht wissenschaftliche Qualität, sondern Einstiegshürde im Unterricht.
 
-| Framework | Stärken | Schwächen | Einsteigerfreundlichkeit |
-|-----------|---------|-----------|--------------------------|
-| **LIME** | Sehr intuitiv, gute Visualisierung, schnell lokal | Nur lokale Erklärungen, kann instabil sein | ⭐⭐⭐⭐⭐ |
-| **SHAP** | Klare lokale und globale Attributionen, starke Visualisierungen | Kann langsam sein, komplexeres Konzept | ⭐⭐⭐⭐ |
-| **ELI5** | Extrem einfach, minimaler Code, schnell | Weniger Visualisierungen, weniger Features | ⭐⭐⭐⭐⭐ |
-| **InterpretML** | Interaktive Dashboards, umfassend, professionell | Komplexer Setup, Overhead für einfache Aufgaben | ⭐⭐⭐ |
-| **RF Importance** | Extrem schnell, in sklearn integriert | Nur Feature Importance, keine Richtung | ⭐⭐⭐⭐⭐ |
+| Methode | Scope | Typischer Nutzen | Grenze | Einstieg |
+|---|---|---|---|---|
+| Feature Importance | Global | Schnelle Rangfolge bei Tree-Modellen | Keine Richtung, Verzerrung bei Korrelation | sehr leicht |
+| Permutation Importance | Global | Modellunabhängige Wichtigkeit über Leistungsverlust | Schwierig bei korrelierten Features | leicht |
+| SHAP Global | Global | Aggregierte Attribution mit Richtung | Konzeptuell anspruchsvoller | mittel |
+| ALE | Global | Feature-Effekte bei Korrelation robuster darstellen | Weniger bekannt, Interpretation erfordert Kontext | mittel |
+| Sobol | Global | Varianz und Interaktionen untersuchen | Rechenintensiv, abstrakt | schwer |
+| LIME | Lokal | Einzelne Vorhersage intuitiv erklären | Instabil bei Sampling und Randfällen | leicht |
+| ELI5 Prediction | Lokal | Schnelle lokale Beitragsdarstellung | Interne Skalen können verwirren | leicht |
+| SHAP Waterfall | Lokal | Fundierte Einzelfall-Erklärung | Baseline und Klassenbezug müssen klar sein | mittel |
+| Ceteris Paribus | Lokal | Was-wäre-wenn-Fragen beantworten | Keine kausale Aussage | leicht |
+| Counterfactuals | Lokal | Entscheidungsgrenze sichtbar machen | Änderbarkeit und Plausibilität nötig | leicht bis mittel |
+| Fairness/Bias | Prüfung | Gruppenunterschiede sichtbar machen | Normative Bewertung bleibt extern | mittel |
+| Stabilitätschecks | Prüfung | Belastbarkeit von Erklärungen prüfen | Mehr Rechenzeit und Wiederholungen | mittel |
+| Surrogate/EBM | Modellstrategie | Interpretierbare Alternative oder Approximation | Fidelity muss gemessen werden | mittel |
+| Anchors | Lokal | Lesbare Wenn-dann-Regeln | Präzision ohne Coverage reicht nicht | mittel |
+| Example-Based | Lokal | Ähnliche Fälle, Prototypen, Gegenbeispiele | Abhängig von Distanzmetrik | mittel |
 
-### Entscheidungshilfe
+---
+
+## Entscheidungshilfe
 
 ```mermaid
 flowchart TD
-    START["❓ Welches XAI-Framework?"]
-    
-    START --> Q1{"Einzelne Vorhersage<br/>oder gesamtes Modell?"}
-    
-    Q1 -->|"Einzelne<br/>Vorhersage"| Q2{"Schnelligkeit<br/>wichtig?"}
-    Q1 -->|"Gesamtes<br/>Modell"| Q3{"Tree-basiertes<br/>Modell?"}
-    
-    Q2 -->|"Ja"| LIME["🔍 LIME"]
-    Q2 -->|"Nein"| SHAP_L["🎯 SHAP"]
-    
-    Q3 -->|"Ja"| RF["🌲 RF Importance<br/>+ SHAP"]
-    Q3 -->|"Nein"| Q4{"Interaktives<br/>Dashboard nötig?"}
-    
-    Q4 -->|"Ja"| IML["🏢 InterpretML"]
-    Q4 -->|"Nein"| SHAP_G["🎯 SHAP Summary"]
-    
-    style START fill:#e3f2fd,stroke:#1565c0
-    style LIME fill:#c8e6c9,stroke:#388e3c
-    style SHAP_L fill:#c8e6c9,stroke:#388e3c
-    style SHAP_G fill:#c8e6c9,stroke:#388e3c
-    style RF fill:#c8e6c9,stroke:#388e3c
-    style IML fill:#c8e6c9,stroke:#388e3c
+    START["Was soll erklärt werden?"] --> Q1{"Gesamtmodell<br>oder Einzelfall?"}
+    Q1 -->|"Gesamtmodell"| G1{"Schneller Überblick?"}
+    Q1 -->|"Einzelfall"| L1{"Beitragsgewichte<br>oder Was-wäre-wenn?"}
+
+    G1 -->|"Ja"| FI["Feature Importance<br>oder Permutation"]
+    G1 -->|"Nein"| G2{"Feature-Effekt<br>oder Attribution?"}
+    G2 -->|"Effekt"| ALE["ALE"]
+    G2 -->|"Attribution"| SHAPG["SHAP Global"]
+
+    L1 -->|"Gewichte"| L2{"Einstieg<br>oder fundiert?"}
+    L2 -->|"Einstieg"| LIME["LIME / ELI5"]
+    L2 -->|"Fundiert"| SHAPL["SHAP Waterfall"]
+    L1 -->|"Was-wäre-wenn"| CP["Ceteris Paribus<br>oder Counterfactuals"]
+
+    START --> Q2{"Erklärung prüfen?"}
+    Q2 -->|"Gruppen"| FAIR["Fairness/Bias"]
+    Q2 -->|"Schwankung"| STAB["Stabilität"]
+    Q2 -->|"Alternatives Modell"| EBM["Surrogate / EBM"]
 ```
 
----
-
-## XAI-Techniken Übersicht
-
-| XAI-Technik | Beschreibung | Bibliotheken |
-|-------------|--------------|--------------|
-| **LIME** | Lokale Erklärungen durch interpretierbare Surrogate-Modelle | lime, Skater |
-| **SHAP** | Berechnet Feature-Beiträge basierend auf Spieltheorie | shap, Dalex |
-| **Break Down** | Aufschlüsselung des Vorhersagebeitrags jeder Variable | Dalex |
-| **Permutation Importance** | Ermittelt Wichtigkeit durch Feature-Permutation | ELI5, Skater |
-| **Partial Dependence** | Zeigt Abhängigkeit der Vorhersage von einem Feature | Skater, Dalex |
-| **Counterfactuals** | Findet alternative Eingaben zur Erklärung | Alibi-Explain |
-| **Anchors** | Entdeckt Regeln, die die Vorhersage erklären | Alibi-Explain |
-
----
-
-## Counterfactual Explanations
-
-### Konzept
-
-**Counterfactual Explanations** (kontrafaktische Erklärungen) beantworten die Frage: *"Was müsste anders sein, damit das Modell eine andere Entscheidung trifft?"*
-
-```mermaid
-flowchart LR
-    subgraph Faktisch["📊 Faktische Situation"]
-        F["Kreditantrag: Abgelehnt<br/>Einkommen: 35.000€<br/>Schulden: 15.000€<br/>Beschäftigung: 2 Jahre"]
-    end
-    
-    subgraph Kontrafaktisch["✅ Counterfactual"]
-        CF["Kreditantrag: Genehmigt<br/>Einkommen: 35.000€<br/>Schulden: 8.000€<br/>Beschäftigung: 2 Jahre"]
-    end
-    
-    F -->|"Minimale<br/>Änderung"| CF
-    
-    style F fill:#ffcccc,stroke:#cc0000
-    style CF fill:#ccffcc,stroke:#00cc00
-```
-
-### Eigenschaften guter Counterfactuals
-
-| Eigenschaft | Beschreibung |
-|-------------|--------------|
-| **Minimal** | So wenig Änderungen wie möglich |
-| **Plausibel** | Die Änderungen sind realistisch umsetzbar |
-| **Actionable** | Der Betroffene kann die Änderungen beeinflussen |
-| **Divers** | Mehrere alternative Wege zum Ziel aufzeigen |
-
-### Anwendungsbeispiel
-
-Das folgende Beispiel zeigt die grundlegende Verwendung. In der Praxis erfordert die Bibliothek weitere Konfiguration.
-
-```python
-from alibi.explainers import CounterFactual
-
-# Counterfactual Explainer erstellen
-cf = CounterFactual(model.predict_proba, shape=(1, n_features))
-
-# Counterfactual für abgelehnten Kreditantrag finden
-explanation = cf.explain(abgelehnter_antrag)
-
-# Ergebnis zeigt minimale Änderungen für andere Entscheidung
-# z.B.: "Reduzieren Sie Ihre Schulden um 7.000€ für eine Genehmigung"
-```
-
-**Vorteil:** Counterfactuals sind intuitiv verständlich und geben konkrete Handlungsempfehlungen.
-
----
-
-## Anchors
-
-### Konzept
-
-**Anchors** sind Regeln, die eine Vorhersage "verankern" – sie beschreiben die *hinreichenden Bedingungen*, unter denen das Modell mit hoher Wahrscheinlichkeit dieselbe Entscheidung trifft.
-
-```mermaid
-flowchart TD
-    subgraph Anchor["⚓ Anchor-Regel"]
-        RULE["WENN Geschlecht = weiblich<br/>UND Klasse ≤ 2<br/>DANN Überlebt = Ja<br/>(Precision: 97%)"]
-    end
-    
-    subgraph Anwendung["📊 Anwendung"]
-        P1["Rose: weiblich, 1. Klasse → ✅"]
-        P2["Mary: weiblich, 2. Klasse → ✅"]
-        P3["Jack: männlich, 3. Klasse → ❓"]
-    end
-    
-    Anchor --> Anwendung
-    
-    style Anchor fill:#e3f2fd,stroke:#1565c0
-    style P1 fill:#c8e6c9,stroke:#388e3c
-    style P2 fill:#c8e6c9,stroke:#388e3c
-    style P3 fill:#ffcccc,stroke:#cc0000
-```
-
-### Vergleich der Erklärungsarten
-
-Anchors liefern einen anderen Erklärungstyp als andere XAI-Methoden. Während LIME (siehe Abschnitt oben) numerische Gewichte liefert, die zeigen *wie stark* ein Feature wirkt, geben Anchors klare Regeln an, *wann* eine Vorhersage gilt.
-
-| Aspekt | Gewicht-basiert (z.B. LIME) | Regel-basiert (Anchors) |
-|--------|----------------------------|-------------------------|
-| **Output** | "Alter hat Gewicht +0.3" | "WENN Alter < 30 DANN ..." |
-| **Interpretation** | Erfordert Verständnis von Gewichten | Lesbar wie Geschäftsregel |
-| **Antwort auf** | "Wie stark wirkt jedes Feature?" | "Unter welchen Bedingungen gilt diese Vorhersage?" |
-| **Besonders geeignet für** | Technische Analyse | Kommunikation an Laien |
-
-### Code-Beispiel
-
-```python
-from alibi.explainers import AnchorTabular
-
-# Anchor Explainer erstellen
-anchor_exp = AnchorTabular(
-    predictor=model.predict,
-    feature_names=feature_names
-)
-anchor_exp.fit(X_train)
-
-# Anchor für einzelne Instanz
-explanation = anchor_exp.explain(rose.values)
-
-# Ausgabe: "IF sex = female AND pclass <= 2 THEN survived = 1"
-print(f"Anchor: {explanation.anchor}")
-print(f"Precision: {explanation.precision:.2%}")
-```
-
----
-
-## Ceteris Paribus Analysen
-
-### Konzept
-
-Ceteris Paribus ("unter sonst gleichen Bedingungen") Analysen zeigen, wie sich die Vorhersage ändert, wenn nur ein Feature variiert wird, während alle anderen konstant bleiben.
-
-### Anwendungsbeispiel
-
-```python
-# Was wäre wenn: Jack in verschiedenen Passagierklassen?
-jack_cp = jack.copy()
-
-for pclass in [1, 2, 3]:
-    jack_cp['pclass'] = pclass
-    pred = model.predict_proba(jack_cp)[0][1] * 100
-    print(f"Jack in {pclass}. Klasse: {pred:.1f}% Überlebenschance")
-```
-
-### Erkenntnisse aus dem Titanic-Beispiel
-
-- **Alter**: Jüngere Personen hatten tendenziell höhere Überlebenschancen ("Women and children first")
-- **Passagierklasse**: 1. Klasse hatte deutlich höhere Überlebenschancen
-- **Geschlecht dominiert**: Selbst ein Mann in 1. Klasse hätte schlechtere Chancen als eine Frau in 3. Klasse
+In Kursprojekten reicht für den Einstieg meist eine Kombination aus Feature Importance, Permutation Importance, LIME und SHAP Waterfall. Für belastbarere Aussagen kommen ALE, Counterfactuals und Stabilitätschecks hinzu. Sobald Modelle in sensiblen Kontexten eingesetzt werden, gehören Fairness-Analysen und Kausalitätsgrenzen zur Mindestdiskussion.
 
 ---
 
 ## Best Practices
 
-### Empfehlungen für den Einsatz
+XAI sollte nicht als einzelner Plot am Ende eines Notebooks erscheinen. Sinnvoller ist ein kleiner Prüfablauf: zuerst globale Treiber identifizieren, dann zwei bis drei Einzelfälle erklären, anschließend die Erklärung gegen Fachwissen und Stabilität prüfen. Bei Titanic heißt das konkret: Wenn `sex` und `pclass` dominieren, passt das zum historischen Kontext; wenn ein zufälliges oder technisch erzeugtes Merkmal oben steht, wäre ein Datenleck zu vermuten.
 
-1. **Kombiniere lokale und globale Erklärungen**: Nutze SHAP Summary für den Überblick und Waterfall Plots für Einzelfälle
+Eine einzelne Methode reicht selten. Feature Importance liefert Tempo, SHAP liefert Richtung, LIME liefert einen intuitiven lokalen Einstieg, Ceteris Paribus macht Modellgrenzen als Was-wäre-wenn-Frage sichtbar. Widersprechen sich Methoden, ist das kein Fehler der Dokumentation, sondern ein Analysehinweis.
 
-2. **Validiere Erklärungen**: Prüfe, ob die Erklärungen mit Domänenwissen übereinstimmen
+> [!TIP] Robuste XAI-Auswertung<br>
+> Eine Erklärung wird belastbarer, wenn globale und lokale Verfahren dieselbe Kernaussage stützen und diese Aussage über mehrere Seeds oder Splits stabil bleibt.
 
-3. **Berücksichtige Stakeholder**: Wähle die Visualisierung passend zur Zielgruppe
+---
 
-4. **Dokumentiere Limitationen**: XAI-Methoden sind selbst Approximationen
+## Grenzen von XAI
 
-### Wann welche Methode?
+Erklärbarkeit kann Vertrauen begründen, aber auch falsches Vertrauen erzeugen. Besonders riskant sind drei Verwechslungen: Modelllogik mit Kausalität, Feature-Wichtigkeit mit ethischer Zulässigkeit und lokale Erklärungen mit globaler Wahrheit. Das Titanic-Beispiel ist dafür gut geeignet, weil die wichtigsten Merkmale fachlich plausibel sind und zugleich zeigen, wie schnell sensible Merkmale in Vorhersagen eingehen.
 
-| Situation | Empfohlene Methode |
-|-----------|-------------------|
-| Schnelle Feature-Übersicht | RF Importance |
-| Einzelne Kundenentscheidung erklären | LIME oder SHAP Waterfall |
-| Regulatorische Anforderungen | SHAP (gut dokumentierte Attributionen) |
-| Interaktive Exploration | InterpretML Dashboard |
-| Minimal Setup | ELI5 |
+Nicht geeignet ist XAI als Ersatz für Datenprüfung, Modellvalidierung oder fachliche Verantwortung. Ein gut erklärtes Modell kann unfair sein. Ein faires Modell kann schwer erklärbar sein. Und ein erklärbares Modell kann trotzdem schlecht generalisieren.
 
 ---
 
 ## Weiterführende Ressourcen
 
-### Dokumentation
+| Thema | Ressource |
+|---|---|
+| LIME | [github.com/marcotcr/lime](https://github.com/marcotcr/lime) |
+| SHAP | [shap.readthedocs.io](https://shap.readthedocs.io/) |
+| ELI5 | [eli5.readthedocs.io](https://eli5.readthedocs.io/) |
+| InterpretML und EBM | [interpret.ml](https://interpret.ml/) |
+| ALE | [PyALE](https://github.com/DanaJomar/PyALE) |
+| Sobol/SALib | [salib.readthedocs.io](https://salib.readthedocs.io/) |
+| Anchors und Counterfactuals | [alibi-explain.readthedocs.io](https://alibi-explain.readthedocs.io/) |
 
-- **LIME**: [github.com/marcotcr/lime](https://github.com/marcotcr/lime)
-- **SHAP**: [shap.readthedocs.io](https://shap.readthedocs.io/)
-- **ELI5**: [eli5.readthedocs.io](https://eli5.readthedocs.io/)
-- **InterpretML**: [interpret.ml](https://interpret.ml/)
-
-### Wissenschaftliche Paper
-
-- **LIME**: "Why Should I Trust You?" (Ribeiro et al., 2016)
-- **SHAP**: "A Unified Approach to Interpreting Model Predictions" (Lundberg & Lee, 2017)
-
+Zentrale Paper: Ribeiro et al. (2016) zu LIME, Lundberg & Lee (2017) zu SHAP und Apley & Zhu (2020) zu ALE.
 
 ---
 
 ## Zusammenfassung
 
 > [!SUCCESS] Kernpunkte<br>
-> - XAI macht ML-Modelle verständlich und überprüfbar
-> - **SHAP** eignet sich für lokale und globale Erklärungen
-> - **LIME** eignet sich für schnelle lokale Erklärungen
-> - **ELI5** bietet den einfachsten Einstieg
-> - Die Wahl des Frameworks hängt von Anwendungsfall und Zielgruppe ab
-> - Mehrere Verfahren liefern oft ein robusteres Bild als eine Einzelmethode
+> XAI erklärt Modellverhalten aus mehreren Perspektiven. Für den Einstieg reichen globale Wichtigkeiten, LIME und lokale SHAP-Erklärungen; für belastbare Projektarbeit kommen ALE, Counterfactuals, Fairness, Stabilität und Kausalitätsgrenzen hinzu. Entscheidend ist nicht die Anzahl der Plots, sondern ob die Erklärung fachlich plausibel, stabil und korrekt eingeordnet ist.
+
 ## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
-|-------|------------|
-| [Modellauswahl](./modeling/modellauswahl.html) | XAI erklärt Black-Box-Modelle nachträglich; Modellauswahl berücksichtigt Interpretierbarkeit von Anfang an |
-| [Feature Importance (Random Forest)](./modeling/random-forest.html) | Feature Importance ist eingebaute, modellspezifische Erklärung; XAI umfasst modell-agnostische Methoden (LIME, SHAP) |
-| [Hyperparameter-Tuning](./evaluate/hyperparameter_tuning.html) | XAI erklärt Modellentscheidungen qualitativ; Hyperparameter-Tuning optimiert Modellleistung quantitativ |
-
+|---|---|
+| [Modellauswahl](./modeling/modellauswahl.html) | Modellauswahl entscheidet, ob ein interpretierbares Modell von Anfang an genügt; XAI erklärt zusätzlich oder nachträglich trainierte Modelle. |
+| [Random Forest](./modeling/random-forest.html) | Random Forest behandelt Modelllogik und Feature Importance; XAI vergleicht diese Erklärung mit modell-agnostischen und lokalen Verfahren. |
+| [Bewertung Klassifizierung](./evaluate/bewertung_klassifizierung.html) | Klassifikationsmetriken bewerten Vorhersagequalität; XAI untersucht, welche Merkmale die Vorhersagen treiben. |
+| [Hyperparameter-Tuning](./evaluate/hyperparameter_tuning.html) | Tuning optimiert Modellparameter; XAI prüft, ob das optimierte Modell fachlich nachvollziehbar bleibt. |
 
 ---
 
-**Version:** 1.2<br>
-**Stand:** Januar 2026<br>
+**Version:** 1.3<br>
+**Stand:** April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
