@@ -60,7 +60,7 @@ Perturbation ist dabei ein zentrales Arbeitsprinzip. LIME erzeugt ähnliche Date
 
 ## Methodische Landkarte
 
-Die Kursnotebooks trennen XAI bewusst in zwei Stufen. `b900_xai_titanic.ipynb` behandelt die Kernmethoden für den Einstieg: erst globale Verfahren, dann lokale Erklärungen. `b910_xai_titanic.ipynb` erweitert diese Sicht um fortgeschrittene Fragen wie Fairness, Stabilität, interpretierbare Ersatzmodelle, Interaktionen und kausale Grenzen.
+Die Kursstruktur trennt XAI bewusst in zwei Stufen. Zuerst werden die Kernmethoden für den Einstieg behandelt: globale Verfahren, danach lokale Erklärungen. Darauf aufbauend folgen fortgeschrittene Fragen wie Fairness, Stabilität, interpretierbare Ersatzmodelle, Interaktionen und kausale Grenzen.
 
 ```mermaid
 flowchart TD
@@ -137,7 +137,7 @@ shap.plots.bar(shap_values_global[:, :, 1])
 
 ALE zeigt, wie sich die Modellvorhersage verändert, wenn ein einzelnes Feature in lokalen Intervallen steigt oder fällt. Es ist eng verwandt mit Partial Dependence, vermeidet aber einen wichtigen Fehler: Es wertet nicht systematisch unrealistische Feature-Kombinationen aus, die bei korrelierten Merkmalen entstehen können.
 
-Im Titanic-Beispiel eignet sich ALE für Fragen wie: Wie verändert sich die Überlebenschance mit dem Alter? Wie wirken die diskreten Merkmale `sex` und `pclass`? Für Einsteiger reicht ein kurzer Hinweis, dass PDP und ICE verwandte Verfahren sind. Die Kursnotebooks bevorzugen ALE, weil es bei korrelierten Features robuster ist.
+Im Titanic-Beispiel eignet sich ALE für Fragen wie: Wie verändert sich die Überlebenschance mit dem Alter? Wie wirken die diskreten Merkmale `sex` und `pclass`? Für Einsteiger reicht ein kurzer Hinweis, dass PDP und ICE verwandte Verfahren sind. Im Kurs wird ALE bevorzugt, weil es bei korrelierten Features robuster ist.
 
 ```python
 result = ale(
@@ -151,7 +151,7 @@ result = ale(
 
 ### Sobol-Indizes
 
-Sobol-Indizes stammen aus der globalen Sensitivitätsanalyse. Sie zerlegen die Varianz der Modellvorhersagen in Anteile, die einzelnen Features und deren Interaktionen zugeschrieben werden. Im Notebook ist Sobol als Vertiefung markiert, nicht als Einstiegsmethode.
+Sobol-Indizes stammen aus der globalen Sensitivitätsanalyse. Sie zerlegen die Varianz der Modellvorhersagen in Anteile, die einzelnen Features und deren Interaktionen zugeschrieben werden. Im Kurs ist Sobol als Vertiefung einzuordnen, nicht als Einstiegsmethode.
 
 Die Methode ist relevant, wenn nicht nur die Stärke einzelner Features interessiert, sondern auch deren Wechselwirkungen. Sie erfordert viele Modellaufrufe und eine saubere Definition der Feature-Bereiche. Bei kategorischen Merkmalen wie `sex` oder `pclass` muss zusätzlich darauf geachtet werden, dass generierte Werte wieder realistisch auf Kategorien abgebildet werden.
 
@@ -159,7 +159,7 @@ Die Methode ist relevant, wenn nicht nur die Stärke einzelner Features interess
 
 ## Lokale Erklärungen
 
-Lokale Erklärungen beantworten, warum eine konkrete Vorhersage entstanden ist. Im Titanic-Notebook werden dafür Rose und Jack als bewusst einfache Testpersonen verwendet. Das ist didaktisch stark, weil die Erklärungen sofort mit Domänenwissen abgeglichen werden können: Geschlecht und Passagierklasse sollten im Modell eine sichtbare Rolle spielen.
+Lokale Erklärungen beantworten, warum eine konkrete Vorhersage entstanden ist. Im Titanic-Beispiel werden dafür Rose und Jack als bewusst einfache Testpersonen verwendet. Das ist didaktisch stark, weil die Erklärungen sofort mit Domänenwissen abgeglichen werden können: Geschlecht und Passagierklasse sollten im Modell eine sichtbare Rolle spielen.
 
 ### LIME
 
@@ -203,7 +203,7 @@ shap.plots.waterfall(rose_shap[0, :, 1])
 
 InterpretML bündelt mehrere XAI-Verfahren unter einer einheitlichen API und bietet interaktive Darstellungen. Im Kurs wird es vor allem genutzt, um lokale SHAP-basierte Erklärungen für Rose und Jack vergleichbar darzustellen.
 
-Für den Einstieg ist InterpretML nicht zwingend nötig. Der Mehrwert entsteht, wenn Erklärungen explorativ untersucht oder in einem Dashboard präsentiert werden sollen. Für einfache Notebook-Demos ist der Setup-Aufwand höher als bei LIME oder direktem SHAP.
+Für den Einstieg ist InterpretML nicht zwingend nötig. Der Mehrwert entsteht, wenn Erklärungen explorativ untersucht oder in einem Dashboard präsentiert werden sollen. Für einfache Demonstrationen ist der Setup-Aufwand höher als bei LIME oder direktem SHAP.
 
 ### Ceteris Paribus
 
@@ -213,7 +213,7 @@ Die Methode ist didaktisch stark, weil sie direkt an Was-wäre-wenn-Fragen ansch
 
 ### Counterfactual Explanations
 
-Counterfactuals suchen minimale Änderungen, die die Modellentscheidung kippen. Im Titanic-Notebook wird für Jack gesucht, welche Kombinationen die prognostizierte Überlebenschance über 50 Prozent heben würden. Das macht die Modellgrenze verständlich: Welche Eigenschaften müssten anders sein, damit das Modell anders entscheidet?
+Counterfactuals suchen minimale Änderungen, die die Modellentscheidung kippen. Im Titanic-Beispiel wird für Jack gesucht, welche Kombinationen die prognostizierte Überlebenschance über 50 Prozent heben würden. Das macht die Modellgrenze verständlich: Welche Eigenschaften müssten anders sein, damit das Modell anders entscheidet?
 
 Fortgeschritten wird diese Methode erst, wenn realistische Nebenbedingungen einbezogen werden. Nicht jedes Feature ist veränderbar, und nicht jede rechnerisch minimale Änderung ist fachlich sinnvoll. Gerade sensitive Merkmale wie Geschlecht dürfen nicht als Handlungsempfehlung missverstanden werden.
 
@@ -224,7 +224,7 @@ Fortgeschritten wird diese Methode erst, wenn realistische Nebenbedingungen einb
 
 ## Fortgeschrittene XAI-Themen
 
-`b910_xai_titanic.ipynb` erweitert den Einstieg um Themen, die in realen Projekten häufig wichtiger sind als eine weitere Visualisierung. Die zentrale Frage verschiebt sich: Nicht nur "Was sagt die Erklärung?", sondern "Ist diese Erklärung belastbar, fair und korrekt interpretierbar?"
+Die fortgeschrittenen XAI-Themen erweitern den Einstieg um Fragen, die in realen Projekten häufig wichtiger sind als eine weitere Visualisierung. Die zentrale Frage verschiebt sich: Nicht nur "Was sagt die Erklärung?", sondern "Ist diese Erklärung belastbar, fair und korrekt interpretierbar?"
 
 ### Fairness und Bias
 
@@ -234,7 +234,7 @@ XAI macht solche Muster sichtbar, bewertet sie aber nicht automatisch moralisch 
 
 ### Robustheit und Stabilität
 
-Eine Erklärung ist nur dann brauchbar, wenn sie nicht bei jedem Seed oder Split stark kippt. Das fortgeschrittene Notebook untersucht deshalb LIME-Gewichte über mehrere Läufe und SHAP-Ergebnisse über verschiedene Train-Test-Splits. Wenn `sex` und `pclass` stabil oben bleiben, ist diese Kernaussage robuster als die genaue Rangfolge schwacher Features wie `sibsp` oder `parch`.
+Eine Erklärung ist nur dann brauchbar, wenn sie nicht bei jedem Seed oder Split stark kippt. Deshalb werden LIME-Gewichte über mehrere Läufe und SHAP-Ergebnisse über verschiedene Train-Test-Splits verglichen. Wenn `sex` und `pclass` stabil oben bleiben, ist diese Kernaussage robuster als die genaue Rangfolge schwacher Features wie `sibsp` oder `parch`.
 
 In Trainings zeigt sich häufig, dass Teilnehmende die erste Erklärung als endgültige Wahrheit lesen. Stabilitätschecks brechen diese Gewohnheit. Sie machen sichtbar, welche Aussagen zuverlässig sind und welche eher Artefakte eines konkreten Laufs.
 
@@ -254,7 +254,7 @@ Diese Analyse ist fortgeschritten, weil die Interpretation schnell komplex wird.
 
 XAI-Erklärungen sind keine Kausalmodelle. SHAP, LIME, ALE und Feature Importance zeigen, wie ein trainiertes Modell seine Inputs nutzt. Sie beantworten nicht, was in der realen Welt passiert wäre, wenn ein Merkmal geändert worden wäre.
 
-Das Notebook demonstriert diese Grenze mit einer Proxy-Frage: Was passiert, wenn ein sensibles Feature entfernt wird? Häufig bleiben Stellvertretermerkmale im Datensatz, die ähnliche Information tragen. Ein Modell ohne `sex` kann also weiterhin geschlechtsnahe Muster über andere Variablen nutzen. Genau deshalb reicht "Feature entfernen" als Fairness-Maßnahme selten aus.
+Diese Grenze lässt sich mit einer Proxy-Frage demonstrieren: Was passiert, wenn ein sensibles Feature entfernt wird? Häufig bleiben Stellvertretermerkmale im Datensatz, die ähnliche Information tragen. Ein Modell ohne `sex` kann also weiterhin geschlechtsnahe Muster über andere Variablen nutzen. Genau deshalb reicht "Feature entfernen" als Fairness-Maßnahme selten aus.
 
 ### Anchors
 
@@ -324,7 +324,7 @@ In Kursprojekten reicht für den Einstieg meist eine Kombination aus Feature Imp
 
 ## Best Practices
 
-XAI sollte nicht als einzelner Plot am Ende eines Notebooks erscheinen. Sinnvoller ist ein kleiner Prüfablauf: zuerst globale Treiber identifizieren, dann zwei bis drei Einzelfälle erklären, anschließend die Erklärung gegen Fachwissen und Stabilität prüfen. Bei Titanic heißt das konkret: Wenn `sex` und `pclass` dominieren, passt das zum historischen Kontext; wenn ein zufälliges oder technisch erzeugtes Merkmal oben steht, wäre ein Datenleck zu vermuten.
+XAI sollte nicht als einzelner Plot am Ende einer Analyse erscheinen. Sinnvoller ist ein kleiner Prüfablauf: zuerst globale Treiber identifizieren, dann zwei bis drei Einzelfälle erklären, anschließend die Erklärung gegen Fachwissen und Stabilität prüfen. Bei Titanic heißt das konkret: Wenn `sex` und `pclass` dominieren, passt das zum historischen Kontext; wenn ein zufälliges oder technisch erzeugtes Merkmal oben steht, wäre ein Datenleck zu vermuten.
 
 Eine einzelne Methode reicht selten. Feature Importance liefert Tempo, SHAP liefert Richtung, LIME liefert einen intuitiven lokalen Einstieg, Ceteris Paribus macht Modellgrenzen als Was-wäre-wenn-Frage sichtbar. Widersprechen sich Methoden, ist das kein Fehler der Dokumentation, sondern ein Analysehinweis.
 
