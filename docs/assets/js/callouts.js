@@ -13,6 +13,7 @@
     'INFO': { icon: 'ℹ️', title: 'Information', className: 'info' },
     'TIP': { icon: '💡', title: 'Tipp', className: 'tip' },
     'TIPP': { icon: '💡', title: 'Tipp', className: 'tipp' },
+    'IMPORTANT': { icon: '❗', title: 'Wichtig', className: 'important' },
     'WARNING': { icon: '⚠️', title: 'Warnung', className: 'warning' },
     'CAUTION': { icon: '⚠️', title: 'Achtung', className: 'caution' },
     'DANGER': { icon: '🚫', title: 'Gefahr', className: 'danger' },
