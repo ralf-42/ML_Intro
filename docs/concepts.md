@@ -21,6 +21,7 @@ Hier beginnt der Kurs fachlich. Die Dokumente klären, was Machine Learning von 
 Viele Qualitätsprobleme entstehen vor dem ersten Modelltraining. Dieser Block behandelt deshalb die Schritte, die in Projekten oft unterschätzt werden: fehlende Werte, Ausreißer, Skalierung, Kodierung und die saubere Trennung von Trainings- und Testdaten.
 
 - **[Prepare](https://ralf-42.github.io/ML_Intro/concepts/02_prepare.html)** – *Wie werden Rohdaten modellfähig gemacht?* Datenaufbereitung, Transformation und typische Fehlerquellen.
+- **[Prepare nach Modell](https://ralf-42.github.io/ML_Intro/concepts/prepare/prepare_nach_modell.html)** – *Welche Vorverarbeitung braucht welcher Algorithmus?* Entscheidungshilfe für die im Kurs eingesetzten Modelle.
 
 ## Modelle auswählen
 
@@ -39,4 +40,3 @@ Ein Modell ist erst dann brauchbar, wenn seine Qualität sauber eingeordnet wurd
 Erklärbarkeit wird relevant, sobald Modelle begründet, geprüft oder gegenüber Fachbereichen erläutert werden müssen. Die XAI-Seiten zeigen, was Verfahren wie SHAP oder LIME leisten und wo ihre Grenzen liegen.
 
 - **[XAI](https://ralf-42.github.io/ML_Intro/concepts/08_xai.html)** – *Wie wird ein Modell nachvollziehbar gemacht?* Methoden der erklärbaren KI im ML-Kontext.
-
