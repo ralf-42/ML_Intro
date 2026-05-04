@@ -501,6 +501,7 @@ flowchart TD
 | Dokument | Frage |
 |---|---|
 | [Modellauswahl](./modellauswahl.html) | Wie wird die Auswahl eines Verfahrens systematisch begründet? |
+| [Prepare nach Modell](../prepare/prepare_nach_modell.html) | Welche Vorverarbeitungsschritte braucht das gewählte Verfahren? |
 | [Regression](./regression.html) | Welche Verfahren eignen sich speziell für numerische Zielgrößen? |
 | [Decision Tree](./decision_tree.html) | Wie funktioniert ein einzelnes, häufig genutztes Basismodell im Detail? |
 | [XGBoost](./xgboost.html) | Wie sieht ein leistungsstarkes Boosting-Verfahren im Vergleich aus? |

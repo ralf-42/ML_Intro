@@ -357,6 +357,7 @@ Die Wahl der richtigen Kodierung ist entscheidend für die Modellperformance. Gr
 |-------|------------|
 | [Skalierung](./skalierung.html) | Kodierung transformiert kategoriale in numerische Merkmale; Skalierung normalisiert bereits numerische Werte |
 | [Feature Engineering](./feature-engineering.html) | Kodierung ist Datentyp-Konversion; Feature Engineering erstellt neue Merkmale aus bestehenden |
+| [Prepare nach Modell](./prepare_nach_modell.html) | Zeigt, welche Kursalgorithmen kodierte Eingaben brauchen und wo Sonderfaelle gelten |
 | [Modellauswahl](../modeling/modellauswahl.html) | Kodierungsart beeinflusst Modellwahl: TargetEncoder erfordert Supervised-Kontext und kann Data Leakage verursachen |
 
 

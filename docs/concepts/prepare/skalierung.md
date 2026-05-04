@@ -331,6 +331,7 @@ flowchart LR
 | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | [Outlier-Behandlung](./outlier.html)                                | Outliers verfaelschen Skalierungsergebnisse; RobustScaler verringert diesen Einfluss — Behandlungsreihenfolge beachten |
 | [Kodierung kategorialer Daten](./kodierung_kategorialer_daten.html) | Skalierung normalisiert numerische Features; Kodierung konvertiert kategoriale in numerische Merkmale                  |
+| [Prepare nach Modell](./prepare_nach_modell.html)                   | Zeigt, bei welchen Kursalgorithmen Skalierung notwendig, kritisch oder meist ueberfluessig ist                         |
 | [Modellauswahl](../modeling/modellauswahl.html)                     | Skalierungsbedarf ist algorithmusabhaengig: k-NN und SVM benoetigen sie; Entscheidungsbaeume nicht                     |
 
 

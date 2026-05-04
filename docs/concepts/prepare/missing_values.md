@@ -178,6 +178,7 @@ flowchart TD
 |-------|------------|
 | [Outlier-Behandlung](./outlier.html) | Beide behandeln Datenqualitaetsprobleme; Missing Values sind Abwesenheit von Daten, Outliers sind extreme Werte |
 | [Train-Test-Split](./train_test_split.html) | Missing Values werden *vor* dem Split behandelt; Split trennt Daten erst *nach* der Bereinigung |
+| [Prepare nach Modell](./prepare_nach_modell.html) | Zeigt, welche Kursmodelle fehlende Werte direkt akzeptieren und wann Imputation trotzdem sinnvoll ist |
 | [Feature Engineering](./feature-engineering.html) | Feature Engineering nutzt den bereinigten Datensatz; Missing Values sind ein vorgelagerter Bereinigungsschritt |
 
 

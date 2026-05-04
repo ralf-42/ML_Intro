@@ -21,6 +21,8 @@ Einstiegspunkt für die systematische Auswahl des passenden Algorithmus.
 
 **[Modell-Steckbriefe](https://ralf-42.github.io/ML_Intro/concepts/modeling/modell-steckbriefe.html)** – *Welches Modell eignet sich für welchen Anwendungsfall?* Kompakte Übersicht aller wichtigen ML-Algorithmen mit Vor- und Nachteilen.
 
+**[Prepare nach Modell](https://ralf-42.github.io/ML_Intro/concepts/prepare/prepare_nach_modell.html)** – *Welche Vorverarbeitung braucht das gewählte Modell?* Modellbezogene Entscheidungshilfe zu Missing Values, Skalierung, Kodierung und Ausreißern.
+
 ## Supervised Learning
 
 Modelle, die aus gelabelten Daten lernen, um Vorhersagen zu treffen.
@@ -66,4 +68,3 @@ Kombination mehrerer Modelle für bessere Vorhersagen.
 ## Automatisierung
 
 **[AutoML](https://ralf-42.github.io/ML_Intro/concepts/modeling/automl.html)** – *Wie automatisiert PyCaret den ML-Workflow?* Workflow-Automatisierung von Datenvorbereitung bis Modellauswahl.
-
