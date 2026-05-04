@@ -196,11 +196,12 @@ flowchart TD
 
 ### Übersicht der Lernparadigmen
 
-| Paradigma | Daten | Lernziel | Typische Anwendung |
-|-----------|-------|----------|-------------------|
-| **Supervised Learning** | Daten mit bekannten Lösungen (Labels) | Vorhersage für neue Daten | Spam-Erkennung, Preisvorhersage |
-| **Unsupervised Learning** | Daten ohne Labels | Strukturen und Muster entdecken | Kundensegmentierung, Anomalieerkennung |
-| **Reinforcement Learning** | Interaktion mit Umgebung | Optimale Strategie lernen | Spielstrategien, Robotersteuerung |
+| Paradigma                  | Daten                                    | Lernziel                        | Typische Anwendung                                                           |
+| -------------------------- | ---------------------------------------- | ------------------------------- | ---------------------------------------------------------------------------- |
+| **Supervised Learning**    | Daten mit bekannten Lösungen (Labels)    | Vorhersage für neue Daten       | Spam-Erkennung, Preisvorhersage                                              |
+| **Unsupervised Learning**  | Daten ohne Labels                        | Strukturen und Muster entdecken | Kundensegmentierung, Anomalieerkennung                                       |
+| **Reinforcement Learning** | Interaktion mit Umgebung                 | Optimale Strategie lernen       | Spielstrategien, Robotersteuerung                                            |
+| **keine ML-Lösung**        | keine Daten, kein Simulation/ Experiment | Handlungs-empfehlung            | Asteroideneinschlag,  KI für diplomatische Eskalationen zwischen Atommächten |
 
 ---
 
