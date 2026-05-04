@@ -285,7 +285,7 @@ flowchart TB
 |-------|------------|
 | [Missing Values](./missing_values.html) | Outliers sind extreme Werte; Missing Values sind fehlende Eintraege — unterschiedliche Erkennungs- und Behandlungsstrategien |
 | [Skalierung](./skalierung.html) | Outliers werden idealerweise vor der Skalierung behandelt; Skalierung transformiert den Wertebereich nach der Bereinigung |
-| [Prepare nach Modell](./prepare_nach_modell.html) | Zeigt, bei welchen Kursalgorithmen Ausreisser kritisch sind und wo sie eher beobachtet statt entfernt werden |
+| [Prepare nach Modell](./prepare_nach_modell.html) | Zeigt, bei welchen Kursalgorithmen Ausreißer kritisch sind und wo sie eher beobachtet statt entfernt werden |
 | [Feature Engineering](./feature-engineering.html) | Outlier-Behandlung bereinigt Rohdaten; Feature Engineering transformiert bereinigte Daten in neue Merkmale |
 
 

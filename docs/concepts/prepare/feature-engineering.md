@@ -743,7 +743,7 @@ Der iterative Prozess aus Hypothese, Implementierung und Validierung führt schr
 | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | [Kodierung kategorialer Daten](./kodierung_kategorialer_daten.html)  | Kodierung konvertiert Datentypen; Feature Engineering erschafft neue informative Merkmale aus bestehenden             |
 | [Prepare nach Modell](./prepare_nach_modell.html)                    | Zeigt, welche vorbereitenden Schritte pro Kursalgorithmus vor dem Feature Engineering besonders wichtig sind          |
-| [Modellauswahl](../modeling/modellauswahl.html)                      | Feature Engineering optimiert die Eingabedaten; Modellauswahl waehlt die Algorithmusklasse                            |
+| [Modellauswahl](../modeling/modellauswahl.html)                      | Feature Engineering optimiert die Eingabedaten; Modellauswahl wählt die Algorithmusklasse                             |
 | [Feature Importance (Random Forest)](../modeling/random-forest.html) | Feature Engineering konstruiert Merkmale; Feature Importance bewertet nachtraeglich, welche Merkmale das Modell nutzt |
 
 

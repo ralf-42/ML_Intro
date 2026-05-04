@@ -4,15 +4,17 @@ title: Prepare nach Modell
 parent: Prepare
 grand_parent: Konzepte
 nav_order: 7
-description: "Welche Vorverarbeitungsschritte fuer die im Kurs eingesetzten ML-Algorithmen notwendig sind"
+description: "Vorverarbeitungsschritte für die im Kurs eingesetzten ML-Algorithmen"
 has_toc: true
 ---
 
 # Prepare nach Modell
 {: .no_toc }
 
-> **Nicht jedes Modell braucht die gleiche Vorverarbeitung.**
-> Diese Seite ordnet die im Kurs eingesetzten Algorithmen danach ein, welche Prepare-Schritte zwingend, wichtig oder nur fallweise relevant sind.
+Vorverarbeitung ist kein fester Block, der für jedes Modell gleich aussieht. Ein Entscheidungsbaum braucht andere Datenvorbereitung als K-Means, eine logistische Regression oder ein LSTM. Entscheidend ist, ob ein Verfahren mit fehlenden Werten umgehen kann, ob es Distanzen oder Gradienten nutzt, ob es numerische Eingaben erwartet und ob Ausreißer das Lernsignal verzerren.
+
+> [!IMPORTANT] Pipeline-Regel<br>
+> Alles, was aus Daten gelernt wird, wird nur auf Trainingsdaten gefittet. Imputation, Encoding, Skalierung und Feature Selection gehören deshalb in eine Pipeline oder in einen klar getrennten Train/Test-Workflow.
 
 ---
 
@@ -24,151 +26,118 @@ has_toc: true
 
 ---
 
-## Zuerst lesen
 
-Vor dieser Seite sollten diese Grundlagen klar sein:
+## Entscheidungslogik
 
-| Dokument | Warum zuerst? |
-|----------|---------------|
-| [Train-Test-Split](./train_test_split.html) | Alle lernenden Vorverarbeitungsschritte muessen nur auf Trainingsdaten gefittet werden. |
-| [Missing Values](./missing_values.html) | Fehlende Werte sind je nach Modell erlaubt oder muessen imputiert werden. |
-| [Kodierung](./kodierung_kategorialer_daten.html) | Die meisten Kursmodelle erwarten numerische Eingaben. |
-| [Skalierung](./skalierung.html) | Distanz-, Gradienten- und Varianzverfahren reagieren stark auf unterschiedliche Wertebereiche. |
-| [Outlier](./outlier.html) | Ausreisser sind kein Pflichtschritt fuer jedes Modell, koennen aber mehrere Verfahren stark verzerren. |
+Die wichtigste Frage ist nicht, ob ein Schritt grundsätzlich existiert, sondern ob das gewählte Verfahren davon abhängt. Einige Modelle vergleichen Zahlen direkt miteinander: große Wertebereiche können dann stärker wirken als kleine, auch wenn sie fachlich nicht wichtiger sind. Baumverfahren sind dagegen meist robuster gegenüber unterschiedlichen Skalen. Association-Rules-Verfahren wie Apriori benötigen wiederum keine klassische Skalierung, sondern eine transaktionale, binäre Datenstruktur.
 
-## Lesepfad
+```mermaid
+flowchart TD
+    A[Modell auswählen] --> B{Beeinflussen Abstände<br/>und Größenordnungen<br/>der Zahlen das Modell stark?}
+    B -->|Ja| C[Skalierung einplanen]
+    B -->|Nein| D[Skalierung nur bei Pipeline- oder Modellbedarf]
 
-Empfohlene Reihenfolge fuer den Prepare-Block:
+    A --> E{Gibt es fehlende Werte?}
+    E -->|Ja| F{Akzeptiert der Estimator<br/>fehlende Werte?}
+    F -->|Ja| G[Imputation fachlich prüfen]
+    F -->|Nein| H[Imputation oder begründetes Entfernen]
 
-1. [Train-Test-Split](./train_test_split.html)
-2. [Missing Values](./missing_values.html)
-3. [Kodierung](./kodierung_kategorialer_daten.html)
-4. [Skalierung](./skalierung.html)
-5. [Outlier](./outlier.html)
-6. [Feature Engineering](./feature-engineering.html)
-7. **Prepare nach Modell**
+    A --> I{Gibt es kategoriale Daten?}
+    I -->|Ja| J[Kodierung passend zum Modell wählen]
 
-Diese Seite ist als Entscheidungshilfe gedacht: Erst die einzelnen Techniken verstehen, dann pro Modell entscheiden, welche davon wirklich gebraucht werden.
+    A --> K{Gibt es extreme Werte?}
+    K -->|Ja| L[Ausreißer analysieren<br/>und Sensitivität prüfen]
+```
 
-## Legende
 
-| Eintrag | Bedeutung |
-|---------|-----------|
-| **Ja** | In der Regel notwendig oder sehr empfehlenswert. |
-| **Nein** | Normalerweise nicht erforderlich. |
-| **Bedingt** | Haengt von Daten, Implementierung, Pipeline oder Ziel ab. |
-| **Kritisch** | Ohne diesen Schritt sind Ergebnisse oft deutlich schlechter oder instabil. |
+## Überblick
 
-## Ueberblick
+| Algorithmus im Kurs                  | Fehlende Werte erlaubt?                     | Skalierung nötig?            | Kodierung nötig?             | Ausreißer kritisch?         | Besondere Prepare-Hinweise                                                                   |
+| ------------------------------------ | ------------------------------------------- | ---------------------------- | ---------------------------- | --------------------------- | -------------------------------------------------------------------------------------------- |
+| **Supervised Learning**              |                                             |                              |                              |                             |                                                                                              |
+| Decision Tree Classifier/Regressor   | Ja, in aktuellen scikit-learn-Versionen     | Nein                         | Ja                           | Eher nein                   | Für ältere Versionen oder vorgelagerte Pipeline-Schritte trotzdem imputieren.                |
+| Random Forest Classifier/Regressor   | Ja, in aktuellen scikit-learn-Versionen     | Nein                         | Ja                           | Eher nein                   | Robust, aber Feature-Auswahl und saubere Kodierung bleiben sinnvoll.                         |
+| Extra Trees                          | Ja, in aktuellen scikit-learn-Versionen     | Nein                         | Ja                           | Eher nein                   | Gilt im Kurs vor allem als PyCaret-/Ensemble-Vergleichsmodell.                               |
+| Gradient Boosting                    | Nein bei klassischen scikit-learn-Varianten | Nein                         | Ja                           | Mittel                      | Missing Values vorher behandeln; Hist-Gradient-Boosting ist ein Sonderfall.                  |
+| XGBoost Classifier/Regressor         | Ja                                          | Nein                         | Ja                           | Mittel                      | Missing Values werden intern behandelt; Kategorien im Kurs meist vorher kodieren.            |
+| LightGBM                             | Bedingt                                     | Nein                         | Bedingt                      | Mittel                      | Bei manueller Nutzung Library-Regeln für Kategorien und Missing Values beachten.             |
+| CatBoost                             | Bedingt                                     | Nein                         | Bedingt                      | Mittel                      | Kann Kategorien speziell behandeln; in AutoML-Vergleichen wird viel automatisch vorbereitet. |
+| Explainable Boosting Classifier      | Bedingt                                     | Nein                         | Ja                           | Mittel                      | Erklärbarkeit profitiert von sauber benannten, stabilen Features.                            |
+| Linear Regression                    | Nein                                        | Meist ja                     | Ja                           | Ja                          | Ausreißer und Multikollinearität besonders prüfen.                                           |
+| Logistic Regression                  | Nein                                        | Ja                           | Ja                           | Ja                          | Skalierung ist besonders bei Regularisierung wichtig.                                        |
+| KNN                                  | Nein                                        | Kritisch                     | Ja                           | Ja                          | Distanzbasiert: Skalierung und Ausreißerbehandlung prägen das Ergebnis.                      |
+| Linear SVC / SVM                     | Nein                                        | Kritisch                     | Ja                           | Ja                          | Ohne Skalierung dominieren Merkmale mit großem Wertebereich.                                 |
+| Stacking Classifier                  | Hängt von Base Models ab                    | Hängt von Base Models ab     | Ja                           | Hängt von Base Models ab    | Prepare muss zu Basis- und Meta-Modell passen.                                               |
+| Voting Regressor                     | Hängt von Einzelmodellen ab                 | Hängt von Einzelmodellen ab  | Ja                           | Hängt von Einzelmodellen ab | Gemeinsame Pipeline am empfindlichsten Einzelmodell ausrichten.                              |
+| **Unsupervised Learning**            |                                             |                              |                              |                             |                                                                                              |
+| K-Means                              | Nein                                        | Kritisch                     | Ja                           | Ja                          | Cluster werden über Distanzen gebildet; Ausreißer verschieben Zentren.                       |
+| DBSCAN                               | Nein                                        | Kritisch                     | Ja                           | Mittel                      | Skalierung bestimmt direkt `eps`; Ausreißer können bewusst als Noise erkannt werden.         |
+| PCA                                  | Nein                                        | Ja                           | Ja                           | Ja                          | Varianzbasiert: Skalierung ist in der Regel Pflicht.                                         |
+| Apriori / Association Rules          | Nein                                        | Nein                         | Speziell                     | Bedingt                     | Erwartet transaktionale, binär kodierte Warenkorb-Daten.                                     |
+| **Neural Network**                   |                                             |                              |                              |                             |                                                                                              |
+| MLP Classifier/Regressor             | Nein                                        | Ja                           | Ja                           | Ja                          | Skalierung stabilisiert Optimierung und Konvergenz.                                          |
+| Keras Dense-Netze                    | Nein                                        | Ja                           | Ja                           | Ja                          | Eingaben numerisch, skaliert und als Arrays/Tensoren vorbereiten.                            |
+| Keras CNN                            | Nein                                        | Ja                           | Bedingt                      | Mittel                      | Bilddaten normalisieren; Zielwerte als Labels oder One-Hot-Matrix vorbereiten.               |
+| Keras LSTM / Sequenzmodelle          | Nein                                        | Ja                           | Bedingt                      | Ja                          | Reihenfolge, Fensterbildung und zeitlicher Split sind entscheidend.                          |
+| Autoencoder                          | Nein                                        | Ja                           | Ja / bedingt                 | Ja                          | Bei Anomalieerkennung sind Ausreißer oft Zielsignal, nicht automatisch Fehler.               |
+| **Übrige**                           |                                             |                              |                              |                             |                                                                                              |
+| PyCaret AutoML                       | Wird automatisiert behandelt                | Wird automatisiert behandelt | Wird automatisiert behandelt | Prüfen                      | Automatisierung ersetzt keine fachliche Kontrolle von Datenqualität und Leakage.             |
 
-| Algorithmus im Kurs | Fehlende Werte erlaubt? | Skalierung noetig? | Kodierung noetig? | Ausreisser kritisch? | Besondere Prepare-Hinweise |
-|---------------------|-------------------------|--------------------|-------------------|----------------------|----------------------------|
-| Decision Tree Classifier/Regressor | Ja, in aktuellen scikit-learn-Versionen | Nein | Ja | Eher nein | Fuer aeltere Versionen oder Pipeline-Schritte trotzdem imputieren. |
-| Random Forest Classifier/Regressor | Ja, in aktuellen scikit-learn-Versionen | Nein | Ja | Eher nein | Robust, aber Feature-Auswahl und saubere Kodierung bleiben sinnvoll. |
-| XGBoost Classifier/Regressor | Ja | Nein | Ja | Mittel | Missing Values werden intern behandelt; Kategorien im Kurs meist vorher kodieren. |
-| Explainable Boosting Classifier | Bedingt | Nein | Ja | Mittel | Explainability profitiert von sauber benannten, stabilen Features. |
-| Linear Regression | Nein | Meist ja | Ja | Ja | Ausreisser und Multikollinearitaet besonders pruefen. |
-| Logistic Regression | Nein | Ja | Ja | Ja | Skalierung ist besonders bei Regularisierung wichtig. |
-| KNN | Nein | Kritisch | Ja | Ja | Distanzbasiert: Skalierung und Ausreisserbehandlung stark relevant. |
-| Linear SVC / SVM | Nein | Kritisch | Ja | Ja | Ohne Skalierung dominieren Merkmale mit grossem Wertebereich. |
-| MLP Classifier/Regressor | Nein | Ja | Ja | Ja | Skalierung stabilisiert Optimierung und Konvergenz. |
-| Keras Dense-Netze | Nein | Ja | Ja | Ja | Eingaben numerisch, skaliert und als Arrays/Tensoren vorbereiten. |
-| Keras CNN | Nein | Ja | Bedingt | Mittel | Bilddaten skalieren/normalisieren; Kategorien meist als Labels oder One-Hot-Ziele. |
-| Keras LSTM / Sequenzmodelle | Nein | Ja | Bedingt | Ja | Reihenfolge, Fensterbildung und zeitlicher Split sind entscheidend. |
-| Autoencoder | Nein | Ja | Ja / bedingt | Ja | Bei Anomalieerkennung sind Ausreisser oft Zielsignal, nicht automatisch Fehler. |
-| PCA | Nein | Ja | Ja | Ja | Varianzbasiert: Skalierung ist in der Regel Pflicht. |
-| K-Means | Nein | Kritisch | Ja | Ja | Cluster werden ueber Distanzen gebildet; Ausreisser verschieben Zentren. |
-| DBSCAN | Nein | Kritisch | Ja | Mittel | Skalierung bestimmt direkt `eps`; Ausreisser koennen bewusst als Noise erkannt werden. |
-| Apriori / Association Rules | Nein | Nein | Speziell | Bedingt | Erwartet transaktionale, binarisiert/one-hot kodierte Warenkorb-Daten. |
-| Stacking Classifier | Haengt von Base Models ab | Haengt von Base Models ab | Ja | Haengt von Base Models ab | Prepare muss zu allen Basis- und Meta-Modellen passen. |
-| Voting Regressor | Haengt von Einzelmodellen ab | Haengt von Einzelmodellen ab | Ja | Haengt von Einzelmodellen ab | Gemeinsame Pipeline so bauen, dass das empfindlichste Modell korrekt versorgt wird. |
-| PyCaret AutoML | Wird automatisiert behandelt | Wird automatisiert behandelt | Wird automatisiert behandelt | Pruefen | Automatisierung ersetzt keine fachliche Kontrolle von Datenqualitaet und Leakage. |
-| CatBoost / LightGBM / Extra Trees / Gradient Boosting in PyCaret-Vergleichen | Bedingt | Nein | Bedingt | Mittel | PyCaret kann viel vorbereiten; bei manueller Nutzung die jeweilige Library beachten. |
+
+**Legende**
+
+| Eintrag      | Bedeutung                                                                        |
+| ------------ | -------------------------------------------------------------------------------- |
+| **Ja**       | In der Regel notwendig oder klar empfehlenswert.                                 |
+| **Nein**     | Normalerweise nicht erforderlich.                                                |
+| **Bedingt**  | Abhängig von Daten, Library, Pipeline oder Zielsetzung.                          |
+| **Kritisch** | Ohne diesen Schritt werden Ergebnisse häufig instabil oder fachlich irreführend. |
 
 ## Modellgruppen
 
-### Baum- und Ensemble-Modelle
+### Supervised Learning
 
-Decision Trees, Random Forest, Extra Trees, Gradient Boosting, XGBoost und Explainable Boosting sind vergleichsweise robust gegen unterschiedliche Skalen. Skalierung ist deshalb normalerweise nicht erforderlich.
+Baum- und Ensemble-Modelle sind gegenüber unterschiedlichen Wertebereichen meist robust. Ein Decision Tree, Random Forest oder XGBoost profitiert deshalb selten von Skalierung. Kategoriale Features bleiben trotzdem ein Thema, weil scikit-learn-Modelle numerische Eingaben erwarten. Bei fehlenden Werten ist die Lage versions- und libraryabhängig: moderne scikit-learn-Bäume akzeptieren `NaN`, klassische Gradient-Boosting-Varianten nicht immer.
 
-Trotzdem gilt:
+Lineare Modelle, KNN und SVM reagieren deutlich stärker auf die Datenaufbereitung. Lineare Regression und Logistic Regression leiden unter Ausreißern und profitieren meist von skalierten numerischen Features. KNN und SVM sind noch strenger: Ohne Skalierung bildet oft nicht die fachliche Ähnlichkeit die Nachbarschaft, sondern nur der größte Zahlenbereich.
 
-- Kategoriale Features muessen fuer scikit-learn-Modelle numerisch kodiert werden.
-- Fehlende Werte sind nicht fuer jede Library und jede Version gleich geregelt.
-- Ausreisser muessen nicht automatisch geloescht werden, sollten aber bei Regression und stark verzerrten Zielvariablen geprueft werden.
+### Unsupervised Learning
 
-### Lineare Modelle
+K-Means und DBSCAN sind Distanzverfahren. Skalierung verändert dort unmittelbar, welche Punkte als ähnlich gelten. PCA ist varianzbasiert und braucht ebenfalls skalierte numerische Daten, wenn Features unterschiedliche Einheiten haben. Apriori folgt einer anderen Logik: Nicht Mittelwerte, Distanzen oder Gradienten sind relevant, sondern Transaktionen und binäre Item-Indikatoren.
 
-Lineare Regression und logistische Regression reagieren empfindlicher auf Ausreisser und Feature-Skalen als Baumverfahren. Besonders bei regularisierten Modellen ist Skalierung praktisch Standard.
+### Neural Network
 
-Wichtige Schritte:
+Neuronale Netze benötigen numerische und konsistent skalierte Eingaben. Bei MLP- und Dense-Netzen geht es vor allem um stabile Optimierung. Bei CNNs werden Pixelwerte typischerweise normalisiert. Bei LSTMs ist zusätzlich die zeitliche Struktur Teil des Preprocessing: Fensterbildung, Reihenfolge und zeitbasierte Splits sind dort wichtiger als ein zufälliger Train-Test-Split.
 
-- Missing Values imputieren oder Zeilen begruendet entfernen.
-- Kategoriale Daten kodieren, oft mit One-Hot-Encoding.
-- Numerische Features skalieren, besonders bei Logistic Regression.
-- Ausreisser und stark schiefe Verteilungen pruefen.
+> [!WARNING] Autoencoder und Ausreißer<br>
+> Bei Anomalieerkennung sind Ausreißer häufig nicht Schmutz in den Daten, sondern das Zielsignal. Ein automatisches Entfernen vor dem Training kann genau die Fälle löschen, die später erkannt werden sollen.
 
-### Distanzbasierte Modelle
+### Übrige
 
-KNN, SVM, K-Means und DBSCAN vergleichen Datenpunkte ueber Abstaende. Darum ist Skalierung hier nicht nur Kosmetik, sondern modellbestimmend.
-
-Wichtige Schritte:
-
-- Numerische Features skalieren.
-- Ausreisser pruefen, weil sie Nachbarschaften und Distanzen verzerren.
-- Kategoriale Features nur mit sinnvoller Kodierung verwenden.
-- Bei DBSCAN `eps` erst nach der Skalierung interpretieren.
-
-### Neuronale Netze
-
-MLP, Keras Dense-Netze, CNNs, LSTMs und Autoencoder brauchen numerische, konsistente Eingaben. Skalierung oder Normalisierung ist fast immer sinnvoll, weil die Optimierung sonst langsam oder instabil werden kann.
-
-Zusaetzlich wichtig:
-
-- Zielvariable passend kodieren: binar, Klassenindex oder One-Hot.
-- Bei Sequenzen zeitliche Reihenfolge erhalten.
-- Bei Bildern Pixelwerte normalisieren.
-- Bei Autoencodern klaeren, ob Ausreisser Fehler oder das eigentliche Zielsignal sind.
-
-### Dimensionsreduktion und Association Rules
-
-PCA ist varianzbasiert und braucht deshalb skalierte numerische Daten. Apriori arbeitet anders: Es lernt keine kontinuierlichen Modellparameter, sondern sucht haeufige Item-Kombinationen. Dafuer muessen Daten transaktional und meist binaer vorliegen.
-
-## Entscheidungsregeln
-
-Wenn unklar ist, welche Prepare-Schritte gebraucht werden, helfen diese Regeln:
-
-| Frage | Konsequenz |
-|-------|------------|
-| Gibt es Text- oder Kategorie-Spalten? | Kodieren. |
-| Gibt es `NaN` oder leere Werte? | Imputieren oder begruendet entfernen. |
-| Nutzt das Modell Distanzen, Gradienten oder Varianz? | Skalieren. |
-| Gibt es extreme Werte oder Messfehler? | Ausreisser pruefen; nicht blind loeschen. |
-| Werden mehrere Modelle kombiniert? | Prepare am empfindlichsten Modell ausrichten. |
-| Wird Cross-Validation oder Tuning genutzt? | Vorverarbeitung in die Pipeline legen. |
+PyCaret und AutoML übernehmen viele Vorverarbeitungsschritte automatisch. Das reduziert manuellen Aufwand, nimmt aber keine fachliche Prüfung ab. Besonders fehlende Werte, Leckage durch zeitlich falsche Splits, unausgewogene Zielklassen und unplausible Ausreißer müssen weiterhin verstanden werden.
 
 ## Typische Fehler
 
 | Fehler | Problem |
 |--------|---------|
 | Skalierung vor dem Train-Test-Split | Testdaten beeinflussen die Transformation: Data Leakage. |
-| Encoding auf allen Daten fitten | Seltene Kategorien aus Testdaten koennen ins Training leaken. |
-| Outlier automatisch entfernen | Echte, fachlich wichtige Extremfaelle gehen verloren. |
-| Baumverfahren unnoetig skalieren | Meist kein Schaden, aber unnoetige Komplexitaet. |
-| Distanzverfahren unskaliert trainieren | Grosse Zahlenbereiche dominieren das Modell. |
-| AutoML ungeprueft vertrauen | Automatisierung erkennt nicht jedes fachliche Datenproblem. |
+| Encoding auf allen Daten fitten | Kategorien aus Testdaten können ins Training leaken. |
+| Ausreißer automatisch entfernen | Echte Extremfälle und fachlich wichtige Signale gehen verloren. |
+| Baumverfahren unnötig skalieren | Meist kein Schaden, aber zusätzliche Komplexität ohne Modellnutzen. |
+| Distanzverfahren unskaliert trainieren | Große Zahlenbereiche dominieren Ähnlichkeit und Clusterstruktur. |
+| AutoML ungeprüft vertrauen | Automatisierung erkennt nicht jedes fachliche Datenproblem. |
 
 ## Abgrenzung zu verwandten Dokumenten
 
-| Thema | Abgrenzung |
-|-------|------------|
-| [Modellauswahl](../modeling/modellauswahl.html) | Waehlt das Modell zur Aufgabe; diese Seite leitet daraus Prepare-Anforderungen ab. |
-| [Modell-Steckbriefe](../modeling/modell-steckbriefe.html) | Beschreibt Staerken und Grenzen der Modelle; diese Seite fokussiert die Datenvorbereitung. |
-| [Workflow Design](../grundlagen/workflow-design.html) | Erklaert Pipelines und Leakage; diese Seite zeigt, welche Pipeline-Schritte je Modell relevant sind. |
-| [Cross-Validation](../evaluate/cross_validation.html) | Bewertet Modelle robust; Prepare-Schritte muessen dabei innerhalb der CV-Schleife liegen. |
+| Dokument | Frage |
+|----------|-------|
+| [Modellauswahl](../modeling/modellauswahl.html) | Nach welchen Kriterien wird ein Algorithmus ausgewählt? |
+| [Modell-Steckbriefe](../modeling/modell-steckbriefe.html) | Welche Stärken und Grenzen haben die Modelle selbst? |
+| [Workflow Design](../grundlagen/workflow-design.html) | Wie werden Pipelines so gebaut, dass keine Leakage entsteht? |
+| [Cross-Validation](../evaluate/cross_validation.html) | Wie wird Modellqualität geprüft, wenn Prepare-Schritte innerhalb der CV-Schleife liegen müssen? |
 
 ---
 
-**Version:** 1.0<br>
+**Version:** 1.1<br>
 **Stand:** Mai 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
