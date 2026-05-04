@@ -35,20 +35,43 @@ Die wichtigste Frage ist nicht, ob ein Schritt grundsätzlich existiert, sondern
 
 ```mermaid
 flowchart TD
-    A[Modell auswählen] --> B{Beeinflussen Abstände<br/>und Größenordnungen<br/>der Zahlen das Modell stark?}
-    B -->|Ja| C[Skalierung einplanen]
-    B -->|Nein| D[Skalierung nur bei Pipeline- oder Modellbedarf]
 
-    A --> E{Gibt es fehlende Werte?}
+    %% Startpunkt
+    A[Modell auswählen]
+
+    %% Zweig 1: Skalierung (Blau)
+    A --> B{Beeinflussen Abstände<br/>und Größenordnungen<br/>das Modell stark?}
+    B -->|Ja| C[<b>Skalierung einplanen</b>]
+    B -->|Nein| D[Skalierung nur bei Bedarf]
+    
+    style B fill:#e1f5fe,stroke:#01579b
+    style C fill:#e1f5fe,stroke:#01579b
+    style D fill:#e1f5fe,stroke:#01579b
+
+    %% Zweig 2: Fehlende Werte (Rot)
+    A --> E{Gibt es<br/>fehlende Werte?}
     E -->|Ja| F{Akzeptiert der Estimator<br/>fehlende Werte?}
-    F -->|Ja| G[Imputation fachlich prüfen]
-    F -->|Nein| H[Imputation oder begründetes Entfernen]
+    F -->|Ja| G[<b>Imputation fachlich prüfen</b>]
+    F -->|Nein| H[<b>Imputation oder Entfernen</b>]
+    
+    style E fill:#ffebee,stroke:#b71c1c
+    style F fill:#ffebee,stroke:#b71c1c
+    style G fill:#ffebee,stroke:#b71c1c
+    style H fill:#ffebee,stroke:#b71c1c
 
-    A --> I{Gibt es kategoriale Daten?}
-    I -->|Ja| J[Kodierung passend zum Modell wählen]
+    %% Zweig 3: Kategorien (Gelb/Gold)
+    A --> I{Gibt es<br/>kategoriale Daten?}
+    I -->|Ja| J[<b>Kodierung wählen</b><br/>OneHot / Ordinal]
+    
+    style I fill:#fffde7,stroke:#fbc02d
+    style J fill:#fffde7,stroke:#fbc02d
 
-    A --> K{Gibt es extreme Werte?}
-    K -->|Ja| L[Ausreißer analysieren<br/>und Sensitivität prüfen]
+    %% Zweig 4: Ausreißer (Grün)
+    A --> K{Gibt es<br/>extreme Werte?}
+    K -->|Ja| L[<b>Ausreißer analysieren</b><br/>und Sensitivität prüfen]
+
+    style K fill:#e8f5e9,stroke:#2e7d32
+    style L fill:#e8f5e9,stroke:#2e7d32
 ```
 
 
