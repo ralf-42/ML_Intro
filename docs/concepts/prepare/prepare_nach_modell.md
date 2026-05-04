@@ -3,7 +3,7 @@ layout: default
 title: Prepare nach Modell
 parent: Prepare
 grand_parent: Konzepte
-nav_order: 7
+nav_order: 2
 description: "Vorverarbeitungsschritte für die im Kurs eingesetzten ML-Algorithmen"
 has_toc: true
 ---
@@ -27,6 +27,20 @@ Vorverarbeitung ist kein fester Block, der für jedes Modell gleich aussieht. Ei
 {:toc}
 
 ---
+
+## Zuerst lesen
+
+Vor dieser Seite sollte der [Train-Test-Split](./train_test_split.html) klar sein. Die modellbezogene Entscheidung hängt daran, dass alle lernenden Prepare-Schritte nur auf den Trainingsdaten gefittet werden.
+
+## Lesepfad
+
+1. [Train-Test-Split](./train_test_split.html)
+2. **Prepare nach Modell**
+3. [Missing Values](./missing_values.html)
+4. [Kodierung](./kodierung_kategorialer_daten.html)
+5. [Skalierung](./skalierung.html)
+6. [Outlier](./outlier.html)
+7. [Feature Engineering](./feature-engineering.html)
 
 
 ## Entscheidungslogik
