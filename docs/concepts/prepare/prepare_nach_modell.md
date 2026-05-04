@@ -11,7 +11,7 @@ has_toc: true
 # Prepare nach Modell
 {: .no_toc }
 
-Vorverarbeitung ist kein fester Block, der für jedes Modell gleich aussieht. Ein Entscheidungsbaum braucht andere Datenvorbereitung als K-Means, eine logistische Regression oder ein LSTM. Entscheidend ist, ob ein Verfahren mit fehlenden Werten umgehen kann, ob es Distanzen oder Gradienten nutzt, ob es numerische Eingaben erwartet und ob Ausreißer das Lernsignal verzerren.
+Vorverarbeitung ist kein fester Block, der für jedes Modell gleich aussieht. Ein Entscheidungsbaum braucht andere Datenvorbereitung als K-Means, eine logistische Regression oder ein LSTM. Entscheidend ist, ob ein Verfahren mit fehlenden Werten umgehen kann, ob es Distanzen oder Gradienten nutzt, ob es numerische Eingaben erwartet und ob Ausreißer das Lernsignal verzerren.  
 
 
 > [!IMPORTANT] Pipeline-Regel<br>
