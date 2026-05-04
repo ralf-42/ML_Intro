@@ -30,7 +30,7 @@ Vorverarbeitung ist kein fester Block, der für jedes Modell gleich aussieht. Ei
 
 ## Zuerst lesen
 
-Vor dieser Seite sollte der [Train-Test-Split](./train_test_split.html) klar sein. Die modellbezogene Entscheidung hängt daran, dass alle lernenden Prepare-Schritte nur auf den Trainingsdaten gefittet werden.
+Vor dieser Seite sollte der [Train-Test-Split](./train_test_split.html) klar sein. Die modellbezogene Entscheidung hängt daran, dass alle lernenden Prepare-Schritte nur auf den Trainingsdaten gefittet werden. 
 
 ## Lesepfad
 
