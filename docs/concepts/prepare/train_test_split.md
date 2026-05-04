@@ -456,9 +456,10 @@ Der Train-Test-Split ist die Grundlage für zuverlässige Modellbewertung. Die k
 
 | Thema | Abgrenzung |
 |-------|------------|
+| [Prepare nach Modell](./prepare_nach_modell.html) | Nach dem Split wird entschieden, welche Vorverarbeitung das gewählte Modell wirklich braucht |
 | [Workflow-Design (Pipelines)](../grundlagen/workflow-design.html) | Train-Test-Split teilt Daten *vor* dem Preprocessing; Pipelines wenden fit/transform korrekt *nach* dem Split an |
-| [Cross-Validation](../evaluate/cross_validation.html) | Train-Test-Split ist ein einzelner, einfacher Split; Cross-Validation macht mehrfache Splits fuer robustere Bewertung |
-| [Missing Values](./missing_values.html) | Missing Values werden vor dem Split behandelt — falsche Reihenfolge fuehrt zu Data Leakage |
+| [Cross-Validation](../evaluate/cross_validation.html) | Train-Test-Split ist ein einzelner, einfacher Split; Cross-Validation macht mehrfache Splits für robustere Bewertung |
+| [Missing Values](./missing_values.html) | Missing Values werden nach dem Split innerhalb der Pipeline behandelt, wenn das Modell keine fehlenden Werte akzeptiert |
 
 ---
    

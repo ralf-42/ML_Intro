@@ -3,7 +3,7 @@ layout: default
 title: Outlier
 parent: Prepare
 grand_parent: Konzepte
-nav_order: 3
+nav_order: 6
 description: "Outlier - Ausreißer erkennen und behandeln mit Z-Score, IQR und Isolation Forest"
 has_toc: true
 ---
