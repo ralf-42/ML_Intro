@@ -13,8 +13,10 @@ has_toc: true
 
 Vorverarbeitung ist kein fester Block, der für jedes Modell gleich aussieht. Ein Entscheidungsbaum braucht andere Datenvorbereitung als K-Means, eine logistische Regression oder ein LSTM. Entscheidend ist, ob ein Verfahren mit fehlenden Werten umgehen kann, ob es Distanzen oder Gradienten nutzt, ob es numerische Eingaben erwartet und ob Ausreißer das Lernsignal verzerren.
 
+
 > [!IMPORTANT] Pipeline-Regel<br>
 > Alles, was aus Daten gelernt wird, wird nur auf Trainingsdaten gefittet. Imputation, Encoding, Skalierung und Feature Selection gehören deshalb in eine Pipeline oder in einen klar getrennten Train/Test-Workflow.
+
 
 ---
 
