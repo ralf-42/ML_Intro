@@ -57,7 +57,7 @@ Machine Learning Algorithmen und Modellierung
 | Thema                  | Beschreibung                            | Link                                                                       |
 | ---------------------- | --------------------------------------- | -------------------------------------------------------------------------- |
 | **Entscheidungsbaum**  | Interaktive Tree-Visualisierung         | [Entscheidungsbaum](https://editor.p5js.org/ralf.bendig.rb/full/0zz-teGS5) |
-| **Entropie**           | Information Gain und Splits             | [Entropy](https://editor.p5js.org/ralf.bendig.rb/full/U8HA8w1S_)           |
+| **Gini/Entropy**       | Split-Kriterien im Entscheidungsbaum    | [Gini/Entropy](https://editor.p5js.org/ralf.bendig.rb/full/uYvfGtOmZ)      |
 | **Lineare Regression** | Regressionslinie und Residuen           | [LineareRegression](https://editor.p5js.org/ralf.bendig.rb/full/qkA6BrHi0) |
 | **Random Forest**      | Visualisierung der Entscheidungsfindung | [Random Forest](https://editor.p5js.org/ralf.bendig.rb/full/IkWgpvgok)     |
 | **XGBoost**            | Abfolge lernender Entscheidungsbäume    | [xgboost](https://editor.p5js.org/ralf.bendig.rb/full/IDc6o3SKr)           |
