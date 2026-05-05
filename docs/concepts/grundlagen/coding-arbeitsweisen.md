@@ -4,14 +4,14 @@ title: Coding-Arbeitsweisen
 parent: Grundlagen
 grand_parent: Konzepte
 nav_order: 4
-description: "Effiziente Arbeitsweisen für die ML-Entwicklung: KI-Assistenz, Checklisten und Code-Snippets"
+description: "Effiziente Arbeitsweisen für die ML-Entwicklung: KI-Assistenz, Checklisten, Code-Snippets und Transfer-Cases"
 has_toc: true
 ---
 
 # Coding-Arbeitsweisen
 {: .no_toc }
 
-> **Effiziente Arbeitsweisen für die ML-Entwicklung: KI-Assistenz, Checklisten und Code-Snippets**    
+> **Effiziente Arbeitsweisen für die ML-Entwicklung: KI-Assistenz, Checklisten, Code-Snippets und Transfer-Cases**    
 
 ---
 
@@ -25,7 +25,7 @@ has_toc: true
 
 ## Überblick
 
-Professionelle ML-Entwicklung erfordert strukturierte Arbeitsweisen. Drei bewährte Methoden unterstützen dabei:
+Professionelle ML-Entwicklung erfordert strukturierte Arbeitsweisen. Vier bewährte Methoden unterstützen dabei:
 
 ```mermaid
 flowchart LR
@@ -33,23 +33,26 @@ flowchart LR
         A[🤖 KI-Assistenz] --> D[Effizienz]
         B[📋 Checklisten] --> D
         C[📝 Code-Snippets] --> D
+        F[🧭 Transfer-Cases] --> D
     end
     D --> E[Qualität & Geschwindigkeit]
     
     style A fill:#e1f5fe
     style B fill:#fff3e0
     style C fill:#e8f5e9
+    style F fill:#ede7f6
     style D fill:#f3e5f5
     style E fill:#fce4ec
 ```
 
-| Methode | Zweck | Zeitersparnis |
-|---------|-------|---------------|
-| **KI-Assistenz** | Schnelle Antworten, Code-Generierung | Hoch |
-| **Checklisten** | Vollständigkeit sicherstellen | Mittel |
-| **Code-Snippets** | Wiederverwendung bewährter Lösungen | Hoch |
+| Methode             | Zweck                                             | Zeitersparnis |
+| ------------------- | ------------------------------------------------- | ------------- |
+| **KI-Assistenz**    | Schnelle Antworten, Code-Generierung              | Hoch          |
+| **Checklisten**     | Vollständigkeit sicherstellen                     | Mittel        |
+| **Code-Snippets**   | Wiederverwendung bewährter Lösungen               | Hoch          |
+| **Transfer-Cases**  | Lösungsansätze vergleichbarer Probleme übertragen | Hoch          |
 
----
+Ein **Transfer-Case** ist ein vergleichbares, bereits gelöstes Problem mit dokumentiertem Lösungsansatz. An ihm kann man nachvollziehen, welche Schritte, Entscheidungen und Methoden funktioniert haben, und den Ansatz anschließend auf das eigene Problem übertragen und anpassen.
 
 ## KI-Assistenz beim Programmieren
 
@@ -91,6 +94,7 @@ mindmap
 | **Code generieren** | "Erstelle eine Funktion für Feature Scaling mit StandardScaler" |
 | **Optimieren** | "Wie kann ich diesen Code effizienter gestalten?" |
 | **Lernen** | "Erkläre mir Schritt für Schritt, wie Cross-Validation funktioniert" |
+| **Transfer-Case nutzen** | "Vergleiche mein Problem mit diesem Transfer-Case und zeige, welche Teile des Lösungsansatzes sich übertragen lassen" |
 
 ### Tipps für effektive KI-Nutzung
 
@@ -103,6 +107,7 @@ mindmap
 - Fehlermeldungen vollständig einfügen
 - Gewünschtes Ergebnis beschreiben
 - Codeausschnitt bereitstellen
+- Transfer-Case nennen, damit die Antwort die Übertragung von einem vergleichbaren gelösten Problem auf die eigene Aufgabe unterstützt
 
 ---
 
@@ -145,6 +150,7 @@ Die folgende Checkliste deckt alle wesentlichen Phasen eines ML-Projekts ab:
 - [ ] Daten sammeln und sichten
 - [ ] Statistische Analyse durchführen
 - [ ] Datenvisualisierung erstellen
+- [ ] Passenden Transfer-Case als Orientierung auswählen
 
 #### Phase 2: Prepare
 
@@ -159,6 +165,7 @@ Die folgende Checkliste deckt alle wesentlichen Phasen eines ML-Projekts ab:
 - [ ] Feature Engineering (neue Features schaffen)
 - [ ] Dimensionalität reduzieren
 - [ ] Resampling (Over-/Undersampling) prüfen
+- [ ] Preprocessing-Entscheidungen aus dem Transfer-Case auf Übertragbarkeit prüfen
 
 #### Phase 3: Modeling
 
@@ -170,6 +177,7 @@ Die folgende Checkliste deckt alle wesentlichen Phasen eines ML-Projekts ab:
 - [ ] Cross-Validation
 - [ ] Bootstrapping (optional)
 - [ ] Regularization prüfen
+- [ ] Modellansatz aus dem Transfer-Case als Orientierung für die eigene Lösung nutzen
 
 #### Phase 4: Evaluate
 
@@ -181,6 +189,7 @@ Die folgende Checkliste deckt alle wesentlichen Phasen eines ML-Projekts ab:
 - [ ] Modellinterpretation erstellen
 - [ ] Sensitivitätsanalyse erstellen
 - [ ] Key Takeaways kommunizieren
+- [ ] Ergebnisse mit dem Transfer-Case vergleichen und Unterschiede erklären
 
 #### Phase 5: Deploy
 
@@ -190,6 +199,7 @@ Die folgende Checkliste deckt alle wesentlichen Phasen eines ML-Projekts ab:
 - [ ] In die Produktion integrieren
 - [ ] Tests und Validierung durchführen
 - [ ] Dokumentation & Wartungsplan erstellen
+- [ ] Grenzen der Übertragbarkeit vom Transfer-Case auf den eigenen Anwendungsfall dokumentieren
 
 ---
 
@@ -215,6 +225,8 @@ flowchart TD
 ```
 
 ### Beispiel-Snippets für ML
+
+Snippets können aus einem Transfer-Case abgeleitet werden. Dabei wird nicht der Code blind kopiert, sondern der Lösungsansatz übertragen: Daten laden, Zielvariable definieren, Preprocessing aufbauen, Modell trainieren und Evaluation passend zum eigenen Problem anpassen.
 
 #### Data Loading & Exploration
 
@@ -311,12 +323,13 @@ def evaluate_classifier(y_true, y_pred, model_name="Model"):
 
 ### Organisation von Snippets
 
-| Methode            | Beschreibung                                     | Empfehlung                       |
-| ------------------ | ------------------------------------------------ | -------------------------------- |
-| **IDE-Snippets**   | In Google Colab, VS Code, PyCharm etc. speichern | Für häufig genutzte Patterns     |
-| **Utility-Module** | Python-Dateien mit Hilfsfunktionen               | Für projektübergreifende Nutzung |
-| **Notebooks**      | Template-Notebooks für verschiedene Aufgaben     | Für explorative Analysen         |
-| **Git Repository** | Versionierte Snippet-Sammlung                    | Für Team-Sharing                 |
+| Methode            | Beschreibung                                           | Empfehlung                                   |
+| ------------------ | ------------------------------------------------------ | -------------------------------------------- |
+| **IDE-Snippets**   | In Google Colab, VS Code, PyCharm etc. speichern       | Für häufig genutzte Patterns                 |
+| **Utility-Module** | Python-Dateien mit Hilfsfunktionen                     | Für projektübergreifende Nutzung             |
+| **Notebooks**      | Template-Notebooks für verschiedene Aufgaben           | Für explorative Analysen                     |
+| **Git Repository** | Versionierte Snippet-Sammlung                          | Für Team-Sharing                             |
+| **Transfer-Case**  | Lösungsansatz eines vergleichbaren Problems übertragen | Für Orientierung, Anpassung und Lerntransfer |
 
 > **Tipp**
 >
@@ -324,9 +337,45 @@ def evaluate_classifier(y_true, y_pred, model_name="Model"):
 
 ---
 
+## Transfer-Cases als Orientierung
+
+### Was ist ein Transfer-Case?
+
+Ein Transfer-Case ist ein vergleichbares Problem, für das bereits eine funktionierende Lösung vorliegt. In der ML-Entwicklung kann das zum Beispiel ein Notebook, ein dokumentiertes Projekt oder ein bekannter Beispiel-Workflow sein, der eine ähnliche Datenstruktur, Zielvariable oder Modellierungsaufgabe behandelt.
+
+Der Transfer-Case ersetzt nicht die eigene Analyse. Er hilft dabei, den Lösungsweg zu verstehen und gezielt zu übertragen:
+
+```mermaid
+flowchart LR
+    A[Transfer-Case<br/>gelöstes Problem] --> B[Lösungsansatz<br/>verstehen]
+    B --> C[Übertragbare<br/>Elemente auswählen]
+    C --> D[Eigenes Problem<br/>angepasst lösen]
+    
+    style A fill:#ede7f6
+    style B fill:#e1f5fe
+    style C fill:#fff3e0
+    style D fill:#e8f5e9
+```
+
+### Praktische Anwendung
+
+| Schritt | Leitfrage |
+|---------|-----------|
+| **Problem vergleichen** | Ist die Aufgabe ähnlich, z. B. Klassifikation, Regression oder Clustering? |
+| **Datenstruktur prüfen** | Gibt es vergleichbare Features, Zielvariablen oder Datentypen? |
+| **Lösungsansatz verstehen** | Welche Schritte wurden im Transfer-Case verwendet? |
+| **Transfer planen** | Welche Teile lassen sich übernehmen, welche müssen angepasst werden? |
+| **Grenzen dokumentieren** | Wo unterscheiden sich Transfer-Case und eigenes Problem deutlich? |
+
+> **Best Practice**
+>
+> Einen Transfer-Case nicht als Kopiervorlage verwenden, sondern als begründete Orientierung: Der Lösungsansatz wird übernommen, die konkrete Umsetzung wird an Daten, Zielsetzung und Bewertungskriterien des eigenen Problems angepasst.
+
+---
+
 ## Zusammenfassung
 
-Effiziente ML-Entwicklung basiert auf drei Säulen:
+Effiziente ML-Entwicklung basiert auf vier Säulen:
 
 ```mermaid
 flowchart TB
@@ -335,15 +384,18 @@ flowchart TB
         A[🤖 KI-Assistenz<br/>Schnelle Hilfe bei<br/>Syntax & Debugging]
         B[📋 Checklisten<br/>Vollständigkeit &<br/>Reproduzierbarkeit]
         C[📝 Code-Snippets<br/>Wiederverwendung &<br/>Best Practices]
+        E[🧭 Transfer-Cases<br/>Lösungsansätze<br/>übertragen]
     end
     
     A --> D[Produktive<br/>ML-Entwicklung]
     B --> D
     C --> D
+    E --> D
     
     style A fill:#e1f5fe
     style B fill:#fff3e0
     style C fill:#e8f5e9
+    style E fill:#ede7f6
     style D fill:#c8e6c9
 ```
 
@@ -352,8 +404,9 @@ flowchart TB
 - **KI-Assistenz** beschleunigt Problemlösung und Lernprozesse
 - **Checklisten** stellen sicher, dass keine wichtigen Schritte vergessen werden
 - **Code-Snippets** ermöglichen schnelle Implementierung bewährter Lösungen
+- **Transfer-Cases** liefern vergleichbare gelöste Probleme, deren Lösungsansätze auf die eigene Aufgabe übertragen werden können
 
-Die Kombination dieser Methoden führt zu höherer Codequalität, besserer Reproduzierbarkeit und effizienterer Projektarbeit.
+Die Kombination dieser vier Methoden führt zu höherer Codequalität, besserer Reproduzierbarkeit und effizienterer Projektarbeit.
 
 ---
 
@@ -361,7 +414,7 @@ Die Kombination dieser Methoden führt zu höherer Codequalität, besserer Repro
 
 | Thema | Abgrenzung |
 |-------|------------|
-| [ML Workflow Erklaerung](./ml_workflow_erklaerung.html) | Coding-Arbeitsweisen sind Produktivitaetstechniken (KI-Assistenz, Checklisten); ML-Workflow beschreibt Projektphasen |
+| [ML Workflow Erklaerung](./ml_workflow_erklaerung.html) | Coding-Arbeitsweisen sind Produktivitaetstechniken (KI-Assistenz, Checklisten, Code-Snippets, Transfer-Cases); ML-Workflow beschreibt Projektphasen |
 | [Modellauswahl](../modeling/modellauswahl.html) | Coding-Arbeitsweisen unterstuetzen effizientes Arbeiten; Modellauswahl entscheidet, welcher Algorithmus eingesetzt wird |
 | [Hyperparameter-Tuning](../evaluate/hyperparameter_tuning.html) | Arbeitsweisen optimieren den Entwicklungsprozess; Tuning optimiert Algorithmus-Parameter |
 
@@ -373,4 +426,3 @@ Die Kombination dieser Methoden führt zu höherer Codequalität, besserer Repro
 **Version:** 1.0<br>
 **Stand:** Januar 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
-
