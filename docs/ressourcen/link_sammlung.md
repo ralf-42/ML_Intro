@@ -163,19 +163,19 @@ has_toc: true
 
 ## 📚 Bücher & E-Books (kostenlos)
 
-| Titel | Link |
-|-------|------|
-| Data Science Guide (Berthold et al.) | [Link](https://www.datascienceguide.org/teaching-material.html) |
-| Hands-On ML (Géron) - Notebooks | [Link](https://github.com/ageron/handson-ml2) |
-| ML Book (Friedman) | [Link](https://dafriedman97.github.io/mlbook/content/introduction.html) |
-| ML Interpretability (H2O) | [Link](https://h2o.ai/content/dam/h2o/en/marketing/documents/2019/08/An-Introduction-to-Machine-Learning-Interpretability-Second-Edition.pdf) |
-| NLTK Book (NLP) | [Link](https://www.nltk.org/book/) |
-| Interpretable ML (Molnar) | [Link](https://christophm.github.io/interpretable-ml-book/) |
-| Data Mining Book | [Link](https://dataminingbook.info/book_html/) |
-| Explanatory Model Analysis | [Link](https://ema.drwhy.ai/) |
-| XAI Stories | [Link](https://pbiecek.github.io/xai_stories/) |
-| AI by Hand (Newsletter) | [Link](https://aibyhand.substack.com/) |
-| Maschinennah (deutsch) | [Link](https://www.maschinennah.de/ki-buch/) |
+| Titel                                | Link                                                                                                                                          |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Data Science Guide (Berthold et al.) | [Link](https://www.datascienceguide.org/teaching-material.html)                                                                               |
+| Hands-On ML (Géron) - Notebooks      | [Link](https://github.com/ageron/handson-ml3)                                                                                                 |
+| ML Book (Friedman)                   | [Link](https://dafriedman97.github.io/mlbook/content/introduction.html)                                                                       |
+| ML Interpretability (H2O)            | [Link](https://h2o.ai/content/dam/h2o/en/marketing/documents/2019/08/An-Introduction-to-Machine-Learning-Interpretability-Second-Edition.pdf) |
+| NLTK Book (NLP)                      | [Link](https://www.nltk.org/book/)                                                                                                            |
+| Interpretable ML (Molnar)            | [Link](https://christophm.github.io/interpretable-ml-book/)                                                                                   |
+| Data Mining Book                     | [Link](https://dataminingbook.info/book_html/)                                                                                                |
+| Explanatory Model Analysis           | [Link](https://ema.drwhy.ai/)                                                                                                                 |
+| XAI Stories                          | [Link](https://pbiecek.github.io/xai_stories/)                                                                                                |
+| AI by Hand (Newsletter)              | [Link](https://aibyhand.substack.com/)                                                                                                        |
+| Maschinennah (deutsch)               | [Link](https://www.maschinennah.de/ki-buch/)                                                                                                  |
 
 ---
 
