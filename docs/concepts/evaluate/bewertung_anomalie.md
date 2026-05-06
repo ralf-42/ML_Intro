@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Anomalieerkennung
+title: Anomalie
 parent: Evaluate
 grand_parent: Konzepte
 nav_order: 5
-description: "Bewertung von Anomalieerkennung: Anomaly Scores, decision_function, Thresholds und Metriken mit und ohne Labels"
+description: "Bewertung von Anomalien: Anomaly Scores, decision_function, Thresholds und Metriken mit und ohne Labels"
 has_toc: true
 ---
 
@@ -92,8 +92,6 @@ Bei `IsolationForest` gilt:
 
 ---
 
-
----
 
 ## Bewertung mit Labels
 
