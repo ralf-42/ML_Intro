@@ -11,7 +11,7 @@ has_toc: true
 # Bewertung: Anomalieerkennung
 {: .no_toc }
 
-> **Anomalieerkennung bewertet nicht nur Klassen, sondern vor allem Auffälligkeitswerte.**    
+> **Anomalieerkennung bewertet nicht nur Klassen, sondern vor allem Auffälligkeitswerte.**        
 > Ein Modell liefert meist zuerst einen Score pro Datenpunkt. Erst ein Schwellenwert macht daraus die Entscheidung "normal" oder "anomal".
 
 ---
@@ -71,12 +71,7 @@ Wichtig bei `IsolationForest` in scikit-learn:
 
 <img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/anomalie.png" class="logo" width="1000"/>
 
-Das ist eine häufige Stolperfalle: Bei `decision_function` bedeutet **größer nicht stärker anomal**, sondern stärker auf der normalen Seite der Entscheidungsgrenze. Wenn für Visualisierungen ein "Anomaly Score" gebraucht wird, bei dem höhere Werte auffälliger sind, kann man das Vorzeichen drehen:
-
-```python
-# Höherer Wert = auffälliger
-anomaly_scores = -model.decision_function(data)
-```
+Bei `decision_function` bedeutet **größer nicht stärker anomal**, sondern stärker auf der normalen Seite der Entscheidungsgrenze. 
 
 ### Zusammenhang mit `predict`
 
@@ -97,44 +92,6 @@ Bei `IsolationForest` gilt:
 
 ---
 
-## Score-Verteilung interpretieren
-
-Eine sinnvolle Auswertung beginnt oft mit der Score-Verteilung:
-
-```python
-import pandas as pd
-
-result = pd.DataFrame(data).copy()
-result["score"] = model.decision_function(data)
-result["anomaly_score"] = -result["score"]
-result["label"] = model.predict(data)
-
-top_anomalies = result.sort_values("anomaly_score", ascending=False).head(10)
-```
-
-Typische Prüfungen:
-
-| Prüfung | Zweck |
-|---------|-------|
-| **Histogramm der Scores** | Erkennen, ob es eine klare Trennung oder nur fließende Übergänge gibt |
-| **Top-k-Anomalien** | Die auffälligsten Fälle fachlich prüfen |
-| **Score pro Segment** | Prüfen, ob bestimmte Gruppen systematisch häufiger markiert werden |
-| **Zeitlicher Verlauf** | Monitoring: Drift, neue Muster oder Alarmhäufungen erkennen |
-
-```mermaid
-flowchart TD
-    S["Scores berechnen"] --> H["Verteilung visualisieren"]
-    S --> K["Top-k-Fälle prüfen"]
-    S --> G["Gruppen vergleichen"]
-    S --> Z["Zeitverlauf beobachten"]
-    
-    H --> E["Threshold begründen"]
-    K --> E
-    G --> E
-    Z --> E
-    
-    style E fill:#e8f5e9,stroke:#4caf50
-```
 
 ---
 
