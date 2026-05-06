@@ -212,6 +212,7 @@ Die Evaluation ist kein einmaliger Schritt, sondern ein iterativer Prozess. Die 
 
 - **Classification:** Confusion Matrix, ROC-Kurve, AUC
 - **Regression:** R², MAE, Residual-Plots
+- **Anomalieerkennung:** Anomaly Scores, Thresholds, Top-k-Review
 - **Cross-Validation:** Robustere Modellbewertung
 - **XAI (Explainable AI):** SHAP Values, LIME
 
@@ -221,6 +222,7 @@ Die Evaluation ist kein einmaliger Schritt, sondern ein iterativer Prozess. Die 
 |---|---|
 | [Bewertung Klassifizierung](./bewertung_klassifizierung.html) | Welche Metriken sind für Klassifikationsaufgaben zentral? |
 | [Bewertung Regression](./bewertung_regression.html) | Wie wird die Qualität numerischer Vorhersagen eingeordnet? |
+| [Bewertung Anomalieerkennung](./bewertung_anomalie.html) | Wie werden Anomaly Scores, `decision_function` und Thresholds interpretiert? |
 | [Cross Validation](./cross_validation.html) | Wie wird Modellqualität robuster über mehrere Folds geschätzt? |
 | [Bootstrapping](./bootstrapping.html) | Wie lässt sich die Unsicherheit einer Schätzung zusätzlich quantifizieren? |
 | [XAI Erklärbare KI](../xai_erklaerbare_ki.html) | Wie werden Modellentscheidungen über reine Metriken hinaus verständlich gemacht? |
