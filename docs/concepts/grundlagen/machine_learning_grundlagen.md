@@ -558,6 +558,7 @@ flowchart TB
 | [ML Workflow](./ml_workflow_erklaerung.html) | Grundlagen erklaeren *was* ML ist; der Workflow beschreibt *wie* Projekte strukturiert durchgefuehrt werden |
 | [Entscheidungsbaum](../modeling/decision_tree.html) | Grundlagen behandeln Lernparadigmen uebergreifend; Entscheidungsbaum ist eine konkrete Implementierung von Supervised Learning |
 | [Clustering (K-Means & DBSCAN)](../modeling/kmeans-dbscan.html) | Grundlagen definieren Unsupervised Learning als Paradigma; Clustering implementiert es praktisch ohne Labels |
+| [Isolation Forest](../modeling/isolation-forest.html) | Grundlagen nennen Anomalieerkennung als Aufgabentyp; Isolation Forest zeigt ein konkretes Verfahren dafuer |
 
 
 

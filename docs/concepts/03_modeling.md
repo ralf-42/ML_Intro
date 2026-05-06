@@ -41,6 +41,8 @@ Modelle, die Strukturen in ungelabelten Daten entdecken.
 
 **[Clustering (K-Means & DBSCAN)](https://ralf-42.github.io/ML_Intro/concepts/modeling/kmeans-dbscan.html)** – *Wie werden Datenpunkte ohne Labels sinnvoll gruppiert?* Partitions- und dichtebasiertes Clustering im Vergleich.
 
+**[Isolation Forest](https://ralf-42.github.io/ML_Intro/concepts/modeling/isolation-forest.html)** – *Wie werden Anomalien ohne Labels erkannt?* Baum-Ensemble zur unüberwachten Ausreißer- und Anomalieerkennung.
+
 **[PCA und LDA](https://ralf-42.github.io/ML_Intro/concepts/modeling/pca-lda.html)** – *Wie werden hochdimensionale Daten reduziert ohne wesentliche Information zu verlieren?* Dimensionsreduktion und Visualisierung mit PCA und LDA.
 
 **[Apriori](https://ralf-42.github.io/ML_Intro/concepts/modeling/apriori.html)** – *Wie werden häufige Muster in Transaktionsdaten gefunden?* Association Rules und Warenkorbanalyse mit dem Apriori-Algorithmus.

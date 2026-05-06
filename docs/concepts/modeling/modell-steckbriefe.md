@@ -36,6 +36,7 @@ Kompakte Referenz zu wichtigen Machine-Learning-Algorithmen mit Einsatzbereich, 
 | **LDA**                 | Supervised               | Dimensionsreduktion, Klassifikation | Erklärte Varianz                        |
 | **K-Means**             | Unsupervised             | Clustering                          | Silhouetten-Koeffizient                 |
 | **DBSCAN**              | Unsupervised             | Clustering, Anomalieerkennung       | Silhouetten-Koeffizient                 |
+| **Isolation Forest**    | Unsupervised             | Anomalieerkennung                   | Precision/Recall, Anomaly Score         |
 | **Apriori**             | Unsupervised             | Assoziationsanalyse                 | Support, Confidence, Lift               |
 | **PCA**                 | Unsupervised             | Dimensionsreduktion                 | Erklärte Varianz                        |
 
@@ -381,7 +382,47 @@ DBSCAN (Density-Based Spatial Clustering of Applications with Noise) ist ein dic
 - `metric`: Distanzmetrik ('euclidean', 'manhattan', etc.)
 
 
-> **Hinweis zur Anomalieerkennung:** Für die Erkennung von Anomalien und Ausreißern eignet sich **DBSCAN** (siehe Abschnitt "DBSCAN" oben), da dieser Algorithmus Rauschpunkte automatisch identifiziert und beliebig geformte Cluster erkennen kann.
+> **Hinweis zur Anomalieerkennung:** DBSCAN erkennt Ausreißer als Rauschpunkte im Rahmen eines Clustering-Ergebnisses. Wenn die Aufgabe direkt darin besteht, auffällige Datenpunkte zu bewerten, ist Isolation Forest oft die passendere Modellklasse.
+
+---
+
+### Isolation Forest
+
+| Eigenschaft | Beschreibung |
+|-------------|--------------|
+| **Lernstrategie** | Unsupervised Learning |
+| **Einsatzbereich** | Anomalieerkennung, Outlier Detection |
+| **Kernprinzip** | Isoliert ungewöhnliche Punkte mit zufälligen Baum-Splits schneller als normale Punkte |
+
+**Beschreibung**
+
+Isolation Forest ist ein Ensemble aus zufälligen Isolation Trees. Anomalien liegen häufig in dünn besetzten Randbereichen und werden deshalb mit wenigen Splits getrennt. Normale Beobachtungen brauchen im Durchschnitt längere Pfade. Aus den Pfadlängen entsteht ein Anomaly Score, der anschließend über einen Schwellenwert interpretiert wird.
+
+**Vorteile**
+- Kein gelabeltes Target nötig
+- Schnell und gut für tabellarische Daten geeignet
+- Liefert kontinuierliche Auffälligkeits-Scores
+- Robuster als rein distanzbasierte Verfahren bei größeren Datensätzen
+
+**Nachteile**
+- Schwellenwert und `contamination` müssen fachlich begründet werden
+- Ursachen der Anomalie sind nicht automatisch erklärt
+- Kategoriale Features und Missing Values müssen vorbereitet werden
+- Lokale Anomalien können schwieriger sein als globale Ausreißer
+
+**Bewertungsmetriken**
+
+| Situation | Metrik |
+|-----------|--------|
+| Gelabelte Anomalien vorhanden | Precision, Recall, F1, PR-AUC |
+| Wenige geprüfte Fälle | Top-k-Prüfung, fachliche Review |
+| Keine Labels | Score-Verteilung, Stabilität, Plausibilität |
+
+**Wichtige Hyperparameter**
+- `n_estimators`: Anzahl der Isolation Trees
+- `max_samples`: Stichprobengröße pro Baum
+- `contamination`: Erwarteter Anteil der Anomalien
+- `max_features`: Anteil der Features pro Baum
 
 ---
 
@@ -481,7 +522,7 @@ flowchart TD
     
     Q3 -->|Gruppen finden| CLUST[/"🔍 CLUSTERING<br/>K-Means<br/>DBSCAN"/]
 
-    Q3 -->|Ausreißer finden| ANOM[/"🔍 ANOMALIE<br/>DBSCAN"/]
+    Q3 -->|Ausreißer finden| ANOM[/"🔍 ANOMALIE<br/>Isolation Forest<br/>DBSCAN"/]
 
     Q3 -->|Dimensionen<br/>reduzieren| DIM[/"🔍 DIMENSIONSRED.<br/>PCA<br/>LDA (wenn Labels)"/]
     
@@ -502,6 +543,7 @@ flowchart TD
 |---|---|
 | [Modellauswahl](./modellauswahl.html) | Wie wird die Auswahl eines Verfahrens systematisch begründet? |
 | [Prepare nach Modell](../prepare/prepare_nach_modell.html) | Welche Vorverarbeitungsschritte braucht das gewählte Verfahren? |
+| [Isolation Forest](./isolation-forest.html) | Wie funktioniert ein konkretes Verfahren zur unüberwachten Anomalieerkennung? |
 | [Regression](./regression.html) | Welche Verfahren eignen sich speziell für numerische Zielgrößen? |
 | [Decision Tree](./decision_tree.html) | Wie funktioniert ein einzelnes, häufig genutztes Basismodell im Detail? |
 | [XGBoost](./xgboost.html) | Wie sieht ein leistungsstarkes Boosting-Verfahren im Vergleich aus? |

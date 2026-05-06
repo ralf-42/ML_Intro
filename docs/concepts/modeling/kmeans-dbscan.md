@@ -329,6 +329,7 @@ flowchart TB
 |-------|------------|
 | [Modellauswahl](./modellauswahl.html) | Modellauswahl entscheidet zwischen Supervised und Unsupervised; K-Means und DBSCAN sind Unsupervised-Algorithmen |
 | [Bewertung: Clustering](../evaluate/bewertung_clustering.html) | Clustering-Algorithmen erzeugen Gruppen; Metriken (Silhouette, Davies-Bouldin) bewerten die Guete der Zuordnung |
+| [Isolation Forest](./isolation-forest.html) | DBSCAN markiert Ausreißer als Noise im Clustering; Isolation Forest bewertet auffällige Punkte direkt über Anomaly Scores |
 
 
 ---
