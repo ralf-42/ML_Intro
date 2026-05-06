@@ -62,13 +62,14 @@ Diese Zeile berechnet für jede Zeile in `data` einen numerischen Score.
 
 Wichtig bei `IsolationForest` in scikit-learn:
 
-| Score | Interpretation |
-|-------|----------------|
-| **Großer positiver Wert** | Datenpunkt wirkt normaler |
-| **Wert nahe 0** | Datenpunkt liegt nahe an der Entscheidungsgrenze |
-| **Negativer Wert** | Datenpunkt wird als auffällig bzw. anomal eingestuft |
+| Score                     | Interpretation                                       |
+| ------------------------- | ---------------------------------------------------- |
+| **Großer positiver Wert** | Datenpunkt wirkt normaler                            |
+| **Wert nahe 0**           | Datenpunkt liegt nahe an der Entscheidungsgrenze     |
+| **Negativer Wert**        | Datenpunkt wird als auffällig bzw. anomal eingestuft |
+|                           |                                                      |
 
-<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/residuals_plot.png" class="logo" width="650"/>
+<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/anomalie.png" class="logo" width="1000"/>
 
 Das ist eine häufige Stolperfalle: Bei `decision_function` bedeutet **größer nicht stärker anomal**, sondern stärker auf der normalen Seite der Entscheidungsgrenze. Wenn für Visualisierungen ein "Anomaly Score" gebraucht wird, bei dem höhere Werte auffälliger sind, kann man das Vorzeichen drehen:
 
