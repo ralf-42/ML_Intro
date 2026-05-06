@@ -316,6 +316,7 @@ Anomalieerkennung ist schwerer zu evaluieren als klassische Klassifikation, weil
 |-------|------------|
 | [Outlier](../prepare/outlier.html) | Outlier behandelt Datenqualitätsprüfung und Behandlungsstrategien; Isolation Forest ist ein konkretes ML-Verfahren zur Erkennung auffälliger Punkte |
 | [K-Means und DBSCAN](./kmeans-dbscan.html) | DBSCAN erkennt Ausreißer als Noise im Rahmen von Clustering; Isolation Forest fokussiert direkt auf Anomalie-Scores |
+| [Bewertung: Anomalieerkennung](../evaluate/bewertung_anomalie.html) | Bewertet `decision_function`, Anomaly Scores, Thresholds und Metriken für erkannte Auffälligkeiten |
 | [Modellauswahl](./modellauswahl.html) | Modellauswahl entscheidet, wann Anomalieerkennung statt Klassifikation oder Clustering sinnvoll ist |
 | [Prepare nach Modell](../prepare/prepare_nach_modell.html) | Zeigt, welche Vorverarbeitung Isolation Forest und andere Modelle benötigen |
 

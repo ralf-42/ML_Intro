@@ -19,6 +19,8 @@ description: "Bewertung und Evaluation von ML-Modellen"
 
 **[Clustering](https://ralf-42.github.io/ML_Intro/concepts/evaluate/bewertung_clustering.html)** – *Wie wird bewertet, ob eine Clusterstruktur sinnvoll ist?* Silhouette-Koeffizient und weitere Cluster-Validierungsmetriken.
 
+**[Anomalieerkennung](https://ralf-42.github.io/ML_Intro/concepts/evaluate/bewertung_anomalie.html)** – *Wie werden Auffälligkeiten und Anomaly Scores interpretiert?* `decision_function`, Thresholds, Top-k-Review und Metriken für seltene Anomalien.
+
 ## Cross-Validation
 
 **[Cross-Validation](https://ralf-42.github.io/ML_Intro/concepts/evaluate/cross_validation.html)** – *Wie liefert Kreuzvalidierung eine robuste Schätzung der Modellgüte?* K-Fold, Stratified K-Fold, Leave-One-Out und Time Series Split.
