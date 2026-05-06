@@ -49,6 +49,7 @@ flowchart TB
         end
 
         subgraph ml["<b>ML-basiert"]
+            iforest["<b>Isolation Forest</b><br/>Baum-Ensemble zur<br/>Anomalieerkennung"]
             dbscan["<b>DBSCAN</b><br/>Dichtebasiertes Clustering<br/>mit Ausreißer-Erkennung"]
             lof["<b>Local Outlier Factor</b><br/>Lokale Dichte-<br/>abweichungen"]
         end
@@ -273,6 +274,7 @@ flowchart TB
 
 | Klasse               | Verwendung                                         |
 | -------------------- | -------------------------------------------------- |
+| `IsolationForest`    | Baum-Ensemble zur unüberwachten Anomalieerkennung  |
 | `DBSCAN`             | Dichtebasiertes Clustering mit Ausreißer-Erkennung |
 | `LocalOutlierFactor` | Dichtebasierte lokale Ausreißer                    |
 | `EllipticEnvelope`   | Gaussian-basierte Ausreißer-Erkennung              |
@@ -284,6 +286,7 @@ flowchart TB
 | Thema | Abgrenzung |
 |-------|------------|
 | [Missing Values](./missing_values.html) | Outliers sind extreme Werte; Missing Values sind fehlende Eintraege — unterschiedliche Erkennungs- und Behandlungsstrategien |
+| [Isolation Forest](../modeling/isolation-forest.html) | Isolation Forest ist ein konkretes ML-Verfahren zur Erkennung auffälliger Datenpunkte; Outlier beschreibt zusätzlich Ursachenanalyse und Behandlung |
 | [Skalierung](./skalierung.html) | Outliers werden idealerweise vor der Skalierung behandelt; Skalierung transformiert den Wertebereich nach der Bereinigung |
 | [Prepare nach Modell](./prepare_nach_modell.html) | Zeigt, bei welchen Kursalgorithmen Ausreißer kritisch sind und wo sie eher beobachtet statt entfernt werden |
 | [Feature Engineering](./feature-engineering.html) | Outlier-Behandlung bereinigt Rohdaten; Feature Engineering transformiert bereinigte Daten in neue Merkmale |

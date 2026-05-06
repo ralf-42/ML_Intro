@@ -80,7 +80,7 @@ flowchart TD
 | Random Forest Classifier/Regressor |              Ja              |             Nein             |              Ja              |            Nein             | Robust, aber Feature-Auswahl und saubere Kodierung bleiben sinnvoll.                 |
 | Gradient Boosting                  |             Nein             |             Nein             |              Ja              |           Mittel            | Missing Values vorher behandeln; Hist-Gradient-Boosting ist ein Sonderfall.          |
 | XGBoost Classifier/Regressor       |              Ja              |             Nein             |              Ja              |           Mittel            | Missing Values werden intern behandelt; Kategorien im Kurs meist vorher kodieren.    |
-| Linear Regression                  |             Nein             |             Jja              |              Ja              |             Ja              | Ausreißer und Multikollinearität besonders prüfen.                                   |
+| Linear Regression                  |             Nein             |              Ja              |              Ja              |             Ja              | Ausreißer und Multikollinearität besonders prüfen.                                   |
 | Logistic Regression                |             Nein             |              Ja              |              Ja              |             Ja              | Skalierung ist besonders bei Regularisierung wichtig.                                |
 | KNN                                |             Nein             |              Ja              |              Ja              |             Ja              | Distanzbasiert: Skalierung und Ausreißerbehandlung prägen das Ergebnis.              |
 | Linear SVC / SVM                   |             Nein             |              Ja              |              Ja              |             Ja              | Ohne Skalierung dominieren Merkmale mit großem Wertebereich.                         |
@@ -89,6 +89,7 @@ flowchart TD
 | **Unsupervised Learning**          |                              |                              |                              |                             |                                                                                      |
 | K-Means                            |             Nein             |              Ja              |              Ja              |             Ja              | Cluster werden über Distanzen gebildet; Ausreißer verschieben Zentren.               |
 | DBSCAN                             |             Nein             |              Ja              |              Ja              |           Mittel            | Skalierung bestimmt direkt `eps`; Ausreißer können bewusst als Noise erkannt werden. |
+| Isolation Forest                   |             Nein             |            Bedingt           |              Ja              |          Zielsignal         | Ausreißer sind häufig das zu erkennende Signal; Missing Values und Kategorien vorbereiten. |
 | PCA                                |             Nein             |              Ja              |              Ja              |             Ja              | Varianzbasiert: Skalierung ist in der Regel Pflicht.                                 |
 | Apriori / Association Rules        |             Nein             |             Nein             |           Speziell           |             Ja              | Erwartet transaktionale, binär kodierte Warenkorb-Daten.                             |
 | **Neural Network**                 |                              |                              |                              |                             |                                                                                      |
@@ -108,6 +109,7 @@ flowchart TD
 | **Ja**       | In der Regel notwendig oder klar empfehlenswert.                                 |
 | **Nein**     | Normalerweise nicht erforderlich.                                                |
 | **Bedingt**  | Abhängig von Daten, Library, Pipeline oder Zielsetzung.                          |
+| **Zielsignal** | Ausreißer sind nicht automatisch Fehler, sondern können die gesuchten Fälle sein. |
 
 
 ## Modellgruppen
@@ -120,7 +122,7 @@ Lineare Modelle, KNN und SVM reagieren deutlich stärker auf die Datenaufbereitu
 
 ### Unsupervised Learning
 
-K-Means und DBSCAN sind Distanzverfahren. Skalierung verändert dort unmittelbar, welche Punkte als ähnlich gelten. PCA ist varianzbasiert und braucht ebenfalls skalierte numerische Daten, wenn Features unterschiedliche Einheiten haben. Apriori folgt einer anderen Logik: Nicht Mittelwerte, Distanzen oder Gradienten sind relevant, sondern Transaktionen und binäre Item-Indikatoren.
+K-Means und DBSCAN sind Distanzverfahren. Skalierung verändert dort unmittelbar, welche Punkte als ähnlich gelten. Isolation Forest ist baumbasiert und weniger direkt von Skalen abhängig, benötigt aber numerische, vollständige Eingaben und eine fachlich begründete Behandlung des Anomalie-Signals. PCA ist varianzbasiert und braucht ebenfalls skalierte numerische Daten, wenn Features unterschiedliche Einheiten haben. Apriori folgt einer anderen Logik: Nicht Mittelwerte, Distanzen oder Gradienten sind relevant, sondern Transaktionen und binäre Item-Indikatoren.
 
 ### Neural Network
 
@@ -150,6 +152,7 @@ PyCaret und AutoML übernehmen viele Vorverarbeitungsschritte automatisch. Das r
 |----------|-------|
 | [Modellauswahl](../modeling/modellauswahl.html) | Nach welchen Kriterien wird ein Algorithmus ausgewählt? |
 | [Modell-Steckbriefe](../modeling/modell-steckbriefe.html) | Welche Stärken und Grenzen haben die Modelle selbst? |
+| [Isolation Forest](../modeling/isolation-forest.html) | Welche Besonderheiten hat ein baumbasiertes Verfahren zur Anomalieerkennung? |
 | [Workflow Design](../grundlagen/workflow-design.html) | Wie werden Pipelines so gebaut, dass keine Leakage entsteht? |
 | [Cross-Validation](../evaluate/cross_validation.html) | Wie wird Modellqualität geprüft, wenn Prepare-Schritte innerhalb der CV-Schleife liegen müssen? |
 
