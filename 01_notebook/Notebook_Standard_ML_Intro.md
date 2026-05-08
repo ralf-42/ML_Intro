@@ -367,7 +367,7 @@ Pipeline- und Workflow-Logik.
 
 ### 9.8 `07_special`
 
-Vision, NLP, Zeitreihen, Autoencoder und andere Spezialthemen.
+Vision, NLP, Zeitreihen, Autocoder und andere Spezialthemen.
 
 ### 9.9 `09_diverse`
 
