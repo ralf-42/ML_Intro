@@ -174,15 +174,15 @@ Die folgende Checkliste deckt alle wesentlichen Phasen eines ML-Projekts ab:
 - [ ] Train-Test-Split erstellen
 - [ ] Training durchführen
 - [ ] Hyperparameter Tuning
-- [ ] Cross-Validation
-- [ ] Bootstrapping (optional)
-- [ ] Regularization prüfen
 - [ ] Modellansatz aus dem Transfer-Case als Orientierung für die eigene Lösung nutzen
 
 #### Phase 4: Evaluate
 
 - [ ] Prognose (Train, Test) erstellen
 - [ ] Modellgüte prüfen (Metriken)
+- [ ] Cross-Validation
+- [ ] Bootstrapping (optional)
+- [ ] Regularisierung prüfen
 - [ ] Residuenanalyse erstellen
 - [ ] Feature Importance/Selection prüfen
 - [ ] Robustheitstest erstellen
