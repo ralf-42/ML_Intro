@@ -155,6 +155,7 @@ Die folgende Checkliste deckt alle wesentlichen Phasen eines ML-Projekts ab:
 #### Phase 2: Prepare
 
 - [ ] Prepare-Schritte festlegen
+- [ ] Train-Test-Split durchführen
 - [ ] Nicht benötigte Features löschen
 - [ ] Datentypen ermitteln/ändern
 - [ ] Duplikate ermitteln/löschen
@@ -165,13 +166,13 @@ Die folgende Checkliste deckt alle wesentlichen Phasen eines ML-Projekts ab:
 - [ ] Feature Engineering (neue Features schaffen)
 - [ ] Dimensionalität reduzieren
 - [ ] Resampling (Over-/Undersampling) prüfen
+- [ ] Pipeline erstellen/konfigurieren
 - [ ] Preprocessing-Entscheidungen aus dem Transfer-Case auf Übertragbarkeit prüfen
 
 #### Phase 3: Modeling
 
 - [ ] Modellauswahl treffen
-- [ ] Pipeline erstellen/konfigurieren
-- [ ] Train-Test-Split erstellen
+- [ ] Pipeline erweitern/konfigurieren
 - [ ] Training durchführen
 - [ ] Hyperparameter Tuning
 - [ ] Modellansatz aus dem Transfer-Case als Orientierung für die eigene Lösung nutzen
@@ -185,7 +186,6 @@ Die folgende Checkliste deckt alle wesentlichen Phasen eines ML-Projekts ab:
 - [ ] Regularisierung prüfen
 - [ ] Residuenanalyse erstellen
 - [ ] Feature Importance/Selection prüfen
-- [ ] Robustheitstest erstellen
 - [ ] Modellinterpretation erstellen
 - [ ] Sensitivitätsanalyse erstellen
 - [ ] Key Takeaways kommunizieren
