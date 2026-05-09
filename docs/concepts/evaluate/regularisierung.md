@@ -11,7 +11,7 @@ has_toc: true
 # Regularisierung
 {: .no_toc }
 
-> **Kontrolle der Modellkomplexität**     
+> **Kontrolle der Modellkomplexität**<br>
 > L1, L2, Elastic Net, Ridge und Lasso Regression
 
 ---

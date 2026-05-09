@@ -11,7 +11,7 @@ has_toc: true
 # Bootstrapping
 {: .no_toc }
 
-> **Resampling zur Schätzung von Unsicherheit**      
+> **Resampling zur Schätzung von Unsicherheit**<br>
 > Sampling mit Zurücklegen, Konfidenzintervalle und Bootstrap-Aggregating
 
 ---

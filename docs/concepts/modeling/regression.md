@@ -11,7 +11,7 @@ has_toc: true
 # Regression
 {: .no_toc }
 
-> **Regressionsmodelle sagen stetige, numerische Werte voraus**     
+> **Regressionsmodelle sagen stetige, numerische Werte voraus**<br>
 > Lineare und logistische Regression, Loss-Funktionen und Gradient Descent
 
 ---

@@ -1,10 +1,11 @@
 ---
 layout: default
 title: Modeling
-parent: Konzepte
+parent: Alle Konzepte
 nav_order: 3
 has_children: true
-description: "Machine Learning Modelle und Algorithmen"
+description: Machine Learning Modelle und Algorithmen
+grand_parent: Konzepte
 ---
 
 # Modeling

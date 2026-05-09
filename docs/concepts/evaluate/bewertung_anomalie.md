@@ -11,7 +11,7 @@ has_toc: true
 # Bewertung: Anomalieerkennung
 {: .no_toc }
 
-> **Anomalieerkennung bewertet nicht nur Klassen, sondern vor allem Auffälligkeitswerte.**        
+> **Anomalieerkennung bewertet nicht nur Klassen, sondern vor allem Auffälligkeitswerte.**<br>
 > Ein Modell liefert meist zuerst einen Score pro Datenpunkt. Erst ein Schwellenwert macht daraus die Entscheidung "normal" oder "anomal".
 
 ---

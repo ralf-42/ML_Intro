@@ -1,10 +1,11 @@
 ---
 layout: default
 title: Prepare
-parent: Konzepte
+parent: Alle Konzepte
 nav_order: 2
 has_children: true
-description: "Datenaufbereitung für Machine Learning"
+description: Datenaufbereitung für Machine Learning
+grand_parent: Konzepte
 ---
 
 # Prepare

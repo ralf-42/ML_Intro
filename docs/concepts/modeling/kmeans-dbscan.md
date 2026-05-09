@@ -11,7 +11,7 @@ has_toc: true
 # Clustering: K-Means & DBSCAN
 {: .no_toc }
 
-> **Clustering-Verfahren entdecken verborgene Strukturen in Daten, indem sie ähnliche Datenpunkte zu Gruppen zusammenfassen.**    
+> **Clustering-Verfahren entdecken verborgene Strukturen in Daten, indem sie ähnliche Datenpunkte zu Gruppen zusammenfassen.**<br>
 >  K-Means eignet sich für kompakte, gleichmäßige Cluster, während DBSCAN beliebig geformte Cluster erkennt und Ausreißer identifiziert.
 
 ---
