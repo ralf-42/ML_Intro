@@ -1,18 +1,13 @@
 ---
 layout: default
 title: Modeling
-parent: Alle Konzepte
+parent: Konzepte
 nav_order: 3
 has_children: true
 description: Machine Learning Modelle und Algorithmen
-grand_parent: Konzepte
 ---
 
 # Modeling
-
-**Version:** 1.0<br>
-**Stand:** Mai 2026<br>
-**Kurs:** Machine Learning Einführung
 
 Überblick über Machine Learning Modelle und ihre Anwendungsfälle.
 
@@ -81,8 +76,3 @@ Kombination mehrerer Modelle für bessere Vorhersagen.
 ## Automatisierung
 
 **[AutoML](modeling/automl.html)** – *Wie automatisiert PyCaret den ML-Workflow?* Workflow-Automatisierung von Datenvorbereitung bis Modellauswahl.
-
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|

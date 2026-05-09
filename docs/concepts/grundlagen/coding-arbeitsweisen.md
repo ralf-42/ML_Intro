@@ -139,9 +139,7 @@ flowchart TD
 
 Die folgende Checkliste deckt alle wesentlichen Phasen eines ML-Projekts ab:
 
-
 <img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/checkliste.png" class="logo" width="950"/>
-
 
 #### Phase 1: Understand
 
@@ -416,9 +414,6 @@ Die Kombination dieser vier Methoden führt zu höherer Codequalität, besserer 
 | [ML Workflow Erklaerung](./ml_workflow_erklaerung.html) | Coding-Arbeitsweisen sind Produktivitaetstechniken (KI-Assistenz, Checklisten, Code-Snippets, Transfer-Cases); ML-Workflow beschreibt Projektphasen |
 | [Modellauswahl](../modeling/modellauswahl.html) | Coding-Arbeitsweisen unterstuetzen effizientes Arbeiten; Modellauswahl entscheidet, welcher Algorithmus eingesetzt wird |
 | [Hyperparameter-Tuning](../evaluate/hyperparameter_tuning.html) | Arbeitsweisen optimieren den Entwicklungsprozess; Tuning optimiert Algorithmus-Parameter |
-
-
-
 
 ---
 

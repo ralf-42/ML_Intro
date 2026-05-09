@@ -4,7 +4,7 @@ title: Regularisierung
 parent: Evaluate
 grand_parent: Konzepte
 nav_order: 10
-description: "Regularisierung - Kontrolle der Modellkomplexität durch Strafterme"
+description: Regularisierung - Kontrolle der Modellkomplexität durch Strafterme
 has_toc: true
 ---
 
@@ -51,7 +51,6 @@ flowchart LR
 
 > [!NOTE] Auswahlhilfe<br>
 > L1 fördert Sparse-Modelle, L2 stabilisiert Gewichte, Elastic Net kombiniert beide Effekte.
-
 
 <img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/regularization.png" class="center" width="950"/>
 
@@ -104,7 +103,6 @@ coef_df = pd.DataFrame({
 print("\nAusgewählte Features (Koeffizient ≠ 0):")
 print(coef_df[coef_df['Coefficient'] != 0].sort_values('Coefficient', key=abs, ascending=False))
 ```
-
 
 ## L2-Regularisierung (Ridge)
 
@@ -277,9 +275,6 @@ flowchart LR
     style E2 fill:#c8e6c9
 ```
 
-
-
-
 ### Optimales Alpha finden
 
 ```python
@@ -316,9 +311,7 @@ print(f"Optimales Alpha: {best_alpha:.4f}")
 print(f"Bester CV-Score: {scores[best_idx]:.4f}")
 ```
 
-
 <img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/opt_alpha.png" class="logo" width="750"/>
-
 
 ## Regularisierung in Neuronalen Netzen
 
@@ -710,8 +703,6 @@ Regularisierung ist ein unverzichtbares Werkzeug im Machine Learning. Die richti
 | [Hyperparameter Tuning](./hyperparameter_tuning.html) | Wie werden Regularisierungsstärken systematisch gewählt? |
 | [Regression](../modeling/regression.html) | Wie sieht Regularisierung im Kontext linearer Modelle aus? |
 | [Neuronale Netze](../modeling/neuronale-netze.html) | Welche Regularisierungsformen sind bei Deep-Learning-Modellen relevant? |
-
-
 
 ---
 

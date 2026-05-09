@@ -224,7 +224,6 @@ Der Lift von 1.11 zeigt einen leicht positiven Zusammenhang – Milch und Windel
 
 ---
 
-
 ## Parameterwahl und Schwellenwerte
 
 Die Wahl geeigneter Schwellenwerte ist entscheidend für brauchbare Ergebnisse:
@@ -288,7 +287,6 @@ flowchart TB
 | Seltene Items ignoriert | Support senken oder Items gruppieren |
 
 ---
-
 
 ### Kernpunkte
 

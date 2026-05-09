@@ -1,11 +1,10 @@
 ---
 layout: default
 title: Links
-parent: Alle Ressourcen
+parent: Ressourcen
 nav_order: 2
 description: "Umfassende Sammlung nützlicher ML-Ressourcen: Videos, Tutorials, Bücher, Tools"
 has_toc: true
-grand_parent: Ressourcen
 ---
 
 # Links
@@ -95,8 +94,6 @@ grand_parent: Ressourcen
 | RNN | [Link](https://www.youtube.com/watch?v=AsNTP8Kwu80) |
 | LSTM | [Link](https://www.youtube.com/watch?v=YCzL96nL7j0) |
 
-
-
 ---
 
 ## 📝 Towards Data Science / Medium
@@ -179,7 +176,6 @@ grand_parent: Ressourcen
 
 ---
 
-
 ## 🤖 KI-Tool-Sammlungen
 
 | Plattform | Link |
@@ -256,13 +252,13 @@ grand_parent: Ressourcen
 | The Morpheus Tutorials (deutsch) | [Link](https://www.youtube.com/@TheMorpheusTutorials) |
 | KNIME TV | [Link](https://www.youtube.com/playlist?list=PLz3mQ6OlTI0bX8gRWtuI97HMfrWUtffLG) |
 
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|
+
 ---
 
 **Version:** 1.0<br>
 **Stand:** Januar 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
-
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|

@@ -13,8 +13,6 @@ has_toc: false
 > **Machine Learning - Von den Grundlagen zu fortgeschrittenen Methoden**<br>
 > Praktische Anwendung von Supervised und Unsupervised Learning, Neural Networks und modernen ML-Frameworks   
 
-
-
 ---
 
 Machine Learning steht im Kurs nicht für einen abstrakten Sammelbegriff, sondern für einen konkreten Arbeitsablauf: Daten verstehen, vorbereiten, ein Modell auswählen, die Qualität prüfen und das Ergebnis so bereitstellen, dass es außerhalb des Notebooks noch nutzbar bleibt. Genau an dieser Kette scheitern viele erste Projekte. Nicht am Modell allein, sondern an fehlender Datenlogik, schlechter Evaluation oder einer Pipeline, die nur einmal lokal funktioniert.
@@ -22,7 +20,6 @@ Machine Learning steht im Kurs nicht für einen abstrakten Sammelbegriff, sonder
 Der Kurs ist deshalb bewusst breiter angelegt als eine reine Modellsammlung. Klassische Verfahren wie Regression, Entscheidungsbäume oder Clustering gehören genauso dazu wie Ensemble-Methoden, neuronale Netze und Explainable AI. Der rote Faden bleibt jedoch derselbe: Welche Methode passt zu welchem Problem, woran erkennt sich ein brauchbares Ergebnis und wo wird der Aufwand größer als der Nutzen?
 
 Machine Learning lässt sich im Kurs aus drei **Perspektiven** betrachten:
-
 
 ## Verstehen
 

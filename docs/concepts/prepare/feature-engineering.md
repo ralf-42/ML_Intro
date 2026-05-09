@@ -4,7 +4,7 @@ title: Feature Engineering
 parent: Prepare
 grand_parent: Konzepte
 nav_order: 7
-description: "Systematische Techniken zur Erstellung, Auswahl und Transformation von Features für optimale Modellperformance"
+description: Systematische Techniken zur Erstellung, Auswahl und Transformation von Features für optimale Modellperformance
 has_toc: true
 ---
 
@@ -27,7 +27,6 @@ has_toc: true
 ## Grundlagen des Feature Engineering
 
 Feature Engineering ist der Prozess der Nutzung von Domänenwissen und statistischen Techniken, um aus Rohdaten informative Merkmale zu erstellen. Die Qualität der Features beeinflusst die Modellperformance oft stärker als die Wahl des Algorithmus.
-
 
 ```mermaid
 flowchart TB
@@ -565,7 +564,6 @@ data_2d = pca_2d.fit_transform(data_scaled)
 print(f"\nReduziert auf 2 Komponenten: {pca_2d.explained_variance_ratio_.sum()*100:.1f}% Varianz erklärt")
 ```
 
-
 ### Aggregations-Features
 
 Bei gruppierten Daten können statistische Aggregationen als Features dienen.
@@ -654,9 +652,7 @@ Verschiedene Branchen haben charakteristische Feature-Typen, die aus Domänenwis
 | **Immobilien** | Preis pro m², Lage-Score, Infrastruktur-Index |
 | **Produktion** | OEE-Kennzahlen, Ausschussrate, Maschinenlaufzeit |
 
-
 ---
-
 
 ### Empfehlungen für effektives Feature Engineering
 
@@ -745,8 +741,6 @@ Der iterative Prozess aus Hypothese, Implementierung und Validierung führt schr
 | [Prepare nach Modell](./prepare_nach_modell.html)                    | Zeigt, welche vorbereitenden Schritte pro Kursalgorithmus vor dem Feature Engineering besonders wichtig sind          |
 | [Modellauswahl](../modeling/modellauswahl.html)                      | Feature Engineering optimiert die Eingabedaten; Modellauswahl wählt die Algorithmusklasse                             |
 | [Feature Importance (Random Forest)](../modeling/random-forest.html) | Feature Engineering konstruiert Merkmale; Feature Importance bewertet nachtraeglich, welche Merkmale das Modell nutzt |
-
-
 
 ---
 

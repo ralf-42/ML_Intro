@@ -28,7 +28,6 @@ has_toc: true
 
 Die lineare Regression modelliert eine beobachtete **abhängige Variable (y)** durch eine oder mehrere **unabhängige Variablen (x)**. Sie eignet sich für annähernd lineare Zusammenhänge, ist leicht interpretierbar und scheitert bei stark nichtlinearen Mustern oder dominanten Ausreißern schnell.
 
-
 <img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/regression.png" class="logo" width="650"/>
 
 ### Die Regressionsgleichung
@@ -42,7 +41,6 @@ $$y = b + ax$$
 | **b**     | Intercept (Y-Achsenabschnitt) | Wert von y, wenn x = 0       |
 | **a**     | Slope (Steigung)              | Änderung von y pro Einheit x |
 
-
 ---
 
 ## Prognosefehler und Loss
@@ -50,8 +48,6 @@ $$y = b + ax$$
 ### Was ist Loss?
 
 Als **Loss** (Verlust) wird die Abweichung zwischen dem tatsächlichen Wert (y) und der Vorhersage (ŷ) bezeichnet. Der Loss quantifiziert, wie gut oder schlecht ein Modell vorhersagt.
-
-
 
 <img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/regression_residuals.png" class="logo" width="650"/>
 
@@ -63,12 +59,10 @@ Als **Loss** (Verlust) wird die Abweichung zwischen dem tatsächlichen Wert (y) 
 | **MAE** (Mean Absolute Error) | $\frac{1}{n}\sum\|y_i - \hat{y}_i\|$ | Robust gegenüber Ausreißern |
 | **RMSE** (Root MSE) | $\sqrt{MSE}$ | Gleiche Einheit wie Zielvariable |
 
-
 ---
 ## Linearer Zusammenhang (Der schnelle Check)
 
 Vor der Modellbildung lässt sich prüfen, ob bzw.  wie stark der lineare Zusammenhang zwischen den Merkmalen und der Zielvariable ist.
-
 
 ```Python
 import pandas as pd
@@ -236,7 +230,6 @@ flowchart TB
     style E fill:#c8e6c9
 ```
 
-
 ### Die Lernrate
 
 Die **Lernrate** (Learning Rate) bestimmt die Schrittgröße bei der Optimierung:
@@ -274,7 +267,6 @@ flowchart LR
 | **Batch GD** | Alle Daten | Stabil, aber langsam |
 | **Stochastic GD** | 1 Datenpunkt | Schnell, aber verrauscht |
 | **Mini-Batch GD** | Kleine Teilmenge | Kompromiss aus beiden |
-
 
 ---
 
@@ -352,7 +344,6 @@ flowchart LR
     style O fill:#c8e6c9
 ```
 
-
 ### Entscheidungsgrenze
 
 Die logistische Regression teilt den Merkmalsraum durch eine **lineare Entscheidungsgrenze**:
@@ -421,9 +412,7 @@ flowchart TB
 | **Loss-Funktion** | MSE | Binary Cross-Entropy |
 | **Beispiel** | Hauspreis vorhersagen | Spam erkennen |
 
-
 ---
-
 
 ## Abgrenzung zu verwandten Dokumenten
 
@@ -433,10 +422,7 @@ flowchart TB
 | [Bewertung: Klassifizierung](../evaluate/bewertung_klassifizierung.html) | Lineare Regression vorhersagt kontinuierliche Werte; Logistische Regression gibt Klassenwahrscheinlichkeiten aus |
 | [Modellauswahl](./modellauswahl.html)                                    | Modellauswahl entscheidet, wann Regression angemessen ist; Regression ist die konkrete Implementierung           |
 
-
-
 ---
-
 
 **Version:** 1.1<br>
 **Stand:** April 2026<br>

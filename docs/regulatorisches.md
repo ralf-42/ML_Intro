@@ -3,14 +3,10 @@ layout: default
 title: Regulatorisches
 nav_order: 6
 has_children: true
-description: "Rechtliche Rahmenbedingungen, Ethik und Souveränität"
+description: Rechtliche Rahmenbedingungen, Ethik und Souveränität
 ---
 
 # Regulatorisches
-
-**Version:** 1.0<br>
-**Stand:** Mai 2026<br>
-**Kurs:** Machine Learning Einführung
 
 Regulatorische Fragen treten im ML-Kontext oft später auf als Modell- oder Datenfragen. Sobald Modelle aber Entscheidungen beeinflussen, personenbezogene Daten verarbeiten oder in sensible Anwendungsfelder hineinreichen, reichen rein technische Überlegungen nicht mehr aus. Diese Seiten ordnen die rechtlichen, ethischen und strategischen Rahmenbedingungen ein.
 
@@ -37,8 +33,3 @@ Der EU AI Act ist nicht nur für generative KI relevant. Auch klassische ML-Syst
 Ethische Fragen zeigen sich im ML-Alltag häufig sehr konkret: verzerrte Daten, intransparente Entscheidungen, unfaire Klassifikationen oder scheinbar saubere Modelle mit problematischen Wirkungen in der Anwendung.
 
 - **[Ethik und KI](regulatorisches/Ethik_und_KI.html)** – *Wie wird ein ML-System verantwortungsvoll eingesetzt?* Bias, Fairness, Transparenz und Verantwortlichkeit.
-
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|

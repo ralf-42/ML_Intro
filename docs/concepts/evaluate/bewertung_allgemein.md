@@ -180,7 +180,6 @@ Die folgende Tabelle zeigt, welche Techniken für lokale (einzelne Vorhersagen) 
 
 ---
 
-
 ## Zusammenfassung
 
 ```mermaid
@@ -230,7 +229,7 @@ Die Evaluation ist kein einmaliger Schritt, sondern ein iterativer Prozess. Die 
 ---
 
 *Referenzen:*    
-- scikit-learn Dokumentation: [Model Evaluation](https://scikit-learn.org/stable/modules/model_evaluation.html)   
+- scikit-learn Dokumentation: [Model Evaluation](https://scikit-learn.org/stable/modules/model_evaluation.html)
 
 ---
 

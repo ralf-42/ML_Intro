@@ -1,11 +1,10 @@
 ---
 layout: default
 title: Ethik und KI
-parent: Regulatorische Themen
+parent: Regulatorisches
 nav_order: 3
 description: "Ethische Aspekte: Bias, Fairness und verantwortungsvoller KI-Einsatz"
 has_toc: true
-grand_parent: Regulatorisches
 ---
 
 # Ethik und KI
@@ -39,7 +38,6 @@ grand_parent: Regulatorisches
 
     Die Abgrenzung ist wichtig, da **generative KI besonders intransparente, kreative Outputs erzeugt**, was neue ethische Fragestellungen aufwirft – etwa zur Originalität, Verantwortung und Manipulationsgefahr.
 
-
 **Zentrale ethische Prinzipien:**
 
 - **Verantwortung:** Wer haftet bei Fehlentscheidungen? Eine klare juristische und ethische Zuweisung ist meist schwierig.
@@ -56,12 +54,7 @@ grand_parent: Regulatorisches
 
 - **Akteure:** Technologieunternehmen (oft marktgetrieben), Forschung (wissensgetrieben), Politik (regulierend), Zivilgesellschaft (wertorientiert), Nutzer:innen (praktisch-orientiert) prägen gemeinsam das öffentliche Verständnis und die Entwicklungspfade von KI.
 
-
 <img src="https://raw.githubusercontent.com/ralf-42/GenAI/main/07_image/Pasted image 20250416161530.png" alt="Ethische Grundsätze generativer KI" width="600">
-
-
-
-
 
 # 2 Rahmenwerke & Praxis
 
@@ -71,7 +64,6 @@ grand_parent: Regulatorisches
 
 - **OECD- und UNESCO-Richtlinien** setzen wichtige normative Standards, die Fairness, Erklärbarkeit und Rechenschaftspflicht als universelle Prinzipien formulieren.
 
-
 **Umsetzung in der Industrie:**
 
 - Unternehmen wie OpenAI, Google und Meta haben ethische Leitlinien entwickelt, die Aspekte wie Moderation, Red Teaming und Prompt-Engineering einschließen.
@@ -80,22 +72,17 @@ grand_parent: Regulatorisches
 
 - Trotzdem bleibt die Selbstverpflichtung oft hinter regulatorischen Anforderungen zurück.
 
-
 **Organisatorische Umsetzung:**
 
 - Interne Ethikboards, Compliance-Beauftragte und Prozesse zur Ethikfolgenabschätzung gewinnen an Bedeutung.
 
 - Wichtig ist nicht nur die Existenz, sondern die Integration ethischer Reflexion in agile Entwicklungsprozesse.
 
-
 **Rolle von Bildung & Forschung:**
 
 - Hochschulen und Ausbildungsinstitutionen entwickeln spezialisierte Curricula zu KI-Ethik.
 
 - Praxisnahe Formate wie Fallanalysen, Planspiele oder interdisziplinäre Projektarbeit sind besonders wirksam.
-
-
-
 
 # 3 Risiken & Fehlerquellen
 
@@ -111,10 +98,7 @@ grand_parent: Regulatorisches
 
 - **Sicherheitsrisiken:** Prompt Injection, Jailbreaking oder Training mit vergifteten Daten sind reale Angriffsvektoren.
 
-
-
 <img src="https://raw.githubusercontent.com/ralf-42/GenAI/main/07_image/Pasted image 20250416161648.png" alt="KI Risiken und Fehlerquellen" width="600">
-
 
 **Ethische Spannungsfelder:**
 
@@ -126,7 +110,6 @@ grand_parent: Regulatorisches
 
 - Automatisierung vs. Arbeitsplatzverlust
 
-
 **Fehlerquellen im Lebenszyklus:**
 
 - _Daten:_ Verzerrung durch schlechte oder einseitige Quellen.
@@ -137,18 +120,13 @@ grand_parent: Regulatorisches
 
 - _Nutzung:_ Missbrauch für Desinformation, unreflektierte Übernahme von KI-Outputs.
 
-
 **Verantwortung:**
 
 - Verteilte Verantwortung in Wertschöpfungsketten erschwert Haftung und Governance.
 
 - Neue regulatorische Ansätze wie der AI Act definieren Rollen und Pflichten neu.
 
-
-
 <div style="page-break-after: always;"></div>
-
-
 
 # 4 Chancen & Potenziale
 
@@ -166,22 +144,17 @@ grand_parent: Regulatorisches
 
 - **Nachhaltigkeit:** Umweltmonitoring, Klimamodellierung, Analyse von ESG-Daten.
 
-
 **Ethics by Design:**
 
 - Ethische Reflexion bereits in der Designphase einbetten.
 
 - Interdisziplinäre Teams, Impact Assessments und diverse Perspektiven sind zentral.
 
-
 **Gemeinwohlorientierte KI:**
 
 - Open-Source-Modelle, öffentliche KI-Infrastrukturen (z. B. EU AI Factories), transparente Standards.
 
 - Ziel: Technologische Souveränität und gerechter Zugang zu KI.
-
-
-
 
 # 5 Best Practices
 
@@ -197,7 +170,6 @@ grand_parent: Regulatorisches
 
 - **Transparenz:** Dokumentation, Wasserzeichen, klare Kommunikation der KI-Nutzung.
 
-
 **Organisatorische Strategien:**
 
 - Etablierung klarer Verantwortlichkeiten für KI im Unternehmen.
@@ -206,13 +178,11 @@ grand_parent: Regulatorisches
 
 - Integration von ethischer Reflexion in Produktentwicklung und -bewertung.
 
-
 **Bildungs- und Schulungsinitiativen:**
 
 - Schulung für Entwickler (z. B. Bias, Datenschutz, XAI).
 
 - Aufklärung von Anwendern über Grenzen, Risiken und verantwortungsvollen Umgang mit KI.
-
 
 **Rahmenwerke und Tools:**
 
@@ -220,13 +190,13 @@ grand_parent: Regulatorisches
 
 - Checklisten für ethisch orientierte Entwicklung und Deployment.
 
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|
+
 ---
 
 **Version:** 1.0<br>
 **Stand:** Januar 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
-
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|

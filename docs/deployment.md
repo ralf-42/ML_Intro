@@ -3,14 +3,10 @@ layout: default
 title: Deployment
 nav_order: 4
 has_children: true
-description: "Von der Entwicklung zum produktiven Einsatz von ML-Anwendungen"
+description: Von der Entwicklung zum produktiven Einsatz von ML-Anwendungen
 ---
 
 # Deployment
-
-**Version:** 1.0<br>
-**Stand:** Mai 2026<br>
-**Kurs:** Machine Learning Einführung
 
 Deployment beginnt im ML-Kontext nicht erst bei Docker oder Cloud-Hosting. Relevant wird es in dem Moment, in dem ein Modell wiederholbar laufen, mit echten Eingaben umgehen und außerhalb des Trainingsnotebooks nutzbar bleiben soll. Genau an dieser Schwelle zeigt sich, ob ein Projekt nur eine Auswertung ist oder bereits eine Anwendung.
 
@@ -79,8 +75,3 @@ Mit wachsender Komplexität treten weitere Fragen hinzu: Modellversionierung, Ex
 | **AWS SageMaker** | Vollständige ML-Plattform |
 | **Google Cloud AI** | Managed ML Services |
 | **Azure ML** | Microsoft Cloud ML-Lösung |
-
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|

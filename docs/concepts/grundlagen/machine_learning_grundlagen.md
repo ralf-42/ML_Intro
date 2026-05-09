@@ -110,15 +110,10 @@ Machine Learning ist heute in vielen Bereichen verbreitet:
 - **Prognose**: Wettervorhersage, Aktienkurse, Nachfrageplanung
 - **Automatisierte Entscheidungsfindung**: Kreditvergabe, Empfehlungssysteme
 
-
-
 > [!NOTE] Erfahrung<br>
 > In Kursen wirkt das schnell so, als beginne ML immer mit einem passenden Algorithmus. In der Praxis ist das selten der erste Engpass. Häufiger ist unklar, ob überhaupt genügend brauchbare Daten vorliegen, ob das Problem als Klassifikation oder Regression formuliert werden sollte oder ob eine einfache Regel bereits ausreichen würde.
 
-
-
 --- 
-
 
 ## Wie funktioniert Machine Learning?
 
@@ -162,9 +157,7 @@ flowchart TB
 
 Gerade bei ersten Projekten wird dieser Ablauf oft zu linear gedacht. Tatsächlich führen schwache Evaluation, ungeeignete Features oder auffällige Fehlerbilder meist wieder zurück in frühere Schritte. Ein ML-Projekt ist deshalb fast immer **iterativ**, auch wenn der Ablauf auf Folien sauber nacheinander aussieht.
 
-
 ---
-
 
 ## Lernparadigmen
 
@@ -185,7 +178,6 @@ flowchart TD
     Q1 -- "Nein" --> Q_Env{"Können Daten<br/>gewonnen/simuliert werden?"}
     Q_Env -- "Ja" --> RL["🎮 <b>Reinforcement Learning</b><br/>(Lernen durch Interaktion)"]
     Q_Env -- "Nein" --> NO["❌ Keine ML-Lösung<br/>möglich"]
-
 
     %% Styling
     style SL fill:#c8e6c9,stroke:#2e7d32
@@ -559,9 +551,6 @@ flowchart TB
 | [Entscheidungsbaum](../modeling/decision_tree.html) | Grundlagen behandeln Lernparadigmen uebergreifend; Entscheidungsbaum ist eine konkrete Implementierung von Supervised Learning |
 | [Clustering (K-Means & DBSCAN)](../modeling/kmeans-dbscan.html) | Grundlagen definieren Unsupervised Learning als Paradigma; Clustering implementiert es praktisch ohne Labels |
 | [Isolation Forest](../modeling/isolation-forest.html) | Grundlagen nennen Anomalieerkennung als Aufgabentyp; Isolation Forest zeigt ein konkretes Verfahren dafuer |
-
-
-
 
 ---
 

@@ -4,7 +4,7 @@ title: Ensemble-Methoden
 parent: Modeling
 grand_parent: Konzepte
 nav_order: 12
-description: "Ensemble-Learning kombiniert mehrere Modelle zu leistungsfähigeren Vorhersagesystemen durch Bagging, Boosting und Stacking"
+description: Ensemble-Learning kombiniert mehrere Modelle zu leistungsfähigeren Vorhersagesystemen durch Bagging, Boosting und Stacking
 has_toc: true
 ---
 
@@ -206,8 +206,6 @@ flowchart LR
 
 ---
 
-
-
 ## Zusammenfassung
 
 ```mermaid
@@ -243,8 +241,6 @@ mindmap
 | [Random Forest](./random-forest.html) | Random Forest ist konkrete Bagging-Implementierung; Ensemble-Methoden beschreiben alle Kombinationsstrategien |
 | [XGBoost](./xgboost.html) | Ensemble-Methoden praesentieren Strategien uebergreifend; XGBoost spezialisiert die Boosting-Strategie |
 | [Stacking](./stacking.html) | Bagging und Boosting kombinieren identische Modelltypen; Stacking kombiniert verschiedenartige Modelle |
-
-
 
 ---
 

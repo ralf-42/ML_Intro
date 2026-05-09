@@ -3,14 +3,10 @@ layout: default
 title: Konzepte
 nav_order: 2
 has_children: true
-description: "Theoretische Grundlagen und technische Konzepte"
+description: Theoretische Grundlagen und technische Konzepte
 ---
 
 # Konzepte
-
-**Version:** 1.0<br>
-**Stand:** Mai 2026<br>
-**Kurs:** Machine Learning Einführung
 
 Die Konzeptseiten erklären nicht möglichst viel auf einmal, sondern genau die Stellen, an denen im Kurs die wichtigsten Unterschiede entstehen: Welche Art von Problem liegt vor, wie werden Daten sinnvoll vorbereitet, woran erkennt sich ein geeignetes Modell und wie wird Qualität belastbar bewertet? Die Sammlung ist deshalb entlang des typischen ML-Workflows aufgebaut.
 
@@ -50,8 +46,3 @@ Ein Modell ist erst dann brauchbar, wenn seine Qualität sauber eingeordnet wurd
 Erklärbarkeit wird relevant, sobald Modelle begründet, geprüft oder gegenüber Fachbereichen erläutert werden müssen. Die XAI-Seiten zeigen, was Verfahren wie SHAP oder LIME leisten und wo ihre Grenzen liegen.
 
 - **[XAI](concepts/08_xai.html)** – *Wie wird ein Modell nachvollziehbar gemacht?* Methoden der erklärbaren KI im ML-Kontext.
-
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|

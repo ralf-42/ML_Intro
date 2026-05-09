@@ -91,7 +91,6 @@ data_train_scaled = scaler.fit_transform(data_train_imputed)
 data_train_encoded = encoder.fit_transform(data_train_scaled)
 ```
 
-
 ---
 
 ## Data Leakage
@@ -138,7 +137,6 @@ Data Leakage kann zu einer massiven, aber unbegründeten Leistungssteigerung in 
 - **Politikwissenschaft:** Bei der Vorhersage von Bürgerkriegen schrumpfte der vermeintliche Vorsprung komplexer Modelle gegenüber simplen Methoden nach der Leakage-Korrektur von **0,14 auf fast unbedeutende 0,01** AUC-Punkte.
     
 
-
 ### Vermeidung von Data Leakage
 
 **1. Erst splitten, dann transformieren**
@@ -177,8 +175,6 @@ scores = cross_val_score(pipeline, data_train, target_train, cv=5)
 > **Wichtig**
 >
 > Neben der Trennung von Trainings- und Testdaten sollte auch die **Codierung und Skalierung getrennt** erfolgen. Statistiken (Mittelwert, Standardabweichung, Kategorien) dürfen nur aus den Trainingsdaten berechnet werden!
-
-
 
 ---
 ## Pipelines
@@ -391,7 +387,6 @@ model.fit(data_train, target_train, epochs=10)
 - Verbesserte Portabilität – das gespeicherte Modell enthält die Vorverarbeitung
 - Konsistente Transformation bei Inferenz
 
-
 ---
 
 ## Weiterführende Ressourcen
@@ -400,13 +395,13 @@ model.fit(data_train, target_train, epochs=10)
 - [ColumnTransformer Guide](https://scikit-learn.org/stable/modules/generated/sklearn.compose.ColumnTransformer.html)
 - [Data Leakage Explained](https://machinelearningmastery.com/data-leakage-machine-learning/)
 
-
----
-**Version:** 1.1<br>
-**Stand:** April 2026<br>
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
-
 ## Abgrenzung zu verwandten Dokumenten
 
 | Dokument | Frage |
 |---|---|
+
+---
+
+**Version:** 1.1<br>
+**Stand:** April 2026<br>
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

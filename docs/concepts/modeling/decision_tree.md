@@ -4,7 +4,7 @@ title: Entscheidungsbaum
 parent: Modeling
 grand_parent: Konzepte
 nav_order: 2
-description: "Entscheidungsbaum - Hierarchische Regelstruktur für Klassifikation und Regression"
+description: Entscheidungsbaum - Hierarchische Regelstruktur für Klassifikation und Regression
 has_toc: true
 ---
 
@@ -180,7 +180,6 @@ flowchart TB
 - Bei Frauen spielt die Reiseklasse eine große Rolle
 - Jeder Pfad durch den Baum repräsentiert eine Regel
 
-
 ## Wichtige Hyperparameter
 
 | Parameter | Beschreibung | Typische Werte |
@@ -258,7 +257,6 @@ plt.show()
 - **Lineare Grenzen**: Kann keine diagonalen Entscheidungsgrenzen modellieren
 - **Einzelner Baum oft unzureichend**: → Ensemble-Methoden (Random Forest) bevorzugt
 
-
 ## Zusammenfassung
 
 ```mermaid
@@ -298,9 +296,7 @@ Der Entscheidungsbaum ist ein grundlegender Algorithmus, der das Fundament für 
 | [Ensemble-Methoden](./ensemble.html) | Ensemble-Methoden beschreiben Kombinationsstrategien; Decision Tree ist die grundlegende Komponente dieser Verfahren |
 | [Modellauswahl](./modellauswahl.html) | Modellauswahl entscheidet, wann ein Decision Tree sinnvoll ist — z.B. bei Interpretierbarkeitsanforderungen |
 
-
 ---
-
 
 **Version:** 1.0<br>
 **Stand:** Januar 2026<br>

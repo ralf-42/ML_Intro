@@ -1,11 +1,10 @@
 ---
 layout: default
 title: Digitale Souveränität
-parent: Regulatorische Themen
+parent: Regulatorisches
 nav_order: 1
 description: Definition, Reifegrade und europäische Strategien zur digitalen Souveränität
 has_toc: true
-grand_parent: Regulatorisches
 ---
 
 # Digitale Souveränität
@@ -362,14 +361,13 @@ Die digitale Souveränität Europas wird sich nicht daran entscheiden, ob ein eu
 60. Selbstbestimmt handeln im digitalen Raum – warum Digitale Souveränität für KMU immer wichtiger wird \- Mittelstand Digital, Zugriff am Dezember 31, 2025, [https://www.mittelstand-digital.de/MD/Redaktion/DE/Artikel/Blog/blog-beitrag-51-kipker.html](https://www.mittelstand-digital.de/MD/Redaktion/DE/Artikel/Blog/blog-beitrag-51-kipker.html)
 61. Mittelstand-Digital Zentrum Zukunftskultur, Zugriff am Dezember 31, 2025, [https://www.digitalzentrum-zukunftskultur.de/](https://www.digitalzentrum-zukunftskultur.de/)
 
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|
 
 ---
 
 **Version:** 1.0<br>
 **Stand:** Januar 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
-
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|

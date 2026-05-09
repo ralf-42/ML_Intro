@@ -115,7 +115,6 @@ Der Silhouette-Koeffizient liegt immer im Bereich **[-1, +1]**:
 
 ---
 
-
 ### Interpretation der Szenarien
 
 | Szenario | Charakteristik | Silhouette-Wert |
@@ -166,8 +165,6 @@ flowchart TD
 ```
 
 ---
-
-
 
 ## Best Practices
 

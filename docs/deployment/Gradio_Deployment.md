@@ -1,11 +1,10 @@
 ---
 layout: default
 title: Gradio Deployment
-parent: Deployment-Themen
+parent: Deployment
 nav_order: 1
 description: Bereitstellung von ML-Modellen mit Gradio für interaktive Web-Interfaces
 has_toc: true
-grand_parent: Deployment
 ---
 
 # Deployment
@@ -483,7 +482,6 @@ demo.launch(server_name="0.0.0.0", server_port=7860)
 
 ---
 
-
 ## Best Practices für Gradio-Deployment
 
 ### Code-Organisation
@@ -572,13 +570,13 @@ flowchart LR
 - [Hugging Face Spaces](https://huggingface.co/spaces)
 - [Gradio GitHub Repository](https://github.com/gradio-app/gradio)
 
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|
+
 ---
 
 **Version:** 1.0<br>
 **Stand:** Januar 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
-
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|

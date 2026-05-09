@@ -4,7 +4,7 @@ title: Random Forest
 parent: Modeling
 grand_parent: Konzepte
 nav_order: 3
-description: "Random Forest kombiniert multiple Entscheidungsbäume zu einem robusten Ensemble-Modell für Klassifikation und Regression"
+description: Random Forest kombiniert multiple Entscheidungsbäume zu einem robusten Ensemble-Modell für Klassifikation und Regression
 has_toc: true
 ---
 
@@ -123,7 +123,6 @@ flowchart LR
     style Bootstrap2 fill:#f3e5f5
 ```
 
-
 **Beispiel**:
 
 Bei 3.000 verfügbaren Datensätzen zieht jeder Baum im Random Forest ein Bootstrap-Sample der Größe 3.000, wobei mit Zurücklegen gesampelt wird. Im Mittel gehen dabei etwa 2.000 unterschiedliche Datensätze in das Training eines Baums ein, während rund 1.000 Datensätze für diesen Baum _Out-of-the-Bag_ [1] bleiben.
@@ -196,9 +195,7 @@ flowchart TD
 
 ---
 
-
 ## Wichtige Hyperparameter
-
 
 | Parameter | Default | Empfohlener Bereich | Effekt |
 |-----------|---------|---------------------|--------|
@@ -315,7 +312,6 @@ fig.update_layout(
 
 Sobald die Fehlerrate nur noch minimal schwankt (Plateau), hat man die optimale Anzahl an Bäumen erreicht. Mehr Bäume erhöhen dann nur noch die Rechenlast, aber nicht mehr die Vorhersagekraft.
 
-
 ## Vor- und Nachteile
 
 ### Vorteile
@@ -389,8 +385,6 @@ flowchart TD
 | Bei Zeitreihen ohne Vorsicht     | Random Forest ignoriert zeitliche Ordnung                 |
 | Für Extrapolation verwenden      | Kann nur innerhalb des Trainingsdatenbereichs vorhersagen |
 
-
-
 > [!SUCCESS] Kernaussage<br>
 > Random Forest kombiniert die Einfachheit von Entscheidungsbaeumen mit der Robustheit von Ensemble-Methoden. 
 
@@ -408,9 +402,7 @@ Für große $n$ nähert sich dieser Wert $1/e \approx 0,368$ an.
 | [XGBoost](./xgboost.html)                 | Random Forest nutzt Bagging (parallele, unabhaengige Baeume); XGBoost nutzt Boosting (sequentielle Fehlerkorrektur) |
 | [Ensemble-Methoden](./ensemble.html)      | Random Forest implementiert die Bagging-Strategie; Ensemble-Methoden umfassen zusaetzlich Boosting und Stacking     |
 
-
 ---
-
 
 **Version:** 1.1<br>
 **Stand:** April 2026<br>

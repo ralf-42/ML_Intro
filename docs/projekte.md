@@ -2,7 +2,7 @@
 layout: default
 title: Projekte
 nav_order: 5
-description: "Praktische ML-Projekte und Anwendungen"
+description: Praktische ML-Projekte und Anwendungen
 has_toc: true
 ---
 
@@ -45,14 +45,3 @@ Sinnvolle Projektzuschnitte für `ML_Intro` sind zum Beispiel:
 ## Einordnung zu den übrigen Bereichen
 
 Die Konzeptseiten liefern das methodische Fundament. Die Deployment-Seiten werden relevant, sobald ein Modell außerhalb des Notebooks genutzt werden soll. Ressourcen- und Regulatorikseiten helfen dort, wo Werkzeuge, Datenschutz oder Einordnung in reale Kontexte nötig werden.
-
----
-
-**Version:** 1.0<br>
-**Stand:** März 2026<br>
-**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
-
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|

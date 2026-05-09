@@ -91,7 +91,6 @@ plt.show()
 
 Aus den vier Grundwerten der Confusion Matrix lassen sich verschiedene Leistungsmetriken ableiten, die unterschiedliche Aspekte der Modellqualität bewerten.
 
-
 ### Accuracy (Genauigkeit)
 
 Die Accuracy misst den Anteil aller **korrekten Vorhersagen** an der Gesamtzahl der Fälle.
@@ -257,8 +256,7 @@ disp = ConfusionMatrixDisplay(confusion_matrix=cm,
 disp.plot(cmap='Blues')
 plt.title('Confusion Matrix')
 plt.show()
-```0
-
+```
 ---
 
 ## Cohen's Kappa
@@ -282,8 +280,7 @@ disp = ConfusionMatrixDisplay(confusion_matrix=cm,
 disp.plot(cmap='Blues')
 plt.title('Confusion Matrix')
 plt.show()
-```1
-
+```
 | Kappa-Wert | Interpretation |
 |------------|----------------|
 | κ < 0.0 | Schlechte Übereinstimmung (schlechter als Zufall) |
@@ -318,8 +315,7 @@ disp = ConfusionMatrixDisplay(confusion_matrix=cm,
 disp.plot(cmap='Blues')
 plt.title('Confusion Matrix')
 plt.show()
-```2
-
+```
 ### Vorteile gegenüber Accuracy
 
 ```python
@@ -337,8 +333,7 @@ disp = ConfusionMatrixDisplay(confusion_matrix=cm,
 disp.plot(cmap='Blues')
 plt.title('Confusion Matrix')
 plt.show()
-```3
-
+```
 ---
 
 ## ROC-Kurve (Receiver Operating Characteristic)
@@ -362,26 +357,7 @@ disp = ConfusionMatrixDisplay(confusion_matrix=cm,
 disp.plot(cmap='Blues')
 plt.title('Confusion Matrix')
 plt.show()
-```4
-
-<img src="```python
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
-
-# Confusion Matrix berechnen
-cm = confusion_matrix(target_test, target_pred)
-print("Confusion Matrix:")
-print(cm)
-
-# Visualisierung
-disp = ConfusionMatrixDisplay(confusion_matrix=cm,
-                               display_labels=['Negativ', 'Positiv'])
-disp.plot(cmap='Blues')
-plt.title('Confusion Matrix')
-plt.show()
-```5 class="logo" width="750"/>
-
-
+```
 ### Sensitivität und Spezifität
 
 | Metrik                  | Formel                          | Beschreibung                                                |
@@ -407,8 +383,7 @@ disp = ConfusionMatrixDisplay(confusion_matrix=cm,
 disp.plot(cmap='Blues')
 plt.title('Confusion Matrix')
 plt.show()
-```6
-
+```
 ### Schwellenwert-Optimierung
 
 Der Standard-Schwellenwert von 0.5 ist nicht immer optimal. Je nach Anwendungsfall kann ein anderer Schwellenwert sinnvoller sein.
@@ -428,8 +403,7 @@ disp = ConfusionMatrixDisplay(confusion_matrix=cm,
 disp.plot(cmap='Blues')
 plt.title('Confusion Matrix')
 plt.show()
-```7
-
+```
 **Beispiel: Krebsdiagnose**
 
 Bei einem Test auf eine ernsthafte, aber behandelbare Krankheit wie Krebs:
@@ -458,8 +432,7 @@ disp = ConfusionMatrixDisplay(confusion_matrix=cm,
 disp.plot(cmap='Blues')
 plt.title('Confusion Matrix')
 plt.show()
-```8
-
+```
 ---
 
 ## Area Under the Curve (AUC)
@@ -483,17 +456,7 @@ disp = ConfusionMatrixDisplay(confusion_matrix=cm,
 disp.plot(cmap='Blues')
 plt.title('Confusion Matrix')
 plt.show()
-```9
-
-
-<img src="```python
-from sklearn.metrics import accuracy_score
-
-accuracy = accuracy_score(target_test, target_pred)
-print(f"Accuracy: {accuracy:.4f}")
-```0 class="logo" width="750"/>
-
-
+```
 | AUC-Wert  | Interpretation                          |
 | --------- | --------------------------------------- |
 | 0.5       | Keine Unterscheidungsfähigkeit (Zufall) |
@@ -515,8 +478,7 @@ from sklearn.metrics import accuracy_score
 
 accuracy = accuracy_score(target_test, target_pred)
 print(f"Accuracy: {accuracy:.4f}")
-```1
-
+```
 ### Modellvergleich mit AUC
 
 ```python
@@ -524,8 +486,7 @@ from sklearn.metrics import accuracy_score
 
 accuracy = accuracy_score(target_test, target_pred)
 print(f"Accuracy: {accuracy:.4f}")
-```2
-
+```
 ---
 
 ## Umgang mit unausgewogenen Klassen
@@ -545,8 +506,7 @@ from sklearn.metrics import accuracy_score
 
 accuracy = accuracy_score(target_test, target_pred)
 print(f"Accuracy: {accuracy:.4f}")
-```3
-
+```
 ### Empfehlungen nach Anwendungsfall
 
 | Anwendungsfall | Empfohlene Metrik | Begründung |
@@ -566,8 +526,7 @@ from sklearn.metrics import accuracy_score
 
 accuracy = accuracy_score(target_test, target_pred)
 print(f"Accuracy: {accuracy:.4f}")
-```4
-
+```
 ---
 
 ## Zusammenfassung: Metrik-Übersicht
@@ -580,8 +539,7 @@ from sklearn.metrics import accuracy_score
 
 accuracy = accuracy_score(target_test, target_pred)
 print(f"Accuracy: {accuracy:.4f}")
-```5
-
+```
 ### Quick Reference: Wann welche Metrik?
 
 | Situation | Empfohlene Metrik(en) |
@@ -600,8 +558,7 @@ from sklearn.metrics import accuracy_score
 
 accuracy = accuracy_score(target_test, target_pred)
 print(f"Accuracy: {accuracy:.4f}")
-```6
-
+```
 ---
 
 ## Weiterführende Themen
@@ -620,7 +577,6 @@ print(f"Accuracy: {accuracy:.4f}")
 | [Bewertung: Regression](./bewertung_regression.html) | Klassifikations-Metriken für kategoriale Vorhersagen; Regressions-Metriken für kontinuierliche Werte        |
 | [Overfitting](./overfitting.html)                    | Klassifikations-Metriken quantifizieren Vorhersageguete; Overfitting erkennt man an der Train-Test-Diskrepanz |
 | [Cross-Validation](./cross_validation.html)          | Cross-Validation ist die Evaluierungsmethodik; Klassifikations-Metriken sind die Messgroessen dabei           |
-
 
 ---
 

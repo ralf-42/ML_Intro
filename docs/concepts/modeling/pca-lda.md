@@ -4,7 +4,7 @@ title: PCA und LDA
 parent: Modeling
 grand_parent: Konzepte
 nav_order: 8
-description: "Dimensionsreduktion durch Principal Component Analysis (PCA) und Linear Discriminant Analysis (LDA) - Konzepte, Unterschiede und praktische Implementierung"
+description: Dimensionsreduktion durch Principal Component Analysis (PCA) und Linear Discriminant Analysis (LDA) - Konzepte, Unterschiede und praktische Implementierung
 has_toc: true
 ---
 
@@ -54,7 +54,6 @@ Das Prinzip der PCA lässt sich vereinfacht mit einem **Schattenwurf** erklären
 - **Risiko**: Man muss vorsichtig sein. In manchen Fällen kann die Reduktion dazu führen, dass verschiedene Datenklassen (zum Beispiel unterschiedliche Pflanzentypen) so stark überlappen, dass man sie nach der PCA nicht mehr voneinander unterscheiden kann.
 
 Zusammenfassend ist die PCA also eine Methode, um die **Komplexität von Daten zu verringern**, indem man sie auf ihre wichtigsten Bestandteile reduziert, ähnlich wie ein aussagekräftiger Schatten ein komplexes Objekt vereinfacht darstellt.
-
 
 ---
 
@@ -132,7 +131,6 @@ flowchart TD
 | **Ziel** | Maximierung der Klassentrennung |
 | **Max. Komponenten** | Anzahl Klassen - 1 |
 | **Anwendung** | Klassifikation, Vorverarbeitung |
-
 
 ---
 
@@ -252,7 +250,6 @@ mindmap
 | [K-Means und DBSCAN](./kmeans-dbscan.html) | Wie wird mit reduzierten Daten später gruppiert oder segmentiert? |
 | [Feature Engineering](../prepare/feature-engineering.html) | Wie unterscheiden sich erzeugte Features von reduzierten Komponenten? |
 | [Bewertung Clustering](../evaluate/bewertung_clustering.html) | Wie wird geprüft, ob eine reduzierte Darstellung die Gruppenbildung verbessert? |
-
 
 ---
 

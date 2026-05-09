@@ -2,14 +2,10 @@
 layout: default
 title: Frameworks
 nav_order: 3
-description: "Wichtige ML-Frameworks und Tools - Offizielle Dokumentationen"
+description: Wichtige ML-Frameworks und Tools - Offizielle Dokumentationen
 ---
 
 # Frameworks
-
-**Version:** 1.0<br>
-**Stand:** Mai 2026<br>
-**Kurs:** Machine Learning Einführung
 
 Links zu den offiziellen Dokumentationen der wichtigsten ML-Frameworks und Tools.
 
@@ -53,8 +49,3 @@ Links zu den offiziellen Dokumentationen der wichtigsten ML-Frameworks und Tools
 ## Learning Resources
 
 - **[Data Science Guide - Teaching Material](https://www.datascienceguide.org/teaching-material.html)** - Umfangreiche Lernressourcen für Data Science
-
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|
