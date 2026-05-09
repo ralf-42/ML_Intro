@@ -308,105 +308,103 @@ flowchart LR
 <br> 
 
 
-<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/residuenanalyse_linear_nichtlinear.png" class="logo" width="750"/>
+<img src="```mermaid
+flowchart LR
+    subgraph Modell["🔮 Regressionsmodell"]
+        X["Features X"]
+        Y["Zielvariable y"]
+        PRED["Vorhersage ŷ"]
+    end
+    
+    subgraph R2_Calc["📐 R² Berechnung"]
+        VAR_TOTAL["Gesamtvarianz<br/>SS_total"]
+        VAR_RESIDUAL["Residualvarianz<br/>SS_residual"]
+        RESULT["R² = 1 - SS_res/SS_total"]
+    end
+    
+    X --> PRED
+    Y --> VAR_TOTAL
+    PRED --> VAR_RESIDUAL
+    VAR_TOTAL --> RESULT
+    VAR_RESIDUAL --> RESULT
+    
+    style RESULT fill:#4CAF50,color:#fff
+```0 class="logo" width="750"/>
 
 <br> 
 
 
-<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/residuals_plot_heteroskedastizitaet.png" class="logo" width="750"/>
+<img src="```mermaid
+flowchart LR
+    subgraph Modell["🔮 Regressionsmodell"]
+        X["Features X"]
+        Y["Zielvariable y"]
+        PRED["Vorhersage ŷ"]
+    end
+    
+    subgraph R2_Calc["📐 R² Berechnung"]
+        VAR_TOTAL["Gesamtvarianz<br/>SS_total"]
+        VAR_RESIDUAL["Residualvarianz<br/>SS_residual"]
+        RESULT["R² = 1 - SS_res/SS_total"]
+    end
+    
+    X --> PRED
+    Y --> VAR_TOTAL
+    PRED --> VAR_RESIDUAL
+    VAR_TOTAL --> RESULT
+    VAR_RESIDUAL --> RESULT
+    
+    style RESULT fill:#4CAF50,color:#fff
+```1 class="logo" width="750"/>
 ### Implementation in Python
 
-```python
-import matplotlib.pyplot as plt
-import numpy as np
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-
-# Beispieldaten generieren
-np.random.seed(42)
-data = np.random.rand(100, 1) * 10
-target = 2.5 * data.flatten() + np.random.randn(100) * 2
-
-# Train-Test-Split
-data_train, data_test, target_train, target_test = train_test_split(data, target, test_size=0.2, random_state=42)
-
-# Modell trainieren
-model = LinearRegression()
-model.fit(data_train, target_train)
-
-# Vorhersagen
-target_pred_train = model.predict(data_train)
-target_pred_test = model.predict(data_test)
-
-# Residuen berechnen
-residuals_train = target_train - target_pred_train
-residuals_test = target_test - target_pred_test
-
-# Residual Plot erstellen
-fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-
-# Plot 1: Residuen vs. Vorhergesagte Werte
-axes[0].scatter(target_pred_test, residuals_test, alpha=0.7, edgecolors='black')
-axes[0].axhline(y=0, color='red', linestyle='--', linewidth=2)
-axes[0].set_xlabel('Vorhergesagte Werte')
-axes[0].set_ylabel('Residuen')
-axes[0].set_title('Residual Plot')
-axes[0].grid(True, alpha=0.3)
-
-# Plot 2: Histogramm der Residuen
-axes[1].hist(residuals_test, bins=15, edgecolor='black', alpha=0.7)
-axes[1].axvline(x=0, color='red', linestyle='--', linewidth=2)
-axes[1].set_xlabel('Residuen')
-axes[1].set_ylabel('Häufigkeit')
-axes[1].set_title('Verteilung der Residuen')
-axes[1].grid(True, alpha=0.3)
-
-plt.tight_layout()
-plt.show()
-```
+```mermaid
+flowchart LR
+    subgraph Modell["🔮 Regressionsmodell"]
+        X["Features X"]
+        Y["Zielvariable y"]
+        PRED["Vorhersage ŷ"]
+    end
+    
+    subgraph R2_Calc["📐 R² Berechnung"]
+        VAR_TOTAL["Gesamtvarianz<br/>SS_total"]
+        VAR_RESIDUAL["Residualvarianz<br/>SS_residual"]
+        RESULT["R² = 1 - SS_res/SS_total"]
+    end
+    
+    X --> PRED
+    Y --> VAR_TOTAL
+    PRED --> VAR_RESIDUAL
+    VAR_TOTAL --> RESULT
+    VAR_RESIDUAL --> RESULT
+    
+    style RESULT fill:#4CAF50,color:#fff
+```2
 
 ### Vollständige Evaluation mit allen Metriken
 
-```python
-from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
-import numpy as np
-
-def evaluate_regression(target_true, target_pred, dataset_name=""):
-    """
-    Vollständige Evaluation eines Regressionsmodells.
-
-    Parameters:
-    -----------
-    target_true : array-like
-        Tatsächliche Werte
-    target_pred : array-like
-        Vorhergesagte Werte
-    dataset_name : str
-        Name des Datensatzes (z.B. 'Training' oder 'Test')
-
-    Returns:
-    --------
-    dict : Dictionary mit allen Metriken
-    """
-    metrics = {
-        'R²': r2_score(target_true, target_pred),
-        'MAE': mean_absolute_error(target_true, target_pred),
-        'MSE': mean_squared_error(target_true, target_pred),
-        'RMSE': np.sqrt(mean_squared_error(target_true, target_pred))
-    }
-
-    print(f"\n{'='*40}")
-    print(f"Evaluation: {dataset_name}")
-    print(f"{'='*40}")
-    for metric, value in metrics.items():
-        print(f"{metric:6s}: {value:.4f}")
-
-    return metrics
-
-# Anwendung
-metrics_train = evaluate_regression(target_train, target_pred_train, "Training")
-metrics_test = evaluate_regression(target_test, target_pred_test, "Test")
-```
+```mermaid
+flowchart LR
+    subgraph Modell["🔮 Regressionsmodell"]
+        X["Features X"]
+        Y["Zielvariable y"]
+        PRED["Vorhersage ŷ"]
+    end
+    
+    subgraph R2_Calc["📐 R² Berechnung"]
+        VAR_TOTAL["Gesamtvarianz<br/>SS_total"]
+        VAR_RESIDUAL["Residualvarianz<br/>SS_residual"]
+        RESULT["R² = 1 - SS_res/SS_total"]
+    end
+    
+    X --> PRED
+    Y --> VAR_TOTAL
+    PRED --> VAR_RESIDUAL
+    VAR_TOTAL --> RESULT
+    VAR_RESIDUAL --> RESULT
+    
+    style RESULT fill:#4CAF50,color:#fff
+```3
 
 ---
 
@@ -434,28 +432,27 @@ metrics_test = evaluate_regression(target_test, target_pred_test, "Test")
 ## Zusammenfassung
 
 ```mermaid
-flowchart TD
-    subgraph Evaluation["🎯 Regressions-Evaluation"]
-        R2["<b>R²</b><br/>Erklärte Varianz<br/>0-1 (höher = besser)"]
-        MAE["<b>MAE</b><br/>Mittlerer absoluter Fehler<br/>Robust gegen Ausreißer"]
-        RESIDUAL["<b>Residual Plot</b><br/>Modelldiagnose<br/>Muster erkennen"]
+flowchart LR
+    subgraph Modell["🔮 Regressionsmodell"]
+        X["Features X"]
+        Y["Zielvariable y"]
+        PRED["Vorhersage ŷ"]
     end
     
-    subgraph Anwendung["📋 Anwendung"]
-        VERGLEICH["Modellbewertung<br>-vergleich"]
-        DIAGNOSE["Problemdiagnose"]
-        OPTIMIERUNG["Modelloptimierung"]
+    subgraph R2_Calc["📐 R² Berechnung"]
+        VAR_TOTAL["Gesamtvarianz<br/>SS_total"]
+        VAR_RESIDUAL["Residualvarianz<br/>SS_residual"]
+        RESULT["R² = 1 - SS_res/SS_total"]
     end
     
-    R2 --> VERGLEICH
-    MAE --> VERGLEICH
-    RESIDUAL --> DIAGNOSE
-    DIAGNOSE --> OPTIMIERUNG
+    X --> PRED
+    Y --> VAR_TOTAL
+    PRED --> VAR_RESIDUAL
+    VAR_TOTAL --> RESULT
+    VAR_RESIDUAL --> RESULT
     
-    style R2 fill:#4CAF50,color:#fff
-    style MAE fill:#2196F3,color:#fff
-    style RESIDUAL fill:#9C27B0,color:#fff
-```
+    style RESULT fill:#4CAF50,color:#fff
+```4
 
 
 | Metrik | Stärke | Schwäche |
@@ -469,7 +466,7 @@ flowchart TD
 
 | Thema                                                          | Abgrenzung                                                                                                                 |
 | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| [Bewertung: Klassifizierung](./bewertung_klassifizierung.html) | Regressions-Metriken (R2, MAE, RMSE) fuer kontinuierliche Werte; Klassifikations-Metriken (Precision, Recall) fuer Klassen |
+| [Bewertung: Klassifizierung](./bewertung_klassifizierung.html) | Regressions-Metriken (R2, MAE, RMSE) für kontinuierliche Werte; Klassifikations-Metriken (Precision, Recall) für Klassen |
 | [Overfitting](./overfitting.html)                              | Regressions-Metriken messen Vorhersagefehler; Overfitting-Erkennung nutzt Train-Test-Vergleich dieser Metriken             |
 | [Cross-Validation](./cross_validation.html)                    | Cross-Validation ist die Evaluierungsmethodik; Regressions-Metriken quantifizieren die Modellgüte                          |
 
