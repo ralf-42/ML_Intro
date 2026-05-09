@@ -11,8 +11,7 @@ has_toc: true
 # Coding-Arbeitsweisen
 {: .no_toc }
 
-> **Effiziente Arbeitsweisen für die ML-Entwicklung: KI-Assistenz, Checklisten, Code-Snippets und Transfer-Cases**    
-
+> **Effiziente Arbeitsweisen für die ML-Entwicklung: KI-Assistenz, Checklisten, Code-Snippets und Transfer-Cases**<br>
 ---
 
 # Inhaltsverzeichnis

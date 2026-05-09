@@ -11,7 +11,7 @@ has_toc: true
 # Bewertung Klassifizierung
 {: .no_toc }
 
-> **Klassifikationsmodelle erfordern spezifische Metriken zur Leistungsbewertung.**        
+> **Klassifikationsmodelle erfordern spezifische Metriken zur Leistungsbewertung.**<br>
 >  Dieses Kapitel behandelt die wichtigsten Werkzeuge: Confusion Matrix, Precision, Recall, F1-Score, Cohen's Kappa, ROC-Kurve und AUC. Besondere Aufmerksamkeit gilt dem Umgang mit unausgewogenen Datensätzen.
 
 ---

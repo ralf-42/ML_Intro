@@ -1,10 +1,11 @@
 ---
 layout: default
 title: Gradio Deployment
-parent: Deployment
+parent: Deployment-Themen
 nav_order: 1
 description: Bereitstellung von ML-Modellen mit Gradio für interaktive Web-Interfaces
 has_toc: true
+grand_parent: Deployment
 ---
 
 # Deployment

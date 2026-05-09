@@ -1,10 +1,11 @@
 ---
 layout: default
 title: Grundlagen
-parent: Konzepte
+parent: Alle Konzepte
 nav_order: 1
 has_children: true
-description: "Fundamentale Machine Learning Grundlagen"
+description: Fundamentale Machine Learning Grundlagen
+grand_parent: Konzepte
 ---
 
 # Grundlagen

@@ -1,10 +1,11 @@
 ---
 layout: default
 title: XAI
-parent: Konzepte
+parent: Alle Konzepte
 nav_order: 8
 has_children: true
-description: "Explainable AI - Interpretierbarkeit von ML-Modellen"
+description: Explainable AI - Interpretierbarkeit von ML-Modellen
+grand_parent: Konzepte
 ---
 
 # XAI - Explainable AI

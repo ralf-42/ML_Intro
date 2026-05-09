@@ -1,10 +1,11 @@
 ---
 layout: default
 title: Ethik und KI
-parent: Regulatorisches
+parent: Regulatorische Themen
 nav_order: 3
 description: "Ethische Aspekte: Bias, Fairness und verantwortungsvoller KI-Einsatz"
 has_toc: true
+grand_parent: Regulatorisches
 ---
 
 # Ethik und KI

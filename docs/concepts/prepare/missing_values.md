@@ -11,7 +11,7 @@ has_toc: true
 # Missing Values – Fehlende Werte behandeln
 {: .no_toc }
 
-> **Behandlung fehlender Werte in Machine Learning Projekten**    
+> **Behandlung fehlender Werte in Machine Learning Projekten**<br>
 > MCAR, MAR, MNAR - Deletion vs. Imputation - Strategien und Best Practices
 
 ---

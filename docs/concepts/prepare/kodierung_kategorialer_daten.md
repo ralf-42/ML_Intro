@@ -11,7 +11,7 @@ has_toc: true
 # Kodierung kategorialer Daten
 {: .no_toc }
 
-> **Transformation kategorialer Merkmale in numerische Formate**      
+> **Transformation kategorialer Merkmale in numerische Formate**<br>
 > Nominale vs. ordinale Daten, OrdinalEncoder, OneHotEncoder und TargetEncoder
 
 ---

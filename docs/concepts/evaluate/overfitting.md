@@ -11,7 +11,7 @@ has_toc: true
 # Overfitting
 {: .no_toc }
 
-> **Das Problem des Auswendiglernens**    
+> **Das Problem des Auswendiglernens**<br>
 > Overfitting-Erkennung, Learning Curves und Gegenmaßnahmen
 
 ---

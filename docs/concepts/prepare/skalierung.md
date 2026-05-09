@@ -11,7 +11,7 @@ has_toc: true
 # Skalierung
 {: .no_toc }
 
-> **Feature-Skalierung ist ein kritischer Vorverarbeitungsschritt, der numerische Merkmale auf einen einheitlichen Wertebereich bringt.**      
+> **Feature-Skalierung ist ein kritischer Vorverarbeitungsschritt, der numerische Merkmale auf einen einheitlichen Wertebereich bringt.**<br>
 > Sie verbessert die Konvergenz von Algorithmen und stellt sicher, dass alle Features gleichwertig in die Modellbildung einfließen.
 
 ---

@@ -11,7 +11,7 @@ has_toc: true
 # Cross-Validation
 {: .no_toc }
 
-> **Robuste Modellbewertung durch Kreuzvalidierung**      
+> **Robuste Modellbewertung durch Kreuzvalidierung**<br>
 > K-Fold, Stratified K-Fold, Leave-One-Out und Time Series Split
 
 ---

@@ -1,10 +1,11 @@
 ---
 layout: default
 title: Evaluate
-parent: Konzepte
+parent: Alle Konzepte
 nav_order: 4
 has_children: true
-description: "Bewertung und Evaluation von ML-Modellen"
+description: Bewertung und Evaluation von ML-Modellen
+grand_parent: Konzepte
 ---
 
 # Evaluate

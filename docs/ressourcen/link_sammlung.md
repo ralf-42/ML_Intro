@@ -1,17 +1,17 @@
 ---
 layout: default
 title: Links
-parent: Ressourcen
+parent: Alle Ressourcen
 nav_order: 2
 description: "Umfassende Sammlung nützlicher ML-Ressourcen: Videos, Tutorials, Bücher, Tools"
 has_toc: true
+grand_parent: Ressourcen
 ---
 
 # Links
 {: .no_toc }
 
-> **Umfassende Sammlung nützlicher ML-Ressourcen: Videos, Tutorials, Bücher, Tools**    
-
+> **Umfassende Sammlung nützlicher ML-Ressourcen: Videos, Tutorials, Bücher, Tools**<br>
 ---
 
 # Inhaltsverzeichnis

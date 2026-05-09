@@ -1,10 +1,11 @@
 ---
 layout: default
 title: Interaktive Visualisierung
-parent: Ressourcen
+parent: Alle Ressourcen
 nav_order: 1
 description: "Interaktive Web-Demos für ML-Konzepte: Statistik, Preprocessing, Modelle und Evaluierung"
 has_toc: true
+grand_parent: Ressourcen
 ---
 
 # Interaktive Visualisierung

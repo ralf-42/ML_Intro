@@ -11,7 +11,7 @@ has_toc: true
 # Train-Test-Split
 {: .no_toc }
 
-> **Aufteilung von Daten für Training und Evaluation**    
+> **Aufteilung von Daten für Training und Evaluation**<br>
 > 80-20-Split, Stratified Split, Random State und Best Practices
 
 ---

@@ -11,7 +11,7 @@ has_toc: true
 # Isolation Forest
 {: .no_toc }
 
-> **Isolation Forest erkennt Anomalien, indem ungewöhnliche Datenpunkte schneller isoliert werden als normale Beobachtungen.**    
+> **Isolation Forest erkennt Anomalien, indem ungewöhnliche Datenpunkte schneller isoliert werden als normale Beobachtungen.**<br>
 > Das Verfahren ist besonders nützlich für tabellarische Daten, Betrugserkennung, Qualitätskontrolle und Monitoring-Szenarien ohne gelabelte Fehlerfälle.
 
 ---

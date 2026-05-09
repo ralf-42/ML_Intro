@@ -11,7 +11,7 @@ has_toc: true
 # Der Machine Learning Workflow
 {: .no_toc }
 
-> **Der systematische Prozess von der Problemstellung bis zur produktiven Anwendung**      
+> **Der systematische Prozess von der Problemstellung bis zur produktiven Anwendung**<br>
 > Fünf Phasen: Understand, Prepare, Modeling, Evaluate und Deploy
 
 ---

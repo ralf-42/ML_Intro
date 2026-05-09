@@ -11,7 +11,7 @@ has_toc: true
 # Entscheidungsbaum (Decision Tree)
 {: .no_toc }
 
-> **Hierarchische Regelstruktur für ML-Modelle**     
+> **Hierarchische Regelstruktur für ML-Modelle**<br>
 > Interpretierbare Entscheidungslogik für Klassifikation und Regression
 
 ---
