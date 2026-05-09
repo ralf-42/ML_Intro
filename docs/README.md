@@ -1,8 +1,10 @@
-# GitHub Pages Dokumentation - ML_Intro
+---
+layout: default
+title: Readme
+nav_exclude: true
+---
 
-**Version:** 1.0<br>
-**Stand:** Mai 2026<br>
-**Kurs:** Machine Learning Einführung
+# GitHub Pages Dokumentation - ML_Intro
 
 Diese Dokumentation wird über GitHub Pages veröffentlicht.
 
@@ -94,8 +96,3 @@ bundle exec jekyll serve
 - [Just the Docs Dokumentation](https://just-the-docs.com/)
 - [GitHub Pages Dokumentation](https://docs.github.com/en/pages)
 - [Jekyll Dokumentation](https://jekyllrb.com/docs/)
-
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|

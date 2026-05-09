@@ -81,7 +81,6 @@ Während Graustufenbilder nur einen Kanal haben, bestehen Farbbilder aus mehrere
 | Graustufen | 1      | (28, 28, 1)      |
 | RGB        | 3      | (224, 224, 3)    |
 
-
 ```python
 # Normalisierung der Pixelwerte (0-1 statt 0-255)
 X_train = X_train.astype('float32') / 255.0
@@ -212,7 +211,6 @@ conv_layer = Conv2D(
 )
 ```
 
-
 #### Pooling Layer
 
 Das Pooling reduziert die **räumliche** Größe der Feature Maps und extrahiert dominante Merkmale.
@@ -257,7 +255,6 @@ dense1 = Dense(128, activation='relu')
 # Output Layer (10 Klassen)
 output = Dense(10, activation='softmax')
 ```
-
 
 ### CNN-Parameter verstehen
 
@@ -444,7 +441,6 @@ flowchart LR
     X0 ~~~ X1 ~~~ X2
 ```
 
-
 ### Problem: Vanishing Gradients
 
 RNNs haben Schwierigkeiten, langfristige Abhängigkeiten zu lernen. Bei langen Sequenzen werden die Gradienten während des Backpropagation entweder sehr klein (vanishing) oder sehr groß (exploding).
@@ -510,8 +506,6 @@ flowchart TD
 | **Forget Gate** | Entscheidet, welche Informationen aus dem Zellzustand gelöscht werden | "Was kann ich vergessen?" |
 | **Input Gate** | Entscheidet, welche neuen Informationen gespeichert werden | "Was ist wichtig zu merken?" |
 | **Output Gate** | Entscheidet, welche Informationen als Output verwendet werden | "Was ist jetzt relevant?" |
-
-
 
 ### LSTM vs. SimpleRNN
 
@@ -579,7 +573,6 @@ AutoEncoder eignen sich hervorragend zur Anomalieerkennung: Anomalien werden sch
 
 Ein Denoising AutoEncoder lernt, verrauschte Eingaben zu bereinigen:
 
-
 ---
 
 ## Zusammenfassung
@@ -630,7 +623,6 @@ flowchart TD
 | [Modell-Steckbriefe](./modell-steckbriefe.html) | Wo ordnen sich CNN, LSTM und AutoEncoder im Gesamtüberblick ein? |
 
 ---
-
 
 **Version:** 1.0<br>
 **Stand:** Januar 2026<br>

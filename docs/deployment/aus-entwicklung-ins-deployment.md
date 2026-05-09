@@ -1,11 +1,10 @@
 ---
 layout: default
 title: Produktionsreife Anwendung
-parent: Deployment-Themen
+parent: Deployment
 nav_order: 2
 description: Praktische Anleitung für den Weg vom Jupyter Notebook zur produktionsreifen GenAI-Anwendung
 has_toc: true
-grand_parent: Deployment
 ---
 
 # Aus der Entwicklung ins Deployment
@@ -373,13 +372,13 @@ Vor dem Go-Live sollten diese Punkte geprüft werden:
 - [12-Factor App Prinzipien](https://12factor.net/de/)
 - [LangServe für LangChain-Apps](https://python.langchain.com/docs/langserve)
 
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|
+
 ---
 
 **Version:** 1.0<br>
 **Stand:** Februar 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
-
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|

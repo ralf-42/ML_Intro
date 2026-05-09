@@ -4,7 +4,7 @@ title: Overfitting
 parent: Evaluate
 grand_parent: Konzepte
 nav_order: 9
-description: "Overfitting - Wenn Modelle Trainingsdaten auswendig lernen"
+description: Overfitting - Wenn Modelle Trainingsdaten auswendig lernen
 has_toc: true
 ---
 
@@ -698,7 +698,6 @@ flowchart TB
 | [Cross-Validation](./cross_validation.html) | Overfitting ist das Problem; Cross-Validation ist eine Methode, es zuverlaessig zu erkennen |
 | [Hyperparameter-Tuning](./hyperparameter_tuning.html) | Overfitting entsteht durch falsche Hyperparameter; Tuning optimiert Parameter zur Vermeidung |
 | [Modellauswahl](../modeling/modellauswahl.html) | Overfitting entsteht durch zu komplexe Modelle; Modellauswahl beruecksichtigt den Komplexitaets-Trade-off von Anfang an |
-
 
 ---
 

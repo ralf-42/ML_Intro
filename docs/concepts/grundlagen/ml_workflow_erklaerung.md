@@ -4,7 +4,7 @@ title: ML Workflow
 parent: Grundlagen
 grand_parent: Konzepte
 nav_order: 2
-description: "Der Machine Learning Workflow - Von Understand über Prepare, Modeling und Evaluate bis Deploy"
+description: Der Machine Learning Workflow - Von Understand über Prepare, Modeling und Evaluate bis Deploy
 has_toc: true
 ---
 
@@ -21,14 +21,11 @@ has_toc: true
 1. TOC
 {:toc}
 
-
 ---
 
 Der Machine-Learning-Workflow beschreibt den systematischen Prozess von der ersten Problemstellung bis zur produktiven Anwendung eines ML-Modells. Die folgenden fünf Phasen bilden das Fundament jedes erfolgreichen ML-Projekts.
 
 <img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/ml_prozess.png" class="logo" width="1050"/>
-
-
 
 ## 1. Understand – Das Problem verstehen
 
@@ -84,8 +81,6 @@ Ein Modell mit unbefriedigender Performance kann auf Probleme in der Datenaufber
 | [ML Grundlagen](./machine_learning_grundlagen.html)             | Grundlagen erklaeren *was* ML ist; der Workflow zeigt *wie* Projekte phasenweise durchgefuehrt werden                             |
 | [Workflow-Design (Pipelines)](./workflow-design.html)           | ML-Workflow beschreibt die 5 Phasen übergeordnet; Workflow-Design konkretisiert *technische Umsetzung* mit scikit-learn Pipelines |
 | [Hyperparameter-Tuning](../evaluate/hyperparameter_tuning.html) | Der Workflow rahmt alle Phasen ein; Hyperparameter-Tuning ist eine spezialisierte *Optimierungstechnik* in Phase 3                |
-
-
 
 ---
 

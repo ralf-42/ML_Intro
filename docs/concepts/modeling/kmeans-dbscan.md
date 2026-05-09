@@ -72,7 +72,6 @@ flowchart LR
 | **Partitionierend** | K-Means              | Teilt Daten in k vordefinierte Cluster; iterative Optimierung der Clusterzentren |
 | **Dichtebasiert**   | DBSCAN               | Erkennt Cluster anhand der Datendichte; identifiziert Ausreißer automatisch      |
 
-
 ---
 
 ## K-Means Clustering
@@ -131,11 +130,9 @@ flowchart TD
 | **Clustergröße** | Tendiert zu ähnlich großen Clustern                                         |
 | **Varianz**      | Minimiert die Varianz innerhalb der Cluster                                 |
 
-
 ### Optimale Clusterzahl mit der Elbow-Methode
 
 Die Wahl der richtigen Anzahl K ist entscheidend. Die **Elbow-Methode** hilft dabei, indem sie die Inertia (Within-Cluster Sum of Squares) für verschiedene K-Werte visualisiert.
-
 
 ```mermaid
 xychart-beta
@@ -211,7 +208,6 @@ flowchart TD
 3. **Border Points zuweisen**: Jedem erreichbaren Core Point-Cluster zuordnen
 4. **Noise klassifizieren**: Übrige Punkte als Rauschen markieren
 
-
 ---
 
 ## Distanzmetriken
@@ -250,7 +246,6 @@ flowchart LR
 | **Manhattan** | Σ\|xᵢ-yᵢ\| | Summe der Achsenabstände | Robuster bei Ausreißern |
 | **Cosinus** | 1 - cos(θ) | Winkel zwischen Vektoren | Textähnlichkeit, Embeddings |
 | **Minkowski** | (Σ\|xᵢ-yᵢ\|ᵖ)^(1/p) | Generalisierung | Parameter p anpassbar |
-
 
 ---
 
@@ -299,9 +294,7 @@ flowchart TB
 
 ---
 
-
 ## Best Practices
-
 
 ### Checkliste für erfolgreiches Clustering
 
@@ -311,8 +304,6 @@ flowchart TB
 - [ ] Bei DBSCAN: ε mit k-Distanz-Graph bestimmen
 - [ ] Ergebnis mit Silhouette-Score evaluieren
 - [ ] Cluster visualisieren und interpretieren
-
-
 
 ### Häufige Fehler vermeiden
 
@@ -330,7 +321,6 @@ flowchart TB
 | [Modellauswahl](./modellauswahl.html) | Modellauswahl entscheidet zwischen Supervised und Unsupervised; K-Means und DBSCAN sind Unsupervised-Algorithmen |
 | [Bewertung: Clustering](../evaluate/bewertung_clustering.html) | Clustering-Algorithmen erzeugen Gruppen; Metriken (Silhouette, Davies-Bouldin) bewerten die Guete der Zuordnung |
 | [Isolation Forest](./isolation-forest.html) | DBSCAN markiert Ausreißer als Noise im Clustering; Isolation Forest bewertet auffällige Punkte direkt über Anomaly Scores |
-
 
 ---
 

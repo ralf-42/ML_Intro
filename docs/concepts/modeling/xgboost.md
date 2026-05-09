@@ -4,7 +4,7 @@ title: XGBoost
 parent: Modeling
 grand_parent: Konzepte
 nav_order: 5
-description: "XGBoost (Extreme Gradient Boosting) ist eine optimierte Boosting-Implementierung für hohe Geschwindigkeit und Vorhersagequalität"
+description: XGBoost (Extreme Gradient Boosting) ist eine optimierte Boosting-Implementierung für hohe Geschwindigkeit und Vorhersagequalität
 has_toc: true
 ---
 
@@ -217,8 +217,6 @@ flowchart TD
 
 ---
 
-
-
 ## Zusammenfassung
 
 **Die wichtigsten Erkenntnisse:**
@@ -236,9 +234,6 @@ flowchart TD
 | [Ensemble-Methoden](./ensemble.html)                            | XGBoost spezialisiert Gradient Boosting; Ensemble-Methoden decken Bagging, Boosting und Stacking uebergreifend ab |
 | [Random Forest](./random-forest.html)                           | Random Forest nutzt paralleles Bagging; XGBoost nutzt sequentielle Fehlerkorrektur durch Boosting                 |
 | [Hyperparameter-Tuning](../evaluate/hyperparameter_tuning.html) | XGBoost ist die Modellklasse; Hyperparameter-Tuning optimiert Parameter wie learning_rate und max_depth           |
-
-
-
 
 ---
 

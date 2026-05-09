@@ -1,18 +1,13 @@
 ---
 layout: default
 title: Evaluate
-parent: Alle Konzepte
+parent: Konzepte
 nav_order: 4
 has_children: true
 description: Bewertung und Evaluation von ML-Modellen
-grand_parent: Konzepte
 ---
 
 # Evaluate
-
-**Version:** 1.0<br>
-**Stand:** Mai 2026<br>
-**Kurs:** Machine Learning Einführung
 
 ## Inhaltsverzeichnis
 {: .no_toc .text-delta }
@@ -47,8 +42,3 @@ grand_parent: Konzepte
 **[Overfitting](evaluate/overfitting.html)** – *Woran wird Overfitting erkannt und wie wird es verhindert?* Learning Curves, Bias-Variance Tradeoff und praktische Gegenmaßnahmen.
 
 **[Regularisierung](evaluate/regularisierung.html)** – *Wie reduziert Regularisierung Overfitting ohne die Modellkomplexität zu opfern?* L1 (Lasso), L2 (Ridge) und Elastic Net.
-
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|

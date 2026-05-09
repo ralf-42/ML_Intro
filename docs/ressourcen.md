@@ -3,14 +3,10 @@ layout: default
 title: Ressourcen
 nav_order: 7
 has_children: true
-description: "Nützliche Ressourcen und Tools"
+description: Nützliche Ressourcen und Tools
 ---
 
 # Ressourcen
-
-**Version:** 1.0<br>
-**Stand:** Mai 2026<br>
-**Kurs:** Machine Learning Einführung
 
 Die Ressourcenseiten ergänzen den Kurs dort, wo zusätzliche Werkzeuge, Visualisierungen oder Sammlungen wirklich helfen. Sie sind nicht als unendliches Linkarchiv gedacht, sondern als gezielte Unterstützung für typische Lern- und Projektfragen.
 
@@ -31,8 +27,3 @@ Gerade bei Statistik, Modellverhalten oder Datenvorbereitung helfen visuelle Wer
 Die Link-Sammlung ist dort nützlich, wo eine Kursseite nicht ausreicht oder ein Thema aus einer zweiten Perspektive betrachtet werden soll. Relevant sind vor allem gut gepflegte Dokumentationen, Visualisierungen und vertiefende Tutorials.
 
 - **[Links](ressourcen/link_sammlung.html)** – *Wo finden sich gute externe Quellen für ML-Themen?* Dokumentation, Lernmaterialien, Visualisierungen und weiterführende Tutorials.
-
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|

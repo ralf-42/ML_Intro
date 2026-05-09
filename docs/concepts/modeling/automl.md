@@ -4,7 +4,7 @@ title: AutoML
 parent: Modeling
 grand_parent: Konzepte
 nav_order: 14
-description: "Automatisiertes Machine Learning (AutoML) - Workflow-Automatisierung von Datenvorbereitung bis Modellauswahl"
+description: Automatisiertes Machine Learning (AutoML) - Workflow-Automatisierung von Datenvorbereitung bis Modellauswahl
 has_toc: true
 ---
 
@@ -82,10 +82,7 @@ flowchart TD
 
 [PyCaret](https://pycaret.org/) ist eine Open-Source Python-Bibliothek für Low-Code Machine Learning. Sie automatisiert ML-Workflows und ermöglicht schnelles Experimentieren.
 
-
 ---
-
-
 
 ## AutoML-Plattformen im Vergleich
 
@@ -146,8 +143,6 @@ flowchart TD
 | [Modellauswahl](./modellauswahl.html) | AutoML automatisiert Modellauswahl und Preprocessing; manuelle Modellauswahl erfordert Expertenwissen |
 | [Hyperparameter-Tuning](../evaluate/hyperparameter_tuning.html) | AutoML automatisiert den gesamten Workflow inkl. Tuning; manuelles Tuning optimiert ein einzelnes Modell gezielt |
 | [Feature Engineering](../prepare/feature-engineering.html) | AutoML automatisiert Feature Creation; manuelles Feature Engineering nutzt gezielt Domaenenwissen |
-
-
 
 ---
 

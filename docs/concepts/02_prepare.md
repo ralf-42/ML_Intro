@@ -1,18 +1,13 @@
 ---
 layout: default
 title: Prepare
-parent: Alle Konzepte
+parent: Konzepte
 nav_order: 2
 has_children: true
 description: Datenaufbereitung für Machine Learning
-grand_parent: Konzepte
 ---
 
 # Prepare
-
-**Version:** 1.0<br>
-**Stand:** Mai 2026<br>
-**Kurs:** Machine Learning Einführung
 
 ## Inhaltsverzeichnis
 {: .no_toc .text-delta }
@@ -57,8 +52,3 @@ Beginne mit **Train-Test-Split** und danach mit **Prepare nach Modell**. Erst we
 ## Feature Engineering
 
 **[Feature Engineering](prepare/feature-engineering.html)** – *Wie werden aus Rohdaten informative Merkmale gewonnen?* Feature Creation, Selection, Extraction und Domain Knowledge Integration.
-
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|

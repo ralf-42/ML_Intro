@@ -4,7 +4,7 @@ title: Kodierung
 parent: Prepare
 grand_parent: Konzepte
 nav_order: 4
-description: "Kodierung kategorialer Daten - OrdinalEncoder, OneHotEncoder und TargetEncoder für Machine Learning"
+description: Kodierung kategorialer Daten - OrdinalEncoder, OneHotEncoder und TargetEncoder für Machine Learning
 has_toc: true
 ---
 
@@ -23,7 +23,6 @@ has_toc: true
 {:toc}
 
 ---
-
 
 ## Einführung
 
@@ -240,8 +239,6 @@ encoder = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
 > [!NOTE]  0/1-Kodierung<br>
 > Bei einem nominalen Feature mit **nur 2 Ausprägungen** reicht eine **0/1-Kodierung** (OrdinalEncoder) völlig aus.  **One-Hot-Encoding bringt hier keinen echten Vorteil**, da es nur die gleiche Information auf zwei Spalten verteilt. Für binäre Kategorien: **kein Unterschied in der Praxis → 0/1 genügt**.
 
-
-
 ### 3. TargetEncoder (für nominale Daten mit vielen Kategorien)
 
 Der **TargetEncoder** ersetzt kategoriale Werte durch einen Wert, der aus dem Zielmerkmal (Target) berechnet wird – typischerweise der Mittelwert des Targets für diese Kategorie.
@@ -349,7 +346,6 @@ flowchart TB
 | **Supervised**         | Nein           | Nein             | Ja (benötigt Target) |
 | **Overfitting-Risiko** | Gering         | Gering           | Höher                |
 
-
 Die Wahl der richtigen Kodierung ist entscheidend für die Modellperformance. Grundregel: **Ordinale Daten** mit OrdinalEncoder, **nominale Daten** mit OneHotEncoder (wenige Kategorien) oder TargetEncoder (viele Kategorien).
 ## Abgrenzung zu verwandten Dokumenten
 
@@ -359,8 +355,6 @@ Die Wahl der richtigen Kodierung ist entscheidend für die Modellperformance. Gr
 | [Feature Engineering](./feature-engineering.html) | Kodierung ist Datentyp-Konversion; Feature Engineering erstellt neue Merkmale aus bestehenden |
 | [Prepare nach Modell](./prepare_nach_modell.html) | Zeigt, welche Kursalgorithmen kodierte Eingaben brauchen und wo Sonderfälle gelten |
 | [Modellauswahl](../modeling/modellauswahl.html) | Kodierungsart beeinflusst Modellwahl: TargetEncoder erfordert Supervised-Kontext und kann Data Leakage verursachen |
-
-
 
 ---
 

@@ -4,7 +4,7 @@ title: Train-Test-Split
 parent: Prepare
 grand_parent: Konzepte
 nav_order: 1
-description: "Train-Test-Split - Aufteilung von Daten in Trainings- und Testsets für Machine Learning"
+description: Train-Test-Split - Aufteilung von Daten in Trainings- und Testsets für Machine Learning
 has_toc: true
 ---
 
@@ -23,7 +23,6 @@ has_toc: true
 {:toc}
 
 ---
-
 
 ## Überblick
 
@@ -450,8 +449,6 @@ flowchart TB
 
 Der Train-Test-Split ist die Grundlage für zuverlässige Modellbewertung. Die korrekte Anwendung – insbesondere die Vermeidung von Data Leakage – ist entscheidend für aussagekräftige Ergebnisse und erfolgreiche ML-Projekte.
 
-
-
 ## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
@@ -462,7 +459,7 @@ Der Train-Test-Split ist die Grundlage für zuverlässige Modellbewertung. Die k
 | [Missing Values](./missing_values.html) | Missing Values werden nach dem Split innerhalb der Pipeline behandelt, wenn das Modell keine fehlenden Werte akzeptiert |
 
 ---
-   
+
 **Version:** 1.1<br>
 **Stand:** April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.

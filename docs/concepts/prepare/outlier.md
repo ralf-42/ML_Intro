@@ -4,7 +4,7 @@ title: Outlier
 parent: Prepare
 grand_parent: Konzepte
 nav_order: 6
-description: "Outlier - Ausreißer erkennen und behandeln mit Z-Score, IQR und Isolation Forest"
+description: Outlier - Ausreißer erkennen und behandeln mit Z-Score, IQR und Isolation Forest
 has_toc: true
 ---
 
@@ -27,7 +27,6 @@ has_toc: true
 ## Überblick
 
 Ein Ausreißer (Outlier) ist ein Datenpunkt, dessen Ausprägung stark von der Norm abweicht. Ausreißer können die Ergebnisse von Analysen und Machine-Learning-Modellen erheblich verzerren. Die korrekte Identifikation und Behandlung von Ausreißern ist daher ein wichtiger Schritt in der Datenvorverarbeitung.
-
 
 ## Methoden zur Identifikation
 
@@ -102,7 +101,6 @@ flowchart TD
 
 ### Z-Score Methode
 
-
 Der **Z-Score** (Standardwert) zeigt, **wie weit ein Wert vom Durchschnitt entfernt ist** – gemessen in **Standardabweichungen**.
 
 - **x**: betrachteter Wert
@@ -114,7 +112,6 @@ Der **Z-Score** (Standardwert) zeigt, **wie weit ein Wert vom Durchschnitt entfe
 - **z = 0** → genau im Durchschnitt
 - **z = 1** → 1 Standardabweichung über dem Durchschnitt
 - **z = -2** → 2 Standardabweichungen darunter
-
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
@@ -150,8 +147,6 @@ Die **IQR-Methode** (Interquartilsabstand) wird genutzt, um **Ausreißer zu erke
 **Interpretation:**
 
 - Werte **außerhalb dieser Grenzen** gelten als **Ausreißer**.
-
-
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
@@ -234,7 +229,6 @@ flowchart LR
     style viz fill:#f3e5f5
 ```
 
-
 ## Best Practices
 
 | Empfehlung                | Beschreibung                                                       |
@@ -280,7 +274,6 @@ flowchart TB
 | `EllipticEnvelope`   | Gaussian-basierte Ausreißer-Erkennung              |
 | `OneClassSVM`        | SVM für Anomalie-Erkennung                         |
 
-
 ## Abgrenzung zu verwandten Dokumenten
 
 | Thema | Abgrenzung |
@@ -290,8 +283,6 @@ flowchart TB
 | [Skalierung](./skalierung.html) | Outliers werden idealerweise vor der Skalierung behandelt; Skalierung transformiert den Wertebereich nach der Bereinigung |
 | [Prepare nach Modell](./prepare_nach_modell.html) | Zeigt, bei welchen Kursalgorithmen Ausreißer kritisch sind und wo sie eher beobachtet statt entfernt werden |
 | [Feature Engineering](./feature-engineering.html) | Outlier-Behandlung bereinigt Rohdaten; Feature Engineering transformiert bereinigte Daten in neue Merkmale |
-
-
 
 ---
 

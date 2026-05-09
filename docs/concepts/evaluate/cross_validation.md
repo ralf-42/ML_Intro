@@ -4,7 +4,7 @@ title: Cross-Validation
 parent: Evaluate
 grand_parent: Konzepte
 nav_order: 6
-description: "Cross-Validation - Kreuzvalidierung zur robusten Bewertung von ML-Modellen"
+description: Cross-Validation - Kreuzvalidierung zur robusten Bewertung von ML-Modellen
 has_toc: true
 ---
 
@@ -30,7 +30,6 @@ Cross-Validation (Kreuzvalidierung) ist ein statistisches Verfahren zur Bewertun
 
 > [!NOTE] Warum CV?<br>
 > Cross-Validation reduziert Zufallseffekte einzelner Splits und liefert stabilere Leistungsschätzungen.
-
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '13px'}}}%%
@@ -187,7 +186,6 @@ for metric in scoring:
     print(f"  Training: {results[train_key].mean():.3f} (+/- {results[train_key].std():.3f})")
     print(f"  Test:     {results[test_key].mean():.3f} (+/- {results[test_key].std():.3f})")
 ```
-
 
 ## Wahl von K
 
@@ -762,7 +760,6 @@ Cross-Validation ist ein unverzichtbares Werkzeug für die robuste Bewertung von
 | [Train-Test-Split](../prepare/train_test_split.html)  | Cross-Validation macht mehrfache, ueberlappende Splits; Train-Test-Split ist ein einzelner, einfacher Split |
 | [Hyperparameter-Tuning](./hyperparameter_tuning.html) | Cross-Validation ist die Evaluierungsmethodik; Hyperparameter-Tuning nutzt CV zur robusten Optimierung      |
 | [Overfitting](./overfitting.html)                     | Cross-Validation liefert robuste Metriken; hohe Score-Varianz zwischen Folds ist ein Overfitting-Signal     |
-
 
 ---
 

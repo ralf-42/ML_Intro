@@ -4,7 +4,7 @@ title: Modellauswahl
 parent: Modeling
 grand_parent: Konzepte
 nav_order: 0
-description: "Systematische Kriterien und Strategien zur Auswahl des optimalen Machine-Learning-Modells für verschiedene Problemstellungen"
+description: Systematische Kriterien und Strategien zur Auswahl des optimalen Machine-Learning-Modells für verschiedene Problemstellungen
 has_toc: true
 ---
 
@@ -125,8 +125,6 @@ Neben den Daten spielen die Anforderungen des konkreten Anwendungsfalls eine zen
 
 Vorab festlegen, welche Metriken relevant sind und welche Schwellenwerte akzeptabel sind.
 
-
-
 ### Simplicity: Das richtige Maß an Komplexität
 
 > **Grundregel:** Kein komplexes Modell für ein einfaches Problem.
@@ -159,7 +157,6 @@ Je nach Anwendungsbereich ist die Interpretierbarkeit unterschiedlich wichtig:
 | **Marketing** | Mittel | Random Forest mit Feature Importance |
 | **Bilderkennung** | Niedrig akzeptabel | Neuronale Netze, Deep Learning |
 
-
 ### Computation Costs: Zeit- und Ressourcenbedarf
 
 Das Modell muss in angemessener Zeit trainierbar und mit verfügbarer Hardware anwendbar sein:
@@ -175,7 +172,6 @@ Das Modell muss in angemessener Zeit trainierbar und mit verfügbarer Hardware a
 ### Competition: Systematischer Modellvergleich
 
 Wenn mehrere Modelle die Grundanforderungen erfüllen, hilft ein systematischer Vergleich:
-
 
 ---
 
@@ -224,7 +220,6 @@ flowchart TD
 **Interaktive Mindmap mit einem breiten Methodenüberblick:**
 [Machine Learning Algorithms Mind Map](https://mindmapai.app/mind-map/machine-learning-algorithms-5f3b26fa)
 
-
 ---
 ## Best Practices
 
@@ -251,7 +246,6 @@ flowchart TD
 | [Isolation Forest](./isolation-forest.html) | Isolation Forest ist eine konkrete Wahl für unueberwachte Anomalieerkennung ohne gelabelte Zielvariable |
 | [Hyperparameter-Tuning](../evaluate/hyperparameter_tuning.html) | Modellauswahl waehlt den Algorithmus; Hyperparameter-Tuning optimiert dessen Einstellungen danach |
 | [Overfitting](../evaluate/overfitting.html) | Modellauswahl beruecksichtigt Komplexitaets-Trade-offs; Overfitting ist ein haeufiges Ergebnis zu komplexer Modelle |
-
 
 ---
 

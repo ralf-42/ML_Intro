@@ -123,7 +123,6 @@ flowchart LR
 | **Übertragungsfunktion** | Berechnet die gewichtete Summe aller Eingaben | z = Σ(wᵢ · xᵢ) + b |
 | **Aktivierungsfunktion** | Transformiert die Summe in die Ausgabe | y = f(z) |
 
-
 ---
 
 ## Aktivierungsfunktionen
@@ -190,7 +189,6 @@ flowchart TD
     style BIN fill:#ffcdd2
     style MULTI fill:#fff9c4
 ```
-
 
 ---
 
@@ -262,7 +260,6 @@ flowchart TD
     style HE fill:#bbdefb
 ```
 
-
 ---
 
 ## Loss Functions
@@ -278,18 +275,13 @@ Die Loss-Funktion (Verlustfunktion) quantifiziert, wie weit die Vorhersagen des 
 | **Binäre Klassifikation** | Binary Cross-Entropy | Logarithmischer Verlust für 2 Klassen |
 | **Multi-Class Klassifikation** | Categorical Cross-Entropy | Logarithmischer Verlust für n Klassen |
 
-
 ### Empfohlene Kombinationen für Supervised Learning
 
 <br>
 
-
 <img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/activation_loss_function.png" class="logo" width="750"/>
 
-
-
 ---
-
 
 ## Kombinationen für Unsupervised Learning
 
@@ -301,7 +293,6 @@ Neuronale Netze werden auch im unüberwachten Lernen eingesetzt:
 | **Anomalieerkennung** | ReLU, Tanh, Sigmoid | Sigmoid | MSE, Binary Cross-Entropy |
 | **Dimensionsreduktion** | ReLU, Leaky ReLU, Tanh | Linear, Sigmoid | MSE |
 | **Generative Modelle (GAN)** | Leaky ReLU, SELU | Tanh (Generator), Sigmoid (Discriminator) | Binary Cross-Entropy |
-
 
 ---
 
@@ -315,8 +306,6 @@ Neuronale Netze werden auch im unüberwachten Lernen eingesetzt:
 - [ ] **Passende Output-Aktivierung**: Sigmoid (binär), Softmax (multi-class), Linear (Regression)
 - [ ] **Passende Loss-Funktion**: Muss zur Aufgabe passen
 - [ ] **Gewichtsinitialisierung**: He für ReLU, Xavier für Sigmoid/Tanh
-
-
 
 ### Häufige Fehler vermeiden
 
@@ -335,8 +324,6 @@ Neuronale Netze werden auch im unüberwachten Lernen eingesetzt:
 | [Lineare Regression](./regression.html)                       | Neuronale Netze lernen nichtlineare Funktionen durch mehrere Schichten; Regression modelliert nur lineare Beziehungen  |
 | [Modellauswahl](./modellauswahl.html)                         | Neuronale Netze sind eine Modellklasse; Modellauswahl entscheidet, wann NN sinnvoll ist — z.B. bei großen Datenmengen  |
 | [Spezielle Neuronale Netze](./spezielle-neuronale-netze.html) | Dieses Dokument behandelt Grundlagen (MLP, Aktivierung, Training); spezialisierte Architekturen (CNN, RNN) folgen dort |
-
-
 
 ---
 

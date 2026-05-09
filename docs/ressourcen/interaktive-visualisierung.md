@@ -1,11 +1,10 @@
 ---
 layout: default
 title: Interaktive Visualisierung
-parent: Alle Ressourcen
+parent: Ressourcen
 nav_order: 1
 description: "Interaktive Web-Demos für ML-Konzepte: Statistik, Preprocessing, Modelle und Evaluierung"
 has_toc: true
-grand_parent: Ressourcen
 ---
 
 # Interaktive Visualisierung
@@ -110,13 +109,13 @@ Modellbewertung und Optimierung
 | **Cross Validation** | k-Fold Cross-Validation | [Cross-Validation](https://editor.p5js.org/ralf.bendig.rb/full/dSifyb8Gy) |
 | **Bootstrapping** | Resampling-Methode | [Bootstrapping](https://editor.p5js.org/ralf.bendig.rb/full/DejkjjmMn) |
 
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|
+
 ---
 
 **Version:** 1.0<br>
 **Stand:** Januar 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
-
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|

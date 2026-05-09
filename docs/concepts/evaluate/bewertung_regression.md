@@ -289,7 +289,6 @@ $$Residuum = y_i - \hat{y}_i$$
 | **Kurve/Bogen**   | Nicht-linearer Zusammenhang                                         | Polynomiale Features hinzufügen            |
 | **Cluster**       | Subgruppen in Daten                                                 | Separate Modelle oder zusätzliche Features |
 
-
 ### Visuelle Muster erkennen
 
 ```mermaid
@@ -307,55 +306,8 @@ flowchart LR
 
 <br> 
 
-
-<img src="```mermaid
-flowchart LR
-    subgraph Modell["🔮 Regressionsmodell"]
-        X["Features X"]
-        Y["Zielvariable y"]
-        PRED["Vorhersage ŷ"]
-    end
-    
-    subgraph R2_Calc["📐 R² Berechnung"]
-        VAR_TOTAL["Gesamtvarianz<br/>SS_total"]
-        VAR_RESIDUAL["Residualvarianz<br/>SS_residual"]
-        RESULT["R² = 1 - SS_res/SS_total"]
-    end
-    
-    X --> PRED
-    Y --> VAR_TOTAL
-    PRED --> VAR_RESIDUAL
-    VAR_TOTAL --> RESULT
-    VAR_RESIDUAL --> RESULT
-    
-    style RESULT fill:#4CAF50,color:#fff
-```0 class="logo" width="750"/>
-
 <br> 
 
-
-<img src="```mermaid
-flowchart LR
-    subgraph Modell["🔮 Regressionsmodell"]
-        X["Features X"]
-        Y["Zielvariable y"]
-        PRED["Vorhersage ŷ"]
-    end
-    
-    subgraph R2_Calc["📐 R² Berechnung"]
-        VAR_TOTAL["Gesamtvarianz<br/>SS_total"]
-        VAR_RESIDUAL["Residualvarianz<br/>SS_residual"]
-        RESULT["R² = 1 - SS_res/SS_total"]
-    end
-    
-    X --> PRED
-    Y --> VAR_TOTAL
-    PRED --> VAR_RESIDUAL
-    VAR_TOTAL --> RESULT
-    VAR_RESIDUAL --> RESULT
-    
-    style RESULT fill:#4CAF50,color:#fff
-```1 class="logo" width="750"/>
 ### Implementation in Python
 
 ```mermaid
@@ -379,8 +331,7 @@ flowchart LR
     VAR_RESIDUAL --> RESULT
     
     style RESULT fill:#4CAF50,color:#fff
-```2
-
+```
 ### Vollständige Evaluation mit allen Metriken
 
 ```mermaid
@@ -404,8 +355,7 @@ flowchart LR
     VAR_RESIDUAL --> RESULT
     
     style RESULT fill:#4CAF50,color:#fff
-```3
-
+```
 ---
 
 ## Best Practices
@@ -452,9 +402,7 @@ flowchart LR
     VAR_RESIDUAL --> RESULT
     
     style RESULT fill:#4CAF50,color:#fff
-```4
-
-
+```
 | Metrik | Stärke | Schwäche |
 |--------|--------|----------|
 | **R²** | Leicht interpretierbar, standardisiert | Kann bei nicht-linearen Zusammenhängen irreführen |
@@ -469,8 +417,6 @@ flowchart LR
 | [Bewertung: Klassifizierung](./bewertung_klassifizierung.html) | Regressions-Metriken (R2, MAE, RMSE) für kontinuierliche Werte; Klassifikations-Metriken (Precision, Recall) für Klassen |
 | [Overfitting](./overfitting.html)                              | Regressions-Metriken messen Vorhersagefehler; Overfitting-Erkennung nutzt Train-Test-Vergleich dieser Metriken             |
 | [Cross-Validation](./cross_validation.html)                    | Cross-Validation ist die Evaluierungsmethodik; Regressions-Metriken quantifizieren die Modellgüte                          |
-
-
 
 ---
 

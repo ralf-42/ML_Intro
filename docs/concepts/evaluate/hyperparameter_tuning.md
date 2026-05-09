@@ -4,7 +4,7 @@ title: Hyperparameter-Tuning
 parent: Evaluate
 grand_parent: Konzepte
 nav_order: 8
-description: "Systematische Optimierung von Hyperparametern zur Verbesserung der Modellleistung"
+description: Systematische Optimierung von Hyperparametern zur Verbesserung der Modellleistung
 has_toc: true
 ---
 
@@ -745,7 +745,6 @@ Hyperparameter-Tuning ist ein essenzieller Schritt, um das volle Potenzial von M
 | [Modellauswahl](../modeling/modellauswahl.html) | Hyperparameter-Tuning optimiert Parameter *eines* Modells; Modellauswahl waehlt die Modellklasse insgesamt |
 | [Cross-Validation](./cross_validation.html) | Cross-Validation ist die Evaluierungsmethodik; Hyperparameter-Tuning nutzt CV zum Finden optimaler Parameter |
 | [AutoML](../modeling/automl.html) | Hyperparameter-Tuning ist manueller Optimierungsprozess mit Expertenwissen; AutoML automatisiert ihn |
-
 
 ---
 

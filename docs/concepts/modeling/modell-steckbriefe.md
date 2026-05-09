@@ -4,7 +4,7 @@ title: Modell-Steckbriefe
 parent: Modeling
 grand_parent: Konzepte
 nav_order: 1
-description: "Kompakte Übersicht aller wichtigen ML-Algorithmen mit Einsatzbereichen, Eigenschaften und Bewertungsmetriken"
+description: Kompakte Übersicht aller wichtigen ML-Algorithmen mit Einsatzbereichen, Eigenschaften und Bewertungsmetriken
 has_toc: true
 ---
 
@@ -47,7 +47,6 @@ Kompakte Referenz zu wichtigen Machine-Learning-Algorithmen mit Einsatzbereich, 
 **Interaktive Mindmap mit einem breiten Methodenüberblick:**     
 [Machine Learning Algorithms Mind Map](https://mindmapai.app/mind-map/machine-learning-algorithms-5f3b26fa)
 
-
 ---
 
 ## Supervised Learning
@@ -78,7 +77,6 @@ Ein Entscheidungsbaum zerlegt den Datenraum in aufeinanderfolgende Regeln. Das V
 - `min_samples_leaf`: Minimale Samples pro Blatt
 - `criterion`: Splitting-Kriterium (gini, entropy, log_loss)
 
-
 ---
 
 ### Random Forest
@@ -107,7 +105,6 @@ Random Forest kombiniert viele zufällig variierte Entscheidungsbäume zu einem 
 - `max_features`: Anzahl Features pro Split ('sqrt', 'log2', int)
 - `bootstrap`: Bootstrap-Sampling aktivieren
 
-
 ---
 
 ### Linear Regression
@@ -134,7 +131,6 @@ Die lineare Regression modelliert den Zusammenhang zwischen Merkmalen und Zielwe
 **Wichtige Hyperparameter**
 - `fit_intercept`: Achsenabschnitt berechnen
 - `normalize`: Features normalisieren (deprecated, besser StandardScaler)
-
 
 ---
 
@@ -177,7 +173,6 @@ Die logistische Regression ist eine Form der Regressionsanalyse, bei der ein kat
 - `solver`: Optimierungsalgorithmus
 - `max_iter`: Maximale Iterationen
 
-
 ---
 
 ### Neural Network (MLP)
@@ -218,7 +213,6 @@ Künstliche neuronale Netze bestehen aus Schichten von Knoten (Neuronen) und kö
 - `solver`: Optimierer ('adam', 'sgd', 'lbfgs')
 - `learning_rate_init`: Initiale Lernrate
 - `alpha`: L2-Regularisierung
-
 
 ---
 
@@ -298,7 +292,6 @@ Die Linear Discriminant Analysis ist eine Technik zur Dimensionsreduktion, die s
 - `n_components`: Anzahl der Komponenten
 - `solver`: Berechnungsmethode ('svd', 'lsqr', 'eigen')
 
-
 ---
 
 ## Unsupervised Learning
@@ -341,7 +334,6 @@ K-Means-Clustering ist ein einfacher Ansatz zum Partitionieren eines Datensatzes
 - `n_init`: Anzahl der Initialisierungen
 - `max_iter`: Maximale Iterationen
 
-
 ---
 
 ### DBSCAN
@@ -380,7 +372,6 @@ DBSCAN (Density-Based Spatial Clustering of Applications with Noise) ist ein dic
 - `eps`: Maximaler Abstand für Nachbarschaft
 - `min_samples`: Minimale Punkte für Kernpunkt
 - `metric`: Distanzmetrik ('euclidean', 'manhattan', etc.)
-
 
 > **Hinweis zur Anomalieerkennung:** DBSCAN erkennt Ausreißer als Rauschpunkte im Rahmen eines Clustering-Ergebnisses. Wenn die Aufgabe direkt darin besteht, auffällige Datenpunkte zu bewerten, ist Isolation Forest oft die passendere Modellklasse.
 
@@ -463,7 +454,6 @@ Der Apriori-Algorithmus dient dem Auffinden von Zusammenhängen in transaktionsb
 - `min_confidence`: Minimale Konfidenz für Regeln
 - `min_lift`: Minimaler Lift-Wert
 
-
 ---
 
 ### Principal Component Analysis (PCA)
@@ -501,7 +491,6 @@ Die Hauptkomponentenanalyse (PCA) ist eine Methode zur Dimensionsreduktion, die 
 **Wichtige Hyperparameter**
 - `n_components`: Anzahl zu behaltender Komponenten (int oder float für Varianzanteil)
 - `svd_solver`: Berechnungsmethode ('auto', 'full', 'randomized')
-
 
 ---
 
@@ -549,7 +538,6 @@ flowchart TD
 | [XGBoost](./xgboost.html) | Wie sieht ein leistungsstarkes Boosting-Verfahren im Vergleich aus? |
 
 ---
-
 
 **Version:** 1.0<br>
 **Stand:** Januar 2026<br>

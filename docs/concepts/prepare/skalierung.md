@@ -4,7 +4,7 @@ title: Skalierung
 parent: Prepare
 grand_parent: Konzepte
 nav_order: 5
-description: "Feature-Skalierung durch Normalisierung und Standardisierung für Machine Learning"
+description: Feature-Skalierung durch Normalisierung und Standardisierung für Machine Learning
 has_toc: true
 ---
 
@@ -143,7 +143,6 @@ $$x_{norm} = \frac{60 - 20}{100 - 20} = \frac{40}{80} = 0.5$$
 
 Ergebnis: [0.0, 0.25, 0.5, 0.75, 1.0]
 
-
 ---
 
 ## Standardisierung (Z-Score-Normalisierung)
@@ -179,7 +178,6 @@ Für $x = 60$:
 $$x_{std} = \frac{60 - 60}{28.28} = 0$$
 
 Ergebnis: [-1.41, -0.71, 0, 0.71, 1.41]
-
 
 ---
 
@@ -253,9 +251,7 @@ Bei der Normalisierung werden durch den Ausreißer alle anderen Werte auf einen 
 
 Für Daten mit starken Ausreißern bietet scikit-learn den `RobustScaler`, der Median und Interquartilsabstand statt Mittelwert und Standardabweichung verwendet:
 
-
 ---
-
 
 ## Welche Algorithmen benötigen Skalierung?
 
@@ -294,7 +290,6 @@ flowchart LR
 - **Baumbasierte Algorithmen**: Splitpunkte werden pro Feature unabhängig berechnet
 - **Naive Bayes**: Basiert auf Wahrscheinlichkeiten, nicht auf Abständen
 
-
 ## Best Practices
 
 ### Checkliste für die Skalierung
@@ -307,7 +302,6 @@ flowchart LR
 - [ ] **Scaler speichern** – Für die Anwendung auf neue Daten im Deployment
 - [ ] **Rücktransformation ermöglichen** – Ergebnisse interpretierbar halten
 
-
 ### Häufige Fehler vermeiden
 
 | Fehler | Problem | Lösung |
@@ -317,13 +311,8 @@ flowchart LR
 | Baumbasierte Modelle skalieren | Unnötiger Aufwand | Algorithmus-Anforderungen prüfen |
 | Kategorische Daten skalieren | Sinnlose Transformation | Nur numerische Features skalieren |
 
-
-
-
-
 > [!NOTE] Kernbotschaft: <br>
 > Skalierung ist ein unverzichtbarer Vorverarbeitungsschritt für viele Machine-Learning-Algorithmen. Standardisierung ist die sichere Wahl für die meisten Anwendungsfälle, während Normalisierung bei spezifischen Anforderungen (fester Wertebereich, ausreißerfreie Daten) bevorzugt werden kann. Entscheidend ist die korrekte Anwendung: fit nur auf Trainingsdaten, transform auf alle Daten.
-
 
 ## Abgrenzung zu verwandten Dokumenten
 
@@ -334,9 +323,7 @@ flowchart LR
 | [Prepare nach Modell](./prepare_nach_modell.html)                   | Zeigt, bei welchen Kursalgorithmen Skalierung notwendig, kritisch oder meist überflüssig ist                           |
 | [Modellauswahl](../modeling/modellauswahl.html)                     | Skalierungsbedarf ist algorithmusabhängig: k-NN und SVM benötigen sie; Entscheidungsbäume nicht                        |
 
-
 ---
-
 
 **Version:** 1.1<br>
 **Stand:** April 2026<br>

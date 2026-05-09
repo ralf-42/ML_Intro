@@ -92,7 +92,6 @@ Bei `IsolationForest` gilt:
 
 ---
 
-
 ## Bewertung mit Labels
 
 Wenn bekannte Anomalien vorhanden sind, kann Anomalieerkennung wie eine stark unbalancierte Klassifikation bewertet werden.

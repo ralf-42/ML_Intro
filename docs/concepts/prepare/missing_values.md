@@ -4,7 +4,7 @@ title: Missing Values
 parent: Prepare
 grand_parent: Konzepte
 nav_order: 3
-description: "Missing Values - Fehlende Werte erkennen und behandeln mit SimpleImputer, KNNImputer und IterativeImputer"
+description: Missing Values - Fehlende Werte erkennen und behandeln mit SimpleImputer, KNNImputer und IterativeImputer
 has_toc: true
 ---
 
@@ -125,7 +125,6 @@ flowchart TB
     style advanced fill:#fff3e0
 ```
 
-
 ## Konsequenzen falscher Behandlung
 
 ```mermaid
@@ -163,14 +162,11 @@ flowchart TD
 
 ## Scikit-learn Klassen
 
-
-
 | Klasse             | Verwendung                                                  |
 | ------------------ | ----------------------------------------------------------- |
 | `SimpleImputer`    | Einfache Strategien (mean, median, most_frequent, constant) |
 | `KNNImputer`       | K-Nearest-Neighbors basierte Imputation                     |
 | `IterativeImputer` | Multivariate Imputation mit ML-Modellen                     |
-
 
 ## Abgrenzung zu verwandten Dokumenten
 
@@ -180,8 +176,6 @@ flowchart TD
 | [Train-Test-Split](./train_test_split.html) | Missing Values werden *vor* dem Split behandelt; Split trennt Daten erst *nach* der Bereinigung |
 | [Prepare nach Modell](./prepare_nach_modell.html) | Zeigt, welche Kursmodelle fehlende Werte direkt akzeptieren und wann Imputation trotzdem sinnvoll ist |
 | [Feature Engineering](./feature-engineering.html) | Feature Engineering nutzt den bereinigten Datensatz; Missing Values sind ein vorgelagerter Bereinigungsschritt |
-
-
 
 ---
 

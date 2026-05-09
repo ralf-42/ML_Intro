@@ -4,7 +4,7 @@ title: Bootstrapping
 parent: Evaluate
 grand_parent: Konzepte
 nav_order: 7
-description: "Bootstrapping - Resampling-Methode zur Quantifizierung von Unsicherheit"
+description: Bootstrapping - Resampling-Methode zur Quantifizierung von Unsicherheit
 has_toc: true
 ---
 
@@ -340,7 +340,6 @@ lower, upper = percentile_ci(scores, 0.95)
 print(f"95% Perzentil-CI: [{lower:.3f}, {upper:.3f}]")
 ```
 
-
 ## Bootstrapping vs. Cross-Validation
 
 {% raw %}
@@ -673,7 +672,6 @@ Bootstrapping ergänzt Cross-Validation optimal: Während Cross-Validation die G
 | [Hyperparameter Tuning](./hyperparameter_tuning.html) | Wie wird Modellauswahl systematisch mit Evaluation verbunden? |
 | [Bewertung allgemein](./bewertung_allgemein.html) | Wo ordnet sich Bootstrapping im gesamten Evaluationsprozess ein? |
 | [Random Forest](../modeling/random-forest.html) | Wie wird Bootstrapping in Ensemble-Verfahren praktisch genutzt? |
-
 
 ---
 

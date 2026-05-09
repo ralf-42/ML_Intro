@@ -4,7 +4,7 @@ title: Stacking
 parent: Modeling
 grand_parent: Konzepte
 nav_order: 13
-description: "Stacking kombiniert heterogene Modelle durch Voting oder Meta-Learning zu einem leistungsfähigeren Ensemble"
+description: Stacking kombiniert heterogene Modelle durch Voting oder Meta-Learning zu einem leistungsfähigeren Ensemble
 has_toc: true
 ---
 
@@ -317,7 +317,6 @@ flowchart TD
 
 ---
 
-
 ## Zusammenfassung
 
 ```mermaid
@@ -358,8 +357,6 @@ mindmap
 | [Ensemble-Methoden](./ensemble.html) | Stacking ist heterogenes Ensemble; Bagging und Boosting verwenden homogene Modelltypen |
 | [Random Forest](./random-forest.html) | Random Forest kombiniert identische Decision Trees; Stacking kombiniert verschiedene Algorithmen (Tree, SVM, NN) |
 | [AutoML](./automl.html) | AutoML automatisiert Modellkombination und Hyperparameter; Stacking erfordert manuelle Architekturentscheidungen |
-
-
 
 ---
 

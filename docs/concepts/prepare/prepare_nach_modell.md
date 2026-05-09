@@ -4,7 +4,7 @@ title: Prepare nach Modell
 parent: Prepare
 grand_parent: Konzepte
 nav_order: 2
-description: "Vorverarbeitungsschritte für die im Kurs eingesetzten ML-Algorithmen"
+description: Vorverarbeitungsschritte für die im Kurs eingesetzten ML-Algorithmen
 has_toc: true
 ---
 
@@ -12,7 +12,6 @@ has_toc: true
 {: .no_toc }
 
 Vorverarbeitung ist kein fester Block, der für jedes Modell gleich aussieht. Ein Entscheidungsbaum braucht andere Datenvorbereitung als K-Means, eine logistische Regression oder ein LSTM. Entscheidend ist, ob ein Verfahren mit fehlenden Werten umgehen kann, ob es Distanzen oder Gradienten nutzt, ob es numerische Eingaben erwartet und ob Ausreißer das Lernsignal verzerren.  
-
 
 ---
 
@@ -23,7 +22,6 @@ Vorverarbeitung ist kein fester Block, der für jedes Modell gleich aussieht. Ei
 {:toc}
 
 ---
-
 
 ## Entscheidungslogik
 
@@ -70,7 +68,6 @@ flowchart TD
     style L fill:#e8f5e9,stroke:#2e7d32
 ```
 
-
 ## Überblick
 
 | Algorithmus im Kurs                |   Fehlende Werte erlaubt?    |      Skalierung nötig?       |       Kodierung nötig?       |     Ausreißer kritisch?     | Besondere Prepare-Hinweise                                                           |
@@ -101,7 +98,6 @@ flowchart TD
 | **Übrige**                         |                              |                              |                              |                             |                                                                                      |
 | PyCaret AutoML                     | Wird automatisiert behandelt | Wird automatisiert behandelt | Wird automatisiert behandelt |           Prüfen            | Automatisierung ersetzt keine fachliche Kontrolle von Datenqualität und Leakage.     |
 
-
 **Legende**
 
 | Eintrag      | Bedeutung                                                                        |
@@ -110,7 +106,6 @@ flowchart TD
 | **Nein**     | Normalerweise nicht erforderlich.                                                |
 | **Bedingt**  | Abhängig von Daten, Library, Pipeline oder Zielsetzung.                          |
 | **Zielsignal** | Ausreißer sind nicht automatisch Fehler, sondern können die gesuchten Fälle sein. |
-
 
 ## Modellgruppen
 
