@@ -247,8 +247,8 @@ flowchart TD
 
 | Thema | Abgrenzung |
 |-------|------------|
-| [Regression](./regression.html) | Modellauswahl ist strategische Entscheidung ueber die Algorithmusklasse; Aufgabentyp (Regression/Klassifikation) bestimmt Richtung |
-| [Isolation Forest](./isolation-forest.html) | Isolation Forest ist eine konkrete Wahl fuer unueberwachte Anomalieerkennung ohne gelabelte Zielvariable |
+| [Regression](./regression.html) | Modellauswahl ist strategische Entscheidung über die Algorithmusklasse; Aufgabentyp (Regression/Klassifikation) bestimmt Richtung |
+| [Isolation Forest](./isolation-forest.html) | Isolation Forest ist eine konkrete Wahl für unueberwachte Anomalieerkennung ohne gelabelte Zielvariable |
 | [Hyperparameter-Tuning](../evaluate/hyperparameter_tuning.html) | Modellauswahl waehlt den Algorithmus; Hyperparameter-Tuning optimiert dessen Einstellungen danach |
 | [Overfitting](../evaluate/overfitting.html) | Modellauswahl beruecksichtigt Komplexitaets-Trade-offs; Overfitting ist ein haeufiges Ergebnis zu komplexer Modelle |
 

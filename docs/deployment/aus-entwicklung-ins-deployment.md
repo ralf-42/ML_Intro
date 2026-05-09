@@ -378,3 +378,8 @@ Vor dem Go-Live sollten diese Punkte geprüft werden:
 **Version:** 1.0<br>
 **Stand:** Februar 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
+
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|

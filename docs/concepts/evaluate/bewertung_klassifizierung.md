@@ -243,13 +243,21 @@ Bei Multi-Class-Problemen gibt es verschiedene Möglichkeiten, die Metriken zu a
 | **Micro Average** | Gesamtsumme aller TP, FP, FN | Für Gesamtleistung |
 
 ```python
-from sklearn.metrics import precision_score, recall_score, f1_score
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
 
-# Verschiedene Averaging-Strategien
-print(f"Macro F1:    {f1_score(target_test, target_pred, average='macro'):.4f}")
-print(f"Weighted F1: {f1_score(target_test, target_pred, average='weighted'):.4f}")
-print(f"Micro F1:    {f1_score(target_test, target_pred, average='micro'):.4f}")
-```
+# Confusion Matrix berechnen
+cm = confusion_matrix(target_test, target_pred)
+print("Confusion Matrix:")
+print(cm)
+
+# Visualisierung
+disp = ConfusionMatrixDisplay(confusion_matrix=cm,
+                               display_labels=['Negativ', 'Positiv'])
+disp.plot(cmap='Blues')
+plt.title('Confusion Matrix')
+plt.show()
+```0
 
 ---
 
@@ -259,29 +267,22 @@ Cohen's Kappa ist eine robustere Metrik als die Accuracy, da sie die zufällige 
 
 ### Interpretation
 
-```mermaid
-flowchart LR
-    subgraph scale["<b>Cohen's Kappa Skala"]
-        direction LR
-        S1["-1<br/>Schlechte<br/>Übereinstimmung"]
-        S2["0<br/>Zufällige<br/>Übereinstimmung"]
-        S3["0.2<br/>Leichte"]
-        S4["0.4<br/>Ausreichende"]
-        S5["0.6<br/>Moderate"]
-        S6["0.8<br/>Beachtliche"]
-        S7["1<br/>Perfekte<br/>Übereinstimmung"]
-    end
-    
-    S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7
-    
-    style S1 fill:#ffcdd2
-    style S2 fill:#fff9c4
-    style S3 fill:#fff9c4
-    style S4 fill:#e8f5e9
-    style S5 fill:#c8e6c9
-    style S6 fill:#a5d6a7
-    style S7 fill:#81c784
-```
+```python
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
+
+# Confusion Matrix berechnen
+cm = confusion_matrix(target_test, target_pred)
+print("Confusion Matrix:")
+print(cm)
+
+# Visualisierung
+disp = ConfusionMatrixDisplay(confusion_matrix=cm,
+                               display_labels=['Negativ', 'Positiv'])
+disp.plot(cmap='Blues')
+plt.title('Confusion Matrix')
+plt.show()
+```1
 
 | Kappa-Wert | Interpretation |
 |------------|----------------|
@@ -303,27 +304,40 @@ Wobei:
 ### Implementierung
 
 ```python
-from sklearn.metrics import cohen_kappa_score
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
 
-kappa = cohen_kappa_score(target_test, target_pred)
-print(f"Cohen's Kappa: {kappa:.4f}")
-```
+# Confusion Matrix berechnen
+cm = confusion_matrix(target_test, target_pred)
+print("Confusion Matrix:")
+print(cm)
+
+# Visualisierung
+disp = ConfusionMatrixDisplay(confusion_matrix=cm,
+                               display_labels=['Negativ', 'Positiv'])
+disp.plot(cmap='Blues')
+plt.title('Confusion Matrix')
+plt.show()
+```2
 
 ### Vorteile gegenüber Accuracy
 
 ```python
-import numpy as np
-from sklearn.metrics import accuracy_score, cohen_kappa_score
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
 
-# Beispiel: Unausgewogener Datensatz (90% Klasse 0)
-target_true = np.array([0]*90 + [1]*10)
-target_pred_naive = np.array([0]*100)  # Sagt immer 0 voraus
+# Confusion Matrix berechnen
+cm = confusion_matrix(target_test, target_pred)
+print("Confusion Matrix:")
+print(cm)
 
-print(f"Accuracy:      {accuracy_score(target_true, target_pred_naive):.2f}")  # 0.90
-print(f"Cohen's Kappa: {cohen_kappa_score(target_true, target_pred_naive):.2f}")  # 0.00
-
-# Kappa zeigt, dass das Modell nicht besser als Zufall ist!
-```
+# Visualisierung
+disp = ConfusionMatrixDisplay(confusion_matrix=cm,
+                               display_labels=['Negativ', 'Positiv'])
+disp.plot(cmap='Blues')
+plt.title('Confusion Matrix')
+plt.show()
+```3
 
 ---
 
@@ -333,23 +347,39 @@ Die ROC-Kurve ist ein leistungsstarkes Werkzeug zur Visualisierung der **Klassif
 
 ### Grundkonzept
 
-```mermaid
-flowchart TB
-    subgraph roc["<b>ROC-Kurve Interpretation"]
-        subgraph axes["<b>Achsen"]
-            X["X-Achse: False Positive Rate (FPR)<br/>= FP / (FP + TN)<br/>= 1 - Specificity"]
-            Y["Y-Achse: True Positive Rate (TPR)<br/>= TP / (TP + FN)<br/>= Sensitivity/Recall"]
-        end
-        
-        subgraph interpretation["<b>Interpretation"]
-            I1["Kurve oben links → Gutes Modell"]
-            I2["Diagonale → Zufälliges Raten"]
-            I3["Kurve unter Diagonale → Schlechter als Zufall"]
-        end
-    end
-```
+```python
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
 
-<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/roc_auc.png" class="logo" width="750"/>
+# Confusion Matrix berechnen
+cm = confusion_matrix(target_test, target_pred)
+print("Confusion Matrix:")
+print(cm)
+
+# Visualisierung
+disp = ConfusionMatrixDisplay(confusion_matrix=cm,
+                               display_labels=['Negativ', 'Positiv'])
+disp.plot(cmap='Blues')
+plt.title('Confusion Matrix')
+plt.show()
+```4
+
+<img src="```python
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
+
+# Confusion Matrix berechnen
+cm = confusion_matrix(target_test, target_pred)
+print("Confusion Matrix:")
+print(cm)
+
+# Visualisierung
+disp = ConfusionMatrixDisplay(confusion_matrix=cm,
+                               display_labels=['Negativ', 'Positiv'])
+disp.plot(cmap='Blues')
+plt.title('Confusion Matrix')
+plt.show()
+```5 class="logo" width="750"/>
 
 
 ### Sensitivität und Spezifität
@@ -363,38 +393,42 @@ flowchart TB
 ### Implementierung
 
 ```python
-from sklearn.metrics import roc_curve, RocCurveDisplay
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 
-# Wahrscheinlichkeiten berechnen (nicht Labels!)
-target_proba = model.predict_proba(data_test)[:, 1]
-
-# ROC-Kurve
-fpr, tpr, thresholds = roc_curve(target_test, target_proba)
+# Confusion Matrix berechnen
+cm = confusion_matrix(target_test, target_pred)
+print("Confusion Matrix:")
+print(cm)
 
 # Visualisierung
-RocCurveDisplay.from_predictions(target_test, target_proba)
-plt.plot([0, 1], [0, 1], 'k--', label='Zufall')
-plt.title('ROC-Kurve')
-plt.legend()
+disp = ConfusionMatrixDisplay(confusion_matrix=cm,
+                               display_labels=['Negativ', 'Positiv'])
+disp.plot(cmap='Blues')
+plt.title('Confusion Matrix')
 plt.show()
-```
+```6
 
 ### Schwellenwert-Optimierung
 
 Der Standard-Schwellenwert von 0.5 ist nicht immer optimal. Je nach Anwendungsfall kann ein anderer Schwellenwert sinnvoller sein.
 
-```mermaid
-flowchart TD
-    subgraph decision["Schwellenwert-Entscheidung"]
-        Q1{Welche Fehler<br/>sind kritischer?}
-        Q1 -->|"FN kritisch<br/>(Krankheit übersehen)"| A1["Niedrigerer Schwellenwert<br/>→ Höhere Sensitivität<br/>→ Mehr FP akzeptieren"]
-        Q1 -->|"FP kritisch<br/>(Unnötige OP)"| A2["Höherer Schwellenwert<br/>→ Höhere Spezifität<br/>→ Mehr FN akzeptieren"]
-    end
-    
-    style A1 fill:#e3f2fd
-    style A2 fill:#fff3e0
-```
+```python
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
+
+# Confusion Matrix berechnen
+cm = confusion_matrix(target_test, target_pred)
+print("Confusion Matrix:")
+print(cm)
+
+# Visualisierung
+disp = ConfusionMatrixDisplay(confusion_matrix=cm,
+                               display_labels=['Negativ', 'Positiv'])
+disp.plot(cmap='Blues')
+plt.title('Confusion Matrix')
+plt.show()
+```7
 
 **Beispiel: Krebsdiagnose**
 
@@ -410,21 +444,21 @@ Dies ist vertretbar, weil:
 ### Optimalen Schwellenwert finden
 
 ```python
-from sklearn.metrics import roc_curve
-import numpy as np
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
 
-# ROC-Kurve berechnen
-fpr, tpr, thresholds = roc_curve(target_test, target_proba)
+# Confusion Matrix berechnen
+cm = confusion_matrix(target_test, target_pred)
+print("Confusion Matrix:")
+print(cm)
 
-# Youden's J-Statistik: Maximiert TPR - FPR
-j_scores = tpr - fpr
-optimal_idx = np.argmax(j_scores)
-optimal_threshold = thresholds[optimal_idx]
-
-print(f"Optimaler Schwellenwert: {optimal_threshold:.4f}")
-print(f"TPR bei optimalem Schwellenwert: {tpr[optimal_idx]:.4f}")
-print(f"FPR bei optimalem Schwellenwert: {fpr[optimal_idx]:.4f}")
-```
+# Visualisierung
+disp = ConfusionMatrixDisplay(confusion_matrix=cm,
+                               display_labels=['Negativ', 'Positiv'])
+disp.plot(cmap='Blues')
+plt.title('Confusion Matrix')
+plt.show()
+```8
 
 ---
 
@@ -434,30 +468,30 @@ Die AUC (Area Under the ROC Curve) fasst die **Leistung eines Klassifikators** i
 
 ### Interpretation
 
-```mermaid
-flowchart LR
-    subgraph auc_scale["AUC Interpretation"]
-        direction LR
-        A1["0.5<br/>Zufall"]
-        A2["0.6<br/>Schwach"]
-        A3["0.7<br/>Akzeptabel"]
-        A4["0.8<br/>Gut"]
-        A5["0.9<br/>Sehr gut"]
-        A6["1.0<br/>Perfekt"]
-    end
-    
-    A1 --> A2 --> A3 --> A4 --> A5 --> A6
-    
-    style A1 fill:#ffcdd2
-    style A2 fill:#fff9c4
-    style A3 fill:#e8f5e9
-    style A4 fill:#c8e6c9
-    style A5 fill:#a5d6a7
-    style A6 fill:#81c784
-```
+```python
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
+
+# Confusion Matrix berechnen
+cm = confusion_matrix(target_test, target_pred)
+print("Confusion Matrix:")
+print(cm)
+
+# Visualisierung
+disp = ConfusionMatrixDisplay(confusion_matrix=cm,
+                               display_labels=['Negativ', 'Positiv'])
+disp.plot(cmap='Blues')
+plt.title('Confusion Matrix')
+plt.show()
+```9
 
 
-<img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/roc_auc.png" class="logo" width="750"/>
+<img src="```python
+from sklearn.metrics import accuracy_score
+
+accuracy = accuracy_score(target_test, target_pred)
+print(f"Accuracy: {accuracy:.4f}")
+```0 class="logo" width="750"/>
 
 
 | AUC-Wert  | Interpretation                          |
@@ -477,44 +511,20 @@ flowchart LR
 ### Implementierung
 
 ```python
-from sklearn.metrics import roc_auc_score
+from sklearn.metrics import accuracy_score
 
-# AUC berechnen
-auc = roc_auc_score(target_test, target_proba)
-print(f"AUC: {auc:.4f}")
-
-# Für Multi-Class
-auc_ovr = roc_auc_score(target_test, target_proba_multi, multi_class='ovr')
-print(f"AUC (One-vs-Rest): {auc_ovr:.4f}")
-```
+accuracy = accuracy_score(target_test, target_pred)
+print(f"Accuracy: {accuracy:.4f}")
+```1
 
 ### Modellvergleich mit AUC
 
 ```python
-from sklearn.metrics import roc_curve, auc
-import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score
 
-# Mehrere Modelle vergleichen
-models = [
-    ('Logistische Regression', model_lr_proba),
-    ('Random Forest', model_rf_proba),
-    ('XGBoost', model_xgb_proba)
-]
-
-plt.figure(figsize=(10, 8))
-
-for name, target_proba in models:
-    fpr, tpr, _ = roc_curve(target_test, target_proba)
-    roc_auc = auc(fpr, tpr)
-    plt.plot(fpr, tpr, label=f'{name} (AUC = {roc_auc:.3f})')
-
-plt.plot([0, 1], [0, 1], 'k--', label='Zufall')
-plt.xlabel('False Positive Rate')
-plt.ylabel('True Positive Rate')
-plt.title('ROC-Kurven Vergleich')
-plt.legend()
-plt.show()
-```
+accuracy = accuracy_score(target_test, target_pred)
+print(f"Accuracy: {accuracy:.4f}")
+```2
 
 ---
 
@@ -530,26 +540,12 @@ Bei unausgewogenen Datensätzen (Imbalanced Classification) sind Standard-Metrik
 
 ### Entscheidungsbaum zur Metrikauswahl
 
-```mermaid
-flowchart TD
-    Start["Binäre Klassifikation<br/>mit unausgewogenen Daten"]
-    
-    Q1{Was ist das<br/>Hauptziel?}
-    
-    Q1 -->|"Positive Klasse<br/>erkennen"| Q2{Welche Fehler<br/>sind kritischer?}
-    Q1 -->|"Beide Klassen<br/>korrekt"| A1["F1-Score<br/>oder AUC"]
-    Q1 -->|"Ranking/<br/>Sortierung"| A2["AUC-ROC"]
-    
-    Q2 -->|"False Negatives<br/>(Übersehen)"| A3["Recall<br/>optimieren"]
-    Q2 -->|"False Positives<br/>(Fehlalarm)"| A4["Precision<br/>optimieren"]
-    Q2 -->|"Beide<br/>gleich wichtig"| A5["F1-Score"]
-    
-    style A1 fill:#e3f2fd
-    style A2 fill:#e3f2fd
-    style A3 fill:#e8f5e9
-    style A4 fill:#fff3e0
-    style A5 fill:#f3e5f5
-```
+```python
+from sklearn.metrics import accuracy_score
+
+accuracy = accuracy_score(target_test, target_pred)
+print(f"Accuracy: {accuracy:.4f}")
+```3
 
 ### Empfehlungen nach Anwendungsfall
 
@@ -566,21 +562,11 @@ flowchart TD
 Bei stark unausgewogenen Daten kann die Precision-Recall-Kurve informativer sein als die ROC-Kurve:
 
 ```python
-from sklearn.metrics import precision_recall_curve, average_precision_score
-import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score
 
-# Precision-Recall-Kurve
-precision, recall, thresholds = precision_recall_curve(target_test, target_proba)
-ap = average_precision_score(target_test, target_proba)
-
-plt.figure(figsize=(8, 6))
-plt.plot(recall, precision, label=f'AP = {ap:.3f}')
-plt.xlabel('Recall')
-plt.ylabel('Precision')
-plt.title('Precision-Recall-Kurve')
-plt.legend()
-plt.show()
-```
+accuracy = accuracy_score(target_test, target_pred)
+print(f"Accuracy: {accuracy:.4f}")
+```4
 
 ---
 
@@ -589,32 +575,12 @@ plt.show()
 > [!SUCCESS] Mindeststandard<br>
 > Neben Accuracy immer mindestens Precision, Recall, F1 und eine klassenbezogene Auswertung berichten.
 
-```mermaid
-flowchart TB
-    subgraph overview["<b>Klassifikationsmetriken"]
-        subgraph basic["<b>Basis-Metriken"]
-            CM["<b>Confusion Matrix<br/>(TP, TN, FP, FN)"]
-            ACC["<b>Accuracy<br/>Gesamtgenauigkeit"]
-            PRE["<b>Precision<br/>Relevanz der Positiven"]
-            REC["<b>Recall<br/>Vollständigkeit der Erkennung"]
-        end
-        
-        subgraph combined["<b>Kombinierte Metriken"]
-            F1["<b>F1-Score<br/>Harmonisches Mittel P & R"]
-            KAP["<b>Cohen's Kappa<br/>Zufallskorrigierte Accuracy"]
-        end
-        
-        subgraph threshold["<b>Schwellenwert-basiert"]
-            ROC["<b>ROC-Kurve<br/>TPR vs. FPR"]
-            AUC["<b>AUC<br/>Fläche unter ROC"]
-            PRC["<b>PR-Kurve<br/>Precision vs. Recall"]
-        end
-        
-        CM --> basic
-        basic --> combined
-        basic --> threshold
-    end
-```
+```python
+from sklearn.metrics import accuracy_score
+
+accuracy = accuracy_score(target_test, target_pred)
+print(f"Accuracy: {accuracy:.4f}")
+```5
 
 ### Quick Reference: Wann welche Metrik?
 
@@ -630,55 +596,11 @@ flowchart TB
 ### Komplettes Evaluations-Template
 
 ```python
-from sklearn.metrics import (
-    accuracy_score, precision_score, recall_score, f1_score,
-    cohen_kappa_score, roc_auc_score, classification_report,
-    confusion_matrix, ConfusionMatrixDisplay
-)
-import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score
 
-def evaluate_classifier(target_true, target_pred, target_proba=None, class_names=None):
-    """
-    Umfassende Evaluation eines Klassifikationsmodells.
-    """
-    print("=" * 50)
-    print("KLASSIFIKATIONS-EVALUATION")
-    print("=" * 50)
-
-    # Basis-Metriken
-    print(f"\nAccuracy:      {accuracy_score(target_true, target_pred):.4f}")
-    print(f"Precision:     {precision_score(target_true, target_pred, average='weighted'):.4f}")
-    print(f"Recall:        {recall_score(target_true, target_pred, average='weighted'):.4f}")
-    print(f"F1-Score:      {f1_score(target_true, target_pred, average='weighted'):.4f}")
-    print(f"Cohen's Kappa: {cohen_kappa_score(target_true, target_pred):.4f}")
-
-    # AUC (falls Wahrscheinlichkeiten verfügbar)
-    if target_proba is not None:
-        if len(target_proba.shape) == 1 or target_proba.shape[1] == 2:
-            proba = target_proba[:, 1] if len(target_proba.shape) > 1 else target_proba
-            print(f"AUC-ROC:       {roc_auc_score(target_true, proba):.4f}")
-
-    # Classification Report
-    print("\n" + "-" * 50)
-    print("Classification Report:")
-    print("-" * 50)
-    print(classification_report(target_true, target_pred, target_names=class_names))
-
-    # Confusion Matrix visualisieren
-    fig, ax = plt.subplots(figsize=(8, 6))
-    ConfusionMatrixDisplay.from_predictions(
-        target_true, target_pred,
-        display_labels=class_names,
-        cmap='Blues',
-        ax=ax
-    )
-    plt.title('Confusion Matrix')
-    plt.tight_layout()
-    plt.show()
-
-# Verwendung
-evaluate_classifier(target_test, target_pred, target_proba, class_names=['Negativ', 'Positiv'])
-```
+accuracy = accuracy_score(target_test, target_pred)
+print(f"Accuracy: {accuracy:.4f}")
+```6
 
 ---
 
@@ -695,7 +617,7 @@ evaluate_classifier(target_test, target_pred, target_proba, class_names=['Negati
 
 | Thema                                                | Abgrenzung                                                                                                    |
 | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| [Bewertung: Regression](./bewertung_regression.html) | Klassifikations-Metriken fuer kategoriale Vorhersagen; Regressions-Metriken fuer kontinuierliche Werte        |
+| [Bewertung: Regression](./bewertung_regression.html) | Klassifikations-Metriken für kategoriale Vorhersagen; Regressions-Metriken für kontinuierliche Werte        |
 | [Overfitting](./overfitting.html)                    | Klassifikations-Metriken quantifizieren Vorhersageguete; Overfitting erkennt man an der Train-Test-Diskrepanz |
 | [Cross-Validation](./cross_validation.html)          | Cross-Validation ist die Evaluierungsmethodik; Klassifikations-Metriken sind die Messgroessen dabei           |
 

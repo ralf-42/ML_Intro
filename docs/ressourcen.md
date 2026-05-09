@@ -8,16 +8,31 @@ description: "Nützliche Ressourcen und Tools"
 
 # Ressourcen
 
+**Version:** 1.0<br>
+**Stand:** Mai 2026<br>
+**Kurs:** Machine Learning Einführung
+
 Die Ressourcenseiten ergänzen den Kurs dort, wo zusätzliche Werkzeuge, Visualisierungen oder Sammlungen wirklich helfen. Sie sind nicht als unendliches Linkarchiv gedacht, sondern als gezielte Unterstützung für typische Lern- und Projektfragen.
+
+## Inhaltsverzeichnis
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 ## Interaktive Werkzeuge
 
 Gerade bei Statistik, Modellverhalten oder Datenvorbereitung helfen visuelle Werkzeuge oft mehr als eine weitere Definition. Die Visualisierungsseite bündelt genau solche Hilfen.
 
-- **[Interaktive Visualisierung](https://ralf-42.github.io/ML_Intro/ressourcen/interaktive-visualisierung.html)** – *Welche Konzepte lassen sich besser visuell als textlich verstehen?* Demos zu Statistik, Vorbereitung, Modellierung und Bewertung.
+- **[Interaktive Visualisierung](ressourcen/interaktive-visualisierung.html)** – *Welche Konzepte lassen sich besser visuell als textlich verstehen?* Demos zu Statistik, Vorbereitung, Modellierung und Bewertung.
 
 ## Externe Lern- und Arbeitsquellen
 
 Die Link-Sammlung ist dort nützlich, wo eine Kursseite nicht ausreicht oder ein Thema aus einer zweiten Perspektive betrachtet werden soll. Relevant sind vor allem gut gepflegte Dokumentationen, Visualisierungen und vertiefende Tutorials.
 
-- **[Links](https://ralf-42.github.io/ML_Intro/ressourcen/link_sammlung.html)** – *Wo finden sich gute externe Quellen für ML-Themen?* Dokumentation, Lernmaterialien, Visualisierungen und weiterführende Tutorials.
+- **[Links](ressourcen/link_sammlung.html)** – *Wo finden sich gute externe Quellen für ML-Themen?* Dokumentation, Lernmaterialien, Visualisierungen und weiterführende Tutorials.
+
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|

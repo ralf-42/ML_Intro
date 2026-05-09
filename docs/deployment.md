@@ -8,14 +8,24 @@ description: "Von der Entwicklung zum produktiven Einsatz von ML-Anwendungen"
 
 # Deployment
 
+**Version:** 1.0<br>
+**Stand:** Mai 2026<br>
+**Kurs:** Machine Learning Einführung
+
 Deployment beginnt im ML-Kontext nicht erst bei Docker oder Cloud-Hosting. Relevant wird es in dem Moment, in dem ein Modell wiederholbar laufen, mit echten Eingaben umgehen und außerhalb des Trainingsnotebooks nutzbar bleiben soll. Genau an dieser Schwelle zeigt sich, ob ein Projekt nur eine Auswertung ist oder bereits eine Anwendung.
+
+## Inhaltsverzeichnis
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 ## Einstieg
 
 Die beiden Deployment-Dokumente decken im Kurs zwei typische Übergänge ab: den Weg von einem Notebook zu einer strukturierten Anwendung und den Sonderfall einer einfachen Web-Oberfläche mit Gradio.
 
-- **[Gradio Deployment](https://ralf-42.github.io/ML_Intro/deployment/Gradio_Deployment.html)** – *Wie wird aus einem Modell eine kleine Web-App?* Gradio, Hugging Face Spaces und einfache Bereitstellungspfade.
-- **[Produktionsreife Anwendung](https://ralf-42.github.io/ML_Intro/deployment/aus-entwicklung-ins-deployment.html)** – *Was passiert zwischen Notebook und produktiver Anwendung?* Strukturierung, Konfiguration, Tests und Go-Live-Vorbereitung.
+- **[Gradio Deployment](deployment/Gradio_Deployment.html)** – *Wie wird aus einem Modell eine kleine Web-App?* Gradio, Hugging Face Spaces und einfache Bereitstellungspfade.
+- **[Produktionsreife Anwendung](deployment/aus-entwicklung-ins-deployment.html)** – *Was passiert zwischen Notebook und produktiver Anwendung?* Strukturierung, Konfiguration, Tests und Go-Live-Vorbereitung.
 
 ---
 
@@ -51,7 +61,7 @@ Gradio eignet sich im Kurs vor allem für den Übergang von der Modelllogik zur 
 
 | Thema | Beschreibung |
 |-------|--------------|
-| **[Gradio Deployment](https://ralf-42.github.io/ML_Intro/deployment/Gradio_Deployment.html)** | Web-Interfaces, Hugging Face Spaces, Docker |
+| **[Gradio Deployment](deployment/Gradio_Deployment.html)** | Web-Interfaces, Hugging Face Spaces, Docker |
 
 **Weitere Web-Frameworks:**
 - **Streamlit** - Datenbasierte Web-Apps
@@ -70,3 +80,7 @@ Mit wachsender Komplexität treten weitere Fragen hinzu: Modellversionierung, Ex
 | **Google Cloud AI** | Managed ML Services |
 | **Azure ML** | Microsoft Cloud ML-Lösung |
 
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|

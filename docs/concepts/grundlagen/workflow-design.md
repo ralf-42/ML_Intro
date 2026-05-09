@@ -405,3 +405,8 @@ model.fit(data_train, target_train, epochs=10)
 **Version:** 1.1<br>
 **Stand:** April 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
+
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|

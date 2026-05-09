@@ -7,7 +7,17 @@ description: "Wichtige ML-Frameworks und Tools - Offizielle Dokumentationen"
 
 # Frameworks
 
+**Version:** 1.0<br>
+**Stand:** Mai 2026<br>
+**Kurs:** Machine Learning Einführung
+
 Links zu den offiziellen Dokumentationen der wichtigsten ML-Frameworks und Tools.
+
+## Inhaltsverzeichnis
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 ## Data Processing & Analysis
 
@@ -43,3 +53,8 @@ Links zu den offiziellen Dokumentationen der wichtigsten ML-Frameworks und Tools
 ## Learning Resources
 
 - **[Data Science Guide - Teaching Material](https://www.datascienceguide.org/teaching-material.html)** - Umfangreiche Lernressourcen für Data Science
+
+## Abgrenzung zu verwandten Dokumenten
+
+| Dokument | Frage |
+|---|---|
