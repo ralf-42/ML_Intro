@@ -35,7 +35,7 @@ Gestaltung beginnt dort, wo aus einem Modell eine Anwendung wird. Dann zählen R
 
 
 > [!Note] Hinweis<br>
->  Bei der Erstellung dieser Unterlagen wurden KI-gestützte Werkzeuge unterstützend eingesetzt. Alle Inhalte wurden fachlich geprüft und überarbeitet.
+>  Bei der Erstellung dieser Unterlagen kamen KI-Werkzeuge zum Einsatz. Die Inhalte wurden anschließend fachlich geprüft und überarbeitet.
 
 
 ---
