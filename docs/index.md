@@ -33,6 +33,11 @@ Im Anwendungsteil entstehen belastbare Arbeitsmuster: saubere Preprocessing-Schr
 
 Gestaltung beginnt dort, wo aus einem Modell eine Anwendung wird. Dann zählen Reproduzierbarkeit, Dokumentation, Erklärbarkeit und ein realistischer Blick auf Risiken. Nicht jedes Problem braucht Deep Learning, nicht jedes gute Notebook verdient ein Deployment und nicht jede hohe Accuracy ist ein gutes Ergebnis. Diese Unterscheidungen sind Teil des Kurses, nicht nur Randbemerkung.
 
+
+> [!TIP] Hinweis<br>
+>  Bei der Erstellung dieser Unterlagen wurden KI-gestützte Werkzeuge unterstützend eingesetzt. Alle Inhalte wurden fachlich geprüft und überarbeitet.
+
+
 ---
 
 **Version:** 1.1<br>
