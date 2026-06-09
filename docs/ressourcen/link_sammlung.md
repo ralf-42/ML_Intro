@@ -235,6 +235,8 @@ has_toc: true
 
 ### Weitere
 
+
+
 | Ressource | Link |
 |-----------|------|
 | KI-Campus | [Link](https://ki-campus.org/) |
@@ -252,13 +254,9 @@ has_toc: true
 | The Morpheus Tutorials (deutsch) | [Link](https://www.youtube.com/@TheMorpheusTutorials) |
 | KNIME TV | [Link](https://www.youtube.com/playlist?list=PLz3mQ6OlTI0bX8gRWtuI97HMfrWUtffLG) |
 
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|
 
 ---
 
-**Version:** 1.0<br>
-**Stand:** Januar 2026<br>
+**Version:** 1.1<br>
+**Stand:** Juni 2026<br>
 **Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
