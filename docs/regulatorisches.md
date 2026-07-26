@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Regulatorisches
-nav_order: 6
+nav_order: 5
 has_children: true
 description: Rechtliche Rahmenbedingungen, Ethik und Souveränität
 ---
