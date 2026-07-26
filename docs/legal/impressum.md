@@ -53,4 +53,4 @@ Soweit Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die 
 
 ---
 
-**Letzte Aktualisierung:** Mai 2026
+**Stand:** Juli 2026
