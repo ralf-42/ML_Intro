@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Frameworks
-nav_order: 3
+nav_order: 6
 description: Wichtige ML-Frameworks und Tools - Offizielle Dokumentationen
 ---
 

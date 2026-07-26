@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Projekte
-nav_order: 5
+nav_order: 4
 description: Praktische ML-Projekte und Anwendungen
 has_toc: true
 ---
