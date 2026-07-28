@@ -455,6 +455,8 @@ demo = gr.Interface(fn=greet, inputs="text", outputs="text")
 
 ### Docker Deployment
 
+Grundlagen zu Docker, Port-Mapping und typischen Fehlerfällen stehen im Dokument [Docker Deployment](Docker_Deployment.md).
+
 ```dockerfile
 # Dockerfile
 FROM python:3.10-slim
