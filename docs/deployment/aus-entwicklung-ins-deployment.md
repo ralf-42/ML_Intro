@@ -274,6 +274,8 @@ Lokal testen mit: `uvicorn main:app --reload`
 
 Wenn die gewählte Deployment-Strategie containerisiert ist, wird ein `Dockerfile` benötigt:
 
+Eine allgemeine Einführung zu Docker im ML-Deployment steht im Dokument [Docker Deployment](Docker_Deployment.md).
+
 > [!NOTE] Nur bei Container-Strategie<br>
 > Diese Phase ist optional und nur relevant, wenn als Zielplattform Container genutzt werden.
 
