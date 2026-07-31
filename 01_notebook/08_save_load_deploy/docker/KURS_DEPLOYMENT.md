@@ -63,6 +63,16 @@ Erwartete Port-Ausgabe:
 0.0.0.0:7860->7860/tcp
 ```
 
+## Build vs. Start
+
+Der `docker build`-Schritt muss **nicht vor jedem Start** wiederholt werden:
+
+- `docker build` erzeugt das Image `ml-intro-diamonds-gradio` und speichert es lokal in Docker (sichtbar über `docker images`).
+- `docker run` startet lediglich einen neuen Container aus diesem bereits vorhandenen Image — kein erneuter Build nötig.
+- Durch `--rm` wird nach dem Stoppen nur der **Container** entfernt, das **Image** bleibt erhalten.
+
+Ein erneuter Build ist nur nötig, wenn sich `app.py`, `requirements.txt`, `Dockerfile` oder `diamonds_pipeline.joblib` geändert haben. Für jeden weiteren Start genügt der `docker run`-Befehl aus dem Abschnitt „Standardablauf".
+
 ## Container stoppen
 
 Den laufenden Container stoppen:
