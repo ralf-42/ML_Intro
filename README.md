@@ -1,11 +1,15 @@
 # Machine Learning Kurs
 
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-2026--04--29-blue)](./README.md)
-[![Python Version](https://img.shields.io/badge/Python-3.11%2B-brightgreen)](https://www.python.org/)
-[![Status](https://img.shields.io/badge/Status-Active-success)](./README.md)
-[![License](https://img.shields.io/badge/License-MIT-yellow)](./license)
-[![Notebooks](https://img.shields.io/badge/Notebooks-45-orange)](./01_notebook/)
-[![Modules](https://img.shields.io/badge/Modules-10-blueviolet)](./01_notebook/)
+<table>
+  <tr>
+    <td><a href="./README.md"><img src="https://img.shields.io/badge/Last%20Updated-2026--04--29-blue" alt="Last Updated 2026-04-29"></a></td>
+    <td><a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.11%2B-brightgreen" alt="Python 3.11+"></a></td>
+    <td><a href="./README.md"><img src="https://img.shields.io/badge/Status-Active-success" alt="Status Active"></a></td>
+    <td><a href="./license"><img src="https://img.shields.io/badge/License-MIT-yellow" alt="License MIT"></a></td>
+    <td><a href="./01_notebook/"><img src="https://img.shields.io/badge/Notebooks-45-orange" alt="Notebooks 45"></a></td>
+    <td><a href="./01_notebook/"><img src="https://img.shields.io/badge/Modules-10-blueviolet" alt="Modules 10"></a></td>
+  </tr>
+</table>
 
 Dieses Repository enthält Lehrmaterialien für den Machine Learning-Kurs.      
 
