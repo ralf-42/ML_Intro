@@ -369,15 +369,12 @@ Vor dem Go-Live sollten diese Punkte geprüft werden:
 
 ## Weiterführende Ressourcen
 
+
 - [FastAPI Dokumentation](https://fastapi.tiangolo.com/)
 - [Docker für Python-Entwickler](https://docs.docker.com/language/python/)
 - [12-Factor App Prinzipien](https://12factor.net/de/)
 - [LangServe für LangChain-Apps](https://python.langchain.com/docs/langserve)
 
-## Abgrenzung zu verwandten Dokumenten
-
-| Dokument | Frage |
-|---|---|
 
 ---
 

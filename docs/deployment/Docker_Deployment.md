@@ -191,3 +191,10 @@ Dieses Dokument erklärt die allgemeinen Docker-Konzepte. Die konkreten Befehle 
 - [Docker für Python-Entwickler](https://docs.docker.com/language/python/)
 - [Dockerfile Referenz](https://docs.docker.com/reference/dockerfile/)
 - [Docker run Referenz](https://docs.docker.com/reference/cli/docker/container/run/)
+
+---
+
+
+**Version:** 1.0<br>
+**Stand:** August 2026<br>
+**Kurs:** Machine Learning. Verstehen. Anwenden. Gestalten.
