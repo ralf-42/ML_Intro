@@ -572,10 +572,7 @@ flowchart LR
 - [Hugging Face Spaces](https://huggingface.co/spaces)
 - [Gradio GitHub Repository](https://github.com/gradio-app/gradio)
 
-## Abgrenzung zu verwandten Dokumenten
 
-| Dokument | Frage |
-|---|---|
 
 ---
 
