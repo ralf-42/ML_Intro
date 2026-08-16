@@ -222,6 +222,7 @@ has_toc: true
 | PyCaret | AutoML Framework | [Link](https://pycaret.org/) |
 | MediaPipe Studio | ML-Pipeline für Multimedia | [Link](https://mediapipe-studio.webapps.google.com/home) |
 | Plotly Chart Studio | Interaktive Visualisierungen | [Link](https://chart-studio.plotly.com/create/) |
+| Google Colab CLI | Kommandozeilen-Tool für den Zugriff auf Google Colab-Notebooks vom Terminal aus | [Link](https://github.com/googlecolab/google-colab-cli) |
 
 ### GitHub Repositories
 
