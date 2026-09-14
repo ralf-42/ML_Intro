@@ -24,7 +24,7 @@ diamonds_pipeline.joblib
 In den Docker-Ordner wechseln:
 
 ```bash
-cd C:\Users\ralfb\OneDrive\Desktop\Kurse\ML_Intro\01_notebook\08_save_load_deploy\docker
+cd C:\Users\ralfb\OneDrive\Desktop\Projekte\ML_Intro\01_notebook\08_save_load_deploy\docker
 ```
 
 Docker Image bauen:
