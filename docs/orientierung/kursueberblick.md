@@ -55,12 +55,14 @@ Das praktische Ergebnis ist kein einzelnes Modell, sondern ein wiederholbarer Wo
 
 ## Kursstruktur
 
-Die Module führen von ersten Supervised-Modellen über Unsupervised Learning und neuronale Netze bis zu Ensemble-Methoden, Tuning, Spezialanwendungen und Deployment.
+Die Module führen von Grundlagen über Supervised Learning, Unsupervised Learning und neuronale Netze bis zu Ensemble-Methoden, Tuning, Spezialanwendungen und Deployment.
 
 | Bereich | Inhalte |
 | ------- | ------- |
-| **Grundlagen** | Pandas-Basics, Datensatzzugriff, erster Decision Tree, lineare Regression |
-| **Unsupervised & Neuronale Netze** | K-Means, DBSCAN, Isolation Forest, Apriori, PCA, MLP und Keras |
+| **Grundlagen** | Pandas-Basics, Datensatzzugriff, Snippets und Arbeitsumgebung |
+| **Supervised Learning** | Klassifikation, Regression, erster Decision Tree und lineare Regression |
+| **Unsupervised Learning** | K-Means, DBSCAN, Isolation Forest, Apriori und PCA |
+| **Neuronale Netze** | MLP, Keras und tabellarische Daten |
 | **Ensemble & Tuning** | Random Forest, XGBoost, Stacking, Cross-Validation, Hyperparameter-Suche, AutoML |
 | **Workflow & Spezialthemen** | Scikit-learn-Pipelines, Computer Vision, NLP, Zeitreihen, Autoencoder |
 | **Deployment & Erklärbarkeit** | Modell-Export, Gradio-Apps, XAI, KI-gestützte Datenanalyse |
@@ -84,11 +86,17 @@ Ergänzend geht es um Bootstrapping, Validation Curves und den Umgang mit KI-Mod
 timeline
     title ML-Progression im Kursverlauf
     section Grundlagen
-        Erste Modelle              : Pandas, Decision Tree, lineare Regression
-                                    : 00-01
-    section Unsupervised & Neuronale Netze
-        Struktur erkennen          : Clustering, Anomalieerkennung, PCA, MLP, Keras
-                                    : 02-03
+        Arbeitsbasis schaffen      : Pandas, Datensätze, Snippets
+                                    : 00
+    section Supervised Learning
+        Erste Modelle              : Decision Tree, lineare Regression
+                                    : 01
+    section Unsupervised Learning
+        Struktur erkennen          : Clustering, Anomalieerkennung, Apriori, PCA
+                                    : 02
+    section Neuronale Netze
+        Nichtlineare Modelle       : MLP, Keras, tabellarische Daten
+                                    : 03
     section Ensemble & Tuning
         Robuste Modelle            : Random Forest, XGBoost, Stacking, Cross-Validation, Tuning
                                     : 04-05
@@ -107,9 +115,9 @@ Die Module sind in thematische Blöcke gegliedert:
 | Modul | Block                           | Inhalt                        | Schwerpunkt                                                        |
 | :---: | -------------------------------- | ------------------------------ | ------------------------------------------------------------------ |
 |  00   | Grundlagen                       | Einführung & Werkzeuge         | Pandas-Grundlagen, Datensatzzugriff, Snippets                      |
-|  01   | Grundlagen                       | Supervised Learning Basics     | Decision Tree (Titanic), lineare Regression (MPG)                  |
-|  02   | Unsupervised & Neuronale Netze   | Unsupervised Learning          | K-Means/DBSCAN, Isolation Forest, Apriori, PCA                     |
-|  03   | Unsupervised & Neuronale Netze   | Neuronale Netze                | MLP und Keras bei Breast-Cancer- und Diamonds-Daten                |
+|  01   | Supervised Learning              | Supervised Learning Basics     | Decision Tree (Titanic), lineare Regression (MPG)                  |
+|  02   | Unsupervised Learning            | Unsupervised Learning          | K-Means/DBSCAN, Isolation Forest, Apriori, PCA                     |
+|  03   | Neuronale Netze                  | Neuronale Netze                | MLP und Keras bei Breast-Cancer- und Diamonds-Daten                |
 |  04   | Ensemble & Tuning                | Ensemble-Methoden              | Random Forest, XGBoost, Stacking                                   |
 |  05   | Ensemble & Tuning                | Tuning & Validierung           | Cross-Validation, Bootstrapping, Grid-/Random-/RandomizedSearch, ROC-AUC, AutoML |
 |  06   | Workflow & Spezialthemen         | Workflow-Pipelines             | Scikit-learn-Pipeline (Diamonds)                                   |
@@ -121,8 +129,10 @@ Diamonds, Titanic und Breast Cancer Wisconsin sind die Datensätze, die am häuf
 
 | Kursblock | Ausbau des ML-Workflows | Wiederkehrende Beispiele |
 | --------- | ----------------------- | ------------------------ |
-| **00-01: Grundlagen** | Daten laden, erste Merkmale verstehen, einfache Klassifikations- und Regressionsmodelle trainieren. | Titanic, MPG |
-| **02-03: Unsupervised & Neuronale Netze** | Muster ohne Zielvariable erkennen und erste neuronale Modelle mit tabellarischen Daten vergleichen. | Breast Cancer Wisconsin, Diamonds |
+| **00: Grundlagen** | Daten laden, erste Merkmale verstehen und die Arbeitsumgebung sicher nutzen. | Titanic, Diamonds, Breast Cancer Wisconsin |
+| **01: Supervised Learning** | Einfache Klassifikations- und Regressionsmodelle trainieren und erste Vorhersagen bewerten. | Titanic, MPG |
+| **02: Unsupervised Learning** | Muster ohne Zielvariable erkennen und explorativ auswerten. | Standortdaten, NID, Food, Special-Datensatz |
+| **03: Neuronale Netze** | Erste neuronale Modelle mit klassischen ML-Verfahren vergleichen. | Breast Cancer Wisconsin, Diamonds |
 | **04-05: Ensemble & Tuning** | Robustere Modelle trainieren, Varianten vergleichen, Cross-Validation nutzen und Hyperparameter systematisch prüfen. | Titanic, Diamonds, Breast Cancer Wisconsin |
 | **06-07: Workflow & Spezialthemen** | Vorbereitung und Modellierung in Pipelines bündeln und Spezialfälle wie Bild-, Text- und Zeitreihendaten einordnen. | Diamonds, MNIST, Spam, Wetterdaten |
 | **08-09: Deployment & Erklärbarkeit** | Modelle speichern, als kleine Anwendung bereitstellen und Entscheidungen mit XAI oder Fehleranalyse nachvollziehen. | Diamonds, Titanic |
