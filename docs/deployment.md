@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Deployment
-nav_order: 3
+nav_order: 4
 has_children: true
 description: Von der Entwicklung zum produktiven Einsatz von ML-Anwendungen
 ---
