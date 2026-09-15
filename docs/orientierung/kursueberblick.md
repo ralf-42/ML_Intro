@@ -186,7 +186,7 @@ Konkret heißt das im Kurs: zuerst eine einfache Baseline aufbauen, dann Datenle
 
 Für Übungsaufgaben hat sich ein kurzer Arbeitsrhythmus bewährt: etwa **10 Minuten Bearbeitungszeit**, ein kurzer **Zwischenstopp** und anschließend weitere **10 Minuten oder mehr**. Die erste Phase ist lang genug für den Einstieg und kurz genug, damit Blockaden früh sichtbar werden.
 
-Der Check ist keine harte Pflicht-Unterbrechung für alle. Wer gut im Flow ist, kann weiterarbeiten; wer festhängt, bekommt früh Gelegenheit zur Klärung. Bei unterschiedlichem Tempo bleibt der Takt flexibel: Schnellere vertiefen mit zusätzlichen Datensätzen oder Parametervarianten, langsamere sichern zunächst den Kern-Workflow.
+Der Check ist **keine** harte Pflicht-Unterbrechung für alle. Wer gut im Flow ist, kann weiterarbeiten; wer festhängt, bekommt früh Gelegenheit zur Klärung. Bei unterschiedlichem Tempo bleibt der Takt flexibel: Schnellere vertiefen mit zusätzlichen Datensätzen oder Parametervarianten, langsamere sichern zunächst den Kern-Workflow.
 
 Auch während der Übungszeit stehen Fragen jederzeit offen. Wer lieber ungestört im eigenen Flow bleiben möchte, schaltet dafür einfach den eigenen Lautsprecher stumm.
 
