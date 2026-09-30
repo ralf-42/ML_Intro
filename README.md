@@ -173,6 +173,8 @@ Der Kurs verwendet verschiedene reale Datensätze für praktisches Lernen (unter
 Der **Quellcode** steht unter der [MIT License](./license).      
 Die **Kursmaterialien** (z. B. Folien, Texte, Grafiken) sind unter der [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) veröffentlicht, soweit nicht anders angegeben.      
 
+Die ausführliche Lizenzzuordnung für die Kurs-Website steht unter [Rechtliches → Lizenzen](./docs/legal/lizenzen.md).
+
 © 2025-2026 Ralf-42      
 
 > [!NOTE]
