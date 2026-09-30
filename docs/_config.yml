@@ -99,7 +99,7 @@ aux_links:
     - "https://github.com/ralf-42/ML_Intro"
 
 # Footer
-footer_content: "Copyright &copy; 2025–2026 Ralf-42. MIT für Quellcode · CC BY 4.0 für Kursmaterialien | <a href='/ML_Intro/legal/lizenzen.html'>Lizenzen</a> | <a href='/ML_Intro/legal/impressum.html'>Impressum</a> | <a href='/ML_Intro/legal/datenschutz.html'>Datenschutz</a> | <a href='/ML_Intro/legal/haftungsausschluss.html'>Haftungsausschluss</a>"
+footer_content: "&copy; 2025–2026 Ralf-42 · MIT für Quellcode · CC BY 4.0 für Kursmaterialien | <a href='/ML_Intro/legal/'>Rechtliches</a>"
 
 # Color scheme (optional)
 # color_scheme: dark
