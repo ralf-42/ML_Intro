@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XGBoost Animation - Schritt für Schritt</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #14141f;
+            --bg-card-hover: #1a1a2a;
+            --accent-orange: #ff6b35;
+            --accent-orange-glow: rgba(255, 107, 53, 0.3);
+            --accent-blue: #4ecdc4;
+            --accent-purple: #a855f7;
+            --accent-green: #22c55e;
+            --accent-red: #ef4444;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: #2a2a3a;
+            --gradient-1: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            --gradient-2: linear-gradient(135deg, #4ecdc4 0%, #44a3aa 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background grid */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 107, 53, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 107, 53, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--gradient-1);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 20px var(--accent-orange-glow);
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 1100px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Chart Section */
+        .chart-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-1);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .chart-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chart-title-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--gradient-1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .step-indicator {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-orange);
+            background: rgba(255, 107, 53, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 100px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Metrics Bar */
+        .metrics-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .metric {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .metric:hover {
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateY(-2px);
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.3rem;
+        }
+
+        .metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .metric-value.mse { color: var(--accent-red); }
+        .metric-value.r2 { color: var(--accent-green); }
+        .metric-value.trees { color: var(--accent-blue); }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 4px 15px var(--accent-orange-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px var(--accent-orange-glow);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-orange);
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .btn-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card.active {
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 30px var(--accent-orange-glow);
+        }
+
+        .info-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-card-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .info-card-icon.step { background: var(--gradient-1); }
+        .info-card-icon.formula { background: var(--gradient-2); }
+        .info-card-icon.insight { background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 100%); }
+
+        .info-card-title {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .info-card-content {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .info-card-content strong {
+            color: var(--accent-orange);
+        }
+
+        /* Formula Display */
+        .formula-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+            text-align: center;
+            overflow-x: auto;
+        }
+
+        /* Progress Steps */
+        .progress-steps {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .progress-step {
+            flex: 1;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            transition: background 0.3s ease;
+        }
+
+        .progress-step.completed {
+            background: var(--accent-green);
+        }
+
+        .progress-step.active {
+            background: var(--accent-orange);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .legend-line {
+            width: 24px;
+            height: 3px;
+            border-radius: 2px;
+        }
+
+        /* Tree Visualization */
+        .tree-visual {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tree-node {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .tree-node.inactive {
+            background: var(--bg-card-hover);
+            color: var(--text-muted);
+            border-color: var(--border);
+        }
+
+        .tree-node.active {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 4px 15px var(--accent-orange-glow);
+            animation: popIn 0.3s ease;
+        }
+
+        .tree-node.completed {
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Residual Indicator */
+        .residual-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 12px;
+        }
+
+        .residual-arrow {
+            font-size: 1.5rem;
+            color: var(--accent-red);
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .residual-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .residual-text strong {
+            color: var(--accent-red);
+        }
+
+        /* Speed Control */
+        .speed-control {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+        }
+
+        .speed-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .speed-slider {
+            flex: 1;
+            -webkit-appearance: none;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            outline: none;
+        }
+
+        .speed-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .speed-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .speed-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent-orange);
+            min-width: 40px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    
+    <div class="container">
+        <header>
+            <div class="badge">Interaktive Visualisierung</div>
+            <h1>XGBoost verstehen</h1>
+            <p class="subtitle">Erlebe Schritt für Schritt, wie XGBoost durch iteratives Boosting die Vorhersagen verbessert</p>
+        </header>
+
+        <div class="main-grid">
+            <!-- Chart Section -->
+            <div class="chart-section">
+                <div class="chart-header">
+                    <div class="chart-title">
+                        <div class="chart-title-icon">📊</div>
+                        Regressionsmodell
+                    </div>
+                    <div class="step-indicator" id="stepIndicator">Schritt 0 / 6</div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="mainChart"></canvas>
+                </div>
+
+                <div class="metrics-bar">
+                    <div class="metric">
+                        <div class="metric-label">MSE (Fehler)</div>
+                        <div class="metric-value mse" id="mseValue">—</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">R² Score</div>
+                        <div class="metric-value r2" id="r2Value">—</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Aktive Bäume</div>
+                        <div class="metric-value trees" id="treesValue">0</div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button class="btn btn-secondary" id="resetBtn">
+                        <span class="btn-icon">⟲</span> Reset
+                    </button>
+                    <button class="btn btn-secondary" id="prevBtn" disabled>
+                        <span class="btn-icon">◀</span> Zurück
+                    </button>
+                    <button class="btn btn-primary" id="playBtn">
+                        <span class="btn-icon">▶</span> <span id="playText">Abspielen</span>
+                    </button>
+                    <button class="btn btn-secondary" id="nextBtn">
+                        Weiter <span class="btn-icon">▶</span>
+                    </button>
+                </div>
+
+                <div class="speed-control">
+                    <span class="speed-label">Geschwindigkeit:</span>
+                    <input type="range" class="speed-slider" id="speedSlider" min="0.5" max="3" step="0.5" value="1">
+                    <span class="speed-value" id="speedValue">1.0x</span>
+                </div>
+
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #4ecdc4;"></div>
+                        Trainingsdaten
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-line" style="background: #ef4444;"></div>
+                        Aktuelle Vorhersage
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-line" style="background: rgba(255,107,53,0.5); border: 1px dashed #ff6b35;"></div>
+                        Wahre Funktion
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Step Explanation -->
+                <div class="info-card active" id="stepCard">
+                    <div class="info-card-header">
+                        <div class="info-card-icon step">💡</div>
+                        <div class="info-card-title" id="stepTitle">Startpunkt</div>
+                    </div>
+                    <div class="info-card-content" id="stepContent">
+                        Klicke auf <strong>"Weiter"</strong> oder <strong>"Abspielen"</strong>, um zu sehen, wie XGBoost Schritt für Schritt lernt!
+                    </div>
+                    <div class="progress-steps" id="progressSteps">
+                        <div class="progress-step"></div>
+                        <div class="progress-step"></div>
+                        <div class="progress-step"></div>
+                        <div class="progress-step"></div>
+                        <div class="progress-step"></div>
+                        <div class="progress-step"></div>
+                    </div>
+                </div>
+
+                <!-- Trees Visualization -->
+                <div class="info-card">
+                    <div class="info-card-header">
+                        <div class="info-card-icon formula">🌲</div>
+                        <div class="info-card-title">Ensemble der Bäume</div>
+                    </div>
+                    <div class="info-card-content">
+                        Jeder Baum korrigiert die <strong>Fehler</strong> der vorherigen Bäume.
+                    </div>
+                    <div class="tree-visual" id="treeVisual">
+                        <div class="tree-node inactive">T1</div>
+                        <div class="tree-node inactive">T2</div>
+                        <div class="tree-node inactive">T3</div>
+                        <div class="tree-node inactive">T4</div>
+                        <div class="tree-node inactive">T5</div>
+                    </div>
+                </div>
+
+                <!-- Formula Card -->
+                <div class="info-card">
+                    <div class="info-card-header">
+                        <div class="info-card-icon insight">∑</div>
+                        <div class="info-card-title">XGBoost Formel</div>
+                    </div>
+                    <div class="info-card-content">
+                        Die finale Vorhersage ist die <strong>Summe</strong> aller Baumvorhersagen:
+                    </div>
+                    <div class="formula-box" id="formulaBox">
+                        ŷ = F₀
+                    </div>
+                </div>
+
+                <!-- Residual Info -->
+                <div class="info-card" id="residualCard" style="display: none;">
+                    <div class="info-card-header">
+                        <div class="info-card-icon" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">📉</div>
+                        <div class="info-card-title">Residuen (Fehler)</div>
+                    </div>
+                    <div class="info-card-content">
+                        Der nächste Baum wird auf die <strong>Residuen</strong> trainiert – die Differenz zwischen echten Werten und aktueller Vorhersage.
+                    </div>
+                    <div class="residual-indicator">
+                        <span class="residual-arrow">↓</span>
+                        <span class="residual-text">Residuum = <strong>y - ŷ</strong></span>
+                        <span class="residual-arrow">↓</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // XGBoost Animation - Educational Visualization
+        // ============================================
+
+        // Configuration
+        const CONFIG = {
+            numPoints: 25,
+            maxTrees: 5,
+            learningRate: 0.5,
+            animationDuration: 1500
+        };
+
+        // State
+        let state = {
+            currentStep: 0,
+            isPlaying: false,
+            playInterval: null,
+            speed: 1,
+            data: null,
+            predictions: [],
+            chart: null
+        };
+
+        // Generate synthetic data with a non-linear pattern
+        function generateData() {
+            const data = [];
+            for (let i = 0; i < CONFIG.numPoints; i++) {
+                const x = (i / (CONFIG.numPoints - 1)) * 10;
+                // True function: sin wave with some complexity
+                const trueY = 2 * Math.sin(x * 0.8) + 0.5 * Math.cos(x * 1.5) + 3;
+                // Add noise
+                const noise = (Math.random() - 0.5) * 1.2;
+                data.push({
+                    x: x,
+                    y: trueY + noise,
+                    trueY: trueY
+                });
+            }
+            return data;
+        }
+
+        // Get true function line for display
+        function getTrueFunctionLine() {
+            const points = [];
+            for (let x = 0; x <= 10; x += 0.1) {
+                points.push({
+                    x: x,
+                    y: 2 * Math.sin(x * 0.8) + 0.5 * Math.cos(x * 1.5) + 3
+                });
+            }
+            return points;
+        }
+
+        // Simulate simple decision tree prediction (piecewise constant)
+        function simpleTreePredict(data, residuals, numSplits = 4) {
+            // Create bins and predict mean residual in each bin
+            const predictions = new Array(data.length).fill(0);
+            const sortedIndices = data.map((_, i) => i).sort((a, b) => data[a].x - data[b].x);
+            
+            const binSize = Math.ceil(data.length / numSplits);
+            
+            for (let bin = 0; bin < numSplits; bin++) {
+                const startIdx = bin * binSize;
+                const endIdx = Math.min((bin + 1) * binSize, data.length);
+                
+                // Calculate mean residual in this bin
+                let sum = 0;
+                let count = 0;
+                for (let i = startIdx; i < endIdx; i++) {
+                    sum += residuals[sortedIndices[i]];
+                    count++;
+                }
+                const meanResidual = count > 0 ? sum / count : 0;
+                
+                // Apply prediction to all points in this bin
+                for (let i = startIdx; i < endIdx; i++) {
+                    predictions[sortedIndices[i]] = meanResidual;
+                }
+            }
+            
+            return predictions;
+        }
+
+        // Calculate XGBoost predictions step by step
+        function calculateAllPredictions() {
+            const data = state.data;
+            const allPredictions = [];
+            
+            // Step 0: Initial prediction (mean of y values)
+            const meanY = data.reduce((sum, d) => sum + d.y, 0) / data.length;
+            let currentPrediction = data.map(() => meanY);
+            allPredictions.push([...currentPrediction]);
+            
+            // Steps 1-5: Add trees one by one
+            for (let tree = 0; tree < CONFIG.maxTrees; tree++) {
+                // Calculate residuals
+                const residuals = data.map((d, i) => d.y - currentPrediction[i]);
+                
+                // Train tree on residuals
+                const treePrediction = simpleTreePredict(data, residuals, 3 + tree);
+                
+                // Update prediction with learning rate
+                currentPrediction = currentPrediction.map((pred, i) => 
+                    pred + CONFIG.learningRate * treePrediction[i]
+                );
+                
+                allPredictions.push([...currentPrediction]);
+            }
+            
+            return allPredictions;
+        }
+
+        // Calculate metrics
+        function calculateMetrics(predictions, data) {
+            const n = data.length;
+            
+            // MSE
+            let mse = 0;
+            for (let i = 0; i < n; i++) {
+                mse += Math.pow(data[i].y - predictions[i], 2);
+            }
+            mse /= n;
+            
+            // R²
+            const meanY = data.reduce((sum, d) => sum + d.y, 0) / n;
+            let ssTot = 0;
+            let ssRes = 0;
+            for (let i = 0; i < n; i++) {
+                ssTot += Math.pow(data[i].y - meanY, 2);
+                ssRes += Math.pow(data[i].y - predictions[i], 2);
+            }
+            const r2 = 1 - (ssRes / ssTot);
+            
+            return { mse, r2 };
+        }
+
+        // Get smooth prediction line for chart
+        function getPredictionLine(predictions, data) {
+            // Sort by x and create line
+            const sorted = data.map((d, i) => ({ x: d.x, y: predictions[i] }))
+                .sort((a, b) => a.x - b.x);
+            return sorted;
+        }
+
+        // Step descriptions
+        const stepDescriptions = [
+            {
+                title: "Ausgangspunkt",
+                content: "Wir starten mit <strong>Trainingsdaten</strong> (türkise Punkte) und einer unbekannten Funktion. XGBoost beginnt mit einer einfachen Schätzung: dem <strong>Mittelwert</strong> aller y-Werte.",
+                formula: "ŷ = F₀ = mean(y)"
+            },
+            {
+                title: "Baum 1 trainieren",
+                content: "Der <strong>erste Baum</strong> wird auf die <strong>Residuen</strong> (Fehler) trainiert. Er lernt, wo die initiale Schätzung daneben liegt und korrigiert systematisch.",
+                formula: "ŷ = F₀ + η·h₁(x)"
+            },
+            {
+                title: "Baum 2 hinzufügen",
+                content: "Der <strong>zweite Baum</strong> korrigiert die verbleibenden Fehler. Beachte, wie die Vorhersagelinie sich den Datenpunkten annähert!",
+                formula: "ŷ = F₀ + η·h₁(x) + η·h₂(x)"
+            },
+            {
+                title: "Baum 3 verstärkt",
+                content: "Mit <strong>jedem weiteren Baum</strong> werden die Vorhersagen präziser. XGBoost fokussiert sich auf die schwierigsten Bereiche.",
+                formula: "ŷ = F₀ + η·Σᵢ₌₁³ hᵢ(x)"
+            },
+            {
+                title: "Baum 4 verfeinert",
+                content: "Die <strong>Lernrate η</strong> (hier 0.5) kontrolliert, wie stark jeder Baum beiträgt. Kleinere Werte = vorsichtigeres Lernen.",
+                formula: "ŷ = F₀ + η·Σᵢ₌₁⁴ hᵢ(x)"
+            },
+            {
+                title: "Finales Ensemble",
+                content: "Das <strong>fertige Modell</strong> kombiniert alle Bäume. Der MSE ist drastisch gesunken, R² deutlich gestiegen. So funktioniert Gradient Boosting!",
+                formula: "ŷ = F₀ + η·Σᵢ₌₁⁵ hᵢ(x)"
+            }
+        ];
+
+        // Initialize Chart
+        function initChart() {
+            const ctx = document.getElementById('mainChart').getContext('2d');
+            
+            const trueLine = getTrueFunctionLine();
+            
+            state.chart = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [
+                        {
+                            label: 'Trainingsdaten',
+                            data: state.data.map(d => ({ x: d.x, y: d.y })),
+                            backgroundColor: 'rgba(78, 205, 196, 0.8)',
+                            borderColor: '#4ecdc4',
+                            borderWidth: 2,
+                            pointRadius: 6,
+                            pointHoverRadius: 8,
+                            order: 2
+                        },
+                        {
+                            label: 'Wahre Funktion',
+                            data: trueLine,
+                            type: 'line',
+                            borderColor: 'rgba(255, 107, 53, 0.4)',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            pointRadius: 0,
+                            fill: false,
+                            tension: 0.4,
+                            order: 3
+                        },
+                        {
+                            label: 'XGBoost Vorhersage',
+                            data: [],
+                            type: 'line',
+                            borderColor: '#ef4444',
+                            borderWidth: 3,
+                            pointRadius: 0,
+                            fill: false,
+                            tension: 0.1,
+                            order: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: CONFIG.animationDuration / state.speed
+                    },
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            min: -0.5,
+                            max: 10.5,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: '#64748b'
+                            },
+                            title: {
+                                display: true,
+                                text: 'Feature (x)',
+                                color: '#94a3b8'
+                            }
+                        },
+                        y: {
+                            min: 0,
+                            max: 7,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: '#64748b'
+                            },
+                            title: {
+                                display: true,
+                                text: 'Target (y)',
+                                color: '#94a3b8'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: '#1a1a2a',
+                            titleColor: '#f8fafc',
+                            bodyColor: '#94a3b8',
+                            borderColor: '#2a2a3a',
+                            borderWidth: 1,
+                            padding: 12,
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return `(${context.raw.x.toFixed(2)}, ${context.raw.y.toFixed(2)})`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update visualization for current step
+        function updateVisualization() {
+            const step = state.currentStep;
+            const maxStep = CONFIG.maxTrees; // Maximum ist 5 (Index 0-5 = 6 Schritte)
+            const desc = stepDescriptions[step];
+            
+            // Update step indicator
+            document.getElementById('stepIndicator').textContent = `Schritt ${step} / ${maxStep}`;
+            
+            // Update step card
+            document.getElementById('stepTitle').textContent = desc.title;
+            document.getElementById('stepContent').innerHTML = desc.content;
+            document.getElementById('formulaBox').textContent = desc.formula;
+            
+            // Update progress steps
+            const progressSteps = document.querySelectorAll('.progress-step');
+            progressSteps.forEach((el, i) => {
+                el.classList.remove('completed', 'active');
+                if (i < step) el.classList.add('completed');
+                if (i === step) el.classList.add('active');
+            });
+            
+            // Update tree visualization
+            const treeNodes = document.querySelectorAll('.tree-node');
+            treeNodes.forEach((el, i) => {
+                el.classList.remove('active', 'completed', 'inactive');
+                if (i < step) {
+                    el.classList.add('completed');
+                } else if (i === step && step > 0) {
+                    el.classList.add('active');
+                } else if (i === step - 1 && step > 0) {
+                    el.classList.add('active');
+                } else {
+                    el.classList.add('inactive');
+                }
+            });
+            
+            // Show/hide residual card
+            document.getElementById('residualCard').style.display = 
+                (step > 0 && step < CONFIG.maxTrees) ? 'block' : 'none';
+            
+            // Update chart
+            if (step > 0) {
+                const predictions = state.predictions[step];
+                const predLine = getPredictionLine(predictions, state.data);
+                state.chart.data.datasets[2].data = predLine;
+                
+                // Update metrics
+                const metrics = calculateMetrics(predictions, state.data);
+                document.getElementById('mseValue').textContent = metrics.mse.toFixed(3);
+                document.getElementById('r2Value').textContent = metrics.r2.toFixed(3);
+                document.getElementById('treesValue').textContent = step;
+            } else {
+                state.chart.data.datasets[2].data = [];
+                document.getElementById('mseValue').textContent = '—';
+                document.getElementById('r2Value').textContent = '—';
+                document.getElementById('treesValue').textContent = '0';
+            }
+            
+            state.chart.options.animation.duration = CONFIG.animationDuration / state.speed;
+            state.chart.update();
+            
+            // Update button states
+            document.getElementById('prevBtn').disabled = step === 0;
+            document.getElementById('nextBtn').disabled = step === CONFIG.maxTrees;
+            
+            // Update play button if at end
+            if (step === CONFIG.maxTrees && state.isPlaying) {
+                stopPlaying();
+            }
+        }
+
+        // Navigation functions
+        function nextStep() {
+            if (state.currentStep < CONFIG.maxTrees) {
+                state.currentStep++;
+                updateVisualization();
+            }
+        }
+
+        function prevStep() {
+            if (state.currentStep > 0) {
+                state.currentStep--;
+                updateVisualization();
+            }
+        }
+
+        function reset() {
+            stopPlaying();
+            state.currentStep = 0;
+            updateVisualization();
+        }
+
+        function togglePlay() {
+            if (state.isPlaying) {
+                stopPlaying();
+            } else {
+                startPlaying();
+            }
+        }
+
+        function startPlaying() {
+            state.isPlaying = true;
+            document.getElementById('playBtn').innerHTML = '<span class="btn-icon">⏸</span> <span>Pause</span>';
+            
+            // Auto-advance
+            const interval = (CONFIG.animationDuration / state.speed) + 500;
+            state.playInterval = setInterval(() => {
+                if (state.currentStep < CONFIG.maxTrees) {
+                    nextStep();
+                } else {
+                    stopPlaying();
+                }
+            }, interval);
+            
+            // Immediate first step if at beginning
+            if (state.currentStep === 0) {
+                nextStep();
+            }
+        }
+
+        function stopPlaying() {
+            state.isPlaying = false;
+            document.getElementById('playBtn').innerHTML = '<span class="btn-icon">▶</span> <span>Abspielen</span>';
+            if (state.playInterval) {
+                clearInterval(state.playInterval);
+                state.playInterval = null;
+            }
+        }
+
+        function updateSpeed(value) {
+            state.speed = parseFloat(value);
+            document.getElementById('speedValue').textContent = state.speed.toFixed(1) + 'x';
+            
+            // Restart playing with new speed if currently playing
+            if (state.isPlaying) {
+                stopPlaying();
+                startPlaying();
+            }
+        }
+
+        // Initialize
+        function init() {
+            // Generate data
+            state.data = generateData();
+            
+            // Calculate all predictions
+            state.predictions = calculateAllPredictions();
+            
+            // Initialize chart
+            initChart();
+            
+            // Set up event listeners
+            document.getElementById('nextBtn').addEventListener('click', nextStep);
+            document.getElementById('prevBtn').addEventListener('click', prevStep);
+            document.getElementById('resetBtn').addEventListener('click', reset);
+            document.getElementById('playBtn').addEventListener('click', togglePlay);
+            document.getElementById('speedSlider').addEventListener('input', (e) => updateSpeed(e.target.value));
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    e.preventDefault();
+                    nextStep();
+                } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    prevStep();
+                } else if (e.key === 'r' || e.key === 'R') {
+                    reset();
+                }
+            });
+            
+            // Initial display
+            updateVisualization();
+        }
+
+        // Start when DOM is ready
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

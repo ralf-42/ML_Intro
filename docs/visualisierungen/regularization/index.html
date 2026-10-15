@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Neuronales Netzwerk Visualisierung</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="sketch.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div id="container">
+        <h1>Regularisierungsmethoden im Vergleich</h1>
+        <div id="canvas-container"></div>
+        <div id="controls">
+            <div id="tabs">
+                <button class="tab-btn active" onclick="setRegMode('separate')">L1 & L2 separat</button>
+                <button class="tab-btn" onclick="setRegMode('elastic')">Elastic Net</button>
+            </div>
+            
+            <div id="separate-controls" class="control-panel">
+                <div class="slider-container">
+                    <label>L1-Regularisierung (λ₁): <span id="l1-value">0.00</span></label>
+                    <input type="range" id="l1-slider" min="0" max="1" step="0.05" value="0">
+                </div>
+                <div class="slider-container">
+                    <label>L2-Regularisierung (λ₂): <span id="l2-value">0.00</span></label>
+                    <input type="range" id="l2-slider" min="0" max="2" step="0.1" value="0">
+                </div>
+            </div>
+            
+            <div id="elastic-controls" class="control-panel" style="display: none;">
+                <div class="slider-container">
+                    <label>Regularisierungsstärke (λ): <span id="elastic-value">0.00</span></label>
+                    <input type="range" id="elastic-slider" min="0" max="2" step="0.1" value="0">
+                </div>
+                <div class="slider-container">
+                    <label>Mischungsverhältnis (α): <span id="alpha-value">0.50</span></label>
+                    <div class="alpha-slider-container">
+                        <span class="label-small">L2</span>
+                        <input type="range" id="alpha-slider" min="0" max="1" step="0.05" value="0.5">
+                        <span class="label-small">L1</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="legend">
+            <div class="legend-section">
+                <h3>L1-Regularisierung</h3>
+                <ul>
+                    <li>Setzt schwache Verbindungen auf exakt 0 (gestrichelte Linien)</li>
+                    <li>Erzeugt ein sparse Netzwerk</li>
+                    <li>Feature-Selektion</li>
+                </ul>
+            </div>
+            <div class="legend-section">
+                <h3>L2-Regularisierung</h3>
+                <ul>
+                    <li>Reduziert alle Gewichte proportional</li>
+                    <li>Behält Verbindungsmuster bei</li>
+                    <li>Verhindert extreme Gewichte</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

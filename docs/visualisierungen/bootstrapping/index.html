@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrapping – Interaktive Animation</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #334155;
+            --accent-blue: #38bdf8;
+            --accent-cyan: #22d3d3;
+            --accent-purple: #a78bfa;
+            --accent-pink: #f472b6;
+            --accent-orange: #fb923c;
+            --accent-green: #4ade80;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 400px;
+            background: radial-gradient(ellipse, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .panel {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .panel-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .panel-icon.data { background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); }
+        .panel-icon.sample { background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink)); }
+        .panel-icon.stats { background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink)); }
+        .panel-icon.dist { background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan)); }
+
+        .panel-title {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .panel-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Original Data Visualization */
+        .data-viz {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            padding: 1rem;
+            min-height: 120px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+        }
+
+        .data-point {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 500;
+            background: linear-gradient(145deg, var(--accent-blue), var(--accent-cyan));
+            color: var(--bg-primary);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: default;
+            position: relative;
+        }
+
+        .data-point:hover {
+            transform: scale(1.15) rotate(-3deg);
+            box-shadow: 0 10px 30px -5px rgba(56, 189, 248, 0.4);
+        }
+
+        .data-point.selected {
+            animation: pulse-selected 0.6s ease-out;
+            box-shadow: 0 0 0 3px var(--accent-pink), 0 10px 30px -5px rgba(244, 114, 182, 0.5);
+        }
+
+        @keyframes pulse-selected {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        /* Bootstrap Sample */
+        .sample-viz {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            padding: 1rem;
+            min-height: 120px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+        }
+
+        .sample-point {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 500;
+            background: linear-gradient(145deg, var(--accent-purple), var(--accent-pink));
+            color: white;
+            opacity: 0;
+            transform: scale(0) translateY(-20px);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .sample-point.visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        .sample-point.duplicate {
+            box-shadow: 0 0 0 2px var(--accent-orange);
+        }
+
+        /* Statistics Panel */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-box {
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Distribution Histogram */
+        .histogram-container {
+            height: 200px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .histogram {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            height: 100%;
+            gap: 2px;
+            padding-bottom: 30px;
+        }
+
+        .histogram-bar {
+            width: 12px;
+            background: linear-gradient(to top, var(--accent-green), var(--accent-cyan));
+            border-radius: 4px 4px 0 0;
+            transition: height 0.3s ease-out;
+            position: relative;
+        }
+
+        .histogram-bar:hover {
+            background: linear-gradient(to top, var(--accent-cyan), var(--accent-blue));
+        }
+
+        .histogram-bar::after {
+            content: attr(data-count);
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .ci-line {
+            position: absolute;
+            bottom: 40px;
+            height: 4px;
+            background: var(--accent-orange);
+            border-radius: 2px;
+            transition: all 0.5s ease;
+        }
+
+        .ci-label {
+            position: absolute;
+            bottom: 50px;
+            font-size: 0.7rem;
+            color: var(--accent-orange);
+            font-family: 'JetBrains Mono', monospace;
+            white-space: nowrap;
+        }
+
+        /* Controls */
+        .controls-panel {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .control-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 150px;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--bg-card);
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .slider-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            color: var(--accent-cyan);
+            min-width: 40px;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -5px rgba(56, 189, 248, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-muted);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Explanation */
+        .explanation {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .explanation h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--accent-cyan);
+        }
+
+        .step-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .step {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .step-content p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Progress indicator */
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--bg-card);
+            border-radius: 2px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        /* Animation for flying data points */
+        @keyframes fly-to-sample {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translate(var(--tx), var(--ty)) scale(1.2);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .flying-point {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 500;
+            background: linear-gradient(145deg, var(--accent-blue), var(--accent-cyan));
+            color: var(--bg-primary);
+            pointer-events: none;
+            z-index: 1000;
+            animation: fly-point 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes fly-point {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.3);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖  Bootstrapping</h1>
+            <p class="subtitle">
+                Eine Resampling-Methode, um die Unsicherheit von Statistiken zu schätzen – 
+                ohne Annahmen über die Verteilung der Daten treffen zu müssen.
+            </p>
+        </header>
+
+        <div class="main-grid">
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="panel-icon data">📊</div>
+                    <div>
+                        <div class="panel-title">Originaldaten</div>
+                        <div class="panel-subtitle">Dein Datensatz mit <span id="data-count">10</span> Werten</div>
+                    </div>
+                </div>
+                <div class="data-viz" id="original-data"></div>
+                <div style="margin-top: 1rem; text-align: center;">
+                    <span class="stat-label">Mittelwert: </span>
+                    <span id="original-mean" class="stat-value" style="font-size: 1.1rem;">–</span>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="panel-icon sample">🎲</div>
+                    <div>
+                        <div class="panel-title">Bootstrap-Stichprobe</div>
+                        <div class="panel-subtitle">Zufällig gezogen <strong>mit Zurücklegen</strong></div>
+                    </div>
+                </div>
+                <div class="sample-viz" id="bootstrap-sample"></div>
+                <div style="margin-top: 1rem; text-align: center;">
+                    <span class="stat-label">Stichproben-Mittelwert: </span>
+                    <span id="sample-mean" class="stat-value" style="font-size: 1.1rem;">–</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-grid">
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="panel-icon stats">📈</div>
+                    <div>
+                        <div class="panel-title">Bootstrap-Statistiken</div>
+                        <div class="panel-subtitle">Ergebnisse aus allen Stichproben</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">Stichproben</div>
+                        <div class="stat-value" id="num-samples">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Mittlerer MW</div>
+                        <div class="stat-value" id="bootstrap-mean">–</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Std. Fehler</div>
+                        <div class="stat-value" id="standard-error">–</div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="panel-icon dist">📉</div>
+                    <div>
+                        <div class="panel-title">Bootstrap-Verteilung</div>
+                        <div class="panel-subtitle">Verteilung der Stichproben-Mittelwerte</div>
+                    </div>
+                </div>
+                <div class="histogram-container">
+                    <div class="histogram" id="histogram"></div>
+                    <div class="ci-line" id="ci-line" style="display: none;"></div>
+                    <div class="ci-label" id="ci-label-left" style="display: none;"></div>
+                    <div class="ci-label" id="ci-label-right" style="display: none;"></div>
+                </div>
+                <div style="margin-top: 0.5rem; text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+                    95% Konfidenzintervall: <span id="ci-range" style="color: var(--accent-orange);">–</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls-panel">
+            <div class="control-group">
+                <span class="control-label">Datensatzgröße</span>
+                <div class="slider-container">
+                    <input type="range" id="data-size" min="5" max="20" value="10">
+                    <span class="slider-value" id="data-size-value">10</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <span class="control-label">Anzahl Stichproben</span>
+                <div class="slider-container">
+                    <input type="range" id="num-bootstrap" min="10" max="500" value="100" step="10">
+                    <span class="slider-value" id="num-bootstrap-value">100</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <span class="control-label">Geschwindigkeit</span>
+                <div class="slider-container">
+                    <input type="range" id="speed" min="1" max="10" value="5">
+                    <span class="slider-value" id="speed-value">5</span>
+                </div>
+            </div>
+            <button class="btn btn-primary" id="start-btn">
+                ▶️ Start
+            </button>
+            <button class="btn btn-secondary" id="reset-btn">
+                🔄 Reset
+            </button>
+        </div>
+
+        <div class="explanation">
+            <h3>🎓 So funktioniert Bootstrapping</h3>
+            <div class="step-list">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Originaldaten</h4>
+                        <p>Wir starten mit einem Datensatz von n Beobachtungen und berechnen eine Statistik (hier: den Mittelwert).</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Resampling</h4>
+                        <p>Wir ziehen n Werte zufällig <strong>mit Zurücklegen</strong> – manche Werte können mehrfach vorkommen!</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Statistik berechnen</h4>
+                        <p>Für jede Bootstrap-Stichprobe berechnen wir die gleiche Statistik wie für die Originaldaten.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Wiederholen</h4>
+                        <p>Diesen Prozess wiederholen wir viele Male (z.B. 1000x), um eine Verteilung der Statistik zu erhalten.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Konfidenzintervall</h4>
+                        <p>Aus der Bootstrap-Verteilung können wir Konfidenzintervalle ableiten – z.B. die mittleren 95% der Werte.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h4>Vorteile</h4>
+                        <p>Keine Verteilungsannahmen nötig! Funktioniert auch für komplexe Statistiken wie Median oder Quantile.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let originalData = [];
+        let bootstrapMeans = [];
+        let isRunning = false;
+        let animationId = null;
+
+        // DOM Elements
+        const originalDataEl = document.getElementById('original-data');
+        const bootstrapSampleEl = document.getElementById('bootstrap-sample');
+        const histogramEl = document.getElementById('histogram');
+        const numSamplesEl = document.getElementById('num-samples');
+        const bootstrapMeanEl = document.getElementById('bootstrap-mean');
+        const standardErrorEl = document.getElementById('standard-error');
+        const originalMeanEl = document.getElementById('original-mean');
+        const sampleMeanEl = document.getElementById('sample-mean');
+        const progressFill = document.getElementById('progress-fill');
+        const ciRangeEl = document.getElementById('ci-range');
+
+        // Controls
+        const dataSizeSlider = document.getElementById('data-size');
+        const numBootstrapSlider = document.getElementById('num-bootstrap');
+        const speedSlider = document.getElementById('speed');
+        const startBtn = document.getElementById('start-btn');
+        const resetBtn = document.getElementById('reset-btn');
+
+        // Initialize
+        function init() {
+            generateOriginalData();
+            updateSliderDisplays();
+            setupEventListeners();
+        }
+
+        function generateOriginalData() {
+            const size = parseInt(dataSizeSlider.value);
+            originalData = [];
+            
+            // Generate somewhat realistic data (e.g., exam scores)
+            for (let i = 0; i < size; i++) {
+                // Normal-ish distribution around 70
+                const value = Math.round(50 + Math.random() * 30 + Math.random() * 20);
+                originalData.push(Math.min(100, Math.max(30, value)));
+            }
+            
+            renderOriginalData();
+            const mean = calculateMean(originalData);
+            originalMeanEl.textContent = mean.toFixed(1);
+            document.getElementById('data-count').textContent = size;
+        }
+
+        function renderOriginalData() {
+            originalDataEl.innerHTML = '';
+            originalData.forEach((value, index) => {
+                const point = document.createElement('div');
+                point.className = 'data-point';
+                point.textContent = value;
+                point.style.animationDelay = `${index * 50}ms`;
+                point.dataset.index = index;
+                originalDataEl.appendChild(point);
+            });
+        }
+
+        function calculateMean(arr) {
+            return arr.reduce((a, b) => a + b, 0) / arr.length;
+        }
+
+        function calculateStandardError(arr) {
+            const mean = calculateMean(arr);
+            const squaredDiffs = arr.map(x => Math.pow(x - mean, 2));
+            return Math.sqrt(squaredDiffs.reduce((a, b) => a + b, 0) / arr.length);
+        }
+
+        function drawBootstrapSample() {
+            const sample = [];
+            const indices = [];
+            
+            for (let i = 0; i < originalData.length; i++) {
+                const randomIndex = Math.floor(Math.random() * originalData.length);
+                sample.push(originalData[randomIndex]);
+                indices.push(randomIndex);
+            }
+            
+            return { sample, indices };
+        }
+
+        function renderBootstrapSample(sample, indices) {
+            bootstrapSampleEl.innerHTML = '';
+            
+            // Count occurrences
+            const counts = {};
+            indices.forEach(i => {
+                counts[i] = (counts[i] || 0) + 1;
+            });
+            
+            sample.forEach((value, i) => {
+                const point = document.createElement('div');
+                point.className = 'sample-point';
+                point.textContent = value;
+                
+                // Mark duplicates
+                if (counts[indices[i]] > 1) {
+                    point.classList.add('duplicate');
+                }
+                
+                bootstrapSampleEl.appendChild(point);
+                
+                // Animate in with delay
+                setTimeout(() => {
+                    point.classList.add('visible');
+                    
+                    // Highlight original data point
+                    const originalPoints = originalDataEl.querySelectorAll('.data-point');
+                    originalPoints[indices[i]]?.classList.add('selected');
+                    setTimeout(() => {
+                        originalPoints[indices[i]]?.classList.remove('selected');
+                    }, 200);
+                }, i * 50);
+            });
+            
+            // Update sample mean
+            const mean = calculateMean(sample);
+            setTimeout(() => {
+                sampleMeanEl.textContent = mean.toFixed(1);
+            }, sample.length * 50);
+            
+            return mean;
+        }
+
+        function updateHistogram() {
+            if (bootstrapMeans.length === 0) return;
+            
+            // Create bins
+            const min = Math.min(...bootstrapMeans);
+            const max = Math.max(...bootstrapMeans);
+            const range = max - min || 1;
+            const numBins = 20;
+            const binWidth = range / numBins;
+            
+            const bins = new Array(numBins).fill(0);
+            bootstrapMeans.forEach(mean => {
+                const binIndex = Math.min(Math.floor((mean - min) / binWidth), numBins - 1);
+                bins[binIndex]++;
+            });
+            
+            const maxCount = Math.max(...bins);
+            
+            // Render
+            histogramEl.innerHTML = '';
+            bins.forEach((count, i) => {
+                const bar = document.createElement('div');
+                bar.className = 'histogram-bar';
+                const height = maxCount > 0 ? (count / maxCount) * 150 : 0;
+                bar.style.height = `${height}px`;
+                bar.dataset.count = (min + (i + 0.5) * binWidth).toFixed(0);
+                histogramEl.appendChild(bar);
+            });
+            
+            // Update confidence interval
+            if (bootstrapMeans.length >= 20) {
+                const sorted = [...bootstrapMeans].sort((a, b) => a - b);
+                const ci025 = sorted[Math.floor(sorted.length * 0.025)];
+                const ci975 = sorted[Math.floor(sorted.length * 0.975)];
+                
+                ciRangeEl.textContent = `[${ci025.toFixed(1)}, ${ci975.toFixed(1)}]`;
+                
+                // Position CI line
+                const ciLine = document.getElementById('ci-line');
+                const leftPos = ((ci025 - min) / range) * 100;
+                const width = ((ci975 - ci025) / range) * 100;
+                
+                ciLine.style.display = 'block';
+                ciLine.style.left = `calc(${leftPos}% + 1rem)`;
+                ciLine.style.width = `${width}%`;
+            }
+        }
+
+        function updateStats() {
+            numSamplesEl.textContent = bootstrapMeans.length;
+            
+            if (bootstrapMeans.length > 0) {
+                bootstrapMeanEl.textContent = calculateMean(bootstrapMeans).toFixed(1);
+                standardErrorEl.textContent = calculateStandardError(bootstrapMeans).toFixed(2);
+            }
+        }
+
+        async function runBootstrap() {
+            if (isRunning) return;
+            
+            isRunning = true;
+            startBtn.disabled = true;
+            startBtn.textContent = '⏸️ Läuft...';
+            
+            const totalSamples = parseInt(numBootstrapSlider.value);
+            const speed = parseInt(speedSlider.value);
+            const delay = Math.max(50, 500 - speed * 45);
+            
+            for (let i = 0; i < totalSamples && isRunning; i++) {
+                const { sample, indices } = drawBootstrapSample();
+                const mean = renderBootstrapSample(sample, indices);
+                
+                await new Promise(resolve => setTimeout(resolve, delay));
+                
+                bootstrapMeans.push(mean);
+                updateStats();
+                updateHistogram();
+                
+                // Update progress
+                progressFill.style.width = `${((i + 1) / totalSamples) * 100}%`;
+            }
+            
+            isRunning = false;
+            startBtn.disabled = false;
+            startBtn.textContent = '▶️ Fortsetzen';
+        }
+
+        function reset() {
+            isRunning = false;
+            bootstrapMeans = [];
+            
+            generateOriginalData();
+            bootstrapSampleEl.innerHTML = '';
+            histogramEl.innerHTML = '';
+            
+            numSamplesEl.textContent = '0';
+            bootstrapMeanEl.textContent = '–';
+            standardErrorEl.textContent = '–';
+            sampleMeanEl.textContent = '–';
+            ciRangeEl.textContent = '–';
+            progressFill.style.width = '0%';
+            
+            document.getElementById('ci-line').style.display = 'none';
+            
+            startBtn.disabled = false;
+            startBtn.textContent = '▶️ Start';
+        }
+
+        function updateSliderDisplays() {
+            document.getElementById('data-size-value').textContent = dataSizeSlider.value;
+            document.getElementById('num-bootstrap-value').textContent = numBootstrapSlider.value;
+            document.getElementById('speed-value').textContent = speedSlider.value;
+        }
+
+        function setupEventListeners() {
+            dataSizeSlider.addEventListener('input', () => {
+                updateSliderDisplays();
+                if (!isRunning) {
+                    reset();
+                }
+            });
+            
+            numBootstrapSlider.addEventListener('input', updateSliderDisplays);
+            speedSlider.addEventListener('input', updateSliderDisplays);
+            
+            startBtn.addEventListener('click', runBootstrap);
+            resetBtn.addEventListener('click', reset);
+        }
+
+        // Start
+        init();
+    </script>
+</body>
+</html>

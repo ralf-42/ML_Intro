@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outlier verstehen – Machine Learning Grundlagen</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f1419;
+            --bg-secondary: #1a2028;
+            --bg-card: #232b36;
+            --text-primary: #e8edf4;
+            --text-secondary: #8899aa;
+            --accent-blue: #4ecdc4;
+            --accent-orange: #ff6b6b;
+            --accent-purple: #a78bfa;
+            --grid-color: rgba(78, 205, 196, 0.08);
+            --line-normal: #4ecdc4;
+            --line-with-outlier: #ff6b6b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 1.5rem;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .chart-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: crosshair;
+        }
+
+        #scatter-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.normal { background: var(--accent-blue); }
+        .legend-dot.outlier { background: var(--accent-orange); }
+        .legend-line {
+            width: 24px;
+            height: 3px;
+            border-radius: 2px;
+        }
+        .legend-line.normal { background: var(--accent-blue); }
+        .legend-line.with-outlier { background: var(--accent-orange); opacity: 0.6; }
+
+        .controls-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.25rem;
+        }
+
+        .card-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .stat-item {
+            background: var(--bg-secondary);
+            padding: 0.75rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--accent-blue);
+        }
+
+        .stat-value.warning {
+            color: var(--accent-orange);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.85rem 1rem;
+            border: none;
+            border-radius: 10px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #3db8b0 100%);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(78, 205, 196, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: var(--accent-blue);
+        }
+
+        .btn-danger {
+            background: rgba(255, 107, 107, 0.15);
+            color: var(--accent-orange);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+        }
+
+        .btn-danger:hover {
+            background: rgba(255, 107, 107, 0.25);
+        }
+
+        .mode-toggle {
+            display: flex;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .mode-btn {
+            flex: 1;
+            padding: 0.6rem;
+            border: none;
+            border-radius: 8px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: transparent;
+            color: var(--text-secondary);
+        }
+
+        .mode-btn.active {
+            background: var(--accent-blue);
+            color: var(--bg-primary);
+            font-weight: 500;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(167, 139, 250, 0.1) 100%);
+            border: 1px solid rgba(78, 205, 196, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .info-box strong {
+            color: var(--accent-blue);
+        }
+
+        .tooltip {
+            position: absolute;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s ease;
+            z-index: 100;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .tooltip.visible {
+            opacity: 1;
+        }
+
+        .impact-meter {
+            margin-top: 1rem;
+        }
+
+        .impact-bar-bg {
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .impact-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-orange));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .impact-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.35rem;
+        }
+
+        @media (max-width: 900px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .controls-section {
+                order: 2;
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hint-text {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 0.75rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Outlier im Machine Learning</h1>
+            <p class="subtitle">Interaktiv verstehen, wie Ausreißer Modelle beeinflussen</p>
+        </header>
+
+        <div class="main-grid">
+            <div class="chart-section">
+                <div class="chart-container" id="chart-container">
+                    <canvas id="scatter-canvas"></canvas>
+                    <div class="tooltip" id="tooltip"></div>
+                </div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot normal"></div>
+                        <span>Normale Datenpunkte</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot outlier"></div>
+                        <span>Outlier</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-line normal"></div>
+                        <span>Regression (ohne Outlier)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-line with-outlier"></div>
+                        <span>Regression (mit Outlier)</span>
+                    </div>
+                </div>
+                <p class="hint-text">💡 Klicke auf das Diagramm, um Datenpunkte hinzuzufügen</p>
+            </div>
+
+            <div class="controls-section">
+                <div class="card">
+                    <div class="card-title">Modus wählen</div>
+                    <div class="mode-toggle">
+                        <button class="mode-btn active" data-mode="normal">Normal</button>
+                        <button class="mode-btn" data-mode="outlier">Outlier</button>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-primary" id="btn-demo">
+                            ✨ Demo-Daten laden
+                        </button>
+                        <button class="btn btn-secondary" id="btn-random-outlier">
+                            🎲 Zufälligen Outlier
+                        </button>
+                        <button class="btn btn-danger" id="btn-clear">
+                            🗑️ Alles löschen
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Statistik</div>
+                    <div class="stat-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="stat-total">0</div>
+                            <div class="stat-label">Datenpunkte</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value warning" id="stat-outliers">0</div>
+                            <div class="stat-label">Outlier</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="stat-r2-clean">–</div>
+                            <div class="stat-label">R² (ohne)</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value warning" id="stat-r2-all">–</div>
+                            <div class="stat-label">R² (mit)</div>
+                        </div>
+                    </div>
+                    <div class="impact-meter">
+                        <div class="impact-bar-bg">
+                            <div class="impact-bar" id="impact-bar" style="width: 0%"></div>
+                        </div>
+                        <div class="impact-label">
+                            <span>Kein Einfluss</span>
+                            <span>Starker Einfluss</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card info-box">
+                    <strong>Was sind Outlier?</strong><br>
+                    Ausreißer sind Datenpunkte, die stark vom allgemeinen Muster abweichen. 
+                    Sie können Modelle verfälschen – beobachte, wie sich die Regressionslinie 
+                    verschiebt, wenn du Outlier hinzufügst!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Canvas Setup
+        const canvas = document.getElementById('scatter-canvas');
+        const ctx = canvas.getContext('2d');
+        const container = document.getElementById('chart-container');
+        const tooltip = document.getElementById('tooltip');
+
+        // Data
+        let points = [];
+        let currentMode = 'normal';
+
+        // Colors
+        const colors = {
+            normal: '#4ecdc4',
+            outlier: '#ff6b6b',
+            lineNormal: '#4ecdc4',
+            lineOutlier: 'rgba(255, 107, 107, 0.6)',
+            grid: 'rgba(78, 205, 196, 0.08)',
+            axis: 'rgba(136, 153, 170, 0.3)'
+        };
+
+        // Resize canvas
+        function resizeCanvas() {
+            const rect = container.getBoundingClientRect();
+            canvas.width = rect.width * window.devicePixelRatio;
+            canvas.height = rect.height * window.devicePixelRatio;
+            canvas.style.width = rect.width + 'px';
+            canvas.style.height = rect.height + 'px';
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+            draw();
+        }
+
+        // Linear Regression
+        function linearRegression(pts) {
+            if (pts.length < 2) return null;
+            
+            const n = pts.length;
+            let sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0, sumY2 = 0;
+            
+            for (const p of pts) {
+                sumX += p.x;
+                sumY += p.y;
+                sumXY += p.x * p.y;
+                sumX2 += p.x * p.x;
+                sumY2 += p.y * p.y;
+            }
+            
+            const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+            const intercept = (sumY - slope * sumX) / n;
+            
+            // R² calculation
+            const yMean = sumY / n;
+            let ssTot = 0, ssRes = 0;
+            for (const p of pts) {
+                ssTot += (p.y - yMean) ** 2;
+                ssRes += (p.y - (slope * p.x + intercept)) ** 2;
+            }
+            const r2 = ssTot === 0 ? 1 : 1 - ssRes / ssTot;
+            
+            return { slope, intercept, r2 };
+        }
+
+        // Coordinate conversion
+        function toCanvas(x, y) {
+            const rect = container.getBoundingClientRect();
+            const padding = 40;
+            return {
+                cx: padding + (x / 100) * (rect.width - 2 * padding),
+                cy: rect.height - padding - (y / 100) * (rect.height - 2 * padding)
+            };
+        }
+
+        function toData(cx, cy) {
+            const rect = container.getBoundingClientRect();
+            const padding = 40;
+            return {
+                x: ((cx - padding) / (rect.width - 2 * padding)) * 100,
+                y: ((rect.height - padding - cy) / (rect.height - 2 * padding)) * 100
+            };
+        }
+
+        // Draw
+        function draw() {
+            const rect = container.getBoundingClientRect();
+            ctx.clearRect(0, 0, rect.width, rect.height);
+
+            const padding = 40;
+            const w = rect.width - 2 * padding;
+            const h = rect.height - 2 * padding;
+
+            // Grid
+            ctx.strokeStyle = colors.grid;
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 10; i++) {
+                const x = padding + (i / 10) * w;
+                const y = padding + (i / 10) * h;
+                
+                ctx.beginPath();
+                ctx.moveTo(x, padding);
+                ctx.lineTo(x, rect.height - padding);
+                ctx.stroke();
+                
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(rect.width - padding, y);
+                ctx.stroke();
+            }
+
+            // Axes
+            ctx.strokeStyle = colors.axis;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(padding, rect.height - padding);
+            ctx.lineTo(rect.width - padding, rect.height - padding);
+            ctx.moveTo(padding, padding);
+            ctx.lineTo(padding, rect.height - padding);
+            ctx.stroke();
+
+            // Axis labels
+            ctx.fillStyle = 'rgba(136, 153, 170, 0.6)';
+            ctx.font = '12px "DM Sans"';
+            ctx.textAlign = 'center';
+            ctx.fillText('Feature X', rect.width / 2, rect.height - 10);
+            
+            ctx.save();
+            ctx.translate(15, rect.height / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.fillText('Target Y', 0, 0);
+            ctx.restore();
+
+            // Regression lines
+            const normalPoints = points.filter(p => !p.isOutlier);
+            const allPoints = points;
+
+            if (normalPoints.length >= 2) {
+                const regNormal = linearRegression(normalPoints);
+                if (regNormal) {
+                    drawRegressionLine(regNormal, colors.lineNormal, 3, rect);
+                }
+            }
+
+            if (allPoints.length >= 2 && allPoints.some(p => p.isOutlier)) {
+                const regAll = linearRegression(allPoints);
+                if (regAll) {
+                    drawRegressionLine(regAll, colors.lineOutlier, 3, rect);
+                }
+            }
+
+            // Points
+            for (const point of points) {
+                const { cx, cy } = toCanvas(point.x, point.y);
+                
+                // Glow effect
+                const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, 20);
+                const color = point.isOutlier ? colors.outlier : colors.normal;
+                gradient.addColorStop(0, color + '40');
+                gradient.addColorStop(1, 'transparent');
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(cx, cy, 20, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Point
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.arc(cx, cy, point.isOutlier ? 10 : 8, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Border for outliers
+                if (point.isOutlier) {
+                    ctx.strokeStyle = '#fff';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                }
+            }
+
+            updateStats();
+        }
+
+        function drawRegressionLine(reg, color, width, rect) {
+            const padding = 40;
+            const start = toCanvas(0, reg.intercept);
+            const end = toCanvas(100, reg.slope * 100 + reg.intercept);
+            
+            ctx.strokeStyle = color;
+            ctx.lineWidth = width;
+            ctx.setLineDash([]);
+            
+            ctx.beginPath();
+            ctx.moveTo(Math.max(padding, start.cx), Math.min(rect.height - padding, Math.max(padding, start.cy)));
+            ctx.lineTo(Math.min(rect.width - padding, end.cx), Math.min(rect.height - padding, Math.max(padding, end.cy)));
+            ctx.stroke();
+        }
+
+        // Update statistics
+        function updateStats() {
+            const total = points.length;
+            const outliers = points.filter(p => p.isOutlier).length;
+            const normalPoints = points.filter(p => !p.isOutlier);
+
+            document.getElementById('stat-total').textContent = total;
+            document.getElementById('stat-outliers').textContent = outliers;
+
+            if (normalPoints.length >= 2) {
+                const regClean = linearRegression(normalPoints);
+                document.getElementById('stat-r2-clean').textContent = regClean.r2.toFixed(3);
+            } else {
+                document.getElementById('stat-r2-clean').textContent = '–';
+            }
+
+            if (points.length >= 2) {
+                const regAll = linearRegression(points);
+                document.getElementById('stat-r2-all').textContent = regAll.r2.toFixed(3);
+                
+                // Impact calculation
+                if (normalPoints.length >= 2 && outliers > 0) {
+                    const regClean = linearRegression(normalPoints);
+                    const diff = Math.abs(regClean.r2 - regAll.r2);
+                    const impact = Math.min(100, diff * 500);
+                    document.getElementById('impact-bar').style.width = impact + '%';
+                } else {
+                    document.getElementById('impact-bar').style.width = '0%';
+                }
+            } else {
+                document.getElementById('stat-r2-all').textContent = '–';
+                document.getElementById('impact-bar').style.width = '0%';
+            }
+        }
+
+        // Event Handlers
+        canvas.addEventListener('click', (e) => {
+            const rect = container.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const data = toData(x, y);
+            
+            if (data.x >= 0 && data.x <= 100 && data.y >= 0 && data.y <= 100) {
+                points.push({
+                    x: data.x,
+                    y: data.y,
+                    isOutlier: currentMode === 'outlier'
+                });
+                draw();
+            }
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            let hoveredPoint = null;
+            for (const point of points) {
+                const { cx, cy } = toCanvas(point.x, point.y);
+                const dist = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2);
+                if (dist < 15) {
+                    hoveredPoint = point;
+                    break;
+                }
+            }
+            
+            if (hoveredPoint) {
+                tooltip.textContent = `(${hoveredPoint.x.toFixed(1)}, ${hoveredPoint.y.toFixed(1)})`;
+                tooltip.style.left = (e.clientX - rect.left + 15) + 'px';
+                tooltip.style.top = (e.clientY - rect.top - 30) + 'px';
+                tooltip.classList.add('visible');
+            } else {
+                tooltip.classList.remove('visible');
+            }
+        });
+
+        // Mode toggle
+        document.querySelectorAll('.mode-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentMode = btn.dataset.mode;
+            });
+        });
+
+        // Demo data
+        document.getElementById('btn-demo').addEventListener('click', () => {
+            points = [];
+            
+            // Generate correlated data
+            for (let i = 0; i < 20; i++) {
+                const x = 10 + Math.random() * 70;
+                const y = 0.8 * x + 10 + (Math.random() - 0.5) * 15;
+                points.push({ x, y: Math.max(5, Math.min(95, y)), isOutlier: false });
+            }
+            
+            draw();
+        });
+
+        // Random outlier
+        document.getElementById('btn-random-outlier').addEventListener('click', () => {
+            // Generate an outlier far from the trend
+            const normalPoints = points.filter(p => !p.isOutlier);
+            if (normalPoints.length < 2) {
+                // Add some demo data first
+                document.getElementById('btn-demo').click();
+            }
+            
+            const reg = linearRegression(points.filter(p => !p.isOutlier));
+            if (reg) {
+                const x = 20 + Math.random() * 60;
+                const expectedY = reg.slope * x + reg.intercept;
+                const outlierY = expectedY + (Math.random() > 0.5 ? 1 : -1) * (30 + Math.random() * 20);
+                points.push({ 
+                    x, 
+                    y: Math.max(5, Math.min(95, outlierY)), 
+                    isOutlier: true 
+                });
+            } else {
+                points.push({ 
+                    x: Math.random() * 80 + 10, 
+                    y: Math.random() * 30 + 60, 
+                    isOutlier: true 
+                });
+            }
+            
+            draw();
+        });
+
+        // Clear
+        document.getElementById('btn-clear').addEventListener('click', () => {
+            points = [];
+            draw();
+        });
+
+        // Initialize
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        
+        // Initial demo
+        setTimeout(() => {
+            document.getElementById('btn-demo').click();
+        }, 500);
+    </script>
+</body>
+</html>

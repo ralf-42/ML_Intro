@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Means Clustering – Interaktive Animation</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f1419;
+            --bg-secondary: #1a2027;
+            --bg-card: #242d38;
+            --text-primary: #e8edf4;
+            --text-secondary: #8899a6;
+            --accent-blue: #4f9cf9;
+            --accent-green: #34d399;
+            --accent-orange: #fb923c;
+            --accent-pink: #f472b6;
+            --accent-purple: #a78bfa;
+            --accent-cyan: #22d3ee;
+            --border-color: #2f3b47;
+            --shadow: 0 8px 32px rgba(0,0,0,0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 2rem;
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .canvas-container {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .canvas-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .canvas-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .iteration-badge {
+            background: var(--bg-card);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+        }
+
+        #canvas {
+            width: 100%;
+            height: 500px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            cursor: crosshair;
+            transition: box-shadow 0.3s ease;
+        }
+
+        #canvas:hover {
+            box-shadow: inset 0 0 0 2px var(--accent-blue);
+        }
+
+        .canvas-hint {
+            text-align: center;
+            margin-top: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        .card-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(180deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 2px;
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            padding: 0.875rem 1rem;
+            border: none;
+            border-radius: 10px;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            grid-column: span 2;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(79, 156, 249, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border-color);
+        }
+
+        .btn-step {
+            background: var(--accent-green);
+            color: var(--bg-primary);
+            grid-column: span 2;
+        }
+
+        .btn-step:hover {
+            background: #4ade80;
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .slider-container {
+            margin-top: 1rem;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .slider-value {
+            background: var(--accent-blue);
+            color: white;
+            padding: 0.125rem 0.5rem;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--bg-card);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .explanation-box {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.25rem;
+            border-left: 4px solid var(--accent-orange);
+        }
+
+        .explanation-title {
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .explanation-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .steps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: var(--bg-card);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            opacity: 0.5;
+        }
+
+        .step-item.active {
+            opacity: 1;
+            border-left: 3px solid var(--accent-green);
+            background: rgba(52, 211, 153, 0.1);
+        }
+
+        .step-item.completed {
+            opacity: 0.7;
+        }
+
+        .step-number {
+            width: 24px;
+            height: 24px;
+            background: var(--bg-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .step-item.active .step-number {
+            background: var(--accent-green);
+            color: var(--bg-primary);
+        }
+
+        .step-content {
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .step-desc {
+            color: var(--text-secondary);
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .legend-centroid {
+            width: 14px;
+            height: 14px;
+            border: 3px solid var(--text-primary);
+            border-radius: 50%;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            background: var(--bg-card);
+            padding: 0.75rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.75rem;
+            }
+            
+            .sidebar {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-primary, .btn-step {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>K-Means Clustering</h1>
+            <p class="subtitle">Interaktive Visualisierung für Machine Learning Einsteiger</p>
+        </header>
+
+        <div class="main-grid">
+            <div class="canvas-container">
+                <div class="canvas-header">
+                    <span class="canvas-title">📊 Datenraum</span>
+                    <span class="iteration-badge" id="iterationBadge">Iteration: 0</span>
+                </div>
+                <canvas id="canvas"></canvas>
+                <p class="canvas-hint">💡 Klicke auf die Fläche, um eigene Datenpunkte hinzuzufügen</p>
+            </div>
+
+            <div class="sidebar">
+                <div class="card">
+                    <h3 class="card-title">Steuerung</h3>
+                    <div class="controls-grid">
+                        <button class="btn btn-secondary" onclick="generateRandomPoints()">
+                            🎲 Zufällig
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearCanvas()">
+                            🗑️ Löschen
+                        </button>
+                        <button class="btn btn-step" onclick="stepAlgorithm()" id="stepBtn">
+                            ⏭️ Nächster Schritt
+                        </button>
+                        <button class="btn btn-primary" onclick="runFullAlgorithm()" id="runBtn">
+                            ▶️ Automatisch abspielen
+                        </button>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-label">
+                            <span>Anzahl Cluster (K)</span>
+                            <span class="slider-value" id="kValue">3</span>
+                        </div>
+                        <input type="range" min="2" max="6" value="3" id="kSlider" onchange="updateK()">
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="pointCount">0</div>
+                            <div class="stat-label">Datenpunkte</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="clusterCount">3</div>
+                            <div class="stat-label">Cluster</div>
+                        </div>
+                    </div>
+
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background: var(--accent-blue)"></div>
+                            <span>Datenpunkte</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-centroid"></div>
+                            <span>Zentroide</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Algorithmus-Schritte</h3>
+                    <div class="steps-list">
+                        <div class="step-item" id="step1">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="step-title">Initialisierung</div>
+                                <div class="step-desc">K zufällige Zentroide wählen</div>
+                            </div>
+                        </div>
+                        <div class="step-item" id="step2">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="step-title">Zuweisung</div>
+                                <div class="step-desc">Jeden Punkt dem nächsten Zentroid zuordnen</div>
+                            </div>
+                        </div>
+                        <div class="step-item" id="step3">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="step-title">Update</div>
+                                <div class="step-desc">Zentroide zum Cluster-Mittelpunkt verschieben</div>
+                            </div>
+                        </div>
+                        <div class="step-item" id="step4">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="step-title">Konvergenz</div>
+                                <div class="step-desc">Wiederholen bis stabil</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">Erklärung</h3>
+                    <div class="explanation-box">
+                        <div class="explanation-title" id="explanationTitle">Bereit zum Start</div>
+                        <div class="explanation-text" id="explanationText">
+                            K-Means ist ein Clustering-Algorithmus, der Datenpunkte in K Gruppen einteilt. 
+                            Füge Punkte hinzu oder generiere zufällige Daten, dann starte den Algorithmus!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Canvas Setup
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // High DPI support
+        function setupCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            canvas.style.width = rect.width + 'px';
+            canvas.style.height = rect.height + 'px';
+        }
+        
+        setupCanvas();
+        window.addEventListener('resize', () => {
+            setupCanvas();
+            draw();
+        });
+
+        // Cluster-Farben
+        const clusterColors = [
+            '#4f9cf9', // Blau
+            '#f472b6', // Pink
+            '#34d399', // Grün
+            '#fb923c', // Orange
+            '#a78bfa', // Lila
+            '#22d3ee'  // Cyan
+        ];
+
+        // Zustand
+        let points = [];
+        let centroids = [];
+        let assignments = [];
+        let k = 3;
+        let iteration = 0;
+        let currentStep = 0; // 0: init, 1: assign, 2: update
+        let isConverged = false;
+        let isRunning = false;
+
+        // Event Listener für Klicks auf Canvas
+        canvas.addEventListener('click', (e) => {
+            if (isRunning) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            points.push({ x, y });
+            
+            // Reset bei neuen Punkten
+            if (centroids.length > 0) {
+                resetAlgorithm();
+            }
+            
+            updateStats();
+            draw();
+        });
+
+        // K-Slider Update
+        function updateK() {
+            k = parseInt(document.getElementById('kSlider').value);
+            document.getElementById('kValue').textContent = k;
+            document.getElementById('clusterCount').textContent = k;
+            
+            if (centroids.length > 0) {
+                resetAlgorithm();
+                draw();
+            }
+        }
+
+        // Zufällige Punkte generieren
+        function generateRandomPoints() {
+            if (isRunning) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            const padding = 50;
+            
+            points = [];
+            
+            // Generiere Cluster-Gruppen für interessantere Visualisierung
+            const numClusters = Math.floor(Math.random() * 3) + 2;
+            const pointsPerCluster = Math.floor(40 / numClusters);
+            
+            for (let c = 0; c < numClusters; c++) {
+                const centerX = padding + Math.random() * (rect.width - 2 * padding);
+                const centerY = padding + Math.random() * (rect.height - 2 * padding);
+                const spread = 40 + Math.random() * 60;
+                
+                for (let i = 0; i < pointsPerCluster; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const radius = Math.random() * spread;
+                    const x = centerX + Math.cos(angle) * radius;
+                    const y = centerY + Math.sin(angle) * radius;
+                    
+                    // Bounds check
+                    if (x > padding && x < rect.width - padding && 
+                        y > padding && y < rect.height - padding) {
+                        points.push({ x, y });
+                    }
+                }
+            }
+            
+            resetAlgorithm();
+            updateStats();
+            draw();
+            
+            updateExplanation('Daten generiert', 
+                `${points.length} zufällige Datenpunkte wurden erzeugt. Klicke auf "Nächster Schritt" um den K-Means Algorithmus zu starten.`);
+        }
+
+        // Canvas leeren
+        function clearCanvas() {
+            if (isRunning) return;
+            
+            points = [];
+            resetAlgorithm();
+            updateStats();
+            draw();
+            
+            updateExplanation('Canvas geleert', 
+                'Alle Punkte wurden entfernt. Klicke auf die Fläche um neue Punkte hinzuzufügen oder generiere zufällige Daten.');
+        }
+
+        // Algorithmus zurücksetzen
+        function resetAlgorithm() {
+            centroids = [];
+            assignments = [];
+            iteration = 0;
+            currentStep = 0;
+            isConverged = false;
+            updateIterationBadge();
+            updateStepHighlight(0);
+        }
+
+        // Initialisiere Zentroide
+        function initializeCentroids() {
+            if (points.length < k) {
+                updateExplanation('Zu wenige Punkte', 
+                    `Für ${k} Cluster benötigst du mindestens ${k} Datenpunkte. Füge mehr Punkte hinzu!`);
+                return false;
+            }
+            
+            // K-Means++ Initialisierung für bessere Startpunkte
+            centroids = [];
+            
+            // Ersten Zentroid zufällig wählen
+            const firstIndex = Math.floor(Math.random() * points.length);
+            centroids.push({ ...points[firstIndex] });
+            
+            // Weitere Zentroide basierend auf Distanz wählen
+            while (centroids.length < k) {
+                const distances = points.map(p => {
+                    const minDist = Math.min(...centroids.map(c => distance(p, c)));
+                    return minDist * minDist;
+                });
+                
+                const totalDist = distances.reduce((a, b) => a + b, 0);
+                let random = Math.random() * totalDist;
+                
+                for (let i = 0; i < points.length; i++) {
+                    random -= distances[i];
+                    if (random <= 0) {
+                        centroids.push({ ...points[i] });
+                        break;
+                    }
+                }
+            }
+            
+            assignments = new Array(points.length).fill(-1);
+            currentStep = 1;
+            
+            updateStepHighlight(1);
+            updateExplanation('Schritt 1: Initialisierung', 
+                `${k} Zentroide wurden zufällig im Datenraum platziert (K-Means++ Methode). Die farbigen Kreuze markieren die initialen Cluster-Zentren.`);
+            
+            return true;
+        }
+
+        // Punkte zu Zentroiden zuweisen
+        function assignPoints() {
+            let changed = false;
+            
+            for (let i = 0; i < points.length; i++) {
+                let minDist = Infinity;
+                let nearest = 0;
+                
+                for (let j = 0; j < centroids.length; j++) {
+                    const d = distance(points[i], centroids[j]);
+                    if (d < minDist) {
+                        minDist = d;
+                        nearest = j;
+                    }
+                }
+                
+                if (assignments[i] !== nearest) {
+                    changed = true;
+                    assignments[i] = nearest;
+                }
+            }
+            
+            currentStep = 2;
+            updateStepHighlight(2);
+            updateExplanation('Schritt 2: Zuweisung', 
+                'Jeder Datenpunkt wurde dem nächstgelegenen Zentroid zugeordnet. Die Farbe zeigt die Cluster-Zugehörigkeit.');
+            
+            return changed;
+        }
+
+        // Zentroide aktualisieren
+        function updateCentroids() {
+            const newCentroids = centroids.map(() => ({ x: 0, y: 0, count: 0 }));
+            
+            for (let i = 0; i < points.length; i++) {
+                const cluster = assignments[i];
+                newCentroids[cluster].x += points[i].x;
+                newCentroids[cluster].y += points[i].y;
+                newCentroids[cluster].count++;
+            }
+            
+            let totalMovement = 0;
+            
+            for (let i = 0; i < k; i++) {
+                if (newCentroids[i].count > 0) {
+                    const newX = newCentroids[i].x / newCentroids[i].count;
+                    const newY = newCentroids[i].y / newCentroids[i].count;
+                    
+                    totalMovement += distance(centroids[i], { x: newX, y: newY });
+                    
+                    centroids[i].x = newX;
+                    centroids[i].y = newY;
+                }
+            }
+            
+            iteration++;
+            currentStep = 1;
+            updateIterationBadge();
+            updateStepHighlight(3);
+            
+            updateExplanation('Schritt 3: Update', 
+                `Die Zentroide wurden zum Mittelpunkt ihrer Cluster verschoben. Gesamtbewegung: ${totalMovement.toFixed(1)} Pixel.`);
+            
+            return totalMovement > 0.5; // Konvergenz-Schwelle
+        }
+
+        // Einzelner Schritt
+        function stepAlgorithm() {
+            if (isRunning) return;
+            
+            if (points.length === 0) {
+                updateExplanation('Keine Daten', 
+                    'Füge zuerst Datenpunkte hinzu, indem du auf die Fläche klickst oder zufällige Punkte generierst.');
+                return;
+            }
+            
+            if (isConverged) {
+                updateExplanation('Konvergiert! ✓', 
+                    `Der Algorithmus hat nach ${iteration} Iterationen konvergiert. Die Zentroide bewegen sich nicht mehr. Drücke "Löschen" für einen Neustart.`);
+                updateStepHighlight(4);
+                return;
+            }
+            
+            if (centroids.length === 0) {
+                // Schritt 1: Initialisierung
+                if (!initializeCentroids()) return;
+            } else if (currentStep === 1) {
+                // Schritt 2: Zuweisung
+                assignPoints();
+            } else if (currentStep === 2) {
+                // Schritt 3: Update
+                const stillMoving = updateCentroids();
+                
+                if (!stillMoving) {
+                    isConverged = true;
+                    updateExplanation('Konvergiert! ✓', 
+                        `Der Algorithmus hat nach ${iteration} Iterationen konvergiert. Die optimale Cluster-Einteilung wurde gefunden!`);
+                    updateStepHighlight(4);
+                }
+            }
+            
+            draw();
+        }
+
+        // Vollständiger Durchlauf
+        async function runFullAlgorithm() {
+            if (isRunning) return;
+            
+            if (points.length === 0) {
+                updateExplanation('Keine Daten', 
+                    'Füge zuerst Datenpunkte hinzu!');
+                return;
+            }
+            
+            isRunning = true;
+            document.getElementById('runBtn').disabled = true;
+            document.getElementById('stepBtn').disabled = true;
+            
+            // Reset
+            resetAlgorithm();
+            draw();
+            
+            // Initialisierung
+            await sleep(500);
+            if (!initializeCentroids()) {
+                isRunning = false;
+                document.getElementById('runBtn').disabled = false;
+                document.getElementById('stepBtn').disabled = false;
+                return;
+            }
+            draw();
+            
+            // Iteriere bis zur Konvergenz
+            while (!isConverged && iteration < 50) {
+                await sleep(600);
+                assignPoints();
+                draw();
+                
+                await sleep(600);
+                const stillMoving = updateCentroids();
+                draw();
+                
+                if (!stillMoving) {
+                    isConverged = true;
+                    updateExplanation('Konvergiert! ✓', 
+                        `Der Algorithmus hat nach ${iteration} Iterationen konvergiert. Die optimale Cluster-Einteilung wurde gefunden!`);
+                    updateStepHighlight(4);
+                }
+            }
+            
+            isRunning = false;
+            document.getElementById('runBtn').disabled = false;
+            document.getElementById('stepBtn').disabled = false;
+        }
+
+        // Hilfsfunktionen
+        function distance(a, b) {
+            return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2);
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function updateStats() {
+            document.getElementById('pointCount').textContent = points.length;
+        }
+
+        function updateIterationBadge() {
+            document.getElementById('iterationBadge').textContent = `Iteration: ${iteration}`;
+        }
+
+        function updateStepHighlight(step) {
+            for (let i = 1; i <= 4; i++) {
+                const el = document.getElementById(`step${i}`);
+                el.classList.remove('active', 'completed');
+                
+                if (i < step) {
+                    el.classList.add('completed');
+                } else if (i === step) {
+                    el.classList.add('active');
+                }
+            }
+        }
+
+        function updateExplanation(title, text) {
+            document.getElementById('explanationTitle').textContent = title;
+            document.getElementById('explanationText').textContent = text;
+        }
+
+        // Zeichnen
+        function draw() {
+            const rect = canvas.getBoundingClientRect();
+            ctx.clearRect(0, 0, rect.width, rect.height);
+            
+            // Hintergrund
+            ctx.fillStyle = '#242d38';
+            ctx.fillRect(0, 0, rect.width, rect.height);
+            
+            // Verbindungslinien zu Zentroiden (wenn zugewiesen)
+            if (centroids.length > 0 && assignments.length > 0) {
+                ctx.globalAlpha = 0.15;
+                for (let i = 0; i < points.length; i++) {
+                    if (assignments[i] >= 0) {
+                        ctx.strokeStyle = clusterColors[assignments[i]];
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(points[i].x, points[i].y);
+                        ctx.lineTo(centroids[assignments[i]].x, centroids[assignments[i]].y);
+                        ctx.stroke();
+                    }
+                }
+                ctx.globalAlpha = 1;
+            }
+            
+            // Datenpunkte
+            for (let i = 0; i < points.length; i++) {
+                const color = assignments[i] >= 0 ? clusterColors[assignments[i]] : '#8899a6';
+                
+                // Schatten
+                ctx.shadowColor = color;
+                ctx.shadowBlur = 8;
+                
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.arc(points[i].x, points[i].y, 6, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.shadowBlur = 0;
+            }
+            
+            // Zentroide
+            for (let i = 0; i < centroids.length; i++) {
+                const c = centroids[i];
+                const color = clusterColors[i];
+                
+                // Äußerer Ring
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(c.x, c.y, 15, 0, Math.PI * 2);
+                ctx.stroke();
+                
+                // Kreuz
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(c.x - 8, c.y);
+                ctx.lineTo(c.x + 8, c.y);
+                ctx.moveTo(c.x, c.y - 8);
+                ctx.lineTo(c.x, c.y + 8);
+                ctx.stroke();
+                
+                // Innerer Punkt
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.arc(c.x, c.y, 5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Initial Draw
+        draw();
+        updateStats();
+    </script>
+</body>
+</html>

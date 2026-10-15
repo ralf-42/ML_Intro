@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Missing Values Demonstration</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f3f4f6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            background-color: #dbeafe;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .button-group {
+            margin-bottom: 20px;
+        }
+
+        .button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            margin-right: 10px;
+            cursor: pointer;
+            background-color: #e5e7eb;
+        }
+
+        .button.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .chart-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .table-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            background-color: #f9fafb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Missing Values Demonstration</h1>
+        
+        <div class="alert">
+            <div class="alert-title">Info</div>
+            <p>Diese Demo zeigt verschiedene Strategien zum Umgang mit fehlenden Werten in Datensätzen.</p>
+        </div>
+
+        <div class="button-group">
+            <button class="button active" onclick="applyStrategy('none')">Originaldaten</button>
+            <button class="button" onclick="applyStrategy('mean')">Mittelwert-Imputation</button>
+            <button class="button" onclick="applyStrategy('remove')">Zeilen entfernen</button>
+        </div>
+
+        <div class="chart-container">
+            <h2>Fehlende Werte pro Spalte</h2>
+            <div id="barChart"></div>
+        </div>
+
+        <div class="table-container">
+            <h2>Datentabelle</h2>
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Alter</th>
+                        <th>Einkommen</th>
+                        <th>Berufserfahrung</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Initialdaten
+        const initialData = [
+            { id: 1, alter: 25, einkommen: 45000, berufserfahrung: null },
+            { id: 2, alter: 32, einkommen: null, berufserfahrung: 8 },
+            { id: 3, alter: null, einkommen: 55000, berufserfahrung: null },
+            { id: 4, alter: 45, einkommen: null, berufserfahrung: 20 },
+            { id: 5, alter: 28, einkommen: 48000, berufserfahrung: 4 },
+            { id: 6, alter: null, einkommen: 62000, berufserfahrung: null },
+            { id: 7, alter: 38, einkommen: null, berufserfahrung: 15 },
+            { id: 8, alter: 29, einkommen: null, berufserfahrung: null },
+            { id: 9, alter: null, einkommen: null, berufserfahrung: 6 },
+            { id: 10, alter: 42, einkommen: 68000, berufserfahrung: 18 }
+        ];
+
+        let currentData = [...initialData];
+
+        // Berechnung des Mittelwerts für eine Spalte
+        function calculateMean(column) {
+            const validValues = initialData
+                .map(row => row[column])
+                .filter(value => value !== null);
+            return validValues.reduce((a, b) => a + b, 0) / validValues.length;
+        }
+
+        // Berechnung der fehlenden Werte Statistiken
+        function calculateMissingStats() {
+            const total = initialData.length;
+            const result = [];
+            
+            ['alter', 'einkommen', 'berufserfahrung'].forEach(column => {
+                const missingCount = initialData.filter(row => row[column] === null).length;
+                const missingPercentage = (missingCount / total) * 100;
+                
+                result.push({
+                    name: column,
+                    kategorie: 'Fehlend',
+                    wert: missingPercentage
+                });
+                
+                result.push({
+                    name: column,
+                    kategorie: 'Vorhanden',
+                    wert: 100 - missingPercentage
+                });
+            });
+            
+            return result;
+        }
+
+        // Aktualisierung des Balkendiagramms
+        function updateBarChart() {
+            const margin = { top: 30, right: 80, bottom: 40, left: 60 };
+            const width = 700 - margin.left - margin.right;
+            const height = 300 - margin.top - margin.bottom;
+
+            d3.select("#barChart").selectAll("*").remove();
+
+            const svg = d3.select("#barChart")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            const data = calculateMissingStats();
+
+            const x0 = d3.scaleBand()
+                .domain([...new Set(data.map(d => d.name))])
+                .rangeRound([0, width])
+                .paddingInner(0.1);
+
+            const x1 = d3.scaleBand()
+                .domain(['Fehlend', 'Vorhanden'])
+                .rangeRound([0, x0.bandwidth()])
+                .padding(0.05);
+
+            const y = d3.scaleLinear()
+                .domain([0, 100])
+                .range([height, 0]);
+
+            const color = d3.scaleOrdinal()
+                .domain(['Fehlend', 'Vorhanden'])
+                .range(['#ef4444', '#22c55e']);
+
+            svg.append("g")
+                .attr("transform", `translate(0,${height})`)
+                .call(d3.axisBottom(x0));
+
+            svg.append("g")
+                .call(d3.axisLeft(y)
+                    .ticks(10)
+                    .tickFormat(d => d + "%"));
+
+            svg.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 0 - margin.left)
+                .attr("x", 0 - (height / 2))
+                .attr("dy", "1em")
+                .style("text-anchor", "middle")
+                .text("Anteil der Werte (%)");
+
+            const groups = svg.selectAll(".group")
+                .data([...new Set(data.map(d => d.name))])
+                .enter().append("g")
+                .attr("class", "group")
+                .attr("transform", d => `translate(${x0(d)},0)`);
+
+            groups.selectAll("rect")
+                .data(name => data.filter(d => d.name === name))
+                .enter().append("rect")
+                .attr("x", d => x1(d.kategorie))
+                .attr("y", d => y(d.wert))
+                .attr("width", x1.bandwidth())
+                .attr("height", d => height - y(d.wert))
+                .attr("fill", d => color(d.kategorie));
+
+            const legend = svg.append("g")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", 10)
+                .attr("text-anchor", "start")
+                .selectAll("g")
+                .data(['Fehlend', 'Vorhanden'])
+                .enter().append("g")
+                .attr("transform", (d, i) => `translate(${width + 10},${i * 20})`);
+
+            legend.append("rect")
+                .attr("x", 0)
+                .attr("width", 19)
+                .attr("height", 19)
+                .attr("fill", color);
+
+            legend.append("text")
+                .attr("x", 24)
+                .attr("y", 9.5)
+                .attr("dy", "0.32em")
+                .text(d => d);
+        }
+
+        // Aktualisierung der Datentabelle
+        function updateTable() {
+            const tbody = document.querySelector('#dataTable tbody');
+            tbody.innerHTML = '';
+            
+            currentData.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row.id}</td>
+                    <td>${row.alter?.toFixed(1) || 'NULL'}</td>
+                    <td>${row.einkommen?.toFixed(1) || 'NULL'}</td>
+                    <td>${row.berufserfahrung?.toFixed(1) || 'NULL'}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Anwendung der ausgewählten Strategie
+        function applyStrategy(strategy) {
+            document.querySelectorAll('.button').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`button[onclick="applyStrategy('${strategy}')"]`).classList.add('active');
+
+            if (strategy === 'mean') {
+                const meanAge = calculateMean('alter');
+                const meanIncome = calculateMean('einkommen');
+                const meanExp = calculateMean('berufserfahrung');
+
+                currentData = initialData.map(row => ({
+                    ...row,
+                    alter: row.alter === null ? meanAge : row.alter,
+                    einkommen: row.einkommen === null ? meanIncome : row.einkommen,
+                    berufserfahrung: row.berufserfahrung === null ? meanExp : row.berufserfahrung
+                }));
+            } else if (strategy === 'remove') {
+                currentData = initialData.filter(row => 
+                    row.alter !== null && 
+                    row.einkommen !== null && 
+                    row.berufserfahrung !== null
+                );
+            } else {
+                currentData = [...initialData];
+            }
+
+            updateTable();
+            updateBarChart();
+        }
+
+        // Initiale Anzeige
+        updateTable();
+        updateBarChart();
+    </script>
+</body>
+</html>

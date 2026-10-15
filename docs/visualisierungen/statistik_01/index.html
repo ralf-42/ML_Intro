@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistik Grundlagen – ML Einsteigerkurs</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --bg-card: #1a2234;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --accent-orange: #f97316;
+            --accent-green: #10b981;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: #2d3a4f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 400px;
+            background: radial-gradient(ellipse, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .canvas-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .canvas-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue), var(--accent-purple));
+        }
+
+        .canvas-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .canvas-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .canvas-title span {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        button {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+            color: var(--text-primary);
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-danger:hover {
+            background: rgba(239, 68, 68, 0.3);
+        }
+
+        #canvas {
+            width: 100%;
+            height: 400px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            cursor: crosshair;
+            display: block;
+        }
+
+        .hint {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 8px;
+            border: 1px dashed var(--border);
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .stats-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .stats-card h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .stat-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .stat-icon.mean { background: rgba(6, 182, 212, 0.2); }
+        .stat-icon.variance { background: rgba(139, 92, 246, 0.2); }
+        .stat-icon.std { background: rgba(236, 72, 153, 0.2); }
+        .stat-icon.count { background: rgba(249, 115, 22, 0.2); }
+
+        .stat-name {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .stat-value.mean { color: var(--accent-cyan); }
+        .stat-value.variance { color: var(--accent-purple); }
+        .stat-value.std { color: var(--accent-pink); }
+        .stat-value.count { color: var(--accent-orange); }
+
+        .formula-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .formula-card h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .formula {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            border-left: 3px solid var(--accent-blue);
+        }
+
+        .formula:last-child {
+            margin-bottom: 0;
+        }
+
+        .formula-name {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .formula-content {
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .formula-content .symbol {
+            color: var(--accent-cyan);
+        }
+
+        .formula-content .operator {
+            color: var(--accent-pink);
+        }
+
+        .legend-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .legend-card h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .legend-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .legend-line {
+            width: 24px;
+            height: 3px;
+            border-radius: 2px;
+        }
+
+        .legend-area {
+            width: 24px;
+            height: 12px;
+            border-radius: 3px;
+            opacity: 0.4;
+        }
+
+        .toggle-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .toggle-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .toggle-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .toggle {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            transition: all 0.2s ease;
+        }
+
+        .toggle.active {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        .toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .toggle.active::after {
+            left: 22px;
+        }
+
+        .explanation-section {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .explanation-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .explanation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+
+        .explanation-card.mean::before { background: var(--accent-cyan); }
+        .explanation-card.variance::before { background: var(--accent-purple); }
+        .explanation-card.std::before { background: var(--accent-pink); }
+
+        .explanation-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .explanation-card.mean h4 { color: var(--accent-cyan); }
+        .explanation-card.variance h4 { color: var(--accent-purple); }
+        .explanation-card.std h4 { color: var(--accent-pink); }
+
+        .explanation-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .ml-hint {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--accent-blue);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .ml-hint strong {
+            color: var(--accent-cyan);
+        }
+
+        @media (max-width: 1200px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .explanation-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.75rem;
+            }
+            
+            .sidebar {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Statistik Grundlagen</h1>
+            <p class="subtitle">Interaktive Visualisierung für Machine Learning</p>
+        </header>
+
+        <div class="main-grid">
+            <div class="canvas-section">
+                <div class="canvas-header">
+                    <div class="canvas-title">
+                        <span></span>
+                        Datenvisualisierung
+                    </div>
+                    <div class="controls">
+                        <button class="btn-secondary" onclick="addRandomPoints(5)">+5 Zufallspunkte</button>
+                        <button class="btn-secondary" onclick="addRandomPoints(10)">+10 Zufallspunkte</button>
+                        <button class="btn-danger" onclick="clearPoints()">Zurücksetzen</button>
+                    </div>
+                </div>
+                <canvas id="canvas"></canvas>
+                <p class="hint">💡 Klicke in das Diagramm, um Datenpunkte hinzuzufügen. Ziehe Punkte, um sie zu verschieben.</p>
+            </div>
+
+            <div class="sidebar">
+                <div class="stats-card">
+                    <h3>📈 Berechnete Werte</h3>
+                    <div class="stat-row">
+                        <div class="stat-label">
+                            <div class="stat-icon count">📍</div>
+                            <span class="stat-name">Anzahl (n)</span>
+                        </div>
+                        <span class="stat-value count" id="count">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-label">
+                            <div class="stat-icon mean">μ</div>
+                            <span class="stat-name">Mittelwert</span>
+                        </div>
+                        <span class="stat-value mean" id="mean">–</span>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-label">
+                            <div class="stat-icon variance">σ²</div>
+                            <span class="stat-name">Varianz</span>
+                        </div>
+                        <span class="stat-value variance" id="variance">–</span>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-label">
+                            <div class="stat-icon std">σ</div>
+                            <span class="stat-name">Standardabweichung</span>
+                        </div>
+                        <span class="stat-value std" id="std">–</span>
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h3>📐 Formeln</h3>
+                    <div class="formula">
+                        <div class="formula-name">Mittelwert (arithmetisches Mittel)</div>
+                        <div class="formula-content">
+                            <span class="symbol">μ</span> <span class="operator">=</span> (Σ xᵢ) <span class="operator">/</span> n
+                        </div>
+                    </div>
+                    <div class="formula">
+                        <div class="formula-name">Varianz (mittlere quadratische Abweichung)</div>
+                        <div class="formula-content">
+                            <span class="symbol">σ²</span> <span class="operator">=</span> Σ(xᵢ <span class="operator">-</span> μ)² <span class="operator">/</span> n
+                        </div>
+                    </div>
+                    <div class="formula">
+                        <div class="formula-name">Standardabweichung</div>
+                        <div class="formula-content">
+                            <span class="symbol">σ</span> <span class="operator">=</span> √<span class="symbol">σ²</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="legend-card">
+                    <h3>🎨 Legende</h3>
+                    <div class="legend-items">
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background: var(--accent-blue);"></div>
+                            Datenpunkte (xᵢ)
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-line" style="background: var(--accent-cyan);"></div>
+                            Mittelwert (μ)
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-area" style="background: var(--accent-pink);"></div>
+                            Standardabweichung (±σ)
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-line" style="background: var(--accent-purple); opacity: 0.5;"></div>
+                            Abweichungen vom Mittelwert
+                        </div>
+                    </div>
+                    <div class="toggle-container">
+                        <div class="toggle-item">
+                            <span class="toggle-label">Mittelwert anzeigen</span>
+                            <div class="toggle active" id="toggleMean" onclick="toggleOption('showMean')"></div>
+                        </div>
+                        <div class="toggle-item">
+                            <span class="toggle-label">Abweichungen anzeigen</span>
+                            <div class="toggle active" id="toggleDeviations" onclick="toggleOption('showDeviations')"></div>
+                        </div>
+                        <div class="toggle-item">
+                            <span class="toggle-label">Std.-Bereich anzeigen</span>
+                            <div class="toggle active" id="toggleStd" onclick="toggleOption('showStdRange')"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="explanation-section">
+            <div class="explanation-card mean">
+                <h4>μ Mittelwert</h4>
+                <p>Der <strong>Mittelwert</strong> (auch Durchschnitt genannt) ist der zentrale Wert aller Datenpunkte. Er zeigt den "Schwerpunkt" der Daten.</p>
+                <div class="ml-hint">
+                    <strong>ML-Relevanz:</strong> Wird für Feature-Normalisierung (z.B. Z-Score) und als Baseline für Modelle verwendet.
+                </div>
+            </div>
+            <div class="explanation-card variance">
+                <h4>σ² Varianz</h4>
+                <p>Die <strong>Varianz</strong> misst, wie stark die Datenpunkte um den Mittelwert streuen. Sie ist die durchschnittliche quadrierte Abweichung.</p>
+                <div class="ml-hint">
+                    <strong>ML-Relevanz:</strong> Hohe Varianz kann auf informative Features hinweisen. Wichtig für PCA und Feature Selection.
+                </div>
+            </div>
+            <div class="explanation-card std">
+                <h4>σ Standardabweichung</h4>
+                <p>Die <strong>Standardabweichung</strong> ist die Wurzel der Varianz und hat dieselbe Einheit wie die Originaldaten – leichter zu interpretieren!</p>
+                <div class="ml-hint">
+                    <strong>ML-Relevanz:</strong> Essentiell für Standardisierung (StandardScaler) und Outlier-Erkennung (>3σ).
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let points = [];
+        let draggedPoint = null;
+        let options = {
+            showMean: true,
+            showDeviations: true,
+            showStdRange: true
+        };
+
+        const colors = {
+            point: '#3b82f6',
+            pointHover: '#60a5fa',
+            mean: '#06b6d4',
+            deviation: 'rgba(139, 92, 246, 0.4)',
+            stdRange: 'rgba(236, 72, 153, 0.15)',
+            stdBorder: 'rgba(236, 72, 153, 0.5)',
+            grid: 'rgba(45, 58, 79, 0.5)',
+            axis: '#64748b',
+            text: '#94a3b8'
+        };
+
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            canvas.style.width = rect.width + 'px';
+            canvas.style.height = rect.height + 'px';
+            draw();
+        }
+
+        function getCanvasCoords(e) {
+            const rect = canvas.getBoundingClientRect();
+            return {
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top
+            };
+        }
+
+        function valueToCanvas(value) {
+            const rect = canvas.getBoundingClientRect();
+            const padding = 50;
+            const width = rect.width - padding * 2;
+            return padding + (value / 100) * width;
+        }
+
+        function canvasToValue(x) {
+            const rect = canvas.getBoundingClientRect();
+            const padding = 50;
+            const width = rect.width - padding * 2;
+            return Math.max(0, Math.min(100, ((x - padding) / width) * 100));
+        }
+
+        function calculateStats() {
+            if (points.length === 0) {
+                return { mean: null, variance: null, std: null };
+            }
+            
+            const mean = points.reduce((a, b) => a + b, 0) / points.length;
+            const variance = points.reduce((sum, x) => sum + Math.pow(x - mean, 2), 0) / points.length;
+            const std = Math.sqrt(variance);
+            
+            return { mean, variance, std };
+        }
+
+        function updateDisplay() {
+            const stats = calculateStats();
+            
+            document.getElementById('count').textContent = points.length;
+            document.getElementById('mean').textContent = stats.mean !== null ? stats.mean.toFixed(2) : '–';
+            document.getElementById('variance').textContent = stats.variance !== null ? stats.variance.toFixed(2) : '–';
+            document.getElementById('std').textContent = stats.std !== null ? stats.std.toFixed(2) : '–';
+        }
+
+        function draw() {
+            const rect = canvas.getBoundingClientRect();
+            const width = rect.width;
+            const height = rect.height;
+            const padding = 50;
+            const dataAreaWidth = width - padding * 2;
+            const yCenter = height / 2;
+
+            ctx.clearRect(0, 0, width, height);
+
+            // Grid
+            ctx.strokeStyle = colors.grid;
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 10; i++) {
+                const x = padding + (i / 10) * dataAreaWidth;
+                ctx.beginPath();
+                ctx.moveTo(x, padding);
+                ctx.lineTo(x, height - padding);
+                ctx.stroke();
+            }
+
+            // X-Axis
+            ctx.strokeStyle = colors.axis;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(padding, yCenter);
+            ctx.lineTo(width - padding, yCenter);
+            ctx.stroke();
+
+            // Axis labels
+            ctx.fillStyle = colors.text;
+            ctx.font = '12px JetBrains Mono';
+            ctx.textAlign = 'center';
+            for (let i = 0; i <= 10; i++) {
+                const x = padding + (i / 10) * dataAreaWidth;
+                const value = i * 10;
+                ctx.fillText(value.toString(), x, height - padding + 20);
+            }
+
+            const stats = calculateStats();
+
+            if (stats.mean !== null && points.length > 0) {
+                const meanX = valueToCanvas(stats.mean);
+
+                // Standard deviation range
+                if (options.showStdRange && stats.std > 0) {
+                    const stdLeftX = valueToCanvas(Math.max(0, stats.mean - stats.std));
+                    const stdRightX = valueToCanvas(Math.min(100, stats.mean + stats.std));
+                    
+                    ctx.fillStyle = colors.stdRange;
+                    ctx.fillRect(stdLeftX, padding, stdRightX - stdLeftX, height - padding * 2);
+                    
+                    ctx.strokeStyle = colors.stdBorder;
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([5, 5]);
+                    ctx.beginPath();
+                    ctx.moveTo(stdLeftX, padding);
+                    ctx.lineTo(stdLeftX, height - padding);
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(stdRightX, padding);
+                    ctx.lineTo(stdRightX, height - padding);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+
+                    // Labels for std range
+                    ctx.fillStyle = colors.stdBorder;
+                    ctx.font = '11px JetBrains Mono';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('-σ', stdLeftX, padding - 8);
+                    ctx.fillText('+σ', stdRightX, padding - 8);
+                }
+
+                // Deviation lines
+                if (options.showDeviations) {
+                    ctx.strokeStyle = colors.deviation;
+                    ctx.lineWidth = 2;
+                    points.forEach(point => {
+                        const pointX = valueToCanvas(point);
+                        ctx.beginPath();
+                        ctx.moveTo(pointX, yCenter - 8);
+                        ctx.lineTo(meanX, yCenter - 8);
+                        ctx.stroke();
+                    });
+                }
+
+                // Mean line
+                if (options.showMean) {
+                    ctx.strokeStyle = colors.mean;
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.moveTo(meanX, padding);
+                    ctx.lineTo(meanX, height - padding);
+                    ctx.stroke();
+
+                    // Mean label
+                    ctx.fillStyle = colors.mean;
+                    ctx.font = 'bold 14px JetBrains Mono';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(`μ = ${stats.mean.toFixed(1)}`, meanX, padding - 15);
+                }
+            }
+
+            // Data points
+            points.forEach((point, index) => {
+                const x = valueToCanvas(point);
+                
+                // Shadow
+                ctx.beginPath();
+                ctx.arc(x, yCenter, 12, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(59, 130, 246, 0.3)';
+                ctx.fill();
+
+                // Point
+                ctx.beginPath();
+                ctx.arc(x, yCenter, 8, 0, Math.PI * 2);
+                ctx.fillStyle = colors.point;
+                ctx.fill();
+                ctx.strokeStyle = '#1e40af';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Value label
+                ctx.fillStyle = colors.text;
+                ctx.font = '11px JetBrains Mono';
+                ctx.textAlign = 'center';
+                ctx.fillText(point.toFixed(1), x, yCenter + 25);
+            });
+
+            // Empty state
+            if (points.length === 0) {
+                ctx.fillStyle = colors.text;
+                ctx.font = '16px Plus Jakarta Sans';
+                ctx.textAlign = 'center';
+                ctx.fillText('Klicke hier, um Datenpunkte hinzuzufügen', width / 2, yCenter);
+            }
+        }
+
+        function findPointAt(coords) {
+            const yCenter = canvas.getBoundingClientRect().height / 2;
+            for (let i = points.length - 1; i >= 0; i--) {
+                const x = valueToCanvas(points[i]);
+                const dist = Math.sqrt(Math.pow(coords.x - x, 2) + Math.pow(coords.y - yCenter, 2));
+                if (dist < 15) return i;
+            }
+            return -1;
+        }
+
+        canvas.addEventListener('mousedown', (e) => {
+            const coords = getCanvasCoords(e);
+            const pointIndex = findPointAt(coords);
+            
+            if (pointIndex >= 0) {
+                draggedPoint = pointIndex;
+                canvas.style.cursor = 'grabbing';
+            } else {
+                const value = canvasToValue(coords.x);
+                points.push(value);
+                updateDisplay();
+                draw();
+            }
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            const coords = getCanvasCoords(e);
+            
+            if (draggedPoint !== null) {
+                points[draggedPoint] = canvasToValue(coords.x);
+                updateDisplay();
+                draw();
+            } else {
+                const pointIndex = findPointAt(coords);
+                canvas.style.cursor = pointIndex >= 0 ? 'grab' : 'crosshair';
+            }
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            draggedPoint = null;
+            canvas.style.cursor = 'crosshair';
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            draggedPoint = null;
+            canvas.style.cursor = 'crosshair';
+        });
+
+        function addRandomPoints(count) {
+            for (let i = 0; i < count; i++) {
+                // Normal distribution approximation around 50
+                const u1 = Math.random();
+                const u2 = Math.random();
+                const z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+                const value = Math.max(5, Math.min(95, 50 + z * 20));
+                points.push(value);
+            }
+            updateDisplay();
+            draw();
+        }
+
+        function clearPoints() {
+            points = [];
+            updateDisplay();
+            draw();
+        }
+
+        function toggleOption(option) {
+            options[option] = !options[option];
+            const toggleId = 'toggle' + option.charAt(4).toUpperCase() + option.slice(5);
+            const toggleEl = document.getElementById(toggleId);
+            
+            if (option === 'showMean') toggleEl.id = 'toggleMean';
+            else if (option === 'showDeviations') toggleEl.id = 'toggleDeviations';
+            else if (option === 'showStdRange') toggleEl.id = 'toggleStd';
+            
+            document.getElementById(toggleId.replace('show', 'toggle').replace('Range', '')).classList.toggle('active', options[option]);
+            draw();
+        }
+
+        // Fix toggle IDs
+        document.getElementById('toggleMean').onclick = () => {
+            options.showMean = !options.showMean;
+            document.getElementById('toggleMean').classList.toggle('active', options.showMean);
+            draw();
+        };
+        document.getElementById('toggleDeviations').onclick = () => {
+            options.showDeviations = !options.showDeviations;
+            document.getElementById('toggleDeviations').classList.toggle('active', options.showDeviations);
+            draw();
+        };
+        document.getElementById('toggleStd').onclick = () => {
+            options.showStdRange = !options.showStdRange;
+            document.getElementById('toggleStd').classList.toggle('active', options.showStdRange);
+            draw();
+        };
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        
+        // Start with some example data
+        addRandomPoints(5);
+    </script>
+</body>
+</html>

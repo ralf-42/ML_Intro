@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skalierungs-Demonstration</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        /* Container Styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        /* Typography */
+        .text-3xl {
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .text-xl {
+            font-size: 1.25rem;
+            line-height: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Button Styles */
+        .button-group {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-active {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .btn-inactive {
+            background-color: #e5e7eb;
+        }
+
+        /* Alert Box */
+        .alert {
+            background-color: #f3f4f6;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Chart Container */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .chart-container {
+            height: 320px;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-3xl">Demonstration: Standardisierung vs. Normalisierung</h1>
+        
+        <!-- Distribution Controls -->
+        <div class="button-group">
+            <h2 class="text-xl">Datenverteilung</h2>
+            <button class="btn btn-active" id="normalDist">Normalverteilung</button>
+            <button class="btn btn-inactive" id="expDist">Exponentialverteilung</button>
+        </div>
+
+        <!-- Scaling Controls -->
+        <div class="button-group">
+            <h2 class="text-xl">Skalierungsmethode</h2>
+            <button class="btn btn-active" id="standardization">Standardisierung</button>
+            <button class="btn btn-inactive" id="normalization">Normalisierung</button>
+        </div>
+
+        <!-- Stats Display -->
+        <div class="alert">
+            <div>
+                <strong>Standardisierung (z-Score):</strong> Transformiert Daten zu Mittelwert=0 und Standardabweichung=1
+            </div>
+            <div>
+                <strong>Normalisierung (Min-Max):</strong> Skaliert Daten in den Bereich [0,1]
+            </div>
+            <div id="originalStats" class="mt-4">
+                <strong>Statistiken Original:</strong>
+            </div>
+            <div id="scaledStats">
+                <strong>Statistiken Skaliert:</strong>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="chart-grid">
+            <div class="chart-container">
+                <h3 class="text-xl" style="text-align: center;">Originaldaten</h3>
+                <canvas id="originalChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3 class="text-xl" style="text-align: center;">Skalierte Daten</h3>
+                <canvas id="scaledChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class ScalingDemo {
+            constructor() {
+                this.distribution = 'normal';
+                this.scalingMethod = 'standardization';
+                this.sampleSize = 1000;
+                this.bins = 30;
+                
+                this.setupEventListeners();
+                this.createCharts();
+                this.updateData();
+            }
+
+            generateData() {
+                let rawData;
+                if (this.distribution === 'normal') {
+                    rawData = Array.from({ length: this.sampleSize }, () => {
+                        let u = 0, v = 0;
+                        while (u === 0) u = Math.random();
+                        while (v === 0) v = Math.random();
+                        return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v) * 20 + 100;
+                    });
+                } else {
+                    rawData = Array.from({ length: this.sampleSize }, () => {
+                        return -50 * Math.log(Math.random()) + 50;
+                    });
+                }
+                return rawData;
+            }
+
+            scaleData(rawData) {
+                if (this.scalingMethod === 'standardization') {
+                    const mean = rawData.reduce((a, b) => a + b) / rawData.length;
+                    const std = Math.sqrt(
+                        rawData.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / rawData.length
+                    );
+                    return rawData.map(x => (x - mean) / std);
+                } else {
+                    const min = Math.min(...rawData);
+                    const max = Math.max(...rawData);
+                    return rawData.map(x => (x - min) / (max - min));
+                }
+            }
+
+            calculateStats(data) {
+                const mean = data.reduce((a, b) => a + b) / data.length;
+                const std = Math.sqrt(
+                    data.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / data.length
+                );
+                return {
+                    mean: mean.toFixed(2),
+                    std: std.toFixed(2),
+                    min: Math.min(...data).toFixed(2),
+                    max: Math.max(...data).toFixed(2)
+                };
+            }
+
+            createHistogram(data) {
+                const min = Math.min(...data);
+                const max = Math.max(...data);
+                const binWidth = (max - min) / this.bins;
+                
+                const histogram = Array(this.bins).fill(0);
+                const binEdges = Array(this.bins + 1);
+                
+                for (let i = 0; i <= this.bins; i++) {
+                    binEdges[i] = min + i * binWidth;
+                }
+                
+                data.forEach(value => {
+                    const binIndex = Math.min(
+                        Math.floor((value - min) / binWidth),
+                        this.bins - 1
+                    );
+                    histogram[binIndex]++;
+                });
+                
+                return {
+                    counts: histogram,
+                    labels: binEdges.slice(0, -1).map((edge, i) => 
+                        ((edge + binEdges[i + 1]) / 2).toFixed(2)
+                    )
+                };
+            }
+
+            createCharts() {
+                const chartConfig = {
+                    type: 'bar',
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Häufigkeit'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Wert'
+                                }
+                            }
+                        }
+                    }
+                };
+
+                this.originalChart = new Chart(
+                    document.getElementById('originalChart'),
+                    { ...chartConfig, data: { datasets: [] } }
+                );
+
+                this.scaledChart = new Chart(
+                    document.getElementById('scaledChart'),
+                    { ...chartConfig, data: { datasets: [] } }
+                );
+            }
+
+            updateCharts(originalHist, scaledHist) {
+                const updateConfig = (hist, color) => ({
+                    labels: hist.labels,
+                    datasets: [{
+                        label: 'Häufigkeit',
+                        data: hist.counts,
+                        backgroundColor: color,
+                        borderWidth: 1
+                    }]
+                });
+
+                this.originalChart.data = updateConfig(originalHist, '#93c5fd');
+                this.scaledChart.data = updateConfig(scaledHist, '#3b82f6');
+                
+                this.originalChart.update();
+                this.scaledChart.update();
+            }
+
+            updateStats(originalStats, scaledStats) {
+                document.getElementById('originalStats').innerHTML = `
+                    <strong>Statistiken Original:</strong> 
+                    µ=${originalStats.mean}, σ=${originalStats.std}, 
+                    Min=${originalStats.min}, Max=${originalStats.max}
+                `;
+                
+                document.getElementById('scaledStats').innerHTML = `
+                    <strong>Statistiken Skaliert:</strong> 
+                    µ=${scaledStats.mean}, σ=${scaledStats.std}, 
+                    Min=${scaledStats.min}, Max=${scaledStats.max}
+                `;
+            }
+
+            updateData() {
+                const rawData = this.generateData();
+                const scaledData = this.scaleData(rawData);
+                
+                const originalStats = this.calculateStats(rawData);
+                const scaledStats = this.calculateStats(scaledData);
+                
+                const originalHist = this.createHistogram(rawData);
+                const scaledHist = this.createHistogram(scaledData);
+                
+                this.updateCharts(originalHist, scaledHist);
+                this.updateStats(originalStats, scaledStats);
+            }
+
+            setupEventListeners() {
+                document.getElementById('normalDist').addEventListener('click', () => {
+                    this.distribution = 'normal';
+                    this.updateButtonStates();
+                    this.updateData();
+                });
+
+                document.getElementById('expDist').addEventListener('click', () => {
+                    this.distribution = 'exponential';
+                    this.updateButtonStates();
+                    this.updateData();
+                });
+
+                document.getElementById('standardization').addEventListener('click', () => {
+                    this.scalingMethod = 'standardization';
+                    this.updateButtonStates();
+                    this.updateData();
+                });
+
+                document.getElementById('normalization').addEventListener('click', () => {
+                    this.scalingMethod = 'normalization';
+                    this.updateButtonStates();
+                    this.updateData();
+                });
+            }
+
+            updateButtonStates() {
+                // Distribution buttons
+                document.getElementById('normalDist').className = 
+                    `btn ${this.distribution === 'normal' ? 'btn-active' : 'btn-inactive'}`;
+                document.getElementById('expDist').className = 
+                    `btn ${this.distribution === 'exponential' ? 'btn-active' : 'btn-inactive'}`;
+                
+                // Scaling method buttons
+                document.getElementById('standardization').className = 
+                    `btn ${this.scalingMethod === 'standardization' ? 'btn-active' : 'btn-inactive'}`;
+                document.getElementById('normalization').className = 
+                    `btn ${this.scalingMethod === 'normalization' ? 'btn-active' : 'btn-inactive'}`;
+            }
+        }
+
+        // Initialize the demo when the page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            new ScalingDemo();
+        });
+    </script>
+</body>
+</html>

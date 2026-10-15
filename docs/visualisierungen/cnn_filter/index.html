@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNN Filter Visualisierung</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container">
+        <h1>CNN Filter Visualisierung</h1>
+        <div id="controls">
+            <button id="filter0">Kantenerkennung (horizontal)</button>
+            <button id="filter1">Kantenerkennung (vertikal)</button>
+            <button id="filter2">Schärfung</button>
+            <button id="filter3">Weichzeichnung</button>
+            <button id="filter4">Sobel-Operator</button>
+        </div>
+        <div id="canvas-container"></div>
+
+        <div id="description-container">
+            <h2>Beschreibung:</h2>
+            <p id="description"></p>
+        </div>
+    </div>
+    <script src="sketch.js"></script>
+</body>
+</html>

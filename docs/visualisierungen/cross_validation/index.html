@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cross Validation - Interaktive Visualisierung</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f1419;
+            --bg-secondary: #1a2332;
+            --bg-card: #232f3e;
+            --accent-train: #3b82f6;
+            --accent-test: #f59e0b;
+            --accent-success: #10b981;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .explanation-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .explanation-box::before {
+            content: '💡';
+            font-size: 3rem;
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            opacity: 0.15;
+        }
+
+        .explanation-box h2 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent-train);
+        }
+
+        .explanation-box p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .controls {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .control-group label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .k-selector {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .k-btn {
+            width: 48px;
+            height: 48px;
+            border: 2px solid var(--border-color);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-family: 'Space Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .k-btn:hover {
+            border-color: var(--accent-train);
+            transform: translateY(-2px);
+        }
+
+        .k-btn.active {
+            background: var(--accent-train);
+            border-color: var(--accent-train);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .action-btn {
+            padding: 0.75rem 2rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-train);
+        }
+
+        .visualization-area {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            min-height: 400px;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .step-label {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-train);
+        }
+
+        .step-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .data-container {
+            margin-bottom: 2rem;
+        }
+
+        .data-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .data-blocks {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .data-block {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        .data-block.neutral {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .data-block.train {
+            background: var(--accent-train);
+            border: 2px solid var(--accent-train);
+            color: white;
+            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
+        }
+
+        .data-block.test {
+            background: var(--accent-test);
+            border: 2px solid var(--accent-test);
+            color: white;
+            box-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
+        }
+
+        .fold-visualization {
+            margin-top: 2rem;
+        }
+
+        .fold-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            opacity: 0.4;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+
+        .fold-row.active {
+            opacity: 1;
+            border-color: var(--accent-train);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .fold-row.completed {
+            opacity: 0.7;
+        }
+
+        .fold-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            min-width: 80px;
+        }
+
+        .fold-blocks {
+            display: flex;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .fold-block {
+            flex: 1;
+            height: 40px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .fold-block.train {
+            background: var(--accent-train);
+            color: white;
+        }
+
+        .fold-block.test {
+            background: var(--accent-test);
+            color: white;
+        }
+
+        .fold-score {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--accent-success);
+            min-width: 60px;
+            text-align: right;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .fold-score.visible {
+            opacity: 1;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+        }
+
+        .legend-color.train {
+            background: var(--accent-train);
+        }
+
+        .legend-color.test {
+            background: var(--accent-test);
+        }
+
+        .legend-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .results-panel {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .results-panel.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .results-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .results-header h3 {
+            font-size: 1.1rem;
+            color: var(--accent-success);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .result-card {
+            background: var(--bg-card);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .result-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-success);
+        }
+
+        .result-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .info-card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .speed-control {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .speed-slider {
+            width: 100px;
+            height: 6px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: var(--bg-secondary);
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .speed-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent-train);
+            cursor: pointer;
+        }
+
+        .speed-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            min-width: 40px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse {
+            animation: pulse 0.6s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-in {
+            animation: slideIn 0.4s ease-out forwards;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .data-block {
+                width: 28px;
+                height: 28px;
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔄 Cross Validation</h1>
+            <p class="subtitle">Interaktive Visualisierung für Machine Learning</p>
+        </header>
+
+        <div class="explanation-box">
+            <h2>Was ist Cross Validation?</h2>
+            <p>
+                Cross Validation ist eine Technik zur Bewertung von Machine-Learning-Modellen. 
+                Anstatt die Daten nur einmal in Training und Test aufzuteilen, wird der Datensatz 
+                in <strong>K gleich große Teile (Folds)</strong> aufgeteilt. Das Modell wird K-mal trainiert, 
+                wobei jedes Mal ein anderer Fold als Testdaten dient. So nutzen wir alle Daten sowohl 
+                zum Training als auch zum Testen!
+            </p>
+        </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <label>Anzahl Folds (K)</label>
+                <div class="k-selector">
+                    <button class="k-btn" data-k="3">3</button>
+                    <button class="k-btn active" data-k="5">5</button>
+                    <button class="k-btn" data-k="7">7</button>
+                    <button class="k-btn" data-k="10">10</button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Geschwindigkeit</label>
+                <div class="speed-control">
+                    <span>🐢</span>
+                    <input type="range" class="speed-slider" id="speedSlider" min="0.5" max="3" step="0.5" value="1">
+                    <span>🐇</span>
+                    <span class="speed-value" id="speedValue">1x</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Steuerung</label>
+                <div style="display: flex; gap: 0.75rem;">
+                    <button class="action-btn btn-primary" id="startBtn">
+                        <span>▶</span> Start
+                    </button>
+                    <button class="action-btn btn-secondary" id="resetBtn">
+                        <span>↺</span> Reset
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="visualization-area">
+            <div class="step-indicator">
+                <span class="step-label" id="stepLabel">Bereit</span>
+                <span class="step-description" id="stepDesc">Klicke auf Start, um die Animation zu beginnen</span>
+            </div>
+
+            <div class="data-container">
+                <div class="data-label">📊 Vollständiger Datensatz (20 Datenpunkte)</div>
+                <div class="data-blocks" id="dataBlocks"></div>
+            </div>
+
+            <div class="fold-visualization" id="foldVisualization"></div>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color train"></div>
+                    <span class="legend-text">Training</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color test"></div>
+                    <span class="legend-text">Validierung/Test</span>
+                </div>
+            </div>
+
+            <div class="results-panel" id="resultsPanel">
+                <div class="results-header">
+                    <span style="font-size: 1.5rem;">✅</span>
+                    <h3>Cross Validation Ergebnisse</h3>
+                </div>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-value" id="avgScore">-</div>
+                        <div class="result-label">Durchschnittliche Genauigkeit</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value" id="stdScore">-</div>
+                        <div class="result-label">Standardabweichung</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value" id="foldCount">-</div>
+                        <div class="result-label">Durchgeführte Folds</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-cards">
+            <div class="info-card">
+                <h3>🎯 Warum Cross Validation?</h3>
+                <p>
+                    Ein einzelner Train-Test-Split kann zufällig gut oder schlecht ausfallen. 
+                    Cross Validation gibt uns eine <strong>robustere Schätzung</strong> der 
+                    Modellleistung und reduziert die Varianz in unserer Bewertung.
+                </p>
+            </div>
+            <div class="info-card">
+                <h3>🔢 Wie viele Folds?</h3>
+                <p>
+                    <strong>K=5</strong> oder <strong>K=10</strong> sind gängige Werte. 
+                    Mehr Folds bedeuten mehr Training, aber auch höheren Rechenaufwand. 
+                    Bei sehr kleinen Datensätzen kann Leave-One-Out (K=N) sinnvoll sein.
+                </p>
+            </div>
+            <div class="info-card">
+                <h3>⚠️ Wichtiger Hinweis</h3>
+                <p>
+                    Die Scores in dieser Animation sind simuliert! In der Praxis hängt 
+                    die Genauigkeit von deinen echten Daten, dem gewählten Modell und 
+                    den Hyperparametern ab.
+                </p>
+            </div>
+        </div>
+
+        <footer>
+            Machine Learning Einsteigerkurs • Cross Validation Visualisierung
+        </footer>
+    </div>
+
+    <script>
+        // State
+        let k = 5;
+        let speed = 1;
+        let isRunning = false;
+        let currentFold = 0;
+        const totalDataPoints = 20;
+        const scores = [];
+
+        // DOM Elements
+        const dataBlocksContainer = document.getElementById('dataBlocks');
+        const foldVisualization = document.getElementById('foldVisualization');
+        const stepLabel = document.getElementById('stepLabel');
+        const stepDesc = document.getElementById('stepDesc');
+        const resultsPanel = document.getElementById('resultsPanel');
+        const startBtn = document.getElementById('startBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const speedSlider = document.getElementById('speedSlider');
+        const speedValue = document.getElementById('speedValue');
+
+        // Initialize
+        function init() {
+            createDataBlocks();
+            createFoldRows();
+            setupEventListeners();
+        }
+
+        function createDataBlocks() {
+            dataBlocksContainer.innerHTML = '';
+            for (let i = 0; i < totalDataPoints; i++) {
+                const block = document.createElement('div');
+                block.className = 'data-block neutral';
+                block.textContent = i + 1;
+                block.style.animationDelay = `${i * 0.03}s`;
+                dataBlocksContainer.appendChild(block);
+            }
+        }
+
+        function createFoldRows() {
+            foldVisualization.innerHTML = '';
+            const foldSize = Math.ceil(totalDataPoints / k);
+
+            for (let i = 0; i < k; i++) {
+                const row = document.createElement('div');
+                row.className = 'fold-row';
+                row.id = `fold-${i}`;
+
+                const label = document.createElement('div');
+                label.className = 'fold-label';
+                label.textContent = `Fold ${i + 1}`;
+
+                const blocks = document.createElement('div');
+                blocks.className = 'fold-blocks';
+
+                for (let j = 0; j < k; j++) {
+                    const block = document.createElement('div');
+                    block.className = `fold-block ${j === i ? 'test' : 'train'}`;
+                    block.textContent = j === i ? 'Test' : 'Train';
+                    blocks.appendChild(block);
+                }
+
+                const score = document.createElement('div');
+                score.className = 'fold-score';
+                score.id = `score-${i}`;
+                score.textContent = '';
+
+                row.appendChild(label);
+                row.appendChild(blocks);
+                row.appendChild(score);
+                foldVisualization.appendChild(row);
+            }
+        }
+
+        function setupEventListeners() {
+            // K selection buttons
+            document.querySelectorAll('.k-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (isRunning) return;
+                    document.querySelectorAll('.k-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    k = parseInt(btn.dataset.k);
+                    reset();
+                });
+            });
+
+            // Speed slider
+            speedSlider.addEventListener('input', (e) => {
+                speed = parseFloat(e.target.value);
+                speedValue.textContent = `${speed}x`;
+            });
+
+            // Start button
+            startBtn.addEventListener('click', () => {
+                if (!isRunning) {
+                    startAnimation();
+                }
+            });
+
+            // Reset button
+            resetBtn.addEventListener('click', reset);
+        }
+
+        function reset() {
+            isRunning = false;
+            currentFold = 0;
+            scores.length = 0;
+            
+            startBtn.innerHTML = '<span>▶</span> Start';
+            stepLabel.textContent = 'Bereit';
+            stepDesc.textContent = 'Klicke auf Start, um die Animation zu beginnen';
+            
+            resultsPanel.classList.remove('visible');
+            
+            createDataBlocks();
+            createFoldRows();
+        }
+
+        async function startAnimation() {
+            if (isRunning) return;
+            isRunning = true;
+            scores.length = 0;
+            
+            startBtn.innerHTML = '<span>⏸</span> Läuft...';
+            
+            const foldSize = Math.ceil(totalDataPoints / k);
+            
+            for (let fold = 0; fold < k; fold++) {
+                if (!isRunning) break;
+                
+                currentFold = fold;
+                
+                // Update step indicator
+                stepLabel.textContent = `Fold ${fold + 1} / ${k}`;
+                stepDesc.textContent = `Training mit ${totalDataPoints - foldSize} Datenpunkten, Test mit ${foldSize} Datenpunkten`;
+                
+                // Highlight current fold row
+                document.querySelectorAll('.fold-row').forEach((row, i) => {
+                    row.classList.remove('active', 'completed');
+                    if (i === fold) row.classList.add('active');
+                    if (i < fold) row.classList.add('completed');
+                });
+                
+                // Color data blocks
+                const testStart = fold * foldSize;
+                const testEnd = Math.min(testStart + foldSize, totalDataPoints);
+                
+                document.querySelectorAll('.data-block').forEach((block, i) => {
+                    block.classList.remove('train', 'test', 'neutral');
+                    if (i >= testStart && i < testEnd) {
+                        block.classList.add('test');
+                    } else {
+                        block.classList.add('train');
+                    }
+                });
+                
+                // Simulate training delay
+                await sleep(1500 / speed);
+                
+                // Generate and show score
+                const score = (0.82 + Math.random() * 0.12).toFixed(2);
+                scores.push(parseFloat(score));
+                
+                const scoreEl = document.getElementById(`score-${fold}`);
+                scoreEl.textContent = score;
+                scoreEl.classList.add('visible');
+                
+                await sleep(500 / speed);
+            }
+            
+            if (isRunning) {
+                showResults();
+            }
+            
+            isRunning = false;
+            startBtn.innerHTML = '<span>▶</span> Start';
+        }
+
+        function showResults() {
+            stepLabel.textContent = 'Fertig! ✅';
+            stepDesc.textContent = 'Alle Folds wurden durchgeführt';
+            
+            const avg = (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(3);
+            const std = calculateStd(scores).toFixed(3);
+            
+            document.getElementById('avgScore').textContent = avg;
+            document.getElementById('stdScore').textContent = `± ${std}`;
+            document.getElementById('foldCount').textContent = k;
+            
+            resultsPanel.classList.add('visible');
+            
+            // Mark all folds as completed
+            document.querySelectorAll('.fold-row').forEach(row => {
+                row.classList.remove('active');
+                row.classList.add('completed');
+            });
+        }
+
+        function calculateStd(arr) {
+            const mean = arr.reduce((a, b) => a + b, 0) / arr.length;
+            const squareDiffs = arr.map(value => Math.pow(value - mean, 2));
+            const avgSquareDiff = squareDiffs.reduce((a, b) => a + b, 0) / arr.length;
+            return Math.sqrt(avgSquareDiff);
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Start
+        init();
+    </script>
+</body>
+</html>
