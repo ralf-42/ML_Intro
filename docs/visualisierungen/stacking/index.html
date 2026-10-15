@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ensemble Stacking - Interaktive Animation</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f1419;
+            --bg-secondary: #1a2332;
+            --bg-card: #232f3e;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-green: #10b981;
+            --accent-orange: #f59e0b;
+            --accent-pink: #ec4899;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+            position: relative;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.875rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+            border-color: var(--accent-blue);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .step-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .step-dot.active {
+            background: var(--accent-purple);
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+        }
+
+        .step-dot.completed {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        .animation-container {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+            min-height: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animation-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-pink));
+        }
+
+        .stage {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .stage.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stage-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--accent-purple);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stage-heading {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .stage-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        /* Data Flow Visualization */
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            padding: 1rem 0;
+        }
+
+        .data-block {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.25rem 2rem;
+            border: 2px solid var(--border-color);
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .data-block.highlight {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+        }
+
+        .data-block-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .data-block-content {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .arrow-down {
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(180deg, var(--accent-blue), var(--accent-purple));
+            position: relative;
+        }
+
+        .arrow-down::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 10px solid var(--accent-purple);
+        }
+
+        .arrow-down.animated {
+            animation: flowDown 1.5s ease-in-out infinite;
+        }
+
+        @keyframes flowDown {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Model Cards */
+        .models-row {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .model-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 2px solid var(--border-color);
+            width: 180px;
+            text-align: center;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .model-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .model-card:nth-child(1) { transition-delay: 0.1s; }
+        .model-card:nth-child(2) { transition-delay: 0.2s; }
+        .model-card:nth-child(3) { transition-delay: 0.3s; }
+
+        .model-card.processing {
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.3);
+        }
+
+        .model-card.done {
+            border-color: var(--accent-green);
+        }
+
+        .model-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 1rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .model-card:nth-child(1) .model-icon {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        }
+
+        .model-card:nth-child(2) .model-icon {
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+        }
+
+        .model-card:nth-child(3) .model-icon {
+            background: linear-gradient(135deg, #ec4899, #be185d);
+        }
+
+        .model-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .model-type {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+
+        .model-prediction {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--accent-green);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .model-prediction.visible {
+            opacity: 1;
+        }
+
+        /* Meta Model */
+        .meta-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .predictions-collector {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .prediction-chip {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+        }
+
+        .prediction-chip.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .prediction-chip:nth-child(1) { border-color: var(--accent-blue); color: var(--accent-blue); }
+        .prediction-chip:nth-child(2) { border-color: var(--accent-purple); color: var(--accent-purple); }
+        .prediction-chip:nth-child(3) { border-color: var(--accent-pink); color: var(--accent-pink); }
+
+        .meta-model {
+            background: linear-gradient(135deg, var(--bg-card), #2a3a4d);
+            border: 3px solid var(--accent-green);
+            border-radius: 20px;
+            padding: 2rem 3rem;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.2);
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.5s ease;
+        }
+
+        .meta-model.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .meta-model-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-green);
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .meta-model-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .final-prediction {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--accent-green);
+            margin-top: 1rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .final-prediction.visible {
+            opacity: 1;
+        }
+
+        /* Architecture Diagram */
+        .architecture {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .level {
+            margin-bottom: 3rem;
+        }
+
+        .level-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--accent-purple);
+        }
+
+        /* Info Cards */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+
+        .info-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .info-card:nth-child(1) { transition-delay: 0.1s; }
+        .info-card:nth-child(2) { transition-delay: 0.2s; }
+        .info-card:nth-child(3) { transition-delay: 0.3s; }
+
+        .info-icon {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Pulse Animation */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Loading dots */
+        .loading-dots {
+            display: inline-flex;
+            gap: 4px;
+        }
+
+        .loading-dots span {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+            animation: bounce 1.4s ease-in-out infinite;
+        }
+
+        .loading-dots span:nth-child(1) { animation-delay: 0s; }
+        .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+        }
+
+        /* Summary Stage */
+        .summary-diagram {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .diagram-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .diagram-box {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.75rem 1.25rem;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        .diagram-box.data { border-color: var(--accent-blue); }
+        .diagram-box.model1 { border-color: var(--accent-blue); }
+        .diagram-box.model2 { border-color: var(--accent-purple); }
+        .diagram-box.model3 { border-color: var(--accent-pink); }
+        .diagram-box.meta { border-color: var(--accent-green); background: rgba(16, 185, 129, 0.1); }
+
+        .diagram-arrow {
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+        }
+
+        .key-points {
+            margin-top: 2rem;
+        }
+
+        .key-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--bg-card);
+            border-radius: 12px;
+            border-left: 3px solid var(--accent-purple);
+        }
+
+        .key-point-icon {
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .key-point-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .animation-container { padding: 1.5rem; }
+            .model-card { width: 150px; padding: 1rem; }
+            .meta-model { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Ensemble Stacking</h1>
+            <p class="subtitle">Eine interaktive Einführung in Meta-Learning</p>
+        </header>
+
+        <div class="controls">
+            <button class="btn btn-secondary" id="prevBtn" disabled>
+                ← Zurück
+            </button>
+            <button class="btn btn-primary" id="nextBtn">
+                Weiter →
+            </button>
+            <button class="btn btn-secondary" id="resetBtn">
+                ↺ Neu starten
+            </button>
+        </div>
+
+        <div class="step-indicator">
+            <div class="step-dot active" data-step="0"></div>
+            <div class="step-dot" data-step="1"></div>
+            <div class="step-dot" data-step="2"></div>
+            <div class="step-dot" data-step="3"></div>
+            <div class="step-dot" data-step="4"></div>
+            <div class="step-dot" data-step="5"></div>
+        </div>
+
+        <div class="animation-container">
+            <!-- Stage 0: Einführung -->
+            <div class="stage active" id="stage0">
+                <span class="stage-title">Schritt 1 von 6</span>
+                <h2 class="stage-heading">Was ist Ensemble Stacking?</h2>
+                <p class="stage-description">
+                    Stacking ist eine fortgeschrittene Ensemble-Methode, bei der mehrere verschiedene Modelle 
+                    kombiniert werden. Die Vorhersagen der Basis-Modelle werden als <strong>neue Features</strong> 
+                    für ein übergeordnetes <strong>Meta-Modell</strong> verwendet.
+                </p>
+                
+                <div class="info-grid">
+                    <div class="info-card" id="info1">
+                        <div class="info-icon">🧩</div>
+                        <div class="info-title">Vielfalt nutzen</div>
+                        <div class="info-text">
+                            Verschiedene Algorithmen haben unterschiedliche Stärken. Stacking kombiniert diese intelligent.
+                        </div>
+                    </div>
+                    <div class="info-card" id="info2">
+                        <div class="info-icon">📊</div>
+                        <div class="info-title">Zwei Ebenen</div>
+                        <div class="info-text">
+                            Level 0: Basis-Modelle machen Vorhersagen. Level 1: Meta-Modell lernt aus diesen.
+                        </div>
+                    </div>
+                    <div class="info-card" id="info3">
+                        <div class="info-icon">🎯</div>
+                        <div class="info-title">Bessere Genauigkeit</div>
+                        <div class="info-text">
+                            Das Meta-Modell lernt, wann welches Basis-Modell am besten funktioniert.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 1: Trainingsdaten -->
+            <div class="stage" id="stage1">
+                <span class="stage-title">Schritt 2 von 6</span>
+                <h2 class="stage-heading">Die Trainingsdaten</h2>
+                <p class="stage-description">
+                    Alles beginnt mit den Trainingsdaten. Diese werden an alle Basis-Modelle gleichzeitig übergeben.
+                </p>
+                
+                <div class="flow-container">
+                    <div class="data-block highlight pulse" id="trainData">
+                        <div class="data-block-label">TRAININGSDATEN</div>
+                        <div class="data-block-content">📊 X_train, y_train</div>
+                    </div>
+                    
+                    <div class="arrow-down animated"></div>
+                    
+                    <div style="display: flex; gap: 3rem;">
+                        <div class="arrow-down animated" style="transform: rotate(-30deg);"></div>
+                        <div class="arrow-down animated"></div>
+                        <div class="arrow-down animated" style="transform: rotate(30deg);"></div>
+                    </div>
+                    
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem;">
+                        Die Daten fließen zu den Basis-Modellen...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 2: Basis-Modelle -->
+            <div class="stage" id="stage2">
+                <span class="stage-title">Schritt 3 von 6</span>
+                <h2 class="stage-heading">Level 0: Basis-Modelle</h2>
+                <p class="stage-description">
+                    Verschiedene Algorithmen werden auf den gleichen Daten trainiert. 
+                    Jedes Modell hat seine eigene Art, Muster zu erkennen.
+                </p>
+                
+                <div class="flow-container">
+                    <div class="models-row">
+                        <div class="model-card" id="model1">
+                            <div class="model-icon">🌳</div>
+                            <div class="model-name">Decision Tree</div>
+                            <div class="model-type">Regel-basiert</div>
+                            <div class="model-prediction" id="pred1">
+                                <div class="loading-dots">
+                                    <span></span><span></span><span></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="model-card" id="model2">
+                            <div class="model-icon">📈</div>
+                            <div class="model-name">Lineare Reg.</div>
+                            <div class="model-type">Linear</div>
+                            <div class="model-prediction" id="pred2">
+                                <div class="loading-dots">
+                                    <span></span><span></span><span></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="model-card" id="model3">
+                            <div class="model-icon">🧠</div>
+                            <div class="model-name">Neural Network</div>
+                            <div class="model-type">Deep Learning</div>
+                            <div class="model-prediction" id="pred3">
+                                <div class="loading-dots">
+                                    <span></span><span></span><span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 3: Vorhersagen -->
+            <div class="stage" id="stage3">
+                <span class="stage-title">Schritt 4 von 6</span>
+                <h2 class="stage-heading">Vorhersagen der Basis-Modelle</h2>
+                <p class="stage-description">
+                    Jedes Modell erzeugt seine eigene Vorhersage. Diese unterschiedlichen 
+                    Perspektiven werden nun gesammelt und kombiniert.
+                </p>
+                
+                <div class="flow-container">
+                    <div class="models-row">
+                        <div class="model-card visible done" id="model1b">
+                            <div class="model-icon">🌳</div>
+                            <div class="model-name">Decision Tree</div>
+                            <div class="model-type">Regel-basiert</div>
+                            <div class="model-prediction visible">Pred: 0.72</div>
+                        </div>
+                        
+                        <div class="model-card visible done" id="model2b">
+                            <div class="model-icon">📈</div>
+                            <div class="model-name">Lineare Reg.</div>
+                            <div class="model-type">Linear</div>
+                            <div class="model-prediction visible">Pred: 0.68</div>
+                        </div>
+                        
+                        <div class="model-card visible done" id="model3b">
+                            <div class="model-icon">🧠</div>
+                            <div class="model-name">Neural Network</div>
+                            <div class="model-type">Deep Learning</div>
+                            <div class="model-prediction visible">Pred: 0.81</div>
+                        </div>
+                    </div>
+                    
+                    <div class="arrow-down animated"></div>
+                    
+                    <div class="predictions-collector">
+                        <div class="prediction-chip" id="chip1">🌳 0.72</div>
+                        <div class="prediction-chip" id="chip2">📈 0.68</div>
+                        <div class="prediction-chip" id="chip3">🧠 0.81</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 4: Meta-Modell -->
+            <div class="stage" id="stage4">
+                <span class="stage-title">Schritt 5 von 6</span>
+                <h2 class="stage-heading">Level 1: Das Meta-Modell</h2>
+                <p class="stage-description">
+                    Das Meta-Modell nimmt die Vorhersagen als Input und lernt, diese optimal zu kombinieren.
+                    Es erkennt Muster: "Wenn Modell A unsicher ist, vertraue Modell B mehr."
+                </p>
+                
+                <div class="meta-section">
+                    <div class="predictions-collector">
+                        <div class="prediction-chip visible">🌳 0.72</div>
+                        <div class="prediction-chip visible">📈 0.68</div>
+                        <div class="prediction-chip visible">🧠 0.81</div>
+                    </div>
+                    
+                    <div class="arrow-down animated"></div>
+                    
+                    <div class="meta-model" id="metaModel">
+                        <div class="meta-model-label">META-MODELL (LEVEL 1)</div>
+                        <div class="meta-model-name">🔮 Lineare Regression</div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary);">
+                            Lernt optimale Gewichtung
+                        </div>
+                        <div class="final-prediction" id="finalPred">
+                            <div class="loading-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 5: Zusammenfassung -->
+            <div class="stage" id="stage5">
+                <span class="stage-title">Schritt 6 von 6</span>
+                <h2 class="stage-heading">Zusammenfassung</h2>
+                <p class="stage-description">
+                    Ensemble Stacking kombiniert die Stärken verschiedener Modelle durch 
+                    ein lernendes Meta-Modell für optimale Vorhersagen.
+                </p>
+                
+                <div class="summary-diagram">
+                    <div class="diagram-row">
+                        <div class="diagram-box data">📊 Daten</div>
+                    </div>
+                    <div class="diagram-row">
+                        <span class="diagram-arrow">↓</span>
+                    </div>
+                    <div class="diagram-row">
+                        <div class="diagram-box model1">🌳 Tree</div>
+                        <div class="diagram-box model2">📈 LogReg</div>
+                        <div class="diagram-box model3">🧠 NN</div>
+                    </div>
+                    <div class="diagram-row">
+                        <span class="diagram-arrow">↘</span>
+                        <span class="diagram-arrow">↓</span>
+                        <span class="diagram-arrow">↙</span>
+                    </div>
+                    <div class="diagram-row">
+                        <div class="diagram-box meta">🔮 Meta-Modell → Finale Vorhersage: 0.76</div>
+                    </div>
+                </div>
+                
+                <div class="key-points">
+                    <div class="key-point">
+                        <span class="key-point-icon">✅</span>
+                        <span class="key-point-text">
+                            <strong>Diversität ist Stärke:</strong> Verschiedene Modelle machen unterschiedliche Fehler. 
+                            Das Meta-Modell lernt, diese auszugleichen.
+                        </span>
+                    </div>
+                    <div class="key-point">
+                        <span class="key-point-icon">✅</span>
+                        <span class="key-point-text">
+                            <strong>Cross-Validation wichtig:</strong> In der Praxis werden die Basis-Modelle mit 
+                            K-Fold CV trainiert, um Overfitting zu vermeiden.
+                        </span>
+                    </div>
+                    <div class="key-point">
+                        <span class="key-point-icon">✅</span>
+                        <span class="key-point-text">
+                            <strong>Flexibel kombinierbar:</strong> Beliebige Algorithmen als Basis-Modelle 
+                            und für das Meta-Modell verwendbar.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        const totalSteps = 6;
+        
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const stepDots = document.querySelectorAll('.step-dot');
+        
+        function updateUI() {
+            // Update stages
+            document.querySelectorAll('.stage').forEach((stage, index) => {
+                stage.classList.toggle('active', index === currentStep);
+            });
+            
+            // Update step dots
+            stepDots.forEach((dot, index) => {
+                dot.classList.remove('active', 'completed');
+                if (index === currentStep) {
+                    dot.classList.add('active');
+                } else if (index < currentStep) {
+                    dot.classList.add('completed');
+                }
+            });
+            
+            // Update buttons
+            prevBtn.disabled = currentStep === 0;
+            nextBtn.textContent = currentStep === totalSteps - 1 ? '✓ Fertig' : 'Weiter →';
+            
+            // Trigger stage-specific animations
+            triggerStageAnimations();
+        }
+        
+        function triggerStageAnimations() {
+            // Stage 0: Info cards
+            if (currentStep === 0) {
+                setTimeout(() => {
+                    document.getElementById('info1').classList.add('visible');
+                }, 100);
+                setTimeout(() => {
+                    document.getElementById('info2').classList.add('visible');
+                }, 200);
+                setTimeout(() => {
+                    document.getElementById('info3').classList.add('visible');
+                }, 300);
+            }
+            
+            // Stage 2: Model cards appear
+            if (currentStep === 2) {
+                const models = document.querySelectorAll('#stage2 .model-card');
+                models.forEach((card, i) => {
+                    setTimeout(() => {
+                        card.classList.add('visible');
+                    }, i * 200);
+                });
+                
+                // Show loading, then predictions
+                setTimeout(() => {
+                    models.forEach(card => card.classList.add('processing'));
+                }, 800);
+                
+                setTimeout(() => {
+                    document.querySelectorAll('#stage2 .model-prediction').forEach(p => {
+                        p.classList.add('visible');
+                    });
+                }, 1000);
+                
+                setTimeout(() => {
+                    models.forEach(card => {
+                        card.classList.remove('processing');
+                        card.classList.add('done');
+                    });
+                    document.getElementById('pred1').innerHTML = 'Pred: 0.72';
+                    document.getElementById('pred2').innerHTML = 'Pred: 0.68';
+                    document.getElementById('pred3').innerHTML = 'Pred: 0.81';
+                }, 2500);
+            }
+            
+            // Stage 3: Chips appear
+            if (currentStep === 3) {
+                setTimeout(() => document.getElementById('chip1').classList.add('visible'), 300);
+                setTimeout(() => document.getElementById('chip2').classList.add('visible'), 500);
+                setTimeout(() => document.getElementById('chip3').classList.add('visible'), 700);
+            }
+            
+            // Stage 4: Meta model
+            if (currentStep === 4) {
+                setTimeout(() => {
+                    document.getElementById('metaModel').classList.add('visible');
+                }, 300);
+                
+                setTimeout(() => {
+                    document.getElementById('finalPred').classList.add('visible');
+                }, 800);
+                
+                setTimeout(() => {
+                    document.getElementById('finalPred').innerHTML = '✓ Finale Vorhersage: <strong>0.76</strong>';
+                }, 2000);
+            }
+        }
+        
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < totalSteps - 1) {
+                currentStep++;
+                updateUI();
+            }
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 0) {
+                currentStep--;
+                updateUI();
+            }
+        });
+        
+        resetBtn.addEventListener('click', () => {
+            currentStep = 0;
+            
+            // Reset all animations
+            document.querySelectorAll('.visible').forEach(el => el.classList.remove('visible'));
+            document.querySelectorAll('.processing, .done').forEach(el => {
+                el.classList.remove('processing', 'done');
+            });
+            
+            // Reset prediction texts
+            document.getElementById('pred1').innerHTML = '<div class="loading-dots"><span></span><span></span><span></span></div>';
+            document.getElementById('pred2').innerHTML = '<div class="loading-dots"><span></span><span></span><span></span></div>';
+            document.getElementById('pred3').innerHTML = '<div class="loading-dots"><span></span><span></span><span></span></div>';
+            document.getElementById('finalPred').innerHTML = '<div class="loading-dots"><span></span><span></span><span></span></div>';
+            
+            updateUI();
+        });
+        
+        // Initialize
+        updateUI();
+    </script>
+</body>
+</html>

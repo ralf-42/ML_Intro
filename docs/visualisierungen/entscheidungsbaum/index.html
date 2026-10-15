@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titanic – Entscheidungsbaum (Trainingsdaten)</title>
+    <style>
+        :root {
+            --bg:       #f4f6f9;
+            --bg2:      #ffffff;
+            --bg3:      #eef1f5;
+            --border:   #cdd5df;
+            --border2:  #a0aec0;
+            --blue:     #1a5fa8;
+            --blue-lt:  #c8ddf5;
+            --surv:     #145c36;
+            --surv-bg:  #b6dfc9;
+            --surv-bd:  #5aaa82;
+            --dead:     #9b1212;
+            --dead-bg:  #f5c0c0;
+            --dead-bd:  #d96060;
+            --text:     #1a2332;
+            --text2:    #4a5568;
+            --muted:    #718096;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .container { max-width:1340px; margin:0 auto; padding:2rem 1.8rem; }
+
+        /* HEADER */
+        header {
+            margin-bottom:2rem;
+            padding-bottom:1.4rem;
+            border-bottom:2px solid var(--border);
+        }
+        .hdr { display:flex; align-items:flex-start; justify-content:space-between; gap:2rem; flex-wrap:wrap; }
+        h1 { font-size:clamp(1.6rem,4vw,2.4rem); font-weight:700; color:var(--blue); }
+        .sub { font-size:.76rem; color:var(--muted); margin-top:.35rem; }
+        .hstats { display:flex; gap:1.8rem; align-items:center; flex-wrap:wrap; }
+        .stat { text-align:center; }
+        .sv { font-size:1.55rem; font-weight:700; line-height:1; }
+        .sv.s { color:var(--surv); }
+        .sv.d { color:var(--dead); }
+        .sv.n { color:var(--blue); }
+        .sl { font-size:.67rem; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin-top:.2rem; }
+
+        /* BADGE */
+        .badge {
+            display:inline-block; background:var(--blue-lt); color:var(--blue);
+            border:1px solid #b3cef0; border-radius:3px;
+            font-size:.72rem; font-weight:700; padding:.15rem .55rem;
+            letter-spacing:.04em; vertical-align:middle;
+        }
+
+        /* LAYOUT */
+        .wrap { display:grid; grid-template-columns:1fr; gap:1.4rem; align-items:start; }
+
+        /* TREE CARD */
+        .tcard {
+            background:var(--bg2); border:1px solid var(--border);
+            border-radius:6px; padding:1.3rem;
+            box-shadow:0 1px 6px rgba(0,0,0,.07);
+            overflow-x: auto;
+        }
+        .tcard-hdr {
+            display:flex; justify-content:space-between; align-items:center;
+            margin-bottom:1rem; padding-bottom:.85rem; border-bottom:1px solid var(--border);
+        }
+        .tlbl { font-size:.73rem; color:var(--muted); }
+        .rbtn {
+            background:var(--bg2); border:1px solid var(--border2); color:var(--text2);
+            padding:.28rem .8rem; border-radius:4px;
+            font-family:Arial,Helvetica,sans-serif; font-size:.73rem; cursor:pointer; transition:all .18s;
+        }
+        .rbtn:hover { border-color:var(--blue); color:var(--blue); background:var(--blue-lt); }
+
+        .tsvg { width:100%; min-width:860px; height:340px; }
+
+        /* SIDEBAR: horizontal below tree */
+        .sidebar {
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+            gap:1rem;
+        }
+
+        /* NODE STATES */
+        .node { cursor:default; }
+        .nbg  { transition:filter .22s; }
+        .node.active .nbg { filter:drop-shadow(0 0 7px rgba(26,95,168,.5)); }
+        .node.rs .nbg { filter:drop-shadow(0 0 8px rgba(27,126,74,.55)); animation:pg 2s ease-in-out infinite; }
+        .node.rd .nbg { filter:drop-shadow(0 0 8px rgba(183,28,28,.55)); animation:pg 2s ease-in-out infinite; }
+        @keyframes pg {
+            0%,100%{ filter:drop-shadow(0 0 3px rgba(26,95,168,.15)); }
+            50%    { filter:drop-shadow(0 0 12px rgba(26,95,168,.45)); }
+        }
+        .node.inactive { opacity:.45; }
+        .node.visited  { opacity:1; }
+
+        /* SVG text */
+        .nt { font-family:Arial,Helvetica,sans-serif; font-weight:700; text-anchor:middle; pointer-events:none; }
+        .ns { font-family:Arial,Helvetica,sans-serif; font-weight:400; text-anchor:middle; pointer-events:none; }
+
+        /* EDGES */
+        .edge { fill:none; stroke:#7a9ab8; stroke-width:1.8; opacity:.25; transition:all .35s; }
+        .edge.active { stroke-width:3.5; opacity:1; }
+        .edge.es { stroke:var(--surv); }
+        .edge.ed { stroke:var(--dead); }
+        .edge.en { stroke:var(--blue); }
+        .elbl { font-family:Arial,Helvetica,sans-serif; font-size:9.5px; font-weight:700; text-anchor:middle; }
+        .elbl.yes { fill:var(--surv); }
+        .elbl.no  { fill:var(--dead); }
+
+        /* SIDEBAR panels */
+        .panel {
+            background:var(--bg2); border:1px solid var(--border);
+            border-radius:6px; padding:1.1rem;
+            box-shadow:0 1px 4px rgba(0,0,0,.05);
+        }
+        .ptitle {
+            font-size:.7rem; font-weight:700; text-transform:uppercase;
+            letter-spacing:.06em; color:var(--muted);
+            margin-bottom:.8rem; padding-bottom:.6rem; border-bottom:1px solid var(--border);
+        }
+
+        /* DECISION WIDGET */
+        .dbox {
+            background:var(--blue-lt); border:1px solid #b3cef0;
+            border-left:3px solid var(--blue); border-radius:4px; padding:.9rem;
+        }
+        .dq { font-size:.88rem; font-weight:700; color:var(--text); margin-bottom:.2rem; line-height:1.4; }
+        .dh { font-size:.7rem; color:var(--muted); margin-bottom:.75rem; }
+        .dbts { display:flex; gap:.5rem; }
+        .dbtn {
+            flex:1; padding:.55rem .4rem; border:none; border-radius:4px;
+            font-family:Arial,Helvetica,sans-serif; font-size:.78rem; font-weight:700;
+            cursor:pointer; transition:all .18s;
+        }
+        .dbtn.yes { background:var(--surv); color:#fff; }
+        .dbtn.no  { background:var(--dead); color:#fff; }
+        .dbtn:hover { opacity:.85; transform:translateY(-1px); }
+        .dbtn:disabled { opacity:.3; cursor:not-allowed; transform:none; }
+
+        /* RESULT */
+        .rbox { display:none; text-align:center; padding:1.1rem .9rem; border-radius:4px; }
+        .rbox.rs { background:var(--surv-bg); border:1px solid var(--surv-bd); }
+        .rbox.rd { background:var(--dead-bg); border:1px solid var(--dead-bd); }
+        .remoji  { font-size:2rem; display:block; margin-bottom:.3rem; }
+        .rverdict { font-size:1.15rem; font-weight:700; margin-bottom:.2rem; }
+        .rverdict.rs { color:var(--surv); }
+        .rverdict.rd { color:var(--dead); }
+        .rprob  { font-size:.72rem; color:var(--muted); margin-bottom:.65rem; }
+        .rplbl  { font-size:.65rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin-bottom:.25rem; }
+        .rptxt  { font-size:.69rem; color:var(--text2); line-height:1.55; }
+
+        /* FEATURE IMPORTANCE */
+        .fi { display:flex; align-items:center; gap:.5rem; padding:.26rem 0; border-bottom:1px solid var(--border); }
+        .fi:last-child { border-bottom:none; }
+        .fin { font-size:.78rem; color:var(--text); width:52px; flex-shrink:0; }
+        .fibw { flex:1; background:var(--bg3); height:7px; border-radius:2px; }
+        .fib  { height:7px; border-radius:2px; background:var(--blue); }
+        .fiv  { font-size:.71rem; color:var(--muted); width:36px; text-align:right; }
+
+        /* LEAF OVERVIEW */
+        .lo { display:flex; justify-content:space-between; align-items:center; padding:.25rem 0; border-bottom:1px solid var(--border); font-size:.78rem; }
+        .lo:last-child { border-bottom:none; }
+        .lo-lbl { color:var(--text2); }
+        .lo-val { font-weight:700; }
+        .lo-val.s { color:var(--surv); }
+        .lo-val.d { color:var(--dead); }
+
+        /* INFO GRID */
+        .igrid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1rem; margin-top:1.5rem; }
+        .ic {
+            background:var(--bg2); border:1px solid var(--border);
+            border-radius:6px; padding:1.15rem;
+            box-shadow:0 1px 4px rgba(0,0,0,.05);
+        }
+        .ic h3 { font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--blue); margin-bottom:.55rem; }
+        .ic p  { font-size:.84rem; color:var(--text2); line-height:1.65; }
+        .ic .hl { color:var(--blue); font-weight:700; }
+        .ic code { font-size:.78rem; background:var(--bg3); padding:.1rem .3rem; border-radius:3px; color:#555; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<header>
+    <div class="hdr">
+        <div class="title-block">
+            <h1>RMS Titanic &nbsp;<span class="badge">TRAININGSDATEN</span></h1>
+            <div class="sub">sklearn DecisionTreeClassifier(max_depth=3, random_state=42) · stratify=target · train_size=80% · Train-Acc: 81.1% · Test-Acc: 75.6%</div>
+        </div>
+        <div class="hstats">
+            <div class="stat"><div class="sv n">1.045</div><div class="sl">Trainings-n</div></div>
+            <div class="stat"><div class="sv s">272</div><div class="sl">Überlebt</div></div>
+            <div class="stat"><div class="sv d">773</div><div class="sl">Verstorben</div></div>
+            <div class="stat"><div class="sv n">26.0%</div><div class="sl">Überlebensrate</div></div>
+        </div>
+    </div>
+</header>
+
+<div class="wrap">
+
+<!-- TREE -->
+<div class="tcard">
+    <div class="tcard-hdr">
+        <div class="tlbl">DecisionTreeClassifier(max_depth=3, random_state=42) · stratify · n_train=1.045 · 6 Entscheidungsknoten · 8 Blätter</div>
+        <button class="rbtn" onclick="resetTree()">↺ Zurücksetzen</button>
+    </div>
+
+    <!--
+    TREE STRUCTURE:
+    sex ≤ 0.5 (weiblich)
+      pclass ≤ 2.5 (Kl.1/2)
+        age ≤ 42.5  → SURV  [39, 102]  72,3%
+        age >  42.5 → DEAD  [26, 25]   49,0%
+      pclass >  2.5 (Kl.3)
+        age ≤ 36.5  → DEAD  [99, 56]   36,1%
+        age >  36.5 → DEAD  [14, 1]     6,7%
+    sex >  0.5 (männlich)
+      age ≤ 4.5
+        sibsp ≤ 3.0 → SURV  [3, 14]    82,4%
+        sibsp >  3.0→ DEAD  [4, 1]     20,0%
+      age >  4.5
+        pclass ≤ 1.5 (Kl.1) → DEAD  [105, 33]  23,9%
+        pclass >  1.5 (Kl.2/3)→ DEAD [483, 40]   7,6%
+    -->
+
+    <!--
+    Layout (viewBox 0 0 1100 320):
+    Node width=190, leaf width=118, gap=20
+    8 leaves × 118 + 7 gaps × 20 = 944 + 140 = 1084 → fits in 1100
+    Leaf cx positions (left edge): 8, 146, 284, 422, 560, 698, 836, 974 (+margin 8)
+    Leaf centers: 67, 205, 343, 481, 619, 757, 895, 1033
+
+    Depth-2 nodes centered over their two leaves:
+      fk12:  (67+205)/2=136  → x=136-95=41
+      fk3:   (343+481)/2=412 → x=412-95=317
+      myng:  (619+757)/2=688 → x=688-95=593
+      mold:  (895+1033)/2=964→ x=964-95=869
+
+    Depth-1 nodes centered over their two depth-2:
+      female: (136+412)/2=274 → x=274-95=179
+      male:   (688+964)/2=826 → x=826-95=731
+
+    Root centered: (274+826)/2=550 → x=550-110=440
+    -->
+
+    <svg class="tsvg" viewBox="0 0 1100 320">
+        <defs>
+            <linearGradient id="qG" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#4a90d9"/>
+                <stop offset="100%" style="stop-color:#2e74c0"/>
+            </linearGradient>
+            <linearGradient id="aG" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#1a5fa8"/>
+                <stop offset="100%" style="stop-color:#0f3d78"/>
+            </linearGradient>
+            <linearGradient id="sG" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#2e9e60"/>
+                <stop offset="100%" style="stop-color:#1e7a45"/>
+            </linearGradient>
+            <linearGradient id="dG" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#d94040"/>
+                <stop offset="100%" style="stop-color:#b52020"/>
+            </linearGradient>
+        </defs>
+
+        <!-- EDGES depth 0→1 -->
+        <line id="e-rf"    class="edge" x1="550" y1="62" x2="274" y2="100"/>
+        <line id="e-rm"    class="edge" x1="550" y1="62" x2="826" y2="100"/>
+
+        <!-- EDGES depth 1→2 female -->
+        <line id="e-fk12"  class="edge" x1="274" y1="138" x2="136" y2="175"/>
+        <line id="e-fk3"   class="edge" x1="274" y1="138" x2="412" y2="175"/>
+
+        <!-- EDGES depth 1→2 male -->
+        <line id="e-myng"  class="edge" x1="826" y1="138" x2="688" y2="175"/>
+        <line id="e-mold"  class="edge" x1="826" y1="138" x2="964" y2="175"/>
+
+        <!-- EDGES depth 2→3 fk12 -->
+        <line id="e-fk12s" class="edge" x1="136" y1="213" x2="67"  y2="248"/>
+        <line id="e-fk12d" class="edge" x1="136" y1="213" x2="205" y2="248"/>
+
+        <!-- EDGES depth 2→3 fk3 -->
+        <line id="e-fk3y"  class="edge" x1="412" y1="213" x2="343" y2="248"/>
+        <line id="e-fk3o"  class="edge" x1="412" y1="213" x2="481" y2="248"/>
+
+        <!-- EDGES depth 2→3 myng sibsp -->
+        <line id="e-sibs"  class="edge" x1="688" y1="213" x2="619" y2="248"/>
+        <line id="e-sibd"  class="edge" x1="688" y1="213" x2="757" y2="248"/>
+
+        <!-- EDGES depth 2→3 mold fare -->
+        <line id="e-mk1"   class="edge" x1="964" y1="213" x2="895" y2="248"/>
+        <line id="e-mk23"  class="edge" x1="964" y1="213" x2="1033" y2="248"/>
+
+        <!-- EDGE LABELS depth 0→1 -->
+        <text x="380"  y="78"  class="elbl yes">≤ 0.5 (weiblich)</text>
+        <text x="720"  y="78"  class="elbl no">&gt; 0.5 (männlich)</text>
+
+        <!-- EDGE LABELS depth 1→2 -->
+        <text x="180"  y="158" class="elbl yes">Kl. 1/2</text>
+        <text x="368"  y="158" class="elbl no">Kl. 3</text>
+        <text x="730"  y="158" class="elbl yes">≤ 4,5 J.</text>
+        <text x="922"  y="158" class="elbl no">&gt; 4,5 J.</text>
+
+        <!-- EDGE LABELS depth 2→3 -->
+        <text x="82"   y="234" class="elbl yes">≤ 42,5 J.</text>
+        <text x="196"  y="234" class="elbl no">&gt; 42,5 J.</text>
+        <text x="355"  y="234" class="elbl yes">≤ 20,41 £</text>
+        <text x="494"  y="234" class="elbl no">&gt; 20,41 £</text>
+        <text x="630"  y="234" class="elbl yes">sibsp ≤ 3</text>
+        <text x="769"  y="234" class="elbl no">sibsp &gt; 3</text>
+        <text x="906"  y="234" class="elbl yes">≤ 26,27 £</text>
+        <text x="1046" y="234" class="elbl no">&gt; 26,27 £</text>
+
+        <!-- ===== NODES ===== -->
+
+        <!-- ROOT: sex  cx=550 -->
+        <g id="node-root" class="node active">
+            <rect class="nbg" x="440" y="8" width="220" height="56" rx="4" fill="url(#aG)" stroke="#1a5fa8" stroke-width="1.5"/>
+            <text class="nt" x="550" y="30"  font-size="13" fill="#ffffff">Geschlecht?</text>
+            <text class="ns" x="550" y="44"  font-size="9.5" fill="rgba(255,255,255,.8)">sex ≤ 0.5</text>
+            <text class="ns" x="550" y="57"  font-size="9"   fill="rgba(255,255,255,.65)">weiblich / männlich</text>
+        </g>
+
+        <!-- L2: female cx=274 -->
+        <g id="node-female" class="node inactive">
+            <rect class="nbg" x="179" y="100" width="190" height="50" rx="4" fill="url(#qG)" stroke="#2060a0" stroke-width="1.5"/>
+            <text class="nt" x="274" y="121" font-size="12"  fill="#ffffff">Passagierklasse?</text>
+            <text class="ns" x="274" y="135" font-size="9.5" fill="rgba(255,255,255,.8)">pclass ≤ 2.5</text>
+            <text class="ns" x="274" y="147" font-size="9"   fill="rgba(255,255,255,.65)">♀ · Kl.1/2 vs. Kl.3</text>
+        </g>
+
+        <!-- L2: male cx=826 -->
+        <g id="node-male" class="node inactive">
+            <rect class="nbg" x="731" y="100" width="190" height="50" rx="4" fill="url(#qG)" stroke="#2060a0" stroke-width="1.5"/>
+            <text class="nt" x="826" y="121" font-size="12"  fill="#ffffff">Alter ≤ 4,5 Jahre?</text>
+            <text class="ns" x="826" y="135" font-size="9.5" fill="rgba(255,255,255,.8)">age ≤ 4.5</text>
+            <text class="ns" x="826" y="147" font-size="9"   fill="rgba(255,255,255,.65)">♂ · Kleinkind vs. älter</text>
+        </g>
+
+        <!-- L3: fk12 cx=136 -->
+        <g id="node-fk12" class="node inactive">
+            <rect class="nbg" x="41" y="175" width="190" height="50" rx="4" fill="url(#qG)" stroke="#2060a0" stroke-width="1.5"/>
+            <text class="nt" x="136" y="196" font-size="12"  fill="#ffffff">Alter ≤ 42,5 Jahre?</text>
+            <text class="ns" x="136" y="210" font-size="9.5" fill="rgba(255,255,255,.8)">age ≤ 42.5</text>
+            <text class="ns" x="136" y="222" font-size="9"   fill="rgba(255,255,255,.65)">♀ · Kl.1/2</text>
+        </g>
+
+        <!-- L3: fk3 cx=412 -->
+        <g id="node-fk3" class="node inactive">
+            <rect class="nbg" x="317" y="175" width="190" height="50" rx="4" fill="url(#qG)" stroke="#2060a0" stroke-width="1.5"/>
+            <text class="nt" x="412" y="196" font-size="12"  fill="#ffffff">Fahrpreis ≤ 20,41 £?</text>
+            <text class="ns" x="412" y="210" font-size="9.5" fill="rgba(255,255,255,.8)">fare ≤ 20.41</text>
+            <text class="ns" x="412" y="222" font-size="9"   fill="rgba(255,255,255,.65)">♀ · Kl.3</text>
+        </g>
+
+        <!-- L3: myng cx=688 -->
+        <g id="node-myng" class="node inactive">
+            <rect class="nbg" x="593" y="175" width="190" height="50" rx="4" fill="url(#qG)" stroke="#2060a0" stroke-width="1.5"/>
+            <text class="nt" x="688" y="196" font-size="12"  fill="#ffffff">Geschwister ≤ 3?</text>
+            <text class="ns" x="688" y="210" font-size="9.5" fill="rgba(255,255,255,.8)">sibsp ≤ 3.0</text>
+            <text class="ns" x="688" y="222" font-size="9"   fill="rgba(255,255,255,.65)">♂ · ≤ 4,5 J.</text>
+        </g>
+
+        <!-- L3: mold cx=964 -->
+        <g id="node-mold" class="node inactive">
+            <rect class="nbg" x="869" y="175" width="190" height="50" rx="4" fill="url(#qG)" stroke="#2060a0" stroke-width="1.5"/>
+            <text class="nt" x="964" y="196" font-size="12"  fill="#ffffff">Fahrpreis ≤ 26,27 £?</text>
+            <text class="ns" x="964" y="210" font-size="9.5" fill="rgba(255,255,255,.8)">fare ≤ 26.269</text>
+            <text class="ns" x="964" y="222" font-size="9"   fill="rgba(255,255,255,.65)">♂ · &gt; 4,5 J.</text>
+        </g>
+
+        <!-- LEAVES (depth 3)  — leaf width=118, centers: 67,205,343,481,619,757,895,1033 -->
+
+        <!-- ♀ Kl.1/2 age≤42.5 → SURV  cx=67 -->
+        <g id="node-fk12s" class="node inactive">
+            <rect class="nbg" x="8"   y="248" width="118" height="62" rx="4" fill="url(#sG)" stroke="#1a6b40" stroke-width="1.5"/>
+            <text class="nt" x="67"  y="267" font-size="11" fill="#ffffff">✓ Überlebt</text>
+            <text class="ns" x="67"  y="280" font-size="9"  fill="rgba(255,255,255,.85)">Surv-Rate 72,3%</text>
+            <text class="ns" x="67"  y="292" font-size="9"  fill="rgba(255,255,255,.7)">[39 / 102]</text>
+            <text class="ns" x="67"  y="304" font-size="9"  fill="rgba(255,255,255,.7)">♀ Kl.1/2 ≤42,5J.</text>
+        </g>
+
+        <!-- ♀ Kl.1/2 age>42.5 → DEAD  cx=205 -->
+        <g id="node-fk12d" class="node inactive">
+            <rect class="nbg" x="146" y="248" width="118" height="62" rx="4" fill="url(#dG)" stroke="#902020" stroke-width="1.5"/>
+            <text class="nt" x="205" y="267" font-size="11" fill="#ffffff">✗ Verstorben</text>
+            <text class="ns" x="205" y="280" font-size="9"  fill="rgba(255,255,255,.85)">Surv-Rate 49,0%</text>
+            <text class="ns" x="205" y="292" font-size="9"  fill="rgba(255,255,255,.7)">[26 / 25]</text>
+            <text class="ns" x="205" y="304" font-size="9"  fill="rgba(255,255,255,.7)">♀ Kl.1/2 &gt;42,5J.</text>
+        </g>
+
+        <!-- ♀ Kl.3 fare≤20.41 → DEAD  cx=343 -->
+        <g id="node-fk3y" class="node inactive">
+            <rect class="nbg" x="284" y="248" width="118" height="62" rx="4" fill="url(#dG)" stroke="#902020" stroke-width="1.5"/>
+            <text class="nt" x="343" y="267" font-size="11" fill="#ffffff">✗ Verstorben</text>
+            <text class="ns" x="343" y="280" font-size="9"  fill="rgba(255,255,255,.85)">Surv-Rate 38,7%</text>
+            <text class="ns" x="343" y="292" font-size="9"  fill="rgba(255,255,255,.7)">[86 / 53]</text>
+            <text class="ns" x="343" y="304" font-size="9"  fill="rgba(255,255,255,.7)">♀ Kl.3 ≤20,41£</text>
+        </g>
+
+        <!-- ♀ Kl.3 fare>20.41 → DEAD  cx=481 -->
+        <g id="node-fk3o" class="node inactive">
+            <rect class="nbg" x="422" y="248" width="118" height="62" rx="4" fill="url(#dG)" stroke="#902020" stroke-width="1.5"/>
+            <text class="nt" x="481" y="267" font-size="11" fill="#ffffff">✗ Verstorben</text>
+            <text class="ns" x="481" y="280" font-size="9"  fill="rgba(255,255,255,.85)">Surv-Rate 12,1%</text>
+            <text class="ns" x="481" y="292" font-size="9"  fill="rgba(255,255,255,.7)">[29 / 4]</text>
+            <text class="ns" x="481" y="304" font-size="9"  fill="rgba(255,255,255,.7)">♀ Kl.3 &gt;20,41£</text>
+        </g>
+
+        <!-- ♂ jung sibsp≤3 → SURV  cx=619 -->
+        <g id="node-sibs" class="node inactive">
+            <rect class="nbg" x="560" y="248" width="118" height="62" rx="4" fill="url(#sG)" stroke="#1a6b40" stroke-width="1.5"/>
+            <text class="nt" x="619" y="267" font-size="11" fill="#ffffff">✓ Überlebt</text>
+            <text class="ns" x="619" y="280" font-size="9"  fill="rgba(255,255,255,.85)">Surv-Rate 82,4%</text>
+            <text class="ns" x="619" y="292" font-size="9"  fill="rgba(255,255,255,.7)">[3 / 14]</text>
+            <text class="ns" x="619" y="304" font-size="9"  fill="rgba(255,255,255,.7)">♂ ≤4,5J. sibsp≤3</text>
+        </g>
+
+        <!-- ♂ jung sibsp>3 → DEAD  cx=757 -->
+        <g id="node-sibd" class="node inactive">
+            <rect class="nbg" x="698" y="248" width="118" height="62" rx="4" fill="url(#dG)" stroke="#902020" stroke-width="1.5"/>
+            <text class="nt" x="757" y="267" font-size="11" fill="#ffffff">✗ Verstorben</text>
+            <text class="ns" x="757" y="280" font-size="9"  fill="rgba(255,255,255,.85)">Surv-Rate 20,0%</text>
+            <text class="ns" x="757" y="292" font-size="9"  fill="rgba(255,255,255,.7)">[4 / 1]</text>
+            <text class="ns" x="757" y="304" font-size="9"  fill="rgba(255,255,255,.7)">♂ ≤4,5J. sibsp&gt;3</text>
+        </g>
+
+        <!-- ♂ alt fare≤26.27 → DEAD  cx=895 -->
+        <g id="node-mk1" class="node inactive">
+            <rect class="nbg" x="836" y="248" width="118" height="62" rx="4" fill="url(#dG)" stroke="#902020" stroke-width="1.5"/>
+            <text class="nt" x="895" y="267" font-size="11" fill="#ffffff">✗ Verstorben</text>
+            <text class="ns" x="895" y="280" font-size="9"  fill="rgba(255,255,255,.85)">Surv-Rate 7,0%</text>
+            <text class="ns" x="895" y="292" font-size="9"  fill="rgba(255,255,255,.7)">[454 / 34]</text>
+            <text class="ns" x="895" y="304" font-size="9"  fill="rgba(255,255,255,.7)">♂ &gt;4,5J. ≤26,27£</text>
+        </g>
+
+        <!-- ♂ alt fare>26.27 → DEAD  cx=1033 -->
+        <g id="node-mk23" class="node inactive">
+            <rect class="nbg" x="974" y="248" width="118" height="62" rx="4" fill="url(#dG)" stroke="#902020" stroke-width="1.5"/>
+            <text class="nt" x="1033" y="267" font-size="11" fill="#ffffff">✗ Verstorben</text>
+            <text class="ns" x="1033" y="280" font-size="9"  fill="rgba(255,255,255,.85)">Surv-Rate 22,5%</text>
+            <text class="ns" x="1033" y="292" font-size="9"  fill="rgba(255,255,255,.7)">[134 / 39]</text>
+            <text class="ns" x="1033" y="304" font-size="9"  fill="rgba(255,255,255,.7)">♂ &gt;4,5J. &gt;26,27£</text>
+        </g>
+
+    </svg>
+</div><!-- tcard -->
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+    <div class="panel">
+        <div class="ptitle">Aktueller Entscheidungsknoten</div>
+        <div id="decision-widget">
+            <div class="dbox">
+                <div class="dq" id="dq">Welches Geschlecht hat der Passagier?</div>
+                <div class="dh" id="dh">sex ≤ 0.5 · Feature Importance: 60.6% · n=1.045</div>
+                <div class="dbts">
+                    <button class="dbtn yes" id="btn-yes" onclick="answer(true)">Weiblich</button>
+                    <button class="dbtn no"  id="btn-no"  onclick="answer(false)">Männlich</button>
+                </div>
+            </div>
+        </div>
+        <div id="result-widget" class="rbox">
+            <span class="remoji" id="remoji">🎯</span>
+            <div class="rverdict" id="rverdict">—</div>
+            <div class="rprob"   id="rprob">—</div>
+            <div class="rplbl">Entscheidungspfad</div>
+            <div class="rptxt"  id="rpath">—</div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="ptitle">Feature Importance</div>
+        <div class="fi"><span class="fin">sex</span>   <div class="fibw"><div class="fib" style="width:100%"></div></div><span class="fiv">0.576</span></div>
+        <div class="fi"><span class="fin">pclass</span><div class="fibw"><div class="fib" style="width:28%"></div></div><span class="fiv">0.162</span></div>
+        <div class="fi"><span class="fin">age</span>   <div class="fibw"><div class="fib" style="width:26%"></div></div><span class="fiv">0.152</span></div>
+        <div class="fi"><span class="fin">fare</span>  <div class="fibw"><div class="fib" style="width:15%"></div></div><span class="fiv">0.084</span></div>
+        <div class="fi"><span class="fin">sibsp</span> <div class="fibw"><div class="fib" style="width:4%"></div></div> <span class="fiv">0.025</span></div>
+        <div class="fi"><span class="fin">parch</span> <div class="fibw"><div class="fib" style="width:1%"></div></div> <span class="fiv">0.000</span></div>
+    </div>
+
+    <div class="panel">
+        <div class="ptitle">Blattknoten — weights [Not Surv / Surv]</div>
+        <div class="lo"><span class="lo-lbl">✓ ♀ Kl.1/2 ≤ 42,5 J.</span><span class="lo-val s">72,3%</span></div>
+        <div class="lo"><span class="lo-lbl">✗ ♀ Kl.1/2 &gt; 42,5 J.</span><span class="lo-val d">49,0%</span></div>
+        <div class="lo"><span class="lo-lbl">✗ ♀ Kl.3 ≤ 20,41 £</span><span class="lo-val d">38,7%</span></div>
+        <div class="lo"><span class="lo-lbl">✗ ♀ Kl.3 &gt; 20,41 £</span><span class="lo-val d">12,1%</span></div>
+        <div class="lo"><span class="lo-lbl">✓ ♂ ≤ 4,5 J. sibsp ≤ 3</span><span class="lo-val s">82,4%</span></div>
+        <div class="lo"><span class="lo-lbl">✗ ♂ ≤ 4,5 J. sibsp &gt; 3</span><span class="lo-val d">20,0%</span></div>
+        <div class="lo"><span class="lo-lbl">✗ ♂ &gt; 4,5 J. ≤ 26,27 £</span><span class="lo-val d">7,0%</span></div>
+        <div class="lo" style="border-bottom:none"><span class="lo-lbl">✗ ♂ &gt; 4,5 J. &gt; 26,27 £</span><span class="lo-val d">22,5%</span></div>
+    </div>
+
+</div><!-- sidebar -->
+</div><!-- wrap -->
+
+<!-- INFO CARDS -->
+<div class="igrid">
+    <div class="ic">
+        <h3>stratify=target: Klassen-Balance sichergestellt</h3>
+        <p>Durch <span class="hl">stratify=target</span> ist die Überlebensrate in Train (26,0%) und Test (26,0%) identisch. Ohne stratify kann der Zufall eine ungleiche Verteilung erzeugen, die die Evaluierung verzerrt.</p>
+    </div>
+    <div class="ic">
+        <h3>Ohne min_samples_leaf: feinere Splits</h3>
+        <p>Der Wegfall von <code>min_samples_leaf=20</code> erlaubt kleinere Blätter. Der sibsp-Knoten (n=17 bzw. n=5) wäre mit min_samples_leaf=20 nicht entstanden — er zeigt aber ein <span class="hl">starkes Signal</span> (82% vs. 20%).</p>
+    </div>
+    <div class="ic">
+        <h3>♀ Kl.3: fare statt age als Split</h3>
+        <p>Im neuen Modell trennt bei Frauen der 3. Klasse der <span class="hl">Fahrpreis (≤ 20,41 £)</span>. Teurere Tickets (höhere Kabinenkategorie innerhalb Kl.3) korrelieren paradoxerweise mit schlechteren Überlebenschancen (12,1% vs. 38,7%).</p>
+    </div>
+    <div class="ic">
+        <h3>Train 81,1% vs. Test 75,6%</h3>
+        <p>Die Differenz von <span class="hl">5,5 Prozentpunkten</span> deutet auf leichtes Overfitting hin. Ohne min_samples_leaf passt sich der Baum stärker an Trainingsdaten an. Ein Random Forest auf denselben Daten reduziert diese Lücke typischerweise auf ~2–3 pp.</p>
+    </div>
+</div>
+
+</div><!-- container -->
+
+<script>
+// Tree structure — provided tree with weights
+const tree = {
+    root: {
+        q: "Welches Geschlecht hat der Passagier?",
+        h: "sex ≤ 0.5  →  weiblich | männlich",
+        yL: "Weiblich (≤ 0.5)", nL: "Männlich (> 0.5)",
+        yes: "female", no: "male",
+        eY: "e-rf", eN: "e-rm"
+    },
+    female: {
+        q: "Welche Passagierklasse?",
+        h: "pclass ≤ 2.5  →  Kl.1/2 | Kl.3",
+        yL: "1. oder 2. Klasse", nL: "3. Klasse",
+        yes: "fk12", no: "fk3",
+        eY: "e-fk12", eN: "e-fk3"
+    },
+    male: {
+        q: "Ist der Passagier ≤ 4,5 Jahre alt?",
+        h: "age ≤ 4.5  →  Kleinkind | älter",
+        yL: "Ja, ≤ 4,5 Jahre", nL: "Nein, > 4,5 Jahre",
+        yes: "myng", no: "mold",
+        eY: "e-myng", eN: "e-mold"
+    },
+    fk12: {
+        q: "Ist die Passagierin ≤ 42,5 Jahre alt?",
+        h: "age ≤ 42.5  →  jünger | älter · ♀ Kl.1/2",
+        yL: "Ja, ≤ 42,5 Jahre", nL: "Nein, > 42,5 Jahre",
+        yes: "fk12s", no: "fk12d",
+        eY: "e-fk12s", eN: "e-fk12d"
+    },
+    fk3: {
+        q: "Betrug der Fahrpreis ≤ 20,41 £?",
+        h: "fare ≤ 20.41  →  günstig | teuer · ♀ Kl.3",
+        yL: "Ja, ≤ 20,41 £", nL: "Nein, > 20,41 £",
+        yes: "fk3y", no: "fk3o",
+        eY: "e-fk3y", eN: "e-fk3o"
+    },
+    myng: {
+        q: "Anzahl Geschwister/Partner ≤ 3?",
+        h: "sibsp ≤ 3.0  →  kleine | große Familie · ♂ ≤4,5 J.",
+        yL: "Ja, sibsp ≤ 3", nL: "Nein, sibsp > 3",
+        yes: "sibs", no: "sibd",
+        eY: "e-sibs", eN: "e-sibd"
+    },
+    mold: {
+        q: "Fahrpreis ≤ 26,27 £?",
+        h: "fare ≤ 26.269  →  günstig | teuer · ♂ > 4,5 J.",
+        yL: "Ja, ≤ 26,27 £", nL: "Nein, > 26,27 £",
+        yes: "mk1", no: "mk23",
+        eY: "e-mk1", eN: "e-mk23"
+    },
+    fk12s: {
+        isLeaf: true, survived: true,
+        prob: "Surv-Rate: 72,3%  — weights: [39 / 102]", emoji: "🛟",
+        desc: "♀ · Kl.1/2 · Alter ≤ 42,5 J."
+    },
+    fk12d: {
+        isLeaf: true, survived: false,
+        prob: "Surv-Rate: 49,0%  — weights: [26 / 25]", emoji: "⚓",
+        desc: "♀ · Kl.1/2 · Alter > 42,5 J."
+    },
+    fk3y: {
+        isLeaf: true, survived: false,
+        prob: "Surv-Rate: 38,7%  — weights: [86 / 53]", emoji: "⚓",
+        desc: "♀ · Kl.3 · Fahrpreis ≤ 20,41 £"
+    },
+    fk3o: {
+        isLeaf: true, survived: false,
+        prob: "Surv-Rate: 12,1%  — weights: [29 / 4]", emoji: "⚓",
+        desc: "♀ · Kl.3 · Fahrpreis > 20,41 £"
+    },
+    sibs: {
+        isLeaf: true, survived: true,
+        prob: "Surv-Rate: 82,4%  — weights: [3 / 14]", emoji: "🛟",
+        desc: "♂ · ≤ 4,5 J. · sibsp ≤ 3"
+    },
+    sibd: {
+        isLeaf: true, survived: false,
+        prob: "Surv-Rate: 20,0%  — weights: [4 / 1]", emoji: "⚓",
+        desc: "♂ · ≤ 4,5 J. · sibsp > 3"
+    },
+    mk1: {
+        isLeaf: true, survived: false,
+        prob: "Surv-Rate: 7,0%  — weights: [454 / 34]", emoji: "⚓",
+        desc: "♂ · > 4,5 J. · Fahrpreis ≤ 26,27 £"
+    },
+    mk23: {
+        isLeaf: true, survived: false,
+        prob: "Surv-Rate: 22,5%  — weights: [134 / 39]", emoji: "⚓",
+        desc: "♂ · > 4,5 J. · Fahrpreis > 26,27 £"
+    }
+};
+
+let current = "root", steps = [];
+const g = id => document.getElementById(id);
+
+function updateUI() {
+    const node = tree[current];
+    const dw = g("decision-widget"), rw = g("result-widget");
+
+    if (node.isLeaf) {
+        dw.style.display = "none";
+        rw.style.display = "block";
+        rw.className = "rbox " + (node.survived ? "rs" : "rd");
+        g("remoji").textContent = node.emoji;
+        const v = g("rverdict");
+        v.textContent = node.survived ? "Überlebt" : "Nicht überlebt";
+        v.className = "rverdict " + (node.survived ? "rs" : "rd");
+        g("rprob").textContent = node.prob;
+        g("rpath").textContent = steps.join("\n→ ");
+        const el = g("node-" + current);
+        if (el) { el.classList.remove("inactive"); el.classList.add(node.survived ? "rs" : "rd"); }
+    } else {
+        dw.style.display = "block";
+        rw.style.display = "none";
+        g("dq").textContent = node.q;
+        g("dh").textContent = node.h;
+        g("btn-yes").textContent = node.yL;
+        g("btn-no").textContent  = node.nL;
+        g("btn-yes").disabled = false;
+        g("btn-no").disabled  = false;
+        const el = g("node-" + current);
+        if (el) { el.classList.remove("inactive"); el.classList.add("active"); }
+    }
+}
+
+function answer(isYes) {
+    const node = tree[current];
+    steps.push(isYes ? node.yL : node.nL);
+    const eid = isYes ? node.eY : node.eN;
+    if (eid) {
+        const edge = g(eid);
+        const next = tree[isYes ? node.yes : node.no];
+        edge.classList.add("active", next && next.isLeaf ? (next.survived ? "es" : "ed") : "en");
+    }
+    const el = g("node-" + current);
+    if (el) { el.classList.remove("active"); el.classList.add("visited"); }
+    current = isYes ? node.yes : node.no;
+    setTimeout(updateUI, 280);
+}
+
+function resetTree() {
+    current = "root"; steps = [];
+    document.querySelectorAll(".node").forEach(n => {
+        n.classList.remove("active","visited","rs","rd");
+        if (n.id !== "node-root") n.classList.add("inactive");
+    });
+    g("node-root").classList.add("active");
+    document.querySelectorAll(".edge").forEach(e => e.classList.remove("active","es","ed","en"));
+    g("decision-widget").style.display = "block";
+    g("result-widget").style.display   = "none";
+    updateUI();
+}
+
+updateUI();
+</script>
+</body>
+</html>

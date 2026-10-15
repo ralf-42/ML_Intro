@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korrelation & Kovarianz – ML Einsteigerkurs</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --bg-card: #1a2234;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --accent-orange: #f97316;
+            --accent-green: #10b981;
+            --accent-yellow: #eab308;
+            --accent-red: #ef4444;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: #2d3a4f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 400px;
+            background: radial-gradient(ellipse, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .canvas-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .canvas-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink), var(--accent-orange));
+        }
+
+        .canvas-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .canvas-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .canvas-title span {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-purple);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        button {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent-purple);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #7c3aed;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+            color: var(--text-primary);
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-danger:hover {
+            background: rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-preset {
+            background: rgba(6, 182, 212, 0.2);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        .btn-preset:hover {
+            background: rgba(6, 182, 212, 0.3);
+        }
+
+        .btn-positive {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-green);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-negative {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        #canvas {
+            width: 100%;
+            height: 500px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            cursor: crosshair;
+            display: block;
+        }
+
+        .hint {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 8px;
+            border: 1px dashed var(--border);
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .stats-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .stats-card h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .stat-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        .stat-name {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .correlation-display {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .correlation-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .correlation-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .correlation-interpretation {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+        }
+
+        .correlation-bar {
+            height: 8px;
+            background: linear-gradient(90deg, var(--accent-red), var(--text-muted), var(--accent-green));
+            border-radius: 4px;
+            margin: 1rem 0 0.5rem;
+            position: relative;
+        }
+
+        .correlation-marker {
+            position: absolute;
+            top: -4px;
+            width: 16px;
+            height: 16px;
+            background: white;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            transition: left 0.3s ease;
+        }
+
+        .correlation-scale {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .formula-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .formula-card h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .formula {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            border-left: 3px solid var(--accent-purple);
+        }
+
+        .formula:last-child {
+            margin-bottom: 0;
+        }
+
+        .formula-name {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .formula-content {
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .formula-content .symbol {
+            color: var(--accent-purple);
+        }
+
+        .formula-content .operator {
+            color: var(--accent-pink);
+        }
+
+        .legend-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .legend-card h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .legend-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .legend-line {
+            width: 24px;
+            height: 3px;
+            border-radius: 2px;
+        }
+
+        .toggle-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .toggle-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .toggle-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .toggle {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            transition: all 0.2s ease;
+        }
+
+        .toggle.active {
+            background: var(--accent-purple);
+            border-color: var(--accent-purple);
+        }
+
+        .toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .toggle.active::after {
+            left: 22px;
+        }
+
+        .explanation-section {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .explanation-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .explanation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+
+        .explanation-card.correlation::before { background: var(--accent-purple); }
+        .explanation-card.covariance::before { background: var(--accent-pink); }
+        .explanation-card.regression::before { background: var(--accent-orange); }
+
+        .explanation-card h4 {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .explanation-card.correlation h4 { color: var(--accent-purple); }
+        .explanation-card.covariance h4 { color: var(--accent-pink); }
+        .explanation-card.regression h4 { color: var(--accent-orange); }
+
+        .explanation-card p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .ml-hint {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-top: 0.75rem;
+            font-size: 0.75rem;
+            color: var(--accent-purple);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .ml-hint strong {
+            color: var(--accent-pink);
+        }
+
+        @media (max-width: 1200px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .explanation-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .controls {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔗 Korrelation & Kovarianz</h1>
+            <p class="subtitle">Beziehungen zwischen Variablen verstehen</p>
+        </header>
+
+        <div class="main-grid">
+            <div class="canvas-section">
+                <div class="canvas-header">
+                    <div class="canvas-title">
+                        <span></span>
+                        Scatter-Plot mit Regressionslinie
+                    </div>
+                    <div class="controls">
+                        <button class="btn-positive" onclick="loadPreset('positive')">r ≈ +0.9</button>
+                        <button class="btn-negative" onclick="loadPreset('negative')">r ≈ −0.9</button>
+                        <button class="btn-preset" onclick="loadPreset('none')">r ≈ 0</button>
+                        <button class="btn-preset" onclick="loadPreset('nonlinear')">Nicht-linear</button>
+                        <button class="btn-danger" onclick="clearPoints()">Reset</button>
+                    </div>
+                </div>
+                <canvas id="canvas"></canvas>
+                <p class="hint">💡 Klicke ins Diagramm um Datenpunkte (x, y) hinzuzufügen. Beobachte wie sich Korrelation und Regressionslinie ändern.</p>
+            </div>
+
+            <div class="sidebar">
+                <div class="stats-card">
+                    <h3>📊 Korrelationskoeffizient (Pearson)</h3>
+                    <div class="correlation-display">
+                        <div class="correlation-label">r =</div>
+                        <div class="correlation-value" id="correlation">–</div>
+                        <div class="correlation-bar">
+                            <div class="correlation-marker" id="corrMarker" style="left: 50%;"></div>
+                        </div>
+                        <div class="correlation-scale">
+                            <span>−1</span>
+                            <span>0</span>
+                            <span>+1</span>
+                        </div>
+                        <div class="correlation-interpretation" id="corrInterpretation">
+                            Mind. 2 Punkte benötigt
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <h3>📈 Weitere Kennzahlen</h3>
+                    <div class="stat-row">
+                        <div class="stat-label">
+                            <div class="stat-icon" style="background: rgba(236, 72, 153, 0.2); color: var(--accent-pink);">Cov</div>
+                            <span class="stat-name">Kovarianz</span>
+                        </div>
+                        <span class="stat-value" id="covariance" style="color: var(--accent-pink);">–</span>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-label">
+                            <div class="stat-icon" style="background: rgba(249, 115, 22, 0.2); color: var(--accent-orange);">R²</div>
+                            <span class="stat-name">Bestimmtheitsmaß</span>
+                        </div>
+                        <span class="stat-value" id="rSquared" style="color: var(--accent-orange);">–</span>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-label">
+                            <div class="stat-icon" style="background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan);">m</div>
+                            <span class="stat-name">Steigung</span>
+                        </div>
+                        <span class="stat-value" id="slope" style="color: var(--accent-cyan);">–</span>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-label">
+                            <div class="stat-icon" style="background: rgba(16, 185, 129, 0.2); color: var(--accent-green);">b</div>
+                            <span class="stat-name">Y-Achsenabschnitt</span>
+                        </div>
+                        <span class="stat-value" id="intercept" style="color: var(--accent-green);">–</span>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-label">
+                            <div class="stat-icon" style="background: rgba(59, 130, 246, 0.2); color: var(--accent-blue);">n</div>
+                            <span class="stat-name">Anzahl Punkte</span>
+                        </div>
+                        <span class="stat-value" id="count" style="color: var(--accent-blue);">0</span>
+                    </div>
+                </div>
+
+                <div class="legend-card">
+                    <h3>🎨 Legende</h3>
+                    <div class="legend-items">
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background: var(--accent-purple);"></div>
+                            Datenpunkte (xᵢ, yᵢ)
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-line" style="background: var(--accent-orange);"></div>
+                            Regressionslinie
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-line" style="background: var(--accent-cyan); opacity: 0.5;"></div>
+                            Mittelwert-Linien (x̄, ȳ)
+                        </div>
+                    </div>
+                    <div class="toggle-container">
+                        <div class="toggle-item">
+                            <span class="toggle-label">Regressionslinie</span>
+                            <div class="toggle active" id="toggleRegression"></div>
+                        </div>
+                        <div class="toggle-item">
+                            <span class="toggle-label">Mittelwerte</span>
+                            <div class="toggle active" id="toggleMeans"></div>
+                        </div>
+                        <div class="toggle-item">
+                            <span class="toggle-label">Residuen</span>
+                            <div class="toggle" id="toggleResiduals"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="explanation-section">
+            <div class="explanation-card correlation">
+                <h4>📐 Korrelation (r)</h4>
+                <p>Misst die <strong>Stärke und Richtung</strong> des linearen Zusammenhangs zwischen zwei Variablen. Wertebereich: −1 bis +1. Bei ±1 liegen alle Punkte exakt auf einer Geraden.</p>
+                <div class="ml-hint">
+                    <strong>ML:</strong> Feature Selection – stark korrelierte Features sind redundant. Multikollinearität vermeiden!
+                </div>
+            </div>
+            <div class="explanation-card covariance">
+                <h4>📊 Kovarianz</h4>
+                <p>Zeigt ob Variablen <strong>gemeinsam variieren</strong>. Positiv = beide steigen zusammen. Negativ = eine steigt, andere fällt. Problem: Nicht normiert, schwer interpretierbar.</p>
+                <div class="ml-hint">
+                    <strong>ML:</strong> Basis für PCA – die Kovarianzmatrix zeigt Beziehungen zwischen allen Features.
+                </div>
+            </div>
+            <div class="explanation-card regression">
+                <h4>📈 Lineare Regression</h4>
+                <p>Findet die <strong>beste Gerade</strong> (y = mx + b), die den quadratischen Fehler minimiert. R² zeigt, wie viel Varianz erklärt wird (0-100%).</p>
+                <div class="ml-hint">
+                    <strong>ML:</strong> Einfachster überwachter Lernalgorithmus. Basis für viele komplexere Modelle.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let points = []; // Array of {x, y}
+        let options = {
+            showRegression: true,
+            showMeans: true,
+            showResiduals: false
+        };
+
+        const colors = {
+            point: '#8b5cf6',
+            pointBorder: '#6d28d9',
+            regression: '#f97316',
+            meanLine: 'rgba(6, 182, 212, 0.5)',
+            residual: 'rgba(239, 68, 68, 0.5)',
+            grid: 'rgba(45, 58, 79, 0.5)',
+            axis: '#64748b',
+            text: '#94a3b8',
+            positive: '#10b981',
+            negative: '#ef4444',
+            neutral: '#64748b'
+        };
+
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            canvas.style.width = rect.width + 'px';
+            canvas.style.height = rect.height + 'px';
+            draw();
+        }
+
+        function getCanvasCoords(e) {
+            const rect = canvas.getBoundingClientRect();
+            return {
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top
+            };
+        }
+
+        function valueToCanvasX(value, padding, width) {
+            return padding + (value / 100) * width;
+        }
+
+        function valueToCanvasY(value, padding, height) {
+            return padding + ((100 - value) / 100) * height;
+        }
+
+        function canvasToValueX(x, padding, width) {
+            return Math.max(0, Math.min(100, ((x - padding) / width) * 100));
+        }
+
+        function canvasToValueY(y, padding, height) {
+            return Math.max(0, Math.min(100, 100 - ((y - padding) / height) * 100));
+        }
+
+        function calculateStats() {
+            if (points.length < 2) {
+                return { correlation: null, covariance: null, slope: null, intercept: null, rSquared: null, meanX: null, meanY: null };
+            }
+
+            const n = points.length;
+            const meanX = points.reduce((sum, p) => sum + p.x, 0) / n;
+            const meanY = points.reduce((sum, p) => sum + p.y, 0) / n;
+
+            let sumXY = 0, sumX2 = 0, sumY2 = 0;
+            points.forEach(p => {
+                const dx = p.x - meanX;
+                const dy = p.y - meanY;
+                sumXY += dx * dy;
+                sumX2 += dx * dx;
+                sumY2 += dy * dy;
+            });
+
+            const covariance = sumXY / n;
+            const stdX = Math.sqrt(sumX2 / n);
+            const stdY = Math.sqrt(sumY2 / n);
+            
+            let correlation = 0;
+            if (stdX > 0 && stdY > 0) {
+                correlation = covariance / (stdX * stdY);
+            }
+
+            // Linear regression
+            let slope = 0, intercept = meanY;
+            if (sumX2 > 0) {
+                slope = sumXY / sumX2;
+                intercept = meanY - slope * meanX;
+            }
+
+            // R-squared
+            const rSquared = correlation * correlation;
+
+            return { correlation, covariance, slope, intercept, rSquared, meanX, meanY, stdX, stdY };
+        }
+
+        function updateDisplay() {
+            const stats = calculateStats();
+            
+            document.getElementById('count').textContent = points.length;
+
+            if (stats.correlation !== null) {
+                const r = stats.correlation;
+                document.getElementById('correlation').textContent = r.toFixed(3);
+                document.getElementById('covariance').textContent = stats.covariance.toFixed(2);
+                document.getElementById('rSquared').textContent = (stats.rSquared * 100).toFixed(1) + '%';
+                document.getElementById('slope').textContent = stats.slope.toFixed(3);
+                document.getElementById('intercept').textContent = stats.intercept.toFixed(2);
+
+                // Update correlation marker
+                const markerPos = ((r + 1) / 2) * 100;
+                document.getElementById('corrMarker').style.left = markerPos + '%';
+
+                // Update correlation color and interpretation
+                const corrEl = document.getElementById('correlation');
+                const interpEl = document.getElementById('corrInterpretation');
+                
+                let color, interpretation, bgColor;
+                if (r > 0.7) {
+                    color = colors.positive;
+                    interpretation = 'Starke positive Korrelation';
+                    bgColor = 'rgba(16, 185, 129, 0.15)';
+                } else if (r > 0.3) {
+                    color = colors.positive;
+                    interpretation = 'Moderate positive Korrelation';
+                    bgColor = 'rgba(16, 185, 129, 0.1)';
+                } else if (r > -0.3) {
+                    color = colors.neutral;
+                    interpretation = 'Keine/schwache Korrelation';
+                    bgColor = 'rgba(100, 116, 139, 0.1)';
+                } else if (r > -0.7) {
+                    color = colors.negative;
+                    interpretation = 'Moderate negative Korrelation';
+                    bgColor = 'rgba(239, 68, 68, 0.1)';
+                } else {
+                    color = colors.negative;
+                    interpretation = 'Starke negative Korrelation';
+                    bgColor = 'rgba(239, 68, 68, 0.15)';
+                }
+
+                corrEl.style.color = color;
+                interpEl.textContent = interpretation;
+                interpEl.style.background = bgColor;
+                interpEl.style.color = color;
+            } else {
+                document.getElementById('correlation').textContent = '–';
+                document.getElementById('covariance').textContent = '–';
+                document.getElementById('rSquared').textContent = '–';
+                document.getElementById('slope').textContent = '–';
+                document.getElementById('intercept').textContent = '–';
+                document.getElementById('corrMarker').style.left = '50%';
+                document.getElementById('correlation').style.color = colors.neutral;
+                document.getElementById('corrInterpretation').textContent = 'Mind. 2 Punkte benötigt';
+                document.getElementById('corrInterpretation').style.background = 'transparent';
+                document.getElementById('corrInterpretation').style.color = colors.neutral;
+            }
+        }
+
+        function draw() {
+            const rect = canvas.getBoundingClientRect();
+            const width = rect.width;
+            const height = rect.height;
+            const padding = 50;
+            const dataWidth = width - padding * 2;
+            const dataHeight = height - padding * 2;
+
+            ctx.clearRect(0, 0, width, height);
+
+            // Grid
+            ctx.strokeStyle = colors.grid;
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 10; i++) {
+                const x = padding + (i / 10) * dataWidth;
+                const y = padding + (i / 10) * dataHeight;
+                
+                ctx.beginPath();
+                ctx.moveTo(x, padding);
+                ctx.lineTo(x, height - padding);
+                ctx.stroke();
+                
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(width - padding, y);
+                ctx.stroke();
+            }
+
+            // Axes
+            ctx.strokeStyle = colors.axis;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(padding, height - padding);
+            ctx.lineTo(width - padding, height - padding);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(padding, padding);
+            ctx.lineTo(padding, height - padding);
+            ctx.stroke();
+
+            // Axis labels
+            ctx.fillStyle = colors.text;
+            ctx.font = '12px JetBrains Mono';
+            ctx.textAlign = 'center';
+            for (let i = 0; i <= 10; i += 2) {
+                const x = padding + (i / 10) * dataWidth;
+                ctx.fillText((i * 10).toString(), x, height - padding + 20);
+            }
+            ctx.textAlign = 'right';
+            for (let i = 0; i <= 10; i += 2) {
+                const y = padding + ((10 - i) / 10) * dataHeight;
+                ctx.fillText((i * 10).toString(), padding - 10, y + 4);
+            }
+
+            // Axis titles
+            ctx.fillStyle = colors.text;
+            ctx.font = '14px Plus Jakarta Sans';
+            ctx.textAlign = 'center';
+            ctx.fillText('Variable X', width / 2, height - 10);
+            ctx.save();
+            ctx.translate(15, height / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.fillText('Variable Y', 0, 0);
+            ctx.restore();
+
+            const stats = calculateStats();
+
+            if (stats.meanX !== null && options.showMeans) {
+                const meanXCanvas = valueToCanvasX(stats.meanX, padding, dataWidth);
+                const meanYCanvas = valueToCanvasY(stats.meanY, padding, dataHeight);
+
+                ctx.strokeStyle = colors.meanLine;
+                ctx.lineWidth = 2;
+                ctx.setLineDash([5, 5]);
+                
+                // Vertical mean line
+                ctx.beginPath();
+                ctx.moveTo(meanXCanvas, padding);
+                ctx.lineTo(meanXCanvas, height - padding);
+                ctx.stroke();
+                
+                // Horizontal mean line
+                ctx.beginPath();
+                ctx.moveTo(padding, meanYCanvas);
+                ctx.lineTo(width - padding, meanYCanvas);
+                ctx.stroke();
+                
+                ctx.setLineDash([]);
+
+                // Labels
+                ctx.fillStyle = colors.meanLine;
+                ctx.font = '11px JetBrains Mono';
+                ctx.textAlign = 'center';
+                ctx.fillText('x̄=' + stats.meanX.toFixed(1), meanXCanvas, padding - 8);
+                ctx.textAlign = 'left';
+                ctx.fillText('ȳ=' + stats.meanY.toFixed(1), width - padding + 5, meanYCanvas + 4);
+            }
+
+            // Regression line
+            if (stats.slope !== null && options.showRegression && points.length >= 2) {
+                const x1 = 0;
+                const y1 = stats.slope * x1 + stats.intercept;
+                const x2 = 100;
+                const y2 = stats.slope * x2 + stats.intercept;
+
+                const x1Canvas = valueToCanvasX(x1, padding, dataWidth);
+                const y1Canvas = valueToCanvasY(y1, padding, dataHeight);
+                const x2Canvas = valueToCanvasX(x2, padding, dataWidth);
+                const y2Canvas = valueToCanvasY(y2, padding, dataHeight);
+
+                ctx.strokeStyle = colors.regression;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(x1Canvas, y1Canvas);
+                ctx.lineTo(x2Canvas, y2Canvas);
+                ctx.stroke();
+
+                // Regression equation label
+                ctx.fillStyle = colors.regression;
+                ctx.font = 'bold 12px JetBrains Mono';
+                ctx.textAlign = 'left';
+                const sign = stats.intercept >= 0 ? '+' : '';
+                ctx.fillText(`y = ${stats.slope.toFixed(2)}x ${sign}${stats.intercept.toFixed(1)}`, padding + 10, padding + 20);
+            }
+
+            // Residuals
+            if (options.showResiduals && stats.slope !== null) {
+                ctx.strokeStyle = colors.residual;
+                ctx.lineWidth = 2;
+                points.forEach(p => {
+                    const predictedY = stats.slope * p.x + stats.intercept;
+                    const xCanvas = valueToCanvasX(p.x, padding, dataWidth);
+                    const yCanvas = valueToCanvasY(p.y, padding, dataHeight);
+                    const predYCanvas = valueToCanvasY(predictedY, padding, dataHeight);
+
+                    ctx.beginPath();
+                    ctx.moveTo(xCanvas, yCanvas);
+                    ctx.lineTo(xCanvas, predYCanvas);
+                    ctx.stroke();
+                });
+            }
+
+            // Data points
+            points.forEach(p => {
+                const xCanvas = valueToCanvasX(p.x, padding, dataWidth);
+                const yCanvas = valueToCanvasY(p.y, padding, dataHeight);
+
+                // Shadow
+                ctx.beginPath();
+                ctx.arc(xCanvas, yCanvas, 10, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(139, 92, 246, 0.3)';
+                ctx.fill();
+
+                // Point
+                ctx.beginPath();
+                ctx.arc(xCanvas, yCanvas, 7, 0, Math.PI * 2);
+                ctx.fillStyle = colors.point;
+                ctx.fill();
+                ctx.strokeStyle = colors.pointBorder;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            });
+
+            // Empty state
+            if (points.length === 0) {
+                ctx.fillStyle = colors.text;
+                ctx.font = '16px Plus Jakarta Sans';
+                ctx.textAlign = 'center';
+                ctx.fillText('Klicke hier, um Datenpunkte hinzuzufügen', width / 2, height / 2);
+            }
+        }
+
+        canvas.addEventListener('click', (e) => {
+            const coords = getCanvasCoords(e);
+            const rect = canvas.getBoundingClientRect();
+            const padding = 50;
+            const dataWidth = rect.width - padding * 2;
+            const dataHeight = rect.height - padding * 2;
+
+            const x = canvasToValueX(coords.x, padding, dataWidth);
+            const y = canvasToValueY(coords.y, padding, dataHeight);
+
+            if (x >= 0 && x <= 100 && y >= 0 && y <= 100) {
+                points.push({ x, y });
+                updateDisplay();
+                draw();
+            }
+        });
+
+        function loadPreset(type) {
+            points = [];
+            const n = 30;
+
+            if (type === 'positive') {
+                for (let i = 0; i < n; i++) {
+                    const x = 10 + Math.random() * 80;
+                    const noise = (Math.random() - 0.5) * 15;
+                    const y = Math.max(5, Math.min(95, x + noise));
+                    points.push({ x, y });
+                }
+            } else if (type === 'negative') {
+                for (let i = 0; i < n; i++) {
+                    const x = 10 + Math.random() * 80;
+                    const noise = (Math.random() - 0.5) * 15;
+                    const y = Math.max(5, Math.min(95, 100 - x + noise));
+                    points.push({ x, y });
+                }
+            } else if (type === 'none') {
+                for (let i = 0; i < n; i++) {
+                    const x = 10 + Math.random() * 80;
+                    const y = 10 + Math.random() * 80;
+                    points.push({ x, y });
+                }
+            } else if (type === 'nonlinear') {
+                for (let i = 0; i < n; i++) {
+                    const x = 5 + Math.random() * 90;
+                    const noise = (Math.random() - 0.5) * 10;
+                    // Parabola
+                    const y = Math.max(5, Math.min(95, 10 + 0.02 * Math.pow(x - 50, 2) + noise));
+                    points.push({ x, y });
+                }
+            }
+
+            updateDisplay();
+            draw();
+        }
+
+        function clearPoints() {
+            points = [];
+            updateDisplay();
+            draw();
+        }
+
+        // Toggle handlers
+        document.getElementById('toggleRegression').addEventListener('click', function() {
+            options.showRegression = !options.showRegression;
+            this.classList.toggle('active', options.showRegression);
+            draw();
+        });
+
+        document.getElementById('toggleMeans').addEventListener('click', function() {
+            options.showMeans = !options.showMeans;
+            this.classList.toggle('active', options.showMeans);
+            draw();
+        });
+
+        document.getElementById('toggleResiduals').addEventListener('click', function() {
+            options.showResiduals = !options.showResiduals;
+            this.classList.toggle('active', options.showResiduals);
+            draw();
+        });
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        
+        // Start with positive correlation
+        loadPreset('positive');
+    </script>
+</body>
+</html>

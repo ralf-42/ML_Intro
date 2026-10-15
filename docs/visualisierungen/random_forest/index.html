@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Forest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --forest-dark: #1a2f23;
+            --forest-mid:  #2d4a3e;
+            --forest-light:#3d6b56;
+            --leaf-green:  #4a9d6e;
+            --leaf-bright: #6bc48d;
+            --bark-brown:  #5d4037;
+            --bark-light:  #8d6e63;
+            --sky-soft:    #e8f5e9;
+            --cream:       #fdfaf6;
+            --coral:       #e07a5f;
+            --gold:        #d4a574;
+            --shadow:      rgba(26,47,35,0.15);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        canvas { display:none !important; }
+
+        body {
+            font-family:'Source Sans 3',sans-serif;
+            background:linear-gradient(165deg,var(--cream) 0%,var(--sky-soft) 50%,#c8e6c9 100%);
+            min-height:100vh;
+            color:var(--forest-dark);
+            overflow-x:hidden;
+        }
+        #rf-app {
+            max-width:1200px;
+            margin:0 auto;
+            padding:2rem;
+        }
+        header { text-align:center; margin-bottom:3rem; }
+        h1 {
+            font-family:'Fraunces',serif;
+            font-size:clamp(2.2rem,6vw,4rem);
+            font-weight:700;
+            color:var(--forest-dark);
+            margin-bottom:.5rem;
+        }
+        h1 span {
+            background:linear-gradient(135deg,var(--leaf-green),var(--leaf-bright));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-clip:text;
+        }
+        .subtitle { font-size:1.2rem; color:var(--forest-mid); }
+
+        .controls {
+            background:white; border-radius:20px; padding:1.5rem 2rem;
+            box-shadow:0 8px 32px var(--shadow);
+            display:flex; flex-wrap:wrap; gap:2rem;
+            align-items:center; justify-content:center;
+            margin-bottom:2rem;
+        }
+        .control-group { display:flex; flex-direction:column; gap:.5rem; }
+        .control-group label {
+            font-weight:600; font-size:.85rem; color:var(--forest-mid);
+            text-transform:uppercase; letter-spacing:.05em;
+        }
+        .slider-container { display:flex; align-items:center; gap:1rem; }
+        input[type=range] {
+            -webkit-appearance:none;
+            width:150px; height:8px;
+            background:linear-gradient(90deg,var(--leaf-green),var(--leaf-bright));
+            border-radius:4px; cursor:pointer;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance:none;
+            width:24px; height:24px; background:white;
+            border:3px solid var(--leaf-green); border-radius:50%;
+            cursor:pointer; box-shadow:0 2px 8px var(--shadow);
+        }
+        .slider-value {
+            font-family:'Fraunces',serif; font-size:1.5rem; font-weight:600;
+            color:var(--forest-dark); min-width:2ch;
+        }
+        .btn {
+            font-family:'Source Sans 3',sans-serif; font-size:1rem; font-weight:600;
+            padding:.875rem 2rem; border:none; border-radius:12px; cursor:pointer;
+            text-transform:uppercase; letter-spacing:.05em;
+        }
+        .btn-primary {
+            background:linear-gradient(135deg,var(--leaf-green),var(--forest-light));
+            color:white; box-shadow:0 4px 16px rgba(74,157,110,.4);
+        }
+        .btn-secondary {
+            background:var(--cream); color:var(--forest-dark);
+            border:2px solid var(--forest-light);
+        }
+
+        .stage {
+            background:white; border-radius:24px; padding:2rem;
+            box-shadow:0 12px 48px var(--shadow);
+            position:relative; overflow:hidden; margin-bottom:2rem;
+        }
+        .stage::before {
+            content:''; position:absolute; top:0; left:0; right:0; height:4px;
+            background:linear-gradient(90deg,var(--leaf-green),var(--leaf-bright),var(--gold));
+        }
+        .stage-title {
+            font-family:'Fraunces',serif; font-size:1.5rem; font-weight:600;
+            color:var(--forest-dark); margin-bottom:1.5rem;
+            display:flex; align-items:center; gap:.75rem;
+        }
+        .stage-title .icon {
+            width:36px; height:36px;
+            background:linear-gradient(135deg,var(--leaf-green),var(--leaf-bright));
+            border-radius:10px; display:flex; align-items:center;
+            justify-content:center; font-size:1.25rem;
+        }
+
+        .data-point-display {
+            background:linear-gradient(135deg,var(--sky-soft),var(--cream));
+            border-radius:16px; padding:1.5rem; margin-bottom:1.5rem;
+            border:2px dashed var(--leaf-green);
+        }
+        .data-point-label {
+            font-weight:600; color:var(--forest-mid); margin-bottom:.75rem;
+            font-size:.85rem; text-transform:uppercase; letter-spacing:.05em;
+        }
+        .data-features { display:flex; flex-wrap:wrap; gap:1rem; }
+        .feature {
+            background:white; padding:.75rem 1.25rem; border-radius:10px;
+            box-shadow:0 2px 8px var(--shadow);
+            display:flex; align-items:center; gap:.5rem;
+        }
+        .feature-name  { color:var(--forest-mid); font-size:.85rem; }
+        .feature-value { font-family:'Fraunces',serif; font-weight:600; color:var(--forest-dark); font-size:1.1rem; }
+
+        .step-indicator { display:flex; justify-content:center; gap:.5rem; margin-bottom:1.5rem; }
+        .step-dot {
+            width:12px; height:12px; border-radius:50%;
+            background:var(--sky-soft); border:2px solid var(--leaf-green);
+        }
+        .step-dot.active    { background:var(--leaf-green); transform:scale(1.2); }
+        .step-dot.completed { background:var(--leaf-bright); }
+        .step-text {
+            text-align:center; color:var(--forest-mid); font-size:1rem;
+            min-height:3rem; display:flex; align-items:center;
+            justify-content:center; padding:0 1rem;
+        }
+
+        .forest-container {
+            display:flex; flex-wrap:wrap; gap:1.5rem;
+            justify-content:center; padding:2rem 0 1rem;
+        }
+
+        /* wrapper braucht position:relative + padding-top für die Bubble */
+        .tree-wrapper {
+            display:flex; flex-direction:column; align-items:center;
+            position:relative; padding-top:40px;
+            opacity:0; transform:translateY(30px) scale(.8);
+            transition:opacity .5s,transform .5s;
+        }
+        .tree-wrapper.visible { opacity:1; transform:translateY(0) scale(1); }
+
+        .tree-vote {
+            position:absolute; top:0; left:50%;
+            transform:translateX(-50%) scale(0);
+            background:white; padding:.35rem .65rem; border-radius:20px;
+            font-family:'Fraunces',serif; font-weight:600; font-size:.8rem;
+            box-shadow:0 4px 12px var(--shadow); white-space:nowrap;
+            transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+            pointer-events:none;
+        }
+        .tree-vote.show   { transform:translateX(-50%) scale(1); }
+        .tree-vote.vote-a { color:var(--coral);      border:2px solid var(--coral); }
+        .tree-vote.vote-b { color:var(--leaf-green); border:2px solid var(--leaf-green); }
+
+        .tree { width:100px; height:130px; position:relative; }
+        .tree-crown {
+            position:absolute; bottom:35px; left:50%; transform:translateX(-50%);
+            width:0; height:0;
+            border-left:45px solid transparent;
+            border-right:45px solid transparent;
+            border-bottom:70px solid var(--leaf-green);
+            filter:drop-shadow(0 4px 8px rgba(74,157,110,.3));
+            transition:border-bottom-color .5s;
+        }
+        .tree-crown::before {
+            content:''; position:absolute; top:25px; left:-35px;
+            width:0; height:0;
+            border-left:35px solid transparent;
+            border-right:35px solid transparent;
+            border-bottom:55px solid var(--leaf-bright); opacity:.7;
+        }
+        .tree-trunk {
+            position:absolute; bottom:0; left:50%; transform:translateX(-50%);
+            width:16px; height:40px;
+            background:linear-gradient(90deg,var(--bark-brown),var(--bark-light),var(--bark-brown));
+            border-radius:2px;
+        }
+        .tree-label {
+            font-family:'Fraunces',serif; font-weight:600; font-size:.9rem;
+            color:var(--forest-mid); margin-top:.5rem;
+        }
+
+        .tree-wrapper.voted-a .tree-crown { border-bottom-color:var(--coral); }
+        .tree-wrapper.voted-b .tree-crown { border-bottom-color:var(--leaf-green); }
+
+        .voting-result {
+            background:linear-gradient(135deg,var(--forest-dark),var(--forest-mid));
+            border-radius:20px; padding:2rem; margin-top:2rem;
+            text-align:center;
+            display:none;   /* toggled via JS, no CSS transition needed */
+        }
+        .voting-result h3 { font-family:'Fraunces',serif; color:white; font-size:1.25rem; margin-bottom:1rem; font-weight:400; }
+        .vote-counts { display:flex; justify-content:center; gap:3rem; margin-bottom:1.5rem; }
+        .vote-count { text-align:center; }
+        .vote-count .number { font-family:'Fraunces',serif; font-size:3rem; font-weight:700; line-height:1; }
+        .vote-count.count-a .number { color:var(--coral); }
+        .vote-count.count-b .number { color:var(--leaf-bright); }
+        .vote-count .label { color:rgba(255,255,255,.8); font-size:.9rem; margin-top:.25rem; }
+        .final-prediction {
+            display:inline-block; background:white;
+            padding:1rem 2.5rem; border-radius:50px;
+            font-family:'Fraunces',serif; font-size:1.5rem; font-weight:600;
+        }
+        .final-prediction.result-a { color:var(--coral); }
+        .final-prediction.result-b { color:var(--leaf-green); }
+
+        .info-grid {
+            display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem;
+        }
+        .info-card {
+            background:white; border-radius:16px; padding:1.5rem;
+            box-shadow:0 4px 20px var(--shadow);
+        }
+        .info-card h4 {
+            font-family:'Fraunces',serif; font-size:1.1rem; color:var(--forest-dark);
+            margin-bottom:.75rem; display:flex; align-items:center; gap:.5rem;
+        }
+        .info-card h4::before {
+            content:''; display:inline-block; width:8px; height:8px;
+            background:var(--leaf-green); border-radius:50%;
+        }
+        .info-card p  { color:var(--forest-mid); line-height:1.6; font-size:.95rem; }
+        .info-card ul { color:var(--forest-mid); line-height:1.8; padding-left:1.25rem; }
+        .info-card strong { color:var(--forest-dark); }
+    </style>
+</head>
+<body>
+
+<div id="rf-app">
+    <header>
+        <h1>Der <span>Random Forest</span></h1>
+        <p class="subtitle">Viele Bäume treffen gemeinsam bessere Entscheidungen</p>
+    </header>
+
+    <div class="controls">
+        <div class="control-group">
+            <label>Anzahl der Bäume</label>
+            <div class="slider-container">
+                <input type="range" id="rf-slider" min="3" max="9" value="5" step="2">
+                <span class="slider-value" id="rf-sliderVal">5</span>
+            </div>
+        </div>
+        <button class="btn btn-primary" id="rf-start">🌳 Vorhersage starten</button>
+        <button class="btn btn-secondary" id="rf-reset">↺ Zurücksetzen</button>
+    </div>
+
+    <div class="stage">
+        <h2 class="stage-title"><span class="icon">🎯</span> Klassifikationsaufgabe</h2>
+        <div class="data-point-display">
+            <div class="data-point-label">Neuer Datenpunkt zur Klassifikation:</div>
+            <div class="data-features" id="rf-features"></div>
+        </div>
+        <div class="step-indicator">
+            <div class="step-dot" id="rf-d1"></div>
+            <div class="step-dot" id="rf-d2"></div>
+            <div class="step-dot" id="rf-d3"></div>
+        </div>
+        <p class="step-text" id="rf-stepText">
+            Klicke auf "Vorhersage starten" um den Random Forest in Aktion zu sehen!
+        </p>
+        <div class="forest-container" id="rf-forest"></div>
+        <div class="voting-result" id="rf-result">
+            <h3>Mehrheitsentscheidung der Bäume</h3>
+            <div class="vote-counts">
+                <div class="vote-count count-a">
+                    <div class="number" id="rf-cntA">0</div>
+                    <div class="label">🍎 Apfel</div>
+                </div>
+                <div class="vote-count count-b">
+                    <div class="number" id="rf-cntB">0</div>
+                    <div class="label">🍊 Orange</div>
+                </div>
+            </div>
+            <div class="final-prediction" id="rf-pred">Vorhersage: …</div>
+        </div>
+    </div>
+
+    <div class="info-grid">
+        <div class="info-card">
+            <h4>Was ist ein Random Forest?</h4>
+            <p>Ein <strong>Random Forest</strong> ist ein Ensemble-Lernverfahren, das viele Entscheidungsbäume kombiniert. Jeder Baum wird mit einer zufälligen Teilmenge der Daten trainiert (<strong>Bootstrap</strong>) und betrachtet bei jeder Verzweigung nur zufällig ausgewählte Merkmale.</p>
+        </div>
+        <div class="info-card">
+            <h4>Warum funktioniert das?</h4>
+            <p>Durch die Zufälligkeit sind die Bäume unterschiedlich und machen verschiedene Fehler. Bei der gemeinsamen Abstimmung (<strong>Voting</strong>) gleichen sich individuelle Fehler aus – die <strong>Weisheit der Vielen</strong> führt zu robusteren Vorhersagen.</p>
+        </div>
+        <div class="info-card">
+            <h4>Vorteile</h4>
+            <ul>
+                <li>Geringe Gefahr von <strong>Overfitting</strong></li>
+                <li>Robust gegenüber Ausreißern</li>
+                <li>Funktioniert gut ohne viel Tuning</li>
+                <li>Liefert Feature-Importance</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+// p5.js-Stubs – verhindert Canvas-Injektion
+window.setup = function() { if(typeof noCanvas==='function') noCanvas(); };
+window.draw  = function() {};
+
+// Gesamte App-Logik startet erst nach vollständigem Laden
+window.addEventListener('load', function() {
+
+    // ── DOM-Referenzen ────────────────────────────────────────────────────────
+    var slider    = document.getElementById('rf-slider');
+    var sliderVal = document.getElementById('rf-sliderVal');
+    var startBtn  = document.getElementById('rf-start');
+    var resetBtn  = document.getElementById('rf-reset');
+    var forestEl  = document.getElementById('rf-forest');
+    var featEl    = document.getElementById('rf-features');
+    var stepTxt   = document.getElementById('rf-stepText');
+    var resultEl  = document.getElementById('rf-result');
+    var cntA      = document.getElementById('rf-cntA');
+    var cntB      = document.getElementById('rf-cntB');
+    var predEl    = document.getElementById('rf-pred');
+    var dots      = [
+        document.getElementById('rf-d1'),
+        document.getElementById('rf-d2'),
+        document.getElementById('rf-d3')
+    ];
+
+    // ── Zustand ───────────────────────────────────────────────────────────────
+    var treeCount = 5;
+    var animating = false;
+    var dp        = {};          // data point
+    var nodes     = [];          // [{wrapper, voteEl}]  — direkte DOM-Refs
+
+    // ── Konstanten ────────────────────────────────────────────────────────────
+    var FEATURES = [
+        { name:'Gewicht',            unit:'g',    lo:100, hi:250 },
+        { name:'Durchmesser',        unit:'cm',   lo:5,   hi:12  },
+        { name:'Farbe (Rot-Anteil)', unit:'%',    lo:10,  hi:95  },
+        { name:'Süße',               unit:'Brix', lo:8,   hi:16  }
+    ];
+    var STEPS = [
+        'Neuer Datenpunkt wird an jeden Baum im Wald gesendet…',
+        'Jeder Baum analysiert die Merkmale und trifft eine individuelle Entscheidung…',
+        'Die Bäume stimmen ab – die Mehrheit gewinnt!'
+    ];
+
+    // ── Hilfsfunktionen ───────────────────────────────────────────────────────
+    function rnd(lo, hi) {
+        return Math.round(lo + Math.random() * (hi - lo));
+    }
+
+    function setStep(n) {
+        dots.forEach(function(d, i) {
+            d.classList.remove('active','completed');
+            if (i + 1 <  n) d.classList.add('completed');
+            if (i + 1 === n) d.classList.add('active');
+        });
+    }
+
+    function decide() {
+        var red    = (dp['Farbe (Rot-Anteil)'] - 50) / 100;
+        var weight = (dp['Gewicht'] - 175) / 150;
+        var score  = (red + weight) / 2 + (Math.random() - 0.5) * 0.8;
+        return score > 0 ? 'a' : 'b';
+    }
+
+    // ── Datenpunkt ────────────────────────────────────────────────────────────
+    function generateDP() {
+        dp = {};
+        var html = '';
+        FEATURES.forEach(function(f) {
+            var v = rnd(f.lo, f.hi);
+            dp[f.name] = v;
+            html += '<div class="feature">'
+                  + '<span class="feature-name">' + f.name + ':</span>'
+                  + '<span class="feature-value">' + v + ' ' + f.unit + '</span>'
+                  + '</div>';
+        });
+        featEl.innerHTML = html;
+    }
+
+    // ── Wald aufbauen ─────────────────────────────────────────────────────────
+    function buildForest() {
+        forestEl.innerHTML = '';
+        nodes = [];                     // ← Array leeren und neu befüllen
+
+        for (var i = 0; i < treeCount; i++) {
+
+            // Vote-Blase
+            var voteEl = document.createElement('div');
+            voteEl.className = 'tree-vote';
+
+            // Baumkrone
+            var crown = document.createElement('div');
+            crown.className = 'tree-crown';
+
+            // Stamm
+            var trunk = document.createElement('div');
+            trunk.className = 'tree-trunk';
+
+            // Baum-Div
+            var tree = document.createElement('div');
+            tree.className = 'tree';
+            tree.appendChild(crown);
+            tree.appendChild(trunk);
+
+            // Beschriftung
+            var lbl = document.createElement('span');
+            lbl.className = 'tree-label';
+            lbl.textContent = 'Baum ' + (i + 1);
+
+            // Wrapper
+            var wrap = document.createElement('div');
+            wrap.className = 'tree-wrapper';
+            wrap.appendChild(voteEl);
+            wrap.appendChild(tree);
+            wrap.appendChild(lbl);
+
+            forestEl.appendChild(wrap);
+
+            // Referenz speichern – KEIN querySelector später!
+            nodes.push({ wrapper: wrap, voteEl: voteEl });
+
+            // Einblend-Animation (closure für korrektes i)
+            (function(w, delay) {
+                setTimeout(function() { w.classList.add('visible'); }, delay);
+            })(wrap, i * 120);
+        }
+    }
+
+    // ── Reset ─────────────────────────────────────────────────────────────────
+    function clearVotes() {
+        resultEl.style.display = 'none';
+        setStep(0);
+        stepTxt.textContent = 'Klicke auf "Vorhersage starten" um den Random Forest in Aktion zu sehen!';
+        nodes.forEach(function(n) {
+            n.wrapper.classList.remove('voted-a','voted-b');
+            n.voteEl.classList.remove('show','vote-a','vote-b');
+            n.voteEl.textContent = '';
+        });
+    }
+
+    function doReset() {
+        if (animating) return;
+        generateDP();
+        clearVotes();
+    }
+
+    // ── Animation – NUR setTimeout, kein async/await ──────────────────────────
+    function runAnimation() {
+        if (animating) return;
+        animating = true;
+
+        var votes = { a: 0, b: 0 };
+
+        // Vorherige Runde wegräumen
+        resultEl.style.display = 'none';
+        nodes.forEach(function(n) {
+            n.wrapper.classList.remove('voted-a','voted-b');
+            n.voteEl.classList.remove('show','vote-a','vote-b');
+            n.voteEl.textContent = '';
+        });
+
+        // Schritt 1
+        setStep(1);
+        stepTxt.textContent = STEPS[0];
+
+        // Schritt 2 startet nach 1500 ms
+        setTimeout(function() {
+            setStep(2);
+            stepTxt.textContent = STEPS[1];
+
+            // Jeden Baum nacheinander per setTimeout-Kette verarbeiten
+            function processTree(idx) {
+                if (idx >= nodes.length) {
+                    // Alle Bäume fertig → Schritt 3
+                    setTimeout(function() {
+                        setStep(3);
+                        stepTxt.textContent = STEPS[2];
+
+                        cntA.textContent = votes.a;
+                        cntB.textContent = votes.b;
+
+                        var winner = votes.a >= votes.b ? 'a' : 'b';
+                        predEl.textContent = winner === 'a' ? '🍎 Apfel' : '🍊 Orange';
+                        predEl.className   = 'final-prediction ' + (winner === 'a' ? 'result-a' : 'result-b');
+                        resultEl.style.display = 'block';
+
+                        animating = false;
+                    }, 800);
+                    return;
+                }
+
+                // Aktuellen Baum abstimmen lassen
+                var n   = nodes[idx];          // direkte Referenz, kein querySelector!
+                var dec = decide();
+                votes[dec]++;
+
+                n.voteEl.textContent = dec === 'a' ? '🍎 Apfel' : '🍊 Orange';
+                n.voteEl.classList.add('show', dec === 'a' ? 'vote-a' : 'vote-b');
+                n.wrapper.classList.add(dec === 'a' ? 'voted-a' : 'voted-b');
+
+                // Nächsten Baum nach 600 ms
+                setTimeout(function() { processTree(idx + 1); }, 600);
+            }
+
+            processTree(0);   // Start mit Baum 0
+
+        }, 1500);
+    }
+
+    // ── Event Listener ────────────────────────────────────────────────────────
+    slider.addEventListener('input', function(e) {
+        treeCount = parseInt(e.target.value, 10);
+        sliderVal.textContent = treeCount;
+        if (!animating) { buildForest(); clearVotes(); }
+    });
+
+    startBtn.addEventListener('click', runAnimation);
+    resetBtn.addEventListener('click', doReset);
+
+    // ── Start ─────────────────────────────────────────────────────────────────
+    generateDP();
+    buildForest();
+    setStep(0);
+
+}); // window.onload
+</script>
+</body>
+</html>

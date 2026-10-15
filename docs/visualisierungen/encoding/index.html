@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Feature Encoding Demo</title>
+    <style>
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f3f4f6;
+            --border-color: #e5e7eb;
+            --text-primary: #111827;
+            --text-secondary: #374151;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--primary-bg);
+        }
+
+        .container {
+            width: 896px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--primary-bg);
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .card-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .result-container {
+            margin-top: 1rem;
+        }
+
+        .code-block {
+            background: var(--secondary-bg);
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.5rem;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        th {
+            background: var(--secondary-bg);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Feature Encoding Demo</h2>
+            </div>
+            <div class="card-content">
+                <div class="input-group">
+                    <label class="input-label">Kategorische Werte (kommagetrennt):</label>
+                    <input type="text" id="inputData" class="input-field" value="rot,grün,blau">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Encoding-Methode:</label>
+                    <select id="encodingMethod" class="input-field">
+                        <option value="ordinal">Ordinal Encoding</option>
+                        <option value="onehot">One-Hot Encoding</option>
+                    </select>
+                </div>
+
+                <div id="result" class="result-container">
+                    <h3>Ergebnis:</h3>
+                    <div id="encodingResult"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Beispieldaten</h2>
+            </div>
+            <div class="card-content">
+                <pre class="code-block">Farbe: ['Rot', 'Blau', 'Grün', 'Rot', 'Blau']
+Größe: ['S', 'M', 'L', 'XL', 'M']
+Preis: [10.5, 15.0, 7.8, 25.0, 13.5]</pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function labelEncode(data) {
+            const uniqueValues = [...new Set(data)];
+            return {
+                encoded: data.map(val => uniqueValues.indexOf(val)),
+                mapping: Object.fromEntries(uniqueValues.map((val, idx) => [val, idx]))
+            };
+        }
+
+        function oneHotEncode(data) {
+            const uniqueValues = [...new Set(data)];
+            return {
+                encoded: data.map(val => 
+                    uniqueValues.map(unique => val === unique ? 1 : 0)
+                ),
+                mapping: uniqueValues
+            };
+        }
+
+        function updateResult() {
+            const inputData = document.getElementById('inputData').value.split(',').map(x => x.trim());
+            const method = document.getElementById('encodingMethod').value;
+            const resultDiv = document.getElementById('encodingResult');
+            
+            const result = method === 'ordinal' ? labelEncode(inputData) : oneHotEncode(inputData);
+            
+            if (method === 'ordinal') {
+                resultDiv.innerHTML = `
+                    <p>Encoded Werte:</p>
+                    <pre class="code-block">${JSON.stringify(result.encoded, null, 2)}</pre>
+                    <p>Mapping:</p>
+                    <pre class="code-block">${JSON.stringify(result.mapping, null, 2)}</pre>
+                `;
+            } else {
+                let tableHTML = `
+                    <p>One-Hot Encoded Matrix:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                ${result.mapping.map(col => `<th>${col}</th>`).join('')}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${result.encoded.map(row => `
+                                <tr>
+                                    ${row.map(val => `<td>${val}</td>`).join('')}
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+                resultDiv.innerHTML = tableHTML;
+            }
+        }
+
+        // Event Listeners
+        document.getElementById('inputData').addEventListener('input', updateResult);
+        document.getElementById('encodingMethod').addEventListener('change', updateResult);
+
+        // Initial update
+        updateResult();
+    </script>
+</body>
+</html>

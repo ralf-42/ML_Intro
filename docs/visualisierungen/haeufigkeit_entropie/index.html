@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Häufigkeiten & Entropie – ML Einsteigerkurs</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --bg-card: #1a2234;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --accent-orange: #f97316;
+            --accent-green: #10b981;
+            --accent-yellow: #eab308;
+            --accent-red: #ef4444;
+            --accent-lime: #84cc16;
+            --accent-teal: #14b8a6;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: #2d3a4f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 400px;
+            background: radial-gradient(ellipse, rgba(234, 179, 8, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange), var(--accent-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .canvas-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .canvas-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-yellow), var(--accent-orange), var(--accent-red));
+        }
+
+        .canvas-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .canvas-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .canvas-title span {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-yellow);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        button {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent-yellow);
+            color: #1a1a1a;
+        }
+
+        .btn-primary:hover {
+            background: #ca8a04;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+            color: var(--text-primary);
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-danger:hover {
+            background: rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-preset {
+            background: rgba(249, 115, 22, 0.2);
+            color: var(--accent-orange);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+
+        .btn-preset:hover {
+            background: rgba(249, 115, 22, 0.3);
+        }
+
+        .category-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+        }
+
+        .category-btn {
+            padding: 0.75rem 1.25rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: white;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .category-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .category-btn:active {
+            transform: scale(0.98);
+        }
+
+        #canvas {
+            width: 100%;
+            height: 400px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            display: block;
+        }
+
+        .hint {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: rgba(234, 179, 8, 0.1);
+            border-radius: 8px;
+            border: 1px dashed var(--border);
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .entropy-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .entropy-card h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .entropy-display {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .entropy-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .entropy-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-yellow);
+        }
+
+        .entropy-max {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .entropy-bar-container {
+            margin-top: 1rem;
+        }
+
+        .entropy-bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .entropy-bar {
+            height: 12px;
+            background: var(--bg-primary);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .entropy-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-yellow), var(--accent-red));
+            border-radius: 6px;
+            transition: width 0.3s ease;
+        }
+
+        .entropy-interpretation {
+            text-align: center;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .stats-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .stats-card h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .stat-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .stat-name {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .frequency-table {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .frequency-table h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .freq-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .freq-row:last-child {
+            border-bottom: none;
+        }
+
+        .freq-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        .freq-name {
+            flex: 1;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .freq-count {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            min-width: 30px;
+            text-align: right;
+        }
+
+        .freq-percent {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            min-width: 50px;
+            text-align: right;
+        }
+
+        .freq-bar-container {
+            flex: 2;
+            height: 8px;
+            background: var(--bg-primary);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .freq-bar {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .explanation-section {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .explanation-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .explanation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+
+        .explanation-card.mode::before { background: var(--accent-orange); }
+        .explanation-card.entropy::before { background: var(--accent-yellow); }
+        .explanation-card.probability::before { background: var(--accent-red); }
+
+        .explanation-card h4 {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .explanation-card.mode h4 { color: var(--accent-orange); }
+        .explanation-card.entropy h4 { color: var(--accent-yellow); }
+        .explanation-card.probability h4 { color: var(--accent-red); }
+
+        .explanation-card p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .ml-hint {
+            background: linear-gradient(135deg, rgba(234, 179, 8, 0.1), rgba(249, 115, 22, 0.1));
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-top: 0.75rem;
+            font-size: 0.75rem;
+            color: var(--accent-yellow);
+            border: 1px solid rgba(234, 179, 8, 0.2);
+        }
+
+        .ml-hint strong {
+            color: var(--accent-orange);
+        }
+
+        .formula-box {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            border-left: 3px solid var(--accent-yellow);
+        }
+
+        .formula-box .label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 1200px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .explanation-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .controls {
+                justify-content: center;
+            }
+
+            .category-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Häufigkeiten & Entropie</h1>
+            <p class="subtitle">Kategorische Daten und Informationsgehalt verstehen</p>
+        </header>
+
+        <div class="main-grid">
+            <div class="canvas-section">
+                <div class="canvas-header">
+                    <div class="canvas-title">
+                        <span></span>
+                        Häufigkeitsverteilung
+                    </div>
+                    <div class="controls">
+                        <button class="btn-preset" onclick="loadPreset('uniform')">Gleichverteilt</button>
+                        <button class="btn-preset" onclick="loadPreset('dominant')">Dominante Klasse</button>
+                        <button class="btn-preset" onclick="loadPreset('bimodal')">Bimodal</button>
+                        <button class="btn-danger" onclick="clearData()">Reset</button>
+                    </div>
+                </div>
+                
+                <div class="category-buttons" id="categoryButtons">
+                    <!-- Buttons will be generated by JS -->
+                </div>
+                
+                <canvas id="canvas"></canvas>
+                <p class="hint">💡 Klicke auf die Kategorien um Datenpunkte hinzuzufügen. Beobachte wie sich Modus und Entropie ändern.</p>
+            </div>
+
+            <div class="sidebar">
+                <div class="entropy-card">
+                    <h3>🔥 Shannon-Entropie</h3>
+                    <div class="entropy-display">
+                        <div class="entropy-label">H(X) =</div>
+                        <div class="entropy-value" id="entropy">0.000</div>
+                        <div class="entropy-max" id="maxEntropy">Max: 0.000 bits</div>
+                        <div class="entropy-bar-container">
+                            <div class="entropy-bar-label">
+                                <span>Ordnung</span>
+                                <span>Chaos</span>
+                            </div>
+                            <div class="entropy-bar">
+                                <div class="entropy-fill" id="entropyFill" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                        <div class="entropy-interpretation" id="entropyInterp">
+                            Füge Daten hinzu
+                        </div>
+                    </div>
+                    <div class="formula-box">
+                        <div class="label">Entropie-Formel</div>
+                        <span style="color: var(--accent-yellow);">H(X)</span> = 
+                        <span style="color: var(--accent-pink);">−</span>Σ p(x) · log₂(p(x))
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <h3>📈 Kennzahlen</h3>
+                    <div class="stat-row">
+                        <div class="stat-label">
+                            <div class="stat-icon" style="background: rgba(249, 115, 22, 0.2);">🏆</div>
+                            <span class="stat-name">Modus (häufigste)</span>
+                        </div>
+                        <span class="stat-value" id="mode" style="color: var(--accent-orange);">–</span>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-label">
+                            <div class="stat-icon" style="background: rgba(59, 130, 246, 0.2);">n</div>
+                            <span class="stat-name">Gesamtanzahl</span>
+                        </div>
+                        <span class="stat-value" id="total" style="color: var(--accent-blue);">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-label">
+                            <div class="stat-icon" style="background: rgba(16, 185, 129, 0.2);">k</div>
+                            <span class="stat-name">Kategorien</span>
+                        </div>
+                        <span class="stat-value" id="numCategories" style="color: var(--accent-green);">5</span>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-label">
+                            <div class="stat-icon" style="background: rgba(139, 92, 246, 0.2);">%</div>
+                            <span class="stat-name">Modus-Anteil</span>
+                        </div>
+                        <span class="stat-value" id="modePercent" style="color: var(--accent-purple);">–</span>
+                    </div>
+                </div>
+
+                <div class="frequency-table">
+                    <h3>📋 Häufigkeitstabelle</h3>
+                    <div id="freqTable">
+                        <!-- Generated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="explanation-section">
+            <div class="explanation-card mode">
+                <h4>🏆 Modus</h4>
+                <p>Der <strong>häufigste Wert</strong> in den Daten. Bei kategorischen Variablen die einzig sinnvolle "Mitte". Es können auch mehrere Modi existieren (bimodal, multimodal).</p>
+                <div class="ml-hint">
+                    <strong>ML:</strong> Für Imputation kategorischer Features. Bei Klassifikation: Baseline-Accuracy = Modus-Anteil.
+                </div>
+            </div>
+            <div class="explanation-card entropy">
+                <h4>🔥 Entropie</h4>
+                <p>Misst die <strong>Unsicherheit/Unordnung</strong> in den Daten. 0 = perfekte Ordnung (nur eine Klasse). Maximum = alle Klassen gleich häufig (maximale Unsicherheit).</p>
+                <div class="ml-hint">
+                    <strong>ML:</strong> Basis für Decision Trees (Information Gain). Je höher die Entropie-Reduktion, desto besser der Split.
+                </div>
+            </div>
+            <div class="explanation-card probability">
+                <h4>📊 Wahrscheinlichkeit</h4>
+                <p>Die <strong>relative Häufigkeit</strong> p(x) = n(x)/N schätzt die Wahrscheinlichkeit jeder Kategorie. Summe aller p(x) = 1 (100%).</p>
+                <div class="ml-hint">
+                    <strong>ML:</strong> Grundlage für Naive Bayes, Softmax-Ausgaben und Klassifikations-Konfidenz.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        const categories = [
+            { name: 'Katze', emoji: '🐱', color: '#f97316' },
+            { name: 'Hund', emoji: '🐕', color: '#3b82f6' },
+            { name: 'Vogel', emoji: '🐦', color: '#10b981' },
+            { name: 'Fisch', emoji: '🐟', color: '#06b6d4' },
+            { name: 'Hase', emoji: '🐰', color: '#ec4899' }
+        ];
+
+        let counts = [0, 0, 0, 0, 0];
+
+        const colors = {
+            grid: 'rgba(45, 58, 79, 0.5)',
+            axis: '#64748b',
+            text: '#94a3b8',
+            bar: 'rgba(234, 179, 8, 0.3)',
+            barBorder: '#eab308'
+        };
+
+        function initCategoryButtons() {
+            const container = document.getElementById('categoryButtons');
+            container.innerHTML = '';
+            
+            categories.forEach((cat, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'category-btn';
+                btn.style.background = cat.color;
+                btn.innerHTML = `${cat.emoji} ${cat.name}`;
+                btn.onclick = () => addToCategory(index);
+                container.appendChild(btn);
+            });
+        }
+
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            canvas.style.width = rect.width + 'px';
+            canvas.style.height = rect.height + 'px';
+            draw();
+        }
+
+        function calculateEntropy() {
+            const total = counts.reduce((a, b) => a + b, 0);
+            if (total === 0) return 0;
+
+            let entropy = 0;
+            counts.forEach(count => {
+                if (count > 0) {
+                    const p = count / total;
+                    entropy -= p * Math.log2(p);
+                }
+            });
+            return entropy;
+        }
+
+        function getMaxEntropy() {
+            const k = categories.length;
+            return Math.log2(k);
+        }
+
+        function updateDisplay() {
+            const total = counts.reduce((a, b) => a + b, 0);
+            const entropy = calculateEntropy();
+            const maxEntropy = getMaxEntropy();
+
+            document.getElementById('entropy').textContent = entropy.toFixed(3);
+            document.getElementById('maxEntropy').textContent = `Max: ${maxEntropy.toFixed(3)} bits`;
+            document.getElementById('total').textContent = total;
+            document.getElementById('numCategories').textContent = categories.length;
+
+            // Entropy bar
+            const entropyPercent = maxEntropy > 0 ? (entropy / maxEntropy) * 100 : 0;
+            document.getElementById('entropyFill').style.width = entropyPercent + '%';
+
+            // Entropy interpretation
+            const interpEl = document.getElementById('entropyInterp');
+            if (total === 0) {
+                interpEl.textContent = 'Füge Daten hinzu';
+                interpEl.style.background = 'transparent';
+                interpEl.style.color = colors.text;
+            } else if (entropyPercent < 20) {
+                interpEl.textContent = '📗 Sehr geordnet (niedrige Unsicherheit)';
+                interpEl.style.background = 'rgba(16, 185, 129, 0.15)';
+                interpEl.style.color = '#10b981';
+            } else if (entropyPercent < 50) {
+                interpEl.textContent = '📘 Moderat geordnet';
+                interpEl.style.background = 'rgba(59, 130, 246, 0.15)';
+                interpEl.style.color = '#3b82f6';
+            } else if (entropyPercent < 80) {
+                interpEl.textContent = '📙 Moderate Unsicherheit';
+                interpEl.style.background = 'rgba(234, 179, 8, 0.15)';
+                interpEl.style.color = '#eab308';
+            } else {
+                interpEl.textContent = '📕 Hohe Unsicherheit (nahe Maximum)';
+                interpEl.style.background = 'rgba(239, 68, 68, 0.15)';
+                interpEl.style.color = '#ef4444';
+            }
+
+            // Mode
+            const maxCount = Math.max(...counts);
+            if (total > 0 && maxCount > 0) {
+                const modeIndices = counts.map((c, i) => c === maxCount ? i : -1).filter(i => i >= 0);
+                const modeNames = modeIndices.map(i => categories[i].emoji + ' ' + categories[i].name);
+                document.getElementById('mode').textContent = modeNames.join(', ');
+                document.getElementById('modePercent').textContent = ((maxCount / total) * 100).toFixed(1) + '%';
+            } else {
+                document.getElementById('mode').textContent = '–';
+                document.getElementById('modePercent').textContent = '–';
+            }
+
+            // Frequency table
+            updateFrequencyTable(total);
+        }
+
+        function updateFrequencyTable(total) {
+            const container = document.getElementById('freqTable');
+            container.innerHTML = '';
+
+            categories.forEach((cat, index) => {
+                const count = counts[index];
+                const percent = total > 0 ? (count / total) * 100 : 0;
+                const maxCount = Math.max(...counts, 1);
+                const barWidth = (count / maxCount) * 100;
+
+                const row = document.createElement('div');
+                row.className = 'freq-row';
+                row.innerHTML = `
+                    <div class="freq-color" style="background: ${cat.color};"></div>
+                    <div class="freq-name">${cat.emoji} ${cat.name}</div>
+                    <div class="freq-count">${count}</div>
+                    <div class="freq-bar-container">
+                        <div class="freq-bar" style="background: ${cat.color}; width: ${barWidth}%;"></div>
+                    </div>
+                    <div class="freq-percent">${percent.toFixed(1)}%</div>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        function draw() {
+            const rect = canvas.getBoundingClientRect();
+            const width = rect.width;
+            const height = rect.height;
+            const padding = { top: 40, right: 40, bottom: 60, left: 60 };
+            const chartWidth = width - padding.left - padding.right;
+            const chartHeight = height - padding.top - padding.bottom;
+
+            ctx.clearRect(0, 0, width, height);
+
+            const maxCount = Math.max(...counts, 1);
+            const barWidth = chartWidth / categories.length;
+            const barPadding = barWidth * 0.15;
+
+            // Grid lines
+            ctx.strokeStyle = colors.grid;
+            ctx.lineWidth = 1;
+            const gridLines = 5;
+            for (let i = 0; i <= gridLines; i++) {
+                const y = padding.top + (i / gridLines) * chartHeight;
+                ctx.beginPath();
+                ctx.moveTo(padding.left, y);
+                ctx.lineTo(width - padding.right, y);
+                ctx.stroke();
+
+                // Y-axis labels
+                ctx.fillStyle = colors.text;
+                ctx.font = '12px JetBrains Mono';
+                ctx.textAlign = 'right';
+                const value = Math.round(maxCount * (1 - i / gridLines));
+                ctx.fillText(value.toString(), padding.left - 10, y + 4);
+            }
+
+            // Axes
+            ctx.strokeStyle = colors.axis;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(padding.left, padding.top);
+            ctx.lineTo(padding.left, height - padding.bottom);
+            ctx.lineTo(width - padding.right, height - padding.bottom);
+            ctx.stroke();
+
+            // Bars
+            categories.forEach((cat, index) => {
+                const count = counts[index];
+                const barHeight = maxCount > 0 ? (count / maxCount) * chartHeight : 0;
+                const x = padding.left + index * barWidth + barPadding;
+                const y = height - padding.bottom - barHeight;
+                const bw = barWidth - barPadding * 2;
+
+                // Bar shadow
+                ctx.fillStyle = 'rgba(0,0,0,0.2)';
+                ctx.fillRect(x + 4, y + 4, bw, barHeight);
+
+                // Bar
+                ctx.fillStyle = cat.color + '40';
+                ctx.fillRect(x, y, bw, barHeight);
+                ctx.strokeStyle = cat.color;
+                ctx.lineWidth = 3;
+                ctx.strokeRect(x, y, bw, barHeight);
+
+                // Category label
+                ctx.fillStyle = colors.text;
+                ctx.font = '24px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(cat.emoji, x + bw / 2, height - padding.bottom + 30);
+
+                ctx.font = '11px Plus Jakarta Sans';
+                ctx.fillText(cat.name, x + bw / 2, height - padding.bottom + 48);
+
+                // Count on top of bar
+                if (count > 0) {
+                    ctx.fillStyle = cat.color;
+                    ctx.font = 'bold 14px JetBrains Mono';
+                    ctx.fillText(count.toString(), x + bw / 2, y - 8);
+                }
+            });
+
+            // Title
+            ctx.fillStyle = colors.text;
+            ctx.font = '14px Plus Jakarta Sans';
+            ctx.textAlign = 'left';
+            ctx.fillText('Absolute Häufigkeit', padding.left, 25);
+        }
+
+        function addToCategory(index) {
+            counts[index]++;
+            updateDisplay();
+            draw();
+            
+            // Visual feedback
+            const buttons = document.querySelectorAll('.category-btn');
+            buttons[index].style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                buttons[index].style.transform = 'scale(1)';
+            }, 150);
+        }
+
+        function loadPreset(type) {
+            if (type === 'uniform') {
+                counts = [20, 20, 20, 20, 20];
+            } else if (type === 'dominant') {
+                counts = [50, 5, 5, 3, 2];
+            } else if (type === 'bimodal') {
+                counts = [30, 5, 5, 5, 30];
+            }
+            updateDisplay();
+            draw();
+        }
+
+        function clearData() {
+            counts = [0, 0, 0, 0, 0];
+            updateDisplay();
+            draw();
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        
+        initCategoryButtons();
+        resizeCanvas();
+        updateDisplay();
+    </script>
+</body>
+</html>
