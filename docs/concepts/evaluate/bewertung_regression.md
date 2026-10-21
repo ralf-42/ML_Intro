@@ -47,11 +47,14 @@ flowchart TD
     MAE --> MAE_INT
     MSE --> MSE_INT
     RMSE --> RMSE_INT
-    
-    style R2 fill:#4CAF50,color:#fff
-    style MAE fill:#2196F3,color:#fff
-    style MSE fill:#FF9800,color:#fff
-    style RMSE fill:#9C27B0,color:#fff
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class MSE metric;
+    class R2 output;
+    class RMSE target;
 ```
 
 ---
@@ -83,8 +86,10 @@ flowchart LR
     PRED --> VAR_RESIDUAL
     VAR_TOTAL --> RESULT
     VAR_RESIDUAL --> RESULT
-    
-    style RESULT fill:#4CAF50,color:#fff
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class RESULT output;
 ```
 
 SS = Sum of Squares / Quadratsummen
@@ -173,9 +178,8 @@ flowchart TD
     DIFF --> ABS
     ABS --> MEAN
     MEAN --> MAE
-    
-    style MAE fill:#2196F3,color:#fff
-    style MEAN fill:#64B5F6,color:#fff
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ### Eigenschaften
@@ -200,10 +204,12 @@ flowchart LR
         MSE_BOX["**MSE**<br/>Mittlerer quadratischer Fehler<br/>Bestraft große Fehler stärker"]
         RMSE_BOX["**RMSE**<br/>Wurzel des MSE<br/>Gleiche Einheit wie y"]
     end
-    
-    style MAE_BOX fill:#2196F3,color:#fff
-    style MSE_BOX fill:#FF9800,color:#fff
-    style RMSE_BOX fill:#9C27B0,color:#fff
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class MSE_BOX metric;
+    class RMSE_BOX target;
 ```
 
 | Metrik | Formel | Besonderheit |
@@ -260,10 +266,14 @@ flowchart TD
     PENALTY -->|Nein| INTERPRET
     INTERPRET -->|Ja| RMSE_CHOICE
     INTERPRET -->|Nein| MSE_CHOICE
-    
-    style MAE_CHOICE fill:#4CAF50,color:#fff
-    style MSE_CHOICE fill:#FF9800,color:#fff
-    style RMSE_CHOICE fill:#9C27B0,color:#fff
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class MSE_CHOICE metric;
+    class MAE_CHOICE output;
+    class RMSE_CHOICE target;
 ```
 
 ---
@@ -298,10 +308,14 @@ flowchart LR
         FUNNEL["📐 Trichter<br/>◁━━━━━━━▷<br/>⚠️ ungleiche Varianz"]
         CURVE["〰️ Kurve<br/>⌒━━━━━━⌒<br/>⚠️ Nicht-linear"]
     end
-    
-    style RANDOM fill:#4CAF50,color:#fff
-    style FUNNEL fill:#FF9800,color:#fff
-    style CURVE fill:#f44336,color:#fff
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class FUNNEL metric;
+    class RANDOM output;
+    class CURVE stop;
 ```
 
 <br> 
@@ -329,8 +343,10 @@ flowchart LR
     PRED --> VAR_RESIDUAL
     VAR_TOTAL --> RESULT
     VAR_RESIDUAL --> RESULT
-    
-    style RESULT fill:#4CAF50,color:#fff
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class RESULT output;
 ```
 ### Vollständige Evaluation mit allen Metriken
 
@@ -353,8 +369,10 @@ flowchart LR
     PRED --> VAR_RESIDUAL
     VAR_TOTAL --> RESULT
     VAR_RESIDUAL --> RESULT
-    
-    style RESULT fill:#4CAF50,color:#fff
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class RESULT output;
 ```
 ---
 
@@ -400,8 +418,10 @@ flowchart LR
     PRED --> VAR_RESIDUAL
     VAR_TOTAL --> RESULT
     VAR_RESIDUAL --> RESULT
-    
-    style RESULT fill:#4CAF50,color:#fff
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class RESULT output;
 ```
 | Metrik | Stärke | Schwäche |
 |--------|--------|----------|

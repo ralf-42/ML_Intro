@@ -44,10 +44,12 @@ flowchart LR
     M3 --> |"+"|SUM
     
     SUM --> P["Finale<br>Vorhersage"]
-    
-    style D fill:#e3f2fd,stroke:#1976d2
-    style SUM fill:#fff9c4,stroke:#fbc02d
-    style P fill:#c8e6c9,stroke:#388e3c
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class SUM metric;
+    class P output;
 ```
 
 ### Der Boosting-Ablauf in 4 Schritten
@@ -78,9 +80,10 @@ flowchart TD
     end
     
     M1 --> E1 --> M2 --> E2 --> M3 --> PRED
-    
-    style REAL fill:#e8f5e9,stroke:#4caf50
-    style PRED fill:#c8e6c9,stroke:#388e3c
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class REAL,PRED output;
 ```
 
 > **Kernidee**
@@ -108,9 +111,10 @@ flowchart TD
         QUALITY --> Q2["Optimierter Split-Algorithmus"]
         QUALITY --> Q3["Handling fehlender Werte"]
     end
-    
-    style SPEED fill:#e3f2fd,stroke:#1976d2
-    style QUALITY fill:#fff3e0,stroke:#ff9800
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    class QUALITY metric;
 ```
 
 ### Optimierungen im Detail
@@ -146,10 +150,12 @@ flowchart LR
     CLASS --> C1["Binäre Klassifikation"]
     CLASS --> C2["Multi-Class"]
     CLASS --> C3["Ranking"]
-    
-    style XGB fill:#fff9c4,stroke:#fbc02d
-    style REG fill:#e8f5e9,stroke:#4caf50
-    style CLASS fill:#e3f2fd,stroke:#1976d2
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class XGB metric;
+    class REG output;
 ```
 
 ### Typische Anwendungsfälle
@@ -196,10 +202,12 @@ flowchart TD
         REG --> R2["reg_lambda (L2)"]
         REG --> R3["subsample<br>Stichprobengröße"]
     end
-    
-    style TREE fill:#e8f5e9,stroke:#4caf50
-    style BOOST fill:#e3f2fd,stroke:#1976d2
-    style REG fill:#fff3e0,stroke:#ff9800
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class REG metric;
+    class TREE output;
 ```
 
 | Parameter | Beschreibung | Typische Werte |

@@ -97,9 +97,10 @@ flowchart TB
             I3["Konvergenz zum<br/>Optimum"]
         end
     end
-    
-    style analytical fill:#e3f2fd
-    style iterative fill:#fff9c4
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    style analytical fill:#f8fafc,stroke:#0284c7,stroke-width:2px
+    style iterative fill:#f8fafc,stroke:#d97706,stroke-width:2px
 ```
 
 ### Vergleich der Ansätze
@@ -127,9 +128,10 @@ flowchart TD
     
     Q3 -->|Ja| I
     Q3 -->|Nein| A
-    
-    style A fill:#e3f2fd
-    style I fill:#fff9c4
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    class I metric;
 ```
 
 ---
@@ -223,11 +225,12 @@ flowchart TB
         C -->|Nein| G
         C -->|Ja| E
     end
-    
-    style S fill:#fff9c4
-    style G fill:#e3f2fd
-    style U fill:#e3f2fd
-    style E fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class S metric;
+    class E output;
 ```
 
 ### Die Lernrate
@@ -254,10 +257,8 @@ flowchart LR
             L2["Keine Konvergenz"]
         end
     end
-    
-    style small fill:#fff9c4
-    style optimal fill:#c8e6c9
-    style large fill:#ffcdd2
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ### Varianten von Gradient Descent
@@ -291,9 +292,10 @@ flowchart LR
             LO2["z.B. P(bestanden) = 0.85"]
         end
     end
-    
-    style linear fill:#e3f2fd
-    style logistic fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    style linear fill:#f8fafc,stroke:#0284c7,stroke-width:2px
+    style logistic fill:#f8fafc,stroke:#16a34a,stroke-width:2px
 ```
 
 ### Das Problem der linearen Regression bei Klassifikation
@@ -317,9 +319,10 @@ flowchart TB
     end
     
     problem --> solution
-    
-    style problem fill:#ffcdd2
-    style solution fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    style problem fill:#f8fafc,stroke:#dc2626,stroke-width:2px
+    style solution fill:#f8fafc,stroke:#16a34a,stroke-width:2px
 ```
 
 ### Die Sigmoid-Funktion
@@ -338,10 +341,12 @@ flowchart LR
         
         I --> S --> O
     end
-    
-    style I fill:#fff9c4
-    style S fill:#e3f2fd
-    style O fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class I metric;
+    class O output;
 ```
 
 ### Entscheidungsgrenze
@@ -363,9 +368,10 @@ flowchart TB
             A2["Niedrigerer Schwellenwert:<br/>Weniger False Negatives"]
         end
     end
-    
-    style threshold fill:#e3f2fd
-    style adjust fill:#fff9c4
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    style threshold fill:#f8fafc,stroke:#0284c7,stroke-width:2px
+    style adjust fill:#f8fafc,stroke:#d97706,stroke-width:2px
 ```
 
 ---
@@ -396,10 +402,8 @@ flowchart TB
         
         step1 --> step2 --> step3
     end
-    
-    style step1 fill:#fff9c4
-    style step2 fill:#e3f2fd
-    style step3 fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ## Vergleich: Lineare vs. Logistische Regression

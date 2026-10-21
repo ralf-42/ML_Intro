@@ -45,9 +45,12 @@ flowchart LR
     end
     
     training --> |"Overfitting"| test
-    
-    style T3 fill:#c8e6c9
-    style N3 fill:#ffcdd2
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class T3 output;
+    class N3 stop;
 ```
 
 **Das Problem:** Ein Modell, das nur auf bereits gesehenen Daten gut funktioniert, hat keinen praktischen Nutzen. Das Ziel ist immer die **Generalisierungsfähigkeit** – die Fähigkeit, auf neuen Daten zuverlässige Vorhersagen zu treffen.
@@ -81,10 +84,8 @@ flowchart TD
         O3["Training ✅ Test ❌"]
         O1 --> O2 --> O3
     end
-    
-    style underfit fill:#e3f2fd
-    style goodfit fill:#c8e6c9
-    style overfit fill:#ffcdd2
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ### Charakteristiken im Detail
@@ -135,10 +136,8 @@ flowchart TB
             N1["Unvermeidbarer Fehler<br/>in den Daten"]
         end
     end
-    
-    style bias fill:#e3f2fd
-    style variance fill:#ffcdd2
-    style noise fill:#f5f5f5
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ### Der Tradeoff
@@ -152,10 +151,12 @@ flowchart LR
     LOW --> |"Hoher Bias<br/>Niedrige Varianz"| UF["Underfit"]
     HIGH --> |"Niedriger Bias<br/>Hohe Varianz"| OF["Overfit"]
     MED --> |"Balance"| GF["Goodfit ✅"]
-    
-    style UF fill:#e3f2fd
-    style OF fill:#ffcdd2
-    style GF fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class GF output;
+    class OF stop;
 ```
 
 **Hinweis:** 
@@ -283,10 +284,8 @@ flowchart TB
             G3["Kleine Lücke, beide hoch"]
         end
     end
-    
-    style overfit fill:#ffcdd2
-    style underfit fill:#e3f2fd
-    style good fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 | Muster | Training Score | Validation Score | Diagnose | Maßnahme |
@@ -388,11 +387,8 @@ flowchart TB
             EN2["Boosting mit Regularisierung"]
         end
     end
-    
-    style data fill:#e3f2fd
-    style model fill:#fff3e0
-    style eval fill:#e8f5e9
-    style ensemble fill:#fce4ec
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ### Strategie 1: Mehr Trainingsdaten
@@ -645,9 +641,11 @@ flowchart TB
     UF --> S1["Komplexeres Modell<br/>Mehr Features<br/>Weniger Regularisierung"]
     OF --> S2["Mehr Daten<br/>Regularisierung<br/>Feature Selection<br/>Cross-Validation"]
 
-    style UF fill:#e3f2fd
-    style OF fill:#ffcdd2
-    style GF fill:#c8e6c9
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class GF output;
+    class OF stop;
 ```
 {% endraw %}
 

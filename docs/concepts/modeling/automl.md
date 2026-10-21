@@ -41,8 +41,10 @@ flowchart LR
         G[Daten] --> H[🤖 Automatisiert]
         H --> I[Bestes<br/>Modell]
     end
-    
-    style H fill:#4CAF50,color:#fff
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class H output;
 ```
 
 ---
@@ -72,8 +74,8 @@ flowchart TD
     
     B -.-> B1[Missing Values<br/>Encoding<br/>Scaling]
     D -.-> D1[Random Forest<br/>XGBoost<br/>LightGBM<br/>...]
-    
-    style G fill:#2196F3,color:#fff
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ---
@@ -120,11 +122,14 @@ flowchart TD
         A --> D[Komplexe Pipeline<br/>→ ⚠️ Hybrid]
         A --> E[Maximale Kontrolle<br/>→ ❌ Manuell]
     end
-    
-    style B fill:#4CAF50,color:#fff
-    style C fill:#4CAF50,color:#fff
-    style D fill:#FFC107
-    style E fill:#f44336,color:#fff
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class D metric;
+    class B,C output;
+    class E stop;
 ```
 
 ---

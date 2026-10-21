@@ -54,11 +54,12 @@ flowchart TD
     D --> H[❌ Stark betroffen<br/>Langsame Konvergenz]
     E --> I[❌ Stark betroffen<br/>Unfaire Bestrafung]
     F --> J[✅ Nicht betroffen<br/>Splitpunkte unabhängig]
-    
-    style G fill:#ffcccc
-    style H fill:#ffcccc
-    style I fill:#ffcccc
-    style J fill:#ccffcc
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class J output;
+    class G,H,I stop;
 ```
 
 ---
@@ -195,11 +196,10 @@ flowchart TD
     
     F -->|Ja| G[Standardisierung<br/>empfohlen]
     F -->|Nein| H[Normalisierung<br/>oder Standardisierung<br/>beide möglich]
-    
-    style C fill:#e6f3ff
-    style E fill:#fff2e6
-    style G fill:#e6f3ff
-    style H fill:#f0f0f0
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    class E metric;
 ```
 
 ### Übersichtstabelle
@@ -274,9 +274,10 @@ flowchart LR
         B3[Gradient Boosting<br/>XGBoost, LightGBM]
         B4[Naive Bayes]
     end
-    
-    style need fill:#fff2e6
-    style noneed fill:#e6f3ff
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    style need fill:#f8fafc,stroke:#d97706,stroke-width:2px
+    style noneed fill:#f8fafc,stroke:#0284c7,stroke-width:2px
 ```
 
 ### Erklärung

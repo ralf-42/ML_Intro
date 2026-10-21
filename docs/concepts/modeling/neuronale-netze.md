@@ -54,15 +54,12 @@ flowchart LR
     H2 --> O1
     H3 --> O1
     H4 --> O1
-    
-    style I1 fill:#e3f2fd
-    style I2 fill:#e3f2fd
-    style I3 fill:#e3f2fd
-    style H1 fill:#fff9c4
-    style H2 fill:#fff9c4
-    style H3 fill:#fff9c4
-    style H4 fill:#fff9c4
-    style O1 fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class H1,H2,H3,H4 metric;
+    class O1 output;
 ```
 
 ### Grundlegende Bestandteile
@@ -108,10 +105,12 @@ flowchart LR
     X3 --> W3 --> SUM
     B --> SUM
     SUM --> ACT --> Y
-    
-    style SUM fill:#e3f2fd
-    style ACT fill:#fff9c4
-    style Y fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class ACT metric;
+    class Y output;
 ```
 
 ### Die vier Grundelemente
@@ -150,11 +149,12 @@ flowchart TD
             R["f(x) = max(0, x)<br/>Wertebereich: (0, ∞)"]
         end
     end
-    
-    style L fill:#e0e0e0
-    style S fill:#ffcdd2
-    style T fill:#c8e6c9
-    style R fill:#bbdefb
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class T output;
+    class S stop;
 ```
 
 ### Übersicht der wichtigsten Aktivierungsfunktionen
@@ -183,11 +183,12 @@ flowchart TD
     OUTPUT -->|Regression| REG["Linear"]
     OUTPUT -->|Binäre Klassifikation| BIN["Sigmoid"]
     OUTPUT -->|Multi-Class| MULTI["Softmax"]
-    
-    style HIDDEN fill:#bbdefb
-    style REG fill:#e0e0e0
-    style BIN fill:#ffcdd2
-    style MULTI fill:#fff9c4
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class MULTI metric;
+    class BIN stop;
 ```
 
 ---
@@ -214,11 +215,14 @@ flowchart LR
         GRAD --> UPDATE["Gewichte<br/>aktualisieren"]
         UPDATE --> NN
     end
-    
-    style DATA fill:#e3f2fd
-    style PRED fill:#fff9c4
-    style LOSS fill:#ffcdd2
-    style UPDATE fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class PRED metric;
+    class UPDATE output;
+    class LOSS stop;
 ```
 
 ### Der Trainingszyklus
@@ -255,9 +259,10 @@ flowchart TD
     
     XAVIER --> |"Sigmoid, Tanh"| SIGMOID_NET["Für Sigmoid/Tanh-Netze"]
     HE --> |"ReLU"| RELU_NET["Für ReLU-Netze"]
-    
-    style XAVIER fill:#c8e6c9
-    style HE fill:#bbdefb
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class XAVIER output;
 ```
 
 ---

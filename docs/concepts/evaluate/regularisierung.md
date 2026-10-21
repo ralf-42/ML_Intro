@@ -40,9 +40,12 @@ flowchart LR
     
     ohne --> |"Kann beliebig<br/>große Gewichte haben"| O["Overfitting-<br/>Risiko"]
     mit --> |"Große Gewichte<br/>werden bestraft"| G["Bessere<br/>Generalisierung"]
-    
-    style O fill:#ffcdd2
-    style G fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class G output;
+    class O stop;
 ```
 
 **Kernidee:** Große Gewichte ermöglichen es dem Modell, sich sehr genau an die Trainingsdaten anzupassen – oft zu genau. Durch Bestrafung großer Gewichte wird das Modell gezwungen, robustere, allgemeinere Muster zu lernen.
@@ -269,10 +272,12 @@ flowchart LR
     A0 --> E0["Keine Regularisierung<br/>→ Overfitting"]
     A3 --> E3["Starke Regularisierung<br/>→ Underfitting"]
     A2 --> E2["Balance<br/>→ Goodfit ✅"]
-    
-    style E0 fill:#ffcdd2
-    style E3 fill:#e3f2fd
-    style E2 fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class E2 output;
+    class E0 stop;
 ```
 
 ### Optimales Alpha finden
@@ -338,11 +343,8 @@ flowchart TB
     end
     
     weight ~~~ dropout ~~~ early ~~~ bn
-    
-    style weight fill:#e3f2fd
-    style dropout fill:#fff3e0
-    style early fill:#e8f5e9
-    style bn fill:#fce4ec
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ### L1/L2-Regularisierung in Keras
@@ -409,9 +411,10 @@ flowchart TD
     end
     
     training ~~~ inference
-    
-    style training fill:#fff3e0
-    style inference fill:#e8f5e9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    style training fill:#f8fafc,stroke:#d97706,stroke-width:2px
+    style inference fill:#f8fafc,stroke:#16a34a,stroke-width:2px
 ```
 
 ```python
@@ -640,10 +643,9 @@ flowchart TB
     Q3 --> |"Ja"| A3["Ridge (L2)"]
     Q3 --> |"Nein / Unsicher"| A4["Ridge (L2)<br/>als Standard"]
 
-    style A1 fill:#c8e6c9
-    style A2 fill:#c8e6c9
-    style A3 fill:#c8e6c9
-    style A4 fill:#c8e6c9
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class A1,A2,A3,A4 output;
 ```
 {% endraw %}
 

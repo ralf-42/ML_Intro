@@ -47,14 +47,12 @@ flowchart TB
         end
 
     end
-    
- 
-    
-    
-    style TP fill:#c8e6c9,stroke:#2e7d32
-    style TN fill:#c8e6c9,stroke:#2e7d32
-    style FP fill:#ffcdd2,stroke:#c62828
-    style FN fill:#ffcdd2,stroke:#c62828
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class TP,TN output;
+    class FP,FN stop;
 ```
 
 ### Die vier Kategorien

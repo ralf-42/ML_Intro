@@ -40,10 +40,12 @@ flowchart LR
     end
     
     C --> D
-    
-    style A fill:#e3f2fd
-    style F fill:#c8e6c9
-    style G fill:#fff3e0
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class G metric;
+    class F output;
 ```
 
 ---
@@ -91,9 +93,12 @@ flowchart TD
         D1 & D2 & D3 --> F
         F --> B
     end
-    
-    style E fill:#c8e6c9
-    style B fill:#fff3e0
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class B metric;
+    class E output;
 ```
 
 ---
@@ -404,11 +409,12 @@ flowchart TD
         F --> F2[Button]
         G --> G1[Textbox]
     end
-    
-    style A fill:#e3f2fd
-    style B fill:#fff3e0
-    style C fill:#c8e6c9
-    style D fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class B metric;
+    class C,D output;
 ```
 
 ---
@@ -503,9 +509,10 @@ flowchart TD
         D --> D1[preprocessing.py]
         D --> D2[visualization.py]
     end
-    
-    style A fill:#e3f2fd
-    style B fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class B output;
 ```
 
 ### Checkliste für Deployment
@@ -552,10 +559,12 @@ flowchart LR
     C --> D[Lokal]
     C --> E[Hugging Face<br/>Spaces]
     C --> F[Docker/<br/>Cloud]
-    
-    style A fill:#e3f2fd
-    style B fill:#fff3e0
-    style C fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class B metric;
+    class C output;
 ```
 
 **Kernpunkte:**

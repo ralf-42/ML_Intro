@@ -47,11 +47,14 @@ flowchart LR
     subgraph output["Ausgabe"]
         B --> M["Finales<br/>Modell"]
     end
-    
-    style D fill:#e1f5fe
-    style HP fill:#fff9c4
-    style B fill:#c8e6c9
-    style M fill:#f3e5f5
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class HP metric;
+    class B output;
+    class M target;
 ```
 
 ---
@@ -104,13 +107,12 @@ flowchart TB
         LR_MP --> LR3["Koeffizienten (Slope)"]
         LR_MP --> LR4["Achsenabschnitt (Intercept)"]
     end
-    
-    style RF_HP fill:#fff9c4
-    style NN_HP fill:#fff9c4
-    style LR_HP fill:#fff9c4
-    style RF_MP fill:#c8e6c9
-    style NN_MP fill:#c8e6c9
-    style LR_MP fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class RF_HP,NN_HP,LR_HP metric;
+    class RF_MP,NN_MP,LR_MP output;
 ```
 
 ### Häufige Hyperparameter
@@ -155,11 +157,14 @@ flowchart TB
         BO --> BO1["Intelligent<br/>Adaptiv<br/>Komplex"]
         HA --> HA1["Ressourceneffizient<br/>Frühe Eliminierung<br/>Schnell"]
     end
-    
-    style GS fill:#e3f2fd
-    style RS fill:#e8f5e9
-    style BO fill:#fff3e0
-    style HA fill:#fce4ec
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class BO metric;
+    class RS output;
+    class HA stop;
 ```
 
 ---
@@ -197,8 +202,10 @@ flowchart LR
     end
     
     grid --> combinations
-    
-    style B fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class B output;
 ```
 
 #### Implementierung
@@ -274,9 +281,10 @@ flowchart TB
     end
     
     comparison --> insight
-    
-    style gs fill:#e3f2fd
-    style rs fill:#e8f5e9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    style gs fill:#f8fafc,stroke:#0284c7,stroke-width:2px
+    style rs fill:#f8fafc,stroke:#16a34a,stroke-width:2px
 ```
 
 > **Wichtige Erkenntnis:** Bei den meisten ML-Modellen sind nur wenige Hyperparameter wirklich einflussreich. Random Search testet mehr verschiedene Werte für diese wichtigen Parameter.
@@ -344,9 +352,10 @@ flowchart TB
         Q3 -->|"Ja"| GS
         Q3 -->|"Nein"| RS
     end
-    
-    style GS fill:#e3f2fd
-    style RS fill:#e8f5e9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class RS output;
 ```
 
 | Kriterium | Grid Search | Random Search |
@@ -375,9 +384,12 @@ flowchart LR
     subgraph result["Ergebnis"]
         E --> B["Konvergenz zum<br/>Optimum"]
     end
-    
-    style S fill:#fff3e0
-    style B fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class S metric;
+    class B output;
 ```
 
 #### Implementierung mit Optuna
@@ -442,12 +454,14 @@ flowchart TB
     C2 --> |"Beste 50%"| C3
     C3 --> |"Beste 50%"| C4
     C4 --> B["Bester<br/>Kandidat"]
-    
-    style C1 fill:#ffcdd2
-    style C2 fill:#ffe0b2
-    style C3 fill:#fff9c4
-    style C4 fill:#c8e6c9
-    style B fill:#a5d6a7
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class C2,C3 metric;
+    class C4,B output;
+    class C1 stop;
 ```
 
 #### Implementierung
@@ -515,9 +529,10 @@ flowchart TB
         S4 --> AVG
         S5 --> AVG
     end
-    
-    style D fill:#e1f5fe
-    style AVG fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class AVG output;
 ```
 
 ### Nested Cross-Validation
@@ -547,9 +562,10 @@ flowchart TB
         E4 --> FINAL
         E5 --> FINAL
     end
-    
-    style outer fill:#e3f2fd
-    style FINAL fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class FINAL output;
 ```
 
 #### Implementierung Nested CV
@@ -666,11 +682,14 @@ flowchart TD
         
         S1 --> S2 --> S3 --> S4 --> S5 --> S6
     end
-    
-    style S1 fill:#e3f2fd
-    style S3 fill:#e8f5e9
-    style S5 fill:#fff3e0
-    style S6 fill:#f3e5f5
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class S5 metric;
+    class S3 output;
+    class S6 target;
 ```
 
 ### Dos ✅
@@ -719,10 +738,12 @@ flowchart TB
         BP --> BP2["Test-Set schützen"]
         BP --> BP3["Mit Baseline vergleichen"]
     end
-    
-    style D fill:#e3f2fd
-    style M fill:#e8f5e9
-    style BP fill:#fff9c4
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class BP metric;
+    class M output;
 ```
 
 Hyperparameter-Tuning ist ein essenzieller Schritt, um das volle Potenzial von Machine-Learning-Modellen auszuschöpfen. Die Wahl der richtigen Tuning-Methode hängt von der Anzahl der Parameter, verfügbaren Rechenressourcen und den Anforderungen des Projekts ab. Mit den hier vorgestellten Techniken und Best Practices lässt sich dieser Prozess systematisch und effizient gestalten.

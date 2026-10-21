@@ -43,16 +43,12 @@ flowchart LR
         D3 --> L4["🍃 Leaf Node<br/>(Blattknoten)"]
         D3 --> L5["🍃 Leaf Node<br/>(Blattknoten)"]
     end
-    
-    style R fill:#e8f5e9,stroke:#2e7d32
-    style D1 fill:#e3f2fd,stroke:#1565c0
-    style D2 fill:#e3f2fd,stroke:#1565c0
-    style D3 fill:#e3f2fd,stroke:#1565c0
-    style L1 fill:#fff9c4,stroke:#f9a825
-    style L2 fill:#fff9c4,stroke:#f9a825
-    style L3 fill:#fff9c4,stroke:#f9a825
-    style L4 fill:#fff9c4,stroke:#f9a825
-    style L5 fill:#fff9c4,stroke:#f9a825
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class L1,L2,L3,L4,L5 metric;
+    class R output;
 ```
 
 ## Komponenten des Entscheidungsbaums
@@ -83,11 +79,12 @@ flowchart LR
         K2["Gini-Impurity"]
         K3["MSE<br/>(für Regression)"]
     end
-    
-    style D fill:#e1f5fe
-    style B fill:#c8e6c9
-    style L fill:#fff9c4
-    style R fill:#fff9c4
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class L,R metric;
+    class B output;
 ```
 
 ### Entropie und Information Gain
@@ -128,9 +125,10 @@ flowchart TB
         
         W --> T --> F
     end
-    
-    style S4 fill:#c8e6c9
-    style F fill:#e3f2fd
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class S4 output;
 ```
 
 **Vorgehensweise:**
@@ -160,18 +158,12 @@ flowchart TB
     
     F2 -->|ja| F2A["🔵 Überlebt"]
     F2 -->|nein| F2B["⚫ Nicht überlebt"]
-    
-    style R fill:#e8f5e9,stroke:#2e7d32
-    style M fill:#e3f2fd,stroke:#1565c0
-    style F fill:#e3f2fd,stroke:#1565c0
-    style M2 fill:#e3f2fd,stroke:#1565c0
-    style F2 fill:#e3f2fd,stroke:#1565c0
-    style M1 fill:#ffcdd2,stroke:#c62828
-    style M2A fill:#ffcdd2,stroke:#c62828
-    style F2B fill:#ffcdd2,stroke:#c62828
-    style M2B fill:#c8e6c9,stroke:#2e7d32
-    style F1 fill:#c8e6c9,stroke:#2e7d32
-    style F2A fill:#c8e6c9,stroke:#2e7d32
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class R,M2B,F1,F2A output;
+    class M1,M2A,F2B stop;
 ```
 
 **Interpretation:**
@@ -210,9 +202,10 @@ flowchart LR
     O1 --> L1
     O2 --> L2
     O3 --> L3
-    
-    style problem fill:#ffcdd2
-    style loesung fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    style problem fill:#f8fafc,stroke:#dc2626,stroke-width:2px
+    style loesung fill:#f8fafc,stroke:#16a34a,stroke-width:2px
 ```
 
 ## Feature Importance
@@ -281,10 +274,8 @@ flowchart LR
     end
     
     konzept --> anwendung --> praxis
-    
-    style konzept fill:#e8f5e9
-    style anwendung fill:#e3f2fd
-    style praxis fill:#fff9c4
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 Der Entscheidungsbaum ist ein grundlegender Algorithmus, der das Fundament für fortgeschrittene Ensemble-Methoden wie Random Forest und Gradient Boosting bildet. Seine Stärke liegt in der Interpretierbarkeit – die Entscheidungslogik kann als Regelsystem visualisiert und kommuniziert werden.

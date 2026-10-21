@@ -54,13 +54,14 @@ flowchart LR
         MB --> V
         V --> CI["Konfidenz-<br/>intervall"]
     end
-    
-    style D fill:#e1f5fe
-    style S1 fill:#c8e6c9
-    style S2 fill:#c8e6c9
-    style SB fill:#c8e6c9
-    style V fill:#fff9c4
-    style CI fill:#f3e5f5
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class V metric;
+    class S1,S2,SB output;
+    class CI target;
 ```
 
 θ̂ = bestmögliche Schätzung<br>
@@ -136,11 +137,8 @@ flowchart TB
     original --> |"Ziehen mit<br/>Zurücklegen"| sample1
     original --> |"Ziehen mit<br/>Zurücklegen"| sample2
     original --> |"Ziehen mit<br/>Zurücklegen"| sample3
-    
-    style original fill:#e1f5fe
-    style sample1 fill:#c8e6c9
-    style sample2 fill:#c8e6c9
-    style sample3 fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 **Beobachtungen:**
@@ -170,8 +168,9 @@ flowchart TB
         E --> F["#5 Berechne Konfidenz-<br/>intervall aus Verteilung"]
     end
 
-    style A fill:#e1f5fe
-    style F fill:#f3e5f5
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class F target;
 ```
 {% endraw %}
 
@@ -368,11 +367,11 @@ flowchart TB
         Q1 --> |"Beides"| A3["Kombination<br/>möglich"]
     end
 
-    style cv fill:#e3f2fd
-    style boot fill:#fff3e0
-    style A1 fill:#c8e6c9
-    style A2 fill:#c8e6c9
-    style A3 fill:#c8e6c9
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class A1,A2,A3 output;
+    style cv fill:#f8fafc,stroke:#0284c7,stroke-width:2px
+    style boot fill:#f8fafc,stroke:#d97706,stroke-width:2px
 ```
 {% endraw %}
 
@@ -433,10 +432,12 @@ flowchart LR
     original --> |"In Bootstrap"| bootstrap
     original --> |"Nicht gezogen"| oob
     oob --> |"Zur Validation<br/>nutzen"| V["OOB-Score"]
-    
-    style bootstrap fill:#c8e6c9
-    style oob fill:#ffecb3
-    style V fill:#f3e5f5
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class V target;
+    style bootstrap fill:#f8fafc,stroke:#16a34a,stroke-width:2px
+    style oob fill:#f8fafc,stroke:#d97706,stroke-width:2px
 ```
 
 ### OOB-Score bei Random Forest
@@ -480,10 +481,12 @@ flowchart TB
         
         AGG --> P["Finale<br/>Vorhersage"]
     end
-    
-    style D fill:#e1f5fe
-    style AGG fill:#fff9c4
-    style P fill:#f3e5f5
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class AGG metric;
+    class P target;
 ```
 
 ### Implementierung von Bagging
@@ -635,12 +638,9 @@ flowchart TB
         Q1 --> |"Standardfehler<br/>schätzen"| A6["✅ Bootstrapping"]
     end
 
-    style A1 fill:#c8e6c9
-    style A3 fill:#c8e6c9
-    style A5 fill:#c8e6c9
-    style A6 fill:#c8e6c9
-    style A2 fill:#e3f2fd
-    style A4 fill:#e3f2fd
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class A1,A3,A5,A6 output;
 ```
 {% endraw %}
 

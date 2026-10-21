@@ -44,12 +44,12 @@ flowchart LR
         Q -->|Ja| D["Deploy"]
         Q -->|Nein| I["Iteration:<br/>Modell verbessern"]
     end
-    
-    style T fill:#c8e6c9
-    style M fill:#e3f2fd
-    style Q fill:#fff9c4
-    style D fill:#c8e6c9
-    style I fill:#ffecb3
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class Q,I metric;
+    class T,D output;
 ```
 
 ---
@@ -94,14 +94,14 @@ flowchart TD
     end
     
     core ~~~ features ~~~ robustness ~~~ interpretation
-    
-    style G fill:#c8e6c9
-    style R fill:#c8e6c9
-    style F fill:#e3f2fd
-    style RO fill:#fff9c4
-    style S fill:#fff9c4
-    style I fill:#f3e5f5
-    style K fill:#f3e5f5
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class RO,S metric;
+    class G,R output;
+    class I,K target;
 ```
 
 ### Bewertung der Modellgüte
@@ -196,9 +196,12 @@ flowchart TB
     eval --> E{"Entscheidung"}
     E -->|"Alle Aspekte OK"| D["✅ Deploy"]
     E -->|"Verbesserungsbedarf"| IT["🔁 Iteration"]
-    
-    style D fill:#c8e6c9
-    style IT fill:#ffecb3
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class IT metric;
+    class D output;
 ```
 
 Die Evaluation ist kein einmaliger Schritt, sondern ein iterativer Prozess. Die gewonnenen Erkenntnisse fließen zurück in die Modellentwicklung – sei es durch bessere Datenaufbereitung, andere Algorithmen oder optimierte Hyperparameter.

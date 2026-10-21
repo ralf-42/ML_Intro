@@ -42,10 +42,12 @@ flowchart TD
         
         STACK["<b>Stacking</b><br>Verschiedene Modelle<br>Parallel<br>z.B. Baum + SVM + NN"]
     end
-    
-    style BAG fill:#e8f5e9,stroke:#4caf50
-    style BOOST fill:#e3f2fd,stroke:#2196f3
-    style STACK fill:#fff3e0,stroke:#ff9800
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class STACK metric;
+    class BAG output;
 ```
 
 ### Die zwei Stacking-Varianten
@@ -80,9 +82,11 @@ flowchart TD
 
     V --> FIN["Finale Entscheidung: 'Class A'<br>Konsens der Modelle"]
 
-    style D fill:#e3f2fd,stroke:#1976d2
-    style V fill:#fff9c4,stroke:#fbc02d
-    style FIN fill:#c8e6c9,stroke:#388e3c
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class V metric;
+    class FIN output;
 ```
 
 ### Voting-Strategien
@@ -104,9 +108,12 @@ flowchart LR
         
         COUNT --> RESULT["Ergebnis: 🅰️"]
     end
-    
-    style COUNT fill:#fff9c4,stroke:#fbc02d
-    style RESULT fill:#c8e6c9,stroke:#388e3c
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class COUNT metric;
+    class RESULT output;
 ```
 
 #### Soft Voting (Wahrscheinlichkeits-Durchschnitt)
@@ -139,8 +146,10 @@ flowchart LR
         AGG --> MW["Mittelwert:<br>42.667€"]
         AGG --> MED["Median:<br>42.000€"]
     end
-    
-    style AGG fill:#fff9c4,stroke:#fbc02d
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    class AGG metric;
 ```
 
 ### Gewichtetes Voting
@@ -183,11 +192,12 @@ flowchart TD
     META --> MM["🎯 Meta-Modell"]
     
     MM --> FINAL["Finale Vorhersage"]
-    
-    style D fill:#e3f2fd,stroke:#1976d2
-    style META fill:#fff3e0,stroke:#ff9800
-    style MM fill:#e8f5e9,stroke:#4caf50
-    style FINAL fill:#c8e6c9,stroke:#388e3c
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class META metric;
+    class MM,FINAL output;
 ```
 
 ### Der Meta-Learning Prozess
@@ -213,9 +223,7 @@ end
 Phase1 --> Phase2
 Phase2 --> Phase3
 
-style Phase1 fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
-style Phase2 fill:#fff3e0,stroke:#ff9800,stroke-width:2px
-style Phase3 fill:#e8f5e9,stroke:#4caf50,stroke-width:2px
+classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ### Beispiel: Meta-Daten Struktur
@@ -266,8 +274,10 @@ flowchart TD
         E3["🎯 SVM<br>(Kernel-basiert)"]
         E4["🏘️ k-NN<br>(instanzbasiert)"]
     end
-    
-    style DIV fill:#fff9c4,stroke:#fbc02d
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    class DIV metric;
 ```
 
 > **Regel**
@@ -295,9 +305,10 @@ flowchart TD
         P2 --> META
         PN --> META
     end
-    
-    style DATA fill:#e3f2fd,stroke:#1976d2
-    style META fill:#fff3e0,stroke:#ff9800
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    class META metric;
 ```
 
 ---

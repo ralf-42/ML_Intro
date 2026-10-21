@@ -56,11 +56,14 @@ flowchart LR
     DB --> C1
     DB --> C2
     DB --> N
-    
-    style D1 fill:#e8f4f8,stroke:#1e88e5
-    style K fill:#fff3e0,stroke:#ff9800
-    style DB fill:#f3e5f5,stroke:#9c27b0
-    style N fill:#ffebee,stroke:#f44336
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class K metric;
+    class DB target;
+    class N stop;
 ```
 
 ---
@@ -107,12 +110,16 @@ flowchart TD
     C --> D
     D -->|Ja| B
     D -->|Nein| E
-    
-    style A fill:#e3f2fd,stroke:#1976d2
-    style B fill:#fff3e0,stroke:#ff9800
-    style C fill:#e8f5e9,stroke:#4caf50
-    style D fill:#fce4ec,stroke:#e91e63
-    style E fill:#f3e5f5,stroke:#9c27b0
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class B metric;
+    class C output;
+    class E target;
+    class D stop;
 ```
 
 ### Algorithmus-Schritte
@@ -185,10 +192,12 @@ flowchart TD
     P4 --> CP
     P4 --> BP
     P4 --> NP
-    
-    style CP fill:#ffcdd2,stroke:#c62828
-    style BP fill:#fff9c4,stroke:#f9a825
-    style NP fill:#e0e0e0,stroke:#424242
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class BP metric;
+    class CP stop;
 ```
 
 ### Schlüsselkonzepte
@@ -231,11 +240,14 @@ flowchart LR
         C --> C1["Textdaten,<br/>Empfehlungssysteme"]
         Min --> Min1["Generalisierung<br/>(p=1: Manhattan, p=2: Euklidisch)"]
     end
-    
-    style E fill:#e3f2fd,stroke:#1976d2
-    style M fill:#fff3e0,stroke:#ff9800
-    style C fill:#e8f5e9,stroke:#4caf50
-    style Min fill:#f3e5f5,stroke:#9c27b0
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class M metric;
+    class C output;
+    class Min target;
 ```
 
 ### Vergleich der Distanzmetriken
@@ -268,17 +280,12 @@ flowchart TB
         D4["✗ Parameter ε schwer zu wählen"]
         D5["✗ Probleme bei variierender Dichte"]
     end
-    
-    style K1 fill:#e8f5e9,stroke:#4caf50
-    style K2 fill:#e8f5e9,stroke:#4caf50
-    style K3 fill:#ffebee,stroke:#f44336
-    style K4 fill:#ffebee,stroke:#f44336
-    style K5 fill:#ffebee,stroke:#f44336
-    style D1 fill:#e8f5e9,stroke:#4caf50
-    style D2 fill:#e8f5e9,stroke:#4caf50
-    style D3 fill:#e8f5e9,stroke:#4caf50
-    style D4 fill:#ffebee,stroke:#f44336
-    style D5 fill:#ffebee,stroke:#f44336
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class K1,K2,D1,D2,D3 output;
+    class K3,K4,K5,D4,D5 stop;
 ```
 
 ### Entscheidungshilfe

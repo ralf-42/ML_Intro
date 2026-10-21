@@ -118,10 +118,12 @@ flowchart TD
     
     L --> R[Überschätzte<br/>Modellperformance]
     R --> F[Schlechte Performance<br/>auf neuen Daten]
-    
-    style L fill:#e74c3c,stroke:#c0392b,color:#fff
-    style R fill:#f39c12,stroke:#e67e22
-    style F fill:#e74c3c,stroke:#c0392b,color:#fff
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class R metric;
+    class L,F stop;
 ```
 
 ### Mögliche Auswirkungen von Data Leakage
@@ -219,9 +221,10 @@ flowchart LR
     cat --> FS
     num --> FS
     M --> P[Vorhersage]
-    
-    style cat fill:#e8f4ea,stroke:#27ae60
-    style num fill:#eaf2f8,stroke:#3498db
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    style cat fill:#f8fafc,stroke:#16a34a,stroke-width:2px
+    style num fill:#f8fafc,stroke:#0284c7,stroke-width:2px
 ```
 
 ### Beispiel: Einfache Pipeline

@@ -45,10 +45,12 @@ flowchart LR
     
     T --> F
     R --> A
-    
-    style Apriori fill:#e8f4f8,stroke:#1a5276
-    style T fill:#fdebd0,stroke:#d35400
-    style A fill:#d5f5e3,stroke:#1e8449
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class T metric;
+    class A output;
 ```
 
 ### Anwendungsgebiete
@@ -83,9 +85,10 @@ flowchart LR
     
     A --> |"zusammen<br>gekauft"| B
     B --> |"führt zu"| C
-    
-    style Antezedenz fill:#fff3cd,stroke:#856404
-    style Konsequenz fill:#d4edda,stroke:#155724
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    style Antezedenz fill:#f8fafc,stroke:#d97706,stroke-width:2px
+    style Konsequenz fill:#f8fafc,stroke:#16a34a,stroke-width:2px
 ```
 
 ### Terminologie
@@ -116,11 +119,14 @@ flowchart TB
     C --> Filter
     L --> Filter
     Filter --> Result["Relevante<br>Assoziationsregeln"]
-    
-    style S fill:#e3f2fd,stroke:#1565c0
-    style C fill:#fff8e1,stroke:#f9a825
-    style L fill:#e8f5e9,stroke:#2e7d32
-    style Result fill:#f3e5f5,stroke:#7b1fa2
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class C metric;
+    class L output;
+    class Result target;
 ```
 
 ### Support (Häufigkeit)
@@ -199,9 +205,10 @@ flowchart TB
     
     Daten --> Counts
     Counts --> Results
-    
-    style T1 fill:#d4edda,stroke:#155724
-    style T3 fill:#d4edda,stroke:#155724
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class T1,T3 output;
 ```
 
 **Schritt 1: Support berechnen**
@@ -247,10 +254,12 @@ flowchart TB
     MS --> LS
     MC --> HC
     ML --> HL
-    
-    style MS fill:#e3f2fd,stroke:#1565c0
-    style MC fill:#fff8e1,stroke:#f9a825
-    style ML fill:#e8f5e9,stroke:#2e7d32
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class MC metric;
+    class ML output;
 ```
 
 ### Empfehlungen

@@ -516,14 +516,10 @@ flowchart TD
     Q3 -->|Dimensionen<br/>reduzieren| DIM[/"🔍 DIMENSIONSRED.<br/>PCA<br/>LDA (wenn Labels)"/]
     
     Q3 -->|Zusammenhänge<br/>finden| ASSOC[/"🔍 ASSOZIATION<br/>Apriori"/]
-    
-    style START fill:#f9f9f9,stroke:#333
-    style REG fill:#c8e6c9,stroke:#2e7d32
-    style CLASS fill:#c8e6c9,stroke:#2e7d32
-    style CLUST fill:#bbdefb,stroke:#1565c0
-    style ANOM fill:#bbdefb,stroke:#1565c0
-    style DIM fill:#bbdefb,stroke:#1565c0
-    style ASSOC fill:#bbdefb,stroke:#1565c0
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class REG,CLASS output;
 ```
 
 ## Abgrenzung zu verwandten Dokumenten

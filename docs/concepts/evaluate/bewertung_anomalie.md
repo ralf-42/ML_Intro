@@ -41,10 +41,14 @@ flowchart LR
     S --> T{"Threshold"}
     T -->|"normal"| N["Inlier"]
     T -->|"auffällig"| A["Anomalie"]
-    
-    style S fill:#fff3e0,stroke:#ff9800
-    style N fill:#e8f5e9,stroke:#4caf50
-    style A fill:#ffebee,stroke:#f44336
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class S metric;
+    class N output;
+    class A stop;
 ```
 
 ---

@@ -61,11 +61,14 @@ flowchart LR
     IF --> N
     IF --> A
     IF --> S
-    
-    style D1 fill:#e8f4f8,stroke:#1e88e5
-    style IF fill:#fff3e0,stroke:#ff9800
-    style A fill:#ffebee,stroke:#f44336
-    style S fill:#f3e5f5,stroke:#9c27b0
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class IF metric;
+    class S target;
+    class A stop;
 ```
 
 ---
@@ -104,12 +107,12 @@ flowchart TD
     R --> P
     P --> A
     P --> N
-    
-    style T1 fill:#e3f2fd,stroke:#1976d2
-    style T2 fill:#e3f2fd,stroke:#1976d2
-    style T3 fill:#e3f2fd,stroke:#1976d2
-    style A fill:#ffebee,stroke:#f44336
-    style N fill:#e8f5e9,stroke:#4caf50
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class N output;
+    class A stop;
 ```
 
 ---
@@ -142,10 +145,12 @@ flowchart TD
     D --> F["Teilgruppe"]
     E --> G["Normalpunkt<br/>später isoliert"]
     E --> H["Normalpunkt<br/>später isoliert"]
-    
-    style C fill:#ffebee,stroke:#f44336
-    style G fill:#e8f5e9,stroke:#4caf50
-    style H fill:#e8f5e9,stroke:#4caf50
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class G,H output;
+    class C stop;
 ```
 
 > **Merksatz:** Isolation Forest lernt nicht "wie normal aussieht" im Sinne einer dichten Modellierung. Er misst, wie leicht ein Punkt von anderen getrennt werden kann.
@@ -183,9 +188,12 @@ flowchart LR
     SCORE --> DEC{"Threshold"}
     DEC -->|"auffällig"| A["Anomalie"]
     DEC -->|"unauffällig"| N["Normal"]
-    
-    style A fill:#ffebee,stroke:#f44336
-    style N fill:#e8f5e9,stroke:#4caf50
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class N output;
+    class A stop;
 ```
 
 ---
@@ -230,15 +238,12 @@ flowchart TB
         G3["✗ Kategoriale Features vorher kodieren"]
         G4["✗ Scores brauchen Interpretation"]
     end
-    
-    style S1 fill:#e8f5e9,stroke:#4caf50
-    style S2 fill:#e8f5e9,stroke:#4caf50
-    style S3 fill:#e8f5e9,stroke:#4caf50
-    style S4 fill:#e8f5e9,stroke:#4caf50
-    style G1 fill:#ffebee,stroke:#f44336
-    style G2 fill:#ffebee,stroke:#f44336
-    style G3 fill:#ffebee,stroke:#f44336
-    style G4 fill:#ffebee,stroke:#f44336
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class S1,S2,S3,S4 output;
+    class G1,G2,G3,G4 stop;
 ```
 
 ### Typische Einsatzfälle

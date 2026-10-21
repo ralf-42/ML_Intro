@@ -61,10 +61,11 @@ flowchart TD
     iterative --> end_node
     model --> end_node
 
-    style start fill:#2196F3,color:#fff
-    style end_node fill:#4CAF50,color:#fff
-    style drop_col fill:#f44336,color:#fff
-    style drop_row fill:#f44336,color:#fff
+classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+class end_node output;
+class drop_col,drop_row stop;
 ```
 
 ## Strategien im Detail
@@ -87,8 +88,7 @@ flowchart LR
     column --> col_pro["✅ Schnell bei vielen NaN"]
     column --> col_con["❌ Informationsverlust<br/>❌ Evtl. wichtige Features weg"]
 
-    style listwise fill:#e3f2fd
-    style column fill:#e3f2fd
+classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ### 2. Imputation (Auffüllen)
@@ -121,8 +121,9 @@ flowchart TB
     iterative --> iterative_use["Komplexe Abhängigkeiten<br/>zwischen Features"]
     mice --> mice_use["Statistische Analysen<br/>mit Unsicherheit"]
 
-    style simple fill:#e8f5e9
-    style advanced fill:#fff3e0
+classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+style simple fill:#f8fafc,stroke:#16a34a,stroke-width:2px
+style advanced fill:#f8fafc,stroke:#d97706,stroke-width:2px
 ```
 
 ## Konsequenzen falscher Behandlung
@@ -142,11 +143,9 @@ flowchart TD
     underfit --> result3["Niedrige<br/>Modellgüte"]
     invalid --> result4["Fehlerhafte<br/>Entscheidungen"]
 
-    style wrong fill:#f44336,color:#fff
-    style result1 fill:#ffcdd2
-    style result2 fill:#ffcdd2
-    style result3 fill:#ffcdd2
-    style result4 fill:#ffcdd2
+classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+class wrong,result1,result2,result3,result4 stop;
 ```
 
 ## Best Practices

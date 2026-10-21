@@ -58,9 +58,10 @@ flowchart LR
         S4 --> M
         S5 --> M
     end
-    
-    style D fill:#e1f5fe
-    style M fill:#c8e6c9
+
+classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+class M output;
 ```
 
 ## Warum Cross-Validation?
@@ -113,12 +114,10 @@ flowchart TD
     S5 --> AVG
     
 %% Blaues Farbschema für Test-Folds%% 
-style T1 fill:#2196f3,color:#fff,stroke:#0d47a1 
-style T2 fill:#2196f3,color:#fff,stroke:#0d47a1 
-style T3 fill:#2196f3,color:#fff,stroke:#0d47a1 
-style T4 fill:#2196f3,color:#fff,stroke:#0d47a1 
-style T5 fill:#2196f3,color:#fff,stroke:#0d47a1 
-style AVG fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class AVG output;
 ```
 
 ### Ablauf im Detail
@@ -210,11 +209,12 @@ flowchart LR
         Q1 -->|"1000-10000"| A3["K=5<br/>(schneller)"]
         Q1 -->|"> 10000"| A4["K=3-5<br/>oder Hold-Out"]
     end
-    
-    style A1 fill:#e3f2fd
-    style A2 fill:#c8e6c9
-    style A3 fill:#fff9c4
-    style A4 fill:#ffecb3
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class A3,A4 metric;
+    class A2 output;
 ```
 
 **Faustregel:** K=5 oder K=10 sind in den meisten Fällen gute Standardwerte.
@@ -243,8 +243,9 @@ end
 %% Unsichtbare Verbindung für das Layout (nebeneinander)
 problem ~~~ solution
 
-style problem fill:#ffcdd2,stroke:#e53935
-style solution fill:#c8e6c9,stroke:#43a047
+classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+style problem fill:#f8fafc,stroke:#dc2626,stroke-width:2px
+style solution fill:#f8fafc,stroke:#16a34a,stroke-width:2px
 ```
 
 ### Implementierung
@@ -390,15 +391,10 @@ flowchart LR
     f1 --> f2 --> f3 --> f4 --> f5
     
     note["■ = Training, □ = Test<br/>Test ist immer NACH Training (zeitlich)"]
-    
-    
-    style f1 fill:#c8e6c9
-    style f2 fill:#c8e6c9
-	style f3 fill:#c8e6c9
-	style f4 fill:#c8e6c9
-	style f5 fill:#c8e6c9
-    
-    style note fill:#fff9c4
+
+classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+class note metric;
 ```
 
 ## Nested Cross-Validation
@@ -436,9 +432,10 @@ flowchart TB
         S4 --> R
         S5 --> R
     end
-    
-    style D fill:#e1f5fe
-    style R fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class R output;
 ```
 
 ### Zweck der zwei Ebenen
@@ -546,8 +543,8 @@ flowchart TB
             TRAIN --> EVAL
         end
     end
-    
-    style correct fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ### Vollständiges Beispiel mit ColumnTransformer
@@ -636,10 +633,10 @@ flowchart TB
         
         P3["Beide Scores<br/>niedrig"] --> C3["Underfitting:<br/>- Komplexeres Modell<br/>- Mehr Features<br/>- Weniger Regularisierung"]
     end
-    
-    style P1 fill:#ffcdd2
-    style P2 fill:#ffcdd2
-    style P3 fill:#ffcdd2
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class P1,P2,P3 stop;
 ```
 
 ### Detaillierte Analyse
@@ -721,14 +718,12 @@ flowchart TB
     Q5 -->|"< 100"| A5["RepeatedKFold<br/>oder LOOCV"]
     Q5 -->|"100-10000"| A6["KFold (K=5-10)"]
     Q5 -->|"> 10000"| A7["KFold (K=3-5)<br/>oder Hold-Out"]
-    
-    style A1 fill:#e3f2fd
-    style A2 fill:#e3f2fd
-    style A3 fill:#e3f2fd
-    style A4 fill:#e3f2fd
-    style A5 fill:#e3f2fd
-    style A6 fill:#c8e6c9
-    style A7 fill:#fff9c4
+
+classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+class A7 metric;
+class A6 output;
 ```
 
 ## Zusammenfassung

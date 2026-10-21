@@ -48,11 +48,14 @@ flowchart LR
         P --> E["Evaluation"]
         TE --> E
     end
-    
-    style D fill:#e1f5fe
-    style TR fill:#c8e6c9
-    style TE fill:#ffecb3
-    style P fill:#f3e5f5
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class TE metric;
+    class TR output;
+    class P target;
 ```
 
 ## Warum ist der Split notwendig?
@@ -162,12 +165,14 @@ flowchart TB
         M --> P["Finales Modell"]
         TE --> |"Finale Bewertung<br/>nur einmal!"| P
     end
-    
-    style D fill:#e1f5fe
-    style TR2 fill:#c8e6c9
-    style VA fill:#fff9c4
-    style TE fill:#ffecb3
-    style P fill:#f3e5f5
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class VA,TE metric;
+    class TR2 output;
+    class P target;
 ```
 
 ### Zweck der drei Mengen
@@ -230,9 +235,10 @@ flowchart TB
         S3 --> E["Evaluation"]
         M --> E
     end
-    
-    style wrong fill:#ffcdd2
-    style correct fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    style wrong fill:#f8fafc,stroke:#dc2626,stroke-width:2px
+    style correct fill:#f8fafc,stroke:#16a34a,stroke-width:2px
 ```
 
 ### Häufige Quellen von Data Leakage
@@ -439,12 +445,8 @@ flowchart TB
         Q4 -->|Ja| A4["Stratifizierter<br/>Train-Test-Split"]
         Q4 -->|Nein| A5["Standard<br/>Train-Test-Split"]
     end
-    
-    style A1 fill:#e3f2fd
-    style A2 fill:#e3f2fd
-    style A3 fill:#e3f2fd
-    style A4 fill:#e3f2fd
-    style A5 fill:#e3f2fd
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 Der Train-Test-Split ist die Grundlage für zuverlässige Modellbewertung. Die korrekte Anwendung – insbesondere die Vermeidung von Data Leakage – ist entscheidend für aussagekräftige Ergebnisse und erfolgreiche ML-Projekte.

@@ -50,10 +50,8 @@ flowchart TD
             S4["Meta-Learning"]
         end
     end
-    
-    style Bagging fill:#e8f5e9,stroke:#4caf50
-    style Boosting fill:#e3f2fd,stroke:#2196f3
-    style Stacking fill:#fff3e0,stroke:#ff9800
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 | Strategie | Modelltyp | Training | Beispiele |
@@ -89,9 +87,11 @@ flowchart LR
 
     A --> P["Finale Vorhersage"]
 
-    style D fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
-    style A fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
-    style P fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class A metric;
+    class P output;
 ```
 
 **Die drei Schritte des Bagging:**
@@ -134,9 +134,11 @@ flowchart TD
         AGG --> FINAL["Finale Vorhersage"]
     end
 
-    style D fill:#e8f5e9,stroke:#4caf50,stroke-width:2px
-    style AGG fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
-    style FINAL fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class AGG metric;
+    class D,FINAL output;
 ```
 
 **Was Random Forest "zufällig" macht:**
@@ -177,9 +179,11 @@ flowchart LR
     M1 & M2 & M3 & MN --> K["Gewichtete<br/>Kombination"]
     K --> P["Finale Vorhersage"]
 
-    style D fill:#e3f2fd,stroke:#1976d2
-    style K fill:#fff9c4,stroke:#fbc02d
-    style P fill:#c8e6c9,stroke:#388e3c
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class K metric;
+    class P output;
 ```
 
 **Das Boosting-Prinzip:**

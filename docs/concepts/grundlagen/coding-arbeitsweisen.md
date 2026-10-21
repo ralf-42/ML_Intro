@@ -35,13 +35,16 @@ flowchart LR
         F[🧭 Transfer-Cases] --> D
     end
     D --> E[Qualität & Geschwindigkeit]
-    
-    style A fill:#e1f5fe
-    style B fill:#fff3e0
-    style C fill:#e8f5e9
-    style F fill:#ede7f6
-    style D fill:#f3e5f5
-    style E fill:#fce4ec
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class B metric;
+    class C output;
+    class F,D target;
+    class E stop;
 ```
 
 | Methode             | Zweck                                             | Zeitersparnis |
@@ -123,10 +126,12 @@ flowchart TD
         B[🧩 Komplexität] --> B1[Nichts vergessen]
         C[📐 Standardisierung] --> C1[Konsistente Ergebnisse]
     end
-    
-    style A fill:#e8f5e9
-    style B fill:#fff3e0
-    style C fill:#e1f5fe
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class B metric;
+    class A output;
 ```
 
 | Prinzip | Fliegerei | ML-Entwicklung |
@@ -214,11 +219,14 @@ flowchart TD
         C[✅ Fehlervermeidung] --> C1[Getesteter &<br/>bewährter Code]
         D[📚 Dokumentation] --> D1[Best Practices<br/>als Vorlage]
     end
-    
-    style A fill:#e1f5fe
-    style B fill:#fff3e0
-    style C fill:#e8f5e9
-    style D fill:#f3e5f5
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class B metric;
+    class C output;
+    class D target;
 ```
 
 ### Beispiel-Snippets für ML
@@ -347,11 +355,14 @@ flowchart LR
     A[Transfer-Case<br/>gelöstes Problem] --> B[Lösungsansatz<br/>verstehen]
     B --> C[Übertragbare<br/>Elemente auswählen]
     C --> D[Eigenes Problem<br/>angepasst lösen]
-    
-    style A fill:#ede7f6
-    style B fill:#e1f5fe
-    style C fill:#fff3e0
-    style D fill:#e8f5e9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class C metric;
+    class D output;
+    class A target;
 ```
 
 ### Praktische Anwendung
@@ -388,12 +399,14 @@ flowchart TB
     B --> D
     C --> D
     E --> D
-    
-    style A fill:#e1f5fe
-    style B fill:#fff3e0
-    style C fill:#e8f5e9
-    style E fill:#ede7f6
-    style D fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class B metric;
+    class C,D output;
+    class E target;
 ```
 
 **Kernpunkte:**

@@ -74,9 +74,12 @@ flowchart TD
     C --> D["Hauptkomponenten<br/>auswählen"]
     D --> E["Daten auf neue<br/>Achsen projizieren"]
     E --> F["Reduzierte Daten<br/>(k Dimensionen)"]
-    
-    style A fill:#ffcdd2,stroke:#d32f2f
-    style F fill:#c8e6c9,stroke:#388e3c
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class F output;
+    class A stop;
 ```
 
 **Schrittweise Erklärung:**
@@ -114,9 +117,12 @@ flowchart TD
     C --> D
     D --> E["Optimale<br/>Trennachse"]
     E --> F["Projizierte<br/>Daten"]
-    
-    style A fill:#e1bee7,stroke:#7b1fa2
-    style F fill:#c8e6c9,stroke:#388e3c
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class F output;
+    class A target;
 ```
 
 **Kernidee:** LDA sucht nach linearen Kombinationen der Merkmale, die:
@@ -150,11 +156,12 @@ flowchart TD
     
     Q3 -->|Ja| BOTH["PCA oder LDA<br/>ausprobieren"]
     Q3 -->|Nein| PCA2["✅ PCA bevorzugen"]
-    
-    style PCA fill:#c8e6c9,stroke:#388e3c
-    style LDA fill:#bbdefb,stroke:#1976d2
-    style PCA2 fill:#c8e6c9,stroke:#388e3c
-    style BOTH fill:#fff3e0,stroke:#f57c00
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class BOTH metric;
+    class PCA,PCA2 output;
 ```
 
 ### Gegenüberstellung
@@ -184,9 +191,10 @@ flowchart LR
         L1["Maximiert<br/>Klassentrennung"]
         L2["Klassen optimal<br/>separiert"]
     end
-    
-    style pca_result fill:#e8f5e9,stroke:#388e3c
-    style lda_result fill:#e3f2fd,stroke:#1976d2
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    style pca_result fill:#f8fafc,stroke:#16a34a,stroke-width:2px
+    style lda_result fill:#f8fafc,stroke:#0284c7,stroke-width:2px
 ```
 
 ---

@@ -50,10 +50,12 @@ flowchart TB
         C --> K[Rechenkosten]
         C --> L[Modellvergleich]
     end
-    
-    style A fill:#4a90d9,stroke:#2c5282,color:#fff
-    style B fill:#48bb78,stroke:#276749,color:#fff
-    style C fill:#ed8936,stroke:#c05621,color:#fff
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class C metric;
+    class B output;
 ```
 
 ---
@@ -89,10 +91,12 @@ flowchart TD
     G -->|Gruppen finden| H[Clustering]
     G -->|Ausreißer erkennen| I[Anomalieerkennung]
     G -->|Features reduzieren| J[Dimensionsreduktion]
-    
-    style A fill:#4a90d9,stroke:#2c5282,color:#fff
-    style B fill:#48bb78,stroke:#276749,color:#fff
-    style C fill:#ed8936,stroke:#c05621,color:#fff
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class C metric;
+    class B output;
 ```
 
 ### Umfang des Datenbestands
@@ -139,9 +143,12 @@ flowchart LR
     
     C --> E[Schnell trainierbar<br/>Leicht interpretierbar]
     D --> F[Höhere Genauigkeit<br/>Mehr Ressourcen nötig]
-    
-    style A fill:#48bb78,stroke:#276749,color:#fff
-    style B fill:#ed8936,stroke:#c05621,color:#fff
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class B metric;
+    class A output;
 ```
 
 **Empfehlung:** Immer mit einem einfachen Baseline-Modell starten und Komplexität nur bei Bedarf erhöhen:
@@ -203,16 +210,10 @@ flowchart TD
     M -->|Gruppierung| N[K-Means<br/>DBSCAN]
     M -->|Anomalien| O[Isolation Forest]
     M -->|Dimensionsreduktion| P[PCA<br/>LDA]
-    
-    style A fill:#4a90d9,stroke:#2c5282,color:#fff
-    style G fill:#48bb78,stroke:#276749,color:#fff
-    style I fill:#48bb78,stroke:#276749,color:#fff
-    style J fill:#48bb78,stroke:#276749,color:#fff
-    style K fill:#48bb78,stroke:#276749,color:#fff
-    style L fill:#48bb78,stroke:#276749,color:#fff
-    style N fill:#48bb78,stroke:#276749,color:#fff
-    style O fill:#48bb78,stroke:#276749,color:#fff
-    style P fill:#48bb78,stroke:#276749,color:#fff
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class G,I,J,K,L,N,O,P output;
 ```
 
 ---

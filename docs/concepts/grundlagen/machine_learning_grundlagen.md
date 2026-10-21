@@ -82,13 +82,14 @@ flowchart LR
     M --> P
     M --> E
     M --> K
-    
-    style D fill:#e3f2fd
-    style A fill:#fff9c4
-    style M fill:#c8e6c9
-    style P fill:#f3e5f5
-    style E fill:#f3e5f5
-    style K fill:#f3e5f5
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class A metric;
+    class M output;
+    class P,E,K target;
 ```
 
 ### Kernkonzepte
@@ -137,13 +138,14 @@ flowchart TB
         NEW --> MOD
         MOD --> PRED["Vorhersage"]
     end
-    
-    style D1 fill:#e3f2fd
-    style D2 fill:#bbdefb
-    style ALG fill:#fff9c4
-    style MOD fill:#c8e6c9
-    style NEW fill:#e3f2fd
-    style PRED fill:#f3e5f5
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class ALG metric;
+    class MOD output;
+    class PRED target;
 ```
 
 ### Der Lernprozess im Detail
@@ -179,11 +181,13 @@ flowchart TD
     Q_Env -- "Ja" --> RL["🎮 <b>Reinforcement Learning</b><br/>(Lernen durch Interaktion)"]
     Q_Env -- "Nein" --> NO["❌ Keine ML-Lösung<br/>möglich"]
 
-    %% Styling
-    style SL fill:#c8e6c9,stroke:#2e7d32
-    style UL fill:#bbdefb,stroke:#1565c0
-    style RL fill:#fff9c4,stroke:#fbc02d
-    style NO fill:#ffcdd2,stroke:#c62828
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class RL metric;
+    class SL output;
+    class NO stop;
 ```
 
 ### Übersicht der Lernparadigmen
@@ -250,11 +254,10 @@ flowchart LR
         CL --> OUT_CL
         RG --> OUT_RG
     end
-    
-    style CL fill:#c8e6c9
-    style RG fill:#bbdefb
-    style OUT_CL fill:#e8f5e9
-    style OUT_RG fill:#e3f2fd
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class CL,OUT_CL output;
 ```
 
 ### Klassifizierung
@@ -289,9 +292,12 @@ flowchart LR
         MODEL --> SPAM["🚫 Spam"]
         MODEL --> OK["✅ Kein Spam"]
     end
-    
-    style SPAM fill:#ffcdd2
-    style OK fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class OK output;
+    class SPAM stop;
 ```
 
 ### Regression
@@ -328,8 +334,10 @@ flowchart LR
         
         MODEL --> PRICE["💰 385.000 €"]
     end
-    
-    style PRICE fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class PRICE output;
 ```
 
 ### Vergleich: Klassifizierung vs. Regression
@@ -370,10 +378,8 @@ flowchart TB
 	end
 	
 	CL ~~~ AN ~~~ AS
-    
-    style CL fill:#bbdefb
-    style AN fill:#fff9c4
-    style AS fill:#f3e5f5
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ### Clustering (Segmentierung)
@@ -398,10 +404,10 @@ flowchart LR
     D1 --> ALG
     ALG --> C1
     ALG --> C2
-    
-    style D1 fill:#e3f2fd
-    style C1 fill:#bbdefb
-    style C2 fill:#ffcdd2
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class C2 stop;
 ```
 
 **Anwendungsbeispiele:**
@@ -426,10 +432,14 @@ flowchart TB
         ANOMALY --> |"auffällig!"| AN_ALG
         AN_ALG --> ALERT["⚠️ Warnung"]
     end
-    
-    style NORMAL fill:#e8f5e9
-    style ANOMALY fill:#ffcdd2
-    style ALERT fill:#fff9c4
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class ALERT metric;
+    class NORMAL output;
+    class ANOMALY stop;
 ```
 
 **Anwendungsbeispiele:**
@@ -466,8 +476,8 @@ flowchart LR
     T4 --> ALG
     ALG --> R1
     ALG --> R2
-    
-    style rules fill:#e8f5e9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 **Das klassische Beispiel: Warenkorbanalyse**
@@ -499,11 +509,12 @@ flowchart TB
     UL --> UL3["Assoziationsanalyse<br/>Zusammenhänge finden"]
     
     RL --> RL1["Strategieoptimierung<br/>Optimales Handeln lernen"]
-    
-    style ML fill:#e1f5fe
-    style SL fill:#c8e6c9
-    style UL fill:#bbdefb
-    style RL fill:#fff9c4
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class RL metric;
+    class SL output;
 ```
 
 ### Die wichtigsten Punkte
@@ -536,12 +547,10 @@ flowchart TB
     Q3 --> |"Gruppen"| A3["Clustering"]
     Q3 --> |"Ausreißer"| A4["Anomalieerkennung"]
     Q3 --> |"Zusammenhänge"| A5["Assoziationsanalyse"]
-    
-    style A1 fill:#c8e6c9
-    style A2 fill:#c8e6c9
-    style A3 fill:#bbdefb
-    style A4 fill:#bbdefb
-    style A5 fill:#bbdefb
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class A1,A2 output;
 ```
 ## Abgrenzung zu verwandten Dokumenten
 

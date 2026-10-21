@@ -36,9 +36,10 @@ flowchart LR
         C --> E[Silhouette-Wert]
         D --> E
     end
-    
-    style A fill:#e1f5fe
-    style E fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class E output;
 ```
 
 ### Kernidee
@@ -89,10 +90,12 @@ flowchart TD
     
     A3 --> C1
     B3 --> C1
-    
-    style A3 fill:#fff3e0
-    style B3 fill:#e3f2fd
-    style C1 fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class A3 metric;
+    class C1 output;
 ```
 
 ---
@@ -156,12 +159,14 @@ flowchart TD
     A --> A1[Plot für k=2,3,4,...<br/>erstellen und vergleichen]
     B --> B1[Punkte mit s < 0<br/>untersuchen]
     C --> C1[Durchschnittlichen<br/>Silhouette-Wert berechnen]
-    
-    style SP fill:#e1f5fe
-    style A fill:#c8e6c9
-    style B fill:#fff3e0
-    style C fill:#f3e5f5
-    style D fill:#e8f5e9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+    class B metric;
+    class A,D output;
+    class C target;
 ```
 
 ---
@@ -189,14 +194,12 @@ flowchart TD
     end
     
     Vorbereitung --> Analyse --> Validierung
-    
-    style V1 fill:#e3f2fd
-    style V2 fill:#e3f2fd
-    style A1 fill:#c8e6c9
-    style A2 fill:#c8e6c9
-    style A3 fill:#c8e6c9
-    style VAL1 fill:#fff3e0
-    style VAL2 fill:#fff3e0
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class VAL1,VAL2 metric;
+    class A1,A2,A3 output;
 ```
 
 ### Wichtige Hinweise

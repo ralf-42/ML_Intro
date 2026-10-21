@@ -38,9 +38,6 @@ flowchart TD
     B -->|Ja| C[<b>Skalierung einplanen</b>]
     B -->|Nein| D[Skalierung nur bei Bedarf]
     
-    style B fill:#e1f5fe,stroke:#01579b
-    style C fill:#e1f5fe,stroke:#01579b
-    style D fill:#e1f5fe,stroke:#01579b
 
     %% Zweig 2: Fehlende Werte (Rot)
     A --> E{Gibt es<br/>fehlende Werte?}
@@ -48,24 +45,23 @@ flowchart TD
     F -->|Ja| G[<b>Imputation fachlich prüfen</b>]
     F -->|Nein| H[<b>Imputation oder Entfernen</b>]
     
-    style E fill:#ffebee,stroke:#b71c1c
-    style F fill:#ffebee,stroke:#b71c1c
-    style G fill:#ffebee,stroke:#b71c1c
-    style H fill:#ffebee,stroke:#b71c1c
 
     %% Zweig 3: Kategorien (Gelb/Gold)
     A --> I{Gibt es<br/>kategoriale Daten?}
     I -->|Ja| J[<b>Kodierung wählen</b><br/>OneHot / Ordinal]
     
-    style I fill:#fffde7,stroke:#fbc02d
-    style J fill:#fffde7,stroke:#fbc02d
 
     %% Zweig 4: Ausreißer (Grün)
     A --> K{Gibt es<br/>extreme Werte?}
     K -->|Ja| L[<b>Ausreißer analysieren</b><br/>und Sensitivität prüfen]
 
-    style K fill:#e8f5e9,stroke:#2e7d32
-    style L fill:#e8f5e9,stroke:#2e7d32
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    class I,J metric;
+    class K,L output;
+    class E,F,G,H stop;
 ```
 
 ## Überblick

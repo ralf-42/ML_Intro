@@ -54,9 +54,7 @@ flowchart TB
         end
     end
 
-    style wissen fill:#e8f5e9
-    style statistik fill:#e3f2fd
-    style ml fill:#fff3e0
+classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ## Entscheidungsbaum zur Behandlung
@@ -91,10 +89,11 @@ flowchart TD
     robust --> ende
     sensitivity --> ende
 
-    style start fill:#2196F3,color:#fff
-    style ende fill:#4CAF50,color:#fff
-    style remove fill:#f44336,color:#fff
-    style behalten fill:#4CAF50,color:#fff
+classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+class ende,behalten output;
+class remove stop;
 ```
 
 ## Statistische Methoden
@@ -126,7 +125,7 @@ flowchart LR
     regel --> vorteil["✅ Einfach<br/>✅ Interpretierbar"]
     regel --> nachteil["❌ Sensitiv bei<br/>nicht-normalverteilten Daten"]
 
-    style zscore fill:#e3f2fd
+classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ### IQR-Methode
@@ -167,9 +166,11 @@ flowchart TB
     outlier_check -->|"Ja"| is_outlier["→ Ausreißer"]
     outlier_check -->|"Nein"| normal["→ Normaler Wert"]
 
-    style iqr fill:#e8f5e9
-    style is_outlier fill:#ffcdd2
-    style normal fill:#c8e6c9
+classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+class normal output;
+class is_outlier stop;
 ```
 
 ## Behandlungsstrategien
@@ -202,10 +203,7 @@ flowchart TB
         end
     end
 
-    style entfernen fill:#ffcdd2
-    style anpassen fill:#fff3e0
-    style robust fill:#e3f2fd
-    style behalten fill:#c8e6c9
+classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ## Visualisierung zur Erkennung
@@ -226,7 +224,7 @@ flowchart LR
     histogram --> hist_use["Verteilungsform<br/>verstehen"]
     violin --> vio_use["Detaillierte<br/>Verteilungsanalyse"]
 
-    style viz fill:#f3e5f5
+classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ## Best Practices
@@ -255,13 +253,13 @@ flowchart TB
     outlier --> nn["<b>Neuronale Netze</b><br/>Gradient-beeinflusst<br/>❌ Sensitiv"]
     outlier --> rf["<b>Random Forest</b><br/>Ensemble-Effekt<br/>✓ Robust"]
 
-    style outlier fill:#f44336,color:#fff
-    style linreg fill:#ffcdd2
-    style knn fill:#ffcdd2
-    style nn fill:#ffcdd2
-    style tree fill:#c8e6c9
-    style rf fill:#c8e6c9
-    style svm fill:#fff3e0
+classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+classDef stop fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+class svm metric;
+class tree,rf output;
+class outlier,linreg,knn,nn stop;
 ```
 
 ## Scikit-learn Klassen

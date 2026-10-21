@@ -78,11 +78,12 @@ flowchart TD
     
     Q3 -->|"Ja"| TE["<b>TargetEncoder</b><br/>Zielwert-basiert"]
     Q3 -->|"Nein"| OHE2["<b>OneHotEncoder</b><br/>oder Dimensionsreduktion"]
-    
-    style OE fill:#e1f5fe
-    style OHE fill:#fff3e0
-    style OHE2 fill:#fff3e0
-    style TE fill:#f3e5f5
+
+classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+class OHE,OHE2 metric;
+class TE target;
 ```
 
 ## Kodierungsmethoden im Detail

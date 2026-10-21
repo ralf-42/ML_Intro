@@ -71,10 +71,12 @@ flowchart TD
     Tn --> V
     
     V --> P["Finale Vorhersage"]
-    
-    style D fill:#e1f5fe
-    style V fill:#c8e6c9
-    style P fill:#fff9c4
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class P metric;
+    class V output;
 ```
 
 ---
@@ -117,10 +119,8 @@ flowchart LR
     
     Original -->|"Ziehen mit Zurücklegen"| Bootstrap1
     Original -->|"Ziehen mit Zurücklegen"| Bootstrap2
-    
-    style Original fill:#e3f2fd
-    style Bootstrap1 fill:#fff3e0
-    style Bootstrap2 fill:#f3e5f5
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 **Beispiel**:
@@ -181,10 +181,10 @@ flowchart TD
     
     MV --> Result1["Vorhersage: Klasse A"]
     AVG --> Result2["Vorhersage: ȳ"]
-    
-    style Input fill:#e1f5fe
-    style Result1 fill:#c8e6c9
-    style Result2 fill:#c8e6c9
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class Result1,Result2 output;
 ```
 
 | Aufgabe | Aggregationsmethode | Beschreibung |
@@ -354,12 +354,12 @@ flowchart TD
     
     Q4 -->|Ja| XGB["XGBoost/LightGBM"]
     Q4 -->|Nein| RF3["✅ Random Forest"]
-    
-    style RF1 fill:#c8e6c9
-    style RF2 fill:#c8e6c9
-    style RF3 fill:#c8e6c9
-    style DT fill:#fff9c4
-    style XGB fill:#e1f5fe
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    class DT metric;
+    class RF1,RF2,RF3 output;
 ```
 
 ---
