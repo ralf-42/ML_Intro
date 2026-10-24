@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-    <td><a href="./README.md"><img src="https://img.shields.io/badge/Last%20Updated-2026--04--29-blue" alt="Last Updated 2026-04-29"></a></td>
+    <td><a href="./README.md"><img src="https://img.shields.io/badge/Last%20Updated-2026--10--24-blue" alt="Last Updated 2026-10-24"></a></td>
     <td><a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.11%2B-brightgreen" alt="Python 3.11+"></a></td>
     <td><a href="./README.md"><img src="https://img.shields.io/badge/Status-Active-success" alt="Status Active"></a></td>
     <td><a href="./license"><img src="https://img.shields.io/badge/License-MIT-yellow" alt="License MIT"></a></td>
@@ -47,6 +47,8 @@ Nach Abschluss dieses Kurses können Studierende:
 - **`02_daten/`** - Datensätze für praktische Übungen
 - **`03_skript/`** - Präsentationsmaterialien und Skripte
 - **`04_model/`** - Trainierte Modelle (z. B. `diamonds_model.pmml`, `diamonds_pipeline.joblib`)
+- **`07_image/`** - Bilder und Visualisierungen für die Kursnotebooks
+- **`docs/`** - Kursdokumentation und rechtliche Hinweise
 
 ## 3.2 Kursmodule in `01_notebook/`
 
@@ -68,7 +70,7 @@ Nach Abschluss dieses Kurses können Studierende:
 - Isolation Forest für Anomalieerkennung
 - PCA für Dimensionsreduktion
 - Assoziationsregeln (Apriori-Algorithmus, Lebensmittel)
-- Beispiele: `b200_ul_kmeans_dbscan_location.ipynb`, `b220_ul_dbscan_nid.ipynb`, `b230_ul_apriori_food.ipynb`, `b240_ul_pca_special.ipynb`
+- Beispiele: `b200_ul_kmeans_dbscan_location.ipynb`, `b221_ul_isoforest_nid.ipynb`, `b230_ul_apriori_food.ipynb`, `b240_ul_pca_special.ipynb`
 
 ### 3.2.4 🟡 Modul 03: Neuronale Netze
 **Pfad**: `01_notebook/03_network/`
@@ -170,7 +172,7 @@ Der Kurs verwendet verschiedene reale Datensätze für praktisches Lernen (unter
 
 # 6 ⚖️ Lizenzen
 
-Der **Quellcode** steht unter der [MIT License](./license).      
+Der **Quellcode** steht unter der [MIT License](./license).
 Die **Kursmaterialien** (z. B. Folien, Texte, Grafiken) sind unter der [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) veröffentlicht, soweit nicht anders angegeben.      
 
 Die ausführliche Lizenzzuordnung für die Kurs-Website steht unter [Rechtliches → Lizenzen](./docs/legal/lizenzen.md).
@@ -182,5 +184,5 @@ Die ausführliche Lizenzzuordnung für die Kurs-Website steht unter [Rechtliches
 
 ---
 
-**Letzte Aktualisierung:** 29. April 2026     
-**Version:** 1.1
+**Letzte Aktualisierung:** 24. Oktober 2026
+**Version:** 1.2
