@@ -169,16 +169,16 @@ Die Grenze bleibt wichtig: KI ersetzt nicht das eigene Verständnis von Daten, M
 
 ## Kompetenzillusion vermeiden
 
-Hohe Trainingsgenauigkeit, überzeugend klingende SHAP-Erklärungen oder ein AutoML-Ergebnis mit gutem Score können den Eindruck erwecken, ein Modell sei bereits verstanden und einsatzbereit. Tatsächlich zeigt sich die eigentliche Qualität oft erst bei der Bewertung auf Testdaten, bei der Fehleranalyse oder wenn ein Modell auf neue Daten trifft.
+Bei Teilnehmenden kann eine Kompetenzillusion entstehen, wenn hohe Trainingsgenauigkeit, überzeugend klingende SHAP-Erklärungen oder ein AutoML-Ergebnis mit gutem Score den Eindruck vermitteln, sie hätten das Modell und seine Ergebnisse bereits verstanden. Ein guter Wert oder eine plausible Erklärung belegt weder das eigene Verständnis noch, dass das Modell auf neue Daten übertragbar ist. Seine Qualität zeigt sich erst bei der Bewertung auf Testdaten, in der Fehleranalyse und bei der Anwendung auf neue Daten.
 
 <img src="https://raw.githubusercontent.com/ralf-42/ML_Intro/main/07_image/kompetenzillusion.png" alt="Kompetenzillusion beim Lernen mit KI" width="700">
 <p><small>KI-generiertes Bild</small></p>
 
-Deshalb lohnen sich drei wiederkehrende Prüfbewegungen:
+Deshalb prüfen die Teilnehmenden ihr eigenes Verständnis wiederholt:
 
-- Trainings- und Testergebnisse getrennt betrachten,
-- Metriken und Visualisierungen statt einzelner Kennzahlen prüfen,
-- Modellentscheidungen mit XAI-Methoden oder Fehleranalyse nachvollziehen.
+- Trainings- und Testergebnisse getrennt betrachten und die Aussagekraft der gewählten Metriken erklären,
+- Visualisierungen im Zusammenhang mit Daten und Fragestellung interpretieren, statt sich auf einzelne Kennzahlen zu verlassen,
+- Modellentscheidungen und Fehlvorhersagen mit XAI-Methoden oder Fehleranalyse untersuchen und die Grenzen der Erklärungen benennen.
 
 Konkret heißt das im Kurs: zuerst eine einfache Baseline aufbauen, dann Datenleckagen vermeiden, Train/Test-Split oder Cross-Validation prüfen, passende Metriken wählen und auffällige Fehlvorhersagen genauer untersuchen. XAI kommt erst danach: Eine Erklärung ist nur hilfreich, wenn das Modell selbst belastbar bewertet wurde.
 
