@@ -186,7 +186,7 @@ rose_lime_exp = lime_explainer.explain_instance(
 
 ELI5 kann neben Permutation Importance auch einzelne Vorhersagen aufschlüsseln. Die Darstellung ist weniger mächtig als SHAP, aber für einen ersten lokalen Blick oft ausreichend. Der Nutzen liegt in der niedrigen Einstiegshürde: Feature-Beiträge werden tabellarisch sichtbar, ohne dass zunächst Shapley-Werte erklärt werden müssen.
 
-Grenze: Je nach Modell arbeitet ELI5 auf internen Skalen wie Log-Odds. Das muss erklärt werden, sonst werden Gewichte schnell mit Prozentpunkten verwechselt.
+**Grenze:** Je nach Modell arbeitet ELI5 auf internen Skalen wie Log-Odds. Das muss erklärt werden, sonst werden Gewichte schnell mit Prozentpunkten verwechselt.
 
 ### SHAP lokal
 

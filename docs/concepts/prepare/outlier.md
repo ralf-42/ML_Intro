@@ -140,8 +140,8 @@ Die **IQR-Methode** (Interquartilsabstand) wird genutzt, um **Ausreißer zu erke
 2. Berechne den Abstand:
     - **IQR = Q3 − Q1**
 3. Definiere Grenzen:
-    - Untere Grenze: **Q1 − 1,5 · IQR**
-    - Obere Grenze: **Q3 + 1,5 · IQR**
+    - Untere **Grenze:** **Q1 − 1,5 · IQR**
+    - Obere **Grenze:** **Q3 + 1,5 · IQR**
 
 **Interpretation:**
 
@@ -153,8 +153,8 @@ flowchart TB
     subgraph iqr["<b>IQR-Methode"]
         direction TB
         calc["IQR = Q3 - Q1"]
-        lower["<b>Untere Grenze:<br/>Q1 - 1.5 × IQR"]
-        upper["<b>Obere Grenze:<br/>Q3 + 1.5 × IQR"]
+        lower["<b>Untere **Grenze:**<br/>Q1 - 1.5 × IQR"]
+        upper["<b>Obere **Grenze:**<br/>Q3 + 1.5 × IQR"]
     end
 
     calc --> lower
