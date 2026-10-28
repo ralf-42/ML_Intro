@@ -412,9 +412,15 @@ flowchart TD
     
     training ~~~ inference
 
-    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
     style training fill:#f8fafc,stroke:#d97706,stroke-width:2px
     style inference fill:#f8fafc,stroke:#16a34a,stroke-width:2px
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class I1,I2 input;
+    class H2,H4,O1,O2 output;
 ```
 
 ```python

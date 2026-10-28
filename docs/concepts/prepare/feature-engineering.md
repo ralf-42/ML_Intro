@@ -64,6 +64,11 @@ flowchart TB
     H --> K
 
     classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class A,B,C,D input;
+    class I,J,K output;
 ```
 
 ### Warum Feature Engineering wichtig ist
@@ -261,6 +266,11 @@ flowchart LR
     C --> C3
 
     classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class A,B,C input;
+    class A1,A2,A3,B1,B2,B3,C1,C2,C3 output;
 ```
 
 ### Filter-Methoden
@@ -631,6 +641,11 @@ flowchart TB
     I --> J
 
     classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class A,B,C input;
+    class J output;
 ```
 
 ### Branchenspezifische Features
@@ -714,9 +729,15 @@ flowchart TB
     C --> H
     D --> G
 
-    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
     style Strategie fill:#f8fafc,stroke:#0284c7,stroke-width:2px
     style Techniken fill:#f8fafc,stroke:#c026d3,stroke-width:2px
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class A input;
+    class E,F,G,H,I output;
 ```
 
 Feature Engineering ist eine Kunst, die Domänenwissen, statistische Methoden und Kreativität vereint. Die wichtigsten Erkenntnisse:

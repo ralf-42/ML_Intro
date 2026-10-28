@@ -32,7 +32,6 @@ Cross-Validation (Kreuzvalidierung) ist ein statistisches Verfahren zur Bewertun
 > Cross-Validation reduziert Zufallseffekte einzelner Splits und liefert stabilere Leistungsschätzungen.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '13px'}}}%%
 flowchart LR
     subgraph input[" "]
         D[("Train-Dataset")]
@@ -243,9 +242,15 @@ end
 %% Unsichtbare Verbindung für das Layout (nebeneinander)
 problem ~~~ solution
 
-classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 style problem fill:#f8fafc,stroke:#dc2626,stroke-width:2px
 style solution fill:#f8fafc,stroke:#16a34a,stroke-width:2px
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+
+    class F1,F2,F3,SF1,SF2,SF3 output;
+    class D1,D2 target;
 ```
 
 ### Implementierung
@@ -366,7 +371,6 @@ for fold, (train_idx, test_idx) in enumerate(tscv.split(data), 1):
 ```
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart LR
     subgraph ts["TimeSeriesSplit (5 Folds)"]
         subgraph f1["Fold 1"]
@@ -545,6 +549,11 @@ flowchart TB
     end
 
     classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class TR,TE input;
+    class EVAL output;
 ```
 
 ### Vollständiges Beispiel mit ColumnTransformer
@@ -699,7 +708,6 @@ print(pd.DataFrame(summary).to_string(index=False))
 
 ```mermaid
 
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '13px'}}}%%
 
 flowchart TB
     Q1{Zeitreihen-<br/>Daten?}

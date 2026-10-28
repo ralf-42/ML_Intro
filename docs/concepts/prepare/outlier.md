@@ -31,7 +31,6 @@ Ein Ausreißer (Outlier) ist ein Datenpunkt, dessen Ausprägung stark von der No
 ## Methoden zur Identifikation
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
     subgraph methoden["<b>Identifikationsmethoden"]
         direction LR
@@ -54,13 +53,12 @@ flowchart TB
         end
     end
 
-classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ## Entscheidungsbaum zur Behandlung
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TD
     start([Ausreißer erkannt]) --> analyse["Ursache analysieren"]
 
@@ -113,7 +111,6 @@ Der **Z-Score** (Standardwert) zeigt, **wie weit ein Wert vom Durchschnitt entfe
 - **z = -2** → 2 Standardabweichungen darunter
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart LR
     subgraph zscore["<b>Z-Score Methode"]
         direction TB
@@ -125,7 +122,12 @@ flowchart LR
     regel --> vorteil["✅ Einfach<br/>✅ Interpretierbar"]
     regel --> nachteil["❌ Sensitiv bei<br/>nicht-normalverteilten Daten"]
 
-classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class formel,regel input;
+    class annahme,vorteil,nachteil output;
 ```
 
 ### IQR-Methode
@@ -148,7 +150,6 @@ Die **IQR-Methode** (Interquartilsabstand) wird genutzt, um **Ausreißer zu erke
 - Werte **außerhalb dieser Grenzen** gelten als **Ausreißer**.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
     subgraph iqr["<b>IQR-Methode"]
         direction TB
@@ -176,7 +177,6 @@ class is_outlier stop;
 ## Behandlungsstrategien
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
     subgraph strategien["<b>Behandlungsstrategien"]
         direction LR
@@ -203,13 +203,12 @@ flowchart TB
         end
     end
 
-classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ## Visualisierung zur Erkennung
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart LR
     subgraph viz["<b>Visualisierungsmethoden"]
         direction TB
@@ -224,7 +223,12 @@ flowchart LR
     histogram --> hist_use["Verteilungsform<br/>verstehen"]
     violin --> vio_use["Detaillierte<br/>Verteilungsanalyse"]
 
-classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class boxplot,scatter,histogram,violin input;
+    class bp_use,sc_use,hist_use,vio_use output;
 ```
 
 ## Best Practices
@@ -242,7 +246,6 @@ classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ## Auswirkungen auf ML-Modelle
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
     outlier["Unbehandelte<br/>Ausreißer"]
 

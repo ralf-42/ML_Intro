@@ -33,7 +33,6 @@ Die Wahl der richtigen Kodierungsmethode hängt dabei maßgeblich vom **Skalenni
 ## Skalenniveaus kategorialer Daten
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}}}%%
 flowchart TB
     subgraph Kategoriale["Kategoriale Skalen"]
         direction TB
@@ -49,6 +48,8 @@ flowchart TB
     
     K["Kategoriale Daten<br/>(diskret)"] --> Kategoriale
     NUM["Numerische Daten<br/>(meist stetig)"] --> Numerische
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ### Nominale Daten
@@ -64,7 +65,6 @@ flowchart TB
 ## Entscheidungsbaum: Welche Kodierung verwenden?
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}}}%%
 flowchart TD
     Start["Kategoriale<br/>Daten"] --> Q1{"Haben die Kategorien<br/>eine natürliche<br/>Rangfolge?"}
     
@@ -95,7 +95,6 @@ Der **OrdinalEncoder** konvertiert kategoriale Merkmale in ganzzahlige Werte (0 
 #### Funktionsweise
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}}}%%
 flowchart LR
     subgraph Vorher["Originaldaten"]
         V1["schlecht"]
@@ -115,6 +114,13 @@ flowchart LR
     V2 --> N2
     V3 --> N3
     V4 --> N4
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class V1,V2,V3,V4 input;
+    class N1,N2,N3,N4 output;
 ```
 
 #### Beispiel in scikit-learn
@@ -164,7 +170,6 @@ Der **OneHotEncoder** erstellt für jede Kategorie eine eigene binäre Spalte. D
 #### Funktionsweise
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}}}%%
 flowchart LR
     subgraph Vorher["Originaldaten"]
         direction TB
@@ -185,6 +190,13 @@ flowchart LR
     F1 --> H1
     F2 --> H2
     F3 --> H3
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class F1,F2,F3 input;
+    class H1,H2,H3 output;
 ```
 
 #### Beispiel in scikit-learn
@@ -247,7 +259,6 @@ Der **TargetEncoder** ersetzt kategoriale Werte durch einen Wert, der aus dem Zi
 #### Funktionsweise
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}}}%%
 flowchart TB
     subgraph Input["<b>Eingabedaten"]
         direction LR
@@ -273,6 +284,8 @@ flowchart TB
     Stadt --> Berechnung
     Preis --> Berechnung
     Berechnung --> Output
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 #### Beispiel in scikit-learn
@@ -313,7 +326,6 @@ df['stadt_encoded'] = encoder.fit_transform(
 ## Vergleich der Kodierungsmethoden
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}}}%%
 flowchart TB
     subgraph Vergleich["<b>Übersicht Kodierungsmethoden"]
         direction TB
@@ -336,6 +348,8 @@ flowchart TB
             TE_R["Nutzt: Zielwert"]
         end
     end
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 | Kriterium              | OrdinalEncoder | OneHotEncoder    | TargetEncoder        |

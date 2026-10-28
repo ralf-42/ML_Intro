@@ -33,6 +33,13 @@ flowchart LR
     B --> C["Dockerfile\nBuild-Anleitung"]
     C --> D["Docker Image\nversioniertes Paket"]
     D --> E["Container\nlaufende App"]
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class A input;
+    class E output;
 ```
 
 ## Typische Dateien

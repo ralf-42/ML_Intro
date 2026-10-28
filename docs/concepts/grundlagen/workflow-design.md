@@ -222,9 +222,15 @@ flowchart LR
     num --> FS
     M --> P[Vorhersage]
 
-    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
     style cat fill:#f8fafc,stroke:#16a34a,stroke-width:2px
     style num fill:#f8fafc,stroke:#0284c7,stroke-width:2px
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class I1,I2,FS input;
+    class E,S,P output;
 ```
 
 ### Beispiel: Einfache Pipeline

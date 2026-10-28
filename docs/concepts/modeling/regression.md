@@ -98,9 +98,10 @@ flowchart TB
         end
     end
 
-    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
     style analytical fill:#f8fafc,stroke:#0284c7,stroke-width:2px
     style iterative fill:#f8fafc,stroke:#d97706,stroke-width:2px
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ### Vergleich der Ansätze
@@ -293,9 +294,10 @@ flowchart LR
         end
     end
 
-    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
     style linear fill:#f8fafc,stroke:#0284c7,stroke-width:2px
     style logistic fill:#f8fafc,stroke:#16a34a,stroke-width:2px
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ### Das Problem der linearen Regression bei Klassifikation
@@ -320,9 +322,10 @@ flowchart TB
     
     problem --> solution
 
-    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
     style problem fill:#f8fafc,stroke:#dc2626,stroke-width:2px
     style solution fill:#f8fafc,stroke:#16a34a,stroke-width:2px
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ### Die Sigmoid-Funktion
@@ -369,9 +372,10 @@ flowchart TB
         end
     end
 
-    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
     style threshold fill:#f8fafc,stroke:#0284c7,stroke-width:2px
     style adjust fill:#f8fafc,stroke:#d97706,stroke-width:2px
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ---

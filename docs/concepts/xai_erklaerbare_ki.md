@@ -33,6 +33,13 @@ flowchart LR
     B --> C["Vorhersage"]
     B -.-> D["XAI-Erklärung"]
     D --> E["Prüfen<br>Begründen<br>Kommunizieren"]
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class A input;
+    class C,E output;
 ```
 
 XAI ersetzt keine Modellbewertung. Eine plausible Erklärung kann zu einem schlechten Modell gehören, und eine unplausible Erklärung kann ein Datenproblem sichtbar machen. Im ML-Workflow liegt XAI deshalb nach Training und Evaluation: Erst wird geprüft, ob das Modell tragfähig ist; danach wird untersucht, worauf es seine Vorhersagen stützt.
@@ -87,6 +94,13 @@ flowchart TD
     F --> F5["Kausalitätsgrenzen"]
     F --> F6["Anchors"]
     F --> F7["Example-Based"]
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class XAI input;
+    class G1,G2,G3,G4,G5,L1,L2,L3,L4,L5,F1,F2,F3,F4,F5,F6,F7 output;
 ```
 
 Diese Reihenfolge ist didaktisch sinnvoll: Zuerst entsteht ein Überblick über das Modellverhalten. Danach werden einzelne Fälle untersucht. Erst dann lohnt sich die kritischere Frage, ob die Erklärung stabil, fair, kausal interpretierbar oder nur eine fragile Approximation ist.
@@ -316,6 +330,15 @@ flowchart TD
     Q2 -->|"Gruppen"| FAIR["Fairness/Bias"]
     Q2 -->|"Schwankung"| STAB["Stabilität"]
     Q2 -->|"Alternatives Modell"| EBM["Surrogate / EBM"]
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef metric fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class START input;
+    class Q1,G1,L1,G2,L2,Q2 metric;
+    class FI,ALE,SHAPG,LIME,SHAPL,CP,FAIR,STAB,EBM output;
 ```
 
 In Kursprojekten reicht für den Einstieg meist eine Kombination aus Feature Importance, Permutation Importance, LIME und SHAP Waterfall. Für belastbarere Aussagen kommen ALE, Counterfactuals und Stabilitätschecks hinzu. Sobald Modelle in sensiblen Kontexten eingesetzt werden, gehören Fairness-Analysen und Kausalitätsgrenzen zur Mindestdiskussion.

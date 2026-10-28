@@ -48,6 +48,8 @@ flowchart LR
     end
     
     Bild --> Matrix --> Vektor
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 **Beispiel: MNIST-Datensatz**
@@ -124,6 +126,13 @@ flowchart LR
     end
     
     A --> B --> C --> D --> E --> F --> G --> H
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class A input;
+    class H output;
 ```
 
 ### CNN-Architektur im Detail
@@ -155,6 +164,13 @@ flowchart TD
     I --> C1 --> A1 --> P1
     P1 --> C2 --> A2 --> P2
     P2 --> F --> D1 --> D2
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class I input;
+    class D2 output;
 ```
 
 ### Layer-Typen erklärt
@@ -192,6 +208,8 @@ flowchart LR
     end
     
     Input --> Kernel --> Output
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 **Funktionsweise:**
@@ -292,6 +310,8 @@ flowchart LR
         D["Sentiment<br/>Analysis"]
         E["Textgenerierung<br/>(Text-to-Speech)"]
     end
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 **Typische NLP-Aufgaben:**
@@ -379,6 +399,13 @@ flowchart TD
     S --> |"beeinflusst"| Prognose
     Z --> |"beeinflusst"| Prognose
     R --> |"erschwert"| Prognose
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class T,S,Z,R input;
+    class Prognose output;
 ```
 
 | Eigenschaft | Beschreibung | Beispiel |
@@ -406,6 +433,13 @@ flowchart LR
         H2 --> O2["Output t"]
         H2 --> |"Gedächtnis"| H2
     end
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class I1,I2 input;
+    class O1,O2 output;
 ```
 
 **Kernidee:** Ein RNN nutzt nicht nur die aktuelle Eingabe, sondern auch das "Gedächtnis" aus vorherigen Schritten.
@@ -439,6 +473,13 @@ flowchart LR
     %% t0 --- t1 --- t2 (Verbindung zwischen Subgraphen direkt)
     %% oder unsichtbar zwischen Nodes:
     X0 ~~~ X1 ~~~ X2
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class X0 input;
+    class Y0,Y1,Y2 output;
 ```
 
 ### Problem: Vanishing Gradients
@@ -456,6 +497,13 @@ flowchart LR
     end
     
     A --> |"Gradient wird<br/>immer kleiner"| B --> C --> D --> E
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class A input;
+    class E output;
 ```
 
 **Lösung:** Long Short-Term Memory (LSTM)
@@ -497,6 +545,13 @@ flowchart TD
     O --> |"steuert"| H
     
     H --> Output["Output y_t"]
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class Input,PrevH input;
+    class Output output;
 ```
 
 ### Die drei Gates erklärt
@@ -548,6 +603,13 @@ flowchart LR
     L --> D1 --> D2 --> O
     
     I -.-> |"Ziel: Output ≈ Input"| O
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class I input;
+    class O output;
 ```
 
 **Komponenten:**
@@ -600,6 +662,13 @@ flowchart TD
     RNN --> T4
     AE --> T5
     AE --> T6
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class CNN,RNN,AE input;
+    class T1,T2,T3,T4,T5,T6 output;
 ```
 
 | Architektur | Stärke | Typische Anwendung |

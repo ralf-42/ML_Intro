@@ -192,9 +192,10 @@ flowchart LR
         L2["Klassen optimal<br/>separiert"]
     end
 
-    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
     style pca_result fill:#f8fafc,stroke:#16a34a,stroke-width:2px
     style lda_result fill:#f8fafc,stroke:#0284c7,stroke-width:2px
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 ---

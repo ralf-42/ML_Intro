@@ -282,9 +282,10 @@ flowchart TB
     
     comparison --> insight
 
-    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
     style gs fill:#f8fafc,stroke:#0284c7,stroke-width:2px
     style rs fill:#f8fafc,stroke:#16a34a,stroke-width:2px
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 ```
 
 > **Wichtige Erkenntnis:** Bei den meisten ML-Modellen sind nur wenige Hyperparameter wirklich einflussreich. Random Search testet mehr verschiedene Werte für diese wichtigen Parameter.

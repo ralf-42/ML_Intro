@@ -203,9 +203,15 @@ flowchart LR
     O2 --> L2
     O3 --> L3
 
-    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
     style problem fill:#f8fafc,stroke:#dc2626,stroke-width:2px
     style loesung fill:#f8fafc,stroke:#16a34a,stroke-width:2px
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class O1,O2,O3 input;
+    class L1,L2,L3 output;
 ```
 
 ## Feature Importance

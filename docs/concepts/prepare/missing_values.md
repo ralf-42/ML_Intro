@@ -31,7 +31,6 @@ Fehlende Werte (Missing Values) sind ein häufiges Problem in realen Datensätze
 ## Entscheidungsbaum zur Behandlung
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TD
     start([Start: Fehlende Werte erkannt]) --> analyse["Analyse des Anteils<br/>fehlender Werte"]
     
@@ -73,7 +72,6 @@ class drop_col,drop_row stop;
 ### 1. Löschen (Deletion)
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart LR
     subgraph deletion["<b>Löschstrategien"]
         direction TB
@@ -88,13 +86,17 @@ flowchart LR
     column --> col_pro["✅ Schnell bei vielen NaN"]
     column --> col_con["❌ Informationsverlust<br/>❌ Evtl. wichtige Features weg"]
 
-classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class listwise,column input;
+    class lw_pro,lw_con,col_pro,col_con output;
 ```
 
 ### 2. Imputation (Auffüllen)
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TB
 
     subgraph advanced["<b>Erweiterte Imputation"]
@@ -121,15 +123,20 @@ flowchart TB
     iterative --> iterative_use["Komplexe Abhängigkeiten<br/>zwischen Features"]
     mice --> mice_use["Statistische Analysen<br/>mit Unsicherheit"]
 
-classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
 style simple fill:#f8fafc,stroke:#16a34a,stroke-width:2px
 style advanced fill:#f8fafc,stroke:#d97706,stroke-width:2px
+
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef input fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#1e1b4b;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+
+    class knn,iterative,mice,mean,median,mode,constant input;
+    class mean_use,median_use,mode_use,constant_use,knn_use,iterative_use,mice_use output;
 ```
 
 ## Konsequenzen falscher Behandlung
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '11px'}}}%%
 flowchart TD
     wrong["Falsche Behandlung<br/>fehlender Werte"]
     

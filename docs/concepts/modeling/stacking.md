@@ -223,7 +223,12 @@ end
 Phase1 --> Phase2
 Phase2 --> Phase3
 
-classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef default fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef output fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef target fill:#fae8ff,stroke:#c026d3,stroke-width:2px,color:#701a75;
+
+    class FINAL output;
+    class D1 target;
 ```
 
 ### Beispiel: Meta-Daten Struktur
