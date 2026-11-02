@@ -32,11 +32,21 @@ Deutschsprachige Studierende und Praktiker:innen mit Python-Grundkenntnissen, di
 
 ```
 ML_Intro/
+├── 00_admin/       # Kursorganisation und Planung
 ├── 01_notebook/    # Jupyter Notebooks mit Kursinhalten (10 Module)
 ├── 02_daten/       # Datensätze für praktische Übungen
 ├── 03_skript/      # Präsentationsmaterialien und Skripte
 ├── 04_model/       # Trainierte Modelle (z. B. diamonds_model.pmml, diamonds_pipeline.joblib)
 ├── 07_image/       # Bilder und Visualisierungen für die Kursnotebooks
+├── 08_podcast/     # Audio und Podcasts
+├── 09_ipynb_dev/   # Notebook-Entwicklung und Experimente
+├── 10_nn_simulation/ # Simulation neuronaler Netze
+├── 20_nn_simulation_stanford/ # Verweis auf die Stanford-Simulation
+├── 30_enter_Entscheidungsbaum_Ersteller/ # Entscheidungsbaum-Anwendung
+├── 30_Simulator_Perzeptron/ # Perzeptron-Simulation
+├── VectorStore/    # Lokaler Chroma-Vektorspeicher
+├── Clippings/      # Projektspezifische Fundstücke
+├── 90_repo/        # Ältere Referenzmaterialien
 └── docs/           # Kursdokumentation und rechtliche Hinweise
 ```
 
